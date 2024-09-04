@@ -21,6 +21,9 @@ export default defineNuxtConfig({
     'dayjs-nuxt',
     '@nuxt/icon'
   ],
+  unocss: {
+    nuxtLayers: true,
+  },
   colorMode: {
     preference: 'system', 
     fallback: 'dark', 

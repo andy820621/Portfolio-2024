@@ -44,4 +44,9 @@ export default defineConfig({
   safelist: [
     'i-ri-menu-2-fill',
   ],
+  content: {
+    filesystem: [
+      './content/**/*.md',
+    ],
+  }
 })
