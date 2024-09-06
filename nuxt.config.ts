@@ -19,17 +19,11 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     'floating-vue/nuxt',
     'dayjs-nuxt',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    '@hypernym/nuxt-gsap',
   ],
   unocss: {
     nuxtLayers: true,
-  },
-  colorMode: {
-    preference: 'system', 
-    fallback: 'dark', 
-    classPrefix: '',
-    classSuffix: '',
-    storageKey: 'app-theme'
   },
   // vite: {
   //   optimizeDeps: {

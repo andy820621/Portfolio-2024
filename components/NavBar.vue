@@ -18,8 +18,8 @@ const { y: scroll } = useWindowScroll()
       to="/"
       focusable="false"
     >
-      <!-- // TODO: <Logo /> -->
-      LOGO
+      <!-- <Logo style="transform: scale(5) translate(50%, 50%);" /> -->
+      <Logo />
     </NuxtLink>
     <button
       title="Scroll to top"

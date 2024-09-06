@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import '@unocss/reset/tailwind.css'
-import './styles/main.css'
-import './styles/prose.css'
-import './styles/markdown.css'
+import './assets//main.css'
+import './assets//prose.css'
+import './assets//markdown.css'
 </script>
 
 <template>

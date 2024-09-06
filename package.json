@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.2.0",
+    "@hypernym/nuxt-gsap": "^2.4.3",
+    "@iconify-json/ri": "^1.2.0",
     "@nuxt/icon": "^1.5.1",
     "@nuxt/image": "^1.8.0",
     "@nuxtjs/color-mode": "^3.4.4",
@@ -30,6 +32,7 @@
     "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.9.1",
     "eslint-plugin-format": "^0.1.2",
+    "sass": "^1.78.0",
     "typescript": "^5.5.4",
     "unocss": "^0.62.3",
     "vue-tsc": "^2.1.6"
