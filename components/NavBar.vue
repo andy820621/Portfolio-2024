@@ -18,7 +18,6 @@ const { y: scroll } = useWindowScroll()
       to="/"
       focusable="false"
     >
-      <!-- <Logo style="transform: scale(5) translate(50%, 50%);" /> -->
       <Logo />
     </NuxtLink>
     <button

@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     'floating-vue/nuxt',
     'dayjs-nuxt',
     '@nuxt/icon',
-    '@hypernym/nuxt-gsap',
   ],
   unocss: {
     nuxtLayers: true,

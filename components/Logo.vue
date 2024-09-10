@@ -1,11 +1,13 @@
 <script setup lang="ts">
-const { $gsap } = useNuxtApp()
+import gsap from 'gsap'
 
 const isHoverable = ref(false)
 const isHovered = ref(false)
+let tl: gsap.core.Timeline
+let waitTween: gsap.core.Timeline
 
 onMounted(() => {
-  const tl = $gsap.timeline({ repeat: -1 })
+  tl = gsap.timeline({ repeat: -1 })
   const paths = ['#path1', '#path2', '#path3', '#path4', '#path5', '#circle']
 
   // 基礎進場動畫參數
@@ -81,7 +83,7 @@ onMounted(() => {
   const entranceDuration = accumulatedTime + baseEntranceParams.pathTotalDuration
 
   // 保持顯示狀態
-  tl.to({}, { duration: WAIT_DURATION, onComplete: () => {
+  waitTween = tl.to({}, { duration: WAIT_DURATION, onComplete: () => {
     isHoverable.value = false
     isHovered.value = false
   } })
@@ -111,12 +113,24 @@ onMounted(() => {
 function handleEnter() {
   if (isHoverable.value) {
     isHovered.value = true
+    if (tl && waitTween) {
+      const currentTime = tl.time()
+      const waitTweenStartTime = waitTween.startTime()
+      const waitTweenEndTime = waitTweenStartTime + waitTween.duration()
+
+      if (currentTime >= waitTweenStartTime && currentTime <= waitTweenEndTime) {
+        tl.pause()
+      }
+    }
   }
 }
 
 function handleLeave() {
   if (isHoverable.value) {
     isHovered.value = false
+    if (tl) {
+      tl.resume()
+    }
   }
 }
 </script>
@@ -162,6 +176,9 @@ function handleLeave() {
   transition:
     stroke 0.3s,
     fill 0.3s;
+}
+svg #circle {
+  stroke-width: 1;
 }
 
 #path1,
