@@ -9,7 +9,7 @@ const iconName = computed(() => {
   if (!mounted.value)
     return 'i-ri-moon-line'
 
-  return isDark.value ? 'i-ri-sun-line' : 'i-ri-moon-line'
+  return isDark.value ? 'i-ri-moon-line' : 'i-ri-sun-line'
 })
 
 onMounted(() => {
