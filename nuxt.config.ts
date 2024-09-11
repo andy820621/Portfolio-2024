@@ -26,7 +26,11 @@ export default defineNuxtConfig({
   },
   content: {
     highlight: {
-      theme: 'dracula',
+      theme: {
+        default: 'vitesse-light',
+        dark: 'vitesse-dark',
+        sepia: 'monokai',
+      },
     },
   },
   nitro: {
