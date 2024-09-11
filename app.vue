@@ -6,7 +6,7 @@ import './assets//markdown.css'
 </script>
 
 <template>
-  <NuxtLoadingIndicator />
+  <NuxtLoadingIndicator :throttle="0" />
 
   <!-- // TODO: Check what i can do more with this. -->
   <NuxtRouteAnnouncer />
@@ -23,6 +23,16 @@ import './assets//markdown.css'
 }
 .page-enter-from,
 .page-leave-to {
+  opacity: 0;
+  filter: blur(0.24rem) grayscale(0.8);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.4s;
+}
+.layout-enter-from,
+.layout-leave-to {
   opacity: 0;
   filter: blur(0.24rem) grayscale(0.8);
 }

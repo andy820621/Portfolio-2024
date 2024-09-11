@@ -1,11 +1,39 @@
+import { navbarData, seoData } from './data'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   app: {
     head: {
-      title: 'BarZ Hsieh',
+      charset: 'utf-16',
+      viewport: 'width=device-width,initial-scale=1',
+      title: navbarData.homeTitle,
+      titleTemplate: `%s - ${navbarData.homeTitle}`,
       meta: [
-        { name: 'author', content: 'BarZ Hsieh' },
+        { name: 'author', content: navbarData.homeTitle },
+      ],
+    },
+  },
+  sitemap: {
+    strictNuxtContentPaths: true,
+  },
+  site: {
+    url: seoData.mySite,
+    identity: {
+      type: 'Person',
+    },
+    twitter: seoData.twitterHandle,
+  },
+  content: {
+    highlight: {
+      theme: 'dracula',
+    },
+  },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: [
+        '/',
       ],
     },
   },
@@ -20,6 +48,12 @@ export default defineNuxtConfig({
     'floating-vue/nuxt',
     'dayjs-nuxt',
     '@nuxt/icon',
+    '@nuxt/content',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+    'nuxt-og-image',
+    '@formkit/auto-animate',
+    '@stefanobartoletti/nuxt-social-share',
   ],
   unocss: {
     nuxtLayers: true,
@@ -27,10 +61,9 @@ export default defineNuxtConfig({
   // vite: {
   //   optimizeDeps: {
   //     include: [
-  //       'vue',
-  //       '@vueuse/core',
-  //       'dayjs',
+  //       '@nuxt/image',
+  //       'nuxt-og-image',
   //     ],
   //   },
-  // }
+  // },
 })
