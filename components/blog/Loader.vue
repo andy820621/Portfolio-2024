@@ -8,6 +8,7 @@ export default {
 
 <template>
   <ContentLoader
+    unique-key="blog-loader"
     viewBox="0 0 400 160"
     :speed="2"
     primary-color="#c9c9c9"

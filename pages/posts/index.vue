@@ -129,8 +129,8 @@ defineOgImage({
 
       <template #fallback>
         <!-- this will be rendered on server side -->
-        <!-- <BlogLoader />
-        <BlogLoader /> -->
+        <BlogLoader />
+        <BlogLoader />
       </template>
     </ClientOnly>
 
