@@ -219,7 +219,7 @@ svg #circle {
   #path4,
   #path5,
   #circle {
-    stroke: hsl(26, 30%, 55%);
+    stroke: var(--primary-active);
   }
 
   #path1,
@@ -227,7 +227,7 @@ svg #circle {
   #path3,
   #path4,
   #path5 {
-    fill: hsl(26, 30%, 55%);
+    fill: var(--primary-active);
   }
 }
 </style>

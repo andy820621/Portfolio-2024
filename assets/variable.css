@@ -1,0 +1,9 @@
+:root {
+  --primary-active: hsl(26, 32%, 66%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-active: hsl(26, 30%, 55%);
+  }
+}

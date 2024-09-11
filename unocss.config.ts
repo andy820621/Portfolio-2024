@@ -1,4 +1,4 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno, presetWebFonts, presetMini, transformerDirectives } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetMini, presetUno, presetWebFonts, transformerDirectives } from 'unocss'
 
 export default defineConfig({
   shortcuts: [
@@ -48,5 +48,5 @@ export default defineConfig({
     filesystem: [
       './content/**/*.md',
     ],
-  }
+  },
 })

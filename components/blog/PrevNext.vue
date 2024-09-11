@@ -4,8 +4,8 @@ import type { ParsedContent } from '@nuxt/content'
 type Article = Pick<ParsedContent, '_path' | 'title' | 'description'>
 
 defineProps<{
-  prev: Article
-  next: Article
+  prev: Article | undefined
+  next: Article | undefined
 }>()
 </script>
 

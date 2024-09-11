@@ -9,11 +9,13 @@
 <template>
   <NavBar />
 
-  <main class="px-7 py-10 of-x-hidden">
+  <main class="px-7 py-10">
     <slot />
   </main>
 </template>
 
 <style lang="scss" scoped>
-
+body {
+  @apply overflow-x-hidden;
+}
 </style>

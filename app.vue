@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import './assets//variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets//main.css'
 import './assets//prose.css'

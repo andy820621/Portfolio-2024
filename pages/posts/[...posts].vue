@@ -108,10 +108,39 @@ defineOgImageComponent('Test', {
   link: data.value.ogImage,
 
 })
+
+// setting toc links to have active style
+const activeId = ref('')
+
+onMounted(() => {
+  const observer = new IntersectionObserver(callback, {
+    root: null,
+    threshold: 0.5,
+  })
+
+  const elements = document.querySelectorAll('h2, h3')
+
+  for (const element of elements) observer.observe(element)
+
+  onBeforeUnmount(() => {
+    for (const element of elements) observer.unobserve(element)
+  })
+})
+
+function callback(entries: IntersectionObserverEntry[]) {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      activeId.value = entry.target.id
+      break
+    }
+  }
+}
+
+const tocLinks = computed(() => articles.value?.article.body?.toc?.links || [])
 </script>
 
 <template>
-  <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12 ">
+  <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
     <div class="col-span-12 lg:col-span-9">
       <BlogHeader
         :title="data.title"
@@ -132,7 +161,8 @@ defineOgImageComponent('Test', {
         </ContentRenderer>
       </div>
     </div>
-    <BlogToc />
+
+    <BlogToc :links="tocLinks" :active-id="activeId" />
 
     <div class="col-span-12 flex flex-col gap-4 mt-10">
       <div class="flex flex-row  flex-wrap md:flex-nowrap mt-10 gap-2">
