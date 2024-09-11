@@ -14,21 +14,34 @@ interface BlogPost {
 
 const { path } = useRoute()
 
-const { data: articles, error } = await useAsyncData(`blog-post-${path}`, () => queryContent(path).findOne())
+const { data: articles, error } = await useAsyncData(`blog-post-${path}`, async () => {
+  const article = await queryContent(path).findOne()
+  const surround = await queryContent()
+    .only(['_path', 'title', 'description'])
+    .sort({ date: 1 })
+    .findSurround(path)
+
+  return {
+    article,
+    surround,
+  }
+})
+
+const [prev, next] = articles.value?.surround || []
 
 if (error.value)
   navigateTo('/404')
 
 const data = computed<BlogPost>(() => {
   return {
-    title: articles.value?.title || 'no-title available',
-    description: articles.value?.description || 'no-description available',
-    image: articles.value?.image || '/not-found.jpg',
-    alt: articles.value?.alt || 'no alter data available',
-    ogImage: articles.value?.ogImage || '/not-found.jpg',
-    date: articles.value?.date || 'not-date-available',
-    tags: articles.value?.tags || [],
-    published: articles.value?.published || false,
+    title: articles.value?.article.title || 'no-title available',
+    description: articles.value?.article.description || 'no-description available',
+    image: articles.value?.article.image || '/not-found.jpg',
+    alt: articles.value?.article.alt || 'no alter data available',
+    ogImage: articles.value?.article.ogImage || '/not-found.jpg',
+    date: articles.value?.article.date || 'not-date-available',
+    tags: articles.value?.article.tags || [],
+    published: articles.value?.article.published || false,
   }
 })
 
@@ -112,7 +125,7 @@ defineOgImageComponent('Test', {
         class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg
         prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
       >
-        <ContentRenderer v-if="articles" :value="articles">
+        <ContentRenderer v-if="articles && articles.article" :value="articles.article">
           <template #empty>
             <p>No content found.</p>
           </template>
@@ -121,16 +134,20 @@ defineOgImageComponent('Test', {
     </div>
     <BlogToc />
 
-    <div class="flex flex-row  flex-wrap md:flex-nowrap mt-10 gap-2">
-      <SocialShare
-        v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
-        :key="network"
-        :network="network"
-        :styled="true"
-        :label="true"
-        class="p-1"
-        aria-label="Share with {network}"
-      />
+    <div class="col-span-12 flex flex-col gap-4 mt-10">
+      <div class="flex flex-row  flex-wrap md:flex-nowrap mt-10 gap-2">
+        <SocialShare
+          v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
+          :key="network"
+          :network="network"
+          :styled="true"
+          :label="true"
+          class="p-1"
+          aria-label="Share with {network}"
+        />
+      </div>
+
+      <BlogPrevNext :prev="prev" :next="next" />
     </div>
   </div>
 </template>
