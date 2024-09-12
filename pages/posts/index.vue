@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-const { data: contentPosts } = await useAsyncData('listPosts', () => queryContent('/posts')
+definePageMeta({
+  documentDriven: {
+    page: false, // Keep page fetching enabled
+    surround: false, // Disable surround fetching
+  },
+})
+const { data: contentPosts } = await useAsyncData('listPosts', () => queryContent('posts')
   .where({ draft: { $ne: true } })
   .sort({ date: -1 }) // ex: .sort({ _id: -1 })
   .find())

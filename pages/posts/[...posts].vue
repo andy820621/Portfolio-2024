@@ -20,8 +20,8 @@ const actualPath = route.path.replace(/\/$/, '')
 const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
   Promise.all([
     queryContent(actualPath).findOne(),
-    // queryContent()
-    queryContent('/posts/')
+
+    queryContent('posts')
       .where({
         navigation: { $ne: false },
         draft: { $ne: true },
