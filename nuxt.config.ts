@@ -49,6 +49,11 @@ export default defineNuxtConfig({
       ],
     },
   },
+  colorMode: {
+    classSuffix: '',
+    // preference: 'dark',
+    // fallback: 'light',
+  },
   devtools: { enabled: true },
   modules: [
     '@pinia/nuxt',
