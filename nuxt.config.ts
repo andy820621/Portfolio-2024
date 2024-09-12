@@ -13,6 +13,8 @@ export default defineNuxtConfig({
         { name: 'author', content: navbarData.homeTitle },
       ],
     },
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   sitemap: {
     strictNuxtContentPaths: true,
@@ -25,6 +27,12 @@ export default defineNuxtConfig({
     twitter: seoData.twitterHandle,
   },
   content: {
+    documentDriven: {
+      injectPage: false,
+    },
+    experimental: {
+      search: {},
+    },
     highlight: {
       theme: {
         default: 'vitesse-light',

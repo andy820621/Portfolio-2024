@@ -12,36 +12,47 @@ interface BlogPost {
   published: boolean
 }
 
-const { path } = useRoute()
+const route = useRoute()
 
-const { data: articles, error } = await useAsyncData(`blog-post-${path}`, async () => {
-  const article = await queryContent(path).findOne()
-  const surround = await queryContent()
-    .only(['_path', 'title', 'description'])
-    .sort({ date: 1 })
-    .findSurround(path)
+// remove trailing slash from path
+const actualPath = route.path.replace(/\/$/, '')
 
-  return {
-    article,
-    surround,
+const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
+  Promise.all([
+    queryContent(actualPath).findOne(),
+    // queryContent()
+    queryContent('/posts/')
+      .where({
+        navigation: { $ne: false },
+        draft: { $ne: true },
+      }) // skip posts with `navigation: false` or `draft: true`
+      .only(['_path', 'title', 'description'])
+      .sort({ date: 1 })
+      .findSurround(route.fullPath.replace(/\/$/, '')),
+  ]))
+
+const article = computed(() => postData.value?.[0])
+const prevPost = computed(() => postData.value?.[1]?.[0])
+const nextPost = computed(() => postData.value?.[1]?.[1])
+
+// 錯誤處理
+watchEffect(() => {
+  if (error.value) {
+    console.error('Fetch error:', error.value)
+    navigateTo('/404')
   }
 })
 
-const [prev, next] = articles.value?.surround || []
-
-if (error.value)
-  navigateTo('/404')
-
 const data = computed<BlogPost>(() => {
   return {
-    title: articles.value?.article.title || 'no-title available',
-    description: articles.value?.article.description || 'no-description available',
-    image: articles.value?.article.image || '/not-found.jpg',
-    alt: articles.value?.article.alt || 'no alter data available',
-    ogImage: articles.value?.article.ogImage || '/not-found.jpg',
-    date: articles.value?.article.date || 'not-date-available',
-    tags: articles.value?.article.tags || [],
-    published: articles.value?.article.published || false,
+    title: article.value?.title || 'no-title available',
+    description: article.value?.description || 'no-description available',
+    image: article.value?.image || '/not-found.jpg',
+    alt: article.value?.alt || 'no alter data available',
+    ogImage: article.value?.ogImage || '/not-found.jpg',
+    date: article.value?.date || 'not-date-available',
+    tags: article.value?.tags || [],
+    published: article.value?.published || false,
   }
 })
 
@@ -58,7 +69,7 @@ useHead({
     { hid: 'og:type', property: 'og:type', content: 'website' },
     {
       property: 'og:url',
-      content: `${seoData.mySite}/${path}`,
+      content: `${seoData.mySite}/${route.path}`,
     },
     {
       property: 'og:title',
@@ -77,7 +88,7 @@ useHead({
     { name: 'twitter:card', content: 'summary_large_image' },
     {
       name: 'twitter:url',
-      content: `${seoData.mySite}/${path}`,
+      content: `${seoData.mySite}/${route.path}`,
     },
     {
       name: 'twitter:title',
@@ -95,7 +106,7 @@ useHead({
   link: [
     {
       rel: 'canonical',
-      href: `${seoData.mySite}/${path}`,
+      href: `${seoData.mySite}/${route.path}`,
     },
   ],
 })
@@ -136,48 +147,57 @@ function callback(entries: IntersectionObserverEntry[]) {
   }
 }
 
-const tocLinks = computed(() => articles.value?.article.body?.toc?.links || [])
+const tocLinks = computed(() => article.value?.body?.toc?.links || [])
 </script>
 
 <template>
-  <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
-    <div class="col-span-12 lg:col-span-9">
-      <BlogHeader
-        :title="data.title"
-        :image="data.image"
-        :alt="data.alt"
-        :date="data.date"
-        :description="data.description"
-        :tags="data.tags"
-      />
-      <div
-        class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg
-        prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
-      >
-        <ContentRenderer v-if="articles && articles.article" :value="articles.article">
-          <template #empty>
-            <p>No content found.</p>
-          </template>
-        </ContentRenderer>
-      </div>
-    </div>
-
-    <BlogToc :links="tocLinks" :active-id="activeId" />
-
-    <div class="col-span-12 flex flex-col gap-4 mt-10">
-      <div class="flex flex-row  flex-wrap md:flex-nowrap mt-10 gap-2">
-        <SocialShare
-          v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
-          :key="network"
-          :network="network"
-          :styled="true"
-          :label="true"
-          class="p-1"
-          aria-label="Share with {network}"
+  <div v-if="article">
+    <!-- 你的現有模板內容 -->
+    <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
+      <div class="col-span-12 lg:col-span-9">
+        <BlogHeader
+          :title="data.title"
+          :image="data.image"
+          :alt="data.alt"
+          :date="data.date"
+          :description="data.description"
+          :tags="data.tags"
         />
+        <div
+          class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg
+          prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
+        >
+          <ContentRenderer :value="article">
+            <template #empty>
+              <p>No content found.</p>
+            </template>
+          </ContentRenderer>
+        </div>
       </div>
 
-      <BlogPrevNext :prev="prev" :next="next" />
+      <BlogToc :links="tocLinks" :active-id="activeId" />
+
+      <div class="col-span-12 flex flex-col gap-4 mt-10">
+        <div class="flex flex-row flex-wrap md:flex-nowrap mt-10 gap-2">
+          <SocialShare
+            v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
+            :key="network"
+            :network="network"
+            :styled="true"
+            :label="true"
+            class="p-1"
+            :aria-label="`Share with ${network}`"
+          />
+        </div>
+
+        <BlogPrevNext :prev="prevPost" :next="nextPost" />
+      </div>
     </div>
+  </div>
+  <div v-else-if="error">
+    An error occurred while loading the content.
+  </div>
+  <div v-else>
+    Loading...
   </div>
 </template>
