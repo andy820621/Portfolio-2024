@@ -17,7 +17,7 @@ const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
         draft: { $ne: true },
       }) // skip posts with `navigation: false` or `draft: true`
       .only(['_path', 'title', 'description'])
-      .sort({ date: 1 })
+      .sort({ date: -1 })
       .findSurround(route.fullPath.replace(/\/$/, '')),
   ]))
 
