@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <div class="gd-container font-spacegrotesk">
+  <div class="gd-container">
     <NavBar />
 
     <main class="px-7 py-10">
@@ -17,13 +17,10 @@
 </template>
 
 <style lang="scss" scoped>
-body {
-  @apply overflow-x-hidden;
-}
-
 .gd-container {
+  @apply overflow-x-hidden;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: min-content auto;
   min-height: 100vh;
 }
 </style>
