@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import { navbarData, seoData } from '~/data'
-
-interface BlogPost {
-  title: string
-  date: string
-  description: string
-  image: string
-  alt: string
-  ogImage: string
-  tags: string[]
-  published: boolean
-}
+import type { BlogPost } from '~/types/main'
 
 const route = useRoute()
 
@@ -19,9 +9,9 @@ const actualPath = route.path.replace(/\/$/, '')
 
 const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
   Promise.all([
-    queryContent(actualPath).findOne(),
+    queryContent<BlogPost>(actualPath).findOne(),
 
-    queryContent('posts')
+    queryContent<BlogPost>('posts')
       .where({
         navigation: { $ne: false },
         draft: { $ne: true },
@@ -43,7 +33,7 @@ watchEffect(() => {
   }
 })
 
-const data = computed<BlogPost>(() => {
+const data = computed(() => {
   return {
     title: article.value?.title || 'no-title available',
     description: article.value?.description || 'no-description available',

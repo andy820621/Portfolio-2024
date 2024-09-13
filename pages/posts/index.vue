@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+import type { BlogPost } from '~/types/main'
+
 definePageMeta({
   documentDriven: {
     page: false, // Keep page fetching enabled
     surround: false, // Disable surround fetching
   },
 })
-const { data: contentPosts } = await useAsyncData('listPosts', () => queryContent('posts')
+const { data: contentPosts } = await useAsyncData('listPosts', () => queryContent<BlogPost>('posts')
   .where({ draft: { $ne: true } })
   .sort({ date: -1 }) // ex: .sort({ _id: -1 })
   .find())
@@ -15,6 +17,8 @@ const elementPerPage = ref(5)
 const pageNumber = ref(1)
 // 搜索關鍵字
 const searchTest = ref('')
+// 選中的標籤
+const selectedTags = ref<string[]>([])
 
 // 格式化獲取的數據，設置默認值
 const formattedData = computed(() => {
@@ -33,26 +37,36 @@ const formattedData = computed(() => {
   }) || []
 })
 
-// 根據搜索關鍵字過濾文章
-const searchData = computed(() => {
+// 結合搜索和標籤過濾
+const filteredData = computed(() => {
   return formattedData.value.filter((data) => {
     const lowerTitle = data.title.toLocaleLowerCase()
-    if (lowerTitle.search(searchTest.value) !== -1)
-      return true
-    else return false
-  }) || []
+    const titleMatch = lowerTitle.includes(searchTest.value.toLocaleLowerCase())
+    const tagMatch = selectedTags.value.length === 0
+      || selectedTags.value.every(tag => data.tags.includes(tag))
+    return titleMatch && tagMatch
+  })
 })
 
 // 根據當前頁碼和每頁顯示數量分頁
 const paginatedData = computed(() => {
-  return searchData.value.filter((data, idx) => {
-    const startInd = ((pageNumber.value - 1) * elementPerPage.value)
-    const endInd = (pageNumber.value * elementPerPage.value) - 1
+  return filteredData.value.slice(
+    (pageNumber.value - 1) * elementPerPage.value,
+    pageNumber.value * elementPerPage.value,
+  )
+})
 
-    if (idx >= startInd && idx <= endInd)
-      return true
-    else return false
-  }) || []
+const totalPage = computed(() => {
+  return Math.ceil(filteredData.value.length / elementPerPage.value)
+})
+
+// 獲取所有唯一標籤
+const allTags = computed(() => {
+  const tags = new Set<string>()
+  formattedData.value.forEach((post) => {
+    post.tags.forEach(tag => tags.add(tag))
+  })
+  return Array.from(tags)
 })
 
 // 上一頁和下一頁的邏輯
@@ -60,17 +74,20 @@ function onPreviousPageClick() {
   if (pageNumber.value > 1)
     pageNumber.value -= 1
 }
-
-// 計算總頁數
-const totalPage = computed(() => {
-  const ttlContent = searchData.value.length || 0
-  const totalPage = Math.ceil(ttlContent / elementPerPage.value)
-  return totalPage
-})
-
 function onNextPageClick() {
   if (pageNumber.value < totalPage.value)
     pageNumber.value += 1
+}
+
+// 處理標籤選擇
+function toggleTag(tag: string) {
+  const index = selectedTags.value.indexOf(tag)
+  if (index > -1) {
+    selectedTags.value.splice(index, 1)
+  }
+  else {
+    selectedTags.value.push(tag)
+  }
 }
 
 // 設置頁面元數據
@@ -100,6 +117,22 @@ defineOgImage({
 <template>
   <main class="container max-w-5xl mx-auto text-zinc-600">
     <ArchiveHero />
+
+    <!-- 新增：標籤選擇器 -->
+    <div class="flex flex-wrap gap-2 px-6 my-4">
+      <button
+        v-for="tag in allTags"
+        :key="tag"
+        class="px-2 py-1 rounded" :class="[
+          selectedTags.includes(tag)
+            ? 'bg-blue-500 text-white'
+            : 'bg-gray-200 text-gray-700',
+        ]"
+        @click="toggleTag(tag)"
+      >
+        {{ tag }}
+      </button>
+    </div>
 
     <div class="px-6">
       <input
