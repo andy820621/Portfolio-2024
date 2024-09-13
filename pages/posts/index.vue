@@ -7,6 +7,7 @@ definePageMeta({
     surround: false, // Disable surround fetching
   },
 })
+
 const { data: contentPosts } = await useAsyncData('listPosts', () => queryContent<BlogPost>('posts')
   .where({ draft: { $ne: true } })
   .sort({ date: -1 }) // ex: .sort({ _id: -1 })
