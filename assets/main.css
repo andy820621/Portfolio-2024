@@ -1,20 +1,8 @@
-:root {
-  --c-bg: #fff;
-  --c-scrollbar: #eee;
-  --c-scrollbar-hover: #bbb;
-}
-
 html {
-  background-color: var(--c-bg);
+  background-color: var(--clr-bg);
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-behavior: smooth;
-}
-
-html.dark {
-  --c-bg: #050505;
-  --c-scrollbar: #111;
-  --c-scrollbar-hover: #222;
 }
 
 body {
@@ -41,7 +29,7 @@ body {
 }
 
 * {
-  scrollbar-color: var(--c-scrollbar) var(--c-bg);
+  scrollbar-color: var(--clr-scrollbar) var(--c-bg);
 }
 
 .sponsorkit-avatar {
@@ -70,11 +58,11 @@ body {
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--c-scrollbar);
+  background: var(--clr-scrollbar);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--c-scrollbar-hover);
+  background: var(--clr-scrollbar-hover);
 }
 
 h2 + p > em:first-child {

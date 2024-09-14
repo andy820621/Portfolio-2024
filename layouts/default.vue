@@ -18,7 +18,7 @@
 
 <style lang="scss" scoped>
 .gd-container {
-  @apply overflow-x-hidden;
+  // @apply overflow-x-hidden;
   display: grid;
   grid-template-rows: min-content auto;
   min-height: 100vh;

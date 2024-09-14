@@ -219,7 +219,7 @@ svg #circle {
   #path4,
   #path5,
   #circle {
-    stroke: var(--primary-active);
+    stroke: var(--clr-primary-green);
   }
 
   #path1,
@@ -227,7 +227,7 @@ svg #circle {
   #path3,
   #path4,
   #path5 {
-    fill: var(--primary-active);
+    fill: var(--clr-primary-green);
   }
 }
 </style>

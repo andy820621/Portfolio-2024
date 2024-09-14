@@ -47,7 +47,7 @@ const route = useRoute()
 
 <style>
 .text-active {
-  color: var(--primary-active);
+  color: var(--clr-sub-green);
   @apply font-bold;
 }
 </style>

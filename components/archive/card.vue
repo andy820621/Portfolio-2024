@@ -36,25 +36,25 @@ withDefaults(defineProps<Props>(), {
         />
       </div>
       <div class="sm:col-span-7 p-5">
-        <h2 class="text-xl font-semibold text-black dark:text-zinc-300   pb-1 group-hover:text-sky-700 dark:group-hover:text-sky-400">
+        <h2 class="text-xl font-semibold text-black dark:text-zinc-300   pb-1 group-hover:text-[var(--clr-primary-green)]">
           {{ title }}
         </h2>
         <p class="text-ellipsis line-clamp-2">
           {{ description }}
         </p>
         <div class="text-black dark:text-zinc-300   text-sm mt-2 mb-1 md:flex md:space-x-6">
-          <div class="flex items-center">
+          <div class="flex items-center gap-1 flex-wrap">
             <Icon name="ri:calendar-line" />
             <p> {{ date }}</p>
           </div>
-          <div class="flex items-center gap-1 flex-wrap">
+          <div class="flex items-center gap-1 flex-wrap ">
             <Icon name="ri:price-tag-3-line" />
-            <p v-for="tag in tags" :key="tag">
+            <p v-for="tag in tags" :key="tag" class="px-[8px] py-[2.4px] rounded bg-[var(--clr-bg-green)] text-gray-700 dark:text-gray-100">
               {{ tag }}
             </p>
           </div>
         </div>
-        <div class="flex group-hover:underline text-sky-700 dark:text-sky-400 items-center pt-2">
+        <div class="flex group-hover:underline text-[var(--clr-sub-green)] items-center pt-2">
           <p>Read More</p>
           <Icon name="ri:arrow-right-line" />
         </div>
