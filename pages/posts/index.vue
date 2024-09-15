@@ -105,6 +105,12 @@ function toggleTag(tag: string) {
   }
 }
 
+// 清除 input & 標籤
+function clearFilters() {
+  searchTest.value = ''
+  selectedTags.value = []
+}
+
 // 設置頁面元數據
 useHead({
   title: 'Blog',
@@ -131,7 +137,7 @@ defineOgImage({
 
 <template>
   <main class="container max-w-5xl mx-auto text-zinc-600">
-    <ArchiveHero />
+    <BlogPostHero />
 
     <!-- 新增：標籤選擇器 -->
     <div class="flex flex-wrap gap-2 px-6 my-4">
@@ -161,7 +167,7 @@ defineOgImage({
     <ClientOnly>
       <div v-auto-animate class="space-y-5 my-5 px-4">
         <template v-for="post in paginatedData" :key="post.title">
-          <ArchiveCard
+          <BlogPostCard
             :path="post.path"
             :title="post.title"
             :date="post.date"
@@ -176,10 +182,9 @@ defineOgImage({
           />
         </template>
 
-        <ArchiveCard
+        <BlogNoResults
           v-if="paginatedData.length <= 0"
-          title="No Post Found"
-          image="/not-found.jpg"
+          :clear-filters="clearFilters"
         />
       </div>
 
