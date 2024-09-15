@@ -8,10 +8,22 @@ definePageMeta({
   },
 })
 
-const { data: contentPosts } = await useAsyncData('listPosts', () => queryContent<BlogPost>('posts')
-  .where({ draft: { $ne: true } })
-  .sort({ date: -1 }) // ex: .sort({ _id: -1 })
-  .find())
+const { data: contentPosts } = await useAsyncData('listPosts', async () => {
+  const posts = await queryContent<BlogPost>('posts')
+    .where({ draft: { $ne: true } })
+    .sort({ date: -1 })
+    .find()
+
+  // 計算每篇文章的字數及時間
+  return posts.map((post) => {
+    const wordCount = post.body ? countWords(post.body) : 0
+    return {
+      ...post,
+      wordCount,
+      readingTime: estimateReadingTime(wordCount),
+    }
+  })
+})
 
 // 設置每頁顯示的文章數量和當前頁碼
 const elementPerPage = ref(5)
@@ -34,6 +46,8 @@ const formattedData = computed(() => {
       date: articles.date || 'not-date-available',
       tags: articles.tags || [],
       published: articles.published || false,
+      wordCount: articles.wordCount || 0,
+      readingTime: articles.readingTime || undefined,
     }
   }) || []
 })
@@ -157,6 +171,8 @@ defineOgImage({
             :og-image="post.ogImage"
             :tags="post.tags"
             :published="post.published"
+            :word-count="post.wordCount"
+            :reading-time="post.readingTime"
           />
         </template>
 

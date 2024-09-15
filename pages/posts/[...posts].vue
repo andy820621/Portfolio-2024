@@ -19,7 +19,16 @@ const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
       .findSurround(route.fullPath.replace(/\/$/, '')),
   ]))
 
-const article = computed(() => postData.value?.[0])
+const article = computed(() => {
+  const post = postData.value![0]
+  const wordCount = post.body ? countWords(post.body) : 0
+
+  return {
+    ...post,
+    wordCount,
+    readingTime: estimateReadingTime(wordCount),
+  }
+})
 const prevPost = computed(() => postData.value?.[1]?.[0])
 const nextPost = computed(() => postData.value?.[1]?.[1])
 
@@ -41,6 +50,8 @@ const data = computed(() => {
     date: article.value?.date || 'not-date-available',
     tags: article.value?.tags || [],
     published: article.value?.published || false,
+    wordCount: article.value?.wordCount || 0,
+    readingTime: article.value?.readingTime || undefined,
   }
 })
 
@@ -154,6 +165,8 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
             :date="data.date"
             :description="data.description"
             :tags="data.tags"
+            :word-count="data.wordCount"
+            :reading-time="data.readingTime"
           />
           <ContentRenderer :value="article">
             <template #empty>

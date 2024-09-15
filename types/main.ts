@@ -11,4 +11,6 @@ export interface BlogPost extends ParsedContent {
   ogImage: string
   tags: string[]
   published: boolean
+  readingTime?: string
+  wordCount?: number
 }
