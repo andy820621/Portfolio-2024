@@ -1,14 +1,13 @@
+import dayjs from 'dayjs'
 import type { DateLike } from '~/types/main'
 
 export function useFormatDate(date: MaybeRefOrGetter<DateLike>, onlyDate = true) {
-  const now = useNow()
-
   return computed(() => {
-    const dateValue = toValue(date)
-    const formatStr = onlyDate || (dateValue && new Date(dateValue).getFullYear() === now.value.getFullYear())
-      ? 'MMM D'
-      : 'MMM D, YYYY'
+    const dateValue = dayjs(toValue(date))
+    const now = dayjs()
 
-    return useDateFormat(date, formatStr).value
+    if (onlyDate || dateValue.year() === now.year())
+      return dateValue.format('MMM D')
+    return dateValue.format('MMM D, YYYY')
   })
 }

@@ -63,7 +63,6 @@ export default defineNuxtConfig({
     '@nuxtjs/fontaine',
     '@unocss/nuxt',
     'floating-vue/nuxt',
-    'dayjs-nuxt',
     '@nuxt/icon',
     '@nuxt/content',
     '@nuxtjs/sitemap',

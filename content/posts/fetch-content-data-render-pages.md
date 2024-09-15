@@ -1,6 +1,6 @@
 ---
 title: How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages
-date: 1st Mar 2023
+date: 2023/5/1
 description: Here we will learn How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages
 image: /blog-images/fetch-content-data-render-pages.jpg
 alt: How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages

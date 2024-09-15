@@ -20,28 +20,30 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <header>
-    <h1 class="text-xl dark:text-zinc-300 md:text-3xl lg:text-4xl m-7 font-bold text-center">
+    <h1 class="text-xl dark:text-zinc-300 md:text-3xl lg:text-4xl font-bold">
       {{ title || '' }}
     </h1>
     <NuxtImg
       :src="image || ''"
       :alt="alt || ''"
       width="600"
-      class="m-auto rounded-2xl shadow-lg h-32 md:h-72 w-4/6 md:w-4/5 content-center object-cover"
+      class="m-auto rounded-lg shadow-lg h-32 md:h-72 w-full h-full max-h-[24vh] content-center object-cover"
     />
-    <p class="text-xs sm:text-sm my-3 max-w-xl mx-auto text-center text-zinc-600 dark:text-zinc-400">
+    <p class="sm:text-xs sm:text-sm my-3 max-w-xl mx-auto text-zinc-600 dark:text-zinc-400">
       {{ description }}
     </p>
-    <div class="flex w-full justify-center text-xs md:text-base my-8">
-      <div class="md:flex text-black dark:text-zinc-300 content-center gap-8 text-xs sm:text-sm">
-        <div class="flex items-center font-semibold">
+    <div class="flex w-full justify-end sm:text-xs md:text-base mt-2 mb-4">
+      <div class="text-right md:flex text-black dark:text-zinc-300 content-center gap-8  sm:text-sm">
+        <div class="flex justify-end items-center font-semibold gap-1 flex-wrap">
           <Icon name="ri:calendar-line" />
-          <p>{{ date || '' }}</p>
+          <p class="m-0!">
+            {{ useFormatDate(date, false) || '' }}
+          </p>
         </div>
-        <div class="flex items-center gap-2 flex-wrap my-5">
+        <div class="flex items-center gap-1 flex-wrap my-2 md:my-5">
           <Icon name="ri:price-tag-3-line" />
           <template v-for="tag in tags" :key="tag">
-            <span class="bg-gray-200 dark:bg-slate-900 rounded-md px-2 py-1 font-semibold">{{ tag }}</span>
+            <span class="px-[8px] py-[2.4px] rounded bg-[var(--clr-bg-green)] text-gray-700 dark:text-gray-100 font-semibold">{{ tag }}</span>
           </template>
         </div>
       </div>

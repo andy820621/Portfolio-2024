@@ -36,7 +36,6 @@
     "@vueuse/core": "^11.0.3",
     "@vueuse/nuxt": "^11.0.3",
     "dayjs": "^1.11.13",
-    "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.9.1",
     "eslint-plugin-format": "^0.1.2",
     "nuxt-og-image": "3.0.0-rc.69",

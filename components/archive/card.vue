@@ -45,7 +45,7 @@ withDefaults(defineProps<Props>(), {
         <div class="text-black dark:text-zinc-300   text-sm mt-2 mb-1 md:flex md:space-x-6">
           <div class="flex items-center gap-1 flex-wrap">
             <Icon name="ri:calendar-line" />
-            <p> {{ date }}</p>
+            <p> {{ useFormatDate(date, false) || '' }}</p>
           </div>
           <div class="flex items-center gap-1 flex-wrap ">
             <Icon name="ri:price-tag-3-line" />

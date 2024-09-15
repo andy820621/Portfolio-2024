@@ -1,6 +1,6 @@
 ---
 title: How To Create Namespace Subdomain & Connect To Vercel App
-date: 1st Mar 2023
+date: 2023/5/1
 description: Here we will learn, How To Create Namespace Subdomain & Connect To Vercel App
 image: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
 alt: How To Create Namespace Subdomain & Connect To Vercel App

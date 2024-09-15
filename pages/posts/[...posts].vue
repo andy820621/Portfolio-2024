@@ -3,9 +3,7 @@ import { navbarData, seoData } from '~/data'
 import type { BlogPost } from '~/types/main'
 
 const route = useRoute()
-
-// remove trailing slash from path
-const actualPath = route.path.replace(/\/$/, '')
+const actualPath = route.path.replace(/\/$/, '') // remove trailing slash from path
 
 const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
   Promise.all([
@@ -116,7 +114,8 @@ const activeId = ref('')
 onMounted(() => {
   const observer = new IntersectionObserver(callback, {
     root: null,
-    threshold: 0.5,
+    rootMargin: '-24% 0px -24% 0px',
+    threshold: 0.24,
   })
 
   const elements = document.querySelectorAll('h2, h3')
@@ -141,22 +140,21 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
 </script>
 
 <template>
-  <div v-if="article">
-    <!-- 你的現有模板內容 -->
+  <div>
     <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
       <div class="col-span-12 lg:col-span-9">
-        <BlogHeader
-          :title="data.title"
-          :image="data.image"
-          :alt="data.alt"
-          :date="data.date"
-          :description="data.description"
-          :tags="data.tags"
-        />
         <div
           class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg
           prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
         >
+          <BlogHeader
+            :title="data.title"
+            :image="data.image"
+            :alt="data.alt"
+            :date="data.date"
+            :description="data.description"
+            :tags="data.tags"
+          />
           <ContentRenderer :value="article">
             <template #empty>
               <p>No content found.</p>
@@ -175,7 +173,7 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
             :network="network"
             :styled="true"
             :label="true"
-            class="p-1"
+            class="p-1 text-slate-300"
             :aria-label="`Share with ${network}`"
           />
         </div>
@@ -183,11 +181,5 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
         <BlogPrevNext :prev="prevPost" :next="nextPost" />
       </div>
     </div>
-  </div>
-  <div v-else-if="error">
-    An error occurred while loading the content.
-  </div>
-  <div v-else>
-    Loading...
   </div>
 </template>

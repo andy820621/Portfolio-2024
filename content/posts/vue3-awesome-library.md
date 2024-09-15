@@ -1,6 +1,6 @@
 ---
 title: Some Awesome Libraries For Vue3
-date: 1st Jan 2023
+date: 2023.1.8
 description: Vue.js is a popular JavaScript framework for building web applications. In this blog post, we will introduce you to some of the awesome libraries for Vue.js in different categories.
 image: /blog-images/some-awesome-libraries-for-vue3.jpg
 alt: Some Awesome Libraries For Vue3
