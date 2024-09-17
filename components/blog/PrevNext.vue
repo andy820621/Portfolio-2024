@@ -7,6 +7,8 @@ defineProps<{
   prev: Article | undefined
   next: Article | undefined
 }>()
+
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -27,7 +29,7 @@ defineProps<{
           {{ prev.description }}
           <slot />
         </div>
-        <NuxtLink :to="prev._path" class="absolute inset-0" />
+        <NuxtLink :to="localePath(prev._path!)" class="absolute inset-0" />
       </div>
     </li>
 
@@ -47,7 +49,7 @@ defineProps<{
           {{ next.description }}
           <slot />
         </div>
-        <NuxtLink :to="next._path" class="absolute inset-0" />
+        <NuxtLink :to="localePath(next._path!)" class="absolute inset-0" />
       </div>
     </li>
   </ul>

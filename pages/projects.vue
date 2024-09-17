@@ -1,4 +1,16 @@
 <script setup lang="ts">
+definePageMeta({
+  documentDriven: {
+    page: false, // Keep page fetching enabled
+    surround: false, // Disable surround fetching
+  },
+})
+
+onMounted(() => {
+  useHead({
+    title: 'projects',
+  })
+})
 </script>
 
 <template>

@@ -2,21 +2,32 @@
 import { navbarData, seoData } from '~/data'
 import type { BlogPost } from '~/types/main'
 
+definePageMeta({
+  documentDriven: {
+    page: false, // Keep page fetching enabled
+    surround: false, // Disable surround fetching
+  },
+})
+
 const route = useRoute()
-const actualPath = route.path.replace(/\/$/, '') // remove trailing slash from path
+const { locale } = useI18n()
+const localePath = useLocalePath()
+// const actualPath = route.path.replace(/\/$/, '') // remove trailing slash from path
+const actualPathWithoutLocale = route.path.split(locale.value).find(path => path.includes('posts'))!
 
-const { data: postData, error } = await useAsyncData(`post-${actualPath}`, () =>
+const { data: postData, error } = await useAsyncData(`post-${route.path}`, () =>
   Promise.all([
-    queryContent<BlogPost>(actualPath).findOne(),
+    queryContent<BlogPost>(actualPathWithoutLocale).locale(locale.value).findOne(),
 
-    queryContent<BlogPost>('posts')
+    queryContent<BlogPost>('/posts')
+      .locale(locale.value)
       .where({
         navigation: { $ne: false },
         draft: { $ne: true },
-      }) // skip posts with `navigation: false` or `draft: true`
+      })
       .only(['_path', 'title', 'description'])
       .sort({ date: -1 })
-      .findSurround(route.fullPath.replace(/\/$/, '')),
+      .findSurround(actualPathWithoutLocale),
   ]))
 
 const article = computed(() => {
@@ -36,7 +47,7 @@ const nextPost = computed(() => postData.value?.[1]?.[1])
 watchEffect(() => {
   if (error.value) {
     console.error('Fetch error:', error.value)
-    navigateTo('/404')
+    navigateTo(localePath('/404'))
   }
 })
 

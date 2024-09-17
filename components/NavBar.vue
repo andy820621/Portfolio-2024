@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useWindowScroll } from '@vueuse/core'
 
+const localePath = useLocalePath()
+
 function toTop() {
   window.scrollTo({
     top: 0,
@@ -15,7 +17,7 @@ const { y: scroll } = useWindowScroll()
   <header class="header z-40">
     <NuxtLink
       class="w-12 h-12 absolute xl:fixed m-5 select-none outline-none"
-      to="/"
+      :to="localePath('/')"
       focusable="false"
     >
       <Logo />
@@ -32,38 +34,40 @@ const { y: scroll } = useWindowScroll()
     <nav class="nav">
       <div class="spacer" />
       <div class="right" print:op0>
-        <NuxtLink to="/posts" title="Blog">
+        <NuxtLink :to="localePath('/posts')" title="Blog">
           <span class="lt-md:hidden">Blog</span>
           <Icon name="ri:article-line" class="md:hidden" />
         </NuxtLink>
 
-        <NuxtLink to="/projects" title="Projects">
+        <NuxtLink :to="localePath('/projects')" title="Projects">
           <span class="lt-md:hidden">Projects</span>
           <Icon name="ri:projector-line" class="md:hidden" />
         </NuxtLink>
 
-        <NuxtLink to="/demos" title="Demos">
+        <NuxtLink :to="localePath('/demos')" title="Demos">
           <span class="lt-md:hidden">Demos</span>
           <Icon name="i-mdi-monitor-dashboard" class="md:hidden" />
         </NuxtLink>
 
-        <!-- <NuxtLink to="/gallery" title="Gallery">
+        <!-- <NuxtLink :to="localePath('/gallery')" title="Gallery">
           <Icon name="i-ri-screenshot-line" class="md:hidden" />
         </NuxtLink>
 
-        <NuxtLink to="/labs" title="Labs">
+        <NuxtLink :to="localePath('/labs')" title="Labs">
           <Icon name="i-ri-screenshot-line" class="md:hidden" />
         </NuxtLink> -->
 
         <!-- Social Media -->
-        <a href="https://twitter.com/antfu7" target="_blank" title="Twitter" class="lt-md:hidden">
+        <a href="https://twitter.com/Barz3064" target="_blank" title="Twitter" class="lt-md:hidden">
           <Icon name="i-ri-twitter-x-fill" />
         </a>
-        <a href="https://github.com/antfu" target="_blank" title="GitHub" class="lt-md:hidden">
+        <a href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden">
           <Icon name="i-ri-github-fill" />
         </a>
 
         <ToggleTheme />
+
+        <ToggleLanguage />
       </div>
     </nav>
   </header>

@@ -8,11 +8,11 @@ definePageMeta({
   },
 })
 
+const { locale } = useI18n()
+const localePath = useLocalePath()
+
 const { data: contentPosts } = await useAsyncData('listPosts', async () => {
-  const posts = await queryContent<BlogPost>('posts')
-    .where({ draft: { $ne: true } })
-    .sort({ date: -1 })
-    .find()
+  const posts = await queryContent<BlogPost>('/posts').locale(locale.value).where({ draft: { $ne: true } }).sort({ date: -1 }).find()
 
   // 計算每篇文章的字數及時間
   return posts.map((post) => {
@@ -139,7 +139,7 @@ defineOgImage({
   <main class="container max-w-5xl mx-auto text-zinc-600">
     <BlogPostHero />
 
-    <!-- 新增：標籤選擇器 -->
+    <!-- 標籤過濾 -->
     <div class="flex flex-wrap gap-2 px-6 my-4">
       <button
         v-for="tag in allTags"
@@ -168,7 +168,7 @@ defineOgImage({
       <div v-auto-animate class="space-y-5 my-5 px-4">
         <template v-for="post in paginatedData" :key="post.title">
           <BlogPostCard
-            :path="post.path"
+            :path="localePath(post.path!)"
             :title="post.title"
             :date="post.date"
             :description="post.description"

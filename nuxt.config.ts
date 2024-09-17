@@ -8,7 +8,6 @@ export default defineNuxtConfig({
       charset: 'utf-16',
       viewport: 'width=device-width,initial-scale=1',
       title: navbarData.homeTitle,
-      titleTemplate: `%s - ${navbarData.homeTitle}`,
       meta: [
         { name: 'author', content: navbarData.homeTitle },
       ],
@@ -27,10 +26,13 @@ export default defineNuxtConfig({
     twitter: seoData.twitterHandle,
   },
   content: {
+    locales: ['en', 'zh'],
+    defaultLocale: 'en',
     documentDriven: {
       injectPage: false,
     },
     experimental: {
+      // clientDB: true,
       search: {},
     },
     highlight: {
@@ -41,11 +43,30 @@ export default defineNuxtConfig({
       },
     },
   },
+  i18n: {
+    baseUrl: 'http://localhost:3000',
+    // vueI18n: './i18n.config.ts',
+    locales: [
+      { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'zh', iso: 'zh-TW', name: 'Chinese', file: 'zh.json' },
+    ],
+    langDir: 'langs',
+    strategy: 'prefix_and_default',
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root', // recommended
+      fallbackLocale: 'en',
+    },
+    // lazy: true,
+  },
   nitro: {
     prerender: {
       crawlLinks: true,
       routes: [
         '/',
+        // '/sitemap.xml',
       ],
     },
   },
@@ -70,6 +91,7 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@formkit/auto-animate',
     '@stefanobartoletti/nuxt-social-share',
+    '@nuxtjs/i18n',
   ],
   unocss: {
     nuxtLayers: true,
