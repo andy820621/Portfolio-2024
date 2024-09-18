@@ -1,3 +1,4 @@
+/* eslint-disable node/prefer-global/process */
 import { navbarData, seoData } from './data'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -44,7 +45,7 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: process.env.NUXT_BASE_URL,
     // vueI18n: './i18n.config.ts',
     locales: [
       { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
@@ -96,12 +97,15 @@ export default defineNuxtConfig({
   unocss: {
     nuxtLayers: true,
   },
-  // vite: {
-  //   optimizeDeps: {
-  //     include: [
-  //       '@nuxt/image',
-  //       'nuxt-og-image',
-  //     ],
-  //   },
-  // },
+  vite: {
+    define: {
+      'process.env': process.env,
+    },
+    // optimizeDeps: {
+    //   include: [
+    //     '@nuxt/image',
+    //     'nuxt-og-image',
+    //   ],
+    // },
+  },
 })
