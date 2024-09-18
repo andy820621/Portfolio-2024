@@ -146,8 +146,8 @@ defineOgImage({
         :key="tag"
         class="px-2 py-1 rounded" :class="[
           selectedTags.includes(tag)
-            ? 'bg-[var(--clr-primary-green)] text-gray-100'
-            : 'bg-[var(--clr-bg-green)] text-gray-700 dark:text-gray-100 hover:bg-[var(--clr-hover-green)]',
+            ? 'bg-primary-green text-gray-100'
+            : 'bg-primary text-gray-700 dark:text-gray-100 hover:bg-primary-hover',
         ]"
         @click="toggleTag(tag)"
       >
@@ -198,11 +198,11 @@ defineOgImage({
 
     <div class="flex justify-center items-center space-x-6 ">
       <button :disabled="pageNumber <= 1" @click="onPreviousPageClick">
-        <Icon name="mdi:code-less-than" size="30" class="text-[var(--clr-btn-disabled)]" :class="{ 'text-[var(--clr-btn)] hover:text-[var(--clr-btn-hover)]': pageNumber > 1 }" />
+        <Icon name="mdi:code-less-than" size="30" class="base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
       </button>
       <p>{{ pageNumber }} / {{ totalPage }}</p>
       <button :disabled="pageNumber >= totalPage" @click="onNextPageClick">
-        <Icon name="mdi:code-greater-than" size="30" class="text-[var(--clr-btn-disabled)]" :class="{ 'text-[var(--clr-btn)] hover:text-[var(--clr-btn-hover)]': pageNumber < totalPage }" />
+        <Icon name="mdi:code-greater-than" size="30" class="base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
       </button>
     </div>
   </main>

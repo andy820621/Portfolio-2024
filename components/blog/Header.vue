@@ -59,7 +59,7 @@ withDefaults(defineProps<Props>(), {
           <Icon class="flex-shrink-0 mt-[0.45rem]" name="ri:price-tag-3-line" />
           <div class="flex gap-1 flex-wrap">
             <template v-for="tag in tags" :key="tag">
-              <span class="px-[8px] py-[2.4px] rounded bg-[var(--clr-bg-green)] text-gray-700 dark:text-gray-100 font-semibold">{{ tag }}</span>
+              <span class="px-[8px] py-[2.4px] rounded bg-primary text-gray-700 dark:text-gray-100 font-semibold">{{ tag }}</span>
             </template>
           </div>
         </div>

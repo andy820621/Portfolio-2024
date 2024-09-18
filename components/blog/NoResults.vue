@@ -15,7 +15,7 @@ defineProps<{ clearFilters: () => void }>()
 
       <div class="mt-6">
         <button
-          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[var(--clr-primary-green)] hover:bg-[var(--clr-hover-green)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--clr-primary-green)]"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-hover base-focus"
           @click="clearFilters"
         >
           Clear filters

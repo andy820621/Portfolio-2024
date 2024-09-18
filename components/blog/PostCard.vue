@@ -27,18 +27,18 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <article class="group border dark:border-gray-800  m-2 rounded-xl overflow-hidden shadow-[var(--box-shadow)] text-[var(--clr-text)]">
+  <article class="group border-base  m-2 rounded-xl overflow-hidden shadow-base hover:shadow-base-hover text-base transition-shadow duration-300">
     <NuxtLink :to="path" class="grid grid-cols-1 sm:grid-cols-10 gap-1">
       <div class="sm:col-span-3">
         <NuxtImg
-          class="h-full w-full object-cover object-center rounded-t-2xl sm:rounded-l-2xl sm:rounded-t-none shadow-lg group-hover:scale-[1.02] transition-all duration-500"
+          class="h-full w-full object-cover object-center rounded-t-2xl sm:rounded-l-2xl sm:rounded-t-none shadow-lg group-hover:scale-[1.02] transition-transform duration-300"
           width="300"
           :src="image"
           :alt="alt"
         />
       </div>
       <div class="sm:col-span-7 p-5">
-        <h2 class="text-xl font-semibold text-black dark:text-zinc-300   pb-1 group-hover:text-[var(--clr-primary-green)]">
+        <h2 class="text-xl font-semibold text-base pb-1 group-hover:text-primary transition-color duration-300">
           {{ title }}
         </h2>
         <p class="text-ellipsis line-clamp-2 dark:text-slate-400">
@@ -62,12 +62,14 @@ withDefaults(defineProps<Props>(), {
 
           <div class="flex items-center gap-1 flex-wrap">
             <Icon name="ri:price-tag-3-line" />
-            <p v-for="tag in tags" :key="tag" class="px-[8px] py-[2.4px] rounded bg-[var(--clr-bg-green)] text-gray-700 dark:text-gray-100">
+            <p v-for="tag in tags" :key="tag" class="px-[8px] py-[2.4px] rounded bg-primary text-base">
               {{ tag }}
             </p>
           </div>
         </div>
-        <div class="flex group-hover:underline text-[var(--clr-sub-green)] items-center pt-2">
+        <div
+          class="custom-underline flex w-fit underline-base group-hover:underline-base-hover text-sub items-center pt-2 transition-all duration-300"
+        >
           <p>Read More</p>
           <Icon name="ri:arrow-right-line" />
         </div>
@@ -75,3 +77,10 @@ withDefaults(defineProps<Props>(), {
     </NuxtLink>
   </article>
 </template>
+
+<style>
+.custom-underline {
+  --clr-underline: #ffffff00;
+  --clr-underline-hover: var(--clr-sub-green);
+}
+</style>

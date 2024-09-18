@@ -12,7 +12,7 @@ function handleLocaleChange(newLocale: string) {
   <Listbox v-slot="{ open }" v-model="locale" @update:model-value="handleLocaleChange">
     <div class="relative mt-1">
       <ListboxButton
-        border="~ [var(--clr-text)]"
+        border="~ base"
         flex="~ items-center gap-1"
         class="text-sm rounded-full py-[0.2rem] px-[.3rem]"
       >
@@ -31,15 +31,15 @@ function handleLocaleChange(newLocale: string) {
         leave-to-class="transform scale-95 opacity-0"
       >
         <ListboxOptions
-          border="~ [var(--clr-text)]"
+          border="~ base"
           class="absolute mt-1 max-h-60 rounded-md left-1/2 -translate-x-1/2 py-[.24rem]"
         >
           <ListboxOption v-for="loc in locales" :key="loc.code" v-slot="{ active, selected }" :value="loc.code">
             <li
               flex="~ justify-end items-center gap-1"
-              text="sm [var(--clr-text)]"
+              text="sm base"
               class="relative select-none py-[.3rem] px-[.4rem]"
-              :class="[active && 'bg-[var(--clr-bg-green)] text-[var(--clr-text)]']"
+              :class="[active && 'bg-primary']"
             >
               <Icon v-if="selected" name="ri:check-fill" />
               <span class="block" :class="[selected ? 'font-bold' : 'font-normal']">
