@@ -187,11 +187,12 @@ defineOgImage({
           :clear-filters="clearFilters"
         />
       </div>
-
       <template #fallback>
         <!-- this will be rendered on server side -->
-        <BlogLoader />
-        <BlogLoader />
+        <div class="space-y-5 my-5 px-4">
+          <BlogLoader />
+          <BlogLoader />
+        </div>
       </template>
     </ClientOnly>
 
