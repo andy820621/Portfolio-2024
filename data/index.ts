@@ -15,8 +15,8 @@ export const homePage = {
 }
 
 export const blogsPage = {
-  title: 'All Blogs',
-  description: 'Here you will find all the blog posts I have written & published on this site.',
+  titleKey: 'blogsPage.title',
+  descriptionKey: 'blogsPage.description',
 }
 
 export const categoryPage = {

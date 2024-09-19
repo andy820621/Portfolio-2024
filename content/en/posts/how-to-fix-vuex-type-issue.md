@@ -20,8 +20,8 @@ In recent version of our vue project, when we try to add vuex we see type error 
 
 ```ts
 declare module 'vuex' {
-  export * from 'vuex/types/index.d.ts'
   export * from 'vuex/types/helpers.d.ts'
+  export * from 'vuex/types/index.d.ts'
   export * from 'vuex/types/logger.d.ts'
   export * from 'vuex/types/vue.d.ts'
 }

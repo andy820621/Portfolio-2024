@@ -1,12 +1,28 @@
 export default defineI18nConfig(() => ({
-  legacy: false,
-  locale: 'en',
-  messages: {
+  datetimeFormats: {
     en: {
-      welcome: 'Welcome',
+      short: {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      },
+      long: {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      },
     },
     zh: {
-      welcome: '歡迎',
+      short: {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      },
+      long: {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      },
     },
   },
 }))

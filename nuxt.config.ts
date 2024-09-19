@@ -44,9 +44,10 @@ export default defineNuxtConfig({
       },
     },
   },
+  // TODO: Try to think of if use Nuxt I18n Micro is better (https://s00d.github.io/nuxt-i18n-micro/)
   i18n: {
-    baseUrl: process.env.NUXT_BASE_URL,
-    // vueI18n: './i18n.config.ts',
+    baseUrl: process.env.I18N_BASE_URL,
+    vueI18n: './i18n.config.ts',
     locales: [
       { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
       { code: 'zh', iso: 'zh-TW', name: 'Chinese', file: 'zh.json' },

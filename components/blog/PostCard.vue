@@ -10,7 +10,7 @@ interface Props {
   tags?: Array<string>
   published?: boolean
   wordCount?: number
-  readingTime?: string
+  readingTime?: ComputedRef<string> | string
 }
 
 withDefaults(defineProps<Props>(), {
@@ -49,11 +49,13 @@ withDefaults(defineProps<Props>(), {
             <div class="flex items-center gap-1 flex-wrap">
               <Icon name="ri:calendar-line" />
               <p> {{ useFormatDate(date, false) || '' }}</p>
+              <!-- <p> {{ $d(new Date(date), 'long', 'zh') }}</p> -->
             </div>
 
             <div v-if="wordCount" class="flex items-center gap-1 flex-wrap">
-              <Icon name="ph:read-cv-logo" />
-              <p>{{ wordCount }} words</p>
+              <!-- <Icon name="ph:read-cv-logo" /> -->
+              <Icon name="ri:time-line" />
+              <p>{{ wordCount }} {{ $t('words') }} </p>
               <p v-if="readingTime">
                 ({{ readingTime }})
               </p>
@@ -70,7 +72,7 @@ withDefaults(defineProps<Props>(), {
         <div
           class="custom-underline flex w-fit underline-base group-hover:underline-base-hover text-sub items-center pt-2 transition-all duration-300"
         >
-          <p>Read More</p>
+          <p>{{ $t('Read More') }}</p>
           <Icon name="ri:arrow-right-line" />
         </div>
       </div>

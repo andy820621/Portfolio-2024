@@ -37,7 +37,7 @@ const article = computed(() => {
   return {
     ...post,
     wordCount,
-    readingTime: estimateReadingTime(wordCount),
+    readingTime: useEstimateReadingTime(wordCount),
   }
 })
 const prevPost = computed(() => postData.value?.[1]?.[0])

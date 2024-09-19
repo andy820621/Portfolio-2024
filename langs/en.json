@@ -1,5 +1,15 @@
 {
   "home": "Home",
+  "Blog": "Blog",
   "projects": "Projects",
-  "demos": "Demos"
+  "demos": "Demos",
+  "backToHome": "Back to Home",
+  "words": "words",
+  "min": "min",
+  "Read More": "Read More",
+  "blogsPage": {
+    "title": "All Blogs",
+    "description": "The articles here will mainly be related to front-end development, but occasionally I will share some of my own stories and thoughts."
+  },
+  "Table Of Content": "Table Of Content"
 }

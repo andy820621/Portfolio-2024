@@ -8,7 +8,7 @@ definePageMeta({
   },
 })
 
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const { data: contentPosts } = await useAsyncData('listPosts', async () => {
@@ -20,7 +20,7 @@ const { data: contentPosts } = await useAsyncData('listPosts', async () => {
     return {
       ...post,
       wordCount,
-      readingTime: estimateReadingTime(wordCount),
+      readingTime: useEstimateReadingTime(wordCount),
     }
   })
 })
@@ -117,7 +117,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Here you will find all the blog posts I have written & published on this site.',
+      content: t('blogsPage.description'),
     },
   ],
 })
@@ -129,7 +129,7 @@ const siteData = useSiteConfig()
 defineOgImage({
   props: {
     title: 'Blog',
-    description: 'Here you will find all the blog posts I have written & published on this site.',
+    description: t('blogsPage.description'),
     siteName: siteData.url,
   },
 })

@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
-import weekOfYear from 'dayjs/plugin/weekOfYear.js'
-import utc from 'dayjs/plugin/utc.js'
-import timezone from 'dayjs/plugin/timezone'
 import isToday from 'dayjs/plugin/isToday.js'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc.js'
+import weekOfYear from 'dayjs/plugin/weekOfYear.js'
 
 dayjs.extend(weekOfYear)
 dayjs.extend(utc)
