@@ -7,7 +7,7 @@ interface Props {
   date: string
   tags: Array<string>
   wordCount?: number
-  readingTime?: string
+  readingTime?: ComputedRef<string> | string
 }
 
 withDefaults(defineProps<Props>(), {
