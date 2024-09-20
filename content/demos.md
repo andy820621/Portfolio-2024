@@ -1,3 +1,5 @@
 # Demos
 
-Check out some of my recent demos on Github!
+Coming soon!
+
+<!-- Check out some of my recent demos on Github! -->

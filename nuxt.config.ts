@@ -49,8 +49,8 @@ export default defineNuxtConfig({
     baseUrl: process.env.I18N_BASE_URL,
     vueI18n: './i18n.config.ts',
     locales: [
-      { code: 'en', iso: 'en-US', name: 'English', file: 'en.json' },
-      { code: 'zh', iso: 'zh-TW', name: 'Chinese', file: 'zh.json' },
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'zh', language: 'zh-TW', name: 'Chinese', file: 'zh.json' },
     ],
     langDir: 'langs',
     strategy: 'prefix_and_default',
