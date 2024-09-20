@@ -13,7 +13,7 @@ useHead({
   ],
 })
 
-defineOgImageComponent('About', {
+defineOgImageComponent('NuxtSeo', {
   headline: 'Wrong Path',
   title: '404',
   description: 'Page Not Found',
