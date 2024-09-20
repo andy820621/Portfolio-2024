@@ -71,6 +71,9 @@ export default defineNuxtConfig({
         // '/sitemap.xml',
       ],
     },
+    future: {
+      nativeSWR: true,
+    },
   },
   colorMode: {
     classSuffix: '',
@@ -109,6 +112,18 @@ export default defineNuxtConfig({
   vite: {
     define: {
       'process.env': process.env,
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // Try to fix `useNitroApp` warning about circular dependency.
+            if (id.includes('nitropack')) {
+              return 'nitropack'
+            }
+          },
+        },
+      },
     },
     // optimizeDeps: {
     //   include: [
