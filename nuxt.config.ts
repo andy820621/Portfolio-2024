@@ -98,6 +98,14 @@ export default defineNuxtConfig({
   unocss: {
     nuxtLayers: true,
   },
+  icon: {
+    customCollections: [
+      {
+        prefix: 'barz-icon',
+        dir: './assets/svgIcons',
+      },
+    ],
+  },
   vite: {
     define: {
       'process.env': process.env,

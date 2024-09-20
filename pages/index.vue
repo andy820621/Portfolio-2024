@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+defineOgImageComponent('NuxtSeo')
 
 definePageMeta({
   documentDriven: {
@@ -14,8 +16,10 @@ useHead({
 </script>
 
 <template>
-  <div>
-    IndexPage
+  <div class="prose m-auto slide-enter-content">
+    <article>
+      <ContentDoc path="/about" :locale="locale" />
+    </article>
   </div>
 </template>
 

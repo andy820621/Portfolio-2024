@@ -2,8 +2,8 @@
 import './assets//variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets//main.css'
-import './assets//prose.css'
 import './assets//markdown.css'
+import './assets//prose.css'
 </script>
 
 <template>
