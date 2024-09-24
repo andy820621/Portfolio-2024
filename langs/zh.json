@@ -11,5 +11,7 @@
     "title": "My Blog",
     "description": "這裡的文章主要會是跟前端開發相關的，但偶爾也會分享一些我自己的小故事與想法。"
   },
-  "Table Of Content": "目錄"
+  "Table Of Content": "目錄",
+  "Tech Stack": "技術棧",
+  "Design Tools": "設計工具"
 }

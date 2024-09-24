@@ -26,54 +26,15 @@ Right now I live in Taipei. If you are around, feel free to reach me out, we cou
 My primary occupation is currently in web front-end development.<br>
 If you have any related needs, feel free to contact me anytime.
 
- <p flex="~ gap-3 wrap" class="mt--2!">
-  <Icon name="vscode-icons:file-type-html" size="24"></Icon>
-  <Icon name="vscode-icons:file-type-css" size="24"></Icon>
-  <Icon name="skill-icons:javascript" size="24"></Icon>
-  <Icon name="logos:typescript-icon" size="24"></Icon>
-  <Icon name="logos:sass" size="24"></Icon>
-  <Icon name="logos:tailwindcss-icon" size="24"></Icon>
-  <Icon name="vscode-icons:file-type-unocss" size="24"></Icon>
-  <Icon name="logos:bootstrap" size="24"></Icon>
-  <Icon name="vscode-icons:file-type-quasar" size="24"></Icon>
-  <Icon name="devicon:jquery" size="24"></Icon>
-  <Icon name="logos:vue" size="24"></Icon>
-  <Icon name="logos:nuxt-icon" size="24"></Icon>
-  <Icon name="logos:pinia" size="24"></Icon>
-  <Icon name="logos:git-icon" size="24"></Icon>
-  <Icon name="mdi:github" size="24"></Icon>
-  <Icon name="logos:nodejs-icon" size="24"></Icon>
-  <Icon name="logos:php" size="24"></Icon>
-  <Icon name="logos:laravel" size="24"></Icon>
-  <Icon name="logos:mongodb-icon" size="24"></Icon>
-  <Icon name="logos:supabase-icon" size="24"></Icon>
-  <Icon name="logos:vitejs" size="24"></Icon>
-  <Icon name="logos:webpack" size="24"></Icon>
-  <Icon name="logos:mysql" size="24"></Icon>
-  <Icon name="logos:xampp" size="24"></Icon>
-  <Icon name="logos:firebase" size="24"></Icon>
-  <Icon name="tabler:brand-threejs" size="24"></Icon>
-  <Icon name="simple-icons:aframe" size="24"></Icon>
-</p>
+:TechStackGrid
 
-### Design Tools
+### Design
 
 I actually majored in Industrial Design during my undergraduate studies, and after graduating, I worked in graphic design-related fields.<br>
 Therefore, I can also offer design-related services such as business cards, logo design, brochure design, etc.<br>
 If there's anything else I can do for you regarding graphic design, please feel free to contact me at any time.
 
-<p flex="~ gap-3 wrap" class="mt--2!">
-  <Icon name="devicon:vscode" size="24"></Icon>
-  <Icon name="skill-icons:photoshop" size="24"></Icon>
-  <Icon name="skill-icons:illustrator" size="24"></Icon>
-  <Icon name="skill-icons:xd" size="24"></Icon>
-  <Icon name="skill-icons:premiere" size="24"></Icon>
-  <Icon name="skill-icons:aftereffects" size="24"></Icon>
-  <Icon name="logos:adobe-lightroom" size="24"></Icon>
-  <Icon name="logos:figma" size="24"></Icon>
-  <Icon name="skill-icons:autocad-light" size="24"></Icon>
-  <Icon name="simple-icons:cinema4d" size="24"></Icon>
-</p>
+:DesignToolsGrid
 
 <div flex-auto></div>
 
