@@ -109,6 +109,9 @@ export default defineNuxtConfig({
       },
     ],
   },
+  build: {
+    transpile: ['shiki'],
+  },
   vite: {
     define: {
       'process.env': process.env,
@@ -127,8 +130,8 @@ export default defineNuxtConfig({
     },
     // optimizeDeps: {
     //   include: [
-    //     '@nuxt/image',
-    //     'nuxt-og-image',
+    //     '@nuxt/content',
+    //     'shiki',
     //   ],
     // },
   },

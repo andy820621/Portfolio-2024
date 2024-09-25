@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import './assets//variable.css'
 import '@unocss/reset/tailwind.css'
-import './assets//main.css'
+import './assets//main.scss'
 import './assets//markdown.css'
 import './assets//prose.css'
-
-const { locale } = useI18n()
 </script>
 
 <template>
@@ -14,7 +12,7 @@ const { locale } = useI18n()
   <!-- // TODO: Check what i can do more with this. -->
   <NuxtRouteAnnouncer />
 
-  <NuxtLayout :key="locale">
-    <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage :key="$i18n.locale" />
   </NuxtLayout>
 </template>

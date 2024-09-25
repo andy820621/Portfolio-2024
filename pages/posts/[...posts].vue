@@ -9,37 +9,56 @@ definePageMeta({
   },
 })
 
-const route = useRoute()
-const { locale } = useI18n()
+const { path, params } = useRoute()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 // const actualPath = route.path.replace(/\/$/, '') // remove trailing slash from path
-const actualPathWithoutLocale = route.path.split(locale.value).find(path => path.includes('posts'))!
 
-const { data: postData, error } = await useAsyncData(`post-${route.path}`, () =>
-  Promise.all([
-    queryContent<BlogPost>(actualPathWithoutLocale).locale(locale.value).findOne(),
+const posts = params.posts[0]
+const truePath = `/posts/${posts}`
 
-    queryContent<BlogPost>('/posts')
-      .locale(locale.value)
-      .where({
-        navigation: { $ne: false },
-        draft: { $ne: true },
-      })
-      .only(['_path', 'title', 'description'])
-      .sort({ date: -1 })
-      .findSurround(actualPathWithoutLocale),
-  ]))
+const { data: postData, error } = await useAsyncData(`post-${path}`, async () => {
+  try {
+    const result = await Promise.all([
+      queryContent<BlogPost>('/').where({ _locale: locale.value, _path: truePath }).findOne(),
+
+      queryContent<BlogPost>('/posts')
+        .locale(locale.value)
+        .where({
+          navigation: { $ne: false },
+          draft: { $ne: true },
+        })
+        .only(['_path', 'title', 'description'])
+        .sort({ date: -1 })
+        .findSurround(truePath),
+    ])
+
+    if (!result[0]) {
+      throw new Error('No post found')
+    }
+
+    return result
+  }
+  catch (error) {
+    console.error('Error fetching post data:', error)
+    return null
+  }
+})
 
 const article = computed(() => {
-  const post = postData.value![0]
+  if (!postData.value)
+    return null
+
+  const post = postData.value[0]
   const wordCount = post.body ? countWords(post.body) : 0
 
   return {
     ...post,
     wordCount,
-    readingTime: useEstimateReadingTime(wordCount),
+    readingTime: useEstimateReadingTime(wordCount, t),
   }
 })
+
 const prevPost = computed(() => postData.value?.[1]?.[0])
 const nextPost = computed(() => postData.value?.[1]?.[1])
 
@@ -79,7 +98,7 @@ useHead({
     { hid: 'og:type', property: 'og:type', content: 'website' },
     {
       property: 'og:url',
-      content: `${seoData.mySite}/${route.path}`,
+      content: `${seoData.mySite}/${path}`,
     },
     {
       property: 'og:title',
@@ -98,7 +117,7 @@ useHead({
     { name: 'twitter:card', content: 'summary_large_image' },
     {
       name: 'twitter:url',
-      content: `${seoData.mySite}/${route.path}`,
+      content: `${seoData.mySite}/${path}`,
     },
     {
       name: 'twitter:title',
@@ -116,7 +135,7 @@ useHead({
   link: [
     {
       rel: 'canonical',
-      href: `${seoData.mySite}/${route.path}`,
+      href: `${seoData.mySite}/${path}`,
     },
   ],
 })
@@ -179,7 +198,7 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
             :word-count="data.wordCount"
             :reading-time="data.readingTime"
           />
-          <ContentRenderer :value="article">
+          <ContentRenderer v-if="article" :value="article">
             <template #empty>
               <p>No content found.</p>
             </template>
