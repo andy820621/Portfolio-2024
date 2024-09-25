@@ -4,6 +4,8 @@ import '@unocss/reset/tailwind.css'
 import './assets//main.css'
 import './assets//markdown.css'
 import './assets//prose.css'
+
+const { locale } = useI18n()
 </script>
 
 <template>
@@ -12,29 +14,7 @@ import './assets//prose.css'
   <!-- // TODO: Check what i can do more with this. -->
   <NuxtRouteAnnouncer />
 
-  <NuxtLayout>
+  <NuxtLayout :key="locale">
     <NuxtPage />
   </NuxtLayout>
 </template>
-
-<style>
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(0.24rem) grayscale(0.8);
-}
-
-.layout-enter-active,
-.layout-leave-active {
-  transition: all 0.4s;
-}
-.layout-enter-from,
-.layout-leave-to {
-  opacity: 0;
-  filter: blur(0.24rem) grayscale(0.8);
-}
-</style>

@@ -16,7 +16,7 @@ useHead({
 </script>
 
 <template>
-  <div class="prose m-auto slide-enter-content">
+  <div class="prose m-auto ">
     <article>
       <ContentDoc path="/about" :locale="locale" />
     </article>
