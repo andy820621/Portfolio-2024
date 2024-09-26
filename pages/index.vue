@@ -45,13 +45,16 @@ defineOgImageComponent('NuxtSeo', {
   <div class="prose m-auto ">
     <article>
       <ContentRenderer v-if="content" :value="content" />
-      <template v-else-if="error">
+
+      <div v-else-if="error" class="h-[80vh] w-[80vw] grid items-center justify-center">
         <h1>{{ t('error.occurred') }}</h1>
         <p>{{ error.message }}</p>
-      </template>
-      <template v-else>
+      </div>
+
+      <div v-else class="h-[80vh] w-[80vw] grid items-center justify-center">
         <h1>{{ t('loading') }}</h1>
-      </template>
+        <Icon name="mdi:loading" class="animate-spin" size="81" />
+      </div>
     </article>
   </div>
 </template>
