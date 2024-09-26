@@ -14,8 +14,8 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 // const actualPath = route.path.replace(/\/$/, '') // remove trailing slash from path
 
-const posts = params.posts[0]
-const truePath = `/posts/${posts}`
+const contentPath = params.post
+const truePath = `/posts/${contentPath}`
 
 const { data: postData, error } = await useAsyncData(`post-${path}`, async () => {
   try {

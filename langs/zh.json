@@ -13,5 +13,9 @@
   },
   "Table Of Content": "目錄",
   "Tech Stack": "技術棧",
-  "Design Tools": "設計工具"
+  "Design Tools": "設計工具",
+  "error": {
+    "occurred": "發生錯誤"
+  },
+  "loading": "載入中..."
 }

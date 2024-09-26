@@ -13,5 +13,9 @@
   },
   "Table Of Content": "Table Of Content",
   "Tech Stack": "Tech Stack",
-  "Design Tools": "Design Tools"
+  "Design Tools": "Design Tools",
+  "error": {
+    "occurred": "An error occurred"
+  },
+  "loading": "Loading..."
 }

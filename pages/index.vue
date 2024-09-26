@@ -1,7 +1,18 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
 
-defineOgImageComponent('NuxtSeo')
+// 使用 useAsyncData 獲取內容
+const { data: content, error } = await useAsyncData(
+  `content-${locale.value}`,
+  () => queryContent('/about').locale(locale.value).findOne(),
+)
+
+// 錯誤處理
+watchEffect(() => {
+  if (error.value) {
+    console.error('Fetch error:', error.value)
+  }
+})
 
 definePageMeta({
   documentDriven: {
@@ -10,22 +21,29 @@ definePageMeta({
   },
 })
 
+const pageTitle = computed(() => t('home'))
+
 useHead({
-  title: t('home'),
+  title: pageTitle.value,
+})
+
+defineOgImageComponent('NuxtSeo', {
+  title: pageTitle.value,
+  description: content.value?.description || '',
 })
 </script>
 
 <template>
   <div class="prose m-auto ">
     <article>
-      <ContentDoc :key="locale" path="/about" :locale="locale">
-        <template #empty>
-          <h1>Document is empty</h1>
-        </template>
-        <template #not-found>
-          <h1>Document not found</h1>
-        </template>
-      </ContentDoc>
+      <ContentRenderer v-if="content" :value="content" />
+      <template v-else-if="error">
+        <h1>{{ t('error.occurred') }}</h1>
+        <p>{{ error.message }}</p>
+      </template>
+      <template v-else>
+        <h1>{{ t('loading') }}</h1>
+      </template>
     </article>
   </div>
 </template>

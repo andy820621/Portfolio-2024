@@ -11,11 +11,32 @@ definePageMeta({
 const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
-const { data: contentPosts } = await useAsyncData(`listPosts-${locale.value}`, async () => {
+const { data: contentPosts, error } = await useAsyncData(`listPosts-${locale.value}`, async () => {
   const posts = await queryContent<BlogPost>('/posts').locale(locale.value).where({ draft: { $ne: true } }).sort({ date: -1 }).find()
 
   // 計算每篇文章的字數及時間
   return posts.map((post) => {
+    const wordCount = post.body ? countWords(post.body) : 0
+    return {
+      ...post,
+      wordCount,
+      readingTime: useEstimateReadingTime(wordCount, t),
+    }
+  })
+})
+
+watchEffect(() => {
+  if (error.value) {
+    console.error('Fetch error:', error.value)
+    navigateTo(localePath('/404'))
+  }
+})
+
+const processedPosts = computed(() => {
+  if (!contentPosts.value)
+    return []
+
+  return contentPosts.value.map((post) => {
     const wordCount = post.body ? countWords(post.body) : 0
     return {
       ...post,
@@ -33,9 +54,16 @@ const searchTest = ref('')
 // 選中的標籤
 const selectedTags = ref<string[]>([])
 
+// 重置分頁當過濾條件改變時
+watchEffect(() => {
+  if (searchTest.value || selectedTags.value.length > 0) {
+    pageNumber.value = 1
+  }
+})
+
 // 格式化獲取的數據，設置默認值
 const formattedData = computed(() => {
-  return contentPosts.value?.map((articles) => {
+  return processedPosts.value?.map((articles) => {
     return {
       path: articles._path,
       title: articles.title || 'no-title available',
