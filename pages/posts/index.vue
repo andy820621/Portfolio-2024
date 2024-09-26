@@ -12,17 +12,27 @@ const { t, locale } = useI18n()
 const localePath = useLocalePath()
 
 const { data: contentPosts, error } = await useAsyncData(`listPosts-${locale.value}`, async () => {
-  const posts = await queryContent<BlogPost>('/posts').locale(locale.value).where({ draft: { $ne: true } }).sort({ date: -1 }).find()
+  try {
+    const posts = await queryContent<BlogPost>('/posts')
+      .locale(locale.value)
+      .where({ draft: { $ne: true } })
+      .sort({ date: -1 })
+      .find()
 
-  // 計算每篇文章的字數及時間
-  return posts.map((post) => {
-    const wordCount = post.body ? countWords(post.body) : 0
-    return {
-      ...post,
-      wordCount,
-      readingTime: useEstimateReadingTime(wordCount, t),
-    }
-  })
+    // 計算每篇文章的字數及時間
+    return posts.map((post) => {
+      const wordCount = post.body ? countWords(post.body) : 0
+      return {
+        ...post,
+        wordCount,
+        readingTime: useEstimateReadingTime(wordCount, t),
+      }
+    })
+  }
+  catch (e) {
+    console.error('Error fetching posts:', e)
+    return []
+  }
 })
 
 watchEffect(() => {

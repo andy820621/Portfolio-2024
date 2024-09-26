@@ -4,7 +4,15 @@ const { t, locale } = useI18n()
 // 使用 useAsyncData 獲取內容
 const { data: content, error } = await useAsyncData(
   `content-${locale.value}`,
-  () => queryContent('/about').locale(locale.value).findOne(),
+  async () => {
+    try {
+      return await queryContent('/about').locale(locale.value).findOne()
+    }
+    catch (e) {
+      console.error('Error fetching content:', e)
+      return null
+    }
+  },
 )
 
 // 錯誤處理
