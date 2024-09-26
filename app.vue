@@ -13,6 +13,6 @@ import './assets//prose.css'
   <NuxtRouteAnnouncer />
 
   <NuxtLayout>
-    <NuxtPage :key="$i18n.locale" />
+    <NuxtPage />
   </NuxtLayout>
 </template>

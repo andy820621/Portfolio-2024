@@ -43,7 +43,7 @@ defineOgImageComponent('NuxtSeo', {
 
 <template>
   <div class="prose m-auto ">
-    <article>
+    <article :key="$i18n.locale">
       <ContentRenderer v-if="content" :value="content" />
       <template v-else-if="error">
         <h1>{{ t('error.occurred') }}</h1>

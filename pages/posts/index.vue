@@ -174,7 +174,7 @@ defineOgImage({
 </script>
 
 <template>
-  <main class="container max-w-5xl mx-auto text-zinc-600">
+  <main :key="$i18n.locale" class="container max-w-5xl mx-auto text-zinc-600">
     <BlogPostHero />
 
     <!-- 標籤過濾 -->
