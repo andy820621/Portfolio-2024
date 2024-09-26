@@ -4,6 +4,7 @@
   "projects": "Projects",
   "demos": "Demos",
   "backToHome": "Back to Home",
+  "backToPostsList": "Back to Posts List",
   "words": "words",
   "min": "min",
   "Read More": "Read More",
@@ -17,5 +18,6 @@
   "error": {
     "occurred": "An error occurred"
   },
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "no article found": "No article found"
 }

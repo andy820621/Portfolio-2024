@@ -171,10 +171,19 @@ defineOgImage({
     siteName: siteData.url,
   },
 })
+
+// const isLocaleChanged = ref(false)
+// watch(locale, async () => {
+//   isLocaleChanged.value = true
+//   await nextTick()
+//   setTimeout(() => {
+//     isLocaleChanged.value = false
+//   }, 400)
+// })
 </script>
 
 <template>
-  <main :key="$i18n.locale" class="container max-w-5xl mx-auto text-zinc-600">
+  <main class="container max-w-5xl mx-auto text-zinc-600">
     <BlogPostHero />
 
     <!-- 標籤過濾 -->

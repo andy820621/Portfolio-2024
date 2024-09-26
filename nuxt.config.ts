@@ -1,9 +1,19 @@
+import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
 import { navbarData, seoData } from './data'
+
+const locales = [
+  { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+  { code: 'zh', language: 'zh-TW', name: 'Chinese', file: 'zh.json' },
+]
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  routeRules: generateRouteRules({
+    locales,
+  }),
+
   app: {
     head: {
       charset: 'utf-16',
@@ -48,10 +58,7 @@ export default defineNuxtConfig({
   i18n: {
     baseUrl: process.env.I18N_BASE_URL,
     vueI18n: './i18n.config.ts',
-    locales: [
-      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
-      { code: 'zh', language: 'zh-TW', name: 'Chinese', file: 'zh.json' },
-    ],
+    locales,
     langDir: 'langs',
     strategy: 'prefix_and_default',
     defaultLocale: 'en',
@@ -136,3 +143,47 @@ export default defineNuxtConfig({
     // },
   },
 })
+
+interface RouteRule {
+  prerender?: boolean
+  isr?: number
+  swr?: boolean
+}
+
+interface RouteRules {
+  [key: string]: RouteRule
+}
+
+interface GenerateRouteRulesOptions {
+  locales: LocaleObject[]
+}
+
+function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules {
+  const rules: RouteRules = {}
+
+  // 為默認語言生成無前綴的路由規則
+  const defaultRules: RouteRules = {
+    '/': { prerender: true },
+    '/posts': { isr: 3600 },
+    '/posts/**': { isr: 86400 },
+    '/demos': { prerender: true },
+    '/gallery': { isr: 21600 },
+    '/projects': { isr: 86400 },
+  }
+
+  // 應用默認規則
+  Object.assign(rules, defaultRules)
+
+  // 為所有語言（包括默認語言）生成帶前綴的路由規則
+  locales.forEach((locale) => {
+    const prefix = `/${locale.code}`
+    Object.entries(defaultRules).forEach(([path, rule]) => {
+      rules[`${prefix}${path}`] = { ...rule }
+    })
+  })
+
+  // 動態路由
+  rules['/**'] = { swr: true }
+
+  return rules
+}

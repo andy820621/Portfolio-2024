@@ -1,29 +1,27 @@
 <script setup lang="ts">
 interface Props {
-  title: string
-  image: string
-  alt: string
-  description: string
-  date: string
-  tags: Array<string>
+  title?: string
+  image?: string
+  ogImage?: string
+  alt?: string
+  description?: string
+  date?: string
+  tags?: Array<string>
   wordCount?: number
   readingTime?: ComputedRef<string> | string
 }
 
-withDefaults(defineProps<Props>(), {
-  title: 'no-title',
-  image: '#',
-  alt: 'no-img',
-  description: 'no description',
-  date: 'no-date',
-  tags: () => ([]),
-})
+const {
+  title,
+  image = '/not-found.jpg',
+  alt = 'no-img',
+} = defineProps<Props>()
 </script>
 
 <template>
   <header>
     <h1 class="text-xl dark:text-zinc-300 md:text-3xl lg:text-4xl font-bold">
-      {{ title || '' }}
+      {{ title || $t('no article found') }}
     </h1>
     <NuxtImg
       :src="image || ''"
@@ -31,10 +29,10 @@ withDefaults(defineProps<Props>(), {
       width="600"
       class="m-auto rounded-lg shadow-lg h-32 md:h-72 w-full h-full max-h-[24vh] content-center object-cover"
     />
-    <p class="text-xs sm:text-sm my-2! max-w-xl mx-auto text-zinc-600 dark:text-zinc-400">
+    <p v-if="description" class="text-xs sm:text-sm my-2! max-w-xl mx-auto text-zinc-600 dark:text-zinc-400">
       {{ description }}
     </p>
-    <div class="flex w-full sm:text-xs md:text-base mb-4 md:mt-3 md:mb-[4rem]">
+    <div v-if="date" class="flex w-full sm:text-xs md:text-base mb-4 md:mt-3 md:mb-[4rem]">
       <div class="w-full text-right md:flex md:justify-between md:items-start text-black dark:text-zinc-300 content-center gap-8 sm:text-sm">
         <div class="flex justify-between md:flex-col md:justify-initial">
           <div class="flex items-center font-semibold gap-1 flex-wrap">

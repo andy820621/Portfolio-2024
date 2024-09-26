@@ -72,12 +72,12 @@ watchEffect(() => {
 
 const data = computed(() => {
   return {
-    title: article.value?.title || 'no-title available',
-    description: article.value?.description || 'no-description available',
-    image: article.value?.image || '/not-found.jpg',
-    alt: article.value?.alt || 'no alter data available',
-    ogImage: article.value?.ogImage || '/not-found.jpg',
-    date: article.value?.date || 'not-date-available',
+    title: article.value?.title,
+    description: article.value?.description,
+    image: article.value?.image,
+    alt: article.value?.alt,
+    ogImage: article.value?.ogImage,
+    date: article.value?.date,
     tags: article.value?.tags || [],
     published: article.value?.published || false,
     wordCount: article.value?.wordCount || 0,
@@ -203,12 +203,24 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
               <p>No content found.</p>
             </template>
           </ContentRenderer>
+
+          <template v-else>
+            <div grid justify-center mt-20>
+              <NuxtLink
+                :to="localePath('/posts')"
+                class="inline-block px-6 py-3 text-lg font-semibold base-btn transition duration-300 ease-in-out hover:-translate-y-1
+          shadow-base hover:shadow-base-hover"
+              >
+                {{ $t('backToPostsList') }}
+              </NuxtLink>
+            </div>
+          </template>
         </div>
       </div>
 
-      <BlogToc :links="tocLinks" :active-id="activeId" />
+      <BlogToc v-if="tocLinks.length > 0" :links="tocLinks" :active-id="activeId" />
 
-      <div class="col-span-12 flex flex-col gap-4 mt-10">
+      <div v-if="article" class="col-span-12 flex flex-col gap-4 mt-10">
         <div class="flex flex-row flex-wrap md:flex-nowrap mt-10 gap-2">
           <SocialShare
             v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"

@@ -4,6 +4,7 @@
   "projects": "專案",
   "demos": "示例",
   "backToHome": "返回首頁",
+  "backToPostsList": "返回文章列表",
   "words": "字",
   "min": "分",
   "Read More": "閱讀更多",
@@ -17,5 +18,6 @@
   "error": {
     "occurred": "發生錯誤"
   },
-  "loading": "載入中..."
+  "loading": "載入中...",
+  "no article found": "沒有找到相應的文章"
 }
