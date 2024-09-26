@@ -18,7 +18,14 @@ useHead({
 <template>
   <div class="prose m-auto ">
     <article>
-      <ContentDoc path="/about" :locale="locale" />
+      <ContentDoc :key="locale" path="/about" :locale="locale">
+        <template #empty>
+          <h1>Document is empty</h1>
+        </template>
+        <template #not-found>
+          <h1>Document not found</h1>
+        </template>
+      </ContentDoc>
     </article>
   </div>
 </template>

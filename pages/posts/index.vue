@@ -154,7 +154,7 @@ defineOgImage({
         {{ tag }}
       </button>
     </div>
-
+    <!-- 搜尋 -->
     <div class="px-6">
       <input
         v-model="searchTest"
@@ -164,8 +164,9 @@ defineOgImage({
       >
     </div>
 
+    <!-- 文章列表 -->
     <ClientOnly>
-      <div v-auto-animate class="space-y-5 my-5 px-4">
+      <div v-if="paginatedData && paginatedData.length" v-auto-animate class="space-y-5 my-5 px-4">
         <template v-for="post in paginatedData" :key="post.title">
           <BlogPostCard
             :path="localePath(post.path!)"
