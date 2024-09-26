@@ -197,12 +197,12 @@ defineOgImage({
     </ClientOnly>
 
     <div class="flex justify-center items-center space-x-6 ">
-      <button class="min-w-[30px] min-h-[30px]" :disabled="pageNumber <= 1" @click="onPreviousPageClick">
-        <Icon name="mdi:code-less-than" size="30" class="base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
+      <button :disabled="pageNumber <= 1" @click="onPreviousPageClick">
+        <Icon name="mdi:code-less-than" size="30" class="base-btn-disabled min-w-[30px] min-h-[30px]" :class="{ 'base-btn': pageNumber > 1 }" />
       </button>
       <p>{{ pageNumber }} / {{ totalPage }}</p>
-      <button class="min-w-[30px] min-h-[30px]" :disabled="pageNumber >= totalPage" @click="onNextPageClick">
-        <Icon name="mdi:code-greater-than" size="30" class="base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
+      <button :disabled="pageNumber >= totalPage" @click="onNextPageClick">
+        <Icon name="mdi:code-greater-than" size="30" class="base-btn-disabled min-w-[30px] min-h-[30px]" :class="{ 'base-btn': pageNumber < totalPage }" />
       </button>
     </div>
   </main>
