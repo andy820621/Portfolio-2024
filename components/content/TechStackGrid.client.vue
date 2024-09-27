@@ -29,6 +29,7 @@
       <LinkWithTooltip to="https://firebase.google.com/" icon="logos:firebase" tooltip-content="Firebase" />
       <LinkWithTooltip to="https://threejs.org/" icon="tabler:brand-threejs" tooltip-content="Three.js" />
       <LinkWithTooltip to="https://aframe.io/" icon="simple-icons:aframe" tooltip-content="A-Frame" />
+      <LinkWithTooltip to="https://code.visualstudio.com/" icon="devicon:vscode" tooltip-content="Visual Studio Code" />
     </p>
   </BorderWrapper>
 </template>

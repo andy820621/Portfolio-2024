@@ -1,6 +1,7 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
 import { navbarData, seoData } from './data'
+import { bundleIcons } from './data/bundleIcons'
 
 const locales = [
   { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
@@ -110,6 +111,12 @@ export default defineNuxtConfig({
   },
   icon: {
     serverBundle: 'remote',
+    clientBundle: {
+      icons: bundleIcons,
+      scan: true,
+      includeCustomCollections: true,
+      sizeLimitKb: 1024,
+    },
     // customCollections: [
     //   {
     //     prefix: 'barz-icon',
