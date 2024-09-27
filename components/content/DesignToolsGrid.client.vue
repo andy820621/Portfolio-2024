@@ -1,7 +1,3 @@
-<script setup>
-import { NuxtLink } from '#components'
-</script>
-
 <template>
   <BorderWrapper :label="$t('Design Tools')">
     <p flex="~ gap-3 wrap" class="mt-3! mb-2!">

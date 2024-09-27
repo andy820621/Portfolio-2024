@@ -58,7 +58,3 @@ defineOgImageComponent('NuxtSeo', {
     </article>
   </div>
 </template>
-
-<style scoped>
-
-</style>

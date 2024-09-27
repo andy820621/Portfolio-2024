@@ -109,12 +109,13 @@ export default defineNuxtConfig({
     nuxtLayers: true,
   },
   icon: {
-    customCollections: [
-      {
-        prefix: 'barz-icon',
-        dir: './assets/svgIcons',
-      },
-    ],
+    serverBundle: 'remote',
+    // customCollections: [
+    //   {
+    //     prefix: 'barz-icon',
+    //     dir: './assets/svgIcons',
+    //   },
+    // ],
   },
   build: {
     transpile: ['shiki'],
@@ -161,7 +162,7 @@ interface GenerateRouteRulesOptions {
 function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules {
   const rules: RouteRules = {}
 
-  // 為默認語言生成無前綴的路由規則
+  // 為預設語言生成無前綴的路由規則
   const defaultRules: RouteRules = {
     '/': { prerender: true },
     '/posts': { isr: 3600 },
@@ -171,10 +172,9 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/projects': { isr: 86400 },
   }
 
-  // 應用默認規則
   Object.assign(rules, defaultRules)
 
-  // 為所有語言（包括默認語言）生成帶前綴的路由規則
+  // 為所有語言（包括預設語言）生成帶前綴的路由規則
   locales.forEach((locale) => {
     const prefix = `/${locale.code}`
     Object.entries(defaultRules).forEach(([path, rule]) => {
