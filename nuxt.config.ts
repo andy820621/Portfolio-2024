@@ -128,6 +128,9 @@ export default defineNuxtConfig({
     transpile: ['shiki'],
   },
   vite: {
+    optimizeDeps: {
+      include: ['@nuxt/vite-builder'],
+    },
     define: {
       'process.env': process.env,
     },
