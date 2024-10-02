@@ -22,26 +22,25 @@ useSeoMeta({
 })
 
 const { data: demoItems } = await useAsyncData('demos-data', async () => {
-  const docs = await queryContent('demos-data').sort({ _file: -1 }).find()
+  // const docs = await queryContent('demos-data').sort({ _file: -1 }).find()
+  const docs = await queryContent('demos-data').find()
 
-  return Promise.all(docs.map(async (doc) => {
-    const fileName = doc._file!.split('/').pop()?.split('.')[0] || ''
-    let video
-    try {
-      video = (await import(`~/content/demos-data/${fileName}.mp4`)).default
-    }
-    catch (e) {
-      console.error(`Failed to import video for ${fileName}`, e)
-    }
+  // console.log({ docs })
+
+  return docs.map((doc) => {
+    const fullFileName = doc._file!.split('/').pop() || ''
+    const parts = fullFileName.split('.')
+    const baseName = parts.length > 2 ? parts[1] : parts[0]
     return {
-      date: fileName,
+      baseName,
       content: doc,
-      video,
+      images: doc.images || [],
+      videos: doc.videos || [],
+      icons: doc.icons || {},
+      thumbnailType: doc.thumbnailType || 'image',
     }
-  }))
+  })
 })
-
-// console.log({ demoItems: demoItems.value })
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 // 根據斷點計算列數
@@ -79,17 +78,18 @@ const parts = computed(() => {
 
     <ClientOnly>
       <div grid="~ cols-1 lg:cols-2 xl:cols-3 gap-4">
-        <!-- 遍歷parts數組，為每一列創建一個flex容器 -->
         <div v-for="(items, idx) in parts" :key="idx" flex="~ col gap-4">
-          <!-- 遍歷每一列中的項目，動態渲染組件 -->
-          <div v-for="item in items" :key="item.date">
+          <div v-for="item in items" :key="item.baseName">
             <DemoItem
-              :video="item.video"
-              :date="item.date"
+              :images="item.images"
+              :videos="item.videos"
+              :icons="item.icons"
+              :base-name="item.baseName"
               :content="item.content"
+              :thumbnail-type="item.thumbnailType"
               class="slide-enter"
               :style="{
-                '--enter-stage': idx + 1, // 設置入場動畫的階段
+                '--enter-stage': idx + 1,
               }"
             />
           </div>

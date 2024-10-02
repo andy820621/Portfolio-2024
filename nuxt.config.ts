@@ -125,12 +125,9 @@ export default defineNuxtConfig({
     // ],
   },
   build: {
-    transpile: ['shiki'],
+    transpile: ['shiki', 'fsevents', 'globby'],
   },
   vite: {
-    optimizeDeps: {
-      include: ['@nuxt/vite-builder'],
-    },
     define: {
       'process.env': process.env,
     },
@@ -146,12 +143,14 @@ export default defineNuxtConfig({
         },
       },
     },
-    // optimizeDeps: {
-    //   include: [
-    //     '@nuxt/content',
-    //     'shiki',
-    //   ],
-    // },
+    optimizeDeps: {
+      include: [
+        '@nuxt/vite-builder',
+        'fsevents',
+        // '@nuxt/content',
+        // 'shiki',
+      ],
+    },
   },
 })
 
