@@ -132,17 +132,6 @@ function onNextPageClick() {
     pageNumber.value += 1
 }
 
-// 處理標籤選擇
-function toggleTag(tag: string) {
-  const index = selectedTags.value.indexOf(tag)
-  if (index > -1) {
-    selectedTags.value.splice(index, 1)
-  }
-  else {
-    selectedTags.value.push(tag)
-  }
-}
-
 // 清除 input & 標籤
 function clearFilters() {
   searchTest.value = ''
@@ -186,30 +175,12 @@ defineOgImage({
   <main class="container max-w-5xl mx-auto text-zinc-600">
     <BlogPostHero />
 
-    <!-- 標籤過濾 -->
-    <div class="flex flex-wrap gap-2 px-6 my-4">
-      <button
-        v-for="tag in allTags"
-        :key="tag"
-        class="px-2 py-1 rounded" :class="[
-          selectedTags.includes(tag)
-            ? 'bg-primary-green text-gray-100'
-            : 'bg-primary text-gray-700 dark:text-gray-100 hover:bg-primary-hover',
-        ]"
-        @click="toggleTag(tag)"
-      >
-        {{ tag }}
-      </button>
-    </div>
-    <!-- 搜尋 -->
-    <div class="px-6">
-      <input
-        v-model="searchTest"
-        placeholder="Search"
-        type="text"
-        class="block py-2 px-3 w-full bg-[#F1F2F4] dark:bg-slate-900 dark:placeholder-zinc-500 text-zinc-300  rounded-md border-gray-300 dark:border-gray-800 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      >
-    </div>
+    <TagsFilter
+      v-model:selected-tags="selectedTags"
+      :all-tags="allTags"
+    />
+
+    <ContentSearch v-model:search-test="searchTest" />
 
     <!-- 文章列表 -->
     <ClientOnly>
