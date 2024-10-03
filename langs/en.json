@@ -10,7 +10,13 @@
   "Read More": "Read More",
   "blogsPage": {
     "title": "All Blogs",
-    "description": "The articles here will mainly be related to front-end development, but occasionally I will share some of my own stories and thoughts."
+    "description": "The articles here will mainly be related to front-end development, but occasionally I will share some of my own stories and thoughts.",
+    "noResultDescription": "We couldn't find any posts matching your search."
+  },
+  "demosPage": {
+    "title": "Demos",
+    "description": "Demonstration and experimentation of the project I am working on.",
+    "noResultDescription": "We couldn't find any demos matching your search."
   },
   "Table Of Content": "Table Of Content",
   "Tech Stack": "Tech Stack",
@@ -19,5 +25,6 @@
     "occurred": "An error occurred"
   },
   "loading": "Loading...",
-  "no article found": "No article found"
+  "no article found": "No article found",
+  "no results found": "No results found"
 }

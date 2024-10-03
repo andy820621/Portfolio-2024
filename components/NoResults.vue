@@ -1,5 +1,8 @@
 <script setup lang="ts">
-defineProps<{ clearFilters: () => void }>()
+const { description = 'We couldn\'t find any posts matching your search.' } = defineProps<{
+  clearFilters: () => void
+  description?: string
+}>()
 </script>
 
 <template>
@@ -7,10 +10,10 @@ defineProps<{ clearFilters: () => void }>()
     <div class="text-center">
       <Icon name="emojione:magnifying-glass-tilted-left" class="mx-auto h-24 w-24 text-gray-400" />
       <h3 class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
-        No results found
+        {{ $t('no results found') }}
       </h3>
       <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-        We couldn't find any posts matching your search.
+        {{ description }}
       </p>
 
       <div class="mt-6">

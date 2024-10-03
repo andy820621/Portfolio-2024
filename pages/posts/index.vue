@@ -60,13 +60,13 @@ const processedPosts = computed(() => {
 const elementPerPage = ref(5)
 const pageNumber = ref(1)
 // 搜索關鍵字
-const searchTest = ref('')
+const searchText = ref('')
 // 選中的標籤
 const selectedTags = ref<string[]>([])
 
 // 重置分頁當過濾條件改變時
 watchEffect(() => {
-  if (searchTest.value || selectedTags.value.length > 0) {
+  if (searchText.value || selectedTags.value.length > 0) {
     pageNumber.value = 1
   }
 })
@@ -94,7 +94,7 @@ const formattedData = computed(() => {
 const filteredData = computed(() => {
   return formattedData.value.filter((data) => {
     const lowerTitle = data.title.toLocaleLowerCase()
-    const titleMatch = lowerTitle.includes(searchTest.value.toLocaleLowerCase())
+    const titleMatch = lowerTitle.includes(searchText.value.toLocaleLowerCase())
     const tagMatch = selectedTags.value.length === 0
       || selectedTags.value.every(tag => data.tags.includes(tag))
     return titleMatch && tagMatch
@@ -134,7 +134,7 @@ function onNextPageClick() {
 
 // 清除 input & 標籤
 function clearFilters() {
-  searchTest.value = ''
+  searchText.value = ''
   selectedTags.value = []
 }
 
@@ -172,15 +172,18 @@ defineOgImage({
 </script>
 
 <template>
-  <main class="container max-w-5xl mx-auto text-zinc-600">
-    <BlogPostHero />
+  <div class="container max-w-5xl mx-auto text-zinc-600">
+    <PageHero
+      :title="$t('blogsPage.title')"
+      :description="$t('blogsPage.description')"
+    />
 
     <TagsFilter
       v-model:selected-tags="selectedTags"
       :all-tags="allTags"
     />
 
-    <ContentSearch v-model:search-test="searchTest" />
+    <ContentSearch v-model:search-test="searchText" />
 
     <!-- 文章列表 -->
     <ClientOnly>
@@ -200,14 +203,16 @@ defineOgImage({
             :reading-time="post.readingTime"
           />
         </template>
-
-        <BlogNoResults
-          v-if="paginatedData.length <= 0"
-          :clear-filters="clearFilters"
-        />
       </div>
+
+      <NoResults
+        v-else
+        :clear-filters="clearFilters"
+        :description="$t('blogsPage.noResultDescription')"
+      />
+
+      <!-- this will be rendered on server side -->
       <template #fallback>
-        <!-- this will be rendered on server side -->
         <div class="space-y-5 my-5 px-4">
           <BlogLoader />
           <BlogLoader />
@@ -215,7 +220,7 @@ defineOgImage({
       </template>
     </ClientOnly>
 
-    <div class="flex justify-center items-center space-x-6 ">
+    <div v-if="paginatedData && paginatedData.length" class="flex justify-center items-center space-x-6 ">
       <button :disabled="pageNumber <= 1" @click="onPreviousPageClick">
         <Icon name="mdi:code-less-than" size="30" class="base-btn-disabled min-w-[30px] min-h-[30px]" :class="{ 'base-btn': pageNumber > 1 }" />
       </button>
@@ -224,5 +229,5 @@ defineOgImage({
         <Icon name="mdi:code-greater-than" size="30" class="base-btn-disabled min-w-[30px] min-h-[30px]" :class="{ 'base-btn': pageNumber < totalPage }" />
       </button>
     </div>
-  </main>
+  </div>
 </template>

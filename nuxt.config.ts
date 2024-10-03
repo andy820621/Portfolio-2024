@@ -146,7 +146,7 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         '@nuxt/vite-builder',
-        'fsevents',
+        // 'fsevents',
         // '@nuxt/content',
         // 'shiki',
       ],

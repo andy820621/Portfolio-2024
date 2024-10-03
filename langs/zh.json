@@ -10,7 +10,13 @@
   "Read More": "閱讀更多",
   "blogsPage": {
     "title": "My Blog",
-    "description": "這裡的文章主要會是跟前端開發相關的，但偶爾也會分享一些我自己的小故事與想法。"
+    "description": "這裡的文章主要會是跟前端開發相關的，但偶爾也會分享一些我自己的小故事與想法。",
+    "noResultDescription": "我們找不到與您現在的搜尋相符文章，請重新搜尋或是清除搜尋條件。"
+  },
+  "demosPage": {
+    "title": "Demos",
+    "description": "這裡主要用來展示一些實驗性、有趣的應用。",
+    "noResultDescription": "我們找不到與您現在的搜尋相符文章，請重新搜尋或是清除搜尋條件。"
   },
   "Table Of Content": "目錄",
   "Tech Stack": "技術棧",
@@ -19,5 +25,6 @@
     "occurred": "發生錯誤"
   },
   "loading": "載入中...",
-  "no article found": "沒有找到相應的文章"
+  "no article found": "沒有找到相應的文章",
+  "no results found": "沒有找到相應的結果"
 }

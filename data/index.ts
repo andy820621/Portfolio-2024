@@ -14,11 +14,6 @@ export const homePage = {
   description: 'Get Web Development, Javascript, Typescript, NodeJs, Vue, and Nuxt, Related Articles, Tips, Learning resources and more.',
 }
 
-export const blogsPage = {
-  titleKey: 'blogsPage.title',
-  descriptionKey: 'blogsPage.description',
-}
-
 export const categoryPage = {
   title: 'Categories',
   description: 'Blow this category is generated from all the tags are mentioned in the different blog post',
