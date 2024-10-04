@@ -35,6 +35,7 @@ withDefaults(defineProps<Props>(), {
           width="300"
           :src="image"
           :alt="alt"
+          placeholder
         />
       </div>
       <div class="sm:col-span-7 p-5">

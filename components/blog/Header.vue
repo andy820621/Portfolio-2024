@@ -28,6 +28,7 @@ const {
       :alt="alt || ''"
       width="600"
       class="m-auto rounded-lg shadow-lg h-32 md:h-72 w-full h-full max-h-[24vh] content-center object-cover"
+      placeholder
     />
     <p v-if="description" class="text-xs sm:text-sm my-2! max-w-xl mx-auto text-zinc-600 dark:text-zinc-400">
       {{ description }}
