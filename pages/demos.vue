@@ -35,9 +35,6 @@ const { data: demoItems } = await useAsyncData(`demos-data-${locale.value}`, asy
       content: doc,
       title: doc.title || baseName,
       tags: doc.tags || [],
-      images: doc.images || [],
-      videos: doc.videos || [],
-      icons: doc.icons || {},
       thumbnailType: doc.thumbnailType || 'img',
     }
   })
@@ -117,13 +114,14 @@ function clearFilters() {
     </div>
 
     <ClientOnly>
-      <div v-if="filteredDemoItems && parts && filteredDemoItems.length" grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4" mt-10 class="container max-w-10xl mx-auto text-zinc-600">
+      <div
+        v-if="filteredDemoItems && parts && filteredDemoItems.length"
+        grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4"
+        class="container max-w-10xl mx-auto mt-10 text-zinc-600"
+      >
         <div v-for="(items, idx) in parts" :key="idx" flex="~ col gap-4">
           <div v-for="item in items" :key="item.baseName">
             <DemoItem
-              :images="item.images"
-              :videos="item.videos"
-              :icons="item.icons"
               :base-name="item.baseName"
               :content="item.content"
               :thumbnail-type="item.thumbnailType"
