@@ -14,7 +14,6 @@ export default defineNuxtConfig({
   routeRules: generateRouteRules({
     locales,
   }),
-
   app: {
     head: {
       charset: 'utf-16',
@@ -36,6 +35,13 @@ export default defineNuxtConfig({
       type: 'Person',
     },
     twitter: seoData.twitterHandle,
+  },
+  image: {
+    ipx: {
+      modifiers: {
+        format: 'webp',
+      },
+    },
   },
   content: {
     locales: ['en', 'zh'],
