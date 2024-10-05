@@ -78,6 +78,7 @@ export default defineNuxtConfig({
     // lazy: true,
   },
   nitro: {
+    compressPublicAssets: true,
     prerender: {
       crawlLinks: true,
       routes: [
@@ -141,9 +142,21 @@ export default defineNuxtConfig({
       rollupOptions: {
         output: {
           manualChunks(id) {
-            // Try to fix `useNitroApp` warning about circular dependency.
-            if (id.includes('nitropack')) {
-              return 'nitropack'
+            if (id.includes('node_modules')) {
+              // Try to fix `useNitroApp` warning about circular dependency.
+              if (id.includes('nitropack')) {
+                return 'nitropack'
+              }
+              if (id.includes('gsap')) {
+                return 'gsap'
+              }
+              if (id.includes('floating-vue')) {
+                return 'floating-vue'
+              }
+              if (id.includes('@iconify-json')) {
+                return 'iconify-icons'
+              }
+              return 'vendor'
             }
           },
         },
