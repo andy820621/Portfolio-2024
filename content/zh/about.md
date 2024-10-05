@@ -44,15 +44,15 @@ image: https://localhost:3000/og.png
 你可以透過以下管道聯絡我：
 
 <p flex="~ gap-3 wrap" class="mt--2!">
-  <a href="https://github.com/andy820621" target="_blank" space-x-1 flex="~ items-center">
+  <a href="https://github.com/andy820621" target="_blank" space-x-1 flex="~ items-center" title="Github">
     <Icon op75 name="i-simple-icons-github"></Icon>
     <span>Github</span>
   </a>
-  <a href="https://www.twitter.com/BarZ3064" target="_blank" space-x-1 flex="~ items-center">
+  <a href="https://www.twitter.com/BarZ3064" target="_blank" space-x-1 flex="~ items-center" title="Twitter">
     <Icon op75 name="i-ri-twitter-x-fill"></Icon>
     <span>Twitter</span>
   </a>
-  <a href="https://www.instagram.com/andy820621" target="_blank" space-x-1 flex="~ items-center">
+  <a href="https://www.instagram.com/andy820621" target="_blank" space-x-1 flex="~ items-center" title="Instagram">
     <Icon op75 name="i-simple-icons-instagram"></Icon>
     <span>Instagram</span>
   </a>

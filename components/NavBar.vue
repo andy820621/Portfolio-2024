@@ -58,12 +58,12 @@ const { y: scroll } = useWindowScroll()
         </NuxtLink> -->
 
         <!-- Social Media -->
-        <a href="https://twitter.com/Barz3064" target="_blank" title="Twitter" class="lt-md:hidden">
-          <Icon name="i-ri-twitter-x-fill" />
-        </a>
-        <a href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden">
+        <NuxtLink href="https://www.instagram.com/andy820621" target="_blank" title="Instagram" class="lt-md:hidden">
+          <Icon name="i-simple-icons-instagram" />
+        </NuxtLink>
+        <NuxtLink href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden">
           <Icon name="i-ri-github-fill" />
-        </a>
+        </NuxtLink>
 
         <ToggleTheme />
 
