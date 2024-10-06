@@ -56,17 +56,19 @@ const allTags = computed(() => {
   return Array.from(tagSet)
 })
 
-const filteredDemoItems = computed(() => {
-  if (!demoItems.value)
-    return []
-  return demoItems.value.filter((item) => {
+const debouncedFilteredDemoItems = ref(demoItems.value || [])
+
+const updateFilteredItems = useDebounceFn(() => {
+  debouncedFilteredDemoItems.value = (demoItems.value || []).filter((item) => {
     const lowerTitle = item.title.toLocaleLowerCase()
     const titleMatch = lowerTitle.includes(searchText.value.toLocaleLowerCase())
     const tagMatch = selectedTags.value.length === 0
       || selectedTags.value.every(tag => item.tags.includes(tag))
     return titleMatch && tagMatch
   })
-})
+}, 500)
+
+watch([searchText, selectedTags, demoItems], updateFilteredItems, { immediate: true })
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -83,7 +85,7 @@ const cols = computed(() => {
   return 1
 })
 const parts = computed(() => {
-  const items = filteredDemoItems.value
+  const items = debouncedFilteredDemoItems.value
   if (!items)
     return []
 
@@ -116,7 +118,7 @@ function clearFilters() {
 
     <ClientOnly>
       <div
-        v-if="filteredDemoItems && parts && filteredDemoItems.length"
+        v-if="debouncedFilteredDemoItems && parts && debouncedFilteredDemoItems.length"
         grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4"
         class="container max-w-10xl mx-auto mt-10 text-zinc-600"
       >

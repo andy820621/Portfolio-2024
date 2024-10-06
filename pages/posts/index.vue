@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlogPost } from '~/types/main'
+import type { BlogPost, FormattedPost } from '~/types/main'
 
 definePageMeta({
   documentDriven: {
@@ -91,15 +91,19 @@ const formattedData = computed(() => {
 })
 
 // 結合搜索和標籤過濾
-const filteredData = computed(() => {
-  return formattedData.value.filter((data) => {
+const filteredData = ref<FormattedPost[]>([])
+
+const updateFilteredData = useDebounceFn(() => {
+  filteredData.value = formattedData.value.filter((data) => {
     const lowerTitle = data.title.toLocaleLowerCase()
     const titleMatch = lowerTitle.includes(searchText.value.toLocaleLowerCase())
     const tagMatch = selectedTags.value.length === 0
       || selectedTags.value.every(tag => data.tags.includes(tag))
     return titleMatch && tagMatch
   })
-})
+}, 500)
+
+watch([searchText, selectedTags, formattedData], updateFilteredData, { immediate: true })
 
 // 根據當前頁碼和每頁顯示數量分頁
 const paginatedData = computed(() => {

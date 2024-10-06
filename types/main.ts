@@ -14,3 +14,17 @@ export interface BlogPost extends ParsedContent {
   readingTime?: ComputedRef<string> | string
   wordCount?: number
 }
+
+export interface FormattedPost {
+  path: string | undefined
+  title: string
+  description: string
+  image: string
+  alt: string
+  ogImage: string
+  date: string
+  tags: string[]
+  published: boolean
+  wordCount: number
+  readingTime: string | undefined
+}
