@@ -150,9 +150,6 @@ export default defineNuxtConfig({
               if (id.includes('gsap')) {
                 return 'gsap'
               }
-              if (id.includes('floating-vue')) {
-                return 'floating-vue'
-              }
               if (id.includes('@iconify-json')) {
                 return 'iconify-icons'
               }
@@ -169,6 +166,13 @@ export default defineNuxtConfig({
         // '@nuxt/content',
         // 'shiki',
       ],
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler', // or "modern"
+        },
+      },
     },
   },
 })

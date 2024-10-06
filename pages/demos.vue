@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
 
+const { t } = useI18n()
+
 definePageMeta({
   documentDriven: {
     page: false, // Keep page fetching enabled
@@ -15,10 +17,9 @@ onMounted(() => {
 })
 
 useSeoMeta({
-  title: 'Demos - BarZ Hsieh',
   ogTitle: 'Demos - BarZ Hsieh',
-  description: 'Demonstration and experimentation of the project I am working on',
-  ogDescription: 'Demonstration and experimentation of the project I am working on',
+  description: t('demosPage.description'),
+  ogDescription: t('demosPage.description'),
 })
 
 const { locale } = useI18n()
