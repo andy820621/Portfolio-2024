@@ -78,7 +78,7 @@ export default defineNuxtConfig({
     // lazy: true,
   },
   nitro: {
-    compressPublicAssets: true,
+    // compressPublicAssets: true,
     prerender: {
       crawlLinks: true,
       routes: [
