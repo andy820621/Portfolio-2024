@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { MarkdownParsedContent } from '@nuxt/content'
+import type { ParsedContent } from '@nuxt/content'
 
 const { content, baseName, thumbnailType } = defineProps<{
-  // content: MarkdownParsedContent
-  content: any
+  content: ParsedContent
   baseName: string
   thumbnailType: string
 }>()
@@ -30,7 +29,7 @@ const maxLength = 150 // 設置預覽內容的最大長度
 const truncatedContent = computed(() => truncateContent(content, maxLength))
 
 const showFullContent = ref(false)
-const displayContent = computed(() => showFullContent.value ? content : truncatedContent.value.truncated)
+const displayContent = computed(() => showFullContent.value ? content : truncatedContent.value.content)
 
 function toggleContent() {
   showFullContent.value = !showFullContent.value
@@ -82,7 +81,7 @@ function toggleContent() {
 
       <div class="flex flex-col items-end">
         <button
-          v-if="truncatedContent.needsTruncation"
+          v-if="truncatedContent.isTruncated"
           class="inline-block px-[10px] py-[2px] mb-1 text-lg text-sm font-medium base-btn transition duration-300 ease-in-out hover:-translate-y-1
           shadow-base hover:shadow-base-hover"
           @click="toggleContent"

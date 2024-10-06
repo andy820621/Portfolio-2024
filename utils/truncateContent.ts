@@ -1,31 +1,34 @@
-import type { MarkdownParsedContent, MarkdownRoot } from '@nuxt/content'
+import type { MarkdownNode, MarkdownRoot, ParsedContent } from '@nuxt/content'
 
-export function truncateContent(content: MarkdownParsedContent, maxChars: number): { truncated: MarkdownParsedContent, needsTruncation: boolean } {
-  let charCount = 0
-  let needsTruncation = false
+type ProcessNode = MarkdownRoot | MarkdownNode | string
+
+// 用於截斷 Markdown 內容
+export function truncateContent(content: ParsedContent, maxChars: number): { content: ParsedContent, isTruncated: boolean } {
+  let charCount = 0 // 已處理的字符數
   let shouldTruncate = false
 
-  function processNode(node: any): any {
-    if (shouldTruncate) {
+  // 遞迴處理 Markdown 內容的每個節點
+  function processNode(node: ProcessNode | ProcessNode[] | null): ProcessNode | ProcessNode[] | null {
+    if (shouldTruncate)
       return null
-    }
 
     if (typeof node === 'string') {
       if (charCount + node.length > maxChars) {
+        // 如果加上當前節點會超過最大字符數，進行截斷
         const remainingChars = maxChars - charCount
         node = `${node.slice(0, remainingChars)}...`
         charCount = maxChars
         shouldTruncate = true
-        needsTruncation = true
       }
       else {
         charCount += node.length
       }
+
       return node
     }
 
     if (Array.isArray(node)) {
-      return node.map(processNode).filter(n => n !== null)
+      return node.map(processNode).filter(n => n !== null) as ProcessNode[]
     }
 
     if (typeof node === 'object' && node !== null) {
@@ -45,10 +48,10 @@ export function truncateContent(content: MarkdownParsedContent, maxChars: number
   const truncatedBody = processNode(content.body) as MarkdownRoot
 
   return {
-    truncated: {
+    content: {
       ...content,
       body: truncatedBody,
     },
-    needsTruncation,
+    isTruncated: shouldTruncate,
   }
 }
