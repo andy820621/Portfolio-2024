@@ -66,7 +66,7 @@ const updateFilteredItems = useDebounceFn(() => {
       || selectedTags.value.every(tag => item.tags.includes(tag))
     return titleMatch && tagMatch
   })
-}, 500)
+}, 400)
 
 watch([searchText, selectedTags, demoItems], updateFilteredItems, { immediate: true })
 
