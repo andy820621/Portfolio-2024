@@ -5,7 +5,7 @@ const { content, baseName, thumbnailType } = defineProps<{
   thumbnailType: string
 }>()
 
-const date = computed(() => useFormatDate(content.date, false) || '')
+const updateDate = computed(() => content.updatedAt ? useFormatDate(content.updatedAt, false) : '')
 
 const linkConfig = {
   link: { name: 'Demo', icon: 'mdi:link-variant' },
@@ -65,9 +65,19 @@ const contentLinks = computed(() =>
 
     <div class="prose prose-sm p-4 m-0 pb-3">
       <ContentRenderer :value="content" />
-      <time v-if="date" class="opacity-50 text-sm pt-2" :datetime="content.date">
-        {{ date }}
-      </time>
+
+      <div class="flex items-center justify-end text-sm pt-1 opacity-70">
+        <div v-if="updateDate" class="flex items-center gap-1 mr-auto">
+          <Icon name="mdi:update" />
+          <time :datetime="content.updatedAt">
+            {{ updateDate }}
+          </time>
+        </div>
+        <div v-if="content.tags && content.tags.length" class="flex items-center gap-1">
+          <Icon name="mdi:tag-multiple" />
+          <span>{{ content.tags.join(', ') }}</span>
+        </div>
+      </div>
     </div>
   </article>
 </template>
