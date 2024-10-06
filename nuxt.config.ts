@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'shortcut icon', type: 'image/vnd.microsoft.icon', href: '/favicon.ico' },
-        { rel: 'icon', type: 'image/gif', href: '//animated_favicon.gif' },
+        { rel: 'icon', type: 'image/gif', href: '/animated_favicon.gif' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon/apple-touch-icon.png' },
         { rel: 'apple-touch-icon', sizes: '57x57', href: '/apple-touch-icon/apple-touch-icon-57x57.png' },
         { rel: 'apple-touch-icon', sizes: '72x72', href: '/apple-touch-icon/apple-touch-icon-72x72.png' },
