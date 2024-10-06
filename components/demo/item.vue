@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { MarkdownParsedContent } from '@nuxt/content'
+
 const { content, baseName, thumbnailType } = defineProps<{
+  // content: MarkdownParsedContent
   content: any
   baseName: string
   thumbnailType: string
@@ -22,6 +25,16 @@ const contentLinks = computed(() =>
       icon,
     })),
 )
+
+const maxLength = 150 // 設置預覽內容的最大長度
+const truncatedContent = computed(() => truncateContent(content, maxLength))
+
+const showFullContent = ref(false)
+const displayContent = computed(() => showFullContent.value ? content : truncatedContent.value.truncated)
+
+function toggleContent() {
+  showFullContent.value = !showFullContent.value
+}
 </script>
 
 <template>
@@ -49,6 +62,7 @@ const contentLinks = computed(() =>
             :key="href"
             :to="href"
             external
+            target="_blank"
             text-white transition="all duration-500"
             hover="text-[var(--clr-primary-green)] scale-110 duration-500"
             flex="~ items-center"
@@ -63,19 +77,30 @@ const contentLinks = computed(() =>
       </div>
     </div>
 
-    <div class="prose prose-sm p-4 m-0 pb-3">
-      <ContentRenderer :value="content" />
+    <div class="prose prose-sm p-4 pt-1 m-0 pb-3">
+      <ContentRenderer :value="displayContent" />
 
-      <div class="flex items-center justify-end text-sm pt-1 opacity-70">
-        <div v-if="updateDate" class="flex items-center gap-1 mr-auto">
-          <Icon name="mdi:update" />
-          <time :datetime="content.updatedAt">
-            {{ updateDate }}
-          </time>
-        </div>
-        <div v-if="content.tags && content.tags.length" class="flex items-center gap-1">
-          <Icon name="mdi:tag-multiple" />
-          <span>{{ content.tags.join(', ') }}</span>
+      <div class="flex flex-col items-end">
+        <button
+          v-if="truncatedContent.needsTruncation"
+          class="inline-block px-[10px] py-[2px] mb-1 text-lg text-sm font-medium base-btn transition duration-300 ease-in-out hover:-translate-y-1
+          shadow-base hover:shadow-base-hover"
+          @click="toggleContent"
+        >
+          {{ showFullContent ? $t('collapse') : $t('read more') }}
+        </button>
+
+        <div class="w-full flex items-center justify-end text-sm pt-1 opacity-70">
+          <div v-if="updateDate" class="flex items-center gap-1 mr-auto">
+            <Icon name="mdi:update" />
+            <time :datetime="content.updatedAt">
+              {{ updateDate }}
+            </time>
+          </div>
+          <div v-if="content.tags && content.tags.length" class="flex items-center gap-1">
+            <Icon name="mdi:tag-multiple" />
+            <span>{{ content.tags.join(', ') }}</span>
+          </div>
         </div>
       </div>
     </div>
