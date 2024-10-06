@@ -79,14 +79,16 @@ function toggleContent() {
     <div class="prose prose-sm p-4 pt-1 m-0 pb-3">
       <ContentRenderer :value="displayContent" />
 
-      <div class="flex flex-col items-end">
+      <div class="flex flex-col items-start">
         <button
           v-if="truncatedContent.isTruncated"
-          class="inline-block px-[10px] py-[2px] mb-1 text-lg text-sm font-medium base-btn transition duration-300 ease-in-out hover:-translate-y-1
-          shadow-base hover:shadow-base-hover"
+          class="custom-btn-underline flex gap-1 w-fit  mb-1 underline-base hover:underline-base-hover text-sub text-[15px] items-center transition-all duration-300"
           @click="toggleContent"
         >
-          {{ showFullContent ? $t('collapse') : $t('read more') }}
+          <p class="m-0!">
+            {{ showFullContent ? $t('collapse') : $t('read more') }}
+          </p>
+          <Icon name="ri:arrow-right-line" />
         </button>
 
         <div class="w-full flex items-center justify-end text-sm pt-1 opacity-70">

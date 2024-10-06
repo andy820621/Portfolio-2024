@@ -71,19 +71,12 @@ withDefaults(defineProps<Props>(), {
           </div>
         </div>
         <div
-          class="custom-underline flex w-fit underline-base group-hover:underline-base-hover text-sub items-center pt-2 transition-all duration-300"
+          class="custom-btn-underline flex w-fit underline-base group-hover:underline-base-hover text-sub items-center pt-2 transition-all duration-300"
         >
-          <p>{{ $t('Read More') }}</p>
+          <p>{{ $t('read more') }}</p>
           <Icon name="ri:arrow-right-line" />
         </div>
       </div>
     </NuxtLink>
   </article>
 </template>
-
-<style>
-.custom-underline {
-  --clr-underline: #ffffff00;
-  --clr-underline-hover: var(--clr-sub-green);
-}
-</style>
