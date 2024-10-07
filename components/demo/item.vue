@@ -88,7 +88,7 @@ function toggleContent() {
           <p class="m-0!">
             {{ showFullContent ? $t('collapse') : $t('read more') }}
           </p>
-          <Icon name="ri:arrow-right-line" />
+          <Icon :name="showFullContent ? 'ri:arrow-up-line' : 'ri:arrow-down-line'" />
         </button>
 
         <div class="w-full flex items-center justify-end text-sm pt-1 opacity-70">
