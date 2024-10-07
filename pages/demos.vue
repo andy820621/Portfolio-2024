@@ -25,7 +25,10 @@ useSeoMeta({
 const { locale } = useI18n()
 
 const { data: demoItems } = await useAsyncData(`demos-${locale.value}`, async () => {
-  const docs = await queryContent('demos').find()
+  const docs = await queryContent('demos')
+    .locale(locale.value)
+    .where({ draft: { $ne: true } })
+    .find()
 
   return docs.map((doc) => {
     const fullFileName = doc._file!.split('/').pop() || ''

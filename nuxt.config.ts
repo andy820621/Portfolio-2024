@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   image: {
     ipx: {
       modifiers: {
-        format: 'webp',
+        formats: ['webp', 'gif', 'jpg', 'png'],
       },
     },
   },

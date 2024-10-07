@@ -45,12 +45,21 @@ function toggleContent() {
     hover="shadow-xl z-10 scale-102"
   >
     <div class="imageBox relative" role="img" :aria-label="content.title || baseName">
+      <video
+        v-if="thumbnailType === 'mp4'"
+        :src="`/demos/thumbnail/${baseName}.${thumbnailType}`"
+        :alt="content.title || baseName"
+        class="w-full border-b border-base"
+        autoplay loop muted playsinline
+      />
       <NuxtImg
+        v-else
         :src="`/demos/thumbnail/${baseName}.${thumbnailType}`"
         :alt="content.title || baseName"
         w-full border="b base"
         placeholder
       />
+
       <div class="overlay absolute inset-0 z-2 flex flex-col justify-center items-center p-6 rounded-lg" aria-hidden="true">
         <h2 class="article-title text-white mb-8 text-xl font-semibold text-center">
           {{ content.title || baseName }}
