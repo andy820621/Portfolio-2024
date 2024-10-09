@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { ParsedContent } from '@nuxt/content'
 
-const { content, baseName, thumbnailType } = defineProps<{
+const { content, baseName, thumbnailType, title } = defineProps<{
   content: ParsedContent
   baseName: string
   thumbnailType: string
+  title: string
 }>()
 
 const updateDate = computed(() => content.updatedAt ? useFormatDate(content.updatedAt, false) : '')
@@ -44,25 +45,25 @@ function toggleContent() {
     transition="all duration-500"
     hover="shadow-xl z-10 scale-102"
   >
-    <div class="imageBox relative" role="img" :aria-label="content.title || baseName">
+    <div class="imageBox relative" role="img" :aria-label="title || baseName">
       <video
         v-if="thumbnailType === 'mp4'"
         :src="`/demos/thumbnail/${baseName}.${thumbnailType}`"
-        :alt="content.title || baseName"
+        :alt="title || baseName"
         class="w-full border-b border-base"
         autoplay loop muted playsinline
       />
       <NuxtImg
         v-else
         :src="`/demos/thumbnail/${baseName}.${thumbnailType}`"
-        :alt="content.title || baseName"
+        :alt="title || baseName"
         w-full border="b base"
         placeholder
       />
 
       <div class="overlay absolute inset-0 z-2 flex flex-col justify-center items-center p-6 rounded-lg" aria-hidden="true">
         <h2 class="article-title text-white mb-8 text-xl font-semibold text-center">
-          {{ content.title || baseName }}
+          {{ title || baseName }}
         </h2>
         <nav v-if="contentLinks.length" class="links flex flex-col gap-3" aria-label="Project links">
           <NuxtLink
@@ -74,7 +75,7 @@ function toggleContent() {
             text-white transition="all duration-500"
             hover="text-[var(--clr-primary-green)] scale-110 duration-500"
             flex="~ items-center"
-            :aria-label="`Visit ${name} for ${content.title || baseName}`"
+            :aria-label="`Visit ${name} for ${title || baseName}`"
           >
             <div w-6 h-6 flex="~ items-center justify-center" aria-hidden="true">
               <Icon :name="icon" />

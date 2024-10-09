@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ParsedContent } from '@nuxt/content'
 import { breakpointsTailwind } from '@vueuse/core'
 
 const { t } = useI18n()
@@ -24,20 +25,51 @@ useSeoMeta({
 
 const { locale } = useI18n()
 
+function formatTitle(fileName: string): string {
+  // 移除文件名開頭的數字和點
+  const cleanFileName = fileName.replace(/^\d+\./, '')
+
+  // 將檔案名中的連字符或底線轉換為空格，並將每個單詞首字母大寫
+  return cleanFileName
+    .replace(/[-_]/g, ' ')
+    .replace(/\.md$/, '')
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ')
+}
+
 const { data: demoItems } = await useAsyncData(`demos-${locale.value}`, async () => {
   const docs = await queryContent('demos')
     .locale(locale.value)
     .where({ draft: { $ne: true } })
     .find()
+    .then(docs => docs.sort((a, b) => {
+      const getNumber = (item: ParsedContent): number => {
+        if (typeof item._file === 'string') {
+          const parts = item._file.split('/')
+          const fileName = parts[parts.length - 1]
+          const numberPart = fileName.split('.')[0]
+          return Number.parseInt(numberPart) || 0
+        }
+        return 0
+      }
+
+      const aNum = getNumber(a)
+      const bNum = getNumber(b)
+      return bNum - aNum // 降序
+    }))
 
   return docs.map((doc) => {
     const fullFileName = doc._file!.split('/').pop() || ''
     const parts = fullFileName.split('.')
     const baseName = parts.length > 2 ? parts[1] : parts[0]
+
+    const formattedTitle = formatTitle(fullFileName)
+
     return {
       baseName,
       content: doc,
-      title: doc.title || baseName,
+      title: formattedTitle,
       tags: doc.tags || [],
       thumbnailType: doc.thumbnailType || 'img',
     }
@@ -130,6 +162,7 @@ function clearFilters() {
             <DemoItem
               :base-name="item.baseName"
               :content="item.content"
+              :title="item.title"
               :thumbnail-type="item.thumbnailType"
               class="slide-enter"
               :style="{
