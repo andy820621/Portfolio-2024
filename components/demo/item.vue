@@ -35,6 +35,8 @@ const displayContent = computed(() => showFullContent.value ? content : truncate
 function toggleContent() {
   showFullContent.value = !showFullContent.value
 }
+
+const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
 </script>
 
 <template>
@@ -47,7 +49,7 @@ function toggleContent() {
   >
     <div class="imageBox relative" role="img" :aria-label="title || baseName">
       <video
-        v-if="thumbnailType === 'mp4'"
+        v-if="vedioTypes.includes(thumbnailType)"
         :src="`/demos/thumbnail/${baseName}.${thumbnailType}`"
         :alt="title || baseName"
         class="w-full border-b border-base"
