@@ -54,6 +54,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
         :alt="title || baseName"
         class="w-full border-b border-base"
         autoplay loop muted playsinline
+        poster="/video-loading.gif"
       />
       <NuxtImg
         v-else
