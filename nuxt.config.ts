@@ -100,6 +100,12 @@ export default defineNuxtConfig({
       crawlLinks: true,
       routes: [
         '/',
+        '/en',
+        '/zh',
+        '/gallery',
+        '/demos',
+        '/posts',
+        '/projects',
         // '/sitemap.xml',
       ],
     },
