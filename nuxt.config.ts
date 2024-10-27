@@ -97,6 +97,7 @@ export default defineNuxtConfig({
   nitro: {
     // compressPublicAssets: true,
     prerender: {
+      failOnError: false, // 防止 404 錯誤中斷建置
       crawlLinks: true,
       routes: [
         '/',
