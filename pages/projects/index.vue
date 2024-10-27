@@ -52,11 +52,11 @@ defineOgImage({
 
     <ContentSearch v-model:search-test="searchText" />
 
-    <!-- 文章列表 -->
+    <!-- 專案列表 -->
     <ClientOnly>
       <div v-if="paginatedData && paginatedData.length" v-auto-animate class="space-y-5 my-5 px-4">
         <template v-for="post in paginatedData" :key="post.title">
-          <BlogPostCard
+          <postCard
             :path="localePath(post.path!)"
             :title="post.title"
             :date="post.date"
@@ -81,8 +81,8 @@ defineOgImage({
       <!-- this will be rendered on server side -->
       <template #fallback>
         <div class="space-y-5 my-5 px-4">
-          <BlogLoader />
-          <BlogLoader />
+          <postLoader />
+          <postLoader />
         </div>
       </template>
     </ClientOnly>

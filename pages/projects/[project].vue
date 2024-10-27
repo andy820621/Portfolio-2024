@@ -188,7 +188,7 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
           class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg
           prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
         >
-          <BlogHeader
+          <postHeader
             :title="data.title"
             :image="data.image"
             :alt="data.alt"
@@ -218,7 +218,7 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
         </div>
       </div>
 
-      <BlogToc v-if="tocLinks.length > 0" :links="tocLinks" :active-id="activeId" />
+      <postToc v-if="tocLinks.length > 0" :links="tocLinks" :active-id="activeId" />
 
       <div v-if="article" class="col-span-12 flex flex-col gap-4 mt-10">
         <div class="flex flex-row flex-wrap md:flex-nowrap mt-10 gap-2">
@@ -233,7 +233,7 @@ const tocLinks = computed(() => article.value?.body?.toc?.links || [])
           />
         </div>
 
-        <BlogPrevNext :prev="prevPost" :next="nextPost" />
+        <postPrevNext :prev="prevPost" :next="nextPost" />
       </div>
     </div>
   </div>

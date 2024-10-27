@@ -181,8 +181,8 @@ function clearFilters() {
 
       <!-- <template #fallback>
         <div class="space-y-5 my-5 px-4">
-          <BlogLoader />
-          <BlogLoader />
+          <postLoader />
+          <postLoader />
         </div>
       </template> -->
     </ClientOnly>
