@@ -13,6 +13,11 @@
     "description": "The articles here will mainly be related to front-end development, but occasionally I will share some of my own stories and thoughts.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
+  "projectsPage": {
+    "title": "Projects",
+    "description": "The projects here mainly include work projects I have participated in or personal projects I am currently working on.",
+    "noResultDescription": "We couldn't find any posts matching your search."
+  },
   "demosPage": {
     "title": "Demos",
     "description": "Demonstration and experimentation of the project I am working on.",

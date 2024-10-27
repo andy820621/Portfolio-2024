@@ -13,6 +13,11 @@
     "description": "這裡的文章主要會是跟前端開發相關的，但偶爾也會分享一些我自己的小故事與想法。",
     "noResultDescription": "我們找不到與您現在的搜尋相符文章，請重新搜尋或是清除搜尋條件。"
   },
+  "projectsPage": {
+    "title": "Projects",
+    "description": "這裡的專案主要是我參與的工作項目，或是個人正在實作的專案。",
+    "noResultDescription": "我們找不到符合您搜尋的項目，請重新搜尋或是清除搜尋條件。"
+  },
   "demosPage": {
     "title": "Demos",
     "description": "這裡主要用來展示一些實驗性、有趣的應用。",

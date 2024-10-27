@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t, localePath, formattedData } = await useContentDatas('posts')
+const { t, localePath, formattedData } = await useContentDatas('project')
 
 const { searchText, selectedTags, filteredData, allTags, clearFilters } = useContentListsFilter(formattedData)
 
@@ -16,11 +16,11 @@ watchEffect(() => {
 
 // 設置頁面元數據
 useHead({
-  title: 'Blog',
+  title: 'Projects',
   meta: [
     {
       name: 'description',
-      content: t('blogsPage.description'),
+      content: t('projectsPage.description'),
     },
   ],
 })
@@ -31,8 +31,8 @@ const siteData = useSiteConfig()
 // 生成 OG 圖片
 defineOgImage({
   props: {
-    title: 'Blog',
-    description: t('blogsPage.description'),
+    title: 'Projects',
+    description: t('projectsPage.description'),
     siteName: siteData.url,
   },
 })
@@ -41,8 +41,8 @@ defineOgImage({
 <template>
   <div class="container max-w-5xl mx-auto text-zinc-600">
     <PageHero
-      :title="$t('blogsPage.title')"
-      :description="$t('blogsPage.description')"
+      :title="$t('projectsPage.title')"
+      :description="$t('projectsPage.description')"
     />
 
     <TagsFilter
@@ -75,7 +75,7 @@ defineOgImage({
       <NoResults
         v-else
         :clear-filters="clearFilters"
-        :description="$t('blogsPage.noResultDescription')"
+        :description="$t('projectsPage.noResultDescription')"
       />
 
       <!-- this will be rendered on server side -->
