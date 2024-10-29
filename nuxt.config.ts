@@ -52,14 +52,15 @@ export default defineNuxtConfig({
     },
     twitter: seoData.twitterHandle,
   },
-  // image: {
-  //   ipx: {
-  //     modifiers: {
-  //       format: 'webp',
-  //       formats: ['webp', 'gif', 'jpg', 'png'],
-  //     },
-  //   },
-  // },
+  image: {
+    // format: ['webp', 'gif', 'jpg', 'png'],
+    // ipx: {
+    //   modifiers: {
+    //     format: 'webp',
+    //     formats: ['webp', 'gif', 'jpg', 'png'],
+    //   },
+    // },
+  },
   content: {
     locales: ['en', 'zh'],
     defaultLocale: 'en',
