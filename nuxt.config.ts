@@ -78,6 +78,17 @@ export default defineNuxtConfig({
         sepia: 'monokai',
       },
     },
+    markdown: {
+      rehypePlugins: [
+        [
+          'rehype-external-links',
+          {
+            target: '_blank',
+            rel: ['nofollow', 'noopener', 'noreferrer'],
+          },
+        ],
+      ],
+    },
   },
   // TODO: Try to think of if use Nuxt I18n Micro is better (https://s00d.github.io/nuxt-i18n-micro/)
   i18n: {
