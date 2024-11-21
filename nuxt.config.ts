@@ -137,6 +137,7 @@ export default defineNuxtConfig({
     '@formkit/auto-animate',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxtjs/i18n',
+    'nuxt-swiper',
   ],
   unocss: {
     nuxtLayers: true,

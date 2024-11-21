@@ -14,6 +14,9 @@ importers:
       gsap:
         specifier: ^3.12.5
         version: 3.12.5
+      lightgallery:
+        specifier: ^2.7.2
+        version: 2.7.2
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.2)(eslint@9.13.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.2)(sass@1.80.4)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.2)(sass@1.80.4)(terser@5.36.0))(vue-tsc@2.1.8(typescript@5.6.3))(webpack-sources@3.2.3)
@@ -30,6 +33,9 @@ importers:
       '@iconify-json/devicon':
         specifier: ^1.2.4
         version: 1.2.4
+      '@iconify-json/iconoir':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@iconify-json/logos':
         specifier: ^1.2.3
         version: 1.2.3
@@ -108,6 +114,9 @@ importers:
       nuxt-og-image:
         specifier: 3.0.0-rc.69
         version: 3.0.0-rc.69(magicast@0.3.5)(rollup@4.24.2)(vite@5.4.10(@types/node@22.8.2)(sass@1.80.4)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))(webpack-sources@3.2.3)
+      nuxt-swiper:
+        specifier: ^1.2.2
+        version: 1.2.2(magicast@0.3.5)(rollup@4.24.2)(webpack-sources@3.2.3)
       sass:
         specifier: ^1.80.4
         version: 1.80.4
@@ -871,6 +880,9 @@ packages:
 
   '@iconify-json/devicon@1.2.4':
     resolution: {integrity: sha512-DrYBFGycCW2wAloxxHEDIFuqv9lUYIn6FVbSx/l7ZqhO9rDtD8jLECS+mfn/BTRBs4/uH8wzB0sYPHXulP8aLQ==}
+
+  '@iconify-json/iconoir@1.2.3':
+    resolution: {integrity: sha512-CIPFznjl417Y5zBPqZP4+lhHwdTr7aDenzUOL/z92ufuMoX7SOZbZ8dK9/wNaLwCr+2w+MrxfVKc7zjUj9K0Dg==}
 
   '@iconify-json/logos@1.2.3':
     resolution: {integrity: sha512-JLHS5hgZP1b55EONAWNeqBUuriRfRNKWXK4cqYx0PpVaJfIIMiiMxFfvoQiX/bkE9XgkLhcKmDUqL3LXPdXPwQ==}
@@ -3537,6 +3549,10 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
+  lightgallery@2.7.2:
+    resolution: {integrity: sha512-Ewdcg9UPDqV0HGZeD7wNE4uYejwH2u0fMo5VAr6GHzlPYlhItJvjhLTR0cL0V1HjhMsH39PAom9iv69ewitLWw==}
+    engines: {node: '>=6.0.0'}
+
   lighthouse-logger@2.0.1:
     resolution: {integrity: sha512-ioBrW3s2i97noEmnXxmUq7cjIcVRjT5HBpAYy8zE11CxU9HqlWHHeRxfeN1tn8F7OEMVPIC9x1f8t3Z7US9ehQ==}
 
@@ -3990,6 +4006,9 @@ packages:
 
   nuxt-site-config@2.2.18:
     resolution: {integrity: sha512-NU39ANP1kvRBzpEWV496y/lf9PKVv3t1VKX3zmQ1POcbzAXU4gm0Mh5NKOaLEcoXj6bQnziFNqjzHX3DAA8Aog==}
+
+  nuxt-swiper@1.2.2:
+    resolution: {integrity: sha512-y4s/srISP4OuhXbYg9/W1/6EWnbcoHRGEKBKAvGP0I2h0b3enhqZNEk7854M3F89ys8waacBXektPzamgl5xwQ==}
 
   nuxt@3.13.2:
     resolution: {integrity: sha512-Bjc2qRsipfBhjXsBEJCN+EUAukhdgFv/KoIR5HFB2hZOYRSqXBod3oWQs78k3ja1nlIhAEdBG533898KJxUtJw==}
@@ -4875,6 +4894,10 @@ packages:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  swiper@10.3.1:
+    resolution: {integrity: sha512-24Wk3YUdZHxjc9faID97GTu6xnLNia+adMt6qMTZG/HgdSUt4fS0REsGUXJOgpTED0Amh/j+gRGQxsLayJUlBQ==}
+    engines: {node: '>= 4.7.0'}
 
   synckit@0.6.2:
     resolution: {integrity: sha512-Vhf+bUa//YSTYKseDiiEuQmhGCoIF3CVBhunm3r/DQnYiGT4JssmnKQc44BIyOZRK2pKjXXAgbhfmbeoC9CJpA==}
@@ -6137,6 +6160,10 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@iconify-json/devicon@1.2.4':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/iconoir@1.2.3':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -9628,6 +9655,8 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
+  lightgallery@2.7.2: {}
+
   lighthouse-logger@2.0.1:
     dependencies:
       debug: 2.6.9
@@ -10392,6 +10421,16 @@ snapshots:
       - supports-color
       - vite
       - vue
+      - webpack-sources
+
+  nuxt-swiper@1.2.2(magicast@0.3.5)(rollup@4.24.2)(webpack-sources@3.2.3):
+    dependencies:
+      '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.24.2)(webpack-sources@3.2.3)
+      swiper: 10.3.1
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
       - webpack-sources
 
   nuxt@3.13.2(@parcel/watcher@2.4.1)(@types/node@22.8.2)(eslint@9.13.0(jiti@2.3.3))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.24.2)(sass@1.80.4)(terser@5.36.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.2)(sass@1.80.4)(terser@5.36.0))(vue-tsc@2.1.8(typescript@5.6.3))(webpack-sources@3.2.3):
@@ -11512,6 +11551,8 @@ snapshots:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.1.1
+
+  swiper@10.3.1: {}
 
   synckit@0.6.2:
     dependencies:

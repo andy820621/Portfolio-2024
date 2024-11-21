@@ -16,6 +16,7 @@
   "dependencies": {
     "floating-vue": "^5.2.2",
     "gsap": "^3.12.5",
+    "lightgallery": "^2.7.2",
     "nuxt": "^3.13.2",
     "vue": "latest"
   },
@@ -23,6 +24,7 @@
     "@antfu/eslint-config": "^3.8.0",
     "@formkit/auto-animate": "^0.8.2",
     "@iconify-json/devicon": "^1.2.4",
+    "@iconify-json/iconoir": "^1.2.3",
     "@iconify-json/logos": "^1.2.3",
     "@iconify-json/material-symbols-light": "^1.2.5",
     "@iconify-json/mdi": "^1.2.1",
@@ -49,6 +51,7 @@
     "eslint-plugin-format": "^0.1.2",
     "nuxt-headlessui": "^1.2.0",
     "nuxt-og-image": "3.0.0-rc.69",
+    "nuxt-swiper": "^1.2.2",
     "sass": "^1.80.4",
     "typescript": "^5.6.3",
     "unocss": "^0.62.4",
