@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Photo } from '~/components/lightBox.global.vue'
+import type { Photo } from '~/components/LightBox.global.vue'
 
 const { folder } = defineProps<{
   folder: string

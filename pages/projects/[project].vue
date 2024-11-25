@@ -8,5 +8,5 @@ definePageMeta({
 </script>
 
 <template>
-  <WrapperPost base-page-name="projects" param-name="project" />
+  <WrapperPost base-page-name="projects" param-name="project" redirect-link="/projects" />
 </template>

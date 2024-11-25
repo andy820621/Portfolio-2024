@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const { basePageName, paramName } = defineProps<{
+const { basePageName, paramName, redirectLink = '/posts' } = defineProps<{
   basePageName: string
   paramName: string
+  redirectLink?: string
 }>()
 
 const localePath = useLocalePath()
@@ -65,7 +66,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
           <template v-else>
             <div grid justify-center mt-20>
               <NuxtLink
-                :to="localePath('/posts')"
+                :to="localePath(redirectLink)"
                 class="inline-block px-6 py-3 text-lg font-semibold base-btn transition duration-300 ease-in-out hover:-translate-y-1
           shadow-base hover:shadow-base-hover"
               >
