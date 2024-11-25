@@ -62,6 +62,7 @@ published: true
 ### 成果展示
 
 ::ProjectLightBox{folder="ti-ho-healthcare"}
+::
 
 ### 結語
 

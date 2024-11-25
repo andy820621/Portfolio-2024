@@ -54,6 +54,11 @@ For the website development, we chose HTML, CSS, and JavaScript as the main tech
 - **Feature Development**: Used JavaScript to implement various interactive features, ensuring the website's dynamics and responsiveness.
 - **Testing and Optimization**: Conducted comprehensive testing to ensure performance and compatibility across different devices and browsers.
 
+### Results Presentation
+
+::ProjectLightBox{folder="ti-ho-healthcare"}
+::
+
 ### Conclusion
 
 Unfortunately, due to the client's own considerations and time constraints, I was not involved in the final stages and launch of this project. However, from my perspective, I believe we successfully created a fully functional and user-friendly website for Ti-He Healthcare. After confirmation with `Morpheus International Brand Consultancy`, they agreed that I can showcase the parts I contributed to on non-commercial, personal platforms. If interested, you can view the [Demo](https://ti-ho-heathcare.netlify.app/).
