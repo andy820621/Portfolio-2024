@@ -13,7 +13,3 @@ const { data: photos } = await useFetch<Photo[]>('/api/project-images', {
 <template>
   <LightBox v-if="photos && photos.length" :photos="photos" />
 </template>
-
-<style scoped>
-
-</style>
