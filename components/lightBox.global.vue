@@ -74,6 +74,8 @@ function handleWheel(e: WheelEvent) {
     return
 
   const zoomInstance = lg.plugins.find(plugin => plugin.constructor.name.includes('Zoom'))
+  console.log({ lg })
+  console.log({ plugins: lg.plugins })
   console.log({ zoomInstance })
   if (!zoomInstance)
     return
