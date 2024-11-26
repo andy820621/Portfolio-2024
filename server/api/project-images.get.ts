@@ -25,7 +25,7 @@ export default defineEventHandler((event) => {
       return {
         src: `/project-images/${projectFolder}/${file}`,
         title,
-        description: `${projectFolder} ${file} image`,
+        description: `${projectFolder} ${title} image`,
       }
     })
 
