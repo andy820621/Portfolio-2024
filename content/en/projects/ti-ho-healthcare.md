@@ -2,9 +2,9 @@
 title: Ti-He Healthcare Official Website
 date: 2022/10/15
 description: Ti-He Healthcare official website.
-image: /project-images/ti-ho-heathcare.webp
+image: /project-images/ti-ho-healthcare.webp
 alt: Ti-He Healthcare Official Website Development
-ogImage: /project-images/ti-ho-heathcare.webp
+ogImage: /project-images/ti-ho-healthcare.webp
 tags: ['Website Development', 'JavaScript', 'Brand Collaboration']
 published: true
 ---
@@ -61,4 +61,4 @@ For the website development, we chose HTML, CSS, and JavaScript as the main tech
 
 ### Conclusion
 
-Unfortunately, due to the client's own considerations and time constraints, I was not involved in the final stages and launch of this project. However, from my perspective, I believe we successfully created a fully functional and user-friendly website for Ti-He Healthcare. After confirmation with `Morpheus International Brand Consultancy`, they agreed that I can showcase the parts I contributed to on non-commercial, personal platforms. If interested, you can view the [Demo](https://ti-ho-heathcare.netlify.app/).
+Unfortunately, due to the client's own considerations and time constraints, I was not involved in the final stages and launch of this project. However, from my perspective, I believe we successfully created a fully functional and user-friendly website for Ti-He Healthcare. After confirmation with `Morpheus International Brand Consultancy`, they agreed that I can showcase the parts I contributed to on non-commercial, personal platforms. If interested, you can view the [Demo](https://ti-ho-healthcare.netlify.app/).

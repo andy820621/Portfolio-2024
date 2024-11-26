@@ -2,9 +2,9 @@
 title: 鈦和生醫官方網站
 date: 2022/10/15
 description: 鈦和生醫官方網站。
-image: /project-images/ti-ho-heathcare.webp
+image: /project-images/ti-ho-healthcare.webp
 alt: 鈦和生醫官方網站開發
-ogImage: /project-images/ti-ho-heathcare.webp
+ogImage: /project-images/ti-ho-healthcare.webp
 tags: ['網站開發', 'JavaScript', '品牌合作']
 published: true
 ---
@@ -68,4 +68,4 @@ published: true
 
 很可惜，這次專案因為客戶自己的考量與時間關係，我並沒有參與到最終以及上線的部分。
 但就我個人而言，我認為已經有成功地為鈦和生醫打造了一個功能完整且使用者友好的網站。
-下面經過與 `Morpheus 摩爾國際品牌顧問` 確認，他們同意我可以在非商業性的、個人的平台展示我參與到的部分的結果，如果有興趣的可以看看 [Demo](https://ti-ho-heathcare.netlify.app/) 展示。
+下面經過與 `Morpheus 摩爾國際品牌顧問` 確認，他們同意我可以在非商業性的、個人的平台展示我參與到的部分的結果，如果有興趣的可以看看 [Demo](https://ti-ho-healthcare.netlify.app/) 展示。
