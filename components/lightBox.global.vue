@@ -78,10 +78,6 @@ function handleWheel(e: WheelEvent) {
     plugin.scale !== undefined
     && typeof plugin.zoomImage === 'function',
   )
-  console.log({ lg })
-  console.log({ lgKeys: Object.keys(lg) })
-  console.log({ plugins })
-  console.log({ zoomInstance })
   if (!zoomInstance)
     return
 
