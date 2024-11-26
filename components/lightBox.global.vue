@@ -73,9 +73,14 @@ function handleWheel(e: WheelEvent) {
   if (!lg.lgOpened)
     return
 
-  const zoomInstance = lg.plugins.find(plugin => plugin.constructor.name.includes('Zoom'))
+  const plugins = lg.plugins
+  const zoomInstance = plugins.find(plugin =>
+    plugin.scale !== undefined
+    && typeof plugin.zoomImage === 'function',
+  )
   console.log({ lg })
-  console.log({ plugins: lg.plugins })
+  console.log({ lgKeys: Object.keys(lg) })
+  console.log({ plugins })
   console.log({ zoomInstance })
   if (!zoomInstance)
     return
