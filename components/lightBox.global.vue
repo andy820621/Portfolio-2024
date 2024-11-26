@@ -66,18 +66,15 @@ onUnmounted(() => {
 })
 
 function handleWheel(e: WheelEvent) {
-  console.log('handleWheel invoked.')
-  console.log({ e, popup: popup.value })
   if (!popup.value)
     return
 
   const lg = popup.value as LightGallery
-  console.log({ lg })
   if (!lg.lgOpened)
     return
 
-  console.log({ zoomInstance })
   const zoomInstance = lg.plugins.find(plugin => plugin.constructor.name.includes('Zoom'))
+  console.log({ zoomInstance })
   if (!zoomInstance)
     return
 
