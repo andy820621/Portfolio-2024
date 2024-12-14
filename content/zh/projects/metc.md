@@ -19,8 +19,7 @@ published: true
 
 ### 智慧消防資訊整合
 
-::image{imgSrc="/project-images/metc/01.intro.png" alt="intro image"}
-::
+![image](/project-images/metc/01.intro.png){placeholder style="margin-left: 1rem"}
 
 ### 系統目標
 

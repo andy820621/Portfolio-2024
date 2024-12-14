@@ -6,5 +6,5 @@ const { imgSrc, alt } = defineProps<{
 </script>
 
 <template>
-  <nuxt-img :src="imgSrc" :alt="alt" />
+  <NuxtImg :src="imgSrc" :alt="alt" />
 </template>
