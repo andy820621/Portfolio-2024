@@ -20,21 +20,18 @@ published: true
 ### 智慧消防資訊整合
 
 首先會需要建置權限系統、大樓資訊建檔，透過對社區資料的建置，可以更好的去應對各種情形的發生。
-::div
-![intro image](/project-images/metc/01.intro.png){placeholder style="margin-left: 1rem"}
-::
+
+![intro image](/project-images/metc/01.intro.webp){placeholder style="margin-left: 1rem"}
 
 ### 使用方式
 
 根據使用時機主要可分成<b>平時管理</b>、<b>災時應變</b>這個兩個大方向。
 
-| 平時管理                                                                       | 緊急應變                                                                                                                                 |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| 平時管理 | 緊急應變 |
+| ------- | ------- |
 | - 社區人員資訊管理<br>- 定期檢查和維護排程<br>- 公告發佈系統<br>- 設備狀態追蹤 | - 實時監控消防設備（消防總機、PLC）<br>- 多管道即時通知（WebSocket、Line、手機推播、簡訊）<br>- 智能任務調度<br>- 應變指引和疏散路線推薦 |
 
-::div
-![function image](/project-images/metc/02.function.png){placeholder style="margin-left: 1rem"}
-::
+![function image](/project-images/metc/02.function.webp){placeholder style="margin-left: 1rem"}
 
 ### 災時應對
 
@@ -45,11 +42,11 @@ published: true
 
 ## 技術棧
 
-|      | 主要技術                                                                                                    |
-| ---- | ----------------------------------------------------------------------------------------------------------- |
-| 前端 | - 框架：Vue 3<br>- UI庫：Quasar<br>- 編程語言：TypeScript<br>- 特殊功能：PWA（iOS推播支持）                 |
+|      | 主要技術  |
+| ---- | ------- |
+| 前端 | - 框架：Vue 3<br>- UI庫：Quasar<br>- 編程語言：TypeScript<br>- 特殊功能：PWA（iOS推播支持）|
 | 後端 | - 開發框架：.NET Core <br>- 工作流引擎：WorkflowCore <br>- 通訊協議：WebSocket <br>- 跨平台通知：多通道整合 |
 
-### 結語
+## 結語
 
-因為考慮到商業機密考量，無法展示完整的系統網頁，但我有做一個可以簡單的展示部分功能的[Demo](https://metc.netlify.app/)，如果有興趣的可以看看 。
+因為考慮到商業機密考量，無法展示完整的系統網頁，但我有做一個可以簡單的展示部分功能的 [Demo](https://metc.netlify.app/)，如果有興趣的可以看看 。
