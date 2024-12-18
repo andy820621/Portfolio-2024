@@ -34,9 +34,11 @@ We will first need to establish a permission system and building information dat
 
 The system can be primarily divided into two main directions: <b>Daily Management</b> and <b>Emergency Response</b>.
 
+<!-- prettier-ignore-start -->
 | Daily Management | Emergency Response |
 | ---------------- | ------------------ |
 | - Community Personnel Information Management<br>- Regular Inspection and Maintenance Scheduling<br>- Announcement Publishing System<br>- Equipment Status Tracking | - Real-time Monitoring of Fire Equipment (Fire Control Panel, PLC)<br>- Multi-channel Instant Notifications (WebSocket, Line, Mobile Push, SMS)<br>- Intelligent Task Scheduling<br>- Emergency Guidance and Evacuation Route Recommendations |
+<!-- prettier-ignore-end -->
 
 ::ProjectLightBox{folder="metc/en/dailyOrEmergency"}
 ::
@@ -50,10 +52,12 @@ During routine fire team training or actual emergencies, the disaster prevention
 
 ## Technology Stack
 
+<!-- prettier-ignore-start -->
 |        | Main Technologies |
 | ------ | ----------------- |
 | Frontend | - Framework: Vue 3<br>- UI Library: Quasar<br>- Programming Language: TypeScript<br>- Special Feature: PWA (iOS Push Notification Support) |
 | Backend | - Development Framework: .NET Core<br>- Workflow Engine: WorkflowCore<br>- Communication Protocol: WebSocket<br>- Cross-platform Notification: Multi-channel Integration |
+<!-- prettier-ignore-end -->
 
 ## Conclusion
 
