@@ -24,6 +24,11 @@
     "description": "Demonstration and experimentation of the project I am working on.",
     "noResultDescription": "We couldn't find any demos matching your search."
   },
+  "galleryPage": {
+    "title": "Gallery",
+    "description": "Some moments of life, memories of travel.",
+    "noResultDescription": "We couldn't find any photos matching your current search.\n Please search again or clear the search criteria."
+  },
   "Table Of Content": "Table Of Content",
   "Tech Stack": "Tech Stack",
   "Design Tools": "Design Tools",
