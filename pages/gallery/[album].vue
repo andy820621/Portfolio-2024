@@ -67,8 +67,8 @@ useSeoMeta({
               :src="src"
               :alt="`${album.title} - Image ${imageIdx + 1}`"
               class="w-full h-auto object-cover"
+              placeholder
             />
-            <!-- <img :src="src" alt=""> -->
           </div>
         </div>
       </div>
