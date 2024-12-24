@@ -76,6 +76,18 @@ function clearFilters() {
   searchText.value = ''
   selectedTags.value = []
 }
+
+// Generate OG Image
+const siteData = useSiteConfig()
+
+// 生成 OG 圖片
+defineOgImage({
+  props: {
+    title: 'Gallery',
+    description: t('galleryPage.description'),
+    siteName: siteData.url,
+  },
+})
 </script>
 
 <template>
