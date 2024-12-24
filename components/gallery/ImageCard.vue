@@ -15,7 +15,7 @@ defineProps<{
       <NuxtImg
         :src="src"
         :alt="title"
-        w-full border="b base"
+        w-full
         placeholder
       />
 
