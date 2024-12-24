@@ -28,18 +28,41 @@ export function truncateContent(content: ParsedContent, maxChars: number): { con
     }
 
     if (Array.isArray(node)) {
-      return node.map(processNode).filter(n => n !== null) as ProcessNode[]
+      const processedNodes = node
+        .map((item) => {
+          if (shouldTruncate)
+            return null
+          return processNode(item)
+        })
+        .filter((n): n is ProcessNode => n !== null)
+
+      // 使用類型断言確保返回正確的類型
+      return processedNodes.length > 0
+        ? processedNodes as ProcessNode[]
+        : null
     }
 
-    if (typeof node === 'object' && node !== null) {
-      const result: any = {}
-      for (const [key, value] of Object.entries(node)) {
-        const processed = processNode(value)
-        if (processed !== null) {
-          result[key] = processed
+    if (node && typeof node === 'object') {
+      const processedNode: any = { ...node }
+
+      // 處理 children
+      if (processedNode.children) {
+        const processedChildren = processNode(processedNode.children)
+        processedNode.children = processedChildren as MarkdownNode[] | null
+      }
+
+      // 處理 value
+      if (processedNode.type === 'text' && processedNode.value) {
+        const processedValue = processNode(processedNode.value)
+        if (processedValue !== null) {
+          processedNode.value = processedValue as string
+        }
+        else {
+          return null
         }
       }
-      return Object.keys(result).length > 0 ? result : null
+
+      return processedNode
     }
 
     return node
