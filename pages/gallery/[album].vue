@@ -2,6 +2,13 @@
 import { breakpointsTailwind } from '@vueuse/core'
 import { galleryGroups } from '~/data/galleryData'
 
+definePageMeta({
+  documentDriven: {
+    page: false,
+    surround: false,
+  },
+})
+
 const route = useRoute()
 const albumId = route.params.album as string
 
