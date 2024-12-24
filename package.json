@@ -56,5 +56,8 @@
     "typescript": "^5.7.2",
     "unocss": "^0.62.4",
     "vue-tsc": "^2.2.0"
+  },
+  "resolutions": {
+    "sharp": "0.32.6"
   }
 }

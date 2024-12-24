@@ -51,24 +51,27 @@ useSeoMeta({
       {{ album.title }}
     </h1>
 
-    <div
-      grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-[.55rem]"
-      class="text-zinc-600"
-    >
-      <div v-for="(items, idx) in parts" :key="idx" flex="~ col gap-[.55rem]">
-        <div
-          v-for="(src, imageIdx) in items"
-          :key="imageIdx"
-          class="slide-enter"
-          :style="{ '--enter-stage': idx + 1 }"
-        >
-          <NuxtImg
-            :src="src"
-            :alt="`${album.title} - Image ${imageIdx + 1}`"
-            class="w-full h-auto object-cover"
-          />
+    <ClientOnly>
+      <div
+        grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-[.55rem]"
+        class="text-zinc-600"
+      >
+        <div v-for="(items, idx) in parts" :key="idx" flex="~ col gap-[.55rem]">
+          <div
+            v-for="(src, imageIdx) in items"
+            :key="imageIdx"
+            class="slide-enter"
+            :style="{ '--enter-stage': idx + 1 }"
+          >
+            <NuxtImg
+              :src="src"
+              :alt="`${album.title} - Image ${imageIdx + 1}`"
+              class="w-full h-auto object-cover"
+            />
+            <!-- <img :src="src" alt=""> -->
+          </div>
         </div>
       </div>
-    </div>
+    </ClientOnly>
   </div>
 </template>
