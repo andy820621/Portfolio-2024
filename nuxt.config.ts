@@ -53,13 +53,13 @@ export default defineNuxtConfig({
     twitter: seoData.twitterHandle,
   },
   image: {
-    // format: ['webp', 'gif', 'jpg', 'png'],
-    // ipx: {
-    //   modifiers: {
-    //     format: 'webp',
-    //     formats: ['webp', 'gif', 'jpg', 'png'],
-    //   },
-    // },
+    format: ['webp', 'gif', 'jpg', 'png'],
+    ipx: {
+      modifiers: {
+        format: 'webp',
+        formats: ['webp', 'gif', 'jpg', 'png'],
+      },
+    },
   },
   content: {
     locales: ['en', 'zh'],
