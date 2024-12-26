@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
-import lightGallery from 'lightgallery'
-import lgShare from 'lightgallery/plugins/share'
-import lgThumbnail from 'lightgallery/plugins/thumbnail'
-import lgZoom from 'lightgallery/plugins/zoom'
+import LightGallery from '~/components/LightGallery.vue'
 import { galleryGroups } from '~/data/galleryData'
 
 definePageMeta({
@@ -42,7 +39,6 @@ const cols = computed(() => {
 //   return Array.from({ length: cols.value }, (_, i) =>
 //     images.filter((_, j) => j % cols.value === i))
 // })
-// Try to use more efficient way
 const parts = computed(() => {
   if (!album.value)
     return []
@@ -62,42 +58,12 @@ useSeoMeta({
   ogTitle: album.value?.title,
 })
 
-// LightGallery 相關
-const lightGalleryContainer = ref<HTMLDivElement | null>(null)
-const lightGalleryInstance = ref<ReturnType<typeof lightGallery> | null>(null)
-const lightGalleryDynamicEl = computed(() => {
-  if (!album.value)
-    return []
-  return album.value.images.map(src => ({
-    src,
-    thumb: src,
-    subHtml: `<h4>${album.value?.title}</h4>`,
-  }))
-})
+const lightGalleryRef = ref<InstanceType<typeof LightGallery> | null>(null)
 
 function openLightGallery(startIndex: number) {
-  if (!album.value)
-    return
-
-  lightGalleryInstance.value = lightGallery(lightGalleryContainer.value!, {
-    dynamic: true,
-    dynamicEl: lightGalleryDynamicEl.value,
-    index: startIndex,
-    plugins: [lgThumbnail, lgZoom, lgShare],
-    mode: 'lg-slide',
-  })
-
-  lightGalleryInstance.value.openGallery(startIndex)
+  lightGalleryRef.value?.openLightGallery(startIndex)
 }
 
-onUnmounted(() => {
-  if (lightGalleryInstance.value) {
-    lightGalleryInstance.value.destroy()
-    lightGalleryInstance.value = null
-  }
-})
-
-// 計算每個列中的圖像索引在原始數組中的位置
 function calculateOriginalIndex(colIdx: number, rowIdx: number) {
   return rowIdx * cols.value + colIdx
 }
@@ -110,8 +76,13 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
     </h1>
 
     <ClientOnly>
+      <LightGallery
+        ref="lightGalleryRef"
+        :images="album.images"
+        :title="album.title"
+      />
+
       <div
-        ref="lightGalleryContainer"
         grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-[.55rem]"
         class="text-zinc-600"
       >
@@ -148,16 +119,3 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
     Loading...
   </div>
 </template>
-
-<style>
-@import 'lightgallery/css/lightgallery.css';
-@import 'lightgallery/css/lg-thumbnail.css';
-@import 'lightgallery/css/lg-zoom.css';
-@import 'lightgallery/css/lg-share.css';
-@import 'lightgallery/css/lg-transitions.css';
-
-.lg-backdrop {
-  background-color: hsla(0, 0%, 0%, 0.81);
-  backdrop-filter: blur(8px);
-}
-</style>
