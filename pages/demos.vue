@@ -124,8 +124,16 @@ const parts = computed(() => {
   if (!items)
     return []
 
-  return Array.from({ length: cols.value }, (_, i) =>
-    items.filter((_, j) => j % cols.value === i))
+  return items.reduce((result, item, index) => {
+    const col = index % cols.value
+    if (!result[col])
+      result[col] = []
+
+    // 使用類型斷言
+    ;(result[col] as typeof items).push(item)
+
+    return result
+  }, [] as Array<typeof items>)
 })
 
 // 清除所有過濾器

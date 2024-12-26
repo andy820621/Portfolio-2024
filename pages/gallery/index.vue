@@ -67,8 +67,14 @@ const cols = computed(() => {
 
 const parts = computed(() => {
   const groups = debouncedFilteredGroups.value
-  return Array.from({ length: cols.value }, (_, i) =>
-    groups.filter((_, j) => j % cols.value === i))
+
+  return groups.reduce((result, group, index) => {
+    const col = index % cols.value
+    if (!result[col])
+      result[col] = []
+    result[col].push(group)
+    return result
+  }, [] as Array<typeof groups>)
 })
 
 // 清除所有過濾器

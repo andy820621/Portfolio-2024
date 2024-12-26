@@ -32,13 +32,6 @@ const cols = computed(() => {
   return 1
 })
 
-// const parts = computed(() => {
-//   if (!album.value)
-//     return []
-//   const images = album.value.images
-//   return Array.from({ length: cols.value }, (_, i) =>
-//     images.filter((_, j) => j % cols.value === i))
-// })
 const parts = computed(() => {
   if (!album.value)
     return []
