@@ -94,7 +94,7 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
               placeholder
               loading="lazy"
               format="webp"
-              quality="81"
+              quality="24"
             />
             <!-- <img
               :src="src"

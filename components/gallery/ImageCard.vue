@@ -15,8 +15,11 @@ defineProps<{
       <NuxtImg
         :src="src"
         :alt="title"
-        w-full
+        class="w-full h-auto object-cover"
         placeholder
+        loading="lazy"
+        format="webp"
+        quality="24"
       />
 
       <div
