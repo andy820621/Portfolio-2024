@@ -56,7 +56,18 @@ defineExpose({
 @import 'lightgallery/css/lg-transitions.css';
 
 .lg-backdrop {
-  background-color: hsla(0, 0%, 0%, 0.81);
-  backdrop-filter: blur(8px);
+  background-color: hsla(24, 8%, 8%, 0.85);
+  backdrop-filter: blur(2.4px);
+}
+
+.lg-outer .lg-thumb-item {
+  border-radius: 4px;
+  border: 2px solid #fff;
+  transition: border-color 0.25s ease;
+}
+.lg-outer .lg-thumb-item.active,
+.lg-outer .lg-thumb-item:hover {
+  border-color: var(--clr-active-border);
+  outline: 1px solid var(--clr-active-border);
 }
 </style>

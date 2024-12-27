@@ -160,6 +160,16 @@ function onSlideChange(_swiper: SwiperClass) {
   background-color: hsla(0, 0%, 0%, 0.81);
   backdrop-filter: blur(8px);
 }
+.lg-outer .lg-thumb-item {
+  border-radius: 4px;
+  border: 2px solid #fff;
+  transition: border-color 0.25s ease;
+}
+.lg-outer .lg-thumb-item.active,
+.lg-outer .lg-thumb-item:hover {
+  border-color: var(--clr-active-border);
+  outline: 1px solid var(--clr-active-border);
+}
 </style>
 
 <style scoped lang="scss">

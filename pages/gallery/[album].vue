@@ -25,11 +25,8 @@ const cols = computed(() => {
     return 4
   if (breakpoints.xl.value || breakpoints.lg.value)
     return 3
-  if (breakpoints.md.value || breakpoints.sm.value)
-    return 2
-  if (breakpoints.smaller('sm'))
-    return 1
-  return 1
+  // 手機和平板都保持2列
+  return 2
 })
 
 const parts = computed(() => {
@@ -76,18 +73,18 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
       />
 
       <div
-        grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-[.55rem]"
+        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
         class="text-zinc-600"
       >
-        <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-[.55rem]">
+        <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
           <div
             v-for="(src, rowIdx) in items"
             :key="rowIdx"
-            class="slide-enter cursor-pointer"
+            class="slide-enter cursor-zoom-in"
             :style="{ '--enter-stage': colIdx + 1 }"
             @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
           >
-            <NuxtImg
+            <!-- <NuxtImg
               :src="src"
               :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
               class="w-full h-auto object-cover"
@@ -95,12 +92,12 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
               loading="lazy"
               format="webp"
               quality="24"
-            />
-            <!-- <img
+            /> -->
+            <img
               :src="src"
               :alt="`${album.title} - Image ${rowIdx + 1}`"
               class="w-full h-auto object-cover"
-            > -->
+            >
           </div>
         </div>
       </div>
@@ -112,3 +109,11 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
     Loading...
   </div>
 </template>
+
+<style>
+@media (max-width: 750px) {
+  main {
+    @apply !px-5.5;
+  }
+}
+</style>

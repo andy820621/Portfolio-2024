@@ -58,11 +58,8 @@ const cols = computed(() => {
     return 4
   if (breakpoints.xl.value || breakpoints.lg.value)
     return 3
-  if (breakpoints.md.value || breakpoints.sm.value)
-    return 2
-  if (breakpoints.smaller('sm'))
-    return 1
-  return 1
+  // 這裡改為預設2列
+  return 2
 })
 
 const parts = computed(() => {
@@ -115,7 +112,7 @@ defineOgImage({
     <ClientOnly>
       <div
         v-if="debouncedFilteredGroups.length"
-        grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4"
+        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4"
         class="container max-w-10xl mx-auto mt-10 text-zinc-600"
       >
         <div v-for="(groups, idx) in parts" :key="idx" flex="~ col gap-4">

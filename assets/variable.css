@@ -14,6 +14,7 @@
   --clr-scrollbar-hover: #bbb;
   --clr-underline: #33333300;
   --clr-underline-hover: #333333;
+  --clr-active-border: hsl(22, 99%, 34%);
   --swiper-navBtn: #3b4039;
   --swiper-navBtnHover: var(--clr-underline-hover);
   --swiper-navBtnHoverBg: hsla(90, 1%, 62%, 0.81);
