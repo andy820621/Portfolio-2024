@@ -112,10 +112,10 @@ defineOgImage({
     <ClientOnly>
       <div
         v-if="debouncedFilteredGroups.length"
-        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4"
+        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
         class="container max-w-10xl mx-auto mt-10 text-zinc-600"
       >
-        <div v-for="(groups, idx) in parts" :key="idx" flex="~ col gap-4">
+        <div v-for="(groups, idx) in parts" :key="idx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
           <div
             v-for="group in groups"
             :key="group.id"
@@ -124,6 +124,7 @@ defineOgImage({
           >
             <NuxtLink :to="`/gallery/${group.id}`">
               <GalleryImageCard
+                :id="group.id"
                 :title="group.title"
                 :src="group.coverImage"
               />

@@ -17,6 +17,15 @@ const album = computed(() =>
   galleryGroups.find(group => group.id === albumId),
 )
 
+// 動態獲取資料夾內的照片
+const { data: images } = await useAsyncData(`gallery-${albumId}`, async () => {
+  const imageModules = import.meta.glob('/public/gallery-images/**/*')
+
+  return Object.keys(imageModules)
+    .filter(path => path.includes(`/public/gallery-images/${albumId}/`))
+    .map(path => path.replace('/public', ''))
+})
+
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 // 根據斷點計算列數
@@ -30,11 +39,10 @@ const cols = computed(() => {
 })
 
 const parts = computed(() => {
-  if (!album.value)
+  if (!images.value)
     return []
 
-  const images = album.value.images
-  return images.reduce((result, image, index) => {
+  return images.value.reduce((result, image, index) => {
     const col = index % cols.value
     if (!result[col])
       result[col] = []
@@ -67,12 +75,14 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
 
     <ClientOnly>
       <LightGallery
+        v-if="images && images.length"
         ref="lightGalleryRef"
-        :images="album.images"
+        :images="images"
         :title="album.title"
       />
 
       <div
+        v-if="images && images.length"
         grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
         class="text-zinc-600"
       >
@@ -84,7 +94,7 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
             :style="{ '--enter-stage': colIdx + 1 }"
             @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
           >
-            <!-- <NuxtImg
+            <NuxtImg
               :src="src"
               :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
               class="w-full h-auto object-cover"
@@ -92,14 +102,17 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
               loading="lazy"
               format="webp"
               quality="24"
-            /> -->
-            <img
+            />
+            <!-- <img
               :src="src"
               :alt="`${album.title} - Image ${rowIdx + 1}`"
               class="w-full h-auto object-cover"
-            >
+            > -->
           </div>
         </div>
+      </div>
+      <div v-else class="text-center">
+        No images found
       </div>
     </ClientOnly>
   </div>

@@ -1,8 +1,23 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   title: string
-  src: string
+  src?: string
+  id?: string
 }>()
+
+const imageSrc = computed(() => {
+  // 如果有 coverImage 直接使用
+  if (props.src)
+    return props.src
+
+  // 如果沒有 coverImage，使用 id 生成圖片路徑
+  if (props.id) {
+    return `/gallery-images/${props.id}.webp`
+  }
+
+  // 如果都沒有，返回預設或空圖片
+  return ''
+})
 </script>
 
 <template>
@@ -11,9 +26,10 @@ defineProps<{
     border-rounded-lg
     transition="all duration-500"
   >
-    <div class="imageBox relative" role="img" :aria-label="title">
+    <div v-if="imageSrc" class="imageBox relative" role="img" :aria-label="title">
       <NuxtImg
-        :src="src"
+
+        :src="imageSrc"
         :alt="title"
         class="w-full h-auto object-cover"
         placeholder
