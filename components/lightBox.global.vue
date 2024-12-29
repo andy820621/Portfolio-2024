@@ -133,7 +133,7 @@ function onSlideChange(_swiper: SwiperClass) {
         :key="index"
         @click="openGallery(index)"
       >
-        <img class="photo" :src="photo.src" :alt="photo.description">
+        <NuxtImg class="photo" :src="photo.src" :alt="photo.description" placeholder />
 
         <div v-if="showTitle && photo.title" class="photo-title">
           <div class="title">
