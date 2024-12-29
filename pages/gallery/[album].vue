@@ -34,7 +34,6 @@ const cols = computed(() => {
     return 4
   if (breakpoints.xl.value || breakpoints.lg.value)
     return 3
-  // 手機和平板都保持2列
   return 2
 })
 
@@ -65,6 +64,66 @@ function openLightGallery(startIndex: number) {
 function calculateOriginalIndex(colIdx: number, rowIdx: number) {
   return rowIdx * cols.value + colIdx
 }
+
+// 追蹤可見圖片的響應式狀態
+const visibleImages = ref<string[]>([])
+const imageRefs = ref<HTMLElement[]>([])
+
+// 創建一個方法來處理 ref 邏輯
+function handleImageRef(el: HTMLElement | null) {
+  if (el) {
+    if (!imageRefs.value.includes(el)) {
+      imageRefs.value.push(el)
+    }
+  }
+}
+
+// 計算轉場延遲
+function getTransitionDelay(images: string[], image: string) {
+  return `${images.indexOf(image) * 100}ms`
+}
+
+// 檢查是否可見的方法
+function isImageVisible(image: string) {
+  return visibleImages.value.includes(image)
+}
+
+let stop: (() => void) | undefined
+
+watch(parts, (newParts) => {
+  if (newParts.length > 0) {
+    setTimeout(() => {
+      const observerOptions = {
+        threshold: 0.1,
+      }
+
+      const observerResult = useIntersectionObserver(
+        imageRefs,
+        (entries) => {
+          entries.forEach((entry) => {
+            const imageSrc = (entry.target as HTMLElement).dataset.imageSrc
+
+            if (entry.isIntersecting) {
+              if (imageSrc && !visibleImages.value.includes(imageSrc)) {
+                nextTick(() => {
+                  visibleImages.value.push(imageSrc)
+                })
+              }
+            }
+          })
+        },
+        observerOptions,
+      )
+
+      stop = observerResult.stop
+    })
+  }
+}, { immediate: true })
+
+onUnmounted(() => {
+  if (stop)
+    stop()
+})
 </script>
 
 <template>
@@ -90,8 +149,15 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
           <div
             v-for="(src, rowIdx) in items"
             :key="rowIdx"
-            class="slide-enter cursor-zoom-in"
-            :style="{ '--enter-stage': colIdx + 1 }"
+            :ref="(el) => handleImageRef(el as HTMLElement)"
+            :data-image-src="src"
+            class="gallery-item opacity-0 transform translate-y-10 transition-all duration-700 ease-out cursor-zoom-in"
+            :class="{
+              'opacity-100 translate-y-0': isImageVisible(src),
+            }"
+            :style="{
+              transitionDelay: getTransitionDelay(items, src),
+            }"
             @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
           >
             <NuxtImg
@@ -103,11 +169,6 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
               format="webp"
               quality="24"
             />
-            <!-- <img
-              :src="src"
-              :alt="`${album.title} - Image ${rowIdx + 1}`"
-              class="w-full h-auto object-cover"
-            > -->
           </div>
         </div>
       </div>
@@ -118,12 +179,22 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
   </div>
 
   <div v-else class="container max-w-10xl mx-auto mt-8">
-    <!-- <NotFound /> -->
     Loading...
   </div>
 </template>
 
-<style>
+<style scoped>
+.gallery-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-item.opacity-100.translate-y-0 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 750px) {
   main {
     @apply !px-5.5;

@@ -27,8 +27,7 @@ const imageSrc = computed(() => {
     transition="all duration-500"
   >
     <div v-if="imageSrc" class="imageBox relative" role="img" :aria-label="title">
-      <NuxtImg
-
+      <!-- <NuxtImg
         :src="imageSrc"
         :alt="title"
         class="w-full h-auto object-cover"
@@ -36,7 +35,12 @@ const imageSrc = computed(() => {
         loading="lazy"
         format="webp"
         quality="24"
-      />
+      /> -->
+      <img
+        :src="imageSrc"
+        :alt="title"
+        class="w-full h-auto object-cover"
+      >
 
       <div
         class="overlay absolute inset-0 z-2 flex flex-col justify-center items-center p-4 rounded-lg"
