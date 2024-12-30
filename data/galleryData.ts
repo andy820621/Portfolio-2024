@@ -40,11 +40,9 @@ export const galleryGroups: GalleryGroup[] = [
 
   },
   {
-    id: 'Chasing Blossomse',
-    title: 'Chasing Blossomse',
-    chTitle: '追花',
-    coverImage: '/gallery-images/Chasing Blossomse.webp',
-    tags: ['Japan', 'Sakura', 'Bicycle', 'Childhood', 'Riverside', 'Spring'],
+    id: 'Neko',
+    title: 'Neko',
+    tags: ['Animals'],
   },
   {
     id: 'Yanesen',
@@ -53,9 +51,11 @@ export const galleryGroups: GalleryGroup[] = [
     tags: ['Travel', 'Japan', 'Food'],
   },
   {
-    id: 'Neko',
-    title: 'Neko',
-    tags: ['Animals'],
+    id: 'Chasing Blossoms',
+    title: 'Chasing Blossoms',
+    chTitle: '追花',
+    coverImage: '/gallery-images/Chasing Blossoms.webp',
+    tags: ['Japan', 'Sakura', 'Bicycle', 'Childhood', 'Riverside', 'Spring'],
   },
 ]
 
