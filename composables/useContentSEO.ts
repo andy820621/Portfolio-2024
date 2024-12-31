@@ -1,24 +1,27 @@
 import { seoData } from '~/data'
 
 export function useContentSEO(data: ComputedRef<any>) {
-  useHead({
+  useSeoMeta({
     title: data.value.title || '',
-    meta: [
-      { name: 'description', content: data.value.description },
-      // ... 其他 meta 標籤
-    ],
+    description: data.value.description || '',
+    ogTitle: data.value.title || '',
+    ogDescription: data.value.description || '',
+  })
+
+  defineOgImage({
+    props: {
+      title: data.value.title || '',
+      description: data.value.description || '',
+      image: data.value.ogImage || data.value.image,
+    },
+  })
+
+  useHead({
     link: [
       {
         rel: 'canonical',
-        href: `${seoData.mySite}/${useRoute().path}`,
+        href: `${seoData.mySite}${useRoute().path}`,
       },
     ],
-  })
-
-  defineOgImageComponent('Test', {
-    headline: 'Greetings 👋',
-    title: data.value.title || '',
-    description: data.value.description || '',
-    link: data.value.ogImage,
   })
 }

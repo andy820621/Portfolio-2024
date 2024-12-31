@@ -11,18 +11,6 @@ definePageMeta({
   },
 })
 
-onMounted(() => {
-  useHead({
-    title: 'gallery',
-  })
-})
-
-useSeoMeta({
-  ogTitle: 'Gallery - BarZ Hsieh',
-  description: t('galleryPage.description'),
-  ogDescription: t('galleryPage.description'),
-})
-
 // 搜索文本和選中的標籤
 const searchText = ref('')
 const selectedTags = ref<string[]>([])
@@ -85,10 +73,14 @@ function clearFilters() {
   selectedTags.value = []
 }
 
-// 獲取站點配置
-const siteData = useSiteConfig()
+// 設置頁面元數據
+useSeoMeta({
+  title: 'Gallery',
+  description: t('galleryPage.description'),
+})
 
 // 生成 Open Graph 圖片
+const siteData = useSiteConfig()
 defineOgImage({
   props: {
     title: 'Gallery',

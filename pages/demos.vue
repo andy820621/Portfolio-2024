@@ -3,79 +3,84 @@ import type { ParsedContent } from '@nuxt/content'
 import { breakpointsTailwind } from '@vueuse/core'
 
 const { t } = useI18n()
+const { locale } = useI18n()
 
 definePageMeta({
   documentDriven: {
-    page: false, // Keep page fetching enabled
-    surround: false, // Disable surround fetching
+    page: false,
+    surround: false,
   },
 })
 
-onMounted(() => {
-  useHead({
-    title: 'demos',
-  })
-})
-
+// SEO 優化
 useSeoMeta({
-  ogTitle: 'Demos - BarZ Hsieh',
+  title: 'Demos',
   description: t('demosPage.description'),
-  ogDescription: t('demosPage.description'),
 })
 
-const { locale } = useI18n()
+const siteData = useSiteConfig()
+defineOgImage({
+  props: {
+    title: 'Demo',
+    description: t('demosPage.description'),
+    siteName: siteData.url,
+  },
+})
 
+// 格式化標題函數
 function formatTitle(fileName: string): string {
-  // 移除文件名開頭的數字和點
-  const cleanFileName = fileName.replace(/^\d+\./, '')
-
-  // 將檔案名中的連字符或底線轉換為空格，並將每個單詞首字母大寫
-  return cleanFileName
-    .replace(/[-_]/g, ' ')
-    .replace(/\.md$/, '')
+  return fileName
+    .replace(/^\d+\./, '') // 移除開頭數字
+    .replace(/[-_]/g, ' ') // 替換連字符和底線
+    .replace(/\.md$/, '') // 移除 .md 副檔名
     .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ')
 }
 
+// 查詢 Demos 的邏輯
 const { data: demoItems } = await useAsyncData(`demos-${locale.value}`, async () => {
   const docs = await queryContent('demos')
     .locale(locale.value)
     .where({ draft: { $ne: true } })
     .find()
-    .then(docs => docs.sort((a, b) => {
-      const getNumber = (item: ParsedContent): number => {
-        if (typeof item._file === 'string') {
-          const parts = item._file.split('/')
-          const fileName = parts[parts.length - 1]
-          const numberPart = fileName.split('.')[0]
-          return Number.parseInt(numberPart) || 0
-        }
-        return 0
-      }
+    .then(sortDemos)
 
-      const aNum = getNumber(a)
-      const bNum = getNumber(b)
-      return bNum - aNum // 降序
-    }))
-
-  return docs.map((doc) => {
-    const fullFileName = doc._file!.split('/').pop() || ''
-    const parts = fullFileName.split('.')
-    const baseName = parts.length > 2 ? parts[1] : parts[0]
-
-    const formattedTitle = formatTitle(fullFileName)
-
-    return {
-      baseName,
-      content: doc,
-      title: formattedTitle,
-      tags: doc.tags || [],
-      thumbnailType: doc.thumbnailType || 'img',
-    }
-  })
+  return docs.map(transformDemoItem)
 })
 
+// 排序 Demos 的獨立函數
+function sortDemos(docs: ParsedContent[]): ParsedContent[] {
+  return docs.sort((a, b) => {
+    const getNumber = (item: ParsedContent): number => {
+      if (typeof item._file === 'string') {
+        const fileName = item._file.split('/').pop() || ''
+        const numberPart = fileName.split('.')[0]
+        return Number.parseInt(numberPart) || 0
+      }
+      return 0
+    }
+
+    return getNumber(b) - getNumber(a) // 降序
+  })
+}
+
+// 轉換 Demo 項目的獨立函數
+function transformDemoItem(doc: ParsedContent) {
+  const fullFileName = doc._file!.split('/').pop() || ''
+  const parts = fullFileName.split('.')
+  const baseName = parts.length > 2 ? parts[1] : parts[0]
+
+  return {
+    baseName,
+    content: doc,
+    title: formatTitle(fullFileName),
+    tags: doc.tags || [],
+    thumbnailType: doc.thumbnailType || 'img',
+  }
+}
+
+// 篩選邏輯
 const searchText = ref('')
 const selectedTags = ref<string[]>([])
 
@@ -105,9 +110,9 @@ const updateFilteredItems = useDebounceFn(() => {
 
 watch([searchText, selectedTags, demoItems], updateFilteredItems, { immediate: true })
 
+// 響應式斷點和列數計算
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
-// 根據斷點計算列數
 const cols = computed(() => {
   if (breakpoints['2xl'].value)
     return 4
@@ -119,6 +124,7 @@ const cols = computed(() => {
     return 1
   return 1
 })
+
 const parts = computed(() => {
   const items = debouncedFilteredDemoItems.value
   if (!items)
@@ -128,15 +134,12 @@ const parts = computed(() => {
     const col = index % cols.value
     if (!result[col])
       result[col] = []
-
-    // 使用類型斷言
     ;(result[col] as typeof items).push(item)
-
     return result
   }, [] as Array<typeof items>)
 })
 
-// 清除所有過濾器
+// 清除篩選器
 function clearFilters() {
   searchText.value = ''
   selectedTags.value = []
@@ -186,13 +189,6 @@ function clearFilters() {
         :clear-filters="clearFilters"
         :description="$t('demosPage.noResultDescription')"
       />
-
-      <!-- <template #fallback>
-        <div class="space-y-5 my-5 px-4">
-          <postLoader />
-          <postLoader />
-        </div>
-      </template> -->
     </ClientOnly>
   </div>
 </template>

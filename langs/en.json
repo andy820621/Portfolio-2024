@@ -29,6 +29,11 @@
     "description": "Some moments of life, memories of travel.",
     "noResultDescription": "We couldn't find any photos matching your current search.\n Please search again or clear the search criteria."
   },
+  "errorPage": {
+    "title": "404 - Not Found",
+    "description": "The page you are looking for does not exist.",
+    "noResultDescription": "We couldn't find any posts matching your search."
+  },
   "Table Of Content": "Table Of Content",
   "Tech Stack": "Tech Stack",
   "Design Tools": "Design Tools",

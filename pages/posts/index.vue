@@ -21,20 +21,13 @@ watchEffect(() => {
 })
 
 // 設置頁面元數據
-useHead({
+useSeoMeta({
   title: 'Blog',
-  meta: [
-    {
-      name: 'description',
-      content: t('blogsPage.description'),
-    },
-  ],
+  description: t('blogsPage.description'),
 })
 
 // Generate OG Image
 const siteData = useSiteConfig()
-
-// 生成 OG 圖片
 defineOgImage({
   props: {
     title: 'Blog',

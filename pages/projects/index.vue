@@ -21,14 +21,9 @@ watchEffect(() => {
 })
 
 // 設置頁面元數據
-useHead({
+useSeoMeta({
   title: 'Projects',
-  meta: [
-    {
-      name: 'description',
-      content: t('projectsPage.description'),
-    },
-  ],
+  description: t('projectsPage.description'),
 })
 
 // Generate OG Image

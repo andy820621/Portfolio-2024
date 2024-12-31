@@ -31,13 +31,18 @@ definePageMeta({
 
 const pageTitle = computed(() => t('home'))
 
-useHead({
+useSeoMeta({
   title: pageTitle.value,
+  description: content.value?.description || t('home.description'),
 })
 
-defineOgImageComponent('NuxtSeo', {
-  title: pageTitle.value,
-  description: content.value?.description || '',
+const siteData = useSiteConfig()
+defineOgImage({
+  props: {
+    title: pageTitle.value,
+    description: content.value?.description || '',
+    siteName: siteData.url,
+  },
 })
 </script>
 

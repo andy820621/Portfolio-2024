@@ -29,6 +29,11 @@
     "description": "一些生活片段、旅行的記憶。",
     "noResultDescription": "我們找不到與您現在的搜尋相符的照片，請重新搜尋或是清除搜尋條件。"
   },
+  "errorPage": {
+    "title": "404 - Not Found",
+    "description": "很抱歉，我們找不到您要的頁面。",
+    "noResultDescription": "我們找不到與您現在的搜尋相符的文章，請重新搜尋或是清除搜尋條件。"
+  },
   "Table Of Content": "目錄",
   "Tech Stack": "技術棧",
   "Design Tools": "設計工具",

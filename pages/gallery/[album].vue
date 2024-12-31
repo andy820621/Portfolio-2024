@@ -50,11 +50,6 @@ const parts = computed(() => {
   }, [] as string[][])
 })
 
-useSeoMeta({
-  title: album.value?.title,
-  ogTitle: album.value?.title,
-})
-
 const lightGalleryRef = ref<InstanceType<typeof LightGallery> | null>(null)
 
 function openLightGallery(startIndex: number) {
@@ -123,6 +118,23 @@ watch(parts, (newParts) => {
 onUnmounted(() => {
   if (stop)
     stop()
+})
+
+// 設定 SEO
+// 設置頁面元數據
+useSeoMeta({
+  title: album.value?.title || 'Gallery',
+  description: album.value?.description || 'Gallery\'s description',
+})
+
+// 生成 Open Graph 圖片
+const siteData = useSiteConfig()
+defineOgImage({
+  props: {
+    title: album.value?.title || 'Gallery',
+    description: album.value?.description || 'Gallery\'s description',
+    siteName: siteData.url,
+  },
 })
 </script>
 

@@ -6,17 +6,23 @@ definePageMeta({
   },
 })
 
-useHead({
-  title: '404',
-  meta: [
-    { name: 'description', content: 'Page not found' },
-  ],
+const { t } = useI18n()
+
+// SEO 配置
+useSeoMeta({
+  title: '404 - Page Not Found',
+  description: t('errorPage.description', '您訪問的頁面不存在'),
+  robots: 'noindex, nofollow',
 })
 
-defineOgImageComponent('NuxtSeo', {
-  headline: 'Wrong Path',
-  title: '404',
-  description: 'Page Not Found',
+const siteData = useSiteConfig()
+defineOgImage({
+  props: {
+    title: 'Demo',
+    headline: 'Wrong Path',
+    description: t('demosPage.description'),
+    siteName: siteData.url,
+  },
 })
 
 const localePath = useLocalePath()
