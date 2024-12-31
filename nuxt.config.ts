@@ -1,5 +1,6 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
+import type { NitroConfig } from 'nitropack'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
@@ -214,15 +215,7 @@ export default defineNuxtConfig({
   },
 })
 
-interface RouteRule {
-  prerender?: boolean
-  isr?: number
-  swr?: boolean
-}
-
-interface RouteRules {
-  [key: string]: RouteRule
-}
+type RouteRules = NitroConfig['routeRules']
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
@@ -233,12 +226,35 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
 
   // 為預設語言生成無前綴的路由規則
   const defaultRules: RouteRules = {
-    '/': { prerender: true },
-    '/posts': { isr: 3600 },
-    '/posts/**': { isr: 86400 },
-    '/demos': { prerender: true },
-    '/gallery': { isr: 21600 },
-    '/projects': { isr: 86400 },
+    '/': {
+      prerender: true,
+      cache: {
+        maxAge: 3600,
+        staleMaxAge: 86400,
+      },
+    },
+    '/posts': { prerender: true, isr: 3600 },
+    '/posts/**': {
+      prerender: true,
+      cache: {
+        maxAge: 7200,
+      },
+    },
+    '/demos': { prerender: true, isr: 86400 },
+    '/gallery': { prerender: true, isr: 21600 },
+    '/gallery/**': {
+      prerender: true,
+      cache: {
+        maxAge: 21600,
+      },
+    },
+    '/projects': { prerender: true, isr: 21600 },
+    '/projects/**': {
+      prerender: true,
+      cache: {
+        maxAge: 21600,
+      },
+    },
   }
 
   Object.assign(rules, defaultRules)
