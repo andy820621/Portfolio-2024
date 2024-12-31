@@ -31,18 +31,9 @@ definePageMeta({
 
 const pageTitle = computed(() => t('home'))
 
-useSeoMeta({
+usePageSeo({
   title: pageTitle.value,
   description: content.value?.description || t('home.description'),
-})
-
-const siteData = useSiteConfig()
-defineOgImage({
-  props: {
-    title: pageTitle.value,
-    description: content.value?.description || '',
-    siteName: siteData.url,
-  },
 })
 </script>
 

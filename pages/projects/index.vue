@@ -20,22 +20,10 @@ watchEffect(() => {
   }
 })
 
-// 設置頁面元數據
-useSeoMeta({
+// 設置 SEO
+usePageSeo({
   title: 'Projects',
   description: t('projectsPage.description'),
-})
-
-// Generate OG Image
-const siteData = useSiteConfig()
-
-// 生成 OG 圖片
-defineOgImage({
-  props: {
-    title: 'Projects',
-    description: t('projectsPage.description'),
-    siteName: siteData.url,
-  },
 })
 </script>
 

@@ -21,19 +21,9 @@ watchEffect(() => {
 })
 
 // 設置頁面元數據
-useSeoMeta({
+usePageSeo({
   title: 'Blog',
   description: t('blogsPage.description'),
-})
-
-// Generate OG Image
-const siteData = useSiteConfig()
-defineOgImage({
-  props: {
-    title: 'Blog',
-    description: t('blogsPage.description'),
-    siteName: siteData.url,
-  },
 })
 </script>
 

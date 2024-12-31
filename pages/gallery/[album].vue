@@ -121,20 +121,9 @@ onUnmounted(() => {
 })
 
 // 設定 SEO
-// 設置頁面元數據
-useSeoMeta({
+usePageSeo({
   title: album.value?.title || 'Gallery',
   description: album.value?.description || 'Gallery\'s description',
-})
-
-// 生成 Open Graph 圖片
-const siteData = useSiteConfig()
-defineOgImage({
-  props: {
-    title: album.value?.title || 'Gallery',
-    description: album.value?.description || 'Gallery\'s description',
-    siteName: siteData.url,
-  },
 })
 </script>
 

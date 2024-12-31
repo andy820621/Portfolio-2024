@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { seoData } from '~/data'
+
 definePageMeta({
   documentDriven: {
     page: false, // Keep page fetching enabled
@@ -9,20 +11,10 @@ definePageMeta({
 const { t } = useI18n()
 
 // SEO 配置
-useSeoMeta({
+usePageSeo({
   title: '404 - Page Not Found',
   description: t('errorPage.description', '您訪問的頁面不存在'),
-  robots: 'noindex, nofollow',
-})
-
-const siteData = useSiteConfig()
-defineOgImage({
-  props: {
-    title: 'Demo',
-    headline: 'Wrong Path',
-    description: t('demosPage.description'),
-    siteName: siteData.url,
-  },
+  noIndex: true,
 })
 
 const localePath = useLocalePath()

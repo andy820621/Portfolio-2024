@@ -13,18 +13,9 @@ definePageMeta({
 })
 
 // SEO 優化
-useSeoMeta({
+usePageSeo({
   title: 'Demos',
   description: t('demosPage.description'),
-})
-
-const siteData = useSiteConfig()
-defineOgImage({
-  props: {
-    title: 'Demo',
-    description: t('demosPage.description'),
-    siteName: siteData.url,
-  },
 })
 
 // 格式化標題函數

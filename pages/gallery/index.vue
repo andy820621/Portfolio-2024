@@ -73,20 +73,10 @@ function clearFilters() {
   selectedTags.value = []
 }
 
-// 設置頁面元數據
-useSeoMeta({
+// 設置 SEO
+usePageSeo({
   title: 'Gallery',
   description: t('galleryPage.description'),
-})
-
-// 生成 Open Graph 圖片
-const siteData = useSiteConfig()
-defineOgImage({
-  props: {
-    title: 'Gallery',
-    description: t('galleryPage.description'),
-    siteName: siteData.url,
-  },
 })
 
 // 追蹤可見圖片組的響應式狀態

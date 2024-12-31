@@ -22,6 +22,16 @@ export function useContentSEO(data: ComputedRef<any>) {
         rel: 'canonical',
         href: `${seoData.mySite}${useRoute().path}`,
       },
+      {
+        rel: 'alternate',
+        hreflang: 'en-US',
+        href: `${seoData.mySite}/en${useRoute().path}`,
+      },
+      {
+        rel: 'alternate',
+        hreflang: 'zh-TW',
+        href: `${seoData.mySite}/zh${useRoute().path}`,
+      },
     ],
   })
 }
