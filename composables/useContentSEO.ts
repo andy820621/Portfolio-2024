@@ -9,6 +9,7 @@ export function useContentSEO(data: ComputedRef<any>) {
   })
 
   defineOgImage({
+    url: seoData.mySite,
     props: {
       title: data.value.title || '',
       description: data.value.description || '',

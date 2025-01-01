@@ -76,9 +76,28 @@ export default defineNuxtConfig({
     twitter: seoData.twitterHandle,
   },
   robots: {
-    allow: ['/', '/en/', '/zh/'],
-    disallow: ['/admin', '/private', '/api'],
+    allow: ['/', '/en/', '/zh/', '/api/__sitemap__/'],
+    disallow: [
+      '/admin',
+      '/private',
+      '/api/(?!__sitemap__/).*', // 阻擋除了 __sitemap__ 以外的所有 API 路徑
+    ],
     sitemap: 'https://barz.app/sitemap.xml',
+    blockAiBots: true,
+  },
+  schemaOrg: {
+    // 設定個人資料
+    identity: {
+      inLanguage: ['en', 'zh-TW'],
+      type: 'Person',
+      name: 'BarZ Hsieh',
+      url: 'https://barz.app/',
+      sameAs: [
+        'https://www.twitter.com/BarZ3064',
+        'https://www.instagram.com/andy820621',
+        'https://github.com/andy820621',
+      ],
+    },
   },
   image: {
     format: ['webp', 'gif', 'jpg', 'png'],
@@ -177,6 +196,7 @@ export default defineNuxtConfig({
     '@stefanobartoletti/nuxt-social-share',
     '@nuxtjs/i18n',
     'nuxt-swiper',
+    'nuxt-schema-org',
   ],
   unocss: {
     nuxtLayers: true,
