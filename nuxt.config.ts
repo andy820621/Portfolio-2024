@@ -86,17 +86,20 @@ export default defineNuxtConfig({
     blockAiBots: true,
   },
   schemaOrg: {
-    // 設定個人資料
+    defaults: false,
     identity: {
-      inLanguage: ['en', 'zh-TW'],
       type: 'Person',
-      name: 'BarZ Hsieh',
-      url: 'https://barz.app/',
+      name: navbarData.homeTitle,
+      url: seoData.mySite,
+      // image: '/profile-photo.jpg',
+      description: seoData.description,
+      email: 'andy820621@gmail.com',
       sameAs: [
         'https://www.twitter.com/BarZ3064',
         'https://www.instagram.com/andy820621',
         'https://github.com/andy820621',
       ],
+      inLanguage: ['en', 'en-US', 'zh-TW'],
     },
   },
   image: {
