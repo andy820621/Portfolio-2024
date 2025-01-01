@@ -56,7 +56,7 @@ useSchemaOrg([
     '@type': 'Person',
     'name': 'BarZ Hsieh',
     'url': 'https://barz.app/',
-    'mail': 'andy820621@gmail.com',
+    'email': 'andy820621@gmail.com',
     'sameAs': [
       'https://www.twitter.com/BarZ3064',
       'https://www.instagram.com/andy820621',
