@@ -7,6 +7,18 @@ alt: Some Awesome Libraries For Vue3
 ogImage: /blog-images/some-awesome-libraries-for-vue3.jpg
 tags: ['vue',"javascript"]
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "Some Awesome Libraries For Vue3"
+    description: "Vue.js is a popular JavaScript framework for building web applications. In this blog post, we will introduce you to some of the awesome libraries for Vue.js in different categories."
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023.1.8"
+    dateModified: "2023.1.8"
+    image: "/blog-images/some-awesome-libraries-for-vue3.jpg"
+    keywords: ['vue', "javascript"]
+    articleSection: "TechArticle"
 ---
 
 ### Introduction

@@ -7,6 +7,18 @@ alt: How to fix vuex type issue
 ogImage: /blog-images/how-to-fix-vuex-type-issue.jpg
 tags: ['vue',"vuex"]
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "How to fix vuex type issue"
+    description: "In recent vue project we see that vuex type not working properly. We will fix that type issue and make vuex type workable."
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023/1/9"
+    dateModified: "2023/1/9"
+    image: "/blog-images/how-to-fix-vuex-type-issue.jpg"
+    keywords: ['vue', "vuex"]
+    articleSection: "TechArticle"
 ---
 
 ### Introduction

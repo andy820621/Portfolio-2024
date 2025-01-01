@@ -7,6 +7,18 @@ alt: Hwo to fix tailwind intellisense in nuxt3 project
 ogImage: /blog-images/fix-tailwindcss-intellisense-in-nuxt3.jpg
 tags: ['nuxt', 'tailwindcss']
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "How To Fix TailwindCSS Intellisense In Nuxt3 Project"
+    description: "In Nuxt3 project tailwind css intellisense doesn't seems to work properly. In this blog I will share a workaround to fix this issue."
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023/1/26"
+    dateModified: "2023/1/26"
+    image: "/blog-images/fix-tailwindcss-intellisense-in-nuxt3.jpg"
+    keywords: ["TailwindCSS", "Nuxt3"]
+    articleSection: "TechArticle"
 ---
 
 ### Problems

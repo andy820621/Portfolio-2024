@@ -7,6 +7,18 @@ alt: How To Connect You Namecheap Domain With Vercel Deployed App
 ogImage: /blog-images/connect-namecheap-to-vercel.jpg
 tags: ['namecheap', 'vercel']
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "How To Connect You Namecheap Domain With Vercel Deployed App"
+    description: "Here you will lean how to connect your namecheap domain to vercel deployed app."
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023/5/1"
+    dateModified: "2023/5/1"
+    image: "https://barz.app/blog-images/connect-namecheap-to-vercel.jpg"
+    keywords: ["Namecheap", "Domain", "Vercel", "Deploy"]
+    articleSection: "TechArticle"
 ---
 
 ### Introduction

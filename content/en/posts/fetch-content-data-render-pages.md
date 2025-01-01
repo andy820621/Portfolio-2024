@@ -7,6 +7,18 @@ alt: How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages
 ogImage: /blog-images/fetch-content-data-render-pages.jpg
 tags: ['nuxt', 'nuxt-content']
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages"
+    description: "Here we will learn How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages."
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023/5/1"
+    dateModified: "2023/5/1"
+    image: "/blog-images/fetch-content-data-render-pages.jpg"
+    keywords: ["Nuxt", "Nuxt Content"]
+    articleSection: "TechArticle"
 ---
 
 ### Introduction

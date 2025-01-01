@@ -7,6 +7,18 @@ alt: 如何創建子網域並連接到 Vercel 應用程式
 ogImage: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
 tags: ['nuxt', 'vercel', 'namecheap']
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "如何創建子網域並連接到 Vercel 應用程式"
+    description: "在這裡，我們將學習如何創建子網域並連接到 Vercel 應用程式。"
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023/5/1"
+    dateModified: "2023/5/1"
+    image: "/blog-images/create-namespace-subdomain-connect-to-vercel.jpg"
+    keywords: ["Namecheap", "Subdomain", "Vercel", "Deploy"]
+    articleSection: "TechArticle"
 ---
 
 ### 介紹

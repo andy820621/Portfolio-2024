@@ -1,12 +1,24 @@
 ---
 title: How To Create Namespace Subdomain & Connect To Vercel App
 date: 2023/5/1
-description: Here we will learn, How To Create Namespace Subdomain & Connect To Vercel App
+description: Here we will learn, How To Create Namespace Subdomain & Connect To Vercel App.
 image: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
 alt: How To Create Namespace Subdomain & Connect To Vercel App
 ogImage: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
 tags: ['nuxt', 'vercel', 'namecheap']
 published: true
+schemaOrg:
+  - "@type": "BlogPosting"
+    headline: "How To Create Namespace Subdomain & Connect To Vercel App"
+    description: "Here we will learn, How To Create Namespace Subdomain & Connect To Vercel App."
+    author:
+      "@type": "Person"
+      name: "BarZ Hsieh"
+    datePublished: "2023/5/1"
+    dateModified: "2023/5/1"
+    image: "/blog-images/create-namespace-subdomain-connect-to-vercel.jpg"
+    keywords: ["Namecheap", "Subdomain", "Vercel", "Deploy"]
+    articleSection: "TechArticle"
 ---
 
 ### Introduction
