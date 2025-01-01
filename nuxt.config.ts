@@ -75,6 +75,11 @@ export default defineNuxtConfig({
     },
     twitter: seoData.twitterHandle,
   },
+  robots: {
+    allow: ['/', '/en/', '/zh/'],
+    disallow: ['/admin', '/private', '/api'],
+    sitemap: 'https://barz.app/sitemap.xml',
+  },
   image: {
     format: ['webp', 'gif', 'jpg', 'png'],
     ipx: {
