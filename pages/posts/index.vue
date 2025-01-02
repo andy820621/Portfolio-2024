@@ -25,6 +25,26 @@ usePageSeo({
   title: 'Blog',
   description: t('blogsPage.description'),
 })
+
+useSchemaOrg([
+  defineWebPage({
+    name: '部落格文章列表',
+    description: 'BarZ Hsieh 的技術部落格',
+  }),
+  {
+    '@type': 'ItemList',
+    'itemListElement': filteredData.value.map((post, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'BlogPosting',
+        'headline': post.title,
+        'url': `https://barz.app${post.path}`,
+        'datePublished': post.date,
+      },
+    })),
+  },
+])
 </script>
 
 <template>
