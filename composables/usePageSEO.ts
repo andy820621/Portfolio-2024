@@ -56,6 +56,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   // OG 圖片
   defineOgImage({
     url: seoData.mySite,
+    renderer: 'chromium',
     props: {
       title: pageTitle.value,
       description: pageDescription.value,
