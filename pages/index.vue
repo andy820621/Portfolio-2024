@@ -1,4 +1,11 @@
 <script setup lang="ts">
+// definePageMeta({
+//   documentDriven: {
+//     page: false, // Keep page fetching enabled
+//     surround: false, // Disable surround fetching
+//   },
+// })
+//
 const { t, locale } = useI18n()
 
 // 使用 useAsyncData 獲取內容
@@ -22,17 +29,10 @@ watchEffect(() => {
   }
 })
 
-definePageMeta({
-  documentDriven: {
-    page: false, // Keep page fetching enabled
-    surround: false, // Disable surround fetching
-  },
-})
-
 const pageTitle = computed(() => t('home'))
 
 usePageSeo({
-  title: pageTitle.value,
+  title: pageTitle.value || 'home',
   description: content.value?.description || t('home.description'),
 })
 </script>
