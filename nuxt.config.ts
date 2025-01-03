@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     locales,
   }),
   app: {
+    baseURL: '/',
     head: {
       charset: 'utf-16',
       viewport: 'width=device-width,initial-scale=1',
@@ -66,6 +67,9 @@ export default defineNuxtConfig({
   },
   sitemap: {
     strictNuxtContentPaths: true,
+    debug: process.env.NODE_ENV === 'development',
+    sitemapName: 'sitemap.xml',
+    autoLastmod: true,
     sources: [
       '/api/__sitemap__/posts',
       '/api/__sitemap__/gallery',
@@ -76,16 +80,22 @@ export default defineNuxtConfig({
         {
           code: 'en',
           _sitemap: 'en',
-          _hreflang: 'en',
+          _hreflang: 'en-US',
+          domain: seoData.mySite,
         },
         {
           code: 'zh-TW',
           _sitemap: 'zh-TW',
           _hreflang: 'zh-TW',
+          domain: seoData.mySite,
         },
       ],
       defaultLocale: 'en',
       strategy: 'prefix_and_default',
+    },
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
     },
   },
   site: {
