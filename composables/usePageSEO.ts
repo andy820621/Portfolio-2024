@@ -14,37 +14,29 @@ interface PageSeoOptions {
 
 export function usePageSeo(options: PageSeoOptions = {}) {
   const route = useRoute()
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
+  const config = useRuntimeConfig()
+  const { generateHrefLangLinks } = useHrefLang()
 
-  const pageTitle = computed(() =>
-    options.title
-    || t(`pages.${String(route.name)}.title`, ''),
-  )
+  // 計算完整的頁面標題
+  const pageTitle = computed(() => {
+    const title = options.title || t(`pages.${String(route.name)}.title`, '')
+    return title ? `${title} | ${seoData.mySite}` : seoData.mySite
+  })
 
   const pageDescription = computed(() =>
     options.description
-    || t(`pages.${String(route.name)}.description`, ''),
+    || t(`pages.${String(route.name)}.description`, '')
+    || seoData.description,
   )
 
-  // 生成默認的替代語言鏈接
-  const defaultAlternateLinks = computed(() => ([
-    {
-      rel: 'alternate',
-      hreflang: 'en-US',
-      href: `${seoData.mySite}/en${useRoute().path}`,
-    },
-    {
-      rel: 'alternate',
-      hreflang: 'zh-TW',
-      href: `${seoData.mySite}/zh${useRoute().path}`,
-    },
-  ]))
+  const hreflangLinks = computed(() => generateHrefLangLinks())
 
-  // 合併自定義和默認的替代鏈接
-  const alternateLinks = [
-    ...(options.alternateLinks || []),
-    ...defaultAlternateLinks.value,
-  ]
+  // 計算完整的規範連結
+  const canonicalUrl = computed(() => {
+    const baseUrl = config.public.siteUrl || seoData.mySite
+    return `${baseUrl}${route.path}`
+  })
 
   // SEO 元數據
   useSeoMeta({
@@ -54,28 +46,34 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   })
 
   // OG 圖片
-  defineOgImage({
-    url: seoData.mySite,
-    renderer: 'chromium',
-    props: {
-      title: pageTitle.value,
-      description: pageDescription.value,
-      siteName: seoData.mySite,
-    },
-  })
+  if (!options.noIndex) {
+    defineOgImage({
+      url: seoData.mySite,
+      renderer: 'chromium',
+      props: {
+        title: pageTitle.value,
+        description: pageDescription.value,
+        siteName: seoData.mySite,
+      },
+    })
+  }
 
   useHead({
+    htmlAttrs: {
+      lang: locale.value,
+    },
     link: [
       {
         rel: 'canonical',
-        href: `${seoData.mySite}${route.path}`,
+        href: canonicalUrl.value,
       },
-      ...alternateLinks,
+      ...hreflangLinks.value,
     ],
   })
 
   return {
     pageTitle,
     pageDescription,
+    canonicalUrl,
   }
 }

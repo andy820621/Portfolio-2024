@@ -1,38 +1,73 @@
 import { seoData } from '~/data'
 
-export function useContentSEO(data: ComputedRef<any>) {
-  useSeoMeta({
-    title: data.value.title || '',
-    description: data.value.description || '',
-    ogTitle: data.value.title || '',
-    ogDescription: data.value.description || '',
+interface ContentData {
+  title?: string
+  description?: string
+  image?: string
+  ogImage?: string
+  noIndex?: boolean
+}
+
+export function useContentSEO(data: ComputedRef<ContentData>) {
+  const route = useRoute()
+  const { locale } = useI18n()
+  const config = useRuntimeConfig()
+  const { generateHrefLangLinks } = useHrefLang()
+
+  // 計算完整的頁面標題
+  const pageTitle = computed(() => {
+    const title = data.value.title
+    return title ? `${title} | ${seoData.mySite}` : seoData.mySite
   })
 
-  defineOgImage({
-    url: seoData.mySite,
-    props: {
-      title: data.value.title || '',
-      description: data.value.description || '',
-      image: data.value.ogImage || data.value.image,
-    },
+  const pageDescription = computed(() =>
+    data.value.description || seoData.description,
+  )
+
+  const hreflangLinks = computed(() => generateHrefLangLinks())
+
+  // 計算完整的規範連結
+  const canonicalUrl = computed(() => {
+    const baseUrl = config.public.siteUrl || seoData.mySite
+    return `${baseUrl}${route.path}`
   })
+
+  // SEO 元數據
+  useSeoMeta({
+    title: pageTitle.value,
+    description: pageDescription,
+    robots: data.value.noIndex ? 'noindex, nofollow' : 'index, follow',
+  })
+
+  // OG 圖片
+  if (!data.value.noIndex) {
+    defineOgImage({
+      url: seoData.mySite,
+      renderer: 'chromium',
+      props: {
+        title: pageTitle.value,
+        description: pageDescription.value,
+        siteName: seoData.mySite,
+      },
+    })
+  }
 
   useHead({
+    htmlAttrs: {
+      lang: locale.value,
+    },
     link: [
       {
         rel: 'canonical',
-        href: `${seoData.mySite}${useRoute().path}`,
+        href: canonicalUrl.value,
       },
-      {
-        rel: 'alternate',
-        hreflang: 'en-US',
-        href: `${seoData.mySite}/en${useRoute().path}`,
-      },
-      {
-        rel: 'alternate',
-        hreflang: 'zh-TW',
-        href: `${seoData.mySite}/zh${useRoute().path}`,
-      },
+      ...hreflangLinks.value,
     ],
   })
+
+  return {
+    pageTitle,
+    pageDescription,
+    canonicalUrl,
+  }
 }
