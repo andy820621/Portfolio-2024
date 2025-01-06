@@ -26,6 +26,8 @@ usePageSeo({
   description: t('blogsPage.description'),
 })
 
+const baseUrl = useRuntimeConfig().public.i18n.baseUrl
+
 useSchemaOrg([
   defineWebPage({
     name: '部落格文章列表',
@@ -39,7 +41,7 @@ useSchemaOrg([
       'item': {
         '@type': 'BlogPosting',
         'headline': post.title,
-        'url': `https://barz.app${post.path}`,
+        'url': `${baseUrl}${post.path}`,
         'datePublished': post.date,
       },
     })),

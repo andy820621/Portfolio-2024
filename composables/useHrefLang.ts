@@ -1,3 +1,5 @@
+import { seoData } from '~/data'
+
 const LOCALE_MAPPING = {
   'en': {
     hreflang: 'en-US',
@@ -13,6 +15,7 @@ export function useHrefLang() {
   const { locales } = useI18n()
   const route = useRoute()
   const config = useRuntimeConfig()
+  const baseUrl = config.public.i18n.baseUrl
 
   const generateHrefLangLinks = () => {
     const links = []
@@ -21,7 +24,7 @@ export function useHrefLang() {
     links.push({
       rel: 'alternate',
       hreflang: 'x-default',
-      href: `${config.public.siteUrl}${route.path}`,
+      href: `${baseUrl}${route.path}`,
     })
 
     locales.value.forEach((loc) => {
@@ -32,20 +35,20 @@ export function useHrefLang() {
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
-            href: `${config.public.siteUrl}${route.path}`,
+            href: `${baseUrl}${route.path}`,
           })
 
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
-            href: `${config.public.siteUrl}/en${route.path}`,
+            href: `${baseUrl}/en${route.path}`,
           })
         }
         else {
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
-            href: `${config.public.siteUrl}${localeConfig.path}${route.path}`,
+            href: `${baseUrl}${localeConfig.path}${route.path}`,
           })
         }
       }

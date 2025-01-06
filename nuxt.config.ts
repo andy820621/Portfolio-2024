@@ -89,7 +89,7 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: seoData.mySite,
+    url: process.env.I18N_BASE_URL,
     name: navbarData.homeTitle,
     identity: {
       type: 'Person',
@@ -111,7 +111,7 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
       name: navbarData.homeTitle,
-      url: seoData.mySite,
+      url: process.env.I18N_BASE_URL,
       // image: '/profile-photo.jpg',
       description: seoData.description,
       email: 'andy820621@gmail.com',
@@ -179,6 +179,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     // compressPublicAssets: true,
+    debug: process.env.NODE_ENV !== 'production',
     prerender: {
       // failOnError: false, // 防止 404 錯誤中斷建置
       crawlLinks: true,
@@ -192,6 +193,7 @@ export default defineNuxtConfig({
         // '/projects',
         // '/sitemap.xml',
       ],
+      ignore: ['/api/_content'],
     },
     future: {
       nativeSWR: true,

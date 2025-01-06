@@ -17,7 +17,7 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
   // 計算完整的頁面標題
   const pageTitle = computed(() => {
     const title = data.value.title
-    return title ? `${title} | ${seoData.mySite}` : seoData.mySite
+    return title ? `${title} | BarZ Hsieh` : seoData.mySite
   })
 
   const pageDescription = computed(() =>
@@ -27,10 +27,8 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
   const hreflangLinks = computed(() => generateHrefLangLinks())
 
   // 計算完整的規範連結
-  const canonicalUrl = computed(() => {
-    const baseUrl = config.public.siteUrl || seoData.mySite
-    return `${baseUrl}${route.path}`
-  })
+  const baseUrl = config.public.i18n.baseUrl || seoData.mySite
+  const canonicalUrl = computed(() => `${baseUrl}${route.path}`)
 
   // SEO 元數據
   useSeoMeta({
@@ -42,12 +40,12 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
   // OG 圖片
   if (!data.value.noIndex) {
     defineOgImage({
-      url: seoData.mySite,
+      url: baseUrl,
       renderer: 'chromium',
       props: {
         title: pageTitle.value,
         description: pageDescription.value,
-        siteName: seoData.mySite,
+        siteName: baseUrl,
       },
     })
   }
