@@ -193,7 +193,7 @@ export default defineNuxtConfig({
         // '/projects',
         // '/sitemap.xml',
       ],
-      ignore: ['/api/_content'],
+      // ignore: ['/api/_content'],
     },
     future: {
       nativeSWR: true,
@@ -286,6 +286,13 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         staleMaxAge: 86400,
       },
     },
+    '/**': {
+      prerender: true,
+      cache: {
+        maxAge: 3600,
+        staleMaxAge: 86400,
+      },
+    },
     '/posts': { prerender: true, isr: 3600 },
     '/posts/**': {
       prerender: true,
@@ -319,9 +326,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       rules[`${prefix}${path}`] = { ...rule }
     })
   })
-
-  // 動態路由
-  rules['/**'] = { swr: true }
 
   return rules
 }
