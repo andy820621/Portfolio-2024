@@ -193,7 +193,7 @@ export default defineNuxtConfig({
         // '/projects',
         // '/sitemap.xml',
       ],
-      // ignore: ['/api/_content'],
+      ignore: ['/api/_content'],
     },
     future: {
       nativeSWR: true,
