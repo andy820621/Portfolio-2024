@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { seoData } from '~/data'
-
 definePageMeta({
   documentDriven: {
     page: false, // Keep page fetching enabled

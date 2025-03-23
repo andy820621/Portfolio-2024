@@ -1,5 +1,3 @@
-import { seoData } from '~/data'
-
 const LOCALE_MAPPING = {
   'en': {
     hreflang: 'en-US',
