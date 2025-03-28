@@ -15,13 +15,15 @@ const {
 </script>
 
 <template>
-  <VTooltip class="w-fit h-fit">
-    <NuxtLink :to="to" :title="tooltipContent" class="border-b-none! flex items-center" target="_blank">
-      <Icon :name="icon" :class="iconClass" :size="size" />
-    </NuxtLink>
+  <ClientOnly>
+    <VTooltip class="w-fit h-fit">
+      <NuxtLink :to="to" :title="tooltipContent" class="border-b-none! flex items-center" target="_blank">
+        <Icon :name="icon" :class="iconClass" :size="size" />
+      </NuxtLink>
 
-    <template #popper>
-      {{ tooltipContent }}
-    </template>
-  </VTooltip>
+      <template #popper>
+        {{ tooltipContent }}
+      </template>
+    </VTooltip>
+  </ClientOnly>
 </template>

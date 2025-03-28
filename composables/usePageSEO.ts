@@ -14,19 +14,15 @@ interface PageSeoOptions {
 
 export function usePageSeo(options: PageSeoOptions = {}) {
   const route = useRoute()
-  const { t, locale } = useI18n()
+  const { locale } = useI18n()
   const config = useRuntimeConfig()
   const { generateHrefLangLinks } = useHrefLang()
 
   // 計算完整的頁面標題
-  const pageTitle = computed(() => {
-    const title = options.title || t(`pages.${String(route.name)}.title`, '')
-    return title ? `${title} | BarZ Hsieh` : seoData.mySite
-  })
+  const pageTitle = computed(() => options.title || seoData.mySite)
 
   const pageDescription = computed(() =>
     options.description
-    || t(`pages.${String(route.name)}.description`, '')
     || seoData.description,
   )
 

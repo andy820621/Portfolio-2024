@@ -1,12 +1,8 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: {
-    page: false, // Keep page fetching enabled
-    surround: false, // Disable surround fetching
-  },
-})
-
 const { t } = useI18n()
+
+// eslint-disable-next-line no-console
+console.log('now in [...slug].vue page.')
 
 // SEO 配置
 usePageSeo({

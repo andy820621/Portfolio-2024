@@ -1,11 +1,6 @@
 <script setup lang="ts">
-// definePageMeta({
-//   documentDriven: {
-//     page: false, // Keep page fetching enabled
-//     surround: false, // Disable surround fetching
-//   },
-// })
-//
+import type { Collections } from '@nuxt/content'
+
 const { t, locale } = useI18n()
 
 // 使用 useAsyncData 獲取內容
@@ -13,12 +8,21 @@ const { data: content, error } = await useAsyncData(
   `content-${locale.value}`,
   async () => {
     try {
-      return await queryContent('/about').locale(locale.value).findOne()
+      const collection = (`content_${locale.value}`) as keyof Collections
+
+      const result = await queryCollection(collection)
+        .path('/about')
+        .first()
+
+      return result
     }
     catch (e) {
       console.error('Error fetching content:', e)
       return null
     }
+  },
+  {
+    watch: [locale], // 當語言變更時重新獲取資料
   },
 )
 
@@ -33,7 +37,7 @@ const pageTitle = computed(() => t('home'))
 
 usePageSeo({
   title: pageTitle.value || 'home',
-  description: content.value?.description || t('home.description'),
+  description: content.value?.description || t('homePage.description') || '',
 })
 </script>
 

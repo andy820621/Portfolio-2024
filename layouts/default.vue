@@ -2,9 +2,9 @@
 import { navbarData } from '~/data'
 
 const localeHead = useLocaleHead({
-  addDirAttribute: true,
-  identifierAttribute: 'id',
-  addSeoAttributes: true,
+  dir: true, // old: addDirAttributes
+  key: 'id', // old: identifierAttribute
+  seo: true, // old: addSeoAttributes
 })
 
 const { t } = useI18n()
@@ -14,7 +14,11 @@ useHead({
     lang: localeHead.value.htmlAttrs.lang,
     dir: localeHead.value.htmlAttrs.dir,
   },
-  titleTemplate: title => `${t(title) ?? title} - ${navbarData.homeTitle}`,
+  titleTemplate: (title) => {
+  // 如果 title 是一個有效的翻譯鍵，則翻譯它，否則直接使用
+    const translatedTitle = title && typeof title === 'string' && t(title) !== title ? t(title) : title
+    return `${translatedTitle} - ${navbarData.homeTitle}`
+  },
   link: [...(localeHead.value.link || [])],
   meta: [...(localeHead.value.meta || [])],
   // options: {

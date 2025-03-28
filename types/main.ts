@@ -1,11 +1,9 @@
-import type { ParsedContent } from '@nuxt/content'
+import type { CollectionItemBase, PageCollectionItemBase } from '@nuxt/content'
 
 export type DateLike = Date | number | string | undefined
 
-export interface BlogPost extends ParsedContent {
-  title: string
+export interface BlogPost extends PageCollectionItemBase {
   date: string
-  description: string
   image: string
   alt: string
   ogImage: string
@@ -13,6 +11,20 @@ export interface BlogPost extends ParsedContent {
   published: boolean
   readingTime?: ComputedRef<string> | string
   wordCount?: number
+}
+
+// 擴展 CollectionItemBase 來創建我們需要的 DemoContent 類型
+export interface DemoContent extends CollectionItemBase {
+  file?: string
+  path?: string
+  tags?: string[]
+  thumbnailType?: string
+  draft?: boolean
+  updatedAt?: string
+  link?: string
+  github?: string
+  codepen?: string
+  [key: string]: any
 }
 
 export interface FormattedPost {

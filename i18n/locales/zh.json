@@ -9,6 +9,11 @@
   "backToPostsList": "返回文章列表",
   "words": "字",
   "min": "分",
+  "homePage": {
+    "title": "首頁",
+    "description": "這裡是 BarZ Hsieh 的個人網站，主要是分享前端相關的知識與技術。",
+    "noResultDescription": "我們找不到與您現在的搜尋的頁面，請重新搜尋。"
+  },
   "blogsPage": {
     "title": "My Blog",
     "description": "這裡的文章主要會是跟前端開發相關的，但偶爾也會分享一些我自己的小故事與想法。",
@@ -45,5 +50,6 @@
   "no results found": "沒有找到相應的結果",
   "read more": "閱讀更多",
   "collapse": "收起",
-  "404": "404"
+  "404": "404",
+  "404 - Page Not Found | BarZ Hsieh": "404 找不到正確頁面 | BarZ Hsieh"
 }

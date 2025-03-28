@@ -1,9 +1,21 @@
 <script setup lang="ts">
+// import { seoData } from './data'
 import './assets//variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets//main.scss'
 import './assets//markdown.css'
 import './assets//prose.css'
+
+// const config = useRuntimeConfig()
+// defineOgImage({
+//   url: config.public.i18n.baseUrl || seoData.mySite,
+//   renderer: 'chromium',
+//   props: {
+//     title: seoData.mySite,
+//     description: seoData.description,
+//     siteName: config.public.i18n.baseUrl || seoData.mySite,
+//   },
+// })
 
 useSchemaOrg([
   defineWebPage({

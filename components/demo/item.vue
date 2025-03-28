@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
+import type { DemoContent } from '~/types/main'
 
 const { content, baseName, thumbnailType, title } = defineProps<{
-  content: ParsedContent
+  content: DemoContent
   baseName: string
   thumbnailType: string
   title: string
 }>()
+
+// console.log({ thumbnail: `/demos/thumbnail/${baseName}.${thumbnailType}` })
 
 const updateDate = computed(() => content.updatedAt ? useFormatDate(content.updatedAt, false) : '')
 
@@ -18,9 +20,9 @@ const linkConfig = {
 
 const contentLinks = computed(() =>
   Object.entries(linkConfig)
-    .filter(([key]) => content[key])
+    .filter(([key]) => content[key as keyof typeof content])
     .map(([key, { name, icon }]) => ({
-      href: content[key],
+      href: content[key as keyof typeof content] as string,
       name,
       icon,
     })),

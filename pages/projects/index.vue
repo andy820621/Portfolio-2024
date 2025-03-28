@@ -1,11 +1,5 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: {
-    page: false, // Keep page fetching enabled
-    surround: false, // Disable surround fetching
-  },
-})
-const { t, localePath, formattedData } = await useContentDatas('project')
+const { t, localePath, formattedData } = await useContentDatas('projects')
 
 const { searchText, selectedTags, filteredData, allTags, clearFilters } = useContentListsFilter(formattedData)
 

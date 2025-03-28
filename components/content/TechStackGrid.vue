@@ -3,7 +3,7 @@
     <p flex="~ gap-3 wrap" class="mt-3! mb-2!">
       <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/HTML" icon="vscode-icons:file-type-html" tooltip-content="HTML" />
       <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/CSS" icon="vscode-icons:file-type-css" tooltip-content="CSS" />
-      <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript" icon="skill-icons:javascript" ooltip-content="JavaScript" />
+      <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript" icon="skill-icons:javascript" tooltip-content="JavaScript" />
       <LinkWithTooltip to="https://www.typescriptlang.org/" icon="logos:typescript-icon" tooltip-content="TypeScript" />
       <LinkWithTooltip to="https://sass-lang.com/" icon="logos:sass" tooltip-content="Sass" />
       <LinkWithTooltip to="https://tailwindcss.com/" icon="logos:tailwindcss-icon" tooltip-content="Tailwind CSS" />

@@ -13,8 +13,8 @@ defineProps({
       {{ label }}
     </span>
     <div class="px-6 py-3">
-      <!-- <slot /> -->
-      <ContentSlot :use="$slots.default" unwrap="span" />
+      <!-- <ContentSlot :use="$slots.default" unwrap="span" /> -->
+      <slot mdc-unwrap="span" />
     </div>
   </div>
 </template>

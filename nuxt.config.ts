@@ -4,32 +4,33 @@ import type { NitroConfig } from 'nitropack'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
-const locales = [
+type SupportedLocale = 'en' | 'zh'
+
+// 使用明確類型定義 locales
+const locales: LocaleObject<SupportedLocale>[] = [
   { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
   { code: 'zh', language: 'zh-TW', name: 'Chinese', file: 'zh.json' },
 ]
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [
-    '@pinia/nuxt',
     '@vueuse/nuxt',
-    '@nuxt/image',
-    '@nuxtjs/color-mode',
-    '@nuxtjs/fontaine',
     '@unocss/nuxt',
-    'floating-vue/nuxt',
-    '@nuxt/icon',
-    '@nuxt/content',
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
-    'nuxt-og-image',
-    '@formkit/auto-animate',
-    '@stefanobartoletti/nuxt-social-share',
+    '@nuxt/content',
     '@nuxtjs/i18n',
+    'floating-vue/nuxt',
+    '@nuxt/icon',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/fontaine',
+    '@formkit/auto-animate',
     'nuxt-swiper',
+    '@stefanobartoletti/nuxt-social-share',
+    'nuxt-og-image',
+    '@nuxt/image',
     'nuxt-schema-org',
     'nuxt-link-checker',
   ],
@@ -64,8 +65,15 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
+  site: {
+    url: process.env.I18N_BASE_URL,
+    name: navbarData.homeTitle,
+    identity: {
+      type: 'Person',
+    },
+    twitter: seoData.twitterHandle,
+  },
   sitemap: {
-    strictNuxtContentPaths: true,
     sources: [
       '/api/__sitemap__/posts',
       '/api/__sitemap__/gallery',
@@ -87,14 +95,6 @@ export default defineNuxtConfig({
       defaultLocale: 'en',
       strategy: 'prefix_and_default',
     },
-  },
-  site: {
-    url: process.env.I18N_BASE_URL,
-    name: navbarData.homeTitle,
-    identity: {
-      type: 'Person',
-    },
-    twitter: seoData.twitterHandle,
   },
   robots: {
     allow: ['/', '/en/', '/zh/', '/api/__sitemap__/'],
@@ -133,40 +133,30 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    locales: ['en', 'zh'],
-    defaultLocale: 'en',
-    documentDriven: {
-      injectPage: false,
-    },
-    experimental: {
-      // clientDB: true,
-      search: {},
-    },
-    highlight: {
-      theme: {
-        default: 'vitesse-light',
-        dark: 'vitesse-dark',
-        sepia: 'monokai',
-      },
-    },
-    markdown: {
-      rehypePlugins: [
-        [
-          'rehype-external-links',
-          {
+    build: {
+      markdown: {
+        toc: {
+          depth: 3, // include h3 headings
+        },
+        rehypePlugins: {
+          'rehype-external-links': {
             target: '_blank',
             rel: ['nofollow', 'noopener', 'noreferrer'],
           },
-        ],
-      ],
+        },
+        highlight: {
+          theme: {
+            default: 'vitesse-light',
+            dark: 'vitesse-dark',
+            sepia: 'monokai',
+          },
+        },
+      },
     },
   },
-  // TODO: Try to think of if use Nuxt I18n Micro is better (https://s00d.github.io/nuxt-i18n-micro/)
   i18n: {
     baseUrl: process.env.I18N_BASE_URL,
-    vueI18n: './i18n.config.ts',
     locales,
-    langDir: 'langs',
     strategy: 'prefix_and_default',
     defaultLocale: 'en',
     detectBrowserLanguage: {
@@ -175,34 +165,9 @@ export default defineNuxtConfig({
       redirectOn: 'root', // recommended
       fallbackLocale: 'en',
     },
-    // lazy: true,
-  },
-  nitro: {
-    // compressPublicAssets: true,
-    debug: process.env.NODE_ENV !== 'production',
-    prerender: {
-      // failOnError: false, // 防止 404 錯誤中斷建置
-      crawlLinks: true,
-      routes: [
-        '/',
-        // '/en',
-        // '/zh',
-        // '/gallery',
-        // '/demos',
-        // '/posts',
-        // '/projects',
-        // '/sitemap.xml',
-      ],
-      ignore: ['/api/_content'],
+    bundle: {
+      optimizeTranslationDirective: false,
     },
-    future: {
-      nativeSWR: true,
-    },
-  },
-  colorMode: {
-    classSuffix: '',
-    // preference: 'dark',
-    // fallback: 'light',
   },
   unocss: {
     nuxtLayers: true,
@@ -222,8 +187,13 @@ export default defineNuxtConfig({
     //   },
     // ],
   },
+  colorMode: {
+    classSuffix: '',
+    // preference: 'dark',
+    // fallback: 'light',
+  },
   build: {
-    transpile: ['shiki', 'fsevents', 'globby'],
+    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
   },
   vite: {
     define: {
@@ -266,6 +236,28 @@ export default defineNuxtConfig({
       },
     },
   },
+  nitro: {
+    // compressPublicAssets: true,
+    debug: process.env.NODE_ENV !== 'production',
+    prerender: {
+      // failOnError: false, // 防止 404 錯誤中斷建置
+      crawlLinks: true,
+      routes: [
+        '/',
+        // '/en',
+        // '/zh',
+        // '/gallery',
+        // '/demos',
+        // '/posts',
+        // '/projects',
+        // '/sitemap.xml',
+      ],
+      ignore: ['/api/_content'],
+    },
+    future: {
+      nativeSWR: true,
+    },
+  },
 })
 
 type RouteRules = NitroConfig['routeRules']
@@ -281,40 +273,30 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   const defaultRules: RouteRules = {
     '/': {
       prerender: true,
-      cache: {
-        maxAge: 3600,
-        staleMaxAge: 86400,
-      },
+      // TODO: 檢查為什麼加了 cache 會有問題
+      // cache: {
+      //   maxAge: 3600,
+      //   staleMaxAge: 86400,
+      // },
     },
     '/**': {
       prerender: true,
-      cache: {
-        maxAge: 3600,
-        staleMaxAge: 86400,
-      },
+      //   maxAge: 3600,
+      //   staleMaxAge: 86400,
+      // },
     },
-    '/posts': { prerender: true, isr: 3600 },
-    '/posts/**': {
-      prerender: true,
-      cache: {
-        maxAge: 7200,
-      },
-    },
-    '/demos': { prerender: true, isr: 86400 },
-    '/gallery': { prerender: true, isr: 21600 },
+    '/posts': { prerender: true },
+    '/posts/**': { prerender: true },
+    '/demos': { prerender: true },
+    '/gallery': { isr: 21600 },
     '/gallery/**': {
-      prerender: true,
+      isr: 21600,
       cache: {
         maxAge: 21600,
       },
     },
-    '/projects': { prerender: true, isr: 21600 },
-    '/projects/**': {
-      prerender: true,
-      cache: {
-        maxAge: 21600,
-      },
-    },
+    '/projects': { isr: 21600 },
+    '/projects/**': { isr: 21600 },
   }
 
   Object.assign(rules, defaultRules)

@@ -1,3 +1,4 @@
+import type { Collections } from '@nuxt/content'
 import type { BlogPost } from '~/types/main'
 
 interface UsePostDataOptions {
@@ -6,40 +7,48 @@ interface UsePostDataOptions {
 }
 
 export async function useContentData({ basePageName, paramName }: UsePostDataOptions) {
-  const { path, params } = useRoute()
+  const route = useRoute()
   const { locale } = useI18n()
 
-  const contentPath = params[paramName]
-  const truePath = `/${basePageName}/${contentPath}`
+  // 從路由參數中獲取內容路徑
+  const contentPath = route.params[paramName]
 
-  const { data: contentData, error } = await useAsyncData(`${paramName}-${path}`, async () => {
-    try {
-      const result = await Promise.all([
-        queryContent<BlogPost>('/').where({ _locale: locale.value, _path: truePath }).findOne(),
-        queryContent<BlogPost>(basePageName)
-          .locale(locale.value)
-          .where({
-            navigation: { $ne: false },
-            draft: { $ne: true },
-          })
-          .only(['_path', 'title', 'description'])
-          .sort({ date: -1 })
-          .findSurround(truePath),
-      ])
+  // 根據當前語言和基礎頁面名稱選擇正確的集合
+  const collection = (`${basePageName}_${locale.value}`) as keyof Collections
 
-      if (!result[0])
-        throw new Error('No data found')
+  // 構建完整路徑
+  // 注意：在新的集合結構中，路徑格式可能會有所不同
+  const fullPath = `/${locale.value}/${basePageName}/${contentPath}`
 
-      return result
-    }
-    catch (error) {
-      console.error('Error fetching data:', error)
-      return null
-    }
-  })
+  const { data: contentData, error } = await useAsyncData(
+    `${paramName}-${route.path}`,
+    async () => {
+      try {
+        // 嘗試獲取主要內容
+        const content = await queryCollection(collection).path(fullPath).first()
+
+        if (!content)
+          throw new Error(`No content found for ${fullPath}.`)
+
+        // 獲取周圍內容
+        const surroundContent = await queryCollectionItemSurroundings(collection, fullPath, {
+          fields: ['title', 'description', 'path', 'date'],
+        }).order('date', 'DESC')
+
+        return [content, surroundContent]
+      }
+      catch (error) {
+        console.error('Error fetching content data:', error)
+        return null
+      }
+    },
+    {
+      watch: [locale],
+    },
+  )
 
   return {
-    contentData,
+    contentData: contentData as unknown as [BlogPost, any] | null,
     error,
   }
 }

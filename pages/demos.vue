@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
+import type { Collections } from '@nuxt/content'
+import type { DemoContent } from '~/types/main'
 import { breakpointsTailwind } from '@vueuse/core'
 
 const { t } = useI18n()
 const { locale } = useI18n()
 
-definePageMeta({
-  documentDriven: {
-    page: false,
-    surround: false,
-  },
-})
+// 定義轉換後的 Demo 項目類型
+interface DemoItem {
+  baseName: string
+  content: DemoContent
+  title: string
+  tags: string[]
+  thumbnailType: string
+}
 
 // SEO 優化
 usePageSeo({
@@ -30,42 +33,50 @@ function formatTitle(fileName: string): string {
 }
 
 // 查詢 Demos 的邏輯
-const { data: demoItems } = await useAsyncData(`demos-${locale.value}`, async () => {
-  const docs = await queryContent('demos')
-    .locale(locale.value)
-    .where({ draft: { $ne: true } })
-    .find()
+const { data: demoItems } = await useAsyncData<DemoItem[]>(`demos-${locale.value}`, async () => {
+  const collection = `demos_${locale.value}` as keyof Collections
+
+  const docsQuery = await queryCollection(collection)
+    // .where('published', '<>', false)
+    .all()
     .then(sortDemos)
 
-  return docs.map(transformDemoItem)
+  return docsQuery.map(transformDemoItem)
+}, {
+  watch: [locale],
 })
 
 // 排序 Demos 的獨立函數
-function sortDemos(docs: ParsedContent[]): ParsedContent[] {
+// 排序 Demos 的獨立函數
+function sortDemos<T extends DemoContent>(docs: T[]): T[] {
   return docs.sort((a, b) => {
-    const getNumber = (item: ParsedContent): number => {
-      if (typeof item._file === 'string') {
-        const fileName = item._file.split('/').pop() || ''
-        const numberPart = fileName.split('.')[0]
-        return Number.parseInt(numberPart) || 0
+    const getNumber = (item: DemoContent): number => {
+      // 從 stem 屬性中提取數字
+      if (typeof item.stem === 'string') {
+        // 從路徑中提取檔案名稱部分
+        const fileName = item.stem.split('/').pop() || ''
+        // 提取檔案名稱中的數字部分
+        const match = fileName.match(/^(\d+)\./)
+        return match ? Number.parseInt(match[1]) : 0
       }
       return 0
     }
 
-    return getNumber(b) - getNumber(a) // 降序
+    // 降序排列（數字大的在前）
+    return getNumber(b) - getNumber(a)
   })
 }
 
 // 轉換 Demo 項目的獨立函數
-function transformDemoItem(doc: ParsedContent) {
-  const fullFileName = doc._file!.split('/').pop() || ''
-  const parts = fullFileName.split('.')
-  const baseName = parts.length > 2 ? parts[1] : parts[0]
+function transformDemoItem<T extends DemoContent>(doc: T): DemoItem {
+  const stemPath = doc.stem || ''
+  const fileName = stemPath.split('/').pop() || ''
+  const baseName = fileName.replace(/^\d+\./, '').toLowerCase()
 
   return {
     baseName,
     content: doc,
-    title: formatTitle(fullFileName),
+    title: doc.title || formatTitle(fileName),
     tags: doc.tags || [],
     thumbnailType: doc.thumbnailType || 'img',
   }
@@ -80,21 +91,21 @@ const allTags = computed(() => {
     return []
   const tagSet = new Set<string>()
   demoItems.value.forEach((item) => {
-    if (item.content.tags) {
-      item.content.tags.forEach((tag: string) => tagSet.add(tag))
+    if (item.tags && item.tags.length) {
+      item.tags.forEach(tag => tagSet.add(tag))
     }
   })
   return Array.from(tagSet)
 })
 
-const debouncedFilteredDemoItems = ref(demoItems.value || [])
+const debouncedFilteredDemoItems = ref<DemoItem[]>(demoItems.value || [])
 
 const updateFilteredItems = useDebounceFn(() => {
   debouncedFilteredDemoItems.value = (demoItems.value || []).filter((item) => {
     const lowerTitle = item.title.toLocaleLowerCase()
     const titleMatch = lowerTitle.includes(searchText.value.toLocaleLowerCase())
     const tagMatch = selectedTags.value.length === 0
-      || selectedTags.value.every(tag => item.tags.includes(tag))
+      || (item.tags && selectedTags.value.every(tag => item.tags.includes(tag)))
     return titleMatch && tagMatch
   })
 }, 400)

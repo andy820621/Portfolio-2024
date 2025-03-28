@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content'
+import type { CollectionItemBase } from '@nuxt/content'
 
-type Article = Pick<ParsedContent, '_path' | 'title' | 'description'>
+interface ArticleBase extends CollectionItemBase {
+  title?: string
+  description?: string
+  path?: string
+}
 
 defineProps<{
-  prev: Article | undefined
-  next: Article | undefined
+  prev: ArticleBase | undefined
+  next: ArticleBase | undefined
 }>()
 
 const localePath = useLocalePath()
@@ -15,7 +19,7 @@ const localePath = useLocalePath()
   <ul mt4 py2 grid="~ cols-[1fr_1fr] gap-4">
     <li>
       <div
-        v-if="prev"
+        v-if="prev && prev.path"
         flex="~ col"
         class="flex-1 p4"
         border="~ base rounded-lg hover:primary"
@@ -29,13 +33,13 @@ const localePath = useLocalePath()
           {{ prev.description }}
           <slot />
         </div>
-        <NuxtLink :to="localePath(prev._path!)" class="absolute inset-0" />
+        <NuxtLink :to="localePath(prev.path)" class="absolute inset-0" />
       </div>
     </li>
 
     <li>
       <div
-        v-if="next"
+        v-if="next && next.path"
         flex="~ col"
         class="flex-1 p4"
         border="~ base rounded-lg hover:primary"
@@ -49,7 +53,7 @@ const localePath = useLocalePath()
           {{ next.description }}
           <slot />
         </div>
-        <NuxtLink :to="localePath(next._path!)" class="absolute inset-0" />
+        <NuxtLink :to="localePath(next.path)" class="absolute inset-0" />
       </div>
     </li>
   </ul>

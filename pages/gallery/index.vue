@@ -4,13 +4,6 @@ import { galleryGroups } from '~/data/galleryData'
 
 const { t } = useI18n()
 
-definePageMeta({
-  documentDriven: {
-    page: false,
-    surround: false,
-  },
-})
-
 // 搜索文本和選中的標籤
 const searchText = ref('')
 const selectedTags = ref<string[]>([])
