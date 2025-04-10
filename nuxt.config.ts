@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
     },
-    twitter: seoData.twitterHandle,
+    twitter: seoData.twitterLink,
   },
   sitemap: {
     sources: [
@@ -122,6 +122,11 @@ export default defineNuxtConfig({
       ],
       inLanguage: ['en', 'en-US', 'zh-TW'],
     },
+  },
+  ogImage: {
+    fonts: [
+      'Noto+Sans+SC:400',
+    ],
   },
   image: {
     format: ['webp', 'gif', 'jpg', 'png'],

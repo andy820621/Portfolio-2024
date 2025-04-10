@@ -19,7 +19,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   const { generateHrefLangLinks } = useHrefLang()
 
   // 計算完整的頁面標題
-  const pageTitle = computed(() => options.title || seoData.mySite)
+  const pageTitle = computed(() => options.title || seoData.ogTitle)
 
   const pageDescription = computed(() =>
     options.description
@@ -41,14 +41,13 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // OG 圖片
   if (!options.noIndex) {
-    defineOgImage({
-      url: baseUrl,
-      renderer: 'chromium',
-      props: {
-        title: pageTitle.value,
-        description: pageDescription.value,
-        siteName: baseUrl,
-      },
+    defineOgImageComponent('Nuxt', {
+      url: config.public.i18n.baseUrl || seoData.mySite,
+      headline: seoData.ogHeadline,
+      title: pageTitle.value,
+      description: pageDescription.value,
+      siteName: baseUrl,
+      siteLogo: seoData.icon,
     })
   }
 

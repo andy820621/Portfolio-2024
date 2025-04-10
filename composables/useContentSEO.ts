@@ -17,7 +17,7 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
   // 計算完整的頁面標題
   const pageTitle = computed(() => {
     const title = data.value.title
-    return title ? `${title} | BarZ Hsieh` : seoData.mySite
+    return title ? `${title} | BarZ Hsieh` : seoData.ogTitle
   })
 
   const pageDescription = computed(() =>
@@ -39,14 +39,12 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
 
   // OG 圖片
   if (!data.value.noIndex) {
-    defineOgImage({
-      url: baseUrl,
-      renderer: 'chromium',
-      props: {
-        title: pageTitle.value,
-        description: pageDescription.value,
-        siteName: baseUrl,
-      },
+    defineOgImageComponent('Nuxt', {
+      url: config.public.i18n.baseUrl || seoData.mySite,
+      headline: seoData.ogHeadline,
+      title: pageTitle.value,
+      description: pageDescription.value,
+      siteName: baseUrl,
     })
   }
 

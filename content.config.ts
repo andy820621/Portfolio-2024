@@ -1,5 +1,6 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 import { asSeoCollection } from '@nuxtjs/seo/content'
+// import { asOgImageCollection } from 'nuxt-og-image/content'
 
 // 通用內容模式
 const commonContentSchema = z.object({
