@@ -1,20 +1,9 @@
 <script setup lang="ts">
-import { seoData } from './data'
 import './assets//variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets//main.scss'
 import './assets//markdown.css'
 import './assets//prose.css'
-
-const config = useRuntimeConfig()
-
-defineOgImageComponent('Nuxt', {
-  url: config.public.i18n.baseUrl || seoData.mySite,
-  headline: seoData.ogHeadline,
-  title: seoData.ogTitle,
-  description: seoData.description,
-  siteName: config.public.i18n.baseUrl || seoData.mySite,
-})
 
 useSchemaOrg([
   defineWebPage({

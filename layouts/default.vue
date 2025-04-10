@@ -7,7 +7,7 @@ const localeHead = useLocaleHead({
   seo: true, // old: addSeoAttributes
 })
 
-const { t } = useI18n()
+// const { t } = useI18n()
 
 useHead({
   htmlAttrs: {
@@ -16,8 +16,8 @@ useHead({
   },
   titleTemplate: (title) => {
   // 如果 title 是一個有效的翻譯鍵，則翻譯它，否則直接使用
-    const translatedTitle = title && typeof title === 'string' && t(title) !== title ? t(title) : title
-    return `${translatedTitle} - ${navbarData.homeTitle}`
+    // const translatedTitle = title && typeof title === 'string' && t(title) !== title ? t(title) : title
+    return `${title} - ${navbarData.homeTitle}`
   },
   link: [...(localeHead.value.link || [])],
   meta: [...(localeHead.value.meta || [])],
