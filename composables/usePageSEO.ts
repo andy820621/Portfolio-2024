@@ -47,7 +47,6 @@ export function usePageSeo(options: PageSeoOptions = {}) {
       title: pageTitle.value,
       description: pageDescription.value,
       siteName: baseUrl,
-      siteLogo: seoData.icon,
     })
   }
 

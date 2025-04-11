@@ -1,7 +1,6 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
 import type { NitroConfig } from 'nitropack'
-import path from 'node:path'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
@@ -14,41 +13,6 @@ const locales: LocaleObject<SupportedLocale>[] = [
 ]
 
 export default defineNuxtConfig({
-  hooks: {
-    'content:file:beforeParse': (ctx) => {
-      const { file } = ctx
-
-      if (path.extname(file.path) === '.md') {
-        if (typeof file.body === 'string') {
-          // 編碼非 ASCII 字元
-          file.body = file.body.replace(/[\u4E00-\u9FA5]/g, char =>
-            encodeURIComponent(char))
-
-          // 根據語系動態處理連結
-          const currentLocale = file.path.includes('/zh/')
-            ? '/zh/'
-            : file.path.includes('/en/')
-              ? '/en/'
-              : '/'
-
-          // 確保連結以正確的根相對路徑開頭，跳過外部連結
-          file.body = file.body.replace(
-            /href="(?!\/|https?:\/\/|mailto:)([^"]*)"/g,
-            `href="${currentLocale}$1"`,
-          )
-
-          // 將大寫字母轉換為小寫
-          file.body = file.body.replace(
-            /href="([^"A-Z]*[A-Z][^"]*)"/g,
-            (match: string, p1: string) => {
-              const updated = p1.replace(/[A-Z]/g, char => char.toLowerCase())
-              return match.replace(p1, updated)
-            },
-          )
-        }
-      }
-    },
-  },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [
@@ -102,7 +66,9 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   site: {
-    url: process.env.I18N_BASE_URL,
+    url: process.env.NODE_ENV === 'production'
+      ? process.env.I18N_BASE_URL
+      : 'http://localhost:3000',
     name: navbarData.homeTitle,
     identity: {
       type: 'Person',
@@ -139,7 +105,7 @@ export default defineNuxtConfig({
       '/private',
       '/api/(?!__sitemap__/).*', // 阻擋除了 __sitemap__ 以外的所有 API 路徑
     ],
-    sitemap: 'https://barz.app/sitemap.xml',
+    sitemap: process.env.NODE_ENV === 'production' ? 'https://barz.app/sitemap.xml' : 'http://localhost:3000/sitemap.xml',
     blockAiBots: true,
   },
   schemaOrg: {
@@ -147,7 +113,9 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
       name: navbarData.homeTitle,
-      url: process.env.I18N_BASE_URL,
+      url: process.env.NODE_ENV === 'production'
+        ? process.env.I18N_BASE_URL
+        : 'http://localhost:3000',
       // image: '/profile-photo.jpg',
       description: seoData.description,
       email: 'andy820621@gmail.com',
@@ -161,11 +129,14 @@ export default defineNuxtConfig({
   },
   ogImage: {
     debug: true,
+    zeroRuntime: true,
     defaults: {
       props: {
         title: seoData.ogTitle,
         description: seoData.description,
-        url: process.env.I18N_BASE_URL,
+        url: process.env.NODE_ENV === 'production'
+          ? process.env.I18N_BASE_URL
+          : 'http://localhost:3000',
         twitterSite: seoData.twitterLink,
         siteName: seoData.ogTitle,
       },
@@ -206,7 +177,9 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    baseUrl: process.env.I18N_BASE_URL,
+    baseUrl: process.env.NODE_ENV === 'production'
+      ? process.env.I18N_BASE_URL
+      : 'http://localhost:3000',
     locales,
     strategy: 'prefix_and_default',
     defaultLocale: 'en',
