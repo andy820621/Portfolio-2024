@@ -1,7 +1,6 @@
 ---
 title: BarZ Hsieh
 description: BarZ Hsieh 的個人網站
-image: https://localhost:3000/og.png
 ---
 
 # BarZ Hsieh

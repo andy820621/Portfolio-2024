@@ -66,9 +66,7 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   site: {
-    url: process.env.NODE_ENV === 'production'
-      ? process.env.I18N_BASE_URL
-      : 'http://localhost:3000',
+    url: process.env.I18N_BASE_URL,
     name: navbarData.homeTitle,
     identity: {
       type: 'Person',
@@ -105,7 +103,7 @@ export default defineNuxtConfig({
       '/private',
       '/api/(?!__sitemap__/).*', // 阻擋除了 __sitemap__ 以外的所有 API 路徑
     ],
-    sitemap: process.env.NODE_ENV === 'production' ? 'https://barz.app/sitemap.xml' : 'http://localhost:3000/sitemap.xml',
+    sitemap: process.env.I18N_BASE_URL,
     blockAiBots: true,
   },
   schemaOrg: {
@@ -113,9 +111,7 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
       name: navbarData.homeTitle,
-      url: process.env.NODE_ENV === 'production'
-        ? process.env.I18N_BASE_URL
-        : 'http://localhost:3000',
+      url: process.env.I18N_BASE_URL,
       // image: '/profile-photo.jpg',
       description: seoData.description,
       email: 'andy820621@gmail.com',
@@ -134,9 +130,7 @@ export default defineNuxtConfig({
       props: {
         title: seoData.ogTitle,
         description: seoData.description,
-        url: process.env.NODE_ENV === 'production'
-          ? process.env.I18N_BASE_URL
-          : 'http://localhost:3000',
+        url: process.env.I18N_BASE_URL,
         twitterSite: seoData.twitterLink,
         siteName: seoData.ogTitle,
       },
@@ -177,9 +171,7 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    baseUrl: process.env.NODE_ENV === 'production'
-      ? process.env.I18N_BASE_URL
-      : 'http://localhost:3000',
+    baseUrl: process.env.I18N_BASE_URL,
     locales,
     strategy: 'prefix_and_default',
     defaultLocale: 'en',

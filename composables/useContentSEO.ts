@@ -39,7 +39,7 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
 
   // OG 圖片
   if (!data.value.noIndex) {
-    defineOgImageComponent('Nuxt', {
+    defineOgImageComponent('Pergel', {
       url: config.public.i18n.baseUrl || seoData.mySite,
       headline: seoData.ogHeadline,
       title: pageTitle.value,

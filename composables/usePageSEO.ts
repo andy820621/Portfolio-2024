@@ -39,9 +39,9 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     robots: options.noIndex ? 'noindex, nofollow' : 'index, follow',
   })
 
-  // 確保 OG 圖片僅在伺服器端生成
+  // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex) {
-    defineOgImageComponent('Nuxt', {
+    defineOgImageComponent('Pergel', {
       url: config.public.i18n.baseUrl || seoData.mySite,
       headline: seoData.ogHeadline,
       title: pageTitle.value,

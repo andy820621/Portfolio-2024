@@ -1,7 +1,6 @@
 ---
 title: BarZ Hsieh
 description: BarZ Hsieh's Portfolio
-image: https://localhost:3000/og.png
 ---
 
 # BarZ Hsieh
