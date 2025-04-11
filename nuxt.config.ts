@@ -125,7 +125,6 @@ export default defineNuxtConfig({
   },
   ogImage: {
     debug: true,
-    zeroRuntime: true,
     defaults: {
       props: {
         title: seoData.ogTitle,
