@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { Locale } from 'vue-i18n'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 
 const { locale, locales, setLocale } = useI18n()
 
-function handleLocaleChange(newLocale: string) {
+function handleLocaleChange(newLocale: Locale) {
   setLocale(newLocale)
 }
 </script>

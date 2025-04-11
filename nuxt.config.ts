@@ -124,6 +124,16 @@ export default defineNuxtConfig({
     },
   },
   ogImage: {
+    debug: true,
+    defaults: {
+      props: {
+        title: seoData.ogTitle,
+        description: seoData.description,
+        url: process.env.I18N_BASE_URL,
+        twitterSite: seoData.twitterLink,
+        siteName: seoData.ogTitle,
+      },
+    },
     fonts: [
       'Noto+Sans+SC:400',
     ],
@@ -306,11 +316,17 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
 
   Object.assign(rules, defaultRules)
 
-  // 為所有語言（包括預設語言）生成帶前綴的路由規則
+  // 定義不需要語言前綴的路徑
+  const excludedPaths = ['/gallery', '/gallery/**']
+
+  // 為所有語言（包括預設語言）生成帶前綴的路由規則，但排除指定路徑
   locales.forEach((locale) => {
     const prefix = `/${locale.code}`
     Object.entries(defaultRules).forEach(([path, rule]) => {
-      rules[`${prefix}${path}`] = { ...rule }
+      // 只有不在排除列表中的路徑才生成帶前綴的規則
+      if (!excludedPaths.includes(path)) {
+        rules[`${prefix}${path}`] = { ...rule }
+      }
     })
   })
 

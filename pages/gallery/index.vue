@@ -4,6 +4,13 @@ import { galleryGroups } from '~/data/galleryData'
 
 const { t } = useI18n()
 
+// 設置 SEO
+usePageSeo({
+  title: 'Gallery',
+  description: t('galleryPage.description'),
+  noIndex: false,
+})
+
 // 搜索文本和選中的標籤
 const searchText = ref('')
 const selectedTags = ref<string[]>([])
@@ -65,12 +72,6 @@ function clearFilters() {
   searchText.value = ''
   selectedTags.value = []
 }
-
-// 設置 SEO
-usePageSeo({
-  title: 'Gallery',
-  description: t('galleryPage.description'),
-})
 
 // 追蹤可見圖片組的響應式狀態
 const visibleGroups = ref<string[]>([])

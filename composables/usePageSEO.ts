@@ -39,8 +39,8 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     robots: options.noIndex ? 'noindex, nofollow' : 'index, follow',
   })
 
-  // OG 圖片
-  if (!options.noIndex) {
+  // 確保 OG 圖片僅在伺服器端生成
+  if (import.meta.server && !options.noIndex) {
     defineOgImageComponent('Nuxt', {
       url: config.public.i18n.baseUrl || seoData.mySite,
       headline: seoData.ogHeadline,
