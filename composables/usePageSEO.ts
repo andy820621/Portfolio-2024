@@ -41,7 +41,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex) {
-    defineOgImageComponent('Pergel', {
+    defineOgImageComponent('Nuxt', {
       url: config.public.i18n.baseUrl || seoData.mySite,
       headline: seoData.ogHeadline,
       title: pageTitle.value,
