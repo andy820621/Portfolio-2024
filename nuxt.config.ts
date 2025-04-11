@@ -18,8 +18,7 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/robots',
+    '@nuxtjs/seo',
     '@nuxt/content',
     '@nuxtjs/i18n',
     'floating-vue/nuxt',
@@ -29,10 +28,7 @@ export default defineNuxtConfig({
     '@formkit/auto-animate',
     'nuxt-swiper',
     '@stefanobartoletti/nuxt-social-share',
-    'nuxt-og-image',
     '@nuxt/image',
-    'nuxt-schema-org',
-    'nuxt-link-checker',
   ],
   routeRules: generateRouteRules({
     locales,
