@@ -58,6 +58,6 @@ image: https://localhost:3000/og.png
   </a>
 </p>
 
-或者直接 mail 我 <a href="mailto:andy820621@gmail.com">andy820621@gmail.com</a>
+或者直接 mail 我 <a href="mailto:andy820621@gmail.com" aria-label="Email me at andy820621@gmail.com" title="Email">andy820621@gmail.com</a>
 
 ---

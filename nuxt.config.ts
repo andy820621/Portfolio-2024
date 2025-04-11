@@ -1,6 +1,7 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
 import type { NitroConfig } from 'nitropack'
+import path from 'node:path'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
@@ -13,6 +14,41 @@ const locales: LocaleObject<SupportedLocale>[] = [
 ]
 
 export default defineNuxtConfig({
+  hooks: {
+    'content:file:beforeParse': (ctx) => {
+      const { file } = ctx
+
+      if (path.extname(file.path) === '.md') {
+        if (typeof file.body === 'string') {
+          // 編碼非 ASCII 字元
+          file.body = file.body.replace(/[\u4E00-\u9FA5]/g, char =>
+            encodeURIComponent(char))
+
+          // 根據語系動態處理連結
+          const currentLocale = file.path.includes('/zh/')
+            ? '/zh/'
+            : file.path.includes('/en/')
+              ? '/en/'
+              : '/'
+
+          // 確保連結以正確的根相對路徑開頭，跳過外部連結
+          file.body = file.body.replace(
+            /href="(?!\/|https?:\/\/|mailto:)([^"]*)"/g,
+            `href="${currentLocale}$1"`,
+          )
+
+          // 將大寫字母轉換為小寫
+          file.body = file.body.replace(
+            /href="([^"A-Z]*[A-Z][^"]*)"/g,
+            (match: string, p1: string) => {
+              const updated = p1.replace(/[A-Z]/g, char => char.toLowerCase())
+              return match.replace(p1, updated)
+            },
+          )
+        }
+      }
+    },
+  },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [

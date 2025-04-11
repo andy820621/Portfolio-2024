@@ -57,6 +57,6 @@ Find me on
   </a>
 </p>
 
-Or mail me at <a href="mailto:andy820621@gmail.com">andy820621@gmail.com</a>
+Or mail me at <a href="mailto:andy820621@gmail.com" aria-label="Email me at andy820621@gmail.com" title="Email">andy820621@gmail.com</a>
 
 ---
