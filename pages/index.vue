@@ -21,9 +21,9 @@ const { data: content, error } = await useAsyncData(
       return null
     }
   },
-  {
-    watch: [locale], // 當語言變更時重新獲取資料
-  },
+  // {
+  //   watch: [locale], // 當語言變更時重新獲取資料
+  // },
 )
 
 // 錯誤處理

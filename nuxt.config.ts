@@ -228,8 +228,10 @@ export default defineNuxtConfig({
               return 'vendor'
             }
           },
+          sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
         },
       },
+      sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
     },
     optimizeDeps: {
       include: [
