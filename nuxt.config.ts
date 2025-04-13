@@ -251,7 +251,13 @@ export default defineNuxtConfig({
   },
   nitro: {
     // compressPublicAssets: true,
-    debug: process.env.NODE_ENV !== 'production',
+    // debug: process.env.NODE_ENV !== 'production',
+    debug: true,
+    publicAssets: [
+      {
+        dir: 'public',
+      },
+    ],
     prerender: {
       // failOnError: false, // 防止 404 錯誤中斷建置
       crawlLinks: true,
