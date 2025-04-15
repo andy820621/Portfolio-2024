@@ -167,6 +167,10 @@ export default defineNuxtConfig({
     experimental: {
       nativeSqlite: false,
     },
+    database: {
+      type: 'postgres',
+      url: process.env.POSTGRES_URL as string,
+    },
   },
   i18n: {
     baseUrl: process.env.I18N_BASE_URL,
