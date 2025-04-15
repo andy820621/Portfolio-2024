@@ -61,6 +61,9 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
+  runtimeConfig: {
+    postgresUrl: process.env.POSTGRES_URL, // 確保環境變量可用
+  },
   site: {
     url: process.env.I18N_BASE_URL,
     name: navbarData.homeTitle,
