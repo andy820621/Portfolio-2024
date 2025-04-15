@@ -165,7 +165,7 @@ export default defineNuxtConfig({
       },
     },
     experimental: {
-      nativeSqlite: true,
+      nativeSqlite: false,
     },
   },
   i18n: {
