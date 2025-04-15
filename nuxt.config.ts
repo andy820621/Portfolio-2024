@@ -164,6 +164,9 @@ export default defineNuxtConfig({
         },
       },
     },
+    experimental: {
+      nativeSqlite: true,
+    },
   },
   i18n: {
     baseUrl: process.env.I18N_BASE_URL,
@@ -253,6 +256,7 @@ export default defineNuxtConfig({
     // compressPublicAssets: true,
     // debug: process.env.NODE_ENV !== 'production',
     debug: true,
+    preset: 'netlify',
     publicAssets: [
       {
         dir: 'public',
