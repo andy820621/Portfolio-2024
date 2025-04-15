@@ -12,7 +12,7 @@
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prebuild": "node scripts/generate-image-map.js"
+    "generate:project-images": "node scripts/generate-project-images-map.js"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.4.0",
