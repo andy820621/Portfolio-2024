@@ -3,5 +3,5 @@ command = "pnpm run build"
 publish = "dist"
 
 [functions]
-  node_bundler = "esbuild"
-  external_node_modules = [“@libsql/client”]
+node_bundler = "esbuild"
+external_node_modules = ["@libsql/client"]
