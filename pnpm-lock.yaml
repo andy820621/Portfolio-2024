@@ -71,8 +71,8 @@ importers:
         specifier: ^1.2.19
         version: 1.2.19
       '@nuxt/content':
-        specifier: https://pkg.pr.new/@nuxt/content@3262
-        version: https://pkg.pr.new/@nuxt/content@3262(magicast@0.3.5)(typescript@5.8.3)
+        specifier: ^3.4.0
+        version: 3.4.0(magicast@0.3.5)(typescript@5.8.3)
       '@nuxt/icon':
         specifier: ^1.12.0
         version: 1.12.0(magicast@0.3.5)(vite@6.2.6(@types/node@22.14.1)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.3))
@@ -793,9 +793,8 @@ packages:
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@3262':
-    resolution: {tarball: https://pkg.pr.new/@nuxt/content@3262}
-    version: 3.3.0
+  '@nuxt/content@3.4.0':
+    resolution: {integrity: sha512-2+OtY+apAxyKCNki9K9wRz7DgoD7es5HUAMjOJVL5up652o8UFTwihtK1/+9YEI2jXd6+SFMiKsDMe2jGaqu4g==}
     peerDependencies:
       '@electric-sql/pglite': '*'
       '@libsql/client': '*'
@@ -862,8 +861,8 @@ packages:
     resolution: {integrity: sha512-pw8xU6PFzCop8tYts5IqqoL4F5eol18Xg+0wgVeptlzdki4LR0NnNQkO5nHhwsKUK8e+g8+Efc6ppqKdTqPGig==}
     engines: {node: '>=18.12.0'}
 
-  '@nuxtjs/mdc@0.15.0':
-    resolution: {integrity: sha512-xdYEu+FmUZpKQzDS35peX9hF36oxvD4zx9lTJq6RPh/vgJuLSohUIUVLtNxM7m8cY/pTh41qaO3pOvKz0Xq3sg==}
+  '@nuxtjs/mdc@0.16.1':
+    resolution: {integrity: sha512-di9Ox9QY5pO2eIkQPyKFe9O8L3RvIrGbmjI3rJQRj1xGYRFj2S9RvBPCFbvfaqQGOTjOfxHLg8KtQIGj1Iw/lg==}
 
   '@nuxtjs/robots@5.2.9':
     resolution: {integrity: sha512-JJykE1llIByw8vqhrn4abSPyAcEFnfVOkIaD2/XLwkhNeZHzAQT2/p+ZhqwtaSMyWq8pnW1y0ei7gQYdCqOu+g==}
@@ -4091,9 +4090,6 @@ packages:
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
 
-  ohash@1.1.6:
-    resolution: {integrity: sha512-TBu7PtV8YkAZn0tSxobKY2n2aAQva936lhRrj6957aDaCf9IEtqsKbgMzXE/F/sjqYOwmrukeORHNLe5glk7Cg==}
-
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
 
@@ -6413,10 +6409,10 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/content@https://pkg.pr.new/@nuxt/content@3262(magicast@0.3.5)(typescript@5.8.3)':
+  '@nuxt/content@3.4.0(magicast@0.3.5)(typescript@5.8.3)':
     dependencies:
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
-      '@nuxtjs/mdc': 0.15.0(magicast@0.3.5)
+      '@nuxtjs/mdc': 0.16.1(magicast@0.3.5)
       '@shikijs/langs': 3.2.2
       '@sqlite.org/sqlite-wasm': 3.49.1-build2
       '@webcontainer/env': 1.1.1
@@ -6757,7 +6753,7 @@ snapshots:
       - supports-color
       - vue
 
-  '@nuxtjs/mdc@0.15.0(magicast@0.3.5)':
+  '@nuxtjs/mdc@0.16.1(magicast@0.3.5)':
     dependencies:
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
       '@shikijs/transformers': 3.2.2
@@ -6775,10 +6771,9 @@ snapshots:
       hast-util-to-string: 3.0.1
       mdast-util-to-hast: 13.2.0
       micromark-util-sanitize-uri: 2.0.1
-      ohash: 1.1.6
       parse5: 7.2.1
       pathe: 2.0.3
-      property-information: 6.5.0
+      property-information: 7.0.0
       rehype-external-links: 3.0.0
       rehype-minify-whitespace: 6.0.2
       rehype-raw: 7.0.0
@@ -10777,8 +10772,6 @@ snapshots:
       destr: 2.0.5
       node-fetch-native: 1.6.6
       ufo: 1.6.1
-
-  ohash@1.1.6: {}
 
   ohash@2.0.11: {}
 
