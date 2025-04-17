@@ -73,27 +73,27 @@ export default defineNuxtConfig({
     twitter: seoData.twitterLink,
   },
   sitemap: {
-    sources: [
-      '/api/__sitemap__/posts',
-      '/api/__sitemap__/gallery',
-      '/api/__sitemap__/projects',
-    ],
-    autoI18n: {
-      locales: [
-        {
-          code: 'en',
-          _sitemap: 'en',
-          _hreflang: 'en',
-        },
-        {
-          code: 'zh-TW',
-          _sitemap: 'zh-TW',
-          _hreflang: 'zh-TW',
-        },
-      ],
-      defaultLocale: 'en',
-      strategy: 'prefix_and_default',
-    },
+    // sources: [
+    //   '/api/__sitemap__/posts',
+    //   '/api/__sitemap__/gallery',
+    //   '/api/__sitemap__/projects',
+    // ],
+    // autoI18n: {
+    //   locales: [
+    //     {
+    //       code: 'en',
+    //       _sitemap: 'en',
+    //       _hreflang: 'en',
+    //     },
+    //     {
+    //       code: 'zh-TW',
+    //       _sitemap: 'zh-TW',
+    //       _hreflang: 'zh-TW',
+    //     },
+    //   ],
+    //   defaultLocale: 'en',
+    //   strategy: 'prefix_and_default',
+    // },
   },
   robots: {
     allow: ['/', '/en/', '/zh/', '/api/__sitemap__/'],
@@ -340,6 +340,10 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       }
     })
   })
+
+  rules['sitemap.xml'] = {
+    prerender: true,
+  }
 
   return rules
 }
