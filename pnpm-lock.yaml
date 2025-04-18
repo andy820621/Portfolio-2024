@@ -50,8 +50,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@iconify-json/material-symbols-light':
-        specifier: ^1.2.18
-        version: 1.2.18
+        specifier: ^1.2.20
+        version: 1.2.20
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -59,8 +59,8 @@ importers:
         specifier: ^1.2.5
         version: 1.2.5
       '@iconify-json/simple-icons':
-        specifier: ^1.2.31
-        version: 1.2.31
+        specifier: ^1.2.32
+        version: 1.2.32
       '@iconify-json/skill-icons':
         specifier: ^1.2.0
         version: 1.2.0
@@ -607,8 +607,8 @@ packages:
   '@iconify-json/logos@1.2.4':
     resolution: {integrity: sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==}
 
-  '@iconify-json/material-symbols-light@1.2.18':
-    resolution: {integrity: sha512-xB/00XUmmmgkPi1XyUDxclXZIQ9jnau40el3UAgGma5PlrDPmob6w+k3QdlcTv2Z/eCzgkXHW4VkHhaJ866I4w==}
+  '@iconify-json/material-symbols-light@1.2.20':
+    resolution: {integrity: sha512-xGPhQR80cNLAXRKAlbHQJednqaimVBqQGTz3WZUlStzIaUhrbVpFscyQT/taAe0X9+Ra6XlhsIN+MPG8HDJCeA==}
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
@@ -616,8 +616,8 @@ packages:
   '@iconify-json/ri@1.2.5':
     resolution: {integrity: sha512-kWGimOXMZrlYusjBKKXYOWcKhbOHusFsmrmRGmjS7rH0BpML5A9/fy8KHZqFOwZfC4M6amObQYbh8BqO5cMC3w==}
 
-  '@iconify-json/simple-icons@1.2.31':
-    resolution: {integrity: sha512-xBUPtvkcSAiXs9DfVtudhLddQtQYin3I3Ph/W5FNYA0oE6r2hmLB8TgOog9OjOt1Sxn3IB5+4n5+64DMf2xNmQ==}
+  '@iconify-json/simple-icons@1.2.32':
+    resolution: {integrity: sha512-gxgLq0raip7SJaeJ0302vwhsqupQttS21B93Ci1kA/++B+hIgGw71HzTOWQoUhwjlrdWcoVUxSvpPJoMs7oURg==}
 
   '@iconify-json/skill-icons@1.2.0':
     resolution: {integrity: sha512-5zlPrzF5pelV1wut7C88zmAiYONvGxvFw11dXW1Pr1oIhUOtYhC7x3zkErSTFkyZ3m5fEgcEUrcO1W3UhNJVpw==}
@@ -6189,7 +6189,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/material-symbols-light@1.2.18':
+  '@iconify-json/material-symbols-light@1.2.20':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -6201,7 +6201,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/simple-icons@1.2.31':
+  '@iconify-json/simple-icons@1.2.32':
     dependencies:
       '@iconify/types': 2.0.0
 
