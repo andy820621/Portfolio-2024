@@ -112,13 +112,8 @@ export default defineNuxtConfig({
     autoI18n: true,
   },
   robots: {
-    allow: ['/', '/en/', '/zh/', '/api/__sitemap__/'],
-    disallow: [
-      '/admin',
-      '/private',
-      '/api/(?!__sitemap__/).*', // 阻擋除了 __sitemap__ 以外的所有 API 路徑
-    ],
-    sitemap: process.env.I18N_BASE_URL,
+    blockNonSeoBots: true,
+    // sitemap: process.env.I18N_BASE_URL,
     blockAiBots: true,
   },
   schemaOrg: {
@@ -328,6 +323,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
           },
         ],
       },
+      robots: true,
       // TODO: 檢查為什麼加了 cache 會有問題
       // cache: {
       //   maxAge: 3600,
@@ -349,8 +345,9 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
           },
         ],
       },
+      robots: true,
     },
-    '/posts/**': { prerender: true },
+    '/posts/**': { prerender: true, robots: true },
     '/demos': {
       prerender: true,
       sitemap: {
@@ -365,6 +362,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
           },
         ],
       },
+      robots: true,
     },
     '/gallery': {
       isr: 21600,
@@ -380,6 +378,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
           },
         ],
       },
+      robots: true,
     },
     '/gallery/**': {
       isr: 21600,
@@ -387,6 +386,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         maxAge: 21600,
       },
       sitemap: { changefreq: 'daily', priority: 0.8 },
+      robots: true,
     },
     '/projects': {
       isr: 21600,
@@ -402,8 +402,9 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
           },
         ],
       },
+      robots: true,
     },
-    '/projects/**': { isr: 21600, sitemap: { changefreq: 'daily', priority: 0.9 } },
+    '/projects/**': { isr: 21600, sitemap: { changefreq: 'daily', priority: 0.9 }, robots: true },
   }
 
   Object.assign(rules, defaultRules)
