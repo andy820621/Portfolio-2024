@@ -19,6 +19,14 @@ schemaOrg:
     image: "/blog-images/fix-tailwindcss-intellisense-in-nuxt3.jpg"
     keywords: ["TailwindCSS", "Nuxt3"]
     articleSection: "TechArticle"
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /blog-images/fix-tailwindcss-intellisense-in-nuxt3.jpg
+      title: "How To Fix TailwindCSS Intellisense In Nuxt3 Project"
+      caption: "In Nuxt3 project tailwind css intellisense doesn't seems to work properly. In this blog I will share a workaround to fix this issue."
 ---
 
 ### Problems

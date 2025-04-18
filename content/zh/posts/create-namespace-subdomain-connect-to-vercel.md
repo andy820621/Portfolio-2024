@@ -19,6 +19,15 @@ schemaOrg:
     image: "/blog-images/create-namespace-subdomain-connect-to-vercel.jpg"
     keywords: ["Namecheap", "Subdomain", "Vercel", "Deploy"]
     articleSection: "TechArticle"
+
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
+      title: "如何創建子網域並連接到 Vercel 應用程式"
+      caption: "如何創建子網域並連接到 Vercel 應用程式"
 ---
 
 ### 介紹

@@ -3,6 +3,7 @@ import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
+import { getSitemapDateFormat } from './utils/dayjs'
 
 type SupportedLocale = 'en' | 'zh'
 
@@ -12,9 +13,14 @@ const locales: LocaleObject<SupportedLocale>[] = [
   { code: 'zh', language: 'zh-TW', name: 'Chinese', file: 'zh.json' },
 ]
 
+const lastmod = getSitemapDateFormat(Date.now())
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  // experimental: {
+  //   inlineRouteRules: true,
+  // },
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -73,27 +79,37 @@ export default defineNuxtConfig({
     twitter: seoData.twitterLink,
   },
   sitemap: {
-    // sources: [
-    //   '/api/__sitemap__/posts',
-    //   '/api/__sitemap__/gallery',
-    //   '/api/__sitemap__/projects',
-    // ],
-    // autoI18n: {
-    //   locales: [
-    //     {
-    //       code: 'en',
-    //       _sitemap: 'en',
-    //       _hreflang: 'en',
-    //     },
-    //     {
-    //       code: 'zh-TW',
-    //       _sitemap: 'zh-TW',
-    //       _hreflang: 'zh-TW',
-    //     },
-    //   ],
-    //   defaultLocale: 'en',
-    //   strategy: 'prefix_and_default',
-    // },
+    xslTips: false,
+    xsl: '/__sitemap__/style.xsl',
+    xslColumns: [
+      { label: 'URL', width: '50%' },
+      { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
+      { label: 'Images', select: 'count(image:image)', width: '5%' },
+      // { label: 'First Image', select: 'substring(image:image[1]/image:loc, 1, 30)', width: '15%' },
+      { label: 'Hreflangs', select: 'count(xhtml:link)', width: '5%' },
+      { label: 'Priority', select: 'sitemap:priority', width: '5%' },
+      { label: 'Change Frequency', select: 'sitemap:changefreq', width: '10%' },
+    ],
+    defaults: {
+      changefreq: 'weekly',
+      priority: 1,
+      lastmod,
+    },
+    discoverImages: true,
+    discoverVideos: true,
+    exclude: [
+      /^\/demos\/.*/,
+      /^\/en\/demos\/.*/,
+      /^\/zh\/demos\/.*/,
+      '/about',
+      '/en/about',
+      '/zh/about',
+    ],
+    sources: [
+      '/api/__sitemap__/gallery',
+      '/api/__sitemap__/index',
+    ],
+    autoI18n: true,
   },
   robots: {
     allow: ['/', '/en/', '/zh/', '/api/__sitemap__/'],
@@ -260,6 +276,7 @@ export default defineNuxtConfig({
     // debug: process.env.NODE_ENV !== 'production',
     debug: true,
     preset: 'netlify',
+    plugins: ['~/server/plugins/sitemap'],
     publicAssets: [
       {
         dir: 'public',
@@ -299,30 +316,94 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   const defaultRules: RouteRules = {
     '/': {
       prerender: true,
+      sitemap: {
+        lastmod,
+        changefreq: 'daily',
+        priority: 1,
+        images: [
+          {
+            url: '/page-cover/home.webp',
+            title: 'home page image',
+            caption: 'This is the home page image.',
+          },
+        ],
+      },
       // TODO: 檢查為什麼加了 cache 會有問題
       // cache: {
       //   maxAge: 3600,
       //   staleMaxAge: 86400,
       // },
     },
-    '/**': {
+    '/**': { prerender: true },
+    '/posts': {
       prerender: true,
-      //   maxAge: 3600,
-      //   staleMaxAge: 86400,
-      // },
+      sitemap: {
+        lastmod,
+        changefreq: 'daily',
+        priority: 0.9,
+        images: [
+          {
+            url: '/page-cover/blog.webp',
+            title: 'blog page image',
+            caption: 'This is the blog page image.',
+          },
+        ],
+      },
     },
-    '/posts': { prerender: true },
     '/posts/**': { prerender: true },
-    '/demos': { prerender: true },
-    '/gallery': { isr: 21600 },
+    '/demos': {
+      prerender: true,
+      sitemap: {
+        lastmod,
+        changefreq: 'daily',
+        priority: 0.9,
+        images: [
+          {
+            url: '/page-cover/demos.webp',
+            title: 'demos page image',
+            caption: 'This is the demos page image.',
+          },
+        ],
+      },
+    },
+    '/gallery': {
+      isr: 21600,
+      sitemap: {
+        lastmod,
+        changefreq: 'daily',
+        priority: 0.9,
+        images: [
+          {
+            url: '/page-cover/gallery.webp',
+            title: 'gallery page image',
+            caption: 'This is the gallery page image.',
+          },
+        ],
+      },
+    },
     '/gallery/**': {
       isr: 21600,
       cache: {
         maxAge: 21600,
       },
+      sitemap: { changefreq: 'daily', priority: 0.8 },
     },
-    '/projects': { isr: 21600 },
-    '/projects/**': { isr: 21600 },
+    '/projects': {
+      isr: 21600,
+      sitemap: {
+        lastmod,
+        changefreq: 'daily',
+        priority: 0.9,
+        images: [
+          {
+            url: '/page-cover/projects.webp',
+            title: 'projects page image',
+            caption: 'This is the projects page image.',
+          },
+        ],
+      },
+    },
+    '/projects/**': { isr: 21600, sitemap: { changefreq: 'daily', priority: 0.9 } },
   }
 
   Object.assign(rules, defaultRules)

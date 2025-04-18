@@ -7,6 +7,15 @@ alt: 智慧消防系統
 ogImage: /project-images/metc.webp
 tags: ['網站開發', 'JavaScript']
 published: true
+
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /project-images/metc.webp
+      title: 智慧消防系統
+      caption: 智慧消防系統 - 社區防災物聯網解決方案
 ---
 
 ## 專案背景

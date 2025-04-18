@@ -10,6 +10,7 @@ interface PageSeoOptions {
     hreflang: string
     href: string
   }[]
+  addModifiedTime?: boolean
 }
 
 export function usePageSeo(options: PageSeoOptions = {}) {
@@ -37,6 +38,9 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     title: pageTitle.value,
     description: pageDescription.value,
     robots: options.noIndex ? 'noindex, nofollow' : 'index, follow',
+    ...(options.addModifiedTime && {
+      articleModifiedTime: getSitemapDateFormat(Date.now()),
+    }),
   })
 
   // 確保 OG 圖片在 Server 端生成

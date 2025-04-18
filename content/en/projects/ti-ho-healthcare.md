@@ -7,6 +7,15 @@ alt: Ti-He Healthcare Official Website Development
 ogImage: /project-images/ti-ho-healthcare.webp
 tags: ['Website Development', 'JavaScript', 'Brand Collaboration']
 published: true
+
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /project-images/ti-ho-healthcare.webp
+      title: "Ti-He Healthcare Official Website Development"
+      caption: "Ti-He Healthcare Official Website Development"
 ---
 
 ### Project Background

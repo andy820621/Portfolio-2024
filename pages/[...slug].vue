@@ -9,6 +9,7 @@ usePageSeo({
   title: '404 - Page Not Found',
   description: t('errorPage.description', '您訪問的頁面不存在'),
   noIndex: true,
+  addModifiedTime: true,
 })
 
 const localePath = useLocalePath()

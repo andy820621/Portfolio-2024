@@ -19,6 +19,14 @@ schemaOrg:
     image: "/blog-images/how-to-fix-vuex-type-issue.jpg"
     keywords: ['vue', "vuex"]
     articleSection: "TechArticle"
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /blog-images/how-to-fix-vuex-type-issue.jpg
+      title: "How to fix vuex type issue"
+      caption: "In recent vue project we see that vuex type not working properly. We will fix that type issue and make vuex type workable."
 ---
 
 ### Introduction

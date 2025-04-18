@@ -7,6 +7,15 @@ alt: 鈦和生醫官方網站開發
 ogImage: /project-images/ti-ho-healthcare.webp
 tags: ['網站開發', 'JavaScript', '品牌合作']
 published: true
+
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /project-images/ti-ho-healthcare.webp
+      title: 鈦和生醫官方網站開發
+      caption: 鈦和生醫官方網站開發
 ---
 
 ### 專案背景

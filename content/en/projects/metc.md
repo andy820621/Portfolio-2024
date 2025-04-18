@@ -7,6 +7,15 @@ alt: Smart Fire Protection System
 ogImage: /project-images/metc.webp
 tags: ['Web Development', 'JavaScript']
 published: true
+
+sitemap:
+  lastmod: 2025-04-17
+  changefreq: weekly
+  priority: 0.8
+  images:
+    - url: /project-images/metc.webp
+      title: Smart Fire Protection System
+      caption: Smart Fire Protection System
 ---
 
 ## Project Background

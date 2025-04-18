@@ -23,3 +23,7 @@ export function getNowDayjsString(time?: number) {
 export function getNowStamp(time?: number) {
   return getNowDayjs(time).toDate().getTime()
 }
+
+export function getSitemapDateFormat(time?: number) {
+  return getNowDayjs(time).format('YYYY-MM-DD')
+}

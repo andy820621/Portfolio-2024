@@ -117,6 +117,7 @@ onUnmounted(() => {
 usePageSeo({
   title: album.value?.title || 'Gallery',
   description: album.value?.description || 'Gallery\'s description',
+  image: album.value?.coverImage,
 })
 </script>
 
