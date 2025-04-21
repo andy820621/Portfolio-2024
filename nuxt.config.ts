@@ -241,9 +241,6 @@ export default defineNuxtConfig({
     transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
   },
   vite: {
-    define: {
-      'process.env': process.env,
-    },
     build: {
       rollupOptions: {
         output: {
