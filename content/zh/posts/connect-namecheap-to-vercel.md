@@ -26,7 +26,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /blog-images/connect-namecheap-to-vercel.jpg
+    - loc: /blog-images/connect-namecheap-to-vercel.jpg
       title: "如何將 Namecheap 網域連接到 Vercel 部署的應用程式"
       caption: "如何將 Namecheap 網域連接到 Vercel 部署的應用程式"
 ---

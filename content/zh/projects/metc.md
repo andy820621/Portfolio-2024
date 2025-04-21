@@ -14,7 +14,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /project-images/metc.webp
+    - loc: /project-images/metc.webp
       title: 智慧消防系統
       caption: 智慧消防系統 - 社區防災物聯網解決方案
 ---

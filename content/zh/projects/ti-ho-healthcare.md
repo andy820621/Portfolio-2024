@@ -14,7 +14,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /project-images/ti-ho-healthcare.webp
+    - loc: /project-images/ti-ho-healthcare.webp
       title: 鈦和生醫官方網站開發
       caption: 鈦和生醫官方網站開發
 ---

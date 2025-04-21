@@ -126,7 +126,6 @@ export default defineNuxtConfig({
   },
   robots: {
     blockNonSeoBots: true,
-    // sitemap: process.env.I18N_BASE_URL,
     blockAiBots: true,
   },
   schemaOrg: {
@@ -282,8 +281,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     // compressPublicAssets: true,
-    // debug: process.env.NODE_ENV !== 'production',
-    debug: true,
+    debug: process.env.NODE_ENV !== 'production',
     preset: 'netlify',
     plugins: ['~/server/plugins/sitemap'],
     publicAssets: [
@@ -294,16 +292,7 @@ export default defineNuxtConfig({
     prerender: {
       // failOnError: false, // 防止 404 錯誤中斷建置
       crawlLinks: true,
-      routes: [
-        '/',
-        // '/en',
-        // '/zh',
-        // '/gallery',
-        // '/demos',
-        // '/posts',
-        // '/projects',
-        // '/sitemap.xml',
-      ],
+      routes: ['/'],
       ignore: ['/api/_content'],
     },
     future: {
@@ -331,7 +320,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         priority: 1,
         images: [
           {
-            url: '/page-cover/home.webp',
+            loc: '/page-cover/home.webp',
             title: 'home page image',
             caption: 'This is the home page image.',
           },
@@ -353,7 +342,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         priority: 0.9,
         images: [
           {
-            url: '/page-cover/blog.webp',
+            loc: '/page-cover/blog.webp',
             title: 'blog page image',
             caption: 'This is the blog page image.',
           },
@@ -370,7 +359,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         priority: 0.9,
         images: [
           {
-            url: '/page-cover/demos.webp',
+            loc: '/page-cover/demos.webp',
             title: 'demos page image',
             caption: 'This is the demos page image.',
           },
@@ -386,7 +375,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         priority: 0.9,
         images: [
           {
-            url: '/page-cover/gallery.webp',
+            loc: '/page-cover/gallery.webp',
             title: 'gallery page image',
             caption: 'This is the gallery page image.',
           },
@@ -410,7 +399,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         priority: 0.9,
         images: [
           {
-            url: '/page-cover/projects.webp',
+            loc: '/page-cover/projects.webp',
             title: 'projects page image',
             caption: 'This is the projects page image.',
           },

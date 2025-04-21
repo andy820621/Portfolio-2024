@@ -25,7 +25,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /blog-images/some-awesome-libraries-for-vue3.jpg
+    - loc: /blog-images/some-awesome-libraries-for-vue3.jpg
       title: "Some Awesome Libraries For Vue3"
       caption: "Vue.js is a popular JavaScript framework for building web applications. In this blog post, we will introduce you to some of the awesome libraries for Vue.js in different categories."
 ---

@@ -25,7 +25,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /blog-images/how-to-fix-vuex-type-issue.jpg
+    - loc: /blog-images/how-to-fix-vuex-type-issue.jpg
       title: "How to fix vuex type issue"
       caption: "In recent vue project we see that vuex type not working properly. We will fix that type issue and make vuex type workable."
 ---

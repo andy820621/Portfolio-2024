@@ -14,7 +14,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /project-images/ti-ho-healthcare.webp
+    - loc: /project-images/ti-ho-healthcare.webp
       title: "Ti-He Healthcare Official Website Development"
       caption: "Ti-He Healthcare Official Website Development"
 ---

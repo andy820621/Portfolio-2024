@@ -25,7 +25,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /blog-images/fetch-content-data-render-pages.jpg
+    - loc: /blog-images/fetch-content-data-render-pages.jpg
       title: "How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages"
       caption: "How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages"
 ---

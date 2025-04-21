@@ -14,7 +14,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /project-images/metc.webp
+    - loc: /project-images/metc.webp
       title: Smart Fire Protection System
       caption: Smart Fire Protection System
 ---

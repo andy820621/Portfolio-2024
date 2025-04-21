@@ -25,7 +25,7 @@ sitemap:
   changefreq: weekly
   priority: 0.8
   images:
-    - url: /blog-images/connect-namecheap-to-vercel.jpg
+    - loc: /blog-images/connect-namecheap-to-vercel.jpg
       title: "How To Connect You Namecheap Domain With Vercel Deployed App"
       caption: "How To Connect You Namecheap Domain With Vercel Deployed App"
 ---
