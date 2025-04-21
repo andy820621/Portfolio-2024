@@ -206,7 +206,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'no prefix', // recommended is 'root', good for SEO.
+      redirectOn: 'root', // recommended
       fallbackLocale: 'en',
     },
     bundle: {
@@ -238,6 +238,10 @@ export default defineNuxtConfig({
   },
   build: {
     transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
+    analyze: {
+      enabled: true,
+      open: true,
+    },
   },
   vite: {
     build: {
@@ -280,7 +284,7 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
-    // compressPublicAssets: true,
+    compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
     preset: 'netlify',
     plugins: ['~/server/plugins/sitemap'],
@@ -295,6 +299,7 @@ export default defineNuxtConfig({
       routes: ['/'],
       ignore: ['/api/_content'],
     },
+    minify: true,
     future: {
       nativeSWR: true,
     },
@@ -419,18 +424,16 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   locales.forEach((locale) => {
     const prefix = `/${locale.code}`
 
-    // 只為不帶尾斜線的路徑設定規則
+    // 新增: 為不帶尾斜線的語言根路徑設定規則
     const rootRule = defaultRules['/']
     if (rootRule && !excludedPaths.includes('/')) {
       rules[prefix] = { ...rootRule }
     }
 
-    // 處理其他路徑，但統一使用不帶尾斜線的格式
+    // 原有的帶斜線路徑規則
     Object.entries(defaultRules).forEach(([path, rule]) => {
-      if (!excludedPaths.includes(path) && path !== '/') {
-        // 移除尾部斜線（如果有）
-        const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
-        rules[`${prefix}${cleanPath}`] = { ...rule }
+      if (!excludedPaths.includes(path)) {
+        rules[`${prefix}${path}`] = { ...rule }
       }
     })
   })
