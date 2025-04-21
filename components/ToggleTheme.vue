@@ -18,7 +18,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <a class="select-none" title="Toggle Color Scheme" @click="toggleDark">
+  <button
+    type="button"
+    class="select-none"
+    title="Toggle Color Scheme"
+    aria-label="Toggle Color Scheme"
+    @click="toggleDark"
+  >
     <Icon :name="iconName" />
-  </a>
+  </button>
 </template>

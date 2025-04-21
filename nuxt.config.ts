@@ -418,10 +418,19 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   // 為所有語言（包括預設語言）生成帶前綴的路由規則，但排除指定路徑
   locales.forEach((locale) => {
     const prefix = `/${locale.code}`
+
+    // 只為不帶尾斜線的路徑設定規則
+    const rootRule = defaultRules['/']
+    if (rootRule && !excludedPaths.includes('/')) {
+      rules[prefix] = { ...rootRule }
+    }
+
+    // 處理其他路徑，但統一使用不帶尾斜線的格式
     Object.entries(defaultRules).forEach(([path, rule]) => {
-      // 只有不在排除列表中的路徑才生成帶前綴的規則
-      if (!excludedPaths.includes(path)) {
-        rules[`${prefix}${path}`] = { ...rule }
+      if (!excludedPaths.includes(path) && path !== '/') {
+        // 移除尾部斜線（如果有）
+        const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
+        rules[`${prefix}${cleanPath}`] = { ...rule }
       }
     })
   })

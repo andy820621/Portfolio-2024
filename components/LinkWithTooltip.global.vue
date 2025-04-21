@@ -17,8 +17,15 @@ const {
 <template>
   <ClientOnly>
     <VTooltip class="w-fit h-fit">
-      <NuxtLink :to="to" :title="tooltipContent" class="border-b-none! flex items-center" target="_blank">
-        <Icon :name="icon" :class="iconClass" :size="size" />
+      <NuxtLink
+        :to="to"
+        :title="tooltipContent"
+        class="border-b-none! flex items-center"
+        target="_blank"
+        :aria-label="tooltipContent || to"
+      >
+        <Icon :name="icon" :class="iconClass" :size="size" aria-hidden="true" />
+        <span class="sr-only">{{ tooltipContent || to }}</span>
       </NuxtLink>
 
       <template #popper>

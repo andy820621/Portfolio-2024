@@ -104,7 +104,8 @@ const { y: scroll } = useWindowScroll()
   margin-bottom: 0;
 }
 
-.nav a {
+.nav a,
+.nav button {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
