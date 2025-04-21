@@ -206,7 +206,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root', // recommended
+      redirectOn: 'no prefix', // recommended is 'root', good for SEO.
       fallbackLocale: 'en',
     },
     bundle: {
