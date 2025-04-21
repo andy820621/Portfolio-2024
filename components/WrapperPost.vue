@@ -1,15 +1,15 @@
 <script setup lang="ts">
-const { basePageName, paramName, redirectLink = '/posts' } = defineProps<{
-  basePageName: string
-  paramName: string
+import type { AllCollectionItem, ContentDetailDataReturn } from '~/types/main';
+
+const { contenDetailData, redirectLink = '/posts' } = defineProps<{
+  contenDetailData: ContentDetailDataReturn<AllCollectionItem>
   redirectLink?: string
 }>()
 
 const localePath = useLocalePath()
 
 // 使用拆分後的 composables
-const { contentData, error } = await useContentData({ basePageName, paramName })
-const { mainData, prevContent, nextContent } = useContentDetailData(contentData)
+const { mainData, prevContent, nextContent } = contenDetailData
 const { activeId } = useTocObserver()
 
 const data = computed(() => ({
@@ -27,14 +27,6 @@ const data = computed(() => ({
 
 // 使用 SEO composable
 useContentSEO(data)
-
-// 錯誤處理
-watchEffect(() => {
-  if (error.value) {
-    console.error('Fetch error:', error.value)
-    navigateTo(localePath('/404'))
-  }
-})
 
 const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 </script>

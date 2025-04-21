@@ -5,7 +5,8 @@ description: In Nuxt3 project tailwind css intellisense doesn't seems to work pr
 image: /blog-images/fix-tailwindcss-intellisense-in-nuxt3.jpg
 alt: Hwo to fix tailwind intellisense in nuxt3 project
 ogImage: /blog-images/fix-tailwindcss-intellisense-in-nuxt3.jpg
-tags: ['nuxt', 'tailwindcss']
+tags: ['nuxt3', 'tailwindcss', 'intellisense', 'vscode', 'frontend', 'config']
+categories: ['Nuxt', 'TailwindCSS', 'VSCode', 'Frontend', 'Troubleshooting']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

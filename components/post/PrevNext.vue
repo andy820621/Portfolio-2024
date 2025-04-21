@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import type { CollectionItemBase } from '@nuxt/content'
-
-interface ArticleBase extends CollectionItemBase {
-  title?: string
-  description?: string
-  path?: string
-}
+import type { ContentNavigationItem } from '@nuxt/content'
 
 defineProps<{
-  prev: ArticleBase | undefined
-  next: ArticleBase | undefined
+  prev: ContentNavigationItem | undefined
+  next: ContentNavigationItem | undefined
 }>()
 
 const localePath = useLocalePath()

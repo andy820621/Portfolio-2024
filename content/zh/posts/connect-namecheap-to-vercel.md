@@ -5,7 +5,8 @@ description: 在這裡你將學習如何將你的 Namecheap 網域連接到 Verc
 image: /blog-images/connect-namecheap-to-vercel.jpg
 alt: 如何將 Namecheap 網域連接到 Vercel 部署的應用程式
 ogImage: /blog-images/connect-namecheap-to-vercel.jpg
-tags: ['namecheap', 'vercel']
+tags: ['Namecheap', 'Vercel', '自訂網域', 'DNS 記錄', '網域綁定', '部署教學', '網站連接', '雲端服務']
+categories: ['網域設定', '部署教學', 'Vercel 指南', 'DNS 操作', '網站管理']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

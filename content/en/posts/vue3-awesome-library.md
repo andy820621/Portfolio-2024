@@ -5,7 +5,8 @@ description: Vue.js is a popular JavaScript framework for building web applicati
 image: /blog-images/some-awesome-libraries-for-vue3.jpg
 alt: Some Awesome Libraries For Vue3
 ogImage: /blog-images/some-awesome-libraries-for-vue3.jpg
-tags: ['vue',"javascript"]
+tags: ['vue', 'vue3', 'javascript', 'libraries', 'frontend', 'ui', 'ecosystem', 'tools']
+categories: ['Vue.js', 'Frontend Development', 'JavaScript Libraries', 'UI Components', 'Web Development']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

@@ -41,11 +41,25 @@ export default defineNuxtConfig({
   }),
   app: {
     head: {
-      charset: 'utf-16',
+      charset: 'utf-8',
       viewport: 'width=device-width,initial-scale=1',
       title: navbarData.homeTitle,
       meta: [
-        { name: 'author', content: navbarData.homeTitle },
+        { name: 'author', content: `${navbarData.homeTitle} | Hsieh Yao Tsu | ヒカル` },
+        { name: 'description', content: seoData.description },
+        { name: 'keywords', content: seoData.keywords },
+        { name: 'theme-color', content: '#285658' },
+        { name: 'twitter:site', content: seoData.twitterSite },
+        { name: 'twitter:title', content: navbarData.homeTitle },
+        { name: 'twitter:description', content: seoData.twitterDescription },
+        { name: 'fb:app_id', content: seoData.fbAppId },
+        // { name: 'fb:pages_id', content: seoData.fbPagesId },
+        { name: 'mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+        { name: 'apple-mobile-web-app-title', content: navbarData.homeTitle },
+        { name: 'msapplication-TileColor', content: '#285658' },
+        { name: 'msapplication-TileImage', content: '/apple-touch-icon/apple-touch-icon-144x144.png' },
+        { name: 'google-site-verification', content: seoData.googleSiteVerification },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -76,7 +90,6 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
     },
-    twitter: seoData.twitterLink,
   },
   sitemap: {
     xslTips: false,
@@ -118,6 +131,7 @@ export default defineNuxtConfig({
   },
   schemaOrg: {
     defaults: false,
+    debug: process.env.NODE_ENV !== 'production',
     identity: {
       type: 'Person',
       name: navbarData.homeTitle,
@@ -147,6 +161,9 @@ export default defineNuxtConfig({
     fonts: [
       'Noto+Sans+SC:400',
     ],
+  },
+  socialShare: {
+    baseUrl: process.env.I18N_BASE_URL,
   },
   image: {
     format: ['webp', 'gif', 'jpg', 'png'],

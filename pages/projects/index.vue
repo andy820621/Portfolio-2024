@@ -19,6 +19,29 @@ usePageSeo({
   title: 'Projects',
   description: t('projectsPage.description'),
 })
+
+const baseUrl = useRuntimeConfig().public.i18n.baseUrl
+
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+    'name': t('projectsPage.title'),
+    'description': t('projectsPage.description'),
+    'mainEntity': {
+      '@type': 'ItemList',
+      'itemListElement': filteredData.value.map((project, index) => ({
+        '@type': 'ListItem',
+        'position': index + 1,
+        'item': {
+          '@type': 'SoftwareApplication',
+          'headline': project.title,
+          'url': `${baseUrl}${project.path}`,
+          'datePublished': project.date,
+        },
+      })),
+    },
+  }),
+])
 </script>
 
 <template>

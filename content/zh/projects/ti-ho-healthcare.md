@@ -5,7 +5,8 @@ description: 鈦和生醫官方網站。
 image: /project-images/ti-ho-healthcare.webp
 alt: 鈦和生醫官方網站開發
 ogImage: /project-images/ti-ho-healthcare.webp
-tags: ['網站開發', 'JavaScript', '品牌合作']
+tags: ['網站開發', 'JavaScript', '品牌合作', '互動設計', 'RWD', '無障礙', '前端技術', '企業網站', 'UI/UX']
+categories: ['專案案例', '前端開發', '品牌網站', '醫療產業']
 published: true
 
 sitemap:

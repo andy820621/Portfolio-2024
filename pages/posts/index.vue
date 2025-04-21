@@ -24,22 +24,23 @@ const baseUrl = useRuntimeConfig().public.i18n.baseUrl
 
 useSchemaOrg([
   defineWebPage({
-    name: '部落格文章列表',
-    description: 'BarZ Hsieh 的技術部落格',
+    '@type': 'CollectionPage',
+    'name': t('blogsPage.title'),
+    'description': t('blogsPage.description'),
+    'mainEntity': {
+      '@type': 'ItemList',
+      'itemListElement': filteredData.value.map((post, index) => ({
+        '@type': 'ListItem',
+        'position': index + 1,
+        'item': {
+          '@type': 'BlogPosting',
+          'headline': post.title,
+          'url': `${baseUrl}${post.path}`,
+          'datePublished': post.date,
+        },
+      })),
+    },
   }),
-  {
-    '@type': 'ItemList',
-    'itemListElement': filteredData.value.map((post, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'item': {
-        '@type': 'BlogPosting',
-        'headline': post.title,
-        'url': `${baseUrl}${post.path}`,
-        'datePublished': post.date,
-      },
-    })),
-  },
 ])
 </script>
 

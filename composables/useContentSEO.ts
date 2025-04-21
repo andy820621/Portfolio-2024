@@ -14,10 +14,9 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
   const config = useRuntimeConfig()
   const { generateHrefLangLinks } = useHrefLang()
 
-  // 計算完整的頁面標題
   const pageTitle = computed(() => {
     const title = data.value.title
-    return title ? `${title} | BarZ Hsieh` : seoData.ogTitle
+    return title || seoData.ogTitle
   })
 
   const pageDescription = computed(() =>

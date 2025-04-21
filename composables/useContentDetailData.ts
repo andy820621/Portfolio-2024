@@ -1,27 +1,24 @@
-export function useContentDetailData(contentData: Ref<any> | any) {
+import type { PageCollectionItemBase } from "@nuxt/content"
+import type { AsyncContentDataType } from "~/types/main"
+
+export function useContentDetailData<T = PageCollectionItemBase>(contentData: AsyncContentDataType) {
   const { t } = useI18n()
 
-  // 檢查 contentData 是否為 Ref，如果不是，則將其包裝為 Ref
-  const contentDataRef = isRef(contentData) ? contentData : ref(contentData)
+  const { content, surroundContent } = toRefs(contentData.value!)
 
   const mainData = computed(() => {
-    if (!contentDataRef.value)
-      return null
-
-    const content = contentDataRef.value[0]
-    const wordCount = content.body ? countWords(content.body) : 0
+    const wordCount = content.value.body ? countWords(content.value.body) : 0
 
     return {
-      ...content,
+      ...content.value as T,
       wordCount,
       readingTime: useEstimateReadingTime(wordCount, t),
-    }
+    } 
   })
 
-  
-  const prevContent = computed(() => contentDataRef.value?.[1]?.[0])
-  const nextContent = computed(() => contentDataRef.value?.[1]?.[1])
-  
+  const prevContent = computed(() => surroundContent.value?.[0] ?? null)
+  const nextContent = computed(() => surroundContent.value?.[1] ?? null)
+
   return {
     mainData,
     prevContent,

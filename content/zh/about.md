@@ -40,7 +40,7 @@ description: BarZ Hsieh 的個人網站
 
 ---
 
-你可以透過以下管道聯絡我：
+你可以透過以下管道更加認識我：
 
 <p flex="~ gap-3 wrap" class="mt--2!">
   <a href="https://github.com/andy820621" target="_blank" space-x-1 flex="~ items-center" title="Github">

@@ -14,11 +14,14 @@ const articleSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
   date: z.string().optional(),
+  updatedAt: z.string().optional(),
   image: z.string().optional(),
   alt: z.string().optional(),
   ogImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  categories: z.array(z.string()).optional(),
   published: z.boolean().optional(),
+  rawbody: z.string(),
 })
 
 // projects 內容模式
@@ -30,7 +33,9 @@ const projectSchema = z.object({
   alt: z.string().optional(),
   ogImage: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  categories: z.array(z.string()).optional(),
   published: z.boolean().optional(),
+  rawbody: z.string(),
 })
 
 // demos 內容模式

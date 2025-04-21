@@ -5,7 +5,8 @@ description: Here you will lean how to connect your namecheap domain to vercel d
 image: /blog-images/connect-namecheap-to-vercel.jpg
 alt: How To Connect You Namecheap Domain With Vercel Deployed App
 ogImage: /blog-images/connect-namecheap-to-vercel.jpg
-tags: ['namecheap', 'vercel']
+tags: ['namecheap', 'vercel', 'custom domain', 'dns', 'deployment', 'web hosting']
+categories: ['Web Development', 'Domain Management', 'Deployment Guides']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

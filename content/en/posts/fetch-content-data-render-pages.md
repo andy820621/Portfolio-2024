@@ -5,7 +5,8 @@ description: Here we will learn How To Properly Fetch Nuxt Content Data and Rend
 image: /blog-images/fetch-content-data-render-pages.jpg
 alt: How To Properly Fetch Nuxt Content Data and Render It in Nuxt Pages
 ogImage: /blog-images/fetch-content-data-render-pages.jpg
-tags: ['nuxt', 'nuxt-content']
+tags: ['nuxt', 'nuxt-content', 'content-module', 'vue', 'fetch-data', 'static-site', 'markdown', 'nuxt3']
+categories: ['Nuxt', 'Content Management', 'Vue.js', 'Static Site Generation']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

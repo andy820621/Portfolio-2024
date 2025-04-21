@@ -5,7 +5,8 @@ description: In recent vue project we see that vuex type not working properly. W
 image: /blog-images/how-to-fix-vuex-type-issue.jpg
 alt: How to fix vuex type issue
 ogImage: /blog-images/how-to-fix-vuex-type-issue.jpg
-tags: ['vue',"vuex"]
+tags: ['vue', 'vuex', 'typescript', 'type error', 'state management', 'frontend', 'bug fix']
+categories: ['Frontend', 'Vue', 'State Management', 'TypeScript']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

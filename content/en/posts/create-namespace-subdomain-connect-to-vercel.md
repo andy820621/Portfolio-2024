@@ -5,7 +5,8 @@ description: Here we will learn, How To Create Namespace Subdomain & Connect To 
 image: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
 alt: How To Create Namespace Subdomain & Connect To Vercel App
 ogImage: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
-tags: ['nuxt', 'vercel', 'namecheap']
+tags: ['subdomain', 'dns', 'namecheap', 'vercel', 'deployment', 'custom-domain']
+categories: ['Web Hosting', 'Domain Management', 'Deployment Guides']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"

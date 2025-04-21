@@ -5,6 +5,8 @@ import './assets//main.scss'
 import './assets//markdown.css'
 import './assets//prose.css'
 
+const { localeProperties } = useI18n()
+
 useSchemaOrg([
   defineWebPage({
     '@id': 'https://barz.app/#webpage',
@@ -19,11 +21,7 @@ useSchemaOrg([
       '@type': 'Person',
       'name': 'BarZ Hsieh',
     },
-    'inLanguage': [
-      'en',
-      'en-US',
-      'zh-TW',
-    ],
+    'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': 'https://barz.app/#website',
     },
@@ -42,11 +40,7 @@ useSchemaOrg([
     'author': 'BarZ Hsieh',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
     'url': 'https://barz.app/',
-    'inLanguage': [
-      'en',
-      'en-US',
-      'zh-TW',
-    ],
+    'inLanguage': localeProperties.value.language,
     'publisher': {
       '@id': 'https://barz.app/#identity',
     },
@@ -61,6 +55,19 @@ useSchemaOrg([
       'https://www.twitter.com/BarZ3064',
       'https://www.instagram.com/andy820621',
       'https://github.com/andy820621',
+    ],
+    'alternateName': 'Hsieh Yao Tsu',
+    'image': 'https://barz.app/page-cover/home.webp',
+    // 'jobTitle': 'Software Engineer',
+    // 'worksFor': {
+    //   '@type': 'Organization',
+    //   'name': 'BarZ Hsieh',
+    //   'url': 'https://barz.app/',
+    // },
+    'knowsLanguage': [
+      'en',
+      'zh-TW',
+      'jp',
     ],
   }),
 ])

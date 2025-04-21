@@ -5,7 +5,8 @@ description: 智慧消防系統 - 社區防災物聯網解決方案
 image: /project-images/metc.webp
 alt: 智慧消防系統
 ogImage: /project-images/metc.webp
-tags: ['網站開發', 'JavaScript']
+tags: ['智慧消防', '物聯網', '社區防災', 'Web開發', 'Vue', 'Quasar', 'PWA', '.NET Core', 'WorkflowCore']
+categories: ['專案案例', 'IoT應用', '智慧城市', '消防科技']
 published: true
 
 sitemap:

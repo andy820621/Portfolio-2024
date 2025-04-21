@@ -5,7 +5,8 @@ description: Smart Fire Protection System - Community Disaster Prevention IoT So
 image: /project-images/metc.webp
 alt: Smart Fire Protection System
 ogImage: /project-images/metc.webp
-tags: ['Web Development', 'JavaScript']
+categories: ['IoT', 'Fire Safety', 'Smart Systems', 'Community Solutions']
+tags: ['IoT', 'Fire Protection', 'Disaster Prevention', 'Vue 3', 'Quasar', '.NET Core', 'WebSocket', 'PWA', 'WorkflowCore', 'Community Management']
 published: true
 
 sitemap:

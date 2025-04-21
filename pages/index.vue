@@ -39,6 +39,13 @@ usePageSeo({
   title: pageTitle.value || 'home',
   description: content.value?.description || t('homePage.description') || '',
 })
+
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'ProfilePage',
+    'about': { '@id': 'https://barz.app/#identity' },
+  }),
+])
 </script>
 
 <template>

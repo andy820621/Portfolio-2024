@@ -5,7 +5,8 @@ description: Ti-He Healthcare official website.
 image: /project-images/ti-ho-healthcare.webp
 alt: Ti-He Healthcare Official Website Development
 ogImage: /project-images/ti-ho-healthcare.webp
-tags: ['Website Development', 'JavaScript', 'Brand Collaboration']
+tags: ['Website Development', 'JavaScript', 'Responsive Design', 'Accessibility', 'UI/UX', 'Brand Collaboration', 'Dental Industry', 'Interactive Features']
+categories: ['Web Development', 'Healthcare Projects', 'Branding', 'Frontend Engineering']
 published: true
 
 sitemap:
