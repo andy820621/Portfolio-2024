@@ -32,7 +32,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/fontaine',
     '@formkit/auto-animate',
-    'nuxt-swiper',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxt/image',
   ],
@@ -242,6 +241,9 @@ export default defineNuxtConfig({
       enabled: true,
       open: true,
     },
+  },
+  features: {
+    inlineStyles: true,
   },
   vite: {
     build: {

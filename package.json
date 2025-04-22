@@ -49,8 +49,8 @@
     "eslint": "^9.24.0",
     "eslint-plugin-format": "^1.0.1",
     "nuxt-headlessui": "^1.2.0",
-    "nuxt-swiper": "^1.2.2",
     "sass": "^1.86.3",
+    "swiper": "^11.2.6",
     "typescript": "^5.8.3",
     "unocss": "^66.0.0",
     "vue-tsc": "^2.2.8"

@@ -6,7 +6,11 @@ import lgShare from 'lightgallery/plugins/share'
 import lgThumbnail from 'lightgallery/plugins/thumbnail'
 // import lgVideo from 'lightgallery/plugins/video'
 import lgZoom from 'lightgallery/plugins/zoom'
+
+import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import 'swiper/css'
+import 'swiper/css/navigation'
 
 export interface Photo {
   src: string
@@ -121,7 +125,7 @@ function onSlideChange(_swiper: SwiperClass) {
 
     <Swiper
       ref="swiper"
-      :modules="[SwiperNavigation]"
+      :modules="[Navigation]"
       :slides-per-view="1"
       navigation
       normalize-slide-index

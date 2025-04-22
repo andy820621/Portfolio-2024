@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import './assets//variable.css'
+import './assets/variable.css'
 import '@unocss/reset/tailwind.css'
-import './assets//main.scss'
-import './assets//markdown.css'
-import './assets//prose.css'
+import './assets/main.scss'
+import './assets/markdown.css'
+import './assets/prose.css'
 
 const { localeProperties } = useI18n()
 
