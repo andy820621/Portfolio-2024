@@ -1,7 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { glob } from 'glob'
+import pkg from 'glob'
+
+const { glob } = pkg
 
 // 獲取當前文件的目錄路徑
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
