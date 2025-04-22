@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.5.3",
+    "floating-vue": "^5.2.2",
     "gsap": "^3.12.7",
     "lightgallery": "^2.8.3",
     "nuxt": "^3.16.2",
@@ -47,7 +48,6 @@
     "dayjs": "^1.11.13",
     "eslint": "^9.24.0",
     "eslint-plugin-format": "^1.0.1",
-    "floating-vue": "^5.2.2",
     "nuxt-headlessui": "^1.2.0",
     "nuxt-purgecss": "^2.0.0",
     "sass": "^1.86.3",
