@@ -43,6 +43,8 @@ export default defineNuxtConfig({
     config: {
       preload: 'swap', // Default: 'media'
       inlineFonts: true, // Inline critical font-face rules (default: false)
+      preloadFonts: true,
+      pruneSource: true,
     },
   },
   purgecss: {
