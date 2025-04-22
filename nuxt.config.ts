@@ -3,6 +3,7 @@ import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
+import { safelist } from './data/purgeCssSafelist'
 import { getSitemapDateFormat } from './utils/dayjs'
 
 type SupportedLocale = 'en' | 'zh'
@@ -30,11 +31,24 @@ export default defineNuxtConfig({
     'floating-vue/nuxt',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
-    '@nuxtjs/fontaine',
     '@formkit/auto-animate',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxt/image',
+    '@nuxtjs/critters',
+    'nuxt-purgecss',
   ],
+  // CSS performance optimization
+  critters: {
+    // Options passed directly to beasties: https://github.com/danielroe/beasties#beasties-
+    config: {
+      preload: 'swap', // Default: 'media'
+      inlineFonts: true, // Inline critical font-face rules (default: false)
+    },
+  },
+  purgecss: {
+    enabled: process.env.NODE_ENV === 'production',
+    safelist,
+  },
   routeRules: generateRouteRules({
     locales,
   }),
