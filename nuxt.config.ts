@@ -107,6 +107,9 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon/apple-touch-icon-180x180.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+        // 優化字型載入速度
+        { rel: 'preconnect', href: 'https://fonts.bunny.net', crossorigin: '' },
+        { rel: 'dns-prefetch', href: 'https://fonts.bunny.net' },
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
