@@ -20,9 +20,9 @@ const {
       <NuxtLink
         :to="to"
         :title="tooltipContent"
+        :aria-label="tooltipContent || to"
         class="border-b-none! flex items-center"
         target="_blank"
-        :aria-label="tooltipContent || to"
       >
         <Icon :name="icon" :class="iconClass" :size="size" aria-hidden="true" />
         <span class="sr-only">{{ tooltipContent || to }}</span>

@@ -27,7 +27,7 @@ const localePath = useLocalePath()
           {{ prev.description }}
           <slot />
         </div>
-        <NuxtLink :to="localePath(prev.path)" class="absolute inset-0" />
+        <NuxtLink title="Previous Page" aria-label="Previous Page" :to="localePath(prev.path)" class="absolute inset-0" />
       </div>
     </li>
 
@@ -47,7 +47,7 @@ const localePath = useLocalePath()
           {{ next.description }}
           <slot />
         </div>
-        <NuxtLink :to="localePath(next.path)" class="absolute inset-0" />
+        <NuxtLink title="Next Page" aria-label="Next Page" :to="localePath(next.path)" class="absolute inset-0" />
       </div>
     </li>
   </ul>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Collections } from '@nuxt/content'
+import ProseTh from '~/components/content/ProseTh.vue'
 
 const { t, locale } = useI18n()
 
@@ -51,7 +52,7 @@ useSchemaOrg([
 <template>
   <div class="prose m-auto ">
     <article>
-      <ContentRenderer v-if="content" :value="content" />
+      <ContentRenderer v-if="content" :value="content" :components="{ th: ProseTh }" />
 
       <div v-else-if="error" class="h-[80vh] w-[80vw] grid items-center justify-center">
         <h1>{{ t('error.occurred') }}</h1>

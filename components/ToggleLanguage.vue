@@ -18,9 +18,9 @@ function handleLocaleChange(newLocale: Locale) {
         class="text-sm rounded-full py-[0.2rem] px-[.3rem]"
       >
         <Icon name="material-symbols-light:language" />
-        <p class="pb-[.1rem]">
+        <span class="pb-[.1rem]">
           {{ locales.find(loc => loc.code === locale)?.code }}
-        </p>
+        </span>
         <Icon name="ri:arrow-down-s-line" class="transition-transform duration-300" :class="[open && 'rotate-180']" />
       </ListboxButton>
       <Transition

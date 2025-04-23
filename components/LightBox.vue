@@ -113,14 +113,16 @@ function onSlideChange(_swiper: SwiperClass) {
   <div v-if="photos && photos.length" class="photo-gallery">
     <button
       ref="lightBoxBtn"
+      type="button"
       title="Open Light Gallery"
+      aria-label="Open Light Gallery"
       class="rounded-tr-[10px] rounded-bl-[5px]"
       absolute right-0 w-8 h-8 hover:op100
       bg-hex-8883
       hover-bg-hex-888381 transition duration-300 z-100 print:hidden
       @click="openGallery(activeIndex)"
     >
-      <div i-iconoir:expand />
+      <span i-iconoir:expand />
     </button>
 
     <Swiper

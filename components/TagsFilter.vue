@@ -26,6 +26,9 @@ function toggleTag(tag: string) {
     <button
       v-for="tag in allTags"
       :key="tag"
+      type="button"
+      title="Filter by tag"
+      aria-label="Filter by tag"
       class="px-2 py-1 rounded"
       :class="[
         selectedTags?.includes(tag)

@@ -25,37 +25,39 @@ const { y: scroll } = useWindowScroll()
     </NuxtLink>
     <!-- //TODO: 考慮要不要使用他 -->
     <button
+      type="button"
       title="Scroll to top"
+      aria-label="Scroll to top"
       fixed right-3 bottom-3 w-10 h-10 hover:op100 rounded-full
       hover-bg-hex-8883 transition duration-300 z-100 print:hidden
       :class="scroll > 300 ? 'op30' : 'op0! pointer-events-none'"
       @click="toTop"
     >
-      <div i-ri-arrow-up-line />
+      <span i-ri-arrow-up-line />
     </button>
     <nav class="nav">
       <div class="spacer" />
       <div class="right" print:op0>
-        <NuxtLink :to="localePath('/posts')" title="Blog">
+        <NuxtLink :to="localePath('/posts')" title="Blog" aria-label="Blog">
           <span class="lt-md:hidden">Blog</span>
           <Icon name="ri:article-line" class="md:hidden" aria-hidden="true" />
         </NuxtLink>
 
-        <NuxtLink :to="localePath('/projects')" title="Projects">
+        <NuxtLink :to="localePath('/projects')" title="Projects" aria-label="Projects">
           <span class="lt-md:hidden">Projects</span>
           <Icon name="ri:projector-line" class="md:hidden" aria-hidden="true" />
         </NuxtLink>
 
-        <NuxtLink :to="localePath('/demos')" title="Demos">
+        <NuxtLink :to="localePath('/demos')" title="Demos" aria-label="Demos">
           <span class="lt-md:hidden">Demos</span>
           <Icon name="i-mdi-monitor-dashboard" class="md:hidden" aria-hidden="true" />
         </NuxtLink>
 
-        <!-- <NuxtLink :to="localePath('/gallery')" title="Gallery">
+        <!-- <NuxtLink :to="localePath('/gallery')" title="Gallery" aria-label="Gallery">
           <Icon name="i-ri-screenshot-line" class="md:hidden" />
         </NuxtLink>
 
-        <NuxtLink :to="localePath('/labs')" title="Labs">
+        <NuxtLink :to="localePath('/labs')" title="Labs" aria-label="Labs">
           <Icon name="i-ri-screenshot-line" class="md:hidden" />
         </NuxtLink> -->
 

@@ -18,6 +18,9 @@ const { description = 'We couldn\'t find any posts matching your search.' } = de
 
       <div class="mt-6">
         <button
+          type="button"
+          title="Clear filters"
+          aria-label="Clear filters"
           class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-hover base-focus"
           @click="clearFilters"
         >

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DemoContent } from '~/types/main'
+import ProseTh from '../content/ProseTh.vue'
 
 const { content, baseName, thumbnailType, title } = defineProps<{
   content: DemoContent
@@ -81,6 +82,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
             hover="text-[var(--clr-primary-green)] scale-110 duration-500"
             flex="~ items-center"
             :aria-label="`Visit ${name} for ${title || baseName}`"
+            :title="`Visit ${name} for ${title || baseName}`"
           >
             <div w-6 h-6 flex="~ items-center justify-center" aria-hidden="true">
               <Icon :name="icon" />
@@ -92,11 +94,14 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
     </div>
 
     <div class="prose prose-sm p-4 pt-1 m-0 pb-3">
-      <ContentRenderer :value="displayContent" />
+      <ContentRenderer :value="displayContent" :components="{ th: ProseTh }" />
 
       <div class="flex flex-col items-start">
         <button
           v-if="truncatedContent.isTruncated"
+          type="button"
+          title="Read more"
+          aria-label="Read more"
           class="custom-btn-underline flex gap-1 w-fit  mb-1 underline-base hover:underline-base-hover text-sub text-[15px] items-center transition-all duration-300"
           @click="toggleContent"
         >

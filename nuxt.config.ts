@@ -36,6 +36,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/critters',
     'nuxt-purgecss',
+    '@nuxtjs/html-validator',
   ],
   // CSS performance optimization
   critters: {
@@ -51,6 +52,22 @@ export default defineNuxtConfig({
     enabled: process.env.NODE_ENV === 'production',
     safelist,
   },
+
+  htmlValidator: {
+    // options: {
+    //   rules: {
+    //     'element-required-attributes': [
+    //       'error',
+    //       {
+    //         ignore: {
+    //           th: ['scope'],
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
+  },
+
   routeRules: generateRouteRules({
     locales,
   }),

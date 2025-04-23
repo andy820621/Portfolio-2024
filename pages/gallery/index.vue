@@ -165,7 +165,7 @@ onMounted(() => {
               transitionDelay: getTransitionDelay(groups, group),
             }"
           >
-            <NuxtLink :to="`/gallery/${group.id}`">
+            <NuxtLink :to="`/gallery/${group.id}`" :title="group.title" :aria-label="group.title">
               <GalleryImageCard
                 :id="group.id"
                 :title="group.title"

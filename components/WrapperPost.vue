@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { AllCollectionItem, ContentDetailDataReturn } from '~/types/main';
+import type { AllCollectionItem, ContentDetailDataReturn } from '~/types/main'
+import ProseTh from './content/ProseTh.vue'
 
 const { contenDetailData, redirectLink = '/posts' } = defineProps<{
   contenDetailData: ContentDetailDataReturn<AllCollectionItem>
@@ -49,7 +50,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
             :word-count="data.wordCount"
             :reading-time="data.readingTime"
           />
-          <ContentRenderer v-if="mainData" :value="mainData">
+          <ContentRenderer v-if="mainData" :value="mainData" :components="{ th: ProseTh }">
             <template #empty>
               <p>No content found.</p>
             </template>
@@ -61,6 +62,8 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
                 :to="localePath(redirectLink)"
                 class="inline-block px-6 py-3 text-lg font-semibold base-btn transition duration-300 ease-in-out hover:-translate-y-1
           shadow-base hover:shadow-base-hover"
+                :aria-label="$t('backToPostsList')"
+                :title="$t('backToPostsList')"
               >
                 {{ $t('backToPostsList') }}
               </NuxtLink>

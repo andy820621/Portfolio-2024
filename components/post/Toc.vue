@@ -13,9 +13,9 @@ const route = useRoute()
       <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
         <div flex items-center mb-3 border-b dark:border-gray-800 pb-2 space-x-2>
           <Icon name="i-ri-menu-2-fill" />
-          <h1 class="text-sm font-bold">
+          <h2 class="text-sm font-bold">
             {{ $t('Table Of Content') }}
-          </h1>
+          </h2>
         </div>
         <NuxtLink
           v-for="link in links"
@@ -23,6 +23,8 @@ const route = useRoute()
           :to="{ path: route.path, hash: `#${link.id}` }"
           class="block text-xs mb-3 hover:underline"
           :class="{ 'text-active': activeId === link.id }"
+          :aria-label="`${link.text}'s anchor link`"
+          :title="`${link.text}'s anchor link`"
         >
           {{ link.text }}
         </NuxtLink>
