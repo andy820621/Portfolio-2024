@@ -2,9 +2,10 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import pkg from 'glob'
+import glob from 'glob'
 
-const globSync = pkg.sync || pkg.globSync
+// 使用正確的方法獲取 globSync 函數
+const globSync = glob.sync || glob.globSync
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '..')
