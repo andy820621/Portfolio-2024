@@ -75,7 +75,7 @@ export default defineNuxtConfig({
         { name: 'twitter:site', content: seoData.twitterSite },
         { name: 'twitter:title', content: navbarData.homeTitle },
         { name: 'twitter:description', content: seoData.twitterDescription },
-        { name: 'fb:app_id', content: seoData.fbAppId },
+        { property: 'fb:app_id', content: seoData.fbAppId },
         // { name: 'fb:pages_id', content: seoData.fbPagesId },
         { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
