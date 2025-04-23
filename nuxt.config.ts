@@ -263,11 +263,11 @@ export default defineNuxtConfig({
     // fallback: 'light',
   },
   build: {
-    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
-    // analyze: {
-    //   enabled: true,
-    //   open: true,
-    // },
+    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker', 'gsap'],
+    analyze: {
+      enabled: true,
+      open: true,
+    },
   },
   features: {
     inlineStyles: true,
@@ -299,6 +299,7 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         '@nuxt/vite-builder',
+        'gsap',
         // 'fsevents',
         // '@nuxt/content',
         // 'shiki',
