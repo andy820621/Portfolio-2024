@@ -34,26 +34,18 @@ export default defineNuxtConfig({
     '@formkit/auto-animate',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxt/image',
-    '@nuxtjs/critters',
     'nuxt-purgecss',
     '@nuxtjs/html-validator',
   ],
   // CSS performance optimization
-  critters: {
-    // Options passed directly to beasties: https://github.com/danielroe/beasties#beasties-
-    config: {
-      preload: 'swap', // Default: 'media'
-      inlineFonts: true, // Inline critical font-face rules (default: false)
-      preloadFonts: true,
-      pruneSource: true,
-    },
-  },
   purgecss: {
     enabled: process.env.NODE_ENV === 'production',
     safelist,
   },
 
+  // HTML optimization
   htmlValidator: {
+    enabled: process.env.NODE_ENV !== 'production',
     // options: {
     //   rules: {
     //     'element-required-attributes': [
