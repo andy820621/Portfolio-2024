@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import { gsap } from 'gsap'
+
+gsap.registerPlugin({ CSSPlugin: false })
+
 const isHoverable = ref(false)
 const isHovered = ref(false)
 let tl: gsap.core.Timeline
 let waitTween: gsap.core.Timeline
 
-onMounted(async () => {
-  const { gsap } = await import('gsap')
-
+onMounted(() => {
   tl = gsap.timeline({ repeat: -1 })
   const paths = ['#path1', '#path2', '#path3', '#path4', '#path5', '#circle']
 
@@ -54,12 +56,12 @@ onMounted(async () => {
     const startTime = accumulatedTime
     const length = (document.querySelector(path) as SVGPathElement).getTotalLength()
 
-    tl!.to(path, { opacity: 1, duration: entranceParams.opacityDuration }, startTime)
+    tl.to(path, { opacity: 1, duration: entranceParams.opacityDuration }, startTime)
 
     if (path === '#circle') {
       const C_DELAY = 0.08
 
-      tl!.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: entranceParams.drawDuration * 1.5, ease: 'sine.out', onComplete: () => {
+      tl.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: entranceParams.drawDuration * 1.5, ease: 'sine.out', onComplete: () => {
         isHoverable.value = true
       } }, startTime + C_DELAY)
     }
@@ -68,11 +70,11 @@ onMounted(async () => {
       const newDrawDuration = oldTotalTime * 0.9
       const newStartTime = startTime + oldTotalTime - entranceParams.fillDuration
 
-      tl!.fromTo(path, { strokeDasharray: length, strokeDashoffset: length, fillOpacity: 0 }, { strokeDashoffset: 0, duration: newDrawDuration, ease: 'power5.inOut' }, startTime).to(path, { fillOpacity: 1, duration: entranceParams.fillDuration, ease: 'power1.in' }, newStartTime,
+      tl.fromTo(path, { strokeDasharray: length, strokeDashoffset: length, fillOpacity: 0 }, { strokeDashoffset: 0, duration: newDrawDuration, ease: 'power5.inOut' }, startTime).to(path, { fillOpacity: 1, duration: entranceParams.fillDuration, ease: 'power1.in' }, newStartTime,
       )
     }
     else {
-      tl!.fromTo(path, { strokeDasharray: length, strokeDashoffset: length, fillOpacity: 0 }, { strokeDashoffset: 0, duration: entranceParams.drawDuration, ease: 'power1.out' }, startTime).to(path, { fillOpacity: 1, duration: entranceParams.fillDuration, ease: 'power1.in' }, `${startTime + entranceParams.drawDuration / 2}`,
+      tl.fromTo(path, { strokeDasharray: length, strokeDashoffset: length, fillOpacity: 0 }, { strokeDashoffset: 0, duration: entranceParams.drawDuration, ease: 'power1.out' }, startTime).to(path, { fillOpacity: 1, duration: entranceParams.fillDuration, ease: 'power1.in' }, `${startTime + entranceParams.drawDuration / 2}`,
       )
     }
 
@@ -94,13 +96,13 @@ onMounted(async () => {
     const length = (document.querySelector(path) as SVGPathElement).getTotalLength()
 
     if (path === '#circle') {
-      tl!.to(path, { strokeDashoffset: length, duration: exitParams.drawDuration }, startTime)
+      tl.to(path, { strokeDashoffset: length, duration: exitParams.drawDuration }, startTime)
     }
     else {
-      tl!.to(path, { fillOpacity: 0, duration: exitParams.fillDuration / 2 }, startTime).to(path, { strokeDashoffset: length, duration: exitParams.drawDuration }, `${startTime + exitParams.fillDuration / 4}`)
+      tl.to(path, { fillOpacity: 0, duration: exitParams.fillDuration / 2 }, startTime).to(path, { strokeDashoffset: length, duration: exitParams.drawDuration }, `${startTime + exitParams.fillDuration / 4}`)
     }
 
-    tl!.to(path, { opacity: 0, duration: exitParams.opacityDuration }, `${startTime + exitParams.pathTotalDuration - exitParams.opacityDuration}`)
+    tl.to(path, { opacity: 0, duration: exitParams.opacityDuration }, `${startTime + exitParams.pathTotalDuration - exitParams.opacityDuration}`)
   })
 
   // 計算總的離場動畫時間
