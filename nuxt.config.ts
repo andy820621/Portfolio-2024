@@ -3,7 +3,6 @@ import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack'
 import { navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
-import { safelist } from './data/purgeCssSafelist'
 import { getSitemapDateFormat } from './utils/dayjs'
 
 type SupportedLocale = 'en' | 'zh'
@@ -34,16 +33,9 @@ export default defineNuxtConfig({
     '@formkit/auto-animate',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxt/image',
-    'nuxt-purgecss',
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
   ],
-  // CSS performance optimization
-  purgecss: {
-    enabled: process.env.NODE_ENV === 'production',
-    safelist,
-  },
-
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
