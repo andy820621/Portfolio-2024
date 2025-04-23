@@ -264,10 +264,10 @@ export default defineNuxtConfig({
   },
   build: {
     transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
-    analyze: {
-      enabled: true,
-      open: true,
-    },
+    // analyze: {
+    //   enabled: true,
+    //   open: true,
+    // },
   },
   features: {
     inlineStyles: true,
