@@ -36,6 +36,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-purgecss',
     '@nuxtjs/html-validator',
+    'nuxt-delay-hydration',
   ],
   // CSS performance optimization
   purgecss: {
@@ -58,6 +59,12 @@ export default defineNuxtConfig({
     //     ],
     //   },
     // },
+  },
+
+  delayHydration: {
+    // enables nuxt-delay-hydration in dev mode for testing
+    // NOTE: you should disable this once you've finished testing, it will break HMR
+    debug: process.env.NODE_ENV === 'development',
   },
 
   routeRules: generateRouteRules({
