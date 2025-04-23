@@ -55,6 +55,10 @@ export default defineConfig({
         condensed: 'Roboto Condensed',
         wisper: 'Bad Script',
       },
+      timeouts: {
+        warning: 800,
+        failure: 5000,
+      },
     }),
   ],
   transformers: [
