@@ -1,11 +1,14 @@
 import fs from 'node:fs'
+// 使用 CommonJS 風格導入 glob
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import glob from 'glob'
 
-// 使用正確的方法獲取 globSync 函數
-const globSync = glob.sync || glob.globSync
+const require = createRequire(import.meta.url)
+const glob = require('glob')
+
+const globSync = glob.sync
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '..')
