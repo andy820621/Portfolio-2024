@@ -18,8 +18,7 @@ useSchemaOrg([
       '@id': 'https://barz.app/#identity',
     },
     'author': {
-      '@type': 'Person',
-      'name': 'BarZ Hsieh',
+      '@id': 'https://barz.app/#identity',
     },
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
@@ -37,7 +36,9 @@ useSchemaOrg([
   defineWebSite({
     '@id': 'https://barz.app/#website',
     '@type': 'WebSite',
-    'author': 'BarZ Hsieh',
+    'author': {
+      '@id': 'https://barz.app/#identity',
+    },
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
     'url': 'https://barz.app/',
     'inLanguage': localeProperties.value.language,
