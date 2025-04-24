@@ -283,9 +283,6 @@ export default defineNuxtConfig({
               if (id.includes('nitropack')) {
                 return 'nitropack'
               }
-              if (id.includes('gsap')) {
-                return 'gsap'
-              }
               if (id.includes('@iconify-json')) {
                 return 'iconify-icons'
               }
