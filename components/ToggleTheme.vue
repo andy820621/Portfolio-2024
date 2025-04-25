@@ -20,7 +20,7 @@ onMounted(() => {
 <template>
   <button
     type="button"
-    class="select-none"
+    class="select-none inline-flex"
     title="Toggle Color Scheme"
     aria-label="Toggle Color Scheme"
     @click="toggleDark"

@@ -38,35 +38,35 @@ const { y: scroll } = useWindowScroll()
     <nav class="nav">
       <div class="spacer" />
       <div class="right" print:op0>
-        <NuxtLink :to="localePath('/posts')" title="Blog" aria-label="Blog">
+        <NuxtLink :to="localePath('/posts')" title="Blog" aria-label="Blog" lt-md:inline-flex>
           <span class="lt-md:hidden">Blog</span>
           <Icon name="ri:article-line" class="md:hidden" aria-hidden="true" />
         </NuxtLink>
 
-        <NuxtLink :to="localePath('/projects')" title="Projects" aria-label="Projects">
+        <NuxtLink :to="localePath('/projects')" title="Projects" aria-label="Projects" lt-md:inline-flex>
           <span class="lt-md:hidden">Projects</span>
           <Icon name="ri:projector-line" class="md:hidden" aria-hidden="true" />
         </NuxtLink>
 
-        <NuxtLink :to="localePath('/demos')" title="Demos" aria-label="Demos">
+        <NuxtLink :to="localePath('/demos')" title="Demos" aria-label="Demos" lt-md:inline-flex>
           <span class="lt-md:hidden">Demos</span>
           <Icon name="i-mdi-monitor-dashboard" class="md:hidden" aria-hidden="true" />
         </NuxtLink>
 
-        <!-- <NuxtLink :to="localePath('/gallery')" title="Gallery" aria-label="Gallery">
-          <Icon name="i-ri-screenshot-line" class="md:hidden" />
+        <NuxtLink :to="localePath('/gallery')" title="Gallery" aria-label="Gallery" inline-flex>
+          <Icon name="i-ri-camera-3-line" />
         </NuxtLink>
 
-        <NuxtLink :to="localePath('/labs')" title="Labs" aria-label="Labs">
+        <!-- <NuxtLink :to="localePath('/labs')" title="Labs" aria-label="Labs">
           <Icon name="i-ri-screenshot-line" class="md:hidden" />
-        </NuxtLink> -->
+        </NuxtLink>  -->
 
         <!-- Social Media -->
-        <NuxtLink href="https://www.instagram.com/andy820621" target="_blank" title="Instagram" class="lt-md:hidden" aria-label="Instagram 個人頁面" rel="noopener noreferrer">
-          <Icon name="i-simple-icons-instagram" aria-hidden="true" />
+        <NuxtLink href="https://www.instagram.com/andy820621" target="_blank" title="Instagram" class="lt-md:hidden" aria-label="Instagram 個人頁面" rel="noopener noreferrer" md:inline-flex>
+          <Icon name="i-ri-instagram-line" aria-hidden="true" />
           <span class="sr-only">Instagram</span>
         </NuxtLink>
-        <NuxtLink href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden" aria-label="GitHub 個人頁面" rel="noopener noreferrer">
+        <NuxtLink href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden" aria-label="GitHub 個人頁面" rel="noopener noreferrer" md:inline-flex>
           <Icon name="i-ri-github-fill" aria-hidden="true" />
           <span class="sr-only">GitHub</span>
         </NuxtLink>
@@ -79,7 +79,7 @@ const { y: scroll } = useWindowScroll()
   </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .header h1 {
   margin-bottom: 0;
 }
@@ -96,38 +96,49 @@ const { y: scroll } = useWindowScroll()
   display: grid;
   grid-template-columns: auto max-content;
   box-sizing: border-box;
-}
 
-.nav > * {
-  margin: auto;
-}
+  @media (max-width: 750px) {
+    padding-inline: 1.5rem;
+  }
 
-.nav img {
-  margin-bottom: 0;
-}
+  @media (max-width: 640px) {
+    padding-inline: 1.2rem;
+  }
 
-.nav a,
-.nav button {
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  transition: opacity 0.2s ease;
-  opacity: 0.6;
-  outline: none;
-}
+  @media (max-width: 500px) {
+    padding-inline: 1rem;
+  }
 
-.nav a:hover {
-  opacity: 1;
-  text-decoration-color: inherit;
-}
+  & > * {
+    margin: auto;
+  }
+  & > .img {
+    margin-bottom: 0;
+  }
 
-.nav .right {
-  display: grid;
-  grid-gap: 1.2rem;
-  grid-auto-flow: column;
-}
+  a,
+  button {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+    opacity: 0.6;
+    outline: none;
+  }
 
-.nav .right > * {
-  margin: auto;
+  a:hover {
+    opacity: 1;
+    text-decoration-color: inherit;
+  }
+
+  .right {
+    display: grid;
+    grid-gap: 1.2rem;
+    grid-auto-flow: column;
+
+    & > * {
+      margin: auto;
+    }
+  }
 }
 </style>
