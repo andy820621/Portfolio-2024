@@ -27,13 +27,13 @@ function toggleTag(tag: string) {
       v-for="tag in allTags"
       :key="tag"
       type="button"
-      title="Filter by tag"
-      aria-label="Filter by tag"
+      :title="tag"
+      :aria-label="tag"
       class="px-2 py-1 rounded"
       :class="[
         selectedTags?.includes(tag)
-          ? 'bg-primary-green text-gray-100'
-          : 'bg-primary text-gray-700 dark:text-gray-100 hover:bg-primary-hover',
+          ? '!bg-primary-green text-gray-100'
+          : '!bg-primary text-gray-700 dark:text-gray-100 hover:bg-primary-hover',
       ]"
       @click="toggleTag(tag)"
     >
