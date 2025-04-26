@@ -333,6 +333,9 @@ export default defineNuxtConfig({
     future: {
       nativeSWR: true,
     },
+    externals: {
+      external: ['better-sqlite3']
+    }
     // experimental: {
     //   database: true
     // },
