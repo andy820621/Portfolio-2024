@@ -14,8 +14,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "NODE_OPTIONS=--no-warnings eslint .",
+    "lint:fix": "NODE_OPTIONS=--no-warnings eslint . --fix"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.5.3",

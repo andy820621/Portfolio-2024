@@ -346,6 +346,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   const defaultRules: RouteRules = {
     '/': {
       prerender: true,
+      headers: { 'Cache-Control': 'public, max-age=3600' },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -359,15 +360,14 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
         ],
       },
       robots: true,
-      // TODO: 檢查為什麼加了 cache 會有問題
-      // cache: {
-      //   maxAge: 3600,
-      //   staleMaxAge: 86400,
-      // },
     },
-    '/**': { prerender: true },
+    '/**': {
+      ssr: true,
+    },
+
     '/posts': {
       prerender: true,
+      headers: { 'Cache-Control': 'public, max-age=3600' },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -382,9 +382,15 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       },
       robots: true,
     },
-    '/posts/**': { prerender: true, robots: true },
+    '/posts/**': {
+      prerender: true,
+      headers: { 'Cache-Control': 'public, max-age=86400' },
+      robots: true,
+    },
+
     '/demos': {
       prerender: true,
+      headers: { 'Cache-Control': 'public, max-age=3600' },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -399,8 +405,43 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       },
       robots: true,
     },
+
+    '/projects': {
+      swr: 21600, // 6小時
+      cache: {
+        maxAge: 3600, // 1小時
+        staleMaxAge: 86400, // 24小時
+      },
+      sitemap: {
+        lastmod,
+        changefreq: 'daily',
+        priority: 0.9,
+        images: [
+          {
+            loc: '/page-cover/projects.webp',
+            title: 'projects page image',
+            caption: 'This is the projects page image.',
+          },
+        ],
+      },
+      robots: true,
+    },
+    '/projects/**': {
+      swr: 21600,
+      cache: {
+        maxAge: 3600,
+        staleMaxAge: 86400,
+      },
+      sitemap: { changefreq: 'daily', priority: 0.9 },
+      robots: true,
+    },
+
     '/gallery': {
-      isr: 21600,
+      swr: 7200, // 2小時
+      cache: {
+        maxAge: 1800, // 30分鐘
+        staleMaxAge: 21600, // 6小時
+      },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -416,30 +457,26 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/gallery/**': {
-      isr: 21600,
+      swr: 7200,
       cache: {
-        maxAge: 21600,
+        maxAge: 1800,
+        staleMaxAge: 21600,
       },
       sitemap: { changefreq: 'daily', priority: 0.8 },
       robots: true,
     },
-    '/projects': {
-      isr: 21600,
-      sitemap: {
-        lastmod,
-        changefreq: 'daily',
-        priority: 0.9,
-        images: [
-          {
-            loc: '/page-cover/projects.webp',
-            title: 'projects page image',
-            caption: 'This is the projects page image.',
-          },
-        ],
+
+    // 靜態資源優化
+    '/assets/**': {
+      headers: {
+        'Cache-Control': 'public, max-age=31536000, immutable',
       },
-      robots: true,
     },
-    '/projects/**': { isr: 21600, sitemap: { changefreq: 'daily', priority: 0.9 }, robots: true },
+    '/_nuxt/**': {
+      headers: {
+        'Cache-Control': 'public, max-age=31536000, immutable',
+      },
+    },
   }
 
   Object.assign(rules, defaultRules)
