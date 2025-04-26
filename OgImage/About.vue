@@ -23,7 +23,7 @@ const title = computed(() => props.title.slice(0, 60))
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col justify-center bg-[#020420]">
+  <div class="h-full w-full flex flex-col justify-center bg-[#020420]">
     <svg
       class="absolute right-0 top-0"
       width="629"
@@ -53,10 +53,10 @@ const title = computed(() => props.title.slice(0, 60))
     </svg>
 
     <div class="w-[600px] pl-[100px]">
-      <p v-if="headline" class="uppercase text-[24px] text-[#00DC82] mb-4 font-semibold">
+      <p v-if="headline" class="mb-4 text-[24px] text-[#00DC82] font-semibold uppercase">
         {{ headline }}
       </p>
-      <h1 class="w-[600px] m-0 text-[75px] font-semibold mb-4 text-white flex items-center">
+      <h1 class="m-0 mb-4 w-[600px] flex items-center text-[75px] text-white font-semibold">
         <span>{{ title }}</span>
       </h1>
       <p class="text-[32px] text-[#E4E4E7] leading-tight">
@@ -64,8 +64,8 @@ const title = computed(() => props.title.slice(0, 60))
       </p>
     </div>
 
-    <div v-if="link" class="absolute top-[200px] right-[200px]">
-      <img :src="link" :alt="title" class="w-52 h-52 rounded-full object-cover">
+    <div v-if="link" class="absolute right-[200px] top-[200px]">
+      <img :src="link" :alt="title" class="h-52 w-52 rounded-full object-cover">
     </div>
   </div>
 </template>

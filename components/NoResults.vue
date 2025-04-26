@@ -6,10 +6,10 @@ const { description = 'We couldn\'t find any posts matching your search.' } = de
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div class="flex flex-col items-center justify-center px-4 py-12 lg:px-8 sm:px-6">
     <div class="text-center">
       <Icon name="emojione:magnifying-glass-tilted-left" class="mx-auto h-24 w-24 text-gray-400" />
-      <h3 class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+      <h3 class="mt-2 text-2xl text-gray-900 font-semibold dark:text-gray-100">
         {{ $t('no results found') }}
       </h3>
       <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -21,7 +21,7 @@ const { description = 'We couldn\'t find any posts matching your search.' } = de
           type="button"
           title="Clear filters"
           aria-label="Clear filters"
-          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-hover base-focus"
+          class="inline-flex items-center border border-transparent rounded-md bg-primary hover:bg-primary-hover px-4 py-2 text-sm text-white font-medium shadow-sm base-focus"
           @click="clearFilters"
         >
           Clear filters

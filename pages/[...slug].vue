@@ -17,14 +17,13 @@ const localePath = useLocalePath()
 
 <template>
   <div class="py-5">
-    <div class="container max-w-xl mx-auto ">
+    <div class="mx-auto max-w-xl container">
       <Logo404 />
 
       <div grid justify-center>
         <NuxtLink
           :to="localePath('/')"
-          class="inline-block px-6 py-3 text-lg font-semibold base-btn transition duration-300 ease-in-out hover:-translate-y-1
-          shadow-base hover:shadow-base-hover"
+          class="inline-block px-6 py-3 text-lg font-semibold hover:shadow-base-hover shadow-base transition duration-300 ease-in-out base-btn hover:-translate-y-1"
           :aria-label="$t('backToHome')"
           :title="$t('backToHome')"
         >

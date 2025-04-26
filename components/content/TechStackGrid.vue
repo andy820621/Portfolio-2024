@@ -1,6 +1,6 @@
 <template>
   <BorderWrapper :label="$t('Tech Stack')">
-    <p flex="~ gap-3 wrap" class="mt-3! mb-2!">
+    <p flex="~ gap-3 wrap" class="mb-2! mt-3!">
       <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/HTML" icon="vscode-icons:file-type-html" tooltip-content="HTML" />
       <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/CSS" icon="vscode-icons:file-type-css" tooltip-content="CSS" />
       <LinkWithTooltip to="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript" icon="skill-icons:javascript" tooltip-content="JavaScript" />

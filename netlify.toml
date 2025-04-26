@@ -3,8 +3,8 @@ command = "pnpm run build"
 publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "22.5.0"
+NODE_VERSION = "20.16.0"
 
 [functions]
 node_bundler = "esbuild"
-external_node_modules = ["better-sqlite3"]
+external_node_modules = [ "better-sqlite3" ]

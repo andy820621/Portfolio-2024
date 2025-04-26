@@ -127,7 +127,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div class="container max-w-5xl mx-auto mb-5 text-zinc-600">
+    <div class="mx-auto mb-5 max-w-5xl text-zinc-600 container">
       <PageHero
         :title="$t('galleryPage.title')"
         :description="$t('galleryPage.description')"
@@ -145,7 +145,7 @@ onMounted(() => {
       <div
         v-if="debouncedFilteredGroups.length"
         grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
-        class="container max-w-10xl mx-auto mt-10 text-zinc-600"
+        class="max-w-10xl mx-auto mt-10 text-zinc-600 container"
       >
         <div
           v-for="(groups, idx) in parts"
@@ -157,7 +157,7 @@ onMounted(() => {
             :key="group.id"
             :ref="(el) => handleGroupRef(el as HTMLElement)"
             :data-group-id="group.id"
-            class="gallery-item opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
+            class="gallery-item translate-y-10 transform opacity-0 transition-all duration-700 ease-out"
             :class="{
               'opacity-100 translate-y-0': isGroupVisible(group),
             }"

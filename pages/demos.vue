@@ -150,7 +150,7 @@ function clearFilters() {
 
 <template>
   <div>
-    <div class="container max-w-5xl mx-auto mb-5 text-zinc-600">
+    <div class="mx-auto mb-5 max-w-5xl text-zinc-600 container">
       <PageHero
         :title="$t('demosPage.title')"
         :description="$t('demosPage.description')"
@@ -168,7 +168,7 @@ function clearFilters() {
       <div
         v-if="debouncedFilteredDemoItems && parts && debouncedFilteredDemoItems.length"
         grid="~ cols-1 sm:cols-2 lg:cols-3 2xl:cols-4 gap-4"
-        class="container max-w-10xl mx-auto mt-10 text-zinc-600"
+        class="max-w-10xl mx-auto mt-10 text-zinc-600 container"
       >
         <div v-for="(items, idx) in parts" :key="idx" flex="~ col gap-4">
           <div v-for="item in items" :key="item.baseName">

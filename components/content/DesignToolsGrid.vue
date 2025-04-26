@@ -1,6 +1,6 @@
 <template>
   <BorderWrapper :label="$t('Design Tools')">
-    <p flex="~ gap-3 wrap" class="mt-3! mb-2!">
+    <p flex="~ gap-3 wrap" class="mb-2! mt-3!">
       <LinkWithTooltip to="https://www.adobe.com/products/photoshop.html" icon="skill-icons:photoshop" tooltip-content="Adobe photoshop" />
       <LinkWithTooltip to="https://www.adobe.com/products/illustrator.html" icon="skill-icons:illustrator" tooltip-content="Adobe llustrator" />
       <LinkWithTooltip to="https://www.adobe.com/products/xd.html" icon="skill-icons:xd" tooltip-content="Adobe XD" />

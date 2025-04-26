@@ -20,30 +20,30 @@ const {
 
 <template>
   <header>
-    <h1 class="text-xl dark:text-zinc-300 md:text-3xl lg:text-4xl font-bold">
+    <h1 class="text-xl font-bold lg:text-4xl md:text-3xl dark:text-zinc-300">
       {{ title || $t('no article found') }}
     </h1>
     <NuxtImg
       :src="image || ''"
       :alt="alt || ''"
       width="600"
-      class="m-auto rounded-lg shadow-lg h-32 md:h-72 w-full h-full max-h-[24vh] content-center object-cover"
+      class="m-auto h-32 h-full max-h-[24vh] w-full content-center rounded-lg object-cover shadow-lg md:h-72"
       placeholder
     />
-    <p v-if="description" class="text-xs sm:text-sm my-2! max-w-xl mx-auto text-zinc-600 dark:text-zinc-400">
+    <p v-if="description" class="mx-auto max-w-xl text-xs text-zinc-600 my-2! sm:text-sm dark:text-zinc-400">
       {{ description }}
     </p>
-    <div v-if="date" class="flex w-full sm:text-xs md:text-base mb-4 md:mt-3 md:mb-[4rem]">
-      <div class="w-full text-right md:flex md:justify-between md:items-start text-black dark:text-zinc-300 content-center gap-8 sm:text-sm">
+    <div v-if="date" class="mb-4 w-full flex md:text-base md:mb-[4rem] md:mt-3 sm:text-xs">
+      <div class="w-full content-center gap-8 text-right text-black md:flex md:items-start md:justify-between sm:text-sm dark:text-zinc-300">
         <div class="flex justify-between md:flex-col md:justify-initial">
-          <div class="flex items-center font-semibold gap-1 flex-wrap">
+          <div class="flex flex-wrap items-center gap-1 font-semibold">
             <Icon name="ri:calendar-line" />
             <p class="m-0!">
               {{ useFormatDate(date, false) || '' }}
             </p>
           </div>
 
-          <div v-if="wordCount" class="flex items-center gap-1 flex-wrap mr-1">
+          <div v-if="wordCount" class="mr-1 flex flex-wrap items-center gap-1">
             <Icon name="ph:read-cv-logo" />
             <p class="m-0!">
               {{ wordCount }} words
@@ -54,11 +54,11 @@ const {
           </div>
         </div>
 
-        <div class="flex gap-1 my-2 md:my-0 md:max-w-[70%]">
-          <Icon class="flex-shrink-0 mt-[0.45rem]" name="ri:price-tag-3-line" />
-          <div class="flex gap-1 flex-wrap">
+        <div class="my-2 flex gap-1 md:my-0 md:max-w-[70%]">
+          <Icon class="mt-[0.45rem] flex-shrink-0" name="ri:price-tag-3-line" />
+          <div class="flex flex-wrap gap-1">
             <template v-for="tag in tags" :key="tag">
-              <span class="px-[8px] py-[2.4px] rounded bg-primary text-gray-700 dark:text-gray-100 font-semibold">{{ tag }}</span>
+              <span class="rounded bg-primary px-[8px] py-[2.4px] text-gray-700 font-semibold dark:text-gray-100">{{ tag }}</span>
             </template>
           </div>
         </div>

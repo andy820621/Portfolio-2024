@@ -116,10 +116,9 @@ function onSlideChange(_swiper: SwiperClass) {
       type="button"
       title="Open Light Gallery"
       aria-label="Open Light Gallery"
-      class="rounded-tr-[10px] rounded-bl-[5px]"
-      absolute right-0 w-8 h-8 hover:op100
-      bg-hex-8883
-      hover-bg-hex-888381 transition duration-300 z-100 print:hidden
+      class="rounded-bl-[5px] rounded-tr-[10px]"
+
+      absolute right-0 z-100 h-8 w-8 bg-hex-8883 transition duration-300 print:hidden hover-bg-hex-888381 hover:op100
       @click="openGallery(activeIndex)"
     >
       <span i-iconoir:expand />

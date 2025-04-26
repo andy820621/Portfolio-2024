@@ -34,11 +34,10 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 
 <template>
   <div>
-    <div class="px-6 container max-w-5xl mx-auto sm:grid grid-cols-12 gap-x-12">
+    <div class="grid-cols-12 mx-auto max-w-5xl gap-x-12 px-6 container sm:grid">
       <div class="col-span-12 lg:col-span-9">
         <div
-          class="prose prose-pre:max-w-xs sm:prose-pre:max-w-full prose-sm sm:prose-base md:prose-lg
-          prose-h1:no-underline max-w-5xl mx-auto prose-zinc dark:prose-invert prose-img:rounded-lg"
+          class="prose prose-pre:max-w-xs prose-sm prose-h1:no-underline prose-zinc prose-img:rounded-lg sm:prose-pre:max-w-full sm:prose-base md:prose-lg dark:prose-invert mx-auto max-w-5xl"
         >
           <postHeader
             :title="data.title"
@@ -57,11 +56,10 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
           </ContentRenderer>
 
           <template v-else>
-            <div grid justify-center mt-20>
+            <div grid mt-20 justify-center>
               <NuxtLink
                 :to="localePath(redirectLink)"
-                class="inline-block px-6 py-3 text-lg font-semibold base-btn transition duration-300 ease-in-out hover:-translate-y-1
-          shadow-base hover:shadow-base-hover"
+                class="inline-block px-6 py-3 text-lg font-semibold hover:shadow-base-hover shadow-base transition duration-300 ease-in-out base-btn hover:-translate-y-1"
                 :aria-label="$t('backToPostsList')"
                 :title="$t('backToPostsList')"
               >
@@ -74,8 +72,8 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 
       <postToc v-if="tocLinks.length > 0" :links="tocLinks" :active-id="activeId" />
 
-      <div v-if="mainData" class="col-span-12 flex flex-col gap-4 mt-10">
-        <div class="flex flex-row flex-wrap md:flex-nowrap mt-10 gap-2">
+      <div v-if="mainData" class="col-span-12 mt-10 flex flex-col gap-4">
+        <div class="mt-10 flex flex-row flex-wrap gap-2 md:flex-nowrap">
           <SocialShare
             v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
             :key="network"

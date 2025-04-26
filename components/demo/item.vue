@@ -45,7 +45,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
 <template>
   <article
     class="group"
-    block of-hidden bg-base relative
+    relative block of-hidden bg-base
     border="~ base rounded-lg"
     transition="all duration-500"
     hover="shadow-xl z-10 scale-102"
@@ -63,12 +63,12 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
         v-else
         :src="`/demos/thumbnail/${baseName}.${thumbnailType}`"
         :alt="title || baseName"
-        w-full border="b base"
-        placeholder
+        border="b base"
+        placeholder w-full
       />
 
-      <div class="overlay absolute inset-0 z-2 flex flex-col justify-center items-center p-6 rounded-lg" aria-hidden="true">
-        <h2 class="article-title text-white mb-8 text-xl font-semibold text-center">
+      <div class="overlay absolute inset-0 z-2 flex flex-col items-center justify-center rounded-lg p-6" aria-hidden="true">
+        <h2 class="article-title mb-8 text-center text-xl text-white font-semibold">
           {{ title || baseName }}
         </h2>
         <nav v-if="contentLinks.length" class="links flex flex-col gap-3" aria-label="Project links">
@@ -84,7 +84,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
             :aria-label="`Visit ${name} for ${title || baseName}`"
             :title="`Visit ${name} for ${title || baseName}`"
           >
-            <div w-6 h-6 flex="~ items-center justify-center" aria-hidden="true">
+            <div h-6 w-6 flex="~ items-center justify-center" aria-hidden="true">
               <Icon :name="icon" />
             </div>
             <span text-lg>{{ name }}</span>
@@ -93,7 +93,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
       </div>
     </div>
 
-    <div class="prose prose-sm p-4 pt-1 m-0 pb-3">
+    <div class="prose prose-sm m-0 p-4 pb-3 pt-1">
       <ContentRenderer :value="displayContent" :components="{ th: ProseTh }" />
 
       <div class="flex flex-col items-start">
@@ -102,7 +102,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
           type="button"
           title="Read more"
           aria-label="Read more"
-          class="custom-btn-underline flex gap-1 w-fit  mb-1 underline-base hover:underline-base-hover text-sub text-[15px] items-center transition-all duration-300"
+          class="custom-btn-underline mb-1 w-fit flex items-center gap-1 text-[15px] text-sub transition-all duration-300 underline-base hover:underline-base-hover"
           @click="toggleContent"
         >
           <p class="m-0!">
@@ -111,8 +111,8 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
           <Icon :name="showFullContent ? 'ri:arrow-up-line' : 'ri:arrow-down-line'" />
         </button>
 
-        <div class="w-full flex items-center justify-end text-sm pt-1 opacity-70">
-          <div v-if="updateDate" class="flex items-center gap-1 mr-auto">
+        <div class="w-full flex items-center justify-end pt-1 text-sm opacity-70">
+          <div v-if="updateDate" class="mr-auto flex items-center gap-1">
             <Icon name="mdi:update" />
             <time :datetime="content.updatedAt">
               {{ updateDate }}

@@ -220,9 +220,9 @@ export default defineNuxtConfig({
         },
       },
     },
-    experimental: {
-      sqliteConnector: 'native',
-    },
+    // experimental: {
+    //   sqliteConnector: 'native',
+    // },
   },
   i18n: {
     baseUrl: process.env.I18N_BASE_URL,
@@ -334,8 +334,8 @@ export default defineNuxtConfig({
       nativeSWR: true,
     },
     externals: {
-      external: ['better-sqlite3']
-    }
+      external: ['better-sqlite3'],
+    },
     // experimental: {
     //   database: true
     // },

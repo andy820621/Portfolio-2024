@@ -7,13 +7,13 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="h-full w-full flex items-start justify-start border-solid border-blue-500 border-[12px] bg-gray-50">
-    <div class="flex items-start justify-start h-full">
-      <div class="flex flex-col justify-between w-full h-full">
-        <h1 class="text-[80px] p-20 font-black text-left">
+  <div class="h-full w-full flex items-start justify-start border-[12px] border-blue-500 border-solid bg-gray-50">
+    <div class="h-full flex items-start justify-start">
+      <div class="h-full w-full flex flex-col justify-between">
+        <h1 class="p-20 text-left text-[80px] font-black">
           {{ title }}
         </h1>
-        <p class="text-2xl pb-10 px-20 font-bold mb-0">
+        <p class="mb-0 px-20 pb-10 text-2xl font-bold">
           mycoolsite.com
         </p>
       </div>

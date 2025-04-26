@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div class="relative border border-base rounded-lg">
-    <span class="absolute -top-[.9rem] left-3 bg-base px-1 text-base">
+    <span class="absolute left-3 bg-base px-1 text-base -top-[.9rem]">
       {{ label }}
     </span>
     <div class="px-6 py-3">

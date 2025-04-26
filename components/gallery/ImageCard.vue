@@ -22,15 +22,15 @@ const imageSrc = computed(() => {
 
 <template>
   <article
-    block of-hidden bg-base relative
-    border-rounded-lg
+
+    relative block of-hidden border-rounded-lg bg-base
     transition="all duration-500"
   >
     <div v-if="imageSrc" class="imageBox relative" role="img" :aria-label="title">
       <NuxtImg
         :src="imageSrc"
         :alt="title"
-        class="w-full h-auto object-cover"
+        class="h-auto w-full object-cover"
         placeholder
         loading="lazy"
         format="webp"
@@ -38,10 +38,10 @@ const imageSrc = computed(() => {
       />
 
       <div
-        class="overlay absolute inset-0 z-2 flex flex-col justify-center items-center p-4 rounded-lg"
+        class="overlay absolute inset-0 z-2 flex flex-col items-center justify-center rounded-lg p-4"
         aria-hidden="true"
       >
-        <h2 class="text-2xl font-semibold text-black dark:text-zinc-300">
+        <h2 class="text-2xl text-black font-semibold dark:text-zinc-300">
           {{ title }}
         </h2>
       </div>

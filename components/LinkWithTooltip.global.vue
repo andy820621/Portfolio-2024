@@ -16,12 +16,12 @@ const {
 
 <template>
   <ClientOnly>
-    <VTooltip class="w-fit h-fit">
+    <VTooltip class="h-fit w-fit">
       <NuxtLink
         :to="to"
         :title="tooltipContent"
         :aria-label="tooltipContent || to"
-        class="border-b-none! flex items-center"
+        class="flex items-center border-b-none!"
         target="_blank"
       >
         <Icon :name="icon" :class="iconClass" :size="size" aria-hidden="true" />

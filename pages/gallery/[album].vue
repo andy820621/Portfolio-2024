@@ -123,8 +123,8 @@ usePageSeo({
 </script>
 
 <template>
-  <div v-if="album" class="container max-w-10xl mx-auto mt-8">
-    <h1 class="text-2xl font-bold mb-24 text-center">
+  <div v-if="album" class="max-w-10xl mx-auto mt-8 container">
+    <h1 class="mb-24 text-center text-2xl font-bold">
       {{ album.title }}
     </h1>
 
@@ -147,7 +147,7 @@ usePageSeo({
             :key="rowIdx"
             :ref="(el) => handleImageRef(el as HTMLElement)"
             :data-image-src="src"
-            class="gallery-item opacity-0 transform translate-y-10 transition-all duration-700 ease-out cursor-zoom-in"
+            class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
             :class="{
               'opacity-100 translate-y-0': isImageVisible(src),
             }"
@@ -159,7 +159,7 @@ usePageSeo({
             <NuxtImg
               :src="src"
               :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
-              class="w-full h-auto object-cover"
+              class="h-auto w-full object-cover"
               placeholder
               loading="lazy"
               format="webp"
@@ -174,7 +174,7 @@ usePageSeo({
     </ClientOnly>
   </div>
 
-  <div v-else class="container max-w-10xl mx-auto mt-8">
+  <div v-else class="max-w-10xl mx-auto mt-8 container">
     Loading...
   </div>
 </template>

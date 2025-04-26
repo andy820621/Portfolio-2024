@@ -15,7 +15,7 @@ function handleLocaleChange(newLocale: Locale) {
       <ListboxButton
         border="~ base"
         flex="~ items-center gap-1"
-        class="text-sm rounded-full py-[0.2rem] px-[.3rem]"
+        class="rounded-full px-[.3rem] py-[0.2rem] text-sm"
       >
         <Icon name="material-symbols-light:language" />
         <span class="pb-[.1rem]">
@@ -33,13 +33,13 @@ function handleLocaleChange(newLocale: Locale) {
       >
         <ListboxOptions
           border="~ base"
-          class="absolute mt-1 max-h-60 rounded-md left-1/2 -translate-x-1/2 py-[.24rem]"
+          class="absolute left-1/2 mt-1 max-h-60 rounded-md py-[.24rem] -translate-x-1/2"
         >
           <ListboxOption v-for="loc in locales" :key="loc.code" v-slot="{ active, selected }" :value="loc.code">
             <li
               flex="~ justify-end items-center gap-1"
               text="sm base"
-              class="relative select-none py-[.3rem] px-[.4rem]"
+              class="relative select-none px-[.4rem] py-[.3rem]"
               :class="[active && 'bg-primary']"
             >
               <Icon v-if="selected" name="ri:check-fill" />

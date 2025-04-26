@@ -45,7 +45,7 @@ useSchemaOrg([
 </script>
 
 <template>
-  <div class="container max-w-5xl mx-auto text-zinc-600">
+  <div class="mx-auto max-w-5xl text-zinc-600 container">
     <PageHero
       :title="$t('blogsPage.title')"
       :description="$t('blogsPage.description')"
@@ -60,7 +60,7 @@ useSchemaOrg([
 
     <!-- 文章列表 -->
     <ClientOnly>
-      <div v-if="paginatedData && paginatedData.length" v-auto-animate class="space-y-5 my-5 px-4">
+      <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 px-4 space-y-5">
         <template v-for="post in paginatedData" :key="post.title">
           <postCard
             :path="localePath(post.path!)"
@@ -86,20 +86,20 @@ useSchemaOrg([
 
       <!-- this will be rendered on server side -->
       <template #fallback>
-        <div class="space-y-5 my-5 px-4">
+        <div class="my-5 px-4 space-y-5">
           <postLoader />
           <postLoader />
         </div>
       </template>
     </ClientOnly>
 
-    <div v-if="paginatedData && paginatedData.length" class="flex justify-center items-center space-x-6 ">
+    <div v-if="paginatedData && paginatedData.length" class="flex items-center justify-center space-x-6">
       <button type="button" title="Previous page" aria-label="Previous page" :disabled="pageNumber <= 1" @click="onPreviousPageClick">
-        <Icon is="span" name="mdi:code-less-than" size="30" class="base-btn-disabled min-w-[30px] min-h-[30px]" :class="{ 'base-btn': pageNumber > 1 }" />
+        <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
       </button>
       <p>{{ pageNumber }} / {{ totalPage }}</p>
       <button type="button" title="Next page" aria-label="Next page" :disabled="pageNumber >= totalPage" @click="onNextPageClick">
-        <Icon is="span" name="mdi:code-greater-than" size="30" class="base-btn-disabled min-w-[30px] min-h-[30px]" :class="{ 'base-btn': pageNumber < totalPage }" />
+        <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
       </button>
     </div>
   </div>

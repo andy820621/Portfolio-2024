@@ -8,10 +8,10 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="lg:col-span-3 hidden lg:block justify-self-end">
+  <div class="hidden justify-self-end lg:col-span-3 lg:block">
     <div class="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto">
-      <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
-        <div flex items-center mb-3 border-b dark:border-gray-800 pb-2 space-x-2>
+      <div class="min-w-[200px] border rounded-md p-3 dark:border-gray-800 dark:bg-slate-900">
+        <div mb-3 flex items-center border-b pb-2 space-x-2 dark:border-gray-800>
           <Icon name="i-ri-menu-2-fill" />
           <h2 class="text-sm font-bold">
             {{ $t('Table Of Content') }}
@@ -21,7 +21,7 @@ const route = useRoute()
           v-for="link in links"
           :key="link.id"
           :to="{ path: route.path, hash: `#${link.id}` }"
-          class="block text-xs mb-3 hover:underline"
+          class="mb-3 block text-xs hover:underline"
           :class="{ 'text-active': activeId === link.id }"
           :aria-label="`${link.text}'s anchor link`"
           :title="`${link.text}'s anchor link`"

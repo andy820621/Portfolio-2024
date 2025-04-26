@@ -29,7 +29,7 @@ const formattedLink = computed(() => {
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col justify-center bg-[#020420]">
+  <div class="h-full w-full flex flex-col justify-center bg-[#020420]">
     <svg
       class="absolute right-0 top-0"
       width="629"
@@ -59,10 +59,10 @@ const formattedLink = computed(() => {
     </svg>
 
     <div class="w-[600px] pl-[100px]">
-      <p v-if="headline" class="uppercase text-[24px] text-[#00DC82] mb-4 font-semibold">
+      <p v-if="headline" class="mb-4 text-[24px] text-[#00DC82] font-semibold uppercase">
         {{ headline }}
       </p>
-      <h1 class="w-[600px] m-0 text-[40px] font-semibold mb-4 text-white flex items-center">
+      <h1 class="m-0 mb-4 w-[600px] flex items-center text-[40px] text-white font-semibold">
         <span>{{ formattedTitle }} </span>
       </h1>
       <p class="text-[25px] text-[#E4E4E7] leading-tight">
@@ -70,8 +70,8 @@ const formattedLink = computed(() => {
       </p>
     </div>
 
-    <div v-if="formattedLink" class="absolute top-[200px] right-[70px]">
-      <img :src="formattedLink" :alt="title" class="w-96 h-52 rounded-lg object-cover">
+    <div v-if="formattedLink" class="absolute right-[70px] top-[200px]">
+      <img :src="formattedLink" :alt="title" class="h-52 w-96 rounded-lg object-cover">
     </div>
   </div>
 </template>

@@ -22,14 +22,14 @@ function toggleTag(tag: string) {
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-2 px-6 my-4">
+  <div class="my-4 flex flex-wrap gap-2 px-6">
     <button
       v-for="tag in allTags"
       :key="tag"
       type="button"
       :title="tag"
       :aria-label="tag"
-      class="px-2 py-1 rounded"
+      class="rounded px-2 py-1"
       :class="[
         selectedTags?.includes(tag)
           ? '!bg-primary-green text-gray-100'

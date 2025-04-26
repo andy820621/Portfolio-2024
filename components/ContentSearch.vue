@@ -9,7 +9,7 @@ const searchTest = defineModel<string>('searchTest', { default: '' })
       placeholder="Search"
       aria-label="Search"
       type="text"
-      class="block py-2 px-3 w-full bg-[#F1F2F4] dark:bg-slate-900 dark:placeholder-zinc-500 text-zinc-300 rounded-md border-gray-300 dark:border-gray-800 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      class="block w-full border-gray-300 rounded-md bg-[#F1F2F4] px-3 py-2 text-zinc-300 shadow-sm dark:border-gray-800 focus:border-indigo-300 dark:bg-slate-900 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:placeholder-zinc-500"
     >
   </div>
 </template>
