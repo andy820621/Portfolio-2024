@@ -1,4 +1,3 @@
-import type { ParsedContentv2 } from '@nuxt/content'
 import type { MDCNode, MDCRoot } from '@nuxtjs/mdc'
 
 // 擴展處理節點類型，包含 minimal 格式

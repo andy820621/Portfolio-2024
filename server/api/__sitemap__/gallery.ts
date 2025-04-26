@@ -1,5 +1,4 @@
 import type { SitemapUrl } from '#sitemap/types'
-import { defineSitemapEventHandler } from '#imports'
 import { galleryGroups } from '~/data/galleryData'
 import { getSitemapDateFormat } from '~/utils/dayjs'
 

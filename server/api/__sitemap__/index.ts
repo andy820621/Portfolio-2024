@@ -1,7 +1,6 @@
-// server/api/__sitemap__/index.ts
-import { defineSitemapEventHandler } from '#imports'
+import type { H3Event } from 'h3'
 
-export default defineSitemapEventHandler(async (event) => {
+export default defineSitemapEventHandler(async (_event: H3Event) => {
   // 獲取當前日期作為最後修改日期
   const lastmod = new Date().toISOString()
 

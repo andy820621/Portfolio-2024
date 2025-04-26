@@ -63,4 +63,4 @@ sitemap:
 
 ## 結語
 
-因為考慮到商業機密考量，無法展示完整的系統網頁，但我有做一個可以簡單的展示部分功能的 [Demo](https://metc.netlify.app/){target="_blank" rel="noopener"}，如果有興趣的可以看看 。
+因為考慮到商業機密考量，無法展示完整的系統網頁，但我有做一個可以簡單的展示部分功能的 [Demo](https://metc.netlify.app/){target="\_blank" rel="noopener"}，如果有興趣的可以看看 。
