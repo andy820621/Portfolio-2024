@@ -221,7 +221,7 @@ export default defineNuxtConfig({
       },
     },
     experimental: {
-      nativeSqlite: false,
+      sqliteConnector: 'native',
     },
   },
   i18n: {
@@ -291,6 +291,9 @@ export default defineNuxtConfig({
           },
           sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
         },
+        external: [
+          'better-sqlite3',
+        ],
       },
       sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
     },
@@ -330,6 +333,19 @@ export default defineNuxtConfig({
     future: {
       nativeSWR: true,
     },
+    // experimental: {
+    //   database: true
+    // },
+    // storage: {
+    //   'content-sqlite': {
+    //     driver: 'db0',
+    //     connector: 'sqlite',  // 通過 connector 指定使用 SQLite
+    //     database: '.data/db/content.db',
+    //     options: {
+    //       native: true // 使用原生 SQLite
+    //     }
+    //   }
+    // }
   },
 })
 

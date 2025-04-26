@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
   "engines": {
-    "node": "20.16.0"
+    "node": ">=22.5.0"
   },
   "scripts": {
     "prebuild": "node scripts/generate-project-images-map.js",
@@ -38,7 +38,7 @@
     "@iconify-json/skill-icons": "^1.2.0",
     "@iconify-json/tabler": "^1.2.17",
     "@iconify-json/vscode-icons": "^1.2.19",
-    "@nuxt/content": "^3.4.0",
+    "@nuxt/content": "^3.5.1",
     "@nuxt/icon": "^1.12.0",
     "@nuxt/image": "^1.10.0",
     "@nuxtjs/color-mode": "^3.5.2",

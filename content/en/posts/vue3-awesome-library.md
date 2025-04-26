@@ -30,11 +30,11 @@ sitemap:
       caption: "Vue.js is a popular JavaScript framework for building web applications. In this blog post, we will introduce you to some of the awesome libraries for Vue.js in different categories."
 ---
 
-### Introduction
+## Introduction
 
 Vue.js is a popular JavaScript framework for building web applications. It offers a lot of flexibility and ease of use, making it a go-to choice for many developers. One of the advantages of Vue.js is its rich library ecosystem. In this blog post, we will introduce you to some of the awesome libraries for Vue.js in different categories.
 
-### Essential
+## Essential
 
 Some libraries are must have when you are start working with new project, here are my list
 
@@ -44,7 +44,7 @@ Some libraries are must have when you are start working with new project, here a
 - **Vitest**: Vitest is a blazing fast unit test framework powered by Vite.
 - **Vue Macro**: Vue Macros is a library that implements proposals or ideas that have not been officially implemented by Vue. That means it will explore and extend more features and syntax sugar to Vue.
 
-### UI Libraries
+## UI Libraries
 
 UI libraries provide pre-built components and styles for building user interfaces. Here are some popular UI libraries for Vue.js:
 
@@ -52,13 +52,13 @@ UI libraries provide pre-built components and styles for building user interface
 - **Vuetify**: Vue Component Framework Vuetify is a no design skills required UI Library with beautifully handcrafted Vue Components.
 - **Vuestic**: You can create a new project or integrate Vuestic UI into an existing application. There are three ways to create new Vuestic App. All of them mostly the same and provides the same features.
 
-### Others
+## Others
 
 - **VueFire**: VueFire Official Firebase bindings for Vue.js
 - **Vue I118**: Vue I18n Internationalization plugin for Vue.js
 - **Vue Auto Animate**: Add motion to your apps with a single line of code.
 - **Vuelidate**: Vuelidate is considered model-based because the validation rules are defined next to your data, and the validation tree structure matches the data model structure.
 
-### Conclusion
+## Conclusion
 
 In this blog post, we have introduced you to some of the awesome libraries for Vue.js in different categories. These libraries can help you build better and more engaging web applications with Vue.js. Remember to choose the right library based on your project requirements and always refer to the documentation for usage and integration instructions. If you encounter any issues, reach out to the Vue.js community for assistance.

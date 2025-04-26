@@ -30,11 +30,11 @@ sitemap:
       caption: "In recent vue project we see that vuex type not working properly. We will fix that type issue and make vuex type workable."
 ---
 
-### Introduction
+## Introduction
 
 In recent version of our vue project, when we try to add vuex we see type error and vuex type not found. We can easily fix that issue.
 
-### How to fix that issue
+## How to fix that issue
 
 1. Create a `vuex.d.ts` file inside of your route project.
 2. Pase this code in that file
