@@ -30,6 +30,7 @@
     "@formkit/auto-animate": "^0.8.2",
     "@iconify-json/devicon": "^1.2.23",
     "@iconify-json/iconoir": "^1.2.7",
+    "@iconify-json/line-md": "^1.2.7",
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/material-symbols-light": "^1.2.20",
     "@iconify-json/mdi": "^1.2.3",

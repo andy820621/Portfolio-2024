@@ -1,57 +1,80 @@
 export function useTheme() {
   const isDark = useDark()
+  const isTransitioning = ref(false)
 
-  function toggleDark(event: MouseEvent) {
-    // 檢查瀏覽器是否支持 View Transitions API 且用戶沒有開啟減少動畫設置
-    const isAppearanceTransition = document.startViewTransition
-      && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  async function toggleDark(event: MouseEvent) {
+    // 如果正在過渡中，不做任何操作
+    if (isTransitioning.value)
+      return null
 
-    if (!isAppearanceTransition) {
-      isDark.value = !isDark.value // 如果不支持過渡效果,直接切換暗色模式
-      return
-    }
+    isTransitioning.value = true
 
-    // 計算動畫的起始點和結束半徑
-    const x = event.clientX
-    const y = event.clientY
-    const endRadius = Math.hypot(
-      Math.max(x, innerWidth - x),
-      Math.max(y, innerHeight - y),
-    )
+    try {
+      // 檢查瀏覽器支持
+      const isAppearanceTransition = document.startViewTransition
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    // 使用 View Transitions API 創建過渡效果
-    const transition = document.startViewTransition!(async () => {
-      isDark.value = !isDark.value
-      await nextTick()
-    })
+      if (!isAppearanceTransition) {
+        isDark.value = !isDark.value // 不支持過渡時直接切換
+        return null
+      }
 
-    // 設置過渡動畫
-    transition.ready.then(() => {
-      const clipPath = [
-        `circle(0px at ${x}px ${y}px)`, // 起始圓形
-        `circle(${endRadius}px at ${x}px ${y}px)`, // 結束圓形
-      ]
-      // 應用圓形遮罩動畫
-      document.documentElement.animate(
-        {
-          clipPath: isDark.value
-            ? [...clipPath].reverse() // 如果切換到暗色模式, 反轉動畫
-            : clipPath,
-        },
-        {
-          duration: 400,
-          easing: 'ease-out',
-          // 根據切換方向選擇不同的偽元素
-          pseudoElement: isDark.value
-            ? '::view-transition-old(root)'
-            : '::view-transition-new(root)',
-        },
+      // 計算動畫參數
+      const x = event?.clientX ?? window.innerWidth / 2
+      const y = event?.clientY ?? window.innerHeight / 2
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
       )
-    })
+
+      // 創建過渡效果
+      const transition = document.startViewTransition!(async () => {
+        isDark.value = !isDark.value
+        await nextTick()
+      })
+
+      // 設置過渡動畫
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ]
+
+      transition.ready.then(() => {
+        document.documentElement.animate(
+          {
+            clipPath: isDark.value
+              ? [...clipPath].reverse()
+              : clipPath,
+          },
+          {
+            duration: 400,
+            easing: 'ease-out',
+            pseudoElement: isDark.value
+              ? '::view-transition-old(root)'
+              : '::view-transition-new(root)',
+          },
+        )
+      })
+
+      // 等待動畫完成
+      await transition.finished
+
+      return transition
+    }
+    catch (error) {
+      console.error('Theme transition failed:', error)
+      return null
+    }
+    finally {
+      setTimeout(() => {
+        isTransitioning.value = false
+      }, 0) // 小延遲確保所有視覺效果完成
+    }
   }
 
   return {
     isDark,
+    isTransitioning,
     toggleDark,
   }
 }

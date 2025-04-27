@@ -124,6 +124,10 @@ const { y: scroll } = useWindowScroll()
     transition: opacity 0.2s ease;
     opacity: 0.6;
     outline: none;
+
+    span.iconify {
+      font-size: 1.3rem;
+    }
   }
 
   a:hover {
@@ -133,7 +137,7 @@ const { y: scroll } = useWindowScroll()
 
   .right {
     display: grid;
-    grid-gap: 1.2rem;
+    grid-gap: 1.15rem;
     grid-auto-flow: column;
 
     & > * {
