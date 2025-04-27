@@ -8,3 +8,21 @@ NODE_VERSION = "20.16.0"
 [functions]
 node_bundler = "esbuild"
 external_node_modules = [ "better-sqlite3" ]
+
+[[redirects]]
+  from = "http://barz.app/*"
+  to = "https://barz.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.barz.app/*"
+  to = "https://barz.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.barz.app/*"
+  to = "https://barz.app/:splat"
+  status = 301
+  force = true

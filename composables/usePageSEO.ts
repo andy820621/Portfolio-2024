@@ -31,7 +31,8 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 計算完整的規範連結
   const baseUrl = config.public.i18n.baseUrl || seoData.mySite
-  const canonicalUrl = computed(() => `${baseUrl}${route.path}`)
+  const routePath = route.path.startsWith('/') ? route.path : `/${route.path}`
+  const canonicalUrl = computed(() => `${baseUrl}${routePath}`)
 
   // SEO 元數據
   useSeoMeta({

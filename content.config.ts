@@ -81,7 +81,7 @@ export default defineContentConfig({
         type: 'page',
         source: {
           include: 'en/posts/*.md',
-          prefix: '/en/posts',
+          prefix: '/posts',
         },
         schema: articleSchema,
       }),
@@ -103,7 +103,7 @@ export default defineContentConfig({
         type: 'page',
         source: {
           include: 'en/projects/*.md',
-          prefix: '/en/projects',
+          prefix: '/projects',
         },
         schema: projectSchema,
       }),
@@ -125,7 +125,7 @@ export default defineContentConfig({
         type: 'page',
         source: {
           include: 'en/demos/*.md',
-          prefix: '/en/demos',
+          prefix: '/demos',
         },
         schema: demoSchema,
       }),

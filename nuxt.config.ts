@@ -227,12 +227,12 @@ export default defineNuxtConfig({
   i18n: {
     baseUrl: process.env.I18N_BASE_URL,
     locales,
-    strategy: 'prefix_and_default',
+    strategy: 'prefix_except_default',
     defaultLocale: 'en',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root', // recommended
+      redirectOn: 'no prefix',
       fallbackLocale: 'en',
     },
     bundle: {
@@ -500,24 +500,23 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
 
   Object.assign(rules, defaultRules)
 
-  // 定義不需要語言前綴的路徑
-  const excludedPaths = ['/gallery', '/gallery/**']
-
-  // 為所有語言（包括預設語言）生成帶前綴的路由規則，但排除指定路徑
+  // 只為非預設語言生成帶前綴的路由規則
   locales.forEach((locale) => {
+    // 跳過預設語言 (因為使用 prefix_except_default 策略)
+    if (locale.code === 'en')
+      return
+
     const prefix = `/${locale.code}`
 
     // 新增: 為不帶尾斜線的語言根路徑設定規則
     const rootRule = defaultRules['/']
-    if (rootRule && !excludedPaths.includes('/')) {
+    if (rootRule) {
       rules[prefix] = { ...rootRule }
     }
 
     // 原有的帶斜線路徑規則
     Object.entries(defaultRules).forEach(([path, rule]) => {
-      if (!excludedPaths.includes(path)) {
-        rules[`${prefix}${path}`] = { ...rule }
-      }
+      rules[`${prefix}${path}`] = { ...rule }
     })
   })
 
