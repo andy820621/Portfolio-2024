@@ -6,6 +6,18 @@ const { isDark, isTransitioning, toggleDark } = useTheme()
 const mounted = ref(false)
 
 onMounted(() => mounted.value = true)
+
+const { locale } = useI18n()
+
+const buttonTitle = computed(() => {
+  if (!mounted.value) {
+    return undefined
+  }
+
+  return locale.value === 'en'
+    ? `Enable ${isDark.value ? 'Light' : 'Dark'} Mode`
+    : `切換至${isDark.value ? '亮色' : '暗色'}模式`
+})
 </script>
 
 <template>
@@ -13,12 +25,12 @@ onMounted(() => mounted.value = true)
     type="button"
     class="group inline-flex select-none hover:text-gray-700 dark:hover:text-gray-200"
     :class="{ 'cursor-not-allowed opacity-80': isTransitioning }"
-    :title="$i18n.locale === 'en' ? `Enable ${isDark ? 'Light' : 'Dark'} Mode` : `切換至${isDark ? '亮色' : '暗色'}模式`"
+    :title="buttonTitle"
     aria-label="Toggle Color Scheme"
     @click="toggleDark"
   >
     <span class="icon-container">
-      <ClientOnly>
+      <ColorScheme placeholder="☾" tag="span">
         <template v-if="mounted">
           <!-- 暗色模式圖標 -->
           <template v-if="isDark">
@@ -47,11 +59,12 @@ onMounted(() => mounted.value = true)
             />
           </template>
         </template>
+
         <template #fallback>
           <Icon v-if="isDark" name="i-line-md-moon" class="icon icon-static" />
           <Icon v-else name="i-line-md-sunny-outline" class="icon icon-static" />
         </template>
-      </ClientOnly>
+      </ColorScheme>
     </span>
   </button>
 </template>
