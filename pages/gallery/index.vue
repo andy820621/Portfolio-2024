@@ -8,7 +8,6 @@ const { t } = useI18n()
 usePageSeo({
   title: 'Gallery',
   description: t('galleryPage.description'),
-  noIndex: false,
 })
 
 // 搜索文本和選中的標籤

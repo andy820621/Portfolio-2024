@@ -22,7 +22,7 @@ withDefaults(defineProps<Props>(), {
   alt: 'no-alt',
   ogImage: '/blog-images/blog.jpg',
   tags: () => [],
-  published: false,
+  published: true,
 })
 </script>
 

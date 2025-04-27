@@ -71,7 +71,7 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
       ogImage: content.ogImage || '/not-found.jpg',
       date: content.date || 'not-date-available',
       tags: content.tags || [],
-      published: content.published || false,
+      published: content.published || true,
       wordCount: content.wordCount || 0,
       readingTime: content.readingTime || undefined,
     }))
