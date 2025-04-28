@@ -2,9 +2,10 @@
 import type { Collections } from '@nuxt/content'
 import type { DemoContent } from '~/types/main'
 import { breakpointsTailwind } from '@vueuse/core'
+import { seoData } from '~/data'
 
-const { t } = useI18n()
-const { locale } = useI18n()
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
 
 // 定義轉換後的 Demo 項目類型
 interface DemoItem {
@@ -14,12 +15,6 @@ interface DemoItem {
   tags: string[]
   thumbnailType: string
 }
-
-// SEO 優化
-usePageSeo({
-  title: 'Demos',
-  description: t('demosPage.description'),
-})
 
 // 格式化標題函數
 function formatTitle(fileName: string): string {
@@ -146,6 +141,78 @@ function clearFilters() {
   searchText.value = ''
   selectedTags.value = []
 }
+
+// SEO 優化
+usePageSeo({
+  title: 'Demos',
+  description: t('demosPage.description'),
+})
+
+// Schema.org
+const route = useRoute()
+const { localeProperties } = useI18n()
+const baseUrl = useRuntimeConfig().public.i18n.baseUrl || seoData.mySite
+const canonicalUrl = localePath(`${baseUrl}${route.path}`)
+const websiteId = `${baseUrl}#website`
+const nowPageId = `${canonicalUrl}#webpage`
+const itemListId = `${canonicalUrl}#itemlist`
+
+const itemListElement = demoItems.value?.map((item, index) => {
+  // 參考 item.vue 中的邏輯，確定最佳 URL
+  let bestUrl = canonicalUrl
+
+  // 按優先級檢查可用連結
+  if (item.content.link) {
+    bestUrl = item.content.link
+  }
+  else if (item.content.github) {
+    bestUrl = item.content.github
+  }
+  else if (item.content.codepen) {
+    bestUrl = item.content.codepen
+  }
+
+  return {
+    '@type': 'ListItem',
+    'name': item.title,
+    'position': index + 1,
+    'item': {
+      '@type': 'SoftwareApplication',
+      'name': item.title,
+      'description': item.content.description || '',
+      'applicationCategory': 'WebApplication',
+      'url': bestUrl,
+      'operatingSystem': 'Any',
+      'screenshot': item.thumbnailType && item.thumbnailType === 'webp'
+        ? `${baseUrl}/demos/thumbnail/${item.baseName}.${item.thumbnailType}`
+        : undefined,
+    },
+  }
+})
+
+useSchemaOrg([
+  defineWebPage({
+    '@id': nowPageId,
+    '@type': 'CollectionPage',
+    'name': t('demosPage.title'),
+    'description': t('demosPage.description'),
+    'url': canonicalUrl,
+    'inLanguage': localeProperties.value.language,
+    'isPartOf': {
+      '@id': websiteId,
+    },
+    'mainEntity': {
+      '@id': itemListId,
+    },
+  }),
+
+  defineItemList({
+    '@id': itemListId,
+    '@type': 'ItemList',
+    'numberOfItems': demoItems.value?.length || 0,
+    'itemListElement': itemListElement || [],
+  }),
+])
 </script>
 
 <template>

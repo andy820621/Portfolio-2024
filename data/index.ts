@@ -8,6 +8,7 @@ export const seoData = {
   ogHeadline: 'Portfolio | Blogger | Creativity',
   twitterDescription: 'My blog website, where I play around with Nuxt, Vue, and more and showcase my blog, resources, etc',
   mySite: 'https://barz.app',
+  email: 'andy820621@gmail.com',
   twitterSite: '@Barz3064',
   twitterLink: 'https://x.com/Barz3064',
   githubLink: 'https://github.com/andy820621',
@@ -18,4 +19,10 @@ export const seoData = {
   fbAppId: '428754658904201',
   // fbPagesId: '123456789012345',
   googleSiteVerification: 'Q4b0n0FVQLUp85bYQ7sBxLsxxvm7f5fJ2gwvpO2Ti4I',
+}
+
+export const linkConfig = {
+  link: { name: 'Demo', icon: 'mdi:link-variant' },
+  github: { name: 'GitHub', icon: 'mdi:github' },
+  codepen: { name: 'CodePen', icon: 'ri:codepen-fill' },
 }

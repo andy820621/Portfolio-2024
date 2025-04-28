@@ -21,25 +21,48 @@ usePageSeo({
 })
 
 const baseUrl = useRuntimeConfig().public.i18n.baseUrl
+const route = useRoute()
+const canonicalUrl = localePath(`${baseUrl}${route.path}`)
+const nowPageId = `${canonicalUrl}#webpage`
+const websiteId = `${baseUrl}#website`
+const itemListId = `${canonicalUrl}#itemlist`
 
 useSchemaOrg([
   defineWebPage({
+    '@id': nowPageId,
     '@type': 'CollectionPage',
     'name': t('blogsPage.title'),
     'description': t('blogsPage.description'),
-    'mainEntity': {
-      '@type': 'ItemList',
-      'itemListElement': filteredData.value.map((post, index) => ({
-        '@type': 'ListItem',
-        'position': index + 1,
-        'item': {
-          '@type': 'BlogPosting',
-          'headline': post.title,
-          'url': `${baseUrl}${post.path}`,
-          'datePublished': post.date,
-        },
-      })),
+    'url': canonicalUrl,
+    'isPartOf': {
+      '@id': websiteId,
     },
+    'mainEntity': {
+      '@id': itemListId,
+    },
+  }),
+
+  defineItemList({
+    '@id': itemListId,
+    '@type': 'ItemList',
+    'numberOfItems': formattedData.value.length || 0,
+    'itemListElement': formattedData.value.map((post, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'BlogPosting',
+        'headline': post.title,
+        'url': `${baseUrl}${post.path}`,
+        'datePublished': new Date(post.date).toISOString(),
+        'image': {
+          '@type': 'ImageObject',
+          'url': post.ogImage,
+        },
+        'author': {
+          '@id': 'https://barz.app#identity',
+        },
+      },
+    })) || [],
   }),
 ])
 </script>

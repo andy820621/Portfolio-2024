@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
+import { seoData } from '~/data'
 import { galleryGroups } from '~/data/galleryData'
 
-const { t } = useI18n()
+const { t, localeProperties } = useI18n()
+const localePath = useLocalePath()
 
 // 設置 SEO
 usePageSeo({
@@ -122,6 +124,47 @@ onMounted(() => {
 
   onUnmounted(stop)
 })
+
+const route = useRoute()
+const canonicalUrl = localePath(`${seoData.mySite}${route.path}`)
+const websiteId = `${seoData.mySite}#website`
+const nowPageId = `${canonicalUrl}#webpage`
+const itemListId = `${canonicalUrl}#itemlist`
+
+useSchemaOrg([
+  defineWebPage({
+    '@id': nowPageId,
+    '@type': ['WebPage', 'CollectionPage'],
+    'name': t('galleryPage.title'),
+    'description': t('galleryPage.description'),
+    'url': canonicalUrl,
+    'inLanguage': localeProperties.value.language,
+    'isPartOf': {
+      '@id': websiteId,
+    },
+    'mainEntity': {
+      '@id': itemListId,
+    },
+  }),
+
+  defineItemList({
+    '@id': itemListId,
+    '@type': 'ItemList',
+    'numberOfItems': debouncedFilteredGroups.value.length,
+    'itemListElement': debouncedFilteredGroups.value.map((group, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'CreativeWork',
+        'name': group.title,
+        'url': `${canonicalUrl}/${group.id}`,
+        'thumbnail': group.coverImage ? `${seoData.mySite}${group.coverImage}` : undefined,
+        'description': group.description || t('galleryPage.title'),
+        'keywords': group.tags.join(', ') || undefined,
+      },
+    })),
+  }),
+])
 </script>
 
 <template>

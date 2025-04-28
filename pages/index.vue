@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { Collections } from '@nuxt/content'
 import ProseTh from '~/components/content/ProseTh.vue'
+import { seoData } from '~/data'
 
-const { t, locale } = useI18n()
+const { t, locale, localeProperties } = useI18n()
 
 // 使用 useAsyncData 獲取內容
 const { data: content, error } = await useAsyncData(
@@ -41,10 +42,25 @@ usePageSeo({
   description: content.value?.description || t('homePage.description') || '',
 })
 
+const webpageId = `${seoData.mySite}#webpage`
+const websiteId = `${seoData.mySite}#website`
+const personId = `${seoData.mySite}#identity`
+
 useSchemaOrg([
   defineWebPage({
+    '@id': webpageId,
     '@type': 'ProfilePage',
-    'about': { '@id': 'https://barz.app/#identity' },
+    'description': 'BarZ Hsieh\'s Portfolio',
+    'name': 'BarZ Hsieh\'s Personal Portfolio Website',
+    'url': `${seoData.mySite}/`,
+    // 'about':  NodeRelation<Organization>,
+    'mainEntity': {
+      '@id': personId,
+    },
+    'inLanguage': localeProperties.value.language,
+    'isPartOf': {
+      '@id': websiteId,
+    },
   }),
 ])
 </script>

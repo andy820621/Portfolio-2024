@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
+import { seoData } from '~/data'
 import { galleryGroups } from '~/data/galleryData'
 
 const LightGallery = defineAsyncComponent(() => import('~/components/LightGallery.vue'))
@@ -12,12 +13,24 @@ const album = computed(() =>
 )
 
 // 動態獲取資料夾內的照片
-const { data: images } = await useAsyncData(`gallery-${albumId}`, async () => {
+const { data: images, error } = await useAsyncData(`gallery-${albumId}`, async () => {
   const imageModules = import.meta.glob('/public/gallery-images/**/*')
 
   return Object.keys(imageModules)
     .filter(path => path.includes(`/public/gallery-images/${albumId}/`))
     .map(path => path.replace('/public', ''))
+})
+
+watchEffect(() => {
+  if (!album.value) {
+    console.error('Album not found:', albumId)
+    navigateTo(useLocalePath()('/404'))
+  }
+
+  if (error.value) {
+    console.error('Fetch error:', error.value)
+    navigateTo(useLocalePath()('/404'))
+  }
 })
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -120,6 +133,50 @@ usePageSeo({
   description: album.value?.description || 'Gallery\'s description',
   image: album.value?.coverImage,
 })
+
+// 將這段代碼放在 usePageSeo 之後
+const { localeProperties } = useI18n()
+const baseUrl = useRuntimeConfig().public.i18n.baseUrl || seoData.mySite
+const canonicalUrl = useLocalePath()(`${baseUrl}${route.path}`)
+const websiteId = `${baseUrl}#website`
+const nowPageId = `${canonicalUrl}#webpage`
+
+useSchemaOrg([
+  defineWebPage({
+    '@id': nowPageId,
+    '@type': 'WebPage',
+    'name': album.value?.title || 'Gallery',
+    'description': album.value?.description || 'Photo gallery',
+    'url': canonicalUrl,
+    'inLanguage': localeProperties.value.language,
+    'isPartOf': {
+      '@id': websiteId,
+    }, // 添加引用到圖片集合
+    'mainEntity': {
+      '@id': `${canonicalUrl}#imagelist`,
+    },
+  }),
+
+  // 定義相冊中的圖片集合
+  defineItemList({
+    '@id': `${canonicalUrl}#imagelist`,
+    '@type': 'ItemList',
+    'numberOfItems': images.value?.length || 0,
+    'itemListElement': images.value?.map((src, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'ImageObject',
+        'contentUrl': `${baseUrl}${src}`,
+        'url': `${baseUrl}${src}`,
+        'name': `${album.value?.title} - Image ${index + 1}`,
+        'description': `${album.value?.title} gallery image ${index + 1}`,
+        'representativeOfPage': index === 0,
+        'encodingFormat': 'image/webp',
+      },
+    })) || [],
+  }),
+])
 </script>
 
 <template>

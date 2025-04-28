@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AllCollectionItem } from '~/types/main'
+import { seoData } from '~/data'
 
 const localePath = useLocalePath()
 
@@ -35,42 +36,58 @@ watchEffect(() => {
     const keywords = mainData.value.tags || []
     const articleSection = mainData.value.categories || mainData.value.tags || []
     const route = useRoute()
+    const canonicalUrl = localePath(`${seoData.mySite}${route.path}`)
+
+    const websiteId = `${seoData.mySite}#website`
+    const nowPageId = `${canonicalUrl}#webpage`
+    const articleId = `${canonicalUrl}#article`
+    const personId = `${seoData.mySite}#identity`
 
     // TODO: Consider using the schemaOrg parameter from the .md file to control this
     useSchemaOrg([
+      defineWebPage({
+        '@type': 'WebPage',
+        '@id': nowPageId,
+        'name': mainData.value.title,
+        'description': mainData.value.description,
+        'isPartOf': {
+          '@id': websiteId,
+        },
+        'inLanguage': localeProperties.value.language,
+      }),
+
       defineArticle({
         '@type': 'BlogPosting',
-        '@id': `https://barz.app/#/schema/Article/${route.params[paramName]}`,
+        '@id': articleId,
         'headline': mainData.value.title,
         'description': mainData.value.description,
         'isPartOf': {
-          '@id': `https://barz.app/#webpage`,
+          '@id': nowPageId,
         },
         'mainEntityOfPage': {
-          '@id': `https://barz.app/#webpage`,
+          '@id': nowPageId,
         },
-        'datePublished': mainData.value.date,
+        'datePublished': new Date(mainData.value.date!).toISOString(),
         'dateModified': mainData.value.updatedAt || mainData.value.date,
         'author': {
-          '@id': 'https://barz.app/#identity',
-          'name': 'BarZ Hsieh',
+          '@id': personId,
         },
         'publisher': {
-          '@id': 'https://barz.app/#identity',
+          '@id': personId,
         },
         'image': mainData.value.image
           ? [mainData.value.image]
           : undefined,
         'articleBody': mainData.value.rawbody || '',
         'wordCount': mainData.value.wordCount,
-        'keywords': keywords,
-        'articleSection': articleSection,
+        keywords,
+        articleSection,
         'inLanguage': localeProperties.value.language,
         'copyrightYear': mainData.value.date
           ? new Date(mainData.value.date).getFullYear().toString()
           : new Date().getFullYear().toString(),
         'copyrightHolder': {
-          '@id': 'https://barz.app/#identity',
+          '@id': personId,
         },
       }),
     ])

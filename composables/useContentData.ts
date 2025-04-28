@@ -8,13 +8,14 @@ interface UsePostDataOptions {
 export async function useContentData({ basePageName, paramName }: UsePostDataOptions) {
   const route = useRoute()
   const { locale } = useI18n()
+  const localePath = useLocalePath()
 
   const contentPath = route.params[paramName]
   // 根據當前語言和基礎頁面名稱選擇正確的集合
   const collection = (`${basePageName}_${locale.value}`) as keyof Collections
 
   // 構建完整路徑
-  const fullPath = `/${locale.value}/${basePageName}/${contentPath}`
+  const fullPath = localePath(`/${basePageName}/${contentPath}`)
 
   const { data: contentData, error } = await useAsyncData(
     `${paramName}-${route.path}`,

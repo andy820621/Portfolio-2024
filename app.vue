@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { navbarData, seoData } from './data'
 import './assets/variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets/main.scss'
@@ -6,70 +7,41 @@ import './assets/markdown.css'
 import './assets/prose.css'
 
 const { localeProperties } = useI18n()
+const websiteId = `${seoData.mySite}#website`
+const personId = `${seoData.mySite}#identity`
 
 useSchemaOrg([
-  defineWebPage({
-    '@id': 'https://barz.app/#webpage',
-    '@type': 'WebPage',
-    'description': 'BarZ Hsieh\'s Portfolio',
-    'name': 'BarZ Hsieh\'s Personal Portfolio Website',
-    'url': 'https://barz.app/',
-    'about': {
-      '@id': 'https://barz.app/#identity',
-    },
-    'author': {
-      '@id': 'https://barz.app/#identity',
-    },
-    'inLanguage': localeProperties.value.language,
-    'isPartOf': {
-      '@id': 'https://barz.app/#website',
-    },
-    'potentialAction': [
-      {
-        '@type': 'ReadAction',
-        'target': [
-          'https://barz.app',
-        ],
-      },
-    ],
-  }),
   defineWebSite({
-    '@id': 'https://barz.app/#website',
+    '@id': websiteId,
     '@type': 'WebSite',
-    'author': {
-      '@id': 'https://barz.app/#identity',
-    },
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
-    'url': 'https://barz.app/',
+    'url': `${seoData.mySite}/`,
     'inLanguage': localeProperties.value.language,
     'publisher': {
-      '@id': 'https://barz.app/#identity',
+      '@id': personId,
     },
   }),
   definePerson({
-    '@id': 'https://barz.app/#identity',
+    '@id': personId,
     '@type': 'Person',
-    'name': 'BarZ Hsieh',
-    'url': 'https://barz.app/',
-    'email': 'andy820621@gmail.com',
-    'sameAs': [
-      'https://www.twitter.com/BarZ3064',
-      'https://www.instagram.com/andy820621',
-      'https://github.com/andy820621',
-    ],
+    'name': navbarData.homeTitle,
     'alternateName': 'Hsieh Yao Tsu',
-    'image': 'https://barz.app/page-cover/home.webp',
-    // 'jobTitle': 'Software Engineer',
+    'url': process.env.I18N_BASE_URL,
+    'image': `${seoData.mySite}/me.jpg`,
+    'description': seoData.description,
+    'email': seoData.email,
+    'sameAs': [
+      seoData.twitterLink,
+      seoData.instagramLink,
+      seoData.githubLink,
+    ],
+    'jobTitle': 'Frontend Engineer',
     // 'worksFor': {
     //   '@type': 'Organization',
-    //   'name': 'BarZ Hsieh',
-    //   'url': 'https://barz.app/',
+    //   'name': 'Mercury Fire',
+    //   'url': `${seoData.jobCompany}/`,
     // },
-    'knowsLanguage': [
-      'en',
-      'zh-TW',
-      'jp',
-    ],
+    'inLanguage': ['en-US', 'zh-TW', 'ja-JP'],
   }),
 ])
 </script>

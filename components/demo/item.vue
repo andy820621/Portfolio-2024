@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DemoContent } from '~/types/main'
+import { linkConfig } from '~/data'
 import ProseTh from '../content/ProseTh.vue'
 
 const { content, baseName, thumbnailType, title } = defineProps<{
@@ -12,12 +13,6 @@ const { content, baseName, thumbnailType, title } = defineProps<{
 // console.log({ thumbnail: `/demos/thumbnail/${baseName}.${thumbnailType}` })
 
 const updateDate = computed(() => content.updatedAt ? useFormatDate(content.updatedAt, false) : '')
-
-const linkConfig = {
-  link: { name: 'Demo', icon: 'mdi:link-variant' },
-  github: { name: 'GitHub', icon: 'mdi:github' },
-  codepen: { name: 'CodePen', icon: 'ri:codepen-fill' },
-}
 
 const contentLinks = computed(() =>
   Object.entries(linkConfig)

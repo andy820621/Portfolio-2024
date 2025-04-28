@@ -157,20 +157,6 @@ export default defineNuxtConfig({
   schemaOrg: {
     defaults: false,
     debug: process.env.NODE_ENV !== 'production',
-    identity: {
-      type: 'Person',
-      name: navbarData.homeTitle,
-      url: process.env.I18N_BASE_URL,
-      // image: '/profile-photo.jpg',
-      description: seoData.description,
-      email: 'andy820621@gmail.com',
-      sameAs: [
-        'https://www.twitter.com/BarZ3064',
-        'https://www.instagram.com/andy820621',
-        'https://github.com/andy820621',
-      ],
-      inLanguage: ['en', 'en-US', 'zh-TW'],
-    },
   },
   ogImage: {
     debug: true,
