@@ -17,7 +17,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   const route = useRoute()
   const { locale } = useI18n()
   const config = useRuntimeConfig()
-  const { generateHrefLangLinks } = useHrefLang()
+  // const { generateHrefLangLinks } = useHrefLang()
 
   // 計算完整的頁面標題
   const pageTitle = computed(() => options.title || seoData.ogTitle)
@@ -27,7 +27,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     || seoData.description,
   )
 
-  const hreflangLinks = computed(() => generateHrefLangLinks())
+  // const hreflangLinks = computed(() => generateHrefLangLinks())
 
   // 計算完整的規範連結
   const baseUrl = config.public.i18n.baseUrl || seoData.mySite
@@ -64,7 +64,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
         rel: 'canonical',
         href: canonicalUrl.value,
       },
-      ...hreflangLinks.value,
+      // ...hreflangLinks.value,
     ],
   })
 

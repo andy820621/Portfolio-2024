@@ -15,14 +15,14 @@ export function useHrefLang() {
   const config = useRuntimeConfig()
   const baseUrl = config.public.i18n.baseUrl
 
-  const generateHrefLangLinks = () => {
+  function generateHrefLangLinks() {
     const links = []
 
     // 添加 x-default 連結
     links.push({
       rel: 'alternate',
       hreflang: 'x-default',
-      href: `${baseUrl}/`, // 始終指向網站根目錄
+      href: `${baseUrl}${route.path}`,
     })
 
     locales.value.forEach((loc) => {
@@ -30,7 +30,6 @@ export function useHrefLang() {
 
       if (localeConfig) {
         if (loc.code === 'en') {
-          // 對於預設語言(英文)，生成不帶前綴的連結
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
@@ -38,7 +37,6 @@ export function useHrefLang() {
           })
         }
         else {
-          // 非預設語言添加對應前綴
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
@@ -52,6 +50,7 @@ export function useHrefLang() {
     // return links.filter((link, index, self) =>
     //   index === self.findIndex(t => t.href === link.href),
     // )
+
     return links
   }
 

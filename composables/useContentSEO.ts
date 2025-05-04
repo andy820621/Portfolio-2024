@@ -12,7 +12,7 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
   const route = useRoute()
   const { locale } = useI18n()
   const config = useRuntimeConfig()
-  const { generateHrefLangLinks } = useHrefLang()
+  // const { generateHrefLangLinks } = useHrefLang()
 
   const pageTitle = computed(() => {
     const title = data.value.title
@@ -23,7 +23,7 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
     data.value.description || seoData.description,
   )
 
-  const hreflangLinks = computed(() => generateHrefLangLinks())
+  // const hreflangLinks = computed(() => generateHrefLangLinks())
 
   // 計算完整的規範連結
   const baseUrl = config.public.i18n.baseUrl || seoData.mySite
@@ -57,7 +57,7 @@ export function useContentSEO(data: ComputedRef<ContentData>) {
         rel: 'canonical',
         href: canonicalUrl.value,
       },
-      ...hreflangLinks.value,
+      // ...hreflangLinks.value,
     ],
   })
 
