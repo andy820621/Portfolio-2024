@@ -25,3 +25,6 @@ logs
 
 # Local Netlify folder
 .netlify
+
+# Local using or testing files
+Google Console Problem

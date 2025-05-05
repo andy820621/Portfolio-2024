@@ -18,9 +18,14 @@ const lastmod = getSitemapDateFormat(Date.now())
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  // experimental: {
-  //   inlineRouteRules: true,
-  // },
+  experimental: {
+    // inlineRouteRules: true,
+    defaults: {
+      nuxtLink: {
+        trailingSlash: 'remove',
+      },
+    },
+  },
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -109,6 +114,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     postgresUrl: process.env.POSTGRES_URL, // 確保環境變量可用
+    public: {
+      trailingSlash: false,
+    },
   },
   site: {
     url: process.env.I18N_BASE_URL,
@@ -218,8 +226,11 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'no prefix',
+      redirectOn: 'root',
       fallbackLocale: 'en',
+      // trying...
+      alwaysRedirect: false,
+      cookieCrossOrigin: true,
     },
     bundle: {
       optimizeTranslationDirective: false,
@@ -506,9 +517,19 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     })
   })
 
-  rules['sitemap.xml'] = {
-    prerender: true,
-  }
+  // Special routes and static assets
+  const noIndexPaths = ['page-cover', 'gallery-images', 'project-images', 'opt']
+
+  Object.assign(rules, {
+    '/sitemap.xml': {
+      prerender: true,
+    },
+
+    ...noIndexPaths.reduce((acc, dir) => ({
+      ...acc,
+      [`/${dir}/**`]: { index: false, robots: 'noindex' },
+    }), {}),
+  })
 
   return rules
 }
