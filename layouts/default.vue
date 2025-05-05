@@ -10,10 +10,7 @@ const localeHead = useLocaleHead({
 // const { t } = useI18n()
 
 useHead({
-  htmlAttrs: {
-    lang: localeHead.value.htmlAttrs.lang,
-    dir: localeHead.value.htmlAttrs.dir,
-  },
+  htmlAttrs: localeHead.value.htmlAttrs,
   // `%s` means The current page title., `%separator` defaults to a pipe character `|`
   titleTemplate: `%s %separator %siteName`,
   templateParams: {
