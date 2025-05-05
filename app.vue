@@ -6,7 +6,34 @@ import './assets/main.scss'
 import './assets/markdown.css'
 import './assets/prose.css'
 
+const localeHead = useLocaleHead({
+  dir: true, // old: addDirAttributes
+  key: 'hid', // old: identifierAttribute
+  seo: true, // old: addSeoAttributes
+})
 const { localeProperties } = useI18n()
+const { path } = useRoute()
+
+useHead({
+  htmlAttrs: localeHead.value.htmlAttrs,
+  // `%s` means The current page title., `%separator` defaults to a pipe character `|`
+  titleTemplate: `%s %separator %siteName`,
+  templateParams: {
+    separator: '-',
+    siteName: navbarData.homeTitle,
+    schemaOrg: {
+      host: seoData.mySite,
+      path,
+      inLanguage: 'en',
+    },
+  },
+  link: [...(localeHead.value.link || [])],
+  meta: [...(localeHead.value.meta || [])],
+  // script: [
+  //   { src: 'https://platform.twitter.com/widgets.js', async: true, charset: 'utf-8' },
+  // ],
+})
+
 const websiteId = `${seoData.mySite}#website`
 const personId = `${seoData.mySite}#identity`
 
