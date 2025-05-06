@@ -28,24 +28,3 @@ from = "https://www.barz.app/*"
 to = "https://barz.app/:splat"
 status = 301
 force = true
-
-# 確保所有 URL 都有尾部斜線 (更精確的正則表達式)
-[[redirects]]
-from = "https://barz.app/([^/]+)$"
-to = "https://barz.app/:splat/"
-status = 301
-force = true
-
-# 確保多層目錄路徑也有尾部斜線
-[[redirects]]
-from = "https://barz.app/(.+[^/])$"
-to = "https://barz.app/:splat/"
-status = 301
-force = true
-
-# 確保首頁也有尾部斜線
-[[redirects]]
-from = "https://barz.app"
-to = "https://barz.app/"
-status = 301
-force = true
