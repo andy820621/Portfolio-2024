@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Collections } from '@nuxt/content'
 import ProseTh from '~/components/content/ProseTh.vue'
-import { seoData } from '~/data'
 
 const { t, locale, localeProperties } = useI18n()
 

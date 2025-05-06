@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { AllCollectionItem } from '~/types/main'
-import { seoData } from '~/data'
 
 const localePath = useLocalePath()
 

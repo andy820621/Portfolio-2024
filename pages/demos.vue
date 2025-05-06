@@ -2,7 +2,6 @@
 import type { Collections } from '@nuxt/content'
 import type { DemoContent } from '~/types/main'
 import { breakpointsTailwind } from '@vueuse/core'
-import { seoData } from '~/data'
 
 const { t, locale } = useI18n()
 

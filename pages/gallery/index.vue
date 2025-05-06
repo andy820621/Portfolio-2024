@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
-import { seoData } from '~/data'
 import { galleryGroups } from '~/data/galleryData'
 
 const { t, localeProperties } = useI18n()
