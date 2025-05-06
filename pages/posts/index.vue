@@ -20,12 +20,28 @@ usePageSeo({
   description: t('blogsPage.description'),
 })
 
-const baseUrl = useRuntimeConfig().public.i18n.baseUrl
-const route = useRoute()
-const canonicalUrl = localePath(`${baseUrl}${route.path}`)
-const nowPageId = `${canonicalUrl}#webpage`
-const websiteId = `${baseUrl}#website`
-const itemListId = `${canonicalUrl}#itemlist`
+const { baseUrl, fullPath } = useUrl()
+const nowPageId = `${fullPath.value}#webpage`
+const websiteId = `${baseUrl.value}#website`
+const itemListId = `${fullPath.value}#itemlist`
+
+const itemListElement = formattedData.value.map((post, index) => ({
+  '@type': 'ListItem',
+  'position': index + 1,
+  'item': {
+    '@type': 'BlogPosting',
+    'headline': post.title,
+    'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${post.path}`,
+    'datePublished': new Date(post.date).toISOString(),
+    'image': {
+      '@type': 'ImageObject',
+      'url': post.ogImage,
+    },
+    'author': {
+      '@id': `${baseUrl.value}#identity`,
+    },
+  },
+})) || []
 
 useSchemaOrg([
   defineWebPage({
@@ -33,7 +49,7 @@ useSchemaOrg([
     '@type': 'CollectionPage',
     'name': t('blogsPage.title'),
     'description': t('blogsPage.description'),
-    'url': canonicalUrl,
+    'url': fullPath.value,
     'isPartOf': {
       '@id': websiteId,
     },
@@ -46,23 +62,7 @@ useSchemaOrg([
     '@id': itemListId,
     '@type': 'ItemList',
     'numberOfItems': formattedData.value.length || 0,
-    'itemListElement': formattedData.value.map((post, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'item': {
-        '@type': 'BlogPosting',
-        'headline': post.title,
-        'url': `${baseUrl}${post.path}`,
-        'datePublished': new Date(post.date).toISOString(),
-        'image': {
-          '@type': 'ImageObject',
-          'url': post.ogImage,
-        },
-        'author': {
-          '@id': 'https://barz.app#identity',
-        },
-      },
-    })) || [],
+    itemListElement,
   }),
 ])
 </script>

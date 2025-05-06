@@ -4,7 +4,6 @@ import { seoData } from '~/data'
 import { galleryGroups } from '~/data/galleryData'
 
 const { t, localeProperties } = useI18n()
-const localePath = useLocalePath()
 
 // 設置 SEO
 usePageSeo({
@@ -125,11 +124,23 @@ onMounted(() => {
   onUnmounted(stop)
 })
 
-const route = useRoute()
-const canonicalUrl = localePath(`${seoData.mySite}${route.path}`)
-const websiteId = `${seoData.mySite}#website`
-const nowPageId = `${canonicalUrl}#webpage`
-const itemListId = `${canonicalUrl}#itemlist`
+const { baseUrl, fullPath } = useUrl()
+const websiteId = `${baseUrl.value}#website`
+const nowPageId = `${fullPath.value}#webpage`
+const itemListId = `${fullPath.value}#itemlist`
+
+const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
+  '@type': 'ListItem',
+  'position': index + 1,
+  'item': {
+    '@type': 'CreativeWork',
+    'name': group.title,
+    'url': `${fullPath.value}${group.id}`,
+    'thumbnail': group.coverImage ? `${trailingSlashUrlOrNot(baseUrl.value, false) + group.coverImage}` : undefined,
+    'description': group.description || t('galleryPage.title'),
+    'keywords': group.tags.join(', ') || undefined,
+  },
+}))
 
 useSchemaOrg([
   defineWebPage({
@@ -137,7 +148,7 @@ useSchemaOrg([
     '@type': ['WebPage', 'CollectionPage'],
     'name': t('galleryPage.title'),
     'description': t('galleryPage.description'),
-    'url': canonicalUrl,
+    'url': fullPath.value,
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': websiteId,
@@ -151,18 +162,7 @@ useSchemaOrg([
     '@id': itemListId,
     '@type': 'ItemList',
     'numberOfItems': debouncedFilteredGroups.value.length,
-    'itemListElement': debouncedFilteredGroups.value.map((group, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'item': {
-        '@type': 'CreativeWork',
-        'name': group.title,
-        'url': `${canonicalUrl}/${group.id}`,
-        'thumbnail': group.coverImage ? `${seoData.mySite}${group.coverImage}` : undefined,
-        'description': group.description || t('galleryPage.title'),
-        'keywords': group.tags.join(', ') || undefined,
-      },
-    })),
+    itemListElement,
   }),
 ])
 </script>

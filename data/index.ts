@@ -7,7 +7,7 @@ export const seoData = {
   ogTitle: 'BarZ Hsieh',
   ogHeadline: 'Portfolio | Blogger | Creativity',
   twitterDescription: 'My blog website, where I play around with Nuxt, Vue, and more and showcase my blog, resources, etc',
-  mySite: 'https://barz.app',
+  mySite: 'https://barz.app/',
   email: 'andy820621@gmail.com',
   twitterSite: '@Barz3064',
   twitterLink: 'https://x.com/Barz3064',

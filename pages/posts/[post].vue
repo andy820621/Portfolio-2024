@@ -35,13 +35,12 @@ watchEffect(() => {
   if (mainData.value) {
     const keywords = mainData.value.tags || []
     const articleSection = mainData.value.categories || mainData.value.tags || []
-    const route = useRoute()
-    const canonicalUrl = localePath(`${seoData.mySite}${route.path}`)
+    const { baseUrl, fullPath } = useUrl()
 
-    const websiteId = `${seoData.mySite}#website`
-    const nowPageId = `${canonicalUrl}#webpage`
-    const articleId = `${canonicalUrl}#article`
-    const personId = `${seoData.mySite}#identity`
+    const websiteId = `${baseUrl.value}#website`
+    const nowPageId = `${fullPath.value}#webpage`
+    const articleId = `${fullPath.value}#article`
+    const personId = `${baseUrl.value}#identity`
 
     // TODO: Consider using the schemaOrg parameter from the .md file to control this
     useSchemaOrg([

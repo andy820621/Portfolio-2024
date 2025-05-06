@@ -18,11 +18,19 @@ const lastmod = getSitemapDateFormat(Date.now())
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  router: {
+    options: {
+      strict: false,
+    },
+  },
+  seo: {
+    redirectToCanonicalSiteUrl: true,
+  },
   experimental: {
     // inlineRouteRules: true,
     defaults: {
       nuxtLink: {
-        trailingSlash: 'remove',
+        trailingSlash: 'append',
       },
     },
   },
@@ -113,9 +121,8 @@ export default defineNuxtConfig({
     layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   runtimeConfig: {
-    postgresUrl: process.env.POSTGRES_URL, // 確保環境變量可用
     public: {
-      trailingSlash: false,
+      trailingSlash: true,
     },
   },
   site: {
@@ -124,6 +131,7 @@ export default defineNuxtConfig({
     identity: {
       type: 'Person',
     },
+    trailingSlash: true,
   },
   sitemap: {
     xslTips: false,

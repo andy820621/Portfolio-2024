@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
-import { seoData } from '~/data'
 import { galleryGroups } from '~/data/galleryData'
 
 const LightGallery = defineAsyncComponent(() => import('~/components/LightGallery.vue'))
@@ -136,10 +135,23 @@ usePageSeo({
 
 // 將這段代碼放在 usePageSeo 之後
 const { localeProperties } = useI18n()
-const baseUrl = useRuntimeConfig().public.i18n.baseUrl || seoData.mySite
-const canonicalUrl = useLocalePath()(`${baseUrl}${route.path}`)
-const websiteId = `${baseUrl}#website`
-const nowPageId = `${canonicalUrl}#webpage`
+const { baseUrl, fullPath } = useUrl()
+const websiteId = `${baseUrl.value}#website`
+const nowPageId = `${fullPath.value}#webpage`
+
+const itemListElement = images.value?.map((src, index) => ({
+  '@type': 'ListItem',
+  'position': index + 1,
+  'item': {
+    '@type': 'ImageObject',
+    'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
+    'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
+    'name': `${album.value?.title} - Image ${index + 1}`,
+    'description': `${album.value?.title} gallery image ${index + 1}`,
+    'representativeOfPage': index === 0,
+    'encodingFormat': 'image/webp',
+  },
+})) || []
 
 useSchemaOrg([
   defineWebPage({
@@ -147,34 +159,22 @@ useSchemaOrg([
     '@type': 'WebPage',
     'name': album.value?.title || 'Gallery',
     'description': album.value?.description || 'Photo gallery',
-    'url': canonicalUrl,
+    'url': fullPath.value,
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': websiteId,
     }, // 添加引用到圖片集合
     'mainEntity': {
-      '@id': `${canonicalUrl}#imagelist`,
+      '@id': `${fullPath.value}#imagelist`,
     },
   }),
 
   // 定義相冊中的圖片集合
   defineItemList({
-    '@id': `${canonicalUrl}#imagelist`,
+    '@id': `${fullPath.value}#imagelist`,
     '@type': 'ItemList',
     'numberOfItems': images.value?.length || 0,
-    'itemListElement': images.value?.map((src, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'item': {
-        '@type': 'ImageObject',
-        'contentUrl': `${baseUrl}${src}`,
-        'url': `${baseUrl}${src}`,
-        'name': `${album.value?.title} - Image ${index + 1}`,
-        'description': `${album.value?.title} gallery image ${index + 1}`,
-        'representativeOfPage': index === 0,
-        'encodingFormat': 'image/webp',
-      },
-    })) || [],
+    itemListElement,
   }),
 ])
 </script>

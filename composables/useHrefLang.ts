@@ -11,9 +11,7 @@ const LOCALE_MAPPING = {
 
 export function useHrefLang() {
   const { locales } = useI18n()
-  const route = useRoute()
-  const config = useRuntimeConfig()
-  const baseUrl = config.public.i18n.baseUrl
+  const { fullPath } = useUrl()
 
   function generateHrefLangLinks() {
     const links = []
@@ -22,7 +20,7 @@ export function useHrefLang() {
     links.push({
       rel: 'alternate',
       hreflang: 'x-default',
-      href: `${baseUrl}${route.path}`,
+      href: fullPath.value,
     })
 
     locales.value.forEach((loc) => {
@@ -33,14 +31,14 @@ export function useHrefLang() {
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
-            href: `${baseUrl}${route.path}`,
+            href: fullPath.value,
           })
         }
         else {
           links.push({
             rel: 'alternate',
             hreflang: localeConfig.hreflang,
-            href: `${baseUrl}${localeConfig.path}${route.path}`,
+            href: fullPath.value,
           })
         }
       }

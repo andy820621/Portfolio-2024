@@ -12,7 +12,7 @@ const localeHead = useLocaleHead({
   seo: true, // old: addSeoAttributes
 })
 const { localeProperties } = useI18n()
-const { path } = useRoute()
+const { route, baseUrl } = useUrl()
 
 useHead({
   htmlAttrs: localeHead.value.htmlAttrs,
@@ -22,8 +22,8 @@ useHead({
     separator: '-',
     siteName: navbarData.homeTitle,
     schemaOrg: {
-      host: seoData.mySite,
-      path,
+      host: baseUrl.value,
+      path: route.path,
       inLanguage: 'en',
     },
   },
@@ -34,15 +34,15 @@ useHead({
   // ],
 })
 
-const websiteId = `${seoData.mySite}#website`
-const personId = `${seoData.mySite}#identity`
+const websiteId = `${baseUrl.value}#website`
+const personId = `${baseUrl.value}#identity`
 
 useSchemaOrg([
   defineWebSite({
     '@id': websiteId,
     '@type': 'WebSite',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
-    'url': `${seoData.mySite}/`,
+    'url': process.env.I18N_BASE_URL,
     'inLanguage': localeProperties.value.language,
     'publisher': {
       '@id': personId,
@@ -54,7 +54,7 @@ useSchemaOrg([
     'name': navbarData.homeTitle,
     'alternateName': 'Hsieh Yao Tsu',
     'url': process.env.I18N_BASE_URL,
-    'image': `${seoData.mySite}/me.jpg`,
+    'image': `${process.env.I18N_BASE_URL}me.jpg`,
     'description': seoData.description,
     'email': seoData.email,
     'sameAs': [

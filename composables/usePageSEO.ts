@@ -14,9 +14,6 @@ interface PageSeoOptions {
 }
 
 export function usePageSeo(options: PageSeoOptions = {}) {
-  const route = useRoute()
-  const config = useRuntimeConfig()
-
   // 計算完整的頁面標題
   const pageTitle = computed(() => options.title || seoData.ogTitle)
 
@@ -26,9 +23,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   )
 
   // 計算完整的規範連結
-  const baseUrl = config.public.i18n.baseUrl || seoData.mySite
-  const routePath = route.path.startsWith('/') ? route.path : `/${route.path}`
-  const canonicalUrl = computed(() => `${baseUrl}${routePath.replace(/\/$/, '')}`)
+  const { baseUrl, fullPath } = useUrl()
 
   // SEO 元數據
   useSeoMeta({
@@ -43,17 +38,16 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex) {
     defineOgImageComponent('Nuxt', {
-      url: config.public.i18n.baseUrl || seoData.mySite,
+      url: fullPath.value,
       headline: seoData.ogHeadline,
       title: pageTitle.value,
       description: pageDescription.value,
-      siteName: baseUrl,
+      siteName: baseUrl.value,
     })
   }
 
   return {
     pageTitle,
     pageDescription,
-    canonicalUrl,
   }
 }

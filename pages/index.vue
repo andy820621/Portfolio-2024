@@ -42,9 +42,11 @@ usePageSeo({
   description: content.value?.description || t('homePage.description') || '',
 })
 
-const webpageId = `${seoData.mySite}#webpage`
-const websiteId = `${seoData.mySite}#website`
-const personId = `${seoData.mySite}#identity`
+const { baseUrl } = useUrl()
+
+const webpageId = `${baseUrl.value}#webpage`
+const websiteId = `${baseUrl.value}#website`
+const personId = `${baseUrl.value}#identity`
 
 useSchemaOrg([
   defineWebPage({
@@ -52,7 +54,7 @@ useSchemaOrg([
     '@type': 'ProfilePage',
     'description': 'BarZ Hsieh\'s Portfolio',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
-    'url': `${seoData.mySite}/`,
+    'url': baseUrl.value,
     // 'about':  NodeRelation<Organization>,
     'mainEntity': {
       '@id': personId,

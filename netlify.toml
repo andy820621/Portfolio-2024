@@ -9,6 +9,7 @@ NODE_VERSION = "20.16.0"
 node_bundler = "esbuild"
 external_node_modules = [ "better-sqlite3" ]
 
+# HTTP 到 HTTPS 的重定向
 [[redirects]]
 from = "http://barz.app/*"
 to = "https://barz.app/:splat"
@@ -21,8 +22,30 @@ to = "https://barz.app/:splat"
 status = 301
 force = true
 
+# 移除 www 子網域
 [[redirects]]
 from = "https://www.barz.app/*"
 to = "https://barz.app/:splat"
+status = 301
+force = true
+
+# 確保所有 URL 都有尾部斜線 (更精確的正則表達式)
+[[redirects]]
+from = "https://barz.app/([^/]+)$"
+to = "https://barz.app/:splat/"
+status = 301
+force = true
+
+# 確保多層目錄路徑也有尾部斜線
+[[redirects]]
+from = "https://barz.app/(.+[^/])$"
+to = "https://barz.app/:splat/"
+status = 301
+force = true
+
+# 確保首頁也有尾部斜線
+[[redirects]]
+from = "https://barz.app"
+to = "https://barz.app/"
 status = 301
 force = true

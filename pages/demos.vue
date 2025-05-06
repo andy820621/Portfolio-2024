@@ -5,7 +5,6 @@ import { breakpointsTailwind } from '@vueuse/core'
 import { seoData } from '~/data'
 
 const { t, locale } = useI18n()
-const localePath = useLocalePath()
 
 // 定義轉換後的 Demo 項目類型
 interface DemoItem {
@@ -149,17 +148,15 @@ usePageSeo({
 })
 
 // Schema.org
-const route = useRoute()
 const { localeProperties } = useI18n()
-const baseUrl = useRuntimeConfig().public.i18n.baseUrl || seoData.mySite
-const canonicalUrl = localePath(`${baseUrl}${route.path}`)
-const websiteId = `${baseUrl}#website`
-const nowPageId = `${canonicalUrl}#webpage`
-const itemListId = `${canonicalUrl}#itemlist`
+const { baseUrl, fullPath } = useUrl()
+const websiteId = `${baseUrl.value}#website`
+const nowPageId = `${fullPath.value}#webpage`
+const itemListId = `${fullPath.value}#itemlist`
 
 const itemListElement = demoItems.value?.map((item, index) => {
   // 參考 item.vue 中的邏輯，確定最佳 URL
-  let bestUrl = canonicalUrl
+  let bestUrl = fullPath.value
 
   // 按優先級檢查可用連結
   if (item.content.link) {
@@ -184,7 +181,7 @@ const itemListElement = demoItems.value?.map((item, index) => {
       'url': bestUrl,
       'operatingSystem': 'Any',
       'screenshot': item.thumbnailType && item.thumbnailType === 'webp'
-        ? `${baseUrl}/demos/thumbnail/${item.baseName}.${item.thumbnailType}`
+        ? `${trailingSlashUrlOrNot(baseUrl.value, false)}/demos/thumbnail/${item.baseName}.${item.thumbnailType}`
         : undefined,
     },
   }
@@ -196,7 +193,7 @@ useSchemaOrg([
     '@type': 'CollectionPage',
     'name': t('demosPage.title'),
     'description': t('demosPage.description'),
-    'url': canonicalUrl,
+    'url': fullPath.value,
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': websiteId,
