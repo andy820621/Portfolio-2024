@@ -19,7 +19,12 @@ export interface Photo {
   description?: string
 }
 
-const { photos, mode = 'lg-tube', showTitle = true, showDescription = false } = defineProps<{
+const {
+  photos,
+  mode = 'lg-tube',
+  showTitle = true,
+  showDescription = false,
+} = defineProps<{
   photos: Photo[]
   mode?: 'lg-slide' | 'lg-fade' | 'lg-zoom-in' | 'lg-zoom-in-big' | 'lg-zoom-out' | 'lg-zoom-out-big' | 'lg-zoom-out-in' | 'lg-zoom-in-out' | 'lg-soft-zoom' | 'lg-scale-up' | 'lg-slide-circular' | 'lg-slide-circular-vertical' | 'lg-slide-vertical' | 'lg-slide-vertical-growth' | 'lg-slide-skew-only' | 'lg-slide-skew-only-rev' | 'lg-slide-skew-only-y' | 'lg-slide-skew-only-y-rev' | 'lg-slide-skew' | 'lg-slide-skew-rev' | 'lg-slide-skew-cross' | 'lg-slide-skew-cross-rev' | 'lg-slide-skew-ver' | 'lg-slide-skew-ver-rev' | 'lg-slide-skew-ver-cross' | 'lg-slide-skew-ver-cross-rev' | 'lg-lollipop' | 'lg-lollipop-rev' | 'lg-rotate' | 'lg-rotate-rev' | 'lg-tube' // 如果 lightgallery 之後有匯出的話可以直接用
   showTitle?: boolean
@@ -37,6 +42,8 @@ const swiper = ref<typeof Swiper>()
 const popup = ref<LightGallery>()
 const activeIndex = ref(0)
 const lightBoxBtn = ref<HTMLButtonElement>()
+
+const deBounceHandleWheel = useDebounceFn(handleWheel, 16)
 
 onMounted(() => {
   if (!photos.length)
@@ -61,12 +68,21 @@ onMounted(() => {
       plugins,
     })
 
-    document.addEventListener('wheel', handleWheel, { passive: false })
+    if (popup.value) {
+      watch(() => popup.value!.lgOpened, (newVal) => {
+        if (newVal) {
+          document.addEventListener('wheel', deBounceHandleWheel, { passive: false })
+        }
+        else {
+          document.removeEventListener('wheel', deBounceHandleWheel)
+        }
+      })
+    }
   }
 })
 
 onUnmounted(() => {
-  document.removeEventListener('wheel', handleWheel)
+  document.removeEventListener('wheel', deBounceHandleWheel)
 })
 
 function handleWheel(e: WheelEvent) {

@@ -1,10 +1,51 @@
 <script setup lang="ts">
-defineProps<{
-  links: any[]
-  activeId: string
+import type { TocLink } from '@nuxt/content'
+
+const { links, isSublistShown = true } = defineProps<{
+  links: TocLink[]
+  isSublistShown?: boolean
 }>()
 
 const route = useRoute()
+const activeTocIds = ref(new Set<string>())
+const lastVisibleHeading = ref('')
+
+onMounted(() => {
+  const observer = new IntersectionObserver(callback, {
+    root: null,
+    rootMargin: '0px 0px -80% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+  })
+
+  const elements = document.querySelectorAll('h2, h3')
+
+  for (const element of elements)
+    observer.observe(element)
+
+  onBeforeUnmount(() => {
+    for (const element of elements)
+      observer.unobserve(element)
+  })
+
+  function callback(entries: IntersectionObserverEntry[]) {
+    entries.forEach((entry) => {
+      const id = entry.target.id
+
+      if (entry.isIntersecting) {
+        lastVisibleHeading.value = id
+        activeTocIds.value.add(id)
+      }
+      else {
+        activeTocIds.value.delete(id)
+      }
+    })
+  }
+})
+
+// 檢查標題是否活躍
+function isHeadingActive(id: string): boolean {
+  return activeTocIds.value.has(id) || id === lastVisibleHeading.value
+}
 </script>
 
 <template>
@@ -12,42 +53,72 @@ const route = useRoute()
     <div class="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto">
       <div class="min-w-[200px] border rounded-md p-3 dark:border-gray-800 dark:bg-slate-900">
         <div mb-3 flex items-center border-b pb-2 space-x-2 dark:border-gray-800>
-          <Icon name="i-ri-menu-2-fill" />
-          <h2 class="text-sm font-bold">
+          <Icon name="i-ri-menu-2-fill" aria-hidden="true" />
+          <h2
+            id="toc-title"
+            class="text-sm font-bold"
+            role="heading"
+            aria-level="2"
+          >
             {{ $t('Table Of Content') }}
           </h2>
         </div>
-        <NuxtLink
-          v-for="link in links"
-          :key="link.id"
-          :to="{ path: route.path, hash: `#${link.id}` }"
-          class="mb-3 block text-xs hover:underline"
-          :class="{ 'text-active': activeId === link.id }"
-          :aria-label="`${link.text}'s anchor link`"
-          :title="`${link.text}'s anchor link`"
-        >
-          {{ link.text }}
-        </NuxtLink>
+
+        <!-- 主目錄項目清單 -->
+        <nav aria-labelledby="toc-title" role="navigation">
+          <ul role="list" class="mt-2">
+            <li
+              v-for="link in links"
+              :key="link.id"
+              role="listitem"
+              class="mb-3"
+              :aria-expanded="isSublistShown && link.children && link.children.length ? 'true' : 'false'"
+            >
+              <!-- 主項目標題 -->
+              <NuxtLink
+                :to="{ path: route.path, hash: `#${link.id}` }"
+                class="block text-xs hover:underline"
+                :class="{ 'text-active': isHeadingActive(link.id) }"
+                :aria-label="`${link.text}的錨點連結`"
+                :title="`${link.text}的錨點連結`"
+                role="link"
+                :aria-current="isHeadingActive(link.id) ? 'location' : undefined"
+              >
+                {{ link.text }}
+              </NuxtLink>
+
+              <!-- 子項目清單 (如果存在且 isSublistShown 為 true) -->
+              <ul
+                v-if="isSublistShown && link.children && link.children.length"
+                class="mt-2 pl-3"
+                role="list"
+                :aria-label="`${link.text}的子標題`"
+              >
+                <li
+                  v-for="sublink in link.children"
+                  :key="sublink.id"
+                  class="mb-2"
+                  role="listitem"
+                >
+                  <NuxtLink
+                    :to="{ path: route.path, hash: `#${sublink.id}` }"
+                    class="block text-xs hover:underline"
+                    :class="{ 'text-active': isHeadingActive(sublink.id) }"
+                    :aria-label="`${sublink.text}'s anchor link`"
+                    :title="`${sublink.text}'s anchor link`"
+                    role="link"
+                    :aria-current="isHeadingActive(sublink.id) ? 'location' : undefined"
+                  >
+                    {{ sublink.text }}
+                  </NuxtLink>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
-
-  <!-- <div class="lg:col-span-3 sticky top-28 h-96 hidden lg:block justify-self-end">
-    <div class="border dark:border-gray-800 p-3 rounded-md min-w-[200px] dark:bg-slate-900">
-      <h1 class="text-sm font-bold mb-3 border-b dark:border-gray-800 pb-2">
-        Table Of Content
-      </h1>
-      <NuxtLink
-        v-for="link in links"
-        :key="link.id"
-        :to="{ path: route.path, hash: `#${link.id}` }"
-        class="block text-xs mb-3 hover:underline"
-        :class="{ 'text-active': activeId === link.id }"
-      >
-        {{ link.text }}
-      </NuxtLink>
-    </div>
-  </div> -->
 </template>
 
 <style>

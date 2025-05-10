@@ -11,7 +11,6 @@ const localePath = useLocalePath()
 
 // 使用拆分後的 composables
 const { mainData, prevContent, nextContent } = contenDetailData
-const { activeId } = useTocObserver()
 
 const data = computed(() => ({
   title: mainData.value?.title,
@@ -49,6 +48,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
             :word-count="data.wordCount"
             :reading-time="data.readingTime"
           />
+
           <ContentRenderer v-if="mainData" :value="mainData" :components="{ th: ProseTh }">
             <template #empty>
               <p>No content found.</p>
@@ -70,7 +70,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
         </div>
       </div>
 
-      <postToc v-if="tocLinks.length > 0" :links="tocLinks" :active-id="activeId" />
+      <postToc v-if="tocLinks.length > 0" :links="tocLinks" />
 
       <div v-if="mainData" class="col-span-12 mt-10 flex flex-col gap-4">
         <div class="mt-10 flex flex-row flex-wrap gap-2 md:flex-nowrap">

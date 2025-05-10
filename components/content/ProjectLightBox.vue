@@ -24,6 +24,15 @@ onMounted(async () => {
 //     console.error('API Response Error:', error)
 //   },
 // })
+
+// TODO: 檢查組件重新渲染的原因
+// onRenderTracked((event) => {
+//   console.log('組件重新渲染被追蹤:', event)
+// })
+
+// onRenderTriggered((event) => {
+//   console.log('觸發組件重新渲染:', event)
+// })
 </script>
 
 <template>
