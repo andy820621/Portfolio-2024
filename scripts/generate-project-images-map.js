@@ -48,7 +48,7 @@ function main() {
   })
 
   fs.writeFileSync(
-    path.join(projectRoot, 'public', 'projects-image-map.json'),
+    path.join(projectRoot, 'public', 'project-images-map.json'),
     JSON.stringify(imageMap, null, 2),
   )
 

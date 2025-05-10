@@ -8,6 +8,7 @@
   },
   "scripts": {
     "prebuild": "node scripts/generate-project-images-map.js",
+    "build:originaldata": "node scripts/generate-project-images-metadata.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",

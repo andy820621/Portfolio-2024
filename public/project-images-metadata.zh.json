@@ -1,0 +1,178 @@
+{
+  "": {
+    "ti-ho-healthcare.webp": {
+      "title": "Ti Ho Healthcare",
+      "description": "Ti Ho Healthcare"
+    },
+    "metc.webp": {
+      "title": "Metc",
+      "description": "Metc"
+    },
+    "finance-tracker.webp": {
+      "title": "Finance Tracker",
+      "description": "Finance Tracker"
+    }
+  },
+  "ti-ho-healthcare": {
+    "1.home.webp": {
+      "title": "Home",
+      "description": "Ti Ho Healthcare - Home"
+    },
+    "2.about.webp": {
+      "title": "About",
+      "description": "Ti Ho Healthcare - About"
+    },
+    "3.clinic-introduction.webp": {
+      "title": "Clinic Introduction",
+      "description": "Ti Ho Healthcare - Clinic Introduction"
+    },
+    "4.clinic-service.webp": {
+      "title": "Clinic Service",
+      "description": "Ti Ho Healthcare - Clinic Service"
+    },
+    "5.technical-cooperation.webp": {
+      "title": "Technical Cooperation",
+      "description": "Ti Ho Healthcare - Technical Cooperation"
+    },
+    "6.implant-system.webp": {
+      "title": "Implant System",
+      "description": "Ti Ho Healthcare - Implant System"
+    },
+    "7.company.webp": {
+      "title": "Company",
+      "description": "Ti Ho Healthcare - Company"
+    },
+    "8.product.webp": {
+      "title": "Product",
+      "description": "Ti Ho Healthcare - Product"
+    },
+    "9.dental-technology.webp": {
+      "title": "Dental Technology",
+      "description": "Ti Ho Healthcare - Dental Technology"
+    },
+    "10.contact.webp": {
+      "title": "Contact",
+      "description": "Ti Ho Healthcare - Contact"
+    }
+  },
+  "metc": {
+    "01.intro.webp": {
+      "title": "Intro",
+      "description": "Metc - Intro"
+    },
+    "02.function.webp": {
+      "title": "Function",
+      "description": "Metc - Function"
+    },
+    "04.process.webp": {
+      "title": "Process",
+      "description": "Metc - Process"
+    }
+  },
+  "metc/monitor": {
+    "01.monitor.webp": {
+      "title": "Monitor",
+      "description": "Metc/monitor - Monitor"
+    },
+    "02.device.webp": {
+      "title": "Device",
+      "description": "Metc/monitor - Device"
+    },
+    "03.marshaling.webp": {
+      "title": "Marshaling",
+      "description": "Metc/monitor - Marshaling"
+    },
+    "04.people.webp": {
+      "title": "People",
+      "description": "Metc/monitor - People"
+    },
+    "05.graphic.webp": {
+      "title": "Graphic",
+      "description": "Metc/monitor - Graphic"
+    },
+    "06.cctv.webp": {
+      "title": "Cctv",
+      "description": "Metc/monitor - Cctv"
+    }
+  },
+  "metc/en": {
+    "01.intro.webp": {
+      "title": "Intro",
+      "description": "Metc/en - Intro"
+    }
+  },
+  "metc/en/monitor": {
+    "01.monitor.png": {
+      "title": "Monitor",
+      "description": "Metc/en/monitor - Monitor"
+    },
+    "02.device.webp": {
+      "title": "Device",
+      "description": "Metc/en/monitor - Device"
+    },
+    "03.marshaling.webp": {
+      "title": "Marshaling",
+      "description": "Metc/en/monitor - Marshaling"
+    },
+    "04.people.webp": {
+      "title": "People",
+      "description": "Metc/en/monitor - People"
+    },
+    "05.graphic.webp": {
+      "title": "Graphic",
+      "description": "Metc/en/monitor - Graphic"
+    },
+    "06.cctv.webp": {
+      "title": "Cctv",
+      "description": "Metc/en/monitor - Cctv"
+    }
+  },
+  "metc/en/dailyOrEmergency": {
+    "01.daily.png": {
+      "title": "Daily",
+      "description": "Metc/en/dailyOrEmergency - Daily"
+    },
+    "02.emergency.png": {
+      "title": "Emergency",
+      "description": "Metc/en/dailyOrEmergency - Emergency"
+    }
+  },
+  "finance-tracker": {
+    "main-page.webp": {
+      "title": "Main Page",
+      "description": "Finance Tracker - Main Page"
+    }
+  },
+  "finance-tracker/settings": {
+    "01.settings-profile.webp": {
+      "title": "Settings Profile",
+      "description": "Finance Tracker 的設定頁面，使用者可在此更新個人資料與帳戶資訊"
+    },
+    "02.settings-avatar.webp": {
+      "title": "Settings Avatar",
+      "description": "Finance Tracker 的頭像設定介面，使用者可自訂個人頭像"
+    },
+    "03.settings-preferences.webp": {
+      "title": "Settings Preferences",
+      "description": "Finance Tracker 的偏好設定頁面，使用者可管理通知偏好與主題選項"
+    }
+  },
+  "finance-tracker/magic-link": {
+    "01.login.webp": {
+      "title": "Login",
+      "description": "使用者在 Finance Tracker 登入畫面，輸入電子郵件以接收 Magic Link"
+    },
+    "02.login-after-send-email.webp": {
+      "title": "Login After Send Email",
+      "description": "發送 Magic Link 郵件後的確認畫面，提示使用者檢查收件匣"
+    },
+    "03.email-get-magic-link-for-login.webp": {
+      "title": "Email Get Magic Link For Login",
+      "description": "範例郵件內容，顯示用於安全登入的 Magic Link 連結"
+    },
+    "04.after-login-will-go-to-main-page.webp": {
+      "title": "After Login Will Go To Main Page",
+      "description": "成功透過 Magic Link 登入後，跳轉至 Finance Tracker 主頁面，呈現儀表板與帳戶概覽"
+    }
+  }
+}
