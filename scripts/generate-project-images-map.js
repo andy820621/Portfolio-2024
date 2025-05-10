@@ -26,6 +26,7 @@ function main() {
     process.exit(1)
   }
 
+  // 先收集所有檔案
   imageFiles.forEach((file) => {
     const dir = path.dirname(file)
     const filename = path.basename(file)
@@ -33,6 +34,17 @@ function main() {
     if (!imageMap[dirKey])
       imageMap[dirKey] = []
     imageMap[dirKey].push(filename)
+  })
+
+  // 對每個目錄下的檔案進行數字順序排序
+  Object.keys(imageMap).forEach((dirKey) => {
+    imageMap[dirKey].sort((a, b) => {
+      // 使用正則表達式從檔案名提取數字前綴
+      const numA = Number.parseInt(a.match(/^(\d+)/)?.[1] || '0')
+      const numB = Number.parseInt(b.match(/^(\d+)/)?.[1] || '0')
+      // 按數字大小排序
+      return numA - numB
+    })
   })
 
   fs.writeFileSync(

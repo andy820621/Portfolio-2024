@@ -23,6 +23,7 @@ const data = computed(() => ({
   published: mainData.value?.published || true,
   wordCount: mainData.value?.wordCount || 0,
   readingTime: mainData.value?.readingTime || undefined,
+  imageClass: mainData.value?.imageClass || '',
 }))
 
 // 使用 SEO composable
@@ -47,6 +48,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
             :tags="data.tags"
             :word-count="data.wordCount"
             :reading-time="data.readingTime"
+            :image-class="data.imageClass"
           />
 
           <ContentRenderer v-if="mainData" :value="mainData" :components="{ th: ProseTh }">

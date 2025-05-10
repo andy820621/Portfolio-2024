@@ -202,16 +202,16 @@ main().catch(console.error)
 使用方法：
 
 1. 生成原始圖片組（默認行為）：
-   node tools/sharp.js
+  node tools/sharp.js
 
 2. 生成圖片組和封面：
-   node tools/sharp.js all
+  node tools/sharp.js all
 
 3. 隨機生成封面：
-   node tools/sharp.js cover
+  node tools/sharp.js cover
 
 4. 根據特定文件名生成封面：
-   node tools/sharp.js cover filename（不需要包含副檔名）
+  node tools/sharp.js cover filename（不需要包含副檔名）
 
 注意事項：
 - 確保 'original' 資料夾中有原始圖片

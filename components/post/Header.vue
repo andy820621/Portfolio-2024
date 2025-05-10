@@ -9,12 +9,14 @@ interface Props {
   tags?: Array<string>
   wordCount?: number
   readingTime?: ComputedRef<string> | string
+  imageClass?: string
 }
 
 const {
   title,
   image = '/not-found.jpg',
   alt = 'no-img',
+  imageClass = '',
 } = defineProps<Props>()
 </script>
 
@@ -28,6 +30,7 @@ const {
       :alt="alt || ''"
       width="600"
       class="m-auto h-32 h-full max-h-[24vh] w-full content-center rounded-lg object-cover shadow-lg md:h-72"
+      :class="imageClass ? imageClass : undefined"
       placeholder
     />
     <p v-if="description" class="mx-auto max-w-xl text-xs text-zinc-600 my-2! sm:text-sm dark:text-zinc-400">

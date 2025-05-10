@@ -17,9 +17,7 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
         const contents = await queryCollection(collection)
           .where('published', '=', true)
           .order('date', 'DESC') // 使用 order 替代 sort
-          .all() as BlogPost[]
-
-        // console.log({contents});
+          .all() as T[]
 
         return contents.map((content) => {
           const wordCount = content.body ? countWords(content.body) : 0
@@ -74,6 +72,7 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
       published: content.published || true,
       wordCount: content.wordCount || 0,
       readingTime: content.readingTime || undefined,
+      imageClass: content.imageClass || '',
     }))
   })
 

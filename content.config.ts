@@ -22,6 +22,7 @@ const articleSchema = z.object({
   categories: z.array(z.string()).optional(),
   published: z.boolean().optional(),
   rawbody: z.string(),
+  imageClass: z.string().optional(),
 })
 
 // projects 內容模式
@@ -36,6 +37,7 @@ const projectSchema = z.object({
   categories: z.array(z.string()).optional(),
   published: z.boolean().optional(),
   rawbody: z.string(),
+  imageClass: z.string().optional(),
 })
 
 // demos 內容模式

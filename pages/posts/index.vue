@@ -97,6 +97,7 @@ useSchemaOrg([
             :published="post.published"
             :word-count="post.wordCount"
             :reading-time="post.readingTime"
+            :image-class="post.imageClass"
           />
         </template>
       </div>

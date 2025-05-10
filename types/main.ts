@@ -24,6 +24,7 @@ export interface BlogPost extends PageCollectionItemBase {
   published: boolean
   readingTime?: ComputedRef<string> | string
   wordCount?: number
+  imageClass?: string
 }
 
 // 擴展 CollectionItemBase 來創建我們需要的 DemoContent 類型

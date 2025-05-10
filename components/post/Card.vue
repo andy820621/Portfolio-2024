@@ -11,6 +11,7 @@ interface Props {
   published?: boolean
   wordCount?: number
   readingTime?: ComputedRef<string> | string
+  imageClass?: string
 }
 
 withDefaults(defineProps<Props>(), {
@@ -32,6 +33,7 @@ withDefaults(defineProps<Props>(), {
       <div class="sm:col-span-3">
         <NuxtImg
           class="h-full w-full rounded-t-2xl object-cover object-center shadow-lg transition-transform duration-300 group-hover:scale-[1.02] sm:rounded-l-2xl sm:rounded-t-none"
+          :class="imageClass ? imageClass : undefined"
           width="300"
           :src="image"
           :alt="alt"
