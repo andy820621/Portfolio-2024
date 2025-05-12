@@ -42,7 +42,7 @@ useSchemaOrg([
     '@id': websiteId,
     '@type': 'WebSite',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
-    'url': process.env.I18N_BASE_URL,
+    'url': baseUrl.value,
     'inLanguage': localeProperties.value.language,
     'publisher': {
       '@id': personId,
@@ -53,8 +53,8 @@ useSchemaOrg([
     '@type': 'Person',
     'name': navbarData.homeTitle,
     'alternateName': 'Hsieh Yao Tsu',
-    'url': process.env.I18N_BASE_URL,
-    'image': `${process.env.I18N_BASE_URL}me.jpg`,
+    'url': baseUrl.value,
+    'image': `${baseUrl.value}me.jpg`,
     'description': seoData.description,
     'email': seoData.email,
     'sameAs': [
