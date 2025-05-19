@@ -14,6 +14,22 @@ const localeHead = useLocaleHead({
 const { localeProperties } = useI18n()
 const { route, baseUrl } = useUrl()
 
+const links = localeHead.value.link?.map(link => ({
+  ...link,
+  href: trailingSlashUrlOrNot(link.href),
+})) || []
+
+const metas = localeHead.value.meta?.map((meta) => {
+  // 只對 URL 類型的 meta 標籤添加斜線
+  if (meta.property === 'og:url' || meta.name === 'canonical' || meta.name === 'twitter:url') {
+    return {
+      ...meta,
+      content: trailingSlashUrlOrNot(meta.content),
+    }
+  }
+  return meta
+}) || []
+
 useHead({
   htmlAttrs: localeHead.value.htmlAttrs,
   // `%s` means The current page title., `%separator` defaults to a pipe character `|`
@@ -27,8 +43,8 @@ useHead({
       inLanguage: 'en',
     },
   },
-  link: [...(localeHead.value.link || [])],
-  meta: [...(localeHead.value.meta || [])],
+  link: links,
+  meta: metas,
   // script: [
   //   { src: 'https://platform.twitter.com/widgets.js', async: true, charset: 'utf-8' },
   // ],
