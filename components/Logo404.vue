@@ -1,5 +1,20 @@
+<script setup lang="ts">
+const { width = '100%', height = 'auto', class: className = '' } = defineProps<{
+  width?: string | number
+  height?: string | number
+  class?: string
+}>()
+</script>
+
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    :width="width"
+    :height="height"
+    :class="className"
+    viewBox="0 0 500 500"
+  >
     <defs>
       <clipPath id="freepik--clip-path--inject-16">
         <path

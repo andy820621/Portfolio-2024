@@ -1,35 +1,21 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
+const route = useRoute()
 // eslint-disable-next-line no-console
-console.log('now in [...slug].vue page.')
+console.log(`now in [...slug].vue page, path: ${route.path}, preparing to throw 404 error.`)
 
-// SEO 配置
-usePageSeo({
-  title: '404 - Page Not Found',
-  description: t('errorPage.description', '您訪問的頁面不存在'),
-  noIndex: true,
-  addModifiedTime: true,
+// throw 404 Error, this will be handled by error.vue
+throw createError({
+  statusCode: 404,
+  statusMessage: t('errorPage.description', '您訪問的頁面不存在'),
+  message: t('errorPage.description', '您訪問的頁面不存在'),
+  fatal: true,
 })
-
-const localePath = useLocalePath()
 </script>
 
 <template>
-  <div class="py-5">
-    <div class="mx-auto max-w-xl container">
-      <Logo404 />
-
-      <div grid justify-center>
-        <NuxtLink
-          :to="localePath('/')"
-          class="inline-block px-6 py-3 text-lg font-semibold hover:shadow-base-hover shadow-base transition duration-300 ease-in-out base-btn hover:-translate-y-1"
-          :aria-label="$t('backToHome')"
-          :title="$t('backToHome')"
-        >
-          {{ $t('backToHome') }}
-        </NuxtLink>
-      </div>
-    </div>
+  <div>
+    This content will not be displayed. The error page (error.vue) will be shown instead.
   </div>
 </template>

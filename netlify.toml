@@ -28,3 +28,17 @@ from = "https://www.barz.app/*"
 to = "https://barz.app/:splat"
 status = 301
 force = true
+
+# 將 /en/ 永久重定向到根目錄 (/)
+[[redirects]]
+from = "/en/*"
+to = "/:splat" # 將 /en/foo 重定向到 /foo, /en/ 重定向到 /
+status = 301
+force = true
+
+# 處理 /en/ 的情況
+[[redirects]]
+from = "/en/"
+to = "/"
+status = 301
+force = true

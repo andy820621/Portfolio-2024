@@ -2,7 +2,7 @@
   <div class="gd-container">
     <NavBar />
 
-    <main class="px-7 py-10">
+    <main class="min-h-[calc(100dvh-140px)] px-7 pb-12">
       <slot />
     </main>
 
