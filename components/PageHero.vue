@@ -12,7 +12,7 @@ defineProps<{
       <h1 class="my-5 text-4xl text-black font-semibold leading-tight slide-enter-50 md:text-5xl dark:text-zinc-300">
         {{ title }}
       </h1>
-      <p class="slide-enter italic dark:text-zinc-300">
+      <p class="slide-enter whitespace-pre-line italic dark:text-zinc-300">
         {{ description }}
       </p>
     </div>

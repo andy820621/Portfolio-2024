@@ -131,6 +131,16 @@ usePageSeo({
   title: album.value?.title || 'Gallery',
   description: album.value?.description || 'Gallery\'s description',
   image: album.value?.coverImage,
+  keywords: [
+    album.value?.title,
+    'Gallery',
+    '相簿',
+    'BarZ',
+    'Hsieh Yao Tsu',
+    '攝影',
+    '作品集',
+    ...(album.value?.tags || []),
+  ].filter(Boolean).join(', '),
 })
 
 // 將這段代碼放在 usePageSeo 之後

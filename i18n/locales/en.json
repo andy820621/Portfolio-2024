@@ -11,27 +11,27 @@
   "min": "min",
   "homePage": {
     "title": "home",
-    "description": "This is BarZ Hsieh's personal website, mainly sharing knowledge and technology related to front-end development.",
+    "description": "Hello, I'm BarZ Hsieh. \nWelcome to my personal blog website. I am a software engineer who loves technology, specializing in frontend development with expertise in Nuxt, Vue, TypeScript, and other modern technologies. \nHere you can explore my technical articles and personal projects, and I also share my life through the lens in the Gallery.",
     "noResultDescription": "We couldn't find correct page matching your search."
   },
   "blogsPage": {
     "title": "All Blogs",
-    "description": "The articles here will mainly be related to front-end development, but occasionally I will share some of my own stories and thoughts.",
+    "description": "\nWelcome to explore my technical blog, where I share personal insights about frontend development and web technologies. \nI cannot guarantee that all content is completely accurate, but I hope you can find some useful information here. \n\nOccasionally, I also share some of my personal stories and life thoughts.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
   "projectsPage": {
     "title": "Projects",
-    "description": "The projects here mainly include work projects I have participated in or personal projects I am currently working on.",
+    "description": "\nWelcome to explore my project portfolio.\nHere you'll find work from company collaborations, client projects, to personal experimental side projects.\nInnovative solutions built with Vue, Nuxt, TypeScript, and cutting-edge web standards.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
   "demosPage": {
     "title": "Demos",
-    "description": "Demonstration and experimentation of the project I am working on.",
+    "description": "\nThis section mainly showcases experimental and interesting applications, along with personal development practice projects. I aim to explore new technologies and test creative ideas to expand the possibilities of my web development skills.\n\nI believe that utilizing modern web technologies can create more innovative and practical user experiences.",
     "noResultDescription": "We couldn't find any demos matching your search."
   },
   "galleryPage": {
     "title": "Gallery",
-    "description": "Some moments of life, memories of travel.",
+    "description": "\n“ Photography is an elegant way of collecting; through it, we gather the world, memories, and life stories captured in light and shadow. „ \n\nTravel adventures, everyday moments, cherished memories.\nBeyond the world of programming and development, I hope to share more of my life through the language of photography.",
     "noResultDescription": "We couldn't find any photos matching your current search.\n Please search again or clear the search criteria."
   },
   "errorPage": {

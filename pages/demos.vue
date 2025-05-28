@@ -144,6 +144,16 @@ function clearFilters() {
 usePageSeo({
   title: 'Demos',
   description: t('demosPage.description'),
+  keywords: [
+    'Demos',
+    'BarZ',
+    'Hsieh Yao Tsu',
+    'Nuxt',
+    'Vue',
+    '前端',
+    '作品集',
+    ...allTags.value,
+  ],
 })
 
 // Schema.org

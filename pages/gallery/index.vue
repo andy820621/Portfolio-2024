@@ -4,12 +4,6 @@ import { galleryGroups } from '~/data/galleryData'
 
 const { t, localeProperties } = useI18n()
 
-// 設置 SEO
-usePageSeo({
-  title: 'Gallery',
-  description: t('galleryPage.description'),
-})
-
 // 搜索文本和選中的標籤
 const searchText = ref('')
 const selectedTags = ref<string[]>([])
@@ -21,6 +15,23 @@ const allTags = computed(() => {
     group.tags.forEach(tag => tagSet.add(tag))
   })
   return Array.from(tagSet)
+})
+
+// 設置 SEO
+usePageSeo({
+  title: 'Gallery',
+  description: t('galleryPage.description'),
+  keywords: [
+    'Gallery',
+    '相簿',
+    'BarZ',
+    'BarZ Hsieh',
+    'Hsieh Yao Tsu',
+    'ヒカル',
+    '攝影',
+    '相片牆',
+    ...allTags.value,
+  ],
 })
 
 // 防抖過濾後的圖片組

@@ -18,6 +18,19 @@ watchEffect(() => {
 usePageSeo({
   title: 'Projects',
   description: t('projectsPage.description'),
+  keywords: [
+    'Projects',
+    '專案',
+    'BarZ',
+    'BarZ Hsieh',
+    'Hsieh Yao Tsu',
+    'ヒカル',
+    'Nuxt',
+    'Vue',
+    '前端',
+    '作品集',
+    ...(allTags.value || []),
+  ],
 })
 
 const { baseUrl, fullPath } = useUrl()

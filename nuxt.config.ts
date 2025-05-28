@@ -1,7 +1,7 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
 import type { NitroConfig } from 'nitropack'
-import { navbarData, seoData } from './data'
+import { getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 import { getSitemapDateFormat } from './utils/dayjs'
 
@@ -83,7 +83,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'author', content: `${navbarData.homeTitle} | Hsieh Yao Tsu | ヒカル` },
         { name: 'description', content: seoData.description },
-        { name: 'keywords', content: seoData.keywords },
+        { name: 'keywords', content: getKeywords('en') },
         { name: 'theme-color', content: '#285658' },
         { name: 'twitter:site', content: seoData.twitterSite },
         { name: 'twitter:title', content: navbarData.homeTitle },

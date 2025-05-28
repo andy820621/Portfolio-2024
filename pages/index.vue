@@ -39,6 +39,18 @@ const pageTitle = computed(() => t('home'))
 usePageSeo({
   title: pageTitle.value || 'home',
   description: content.value?.description || t('homePage.description') || '',
+  keywords: [
+    'BarZ',
+    'Hsieh Yao Tsu',
+    'Portfolio',
+    'Frontend',
+    'Developer',
+    'Nuxt',
+    'Vue',
+    'About Me',
+    'BarZ Hsieh',
+    t('home'),
+  ],
 })
 
 const { baseUrl } = useUrl()

@@ -1,4 +1,4 @@
-import { seoData } from '~/data'
+import { getKeywords, seoData } from '~/data'
 
 interface PageSeoOptions {
   title?: string
@@ -11,6 +11,7 @@ interface PageSeoOptions {
     href: string
   }[]
   addModifiedTime?: boolean
+  keywords?: string | string[]
 }
 
 export function usePageSeo(options: PageSeoOptions = {}) {
@@ -24,11 +25,19 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 計算完整的規範連結
   const { baseUrl, fullPath } = useUrl()
+  const { locale } = useI18n()
+
+  const pageKeywords = computed(() => {
+    if (Array.isArray(options.keywords) || typeof options.keywords === 'string')
+      return getKeywords(locale.value, options.keywords)
+    return getKeywords(locale.value)
+  })
 
   // SEO 元數據
   useSeoMeta({
     title: pageTitle.value,
     description: pageDescription.value,
+    keywords: pageKeywords.value,
     robots: options.noIndex ? 'noindex, nofollow' : 'index, follow',
     ...(options.addModifiedTime && {
       articleModifiedTime: getSitemapDateFormat(Date.now()),

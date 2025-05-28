@@ -11,27 +11,27 @@
   "min": "分",
   "homePage": {
     "title": "首頁",
-    "description": "這裡是 BarZ Hsieh 的個人網站，主要是分享前端相關的知識與技術。",
+    "description": "你好，我是 BarZ Hsieh。 \n歡迎來到我的個人部落格網站。我是一位熱愛技術的軟體工程師，專精於前端開發，擅長運用 Nuxt、Vue、TypeScript 等現代化技術。 \n在這裡您可以探索我的技術文章、個人專案，我也會在 Gallery 透過鏡頭語言分享我的生活。",
     "noResultDescription": "我們找不到與您現在的搜尋的頁面，請重新搜尋。"
   },
   "blogsPage": {
     "title": "My Blog",
-    "description": "這裡的文章主要會是跟前端開發相關的，但偶爾也會分享一些我自己的小故事與想法。",
+    "description": "\n歡迎探索我的技術部落格，在這裡我會分享關於前端開發、網頁技術的個人見解。\n我無法保證所有內容都是正確無誤、但希望你能在這邊找到一些有用的資訊。\n偶爾也會分享一些我自己的小故事與生活想法。",
     "noResultDescription": "我們找不到與您現在的搜尋相符文章，請重新搜尋或是清除搜尋條件。"
   },
   "projectsPage": {
     "title": "Projects",
-    "description": "這裡的專案主要是我參與的工作項目，或是個人正在實作的專案。",
+    "description": "\n歡迎探索我的專案作品集，\n這裡包含公司參與的作品、客戶案件到個人實驗性 Side Projects。\n\n運用 Vue、Nuxt、TypeScript 與前沿網頁標準打造的創新解決方案。",
     "noResultDescription": "我們找不到符合您搜尋的項目，請重新搜尋或是清除搜尋條件。"
   },
   "demosPage": {
     "title": "Demos",
-    "description": "這裡主要用來展示一些實驗性、有趣的應用。",
+    "description": "\n這裡主要用來展示一些實驗性、有趣的應用、還有個人開發技術的練習。我想透過探索新技術、測試創意想法，使自己網頁開發的能力有更多可能性。\n我相信運用現代網頁技術能打造出更為創新、實用的使用者體驗。",
     "noResultDescription": "我們找不到與您現在的搜尋相符的文章，請重新搜尋或是清除搜尋條件。"
   },
   "galleryPage": {
     "title": "Gallery",
-    "description": "一些生活片段、旅行的記憶。",
+    "description": "\n“ 攝影是一種優雅的收藏方式，通過它，我們收集世界，收集回憶，收集光影中的生命故事。„\n\n旅行冒險、日常時光、珍貴回憶 \n在程式語言與開發的世界之外，我希望透過鏡頭語言，分享更多我的生活。",
     "noResultDescription": "我們找不到與您現在的搜尋相符的照片，請重新搜尋或是清除搜尋條件。"
   },
   "errorPage": {
