@@ -29,6 +29,7 @@ const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)
 const { mainData } = contenDetailData
 
 const { localeProperties } = useI18n()
+const { getBreadcrumbListSchema } = useBreadcrumb()
 
 watchEffect(() => {
   if (mainData.value) {
@@ -54,6 +55,8 @@ watchEffect(() => {
         'inLanguage': localeProperties.value.language,
       }),
 
+      defineBreadcrumb(getBreadcrumbListSchema(mainData.value.title)),
+
       defineArticle({
         '@type': 'BlogPosting',
         '@id': articleId,
@@ -74,7 +77,7 @@ watchEffect(() => {
           '@id': personId,
         },
         'image': mainData.value.image
-          ? [mainData.value.image]
+          ? [`${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`]
           : undefined,
         'articleBody': mainData.value.rawbody || '',
         'wordCount': mainData.value.wordCount,

@@ -146,51 +146,61 @@ usePageSeo({
 // 將這段代碼放在 usePageSeo 之後
 const { localeProperties } = useI18n()
 const { baseUrl, fullPath } = useUrl()
+const { getBreadcrumbListSchema } = useBreadcrumb()
+
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`
 
-const itemListElement = images.value?.map((src, index) => ({
-  '@type': 'ListItem',
-  'position': index + 1,
-  'item': {
-    '@type': 'ImageObject',
-    'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
-    'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
-    'name': `${album.value?.title} - Image ${index + 1}`,
-    'description': `${album.value?.title} gallery image ${index + 1}`,
-    'representativeOfPage': index === 0,
-    'encodingFormat': 'image/webp',
-  },
-})) || []
+// 添加完整的 Schema.org 結構化資料
+watchEffect(() => {
+  if (album.value && images.value) {
+    const itemListElement = images.value.map((src, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'ImageObject',
+        'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
+        'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
+        'name': `${album.value!.title} - Image ${index + 1}`,
+        'description': `${album.value!.title} gallery image ${index + 1}`,
+        'representativeOfPage': index === 0,
+        'encodingFormat': 'image/webp',
+      },
+    }))
 
-useSchemaOrg([
-  defineWebPage({
-    '@id': nowPageId,
-    '@type': 'WebPage',
-    'name': album.value?.title || 'Gallery',
-    'description': album.value?.description || 'Photo gallery',
-    'url': fullPath.value,
-    'inLanguage': localeProperties.value.language,
-    'isPartOf': {
-      '@id': websiteId,
-    }, // 添加引用到圖片集合
-    'mainEntity': {
-      '@id': `${fullPath.value}#imagelist`,
-    },
-  }),
+    useSchemaOrg([
+      defineWebPage({
+        '@id': nowPageId,
+        '@type': 'WebPage',
+        'name': album.value.title,
+        'description': album.value.description,
+        'url': fullPath.value,
+        'inLanguage': localeProperties.value.language,
+        'isPartOf': {
+          '@id': websiteId,
+        },
+        'mainEntity': {
+          '@id': `${fullPath.value}#imagelist`,
+        },
+      }),
 
-  // 定義相冊中的圖片集合
-  defineItemList({
-    '@id': `${fullPath.value}#imagelist`,
-    '@type': 'ItemList',
-    'numberOfItems': images.value?.length || 0,
-    itemListElement,
-  }),
-])
+      defineItemList({
+        '@id': `${fullPath.value}#imagelist`,
+        '@type': 'ItemList',
+        'numberOfItems': images.value.length,
+        itemListElement,
+      }),
+
+      defineBreadcrumb(getBreadcrumbListSchema(album.value.title)),
+    ])
+  }
+})
 </script>
 
 <template>
   <div v-if="album" class="max-w-10xl mx-auto mt-8 container">
+    <BreadcrumbList :custom-title="album.title" class="mb-6" />
+
     <h1 class="mb-24 text-center text-2xl font-bold">
       {{ album.title }}
     </h1>
@@ -260,7 +270,8 @@ useSchemaOrg([
 
 @media (max-width: 750px) {
   main {
-    @apply !px-5.5;
+    padding-left: 1.375rem !important;
+    padding-right: 1.375rem !important;
   }
 }
 </style>

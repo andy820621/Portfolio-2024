@@ -29,7 +29,7 @@ defineProps({
   </div>
 </template>
 
-<style>
+<style scoped>
 pre code .line {
   display: block;
   min-height: 1rem;

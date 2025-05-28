@@ -3,7 +3,7 @@ export const navbarData = {
 }
 
 export const seoData = {
-  description: 'I\'m BarZ Hsieh, a Software Engineer based in Taiwan.',
+  description: 'Hello, I\'m BarZ Hsieh. \nWelcome to my personal blog website. I am a software engineer who loves technology, specializing in frontend development with expertise in Nuxt, Vue, TypeScript, and other modern technologies. \nHere you can explore my technical articles and personal projects, and I also share my life through the lens in the Gallery.',
   ogTitle: 'BarZ Hsieh',
   ogHeadline: 'Portfolio | Blogger | Creativity',
   twitterDescription: 'My blog website, where I play around with Nuxt, Vue, and more and showcase my blog, resources, etc',

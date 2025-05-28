@@ -35,7 +35,7 @@ const { y: scroll } = useWindowScroll()
     >
       <span i-ri-arrow-up-line />
     </button>
-    <nav class="nav">
+    <nav class="nav" aria-label="Main navigation">
       <div class="spacer" />
       <div class="right" print:op0>
         <NuxtLink :to="localePath('/posts')" title="Blog" aria-label="Blog" lt-md:inline-flex>

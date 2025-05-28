@@ -22,6 +22,8 @@ const {
 
 <template>
   <header>
+    <BreadcrumbList :custom-title="title" />
+
     <h1 class="text-xl font-bold lg:text-4xl md:text-3xl dark:text-zinc-300">
       {{ title || $t('no article found') }}
     </h1>
