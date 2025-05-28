@@ -84,7 +84,7 @@ useSchemaOrg([
     //   'name': 'Mercury Fire',
     //   'url': `${seoData.jobCompany}/`,
     // },
-    'inLanguage': ['en-US', 'zh-TW', 'ja-JP'],
+    'knowsLanguage': ['en-US', 'zh-TW', 'ja-JP'],
   }),
 ])
 </script>
