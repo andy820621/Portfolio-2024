@@ -537,33 +537,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       ...acc,
       [`/${dir}/**`]: { index: false, robots: 'noindex' },
     }), {}),
-
-    // 修正異常語系組合
-    '/zh/en/**': {
-      redirect: {
-        to: (ctx: any) => ctx.path.replace(/^\/zh\/en\//, '/zh/'),
-        statusCode: 301,
-      },
-    },
-    '/en/zh/**': {
-      redirect: {
-        to: (ctx: any) => ctx.path.replace(/^\/en\/zh\//, '/en/'),
-        statusCode: 301,
-      },
-    },
-    '/zh/zh/**': {
-      redirect: {
-        to: (ctx: any) => ctx.path.replace(/^\/en\/zh\//, '/en/'),
-        statusCode: 301,
-      },
-    },
-    '/en/en/**': {
-      redirect: {
-        to: (ctx: any) => ctx.path.replace(/^\/en\/zh\//, '/en/'),
-        statusCode: 301,
-      },
-    },
-
   })
 
   return rules

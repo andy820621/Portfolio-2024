@@ -37,7 +37,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
     <div class="grid-cols-12 mx-auto max-w-5xl gap-x-12 px-6 container sm:grid">
       <div class="col-span-12 lg:col-span-9">
         <div
-          class="prose prose-pre:max-w-xs prose-sm prose-h1:no-underline prose-zinc prose-img:rounded-lg sm:prose-pre:max-w-full sm:prose-base md:prose-lg dark:prose-invert mx-auto max-w-5xl"
+          class="prose prose-sm prose-pre:max-w-xs prose-h1:no-underline prose-zinc prose-img:rounded-lg sm:prose-pre:max-w-full sm:prose-base md:prose-lg dark:prose-invert mx-auto max-w-5xl"
         >
           <postHeader
             :title="data.title"
