@@ -127,24 +127,26 @@ export default defineContentConfig({
 
     // Demos 集合
     demos_en: defineCollection(
-      {
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'en/demos/*.md',
           prefix: '/demos',
         },
         schema: demoSchema,
-      },
+      }),
     ),
     demos_zh: defineCollection(
-      {
-        type: 'page',
-        source: {
-          include: 'zh/demos/*.md',
-          prefix: '/zh/demos',
+      asSeoCollection(
+        {
+          type: 'page',
+          source: {
+            include: 'zh/demos/*.md',
+            prefix: '/zh/demos',
+          },
+          schema: demoSchema,
         },
-        schema: demoSchema,
-      },
+      ),
     ),
   },
 })

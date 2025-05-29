@@ -153,9 +153,9 @@ export default defineNuxtConfig({
     discoverImages: true,
     discoverVideos: true,
     exclude: [
-      /^\/demos\/.*/,
-      /^\/en\/demos\/.*/,
-      /^\/zh\/demos\/.*/,
+      /^\/demos\/[^/]+/, // 排除 /demos/xxx，但保留 /demos/ 本身
+      /^\/en\/demos\/[^/]+/, // 排除 /en/demos/xxx
+      /^\/zh\/demos\/[^/]+/, // 排除 /zh/demos/xxx
       '/about',
       '/en/about',
       '/zh/about',
