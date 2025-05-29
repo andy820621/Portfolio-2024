@@ -2,6 +2,7 @@
 import type { AllCollectionItem } from '~/types/main'
 
 const localePath = useLocalePath()
+const { locale } = useI18n()
 
 // 獲取內容數據
 const paramName = 'project'
@@ -39,6 +40,9 @@ watchEffect(() => {
     const nowPageId = `${fullPath.value}#webpage`
     const articleId = `${fullPath.value}#article`
     const personId = `${baseUrl.value}#identity`
+    const licensePageUrl = locale.value === 'en'
+      ? 'https://creativecommons.org/licenses/by/4.0/'
+      : 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hant'
 
     useSchemaOrg([
       defineWebPage({
@@ -87,6 +91,21 @@ watchEffect(() => {
         'copyrightHolder': {
           '@id': personId,
         },
+      }),
+
+      defineImage({
+        '@type': 'ImageObject',
+        'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value?.image}`,
+        'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value?.image}`,
+        'license': licensePageUrl,
+        'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
+        'creditText': 'BarZ Hsieh',
+        'creator': {
+          '@type': 'Person',
+          '@id': personId,
+          'name': 'BarZ Hsieh',
+        },
+        'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
       }),
     ])
   }

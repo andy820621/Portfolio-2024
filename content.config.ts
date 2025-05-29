@@ -7,6 +7,7 @@ const commonContentSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
   date: z.string().optional(),
+  keywords: z.array(z.string()).optional(),
 })
 
 // Blogs 內容模式
@@ -23,6 +24,7 @@ const articleSchema = z.object({
   published: z.boolean().optional(),
   rawbody: z.string(),
   imageClass: z.string().optional(),
+  keywords: z.array(z.string()).optional(),
 })
 
 // projects 內容模式
@@ -38,6 +40,7 @@ const projectSchema = z.object({
   published: z.boolean().optional(),
   rawbody: z.string(),
   imageClass: z.string().optional(),
+  keywords: z.array(z.string()).optional(),
 })
 
 // demos 內容模式
@@ -49,6 +52,7 @@ const demoSchema = z.object({
   tags: z.array(z.string()).optional(),
   published: z.boolean().optional(),
   date: z.string().optional(),
+  keywords: z.array(z.string()).optional(),
 })
 
 export default defineContentConfig({

@@ -144,29 +144,65 @@ usePageSeo({
 })
 
 // 將這段代碼放在 usePageSeo 之後
-const { localeProperties } = useI18n()
+const { localeProperties, locale } = useI18n()
 const { baseUrl, fullPath } = useUrl()
 const { getBreadcrumbListSchema } = useBreadcrumb()
+const localePath = useLocalePath()
 
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`
+const personId = `${baseUrl.value}#identity`
+
+// 創意共享授權 URL
+const licensePageUrl = locale.value === 'en'
+  ? 'https://creativecommons.org/licenses/by/4.0/'
+  : 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hant'
 
 // 添加完整的 Schema.org 結構化資料
 watchEffect(() => {
   if (album.value && images.value) {
-    const itemListElement = images.value.map((src, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'item': {
-        '@type': 'ImageObject',
-        'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
-        'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
-        'name': `${album.value!.title} - Image ${index + 1}`,
-        'description': `${album.value!.title} gallery image ${index + 1}`,
-        'representativeOfPage': index === 0,
-        'encodingFormat': 'image/webp',
-      },
-    }))
+    const imageDefinitions: any[] = []
+
+    const itemListElement = images.value.map((src, index) => {
+      const imageId = `${fullPath.value}#image-${index + 1}`
+
+      // 為每張圖片創建 defineImage
+      imageDefinitions.push(
+        defineImage({
+          '@id': imageId,
+          '@type': 'ImageObject',
+          'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
+          'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
+          'name': `${album.value!.title} - Image ${index + 1}`,
+          'description': `${album.value!.title} gallery image ${index + 1}`,
+          'representativeOfPage': index === 0,
+          'encodingFormat': 'image/webp',
+          'inLanguage': localeProperties.value.language,
+          // 授權資訊
+          'license': licensePageUrl,
+          'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
+          'creditText': 'BarZ Hsieh',
+          'creator': {
+            '@type': 'Person',
+            '@id': personId,
+            'name': 'BarZ Hsieh',
+          },
+          'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
+          'copyrightYear': new Date().getFullYear().toString(),
+          'copyrightHolder': {
+            '@id': personId,
+          },
+        }),
+      )
+
+      return {
+        '@type': 'ListItem',
+        'position': index + 1,
+        'item': {
+          '@id': imageId,
+        },
+      }
+    })
 
     useSchemaOrg([
       defineWebPage({
@@ -192,6 +228,9 @@ watchEffect(() => {
       }),
 
       defineBreadcrumb(getBreadcrumbListSchema(album.value.title)),
+
+      // 所有圖片的授權資訊
+      ...imageDefinitions,
     ])
   }
 })

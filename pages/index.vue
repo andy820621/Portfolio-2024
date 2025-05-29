@@ -63,7 +63,7 @@ useSchemaOrg([
   defineWebPage({
     '@id': webpageId,
     '@type': 'ProfilePage',
-    'description': 'BarZ Hsieh\'s Portfolio',
+    'description': t('homePage.description') || 'BarZ Hsieh\'s Portfolio',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
     'url': baseUrl.value,
     // 'about':  NodeRelation<Organization>,

@@ -2,7 +2,7 @@
 import { breakpointsTailwind } from '@vueuse/core'
 import { galleryGroups } from '~/data/galleryData'
 
-const { t, localeProperties } = useI18n()
+const { t, localeProperties, locale } = useI18n()
 
 // 搜索文本和選中的標籤
 const searchText = ref('')
@@ -138,6 +138,12 @@ const { baseUrl, fullPath } = useUrl()
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`
 const itemListId = `${fullPath.value}#itemlist`
+const personId = `${baseUrl.value}#identity`
+const localePath = useLocalePath()
+
+const licensePageUrl = locale.value === 'en'
+  ? 'https://creativecommons.org/licenses/by/4.0/'
+  : 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hant'
 
 const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
   '@type': 'ListItem',
@@ -148,7 +154,17 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
     'url': `${fullPath.value}${group.id}`,
     'thumbnail': group.coverImage ? `${trailingSlashUrlOrNot(baseUrl.value, false) + group.coverImage}` : undefined,
     'description': group.description || t('galleryPage.title'),
-    'keywords': group.tags.join(', ') || undefined,
+    'keywords': group.tags || undefined,
+    // 授權資訊
+    'license': licensePageUrl,
+    'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
+    'creditText': 'BarZ Hsieh',
+    'creator': {
+      '@type': 'Person',
+      '@id': personId,
+      'name': 'BarZ Hsieh',
+    },
+    'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
   },
 }))
 
@@ -172,7 +188,7 @@ useSchemaOrg([
     '@id': itemListId,
     '@type': 'ItemList',
     'numberOfItems': debouncedFilteredGroups.value.length,
-    itemListElement,
+    'itemListElement': itemListElement,
   }),
 ])
 </script>
