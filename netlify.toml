@@ -42,3 +42,31 @@ from = "/en/"
 to = "/"
 status = 301
 force = true
+
+# 修正異常語系組合 /zh/en/* 轉址到正確路徑
+[[redirects]]
+from = "/zh/en/*"
+to = "/zh/:splat"
+status = 301
+force = true
+
+# 修正異常語系組合 /en/zh/* 轉址到正確路徑
+[[redirects]]
+from = "/en/zh/*"
+to = "/en/:splat"
+status = 301
+force = true
+
+# 修正異常語系組合 /zh/zh/* 轉址到正確路徑
+[[redirects]]
+from = "/zh/zh/*"
+to = "/zh/:splat"
+status = 301
+force = true
+
+# 修正異常語系組合 /en/en/* 轉址到正確路徑
+[[redirects]]
+from = "/en/en/*"
+to = "/en/:splat"
+status = 301
+force = true
