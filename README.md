@@ -46,7 +46,7 @@ This is the personal website and portfolio of BarZ Hsieh, built with modern fron
 
 ### Prerequisites（recommended）
 
-- Node.js 20.16.0+
+- Node.js 20.19.0+
 - pnpm (recommended package manager)
 
 ### Installation

@@ -313,7 +313,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern-compiler', // or "modern"
+          // api: 'modern-compiler', // Removed - requires sass@^1.71.0 or newer
         },
       },
     },
@@ -385,10 +385,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       },
       robots: true,
     },
-    '/**': {
-      ssr: true,
-    },
-
     '/posts': {
       prerender: true,
       headers: { 'Cache-Control': 'public, max-age=3600' },

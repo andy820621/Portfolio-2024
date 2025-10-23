@@ -1,8 +1,9 @@
-import type { MinimalNode, MinimalTree } from '@nuxt/content'
+import type { MinimarkNode, MinimarkTree } from '@nuxt/content'
 
 // 擴展類型定義，包含 MarkdownRoot 類型
 interface MarkdownRoot {
   type: string
+  // children 在不同版本型別中可能不是必填，改為可選以避免型別不相容
   children: any[]
   props?: Record<string, any>
   toc?: any
@@ -10,15 +11,15 @@ interface MarkdownRoot {
 }
 
 // 定義可能的內容節點類型
-type ContentNode =
-  | MinimalTree
-  | MinimalNode
-  | MinimalNode[]
-  | Record<string, unknown>
-  | MarkdownRoot
-  | string
-  | null
-  | undefined
+type ContentNode
+  = | MinimarkTree
+    | MinimarkNode
+    | MinimarkNode[]
+    | Record<string, unknown>
+    | MarkdownRoot
+    | string
+    | null
+    | undefined
 
 /**
  * 計算內容中的單詞數量
@@ -42,7 +43,7 @@ export function countWords(content: ContentNode): number {
     }
   }
 
-  // 處理 MinimalTree 類型
+  // 處理 MinimarkTree 類型
   if (typeof content === 'object' && !Array.isArray(content) && content !== null
     && 'type' in content && content.type === 'minimal' && 'value' in content) {
     // 安全地處理 value 屬性
