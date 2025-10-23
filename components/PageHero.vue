@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="mx-auto mb-10 container">
+  <div class="container mx-auto mb-10">
     <!-- <div class="grid grid-cols-1 sm:grid-cols-2 items-center"> -->
     <div class="px-6">
       <h1 class="my-5 text-4xl text-black font-semibold leading-tight slide-enter-50 md:text-5xl dark:text-zinc-300">

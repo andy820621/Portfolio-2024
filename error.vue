@@ -37,7 +37,7 @@ const handleError = () => clearError({ redirect: localePath('/') })
 <template>
   <!-- Can use another layout -->
   <NuxtLayout name="error">
-    <div class="mx-auto max-w-xl min-h-[calc(100dvh-200px)] flex flex-col pb-4 text-center container">
+    <div class="container mx-auto max-w-xl min-h-[calc(100dvh-200px)] flex flex-col pb-4 text-center">
       <h1 class="py-4 text-4xl font-bold">
         <Logo404
           v-if="props.error?.statusCode === 404"
@@ -55,7 +55,7 @@ const handleError = () => clearError({ redirect: localePath('/') })
       <div grid justify-center>
         <NuxtLink
           :to="localePath('/')"
-          class="inline-block px-6 py-3 text-lg font-semibold hover:shadow-base-hover shadow-base transition duration-300 ease-in-out base-btn hover:-translate-y-1"
+          class="inline-block base-btn px-6 py-3 text-lg font-semibold shadow-base transition duration-300 ease-in-out hover:shadow-base-hover hover:-translate-y-1"
           :aria-label="$t('backToHome')"
           :title="$t('backToHome')"
           @click.prevent="handleError"

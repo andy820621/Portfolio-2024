@@ -34,7 +34,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 
 <template>
   <div>
-    <div class="grid-cols-12 mx-auto max-w-5xl gap-x-12 px-6 container sm:grid">
+    <div class="container grid-cols-12 mx-auto max-w-5xl gap-x-12 px-6 sm:grid">
       <div class="col-span-12 lg:col-span-9">
         <div
           class="prose prose-sm prose-pre:max-w-xs prose-h1:no-underline prose-zinc prose-img:rounded-lg sm:prose-pre:max-w-full sm:prose-base md:prose-lg dark:prose-invert mx-auto max-w-5xl"
@@ -61,7 +61,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
             <div grid mt-20 justify-center>
               <NuxtLink
                 :to="localePath(redirectLink)"
-                class="inline-block px-6 py-3 text-lg font-semibold hover:shadow-base-hover shadow-base transition duration-300 ease-in-out base-btn hover:-translate-y-1"
+                class="inline-block base-btn px-6 py-3 text-lg font-semibold shadow-base transition duration-300 ease-in-out hover:shadow-base-hover hover:-translate-y-1"
                 :aria-label="$t('backToPostsList')"
                 :title="$t('backToPostsList')"
               >

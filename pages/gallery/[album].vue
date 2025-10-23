@@ -237,7 +237,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div v-if="album" class="max-w-10xl mx-auto mt-8 container">
+  <div v-if="album" class="max-w-10xl container mx-auto mt-8">
     <BreadcrumbList :custom-title="album.title" class="mb-6" />
 
     <h1 class="mb-24 text-center text-2xl font-bold">
@@ -290,7 +290,7 @@ watchEffect(() => {
     </ClientOnly>
   </div>
 
-  <div v-else class="max-w-10xl mx-auto mt-8 container">
+  <div v-else class="max-w-10xl container mx-auto mt-8">
     Loading...
   </div>
 </template>

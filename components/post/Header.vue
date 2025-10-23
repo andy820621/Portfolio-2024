@@ -38,7 +38,7 @@ const {
     <p v-if="description" class="mx-auto max-w-xl text-xs text-zinc-600 my-2! sm:text-sm dark:text-zinc-400">
       {{ description }}
     </p>
-    <div v-if="date" class="mb-4 w-full flex md:text-base md:mb-[4rem] md:mt-3 sm:text-xs">
+    <div v-if="date" class="mb-4 w-full flex md:mb-[4rem] md:mt-3 sm:text-xs md:text-base">
       <div class="w-full content-center gap-8 text-right text-black md:flex md:items-start md:justify-between sm:text-sm dark:text-zinc-300">
         <div class="flex justify-between md:flex-col md:justify-initial">
           <div class="flex flex-wrap items-center gap-1 font-semibold">

@@ -21,7 +21,7 @@ const { description = 'We couldn\'t find any posts matching your search.' } = de
           type="button"
           title="Clear filters"
           aria-label="Clear filters"
-          class="inline-flex items-center border border-transparent rounded-md bg-primary hover:bg-primary-hover px-4 py-2 text-sm text-white font-medium shadow-sm base-focus"
+          class="inline-flex items-center border border-transparent rounded-md bg-primary px-4 py-2 text-sm text-white font-medium shadow-sm base-focus hover:bg-primary-hover"
           @click="clearFilters"
         >
           Clear filters

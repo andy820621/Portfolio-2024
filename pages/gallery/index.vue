@@ -195,7 +195,7 @@ useSchemaOrg([
 
 <template>
   <div>
-    <div class="mx-auto mb-5 max-w-5xl text-zinc-600 container">
+    <div class="container mx-auto mb-5 max-w-5xl text-zinc-600">
       <PageHero
         :title="$t('galleryPage.title')"
         :description="$t('galleryPage.description')"
@@ -213,7 +213,7 @@ useSchemaOrg([
       <div
         v-if="debouncedFilteredGroups.length"
         grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
-        class="max-w-10xl mx-auto mt-10 text-zinc-600 container"
+        class="max-w-10xl container mx-auto mt-10 text-zinc-600"
       >
         <div
           v-for="(groups, idx) in parts"

@@ -28,7 +28,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <article class="group m-2 overflow-hidden border-base rounded-xl text-base hover:shadow-base-hover shadow-base transition-shadow duration-300">
+  <article class="group m-2 overflow-hidden border-base rounded-xl text-base shadow-base transition-shadow duration-300 hover:shadow-base-hover">
     <NuxtLink :to="path" class="grid grid-cols-1 gap-1 sm:grid-cols-10">
       <div class="sm:col-span-3">
         <NuxtImg
@@ -41,7 +41,7 @@ withDefaults(defineProps<Props>(), {
         />
       </div>
       <div class="p-5 sm:col-span-7">
-        <h2 class="pb-1 text-xl group-hover:text-primary text-base font-semibold transition-color duration-300">
+        <h2 class="pb-1 text-xl text-base font-semibold transition-color duration-300 group-hover:text-primary">
           {{ title }}
         </h2>
         <p class="line-clamp-2 text-ellipsis dark:text-slate-400">

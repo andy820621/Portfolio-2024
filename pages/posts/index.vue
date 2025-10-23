@@ -79,7 +79,7 @@ useSchemaOrg([
 </script>
 
 <template>
-  <div class="mx-auto max-w-5xl text-zinc-600 container">
+  <div class="container mx-auto max-w-5xl text-zinc-600">
     <PageHero
       :title="$t('blogsPage.title')"
       :description="$t('blogsPage.description')"
