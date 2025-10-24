@@ -3,10 +3,10 @@ import { galleryGroups } from '~~/data/galleryData'
 import { getSitemapDateFormat } from '~/utils/dayjs'
 
 export default defineSitemapEventHandler(() => {
-  // 獲取配置以檢查 i18n 策略
-  const config = useRuntimeConfig()
-  const i18nStrategy = config.public.i18n?.strategy || 'prefix_except_default'
-  const defaultLocale = config.public.i18n?.defaultLocale || 'en'
+  // Nuxt i18n v10 移轉：i18n 選項不再暴露在 runtimeConfig。
+  // 與 `nuxt.config.ts` 保持一致，若調整 i18n 設定請同步更新此處。
+  const i18nStrategy = 'prefix_except_default' as const
+  const defaultLocale = 'en' as const
 
   const lastmod = getSitemapDateFormat(Date.now())
   const entries: SitemapUrl[] = []

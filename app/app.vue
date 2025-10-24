@@ -8,7 +8,6 @@ import './assets/prose.css'
 
 const localeHead = useLocaleHead({
   dir: true, // old: addDirAttributes
-  key: 'hid', // old: identifierAttribute
   seo: true, // old: addSeoAttributes
 })
 const { localeProperties } = useI18n()

@@ -234,14 +234,11 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
+      redirectOn: 'all',
       fallbackLocale: 'en',
       // trying...
       alwaysRedirect: false,
       cookieCrossOrigin: true,
-    },
-    bundle: {
-      optimizeTranslationDirective: false,
     },
   },
   unocss: {
@@ -309,13 +306,6 @@ export default defineNuxtConfig({
         // '@nuxt/content',
         // 'shiki',
       ],
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          // api: 'modern-compiler', // Removed - requires sass@^1.71.0 or newer
-        },
-      },
     },
   },
   nitro: {

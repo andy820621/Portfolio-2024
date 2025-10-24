@@ -2,7 +2,6 @@ import en_json from './locales/en.json'
 import zh_json from './locales/zh.json'
 
 export default defineI18nConfig(() => ({
-  legacy: false,
   locale: 'en',
   messages: {
     en: en_json,
