@@ -49,6 +49,10 @@ export default defineNuxtConfig({
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
   ],
+  // VueUse v14 specific configuration
+  vueuse: {
+    ssrHandlers: true,
+  },
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
@@ -265,7 +269,7 @@ export default defineNuxtConfig({
     // fallback: 'light',
   },
   build: {
-    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
+    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker', '@vueuse/core'],
     analyze: {
       enabled: true,
       open: true,
@@ -275,6 +279,12 @@ export default defineNuxtConfig({
     inlineStyles: true,
   },
   vite: {
+    define: {
+      // Ensure proper string handling in VueUse v14
+      __VUEUSE_OPTIONS__: JSON.stringify({
+        ssr: true,
+      }),
+    },
     build: {
       rollupOptions: {
         treeshake: true,
@@ -288,6 +298,10 @@ export default defineNuxtConfig({
               if (id.includes('@iconify-json')) {
                 return 'iconify-icons'
               }
+              // Separate VueUse to avoid SSR issues
+              if (id.includes('@vueuse')) {
+                return 'vueuse'
+              }
               return 'vendor'
             }
           },
@@ -298,14 +312,22 @@ export default defineNuxtConfig({
         ],
       },
       sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
+      target: 'esnext',
+      minify: 'esbuild',
     },
     optimizeDeps: {
       include: [
         '@nuxt/vite-builder',
+        '@vueuse/core',
+        '@vueuse/shared',
         // 'fsevents',
         // '@nuxt/content',
         // 'shiki',
       ],
+      exclude: ['@vueuse/core/metadata'],
+    },
+    ssr: {
+      noExternal: ['@vueuse/core', '@vueuse/shared'],
     },
   },
   nitro: {
@@ -332,6 +354,35 @@ export default defineNuxtConfig({
     },
     externals: {
       external: ['better-sqlite3'],
+    },
+    rollupConfig: {
+      output: {
+        format: 'esm',
+        generatedCode: {
+          constBindings: true,
+        },
+      },
+      plugins: [
+        {
+          name: 'vueuse-ssr-fix',
+          transform(code, id) {
+            // Fix VueUse v14 SSR syntax issue with template literals
+            if (id.includes('@vueuse') || id.includes('node_modules/.cache/nuxt')) {
+              // Fix the specific pattern causing the error
+              const fixed = code.replace(
+                /typeof\s+(\w+)\$1\.matchMedia/g,
+                'typeof $1.matchMedia',
+              ).replace(
+                /"undefined"\$1\.matchMe/g,
+                '"undefined" !== typeof $1 && "matchMe',
+              )
+              if (fixed !== code) {
+                return { code: fixed, map: null }
+              }
+            }
+          },
+        },
+      ],
     },
     // experimental: {
     //   database: true
