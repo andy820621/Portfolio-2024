@@ -162,6 +162,7 @@ export default defineNuxtConfig({
     ],
     sources: [
       '/api/__sitemap__/gallery',
+      '/api/__sitemap__',
     ],
     autoI18n: true,
   },
@@ -332,9 +333,8 @@ export default defineNuxtConfig({
       crawlLinks: true,
       routes: [
         '/',
-        '/api/__sitemap__/gallery',
       ],
-      ignore: ['/api/_content'],
+      ignore: ['/api/_content', '/api/**'],
     },
     minify: true,
     future: {
