@@ -20,6 +20,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@intlify/shared": "^11.1.12",
     "@nuxtjs/i18n": "^10.1.1",
     "better-sqlite3": "^12.4.1",
     "floating-vue": "^5.2.2",
@@ -51,7 +52,7 @@
     "@stefanobartoletti/nuxt-social-share": "^1.2.3",
     "@unocss/eslint-plugin": "66.5.4",
     "@unocss/nuxt": "^66.5.4",
-    "@vueuse/nuxt": "13.1.0",
+    "@vueuse/nuxt": "14.0.0",
     "dayjs": "^1.11.18",
     "eslint": "^9.24.0",
     "eslint-plugin-format": "^1.0.2",
@@ -63,8 +64,5 @@
     "typescript": "^5.8.3",
     "unocss": "^66.5.4",
     "vue-tsc": "^3.1.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": ["@intlify/shared"]
   }
 }
