@@ -71,5 +71,20 @@ export default defineConfig({
     filesystem: [
       './content/**/*.md',
     ],
+    pipeline: {
+      include: [
+        /\.vue$/,
+        /\.vue\?vue/,
+        /\.(md|mdc)$/,
+      ],
+      exclude: [
+        /node_modules/,
+        /\.nuxt/,
+        /\.output/,
+      ],
+    },
   },
+  blocklist: [
+    'm[pascalCase(component)]',
+  ],
 })

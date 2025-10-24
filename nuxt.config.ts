@@ -162,7 +162,6 @@ export default defineNuxtConfig({
     ],
     sources: [
       '/api/__sitemap__/gallery',
-      '/api/__sitemap__/index',
     ],
     autoI18n: true,
   },
@@ -321,7 +320,7 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
-    preset: 'netlify',
+    preset: process.env.NETLIFY ? 'netlify' : undefined,
     plugins: ['~/server/plugins/sitemap'],
     publicAssets: [
       {
@@ -331,7 +330,10 @@ export default defineNuxtConfig({
     prerender: {
       // failOnError: false, // 防止 404 錯誤中斷建置
       crawlLinks: true,
-      routes: ['/'],
+      routes: [
+        '/',
+        '/api/__sitemap__/gallery',
+      ],
       ignore: ['/api/_content'],
     },
     minify: true,
