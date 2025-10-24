@@ -11,7 +11,7 @@ export function useTheme() {
 
     try {
       // 檢查瀏覽器支持
-      const isAppearanceTransition = document.startViewTransition
+      const isAppearanceTransition = 'startViewTransition' in document
         && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
       if (!isAppearanceTransition) {

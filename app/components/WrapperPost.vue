@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AllCollectionItem, ContentDetailDataReturn } from '~/types/main'
+import type { AllCollectionItem, ContentDetailDataReturn } from '~~/types/main'
 import ProseTh from './content/ProseTh.vue'
 
 const { contenDetailData, redirectLink = '/posts' } = defineProps<{
@@ -11,6 +11,10 @@ const localePath = useLocalePath()
 
 // 使用拆分後的 composables
 const { mainData, prevContent, nextContent } = contenDetailData
+
+// 將 null 轉為 undefined，以符合下游元件（如 postPrevNext）可能使用可選屬性的型別
+const prevForNav = computed(() => prevContent.value ?? undefined)
+const nextForNav = computed(() => nextContent.value ?? undefined)
 
 const data = computed(() => ({
   title: mainData.value?.title,
@@ -87,7 +91,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
           />
         </div>
 
-        <postPrevNext :prev="prevContent" :next="nextContent" />
+        <postPrevNext :prev="prevForNav" :next="nextForNav" />
       </div>
     </div>
   </div>

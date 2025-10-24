@@ -1,4 +1,4 @@
-import { seoData } from '~/data'
+import { seoData } from '~~/data'
 
 interface ContentData {
   title?: string

@@ -7,8 +7,8 @@ export interface ContentDetailDataReturn<T = PageCollectionItemBase> {
     wordCount: number
     readingTime: string
   }>
-  prevContent: globalThis.ComputedRef<ContentNavigationItem>
-  nextContent: globalThis.ComputedRef<ContentNavigationItem>
+  prevContent: globalThis.ComputedRef<ContentNavigationItem | null>
+  nextContent: globalThis.ComputedRef<ContentNavigationItem | null>
 }
 
 export type AllCollectionItem = ContentEnCollectionItem & ContentZhCollectionItem & PostsEnCollectionItem & PostsZhCollectionItem & ProjectsEnCollectionItem & ProjectsZhCollectionItem & DemosEnCollectionItem & DemosZhCollectionItem

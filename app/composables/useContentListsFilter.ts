@@ -1,4 +1,4 @@
-import type { FormattedPost } from '~/types/main'
+import type { FormattedPost } from '~~/types/main'
 
 export function useContentListsFilter(formattedData: Ref<FormattedPost[]>) {
   const searchText = ref('') // 搜索關鍵字

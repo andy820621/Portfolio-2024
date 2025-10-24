@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { DemoContent } from '~/types/main'
-import { linkConfig } from '~/data'
+import type { DemoContent } from '~~/types/main'
+import { linkConfig } from '~~/data'
 import ProseTh from '../content/ProseTh.vue'
 
 const { content, baseName, thumbnailType, title } = defineProps<{

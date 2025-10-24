@@ -1,4 +1,4 @@
-import type { DateLike } from '~/types/main'
+import type { DateLike } from '~~/types/main'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { getNowDayjs } from '~/utils/dayjs'

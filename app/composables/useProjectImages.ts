@@ -69,9 +69,9 @@ export function useProjectImages() {
       // 有排序格式
       const [, order, id, title] = orderNameMatch
       return {
-        order: Number.parseInt(order, 10),
-        id: id.replace(/-/g, ' '),
-        title: title ? title.replace(/-/g, ' ') : id.replace(/-/g, ' '),
+        order: order ? Number.parseInt(order, 10) : 999,
+        id: id ? id.replace(/-/g, ' ') : nameWithoutExt,
+        title: title ? title.replace(/-/g, ' ') : id ? id.replace(/-/g, ' ') : nameWithoutExt,
       }
     }
 

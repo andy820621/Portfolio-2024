@@ -1,5 +1,5 @@
 import type { PageCollectionItemBase } from '@nuxt/content'
-import type { AsyncContentDataType } from '~/types/main'
+import type { AsyncContentDataType } from '~~/types/main'
 
 export function useContentDetailData<T = PageCollectionItemBase>(contentData: AsyncContentDataType) {
   const { t } = useI18n()

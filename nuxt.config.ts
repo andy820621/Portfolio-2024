@@ -1,9 +1,9 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
 import type { NitroConfig } from 'nitropack'
+import { getSitemapDateFormat } from './app/utils/dayjs'
 import { getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
-import { getSitemapDateFormat } from './utils/dayjs'
 
 type SupportedLocale = 'en' | 'zh'
 
@@ -321,7 +321,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
     preset: process.env.NETLIFY ? 'netlify' : undefined,
-    plugins: ['~/server/plugins/sitemap'],
+    plugins: ['~~/server/plugins/sitemap'],
     publicAssets: [
       {
         dir: 'public',
@@ -429,11 +429,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     },
 
     '/projects': {
-      swr: 21600, // 6小時
-      cache: {
-        maxAge: 3600, // 1小時
-        staleMaxAge: 86400, // 24小時
-      },
+      prerender: true,
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -449,21 +445,13 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/projects/**': {
-      swr: 21600,
-      cache: {
-        maxAge: 3600,
-        staleMaxAge: 86400,
-      },
+      prerender: true,
       sitemap: { changefreq: 'daily', priority: 0.9 },
       robots: true,
     },
 
     '/gallery': {
-      swr: 7200, // 2小時
-      cache: {
-        maxAge: 1800, // 30分鐘
-        staleMaxAge: 21600, // 6小時
-      },
+      prerender: true,
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -479,11 +467,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/gallery/**': {
-      swr: 7200,
-      cache: {
-        maxAge: 1800,
-        staleMaxAge: 21600,
-      },
+      prerender: true,
       sitemap: { changefreq: 'daily', priority: 0.8 },
       robots: true,
     },

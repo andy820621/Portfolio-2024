@@ -34,6 +34,8 @@ export function useBreadcrumb() {
 
     for (let i = 0; i < pathSegments.length; i++) {
       const segment = pathSegments[i]
+      if (!segment)
+        continue // 跳過 undefined 或空字串
 
       // 生成當前路徑
       let currentPath: string

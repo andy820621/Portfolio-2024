@@ -1,4 +1,4 @@
-import { getKeywords, seoData } from '~/data'
+import { getKeywords, seoData } from '~~/data'
 
 interface PageSeoOptions {
   title?: string

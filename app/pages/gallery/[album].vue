@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
-import { galleryGroups } from '~/data/galleryData'
+import { galleryGroups } from '~~/data/galleryData'
 
-const LightGallery = defineAsyncComponent(() => import('~/components/LightGallery.vue'))
+const LightGallery = defineAsyncComponent(() => import('@/components/LightGallery.vue'))
 
 const route = useRoute()
 const albumId = route.params.album as string

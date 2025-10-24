@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Collections } from '@nuxt/content'
-import type { DemoContent } from '~/types/main'
+import type { DemoContent } from '~~/types/main'
 import { breakpointsTailwind } from '@vueuse/core'
 
 const { t, locale } = useI18n()
@@ -49,8 +49,8 @@ function sortDemos<T extends DemoContent>(docs: T[]): T[] {
         // 從路徑中提取檔案名稱部分
         const fileName = item.stem.split('/').pop() || ''
         // 提取檔案名稱中的數字部分
-        const match = fileName.match(/^(\d+)\./)
-        return match ? Number.parseInt(match[1]) : 0
+        const numStr = fileName.match(/^(\d+)\./)?.[1] ?? '0'
+        return Number.parseInt(numStr, 10)
       }
       return 0
     }

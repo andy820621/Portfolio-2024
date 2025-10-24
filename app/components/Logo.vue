@@ -138,7 +138,8 @@ function animate(time: number) {
       else {
         progress = easeOutPower1(progress)
       }
-      el.style.strokeDashoffset = `${lengths[index] * (1 - progress)}`
+      const length = lengths[index] ?? 0
+      el.style.strokeDashoffset = `${length * (1 - progress)}`
     }
     else if (elapsed > drawEnd) {
       el.style.strokeDashoffset = '0'
@@ -180,7 +181,8 @@ function animate(time: number) {
 
     // 累加時間（依各路徑重疊比例）
     const overlap = getPathOverlap(index)
-    accumulatedTime += pathTotalDuration * (1 - overlap)
+    if (pathTotalDuration !== undefined)
+      accumulatedTime += pathTotalDuration * (1 - overlap)
   })
 
   // 進場結束後，進入可 hover 狀態
@@ -206,6 +208,8 @@ function animate(time: number) {
     // 反向處理路徑（倒序）
     elements.slice().reverse().forEach((el, i) => {
       const exitPathDuration = exitPathTimes[i]
+      if (exitPathDuration === undefined)
+        return
       const exitFillDuration = exitPathDuration * 0.7
 
       // 計算每個路徑的離場開始時間（含重疊）
@@ -213,8 +217,11 @@ function animate(time: number) {
       if (i > 0) {
         for (let j = 0; j < i; j++) {
           const prevEl = elements.slice().reverse()[j]
-          const prevExitOverlap = (prevEl.id === 'path3' || prevEl.id === 'path4') ? 0.5 : 0.4
-          start += exitPathTimes[j] * (1 - prevExitOverlap)
+          const prevExitTime = exitPathTimes[j]
+          if (prevEl && prevExitTime !== undefined) {
+            const prevExitOverlap = (prevEl.id === 'path3' || prevEl.id === 'path4') ? 0.5 : 0.4
+            start += prevExitTime * (1 - prevExitOverlap)
+          }
         }
       }
       const end = start + exitPathDuration
@@ -231,7 +238,10 @@ function animate(time: number) {
         else {
           progress = easeInPower1(progress)
         }
-        el.style.strokeDashoffset = `${lengths[elements.indexOf(el)] * progress}`
+        const elementIndex = elements.indexOf(el)
+        const length = lengths[elementIndex]
+        if (length !== undefined)
+          el.style.strokeDashoffset = `${length * progress}`
 
         // 填色淡出
         if (el.id !== 'circle') {
@@ -249,7 +259,11 @@ function animate(time: number) {
         }
       }
       else if (exitElapsed > end) {
-        el.style.strokeDashoffset = `${lengths[elements.indexOf(el)]}`
+        const elementIndex = elements.indexOf(el)
+        const length = lengths[elementIndex]
+        if (length !== undefined)
+          el.style.strokeDashoffset = `${length}`
+
         el.style.fillOpacity = '0'
         el.style.opacity = '0'
       }

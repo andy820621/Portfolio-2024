@@ -1,5 +1,5 @@
 import type { Collections } from '@nuxt/content'
-import type { BlogPost } from '~/types/main'
+import type { BlogPost } from '~~/types/main'
 
 export async function useContentDatas<T extends BlogPost>(folderName: string = 'projects') {
   const { t, locale } = useI18n()

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AllCollectionItem } from '~/types/main'
+import type { AllCollectionItem } from '~~/types/main'
 
 const localePath = useLocalePath()
 

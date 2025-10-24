@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
-import { galleryGroups } from '~/data/galleryData'
+import { galleryGroups } from '~~/data/galleryData'
 
 const { t, localeProperties, locale } = useI18n()
 

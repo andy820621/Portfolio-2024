@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navbarData, seoData } from './data'
+import { navbarData, seoData } from '~~/data'
 import './assets/variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets/main.scss'
