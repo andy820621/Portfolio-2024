@@ -29,8 +29,8 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.12.0",
-    "@formkit/auto-animate": "^0.8.2",
+    "@antfu/eslint-config": "^4.19.0",
+    "@formkit/auto-animate": "^0.8.4",
     "@iconify-json/devicon": "^1.2.45",
     "@iconify-json/iconoir": "^1.2.9",
     "@iconify-json/line-md": "^1.2.11",
