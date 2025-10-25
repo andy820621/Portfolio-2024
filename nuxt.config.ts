@@ -49,10 +49,6 @@ export default defineNuxtConfig({
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
   ],
-  // VueUse v14 specific configuration
-  vueuse: {
-    ssrHandlers: true,
-  },
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
@@ -269,7 +265,7 @@ export default defineNuxtConfig({
     // fallback: 'light',
   },
   build: {
-    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker', '@vueuse/core'],
+    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
     analyze: {
       enabled: true,
       open: true,
@@ -279,12 +275,6 @@ export default defineNuxtConfig({
     inlineStyles: true,
   },
   vite: {
-    define: {
-      // Ensure proper string handling in VueUse v14
-      __VUEUSE_OPTIONS__: JSON.stringify({
-        ssr: true,
-      }),
-    },
     build: {
       rollupOptions: {
         treeshake: true,
@@ -298,10 +288,6 @@ export default defineNuxtConfig({
               if (id.includes('@iconify-json')) {
                 return 'iconify-icons'
               }
-              // Separate VueUse to avoid SSR issues
-              if (id.includes('@vueuse')) {
-                return 'vueuse'
-              }
               return 'vendor'
             }
           },
@@ -312,22 +298,6 @@ export default defineNuxtConfig({
         ],
       },
       sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
-      target: 'esnext',
-      minify: 'esbuild',
-    },
-    optimizeDeps: {
-      include: [
-        '@nuxt/vite-builder',
-        '@vueuse/core',
-        '@vueuse/shared',
-        // 'fsevents',
-        // '@nuxt/content',
-        // 'shiki',
-      ],
-      exclude: ['@vueuse/core/metadata'],
-    },
-    ssr: {
-      noExternal: ['@vueuse/core', '@vueuse/shared'],
     },
   },
   nitro: {
@@ -356,12 +326,7 @@ export default defineNuxtConfig({
       external: ['better-sqlite3'],
     },
     rollupConfig: {
-      output: {
-        format: 'esm',
-        generatedCode: {
-          constBindings: true,
-        },
-      },
+      // TODO：暫時解決 VueUse v14 在 SSR 下的語法問題，確認未來版本是否已修正此問題後可移除
       plugins: [
         {
           name: 'vueuse-ssr-fix',
