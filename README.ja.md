@@ -49,6 +49,10 @@
 - Node.js 20.19.0以上
 - pnpm（お勧め）
 
+メモ：このプロジェクトは `package.json` の `volta.node` により Volta で Node バージョンを固定しています。ローカルでは Volta の利用を推奨し、pnpm は `packageManager` に従って Corepack が管理します。
+	- Volta のインストール（macOS zsh）：`curl https://get.volta.sh | bash`
+	- Corepack を有効化：`corepack enable`
+
 ### インストール
 
 ```bash

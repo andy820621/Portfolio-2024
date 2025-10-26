@@ -49,6 +49,10 @@
 - Node.js 20.19.0 以上
 - pnpm（推薦使用的套件管理器）
 
+小提醒：本專案以 Volta 在 `package.json` 中的 `volta.node` 鎖定 Node 版本；建議本機安裝 Volta，並讓 Corepack 依 `packageManager` 欄位管理 pnpm。
+	- 安裝 Volta（macOS zsh）：`curl https://get.volta.sh | bash`
+	- 啟用 Corepack 並遵循 packageManager：`corepack enable`
+
 ### 安裝步驟
 
 ```bash
