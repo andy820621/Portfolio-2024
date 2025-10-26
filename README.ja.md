@@ -49,22 +49,27 @@
 - Node.js 20.19.0以上
 - pnpm（お勧め）
 
-メモ：このプロジェクトは `package.json` の `volta.node` により Volta で Node バージョンを固定しています。ローカルでは Volta の利用を推奨し、pnpm は `packageManager` に従って Corepack が管理します。
-	- Volta のインストール（macOS zsh）：`curl https://get.volta.sh | bash`
-	- Corepack を有効化：`corepack enable`
+推奨: Node.js は Volta で、pnpm は Corepack で管理すると、Git hooks（例: pre-commit lint）や開発フローが安定して動作します。
 
 ### インストール
 
 ```bash
-# リポジトリをクローン
-git clone <repository-url>
-cd Portfolio\ 2024
+# Volta をインストール（初回のみ）
+curl https://get.volta.sh | bash
 
-# 依存関係をインストール
-pnpm install
+# ⚠️ 初めて Volta を使う場合、必要な Node バージョンをインストール（初回のみ）
+volta install node@20.19.0
+```
 
-# 開発サーバーを起動
-pnpm dev
+このプロジェクトでは `package.json` に以下を指定しています:
+
+```json
+{
+	"volta": {
+		"node": "20.19.0",
+	},
+	"packageManager": "pnpm@10.19.0"
+}
 ```
 
 ### 利用可能なスクリプト

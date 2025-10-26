@@ -49,22 +49,27 @@ This is the personal website and portfolio of BarZ Hsieh, built with modern fron
 - Node.js 20.19.0+
 - pnpm (recommended package manager)
 
-Tip: This project uses Volta to pin the Node version via `package.json` (see the `volta.node` field). We recommend installing Volta locally and letting Corepack manage pnpm via the `packageManager` field.
-	- Install Volta (macOS zsh): `curl https://get.volta.sh | bash`
-	- Activate Corepack and respect packageManager: `corepack enable`
+We recommend using Volta to manage Node.js and Corepack to manage pnpm, so that Git hooks (e.g., pre-commit lint) and the development workflow run reliably.
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd Portfolio\ 2024
+# Install Volta (once)
+curl https://get.volta.sh | bash
 
-# Install dependencies
-pnpm install
+# ⚠️ If it is your first time using Volta, install the required version (once)
+volta install node@20.19.0
+```
 
-# Start development server
-pnpm dev
+This project specifies the following in `package.json`:
+
+```json
+{
+	"volta": {
+		"node": "20.19.0",
+	},
+	"packageManager": "pnpm@10.19.0"
+}
 ```
 
 ### Available Scripts
