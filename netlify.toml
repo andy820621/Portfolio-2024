@@ -4,6 +4,7 @@ publish = "dist"
 
 [build.environment]
 NODE_VERSION = "22.21.0"
+NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 
 [functions]
 node_bundler = "esbuild"
