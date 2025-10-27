@@ -58,7 +58,7 @@
 curl https://get.volta.sh | bash
 
 # ⚠️ 初めて Volta を使う場合、必要な Node バージョンをインストール（初回のみ）
-volta install node@20.21.0
+volta install node@22.21.0
 ```
 
 このプロジェクトでは `package.json` に以下を指定しています:
@@ -66,7 +66,7 @@ volta install node@20.21.0
 ```json
 {
   "volta": {
-    "node": "20.21.0"
+    "node": "22.21.0"
   },
   "packageManager": "pnpm@10.19.0"
 }
