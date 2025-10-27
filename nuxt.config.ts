@@ -316,7 +316,7 @@ export default defineNuxtConfig({
       routes: [
         '/',
       ],
-      ignore: ['/api/_content', '/api/**'],
+      ignore: ['/api/_content', '/api/**', '/__nuxt_content/**'],
     },
     minify: true,
     future: {

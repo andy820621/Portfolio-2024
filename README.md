@@ -46,7 +46,7 @@ This is the personal website and portfolio of BarZ Hsieh, built with modern fron
 
 ### Prerequisites（recommended）
 
-- Node.js 20.19.0+
+- Node.js 20.21.0+
 - pnpm (recommended package manager)
 
 We recommend using Volta to manage Node.js and Corepack to manage pnpm, so that Git hooks (e.g., pre-commit lint) and the development workflow run reliably.
@@ -58,17 +58,17 @@ We recommend using Volta to manage Node.js and Corepack to manage pnpm, so that 
 curl https://get.volta.sh | bash
 
 # ⚠️ If it is your first time using Volta, install the required version (once)
-volta install node@20.19.0
+volta install node@20.21.0
 ```
 
 This project specifies the following in `package.json`:
 
 ```json
 {
-	"volta": {
-		"node": "20.19.0",
-	},
-	"packageManager": "pnpm@10.19.0"
+  "volta": {
+    "node": "20.21.0"
+  },
+  "packageManager": "pnpm@10.19.0"
 }
 ```
 

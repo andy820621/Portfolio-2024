@@ -46,7 +46,7 @@
 
 ### 系統建議
 
-- Node.js 20.19.0 以上
+- Node.js 20.21.0 以上
 - pnpm（推薦使用的套件管理工具）
 
 本專案建議使用 [Volta](https://volta.sh) 管理 Node.js，Corepack 管理 pnpm，確保 Git hooks（如 pre-commit lint）與開發流程能正常執行。
@@ -58,14 +58,15 @@
 curl https://get.volta.sh | bash
 
 # ⚠️ 若首次使用 Volta，請手動安裝對應版本（僅需一次）
-volta install node@20.19.0
+volta install node@20.21.0
 ```
 
 此專案已於 `package.json` 中指定：
+
 ```json
 {
   "volta": {
-    "node": "20.19.0",
+    "node": "20.21.0",
     "pnpm": "10.6.2"
   },
   "packageManager": "pnpm@10.19.0"

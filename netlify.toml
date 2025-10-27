@@ -3,7 +3,7 @@ command = "pnpm run build"
 publish = "dist"
 
 [build.environment]
-NODE_VERSION = "20.19.0"
+NODE_VERSION = "20.21.0"
 
 [functions]
 node_bundler = "esbuild"

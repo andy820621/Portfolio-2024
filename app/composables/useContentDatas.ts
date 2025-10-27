@@ -16,7 +16,7 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
 
         const contents = await queryCollection(collection)
           .where('published', '=', true)
-          .order('date', 'DESC') // 使用 order 替代 sort
+          .order('date', 'DESC')
           .all() as unknown as T[]
 
         return contents.map((content) => {
@@ -69,7 +69,7 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
       ogImage: content.ogImage || '/not-found.jpg',
       date: content.date || 'not-date-available',
       tags: content.tags || [],
-      published: content.published || true,
+      published: content.published ?? true,
       wordCount: content.wordCount || 0,
       readingTime: content.readingTime || undefined,
       imageClass: content.imageClass || '',

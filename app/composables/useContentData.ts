@@ -29,7 +29,7 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
 
         // 獲取周圍內容
         const surroundContent = await queryCollectionItemSurroundings(collection, fullPath, {
-          fields: ['title', 'description', 'path', 'date'],
+          fields: ['title', 'description', 'path', 'date', 'id'],
         }).order('date', 'DESC')
 
         return { content, surroundContent }
