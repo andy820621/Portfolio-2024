@@ -124,34 +124,6 @@ h6:focus .header-anchor {
   opacity: 0.5;
 }
 
-.prose blockquote {
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1.6em;
-  padding: 0.5em 1em;
-  margin-left: -1.1em;
-}
-
-.prose blockquote > * {
-  opacity: 0.7;
-}
-
-.prose blockquote > :first-child {
-  margin-top: 0;
-}
-
-.prose blockquote > :last-child {
-  margin-bottom: 0;
-}
-
-.prose blockquote p:first-of-type::before {
-  content: none;
-}
-
-.prose blockquote p:first-of-type::after {
-  content: none;
-}
-
 .prose s {
   opacity: 0.5;
 }
@@ -160,4 +132,13 @@ h6:focus .header-anchor {
   --uno: font-serif;
   color: var(--fg-deep);
   font-size: 1.05em;
+}
+
+/* 移除 blockquote 引號與斜體（常見於 typography 預設） */
+.prose blockquote p {
+  font-style: normal !important;
+}
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none !important;
 }

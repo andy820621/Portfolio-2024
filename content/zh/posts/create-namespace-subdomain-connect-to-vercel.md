@@ -28,7 +28,7 @@ sitemap:
   images:
     - loc: /blog-images/create-namespace-subdomain-connect-to-vercel.jpg
       title: "如何創建子網域並連接到 Vercel 應用程式"
-      caption: "如何創建子網域並連接到 Vercel 應用程式"
+      caption: "在這裡，我們將學習如何創建子網域並連接到 Vercel 應用程式"
 ---
 
 ## 介紹

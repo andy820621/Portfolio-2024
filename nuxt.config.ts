@@ -207,6 +207,10 @@ export default defineNuxtConfig({
         toc: {
           depth: 3, // include h3 headings
         },
+        remarkPlugins: {
+          'remark-gfm': {},
+          'remark-validate-links': {},
+        },
         rehypePlugins: {
           'rehype-external-links': {
             target: '_blank',
