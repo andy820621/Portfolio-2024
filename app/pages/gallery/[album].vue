@@ -80,12 +80,14 @@ const visibleImages = ref<string[]>([])
 const imageRefs = ref<HTMLElement[]>([])
 
 // 創建一個方法來處理 ref 邏輯
-function handleImageRef(el: HTMLElement | null) {
-  if (el) {
-    if (!imageRefs.value.includes(el)) {
-      imageRefs.value.push(el)
-    }
-  }
+function handleImageRef(ref: Element | ComponentPublicInstance | null) {
+  if (!ref)
+    return // Vue 的 ref 在元素卸載時會傳入 null
+
+  // 確保是 HTMLElement
+  const el = ref instanceof HTMLElement ? ref : null
+  if (el && !imageRefs.value.includes(el))
+    imageRefs.value.push(el)
 }
 
 // 計算轉場延遲
@@ -250,7 +252,7 @@ watchEffect(() => {
 
 <template>
   <div v-if="album" class="max-w-10xl container mx-auto mt-8">
-    <BreadcrumbList :custom-title="album.title" class="mb-6" />
+    <BreadcrumbList :custom-title="album.title" />
 
     <h1 class="mb-24 text-center text-2xl font-bold">
       {{ album.title }}
@@ -273,7 +275,7 @@ watchEffect(() => {
           <div
             v-for="(src, rowIdx) in items"
             :key="rowIdx"
-            :ref="(el) => handleImageRef(el as HTMLElement)"
+            :ref="handleImageRef"
             :data-image-src="src"
             class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
             :class="{

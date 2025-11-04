@@ -34,6 +34,9 @@ const {
       class="m-auto h-32 h-full max-h-[24vh] w-full content-center rounded-lg object-cover shadow-lg md:h-72"
       :class="imageClass ? imageClass : undefined"
       placeholder
+      preload
+      fetchpriority="high"
+      loading="eager"
     />
     <p v-if="description" class="mx-auto max-w-xl text-xs text-zinc-600 my-2! sm:text-sm dark:text-zinc-400">
       {{ description }}
