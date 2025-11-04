@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
+import { useStableYear } from '~~/app/composables/useStableNow'
 import { galleryGroups } from '~~/data/galleryData'
 
 const LightGallery = defineAsyncComponent(() => import('@/components/LightGallery.vue'))
@@ -188,7 +189,10 @@ watchEffect(() => {
             'name': 'BarZ Hsieh',
           },
           'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
-          'copyrightYear': new Date().getFullYear().toString(),
+          'copyrightYear': (() => {
+            const stableYear = useStableYear()
+            return stableYear.value
+          })(),
           'copyrightHolder': {
             '@id': personId,
           },

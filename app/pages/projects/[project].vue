@@ -85,9 +85,12 @@ watchEffect(() => {
         'keywords': keywords,
         'articleSection': articleSection,
         'inLanguage': localeProperties.value.language,
-        'copyrightYear': mainData.value.date
-          ? new Date(mainData.value.date).getFullYear().toString()
-          : new Date().getFullYear().toString(),
+        'copyrightYear': (() => {
+          const stableYear = useStableYear()
+          return mainData.value.date
+            ? new Date(mainData.value.date).getFullYear().toString()
+            : stableYear.value
+        })(),
         'copyrightHolder': {
           '@id': personId,
         },

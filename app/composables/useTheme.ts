@@ -3,6 +3,9 @@ export function useTheme() {
   const isTransitioning = ref(false)
 
   async function toggleDark(event: MouseEvent) {
+    // Ensure this only runs on client to avoid SSR pitfalls
+    if (!import.meta.client)
+      return null
     // 如果正在過渡中，不做任何操作
     if (isTransitioning.value)
       return null
