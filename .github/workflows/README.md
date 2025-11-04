@@ -41,7 +41,7 @@ jobs:
         run: pnpm install
 
       - name: Lint
-        run: pnpm run lint --fix
+        run: pnpm run lint:fix
 
       - uses: autofix-ci/action@v1
 ```
