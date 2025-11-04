@@ -1,6 +1,6 @@
 [build]
 command = "pnpm run build"
-publish = "dist"
+publish = ".output/public"
 
 [build.environment]
 NODE_VERSION = "22.21.0"
@@ -9,6 +9,7 @@ NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 [functions]
 node_bundler = "esbuild"
 external_node_modules = [ "better-sqlite3" ]
+directory = ".output/functions"
 
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
