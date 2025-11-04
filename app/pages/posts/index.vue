@@ -7,11 +7,9 @@ const elementPerPage = ref(5)
 const { pageNumber, totalPage, paginatedData, onPreviousPageClick, onNextPageClick }
   = usePagination(filteredData, elementPerPage)
 
-// 重置分頁當過濾條件改變時
-watchEffect(() => {
-  if (searchText.value || selectedTags.value.length > 0) {
-    pageNumber.value = 1
-  }
+// 重置分頁當過濾條件改變時 - 使用 watch 代替 watchEffect 避免無限循環
+watch([searchText, selectedTags], () => {
+  pageNumber.value = 1
 })
 
 // 設置頁面元數據
