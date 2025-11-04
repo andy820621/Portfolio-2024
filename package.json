@@ -7,8 +7,8 @@
     "node": "22.21.0"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-project-images-map.js",
-    "build:originaldata": "node scripts/generate-project-images-metadata.js",
+    "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js",
+    "generate:metadata": "node scripts/generate-project-images-metadata.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",

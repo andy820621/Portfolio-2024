@@ -13,24 +13,30 @@ const album = computed(() =>
 )
 
 // 動態獲取資料夾內的照片
-const { data: images, error } = await useAsyncData(`gallery-${albumId}`, async () => {
+const { getAlbumImages } = useGalleryImages()
+const images = ref<string[]>([])
+const error = ref<Error | null>(null)
+
+onMounted(async () => {
   try {
-    return await $fetch<string[]>(`/api/gallery-images/${albumId}`)
+    images.value = await getAlbumImages(albumId)
   }
   catch (err) {
+    error.value = err instanceof Error ? err : new Error(String(err))
     console.error('Failed to fetch gallery images:', err)
-    return []
   }
 })
 
-watchEffect(() => {
-  if (!album.value) {
+watch(album, (newAlbum) => {
+  if (!newAlbum) {
     console.error('Album not found:', albumId)
     navigateTo(useLocalePath()('/404'))
   }
+}, { immediate: true })
 
-  if (error.value) {
-    console.error('Fetch error:', error.value)
+watch(error, (newError) => {
+  if (newError) {
+    console.error('Fetch error:', newError)
     navigateTo(useLocalePath()('/404'))
   }
 })

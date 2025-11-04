@@ -18,13 +18,6 @@ onMounted(async () => {
   }
 })
 
-// const { data: photos, error } = await useFetch<Photo[]>('/api/project-images', {
-//   query: { folder },
-//   onResponseError(error) {
-//     console.error('API Response Error:', error)
-//   },
-// })
-
 // TODO: 檢查組件重新渲染的原因
 // onRenderTracked((event) => {
 //   console.log('組件重新渲染被追蹤:', event)
