@@ -12,23 +12,24 @@ watch([searchText, selectedTags], () => {
   pageNumber.value = 1
 })
 
+// 計算頁面關鍵字（避免在 setup 頂層直接訪問 allTags.value）
+const pageKeywords = computed(() => [
+  'Blog',
+  '文章',
+  'BarZ',
+  'BarZ Hsieh',
+  'Hsieh Yao Tsu',
+  'ヒカル',
+  '前端',
+  '技術',
+  ...allTags.value,
+])
+
 // 設置 SEO
 usePageSeo({
   title: 'Projects',
   description: t('projectsPage.description'),
-  keywords: [
-    'Projects',
-    '專案',
-    'BarZ',
-    'BarZ Hsieh',
-    'Hsieh Yao Tsu',
-    'ヒカル',
-    'Nuxt',
-    'Vue',
-    '前端',
-    '作品集',
-    ...(allTags.value || []),
-  ],
+  keywords: pageKeywords.value,
 })
 
 const { baseUrl, fullPath } = useUrl()

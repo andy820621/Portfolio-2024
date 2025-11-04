@@ -11,17 +11,13 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-// 錯誤處理
-watchEffect(() => {
-  if (error.value) {
-    console.error('Fetch error:', error.value)
-    navigateTo(localePath('/404'))
-  }
-})
-
-if (!contentData.value) {
-  console.error('No content data found')
-  navigateTo(localePath('/404'))
+if (error.value || !contentData.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found',
+    message: error.value?.message || 'Content not found',
+    fatal: true,
+  })
 }
 
 const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)

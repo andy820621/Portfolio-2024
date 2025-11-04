@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { AllCollectionItem } from '~~/types/main'
 
-const localePath = useLocalePath()
-
 // 獲取內容數據
 const paramName = 'post'
 const { contentData, error } = await useContentData({
@@ -10,19 +8,14 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-// 錯誤處理
-watchEffect(() => {
-  if (error.value) {
-    console.error('Fetch error:', error.value)
-    navigateTo(localePath('/404'))
-  }
-})
-
-// 從 contentData 中提取主要數據
-
-if (!contentData.value) {
-  console.error('No content data found')
-  navigateTo(localePath('/404'))
+// 錯誤處理 - 使用 Nuxt 的錯誤處理機制
+if (error.value || !contentData.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found',
+    message: error.value?.message || 'Content not found',
+    fatal: true,
+  })
 }
 
 const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)
