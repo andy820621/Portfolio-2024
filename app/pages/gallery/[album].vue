@@ -14,11 +14,13 @@ const album = computed(() =>
 
 // 動態獲取資料夾內的照片
 const { data: images, error } = await useAsyncData(`gallery-${albumId}`, async () => {
-  const imageModules = import.meta.glob('/public/gallery-images/**/*')
-
-  return Object.keys(imageModules)
-    .filter(path => path.includes(`/public/gallery-images/${albumId}/`))
-    .map(path => path.replace('/public', ''))
+  try {
+    return await $fetch<string[]>(`/api/gallery-images/${albumId}`)
+  }
+  catch (err) {
+    console.error('Failed to fetch gallery images:', err)
+    return []
+  }
 })
 
 watchEffect(() => {
