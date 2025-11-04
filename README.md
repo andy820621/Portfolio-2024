@@ -4,7 +4,7 @@
 
 [![Deploy Status](https://www.netlify.com/img/deploy/button.svg)](https://www.netlify.com/)
 
-This is the personal website and portfolio of BarZ Hsieh, built with modern frontend technologies including Nuxt 3, TypeScript, @nuxt/content, i18n, SEO, PWA, supporting multilingual content management, structured data, and SEO best practices.
+This is the personal website and portfolio of BarZ Hsieh, built with modern frontend technologies including Nuxt 4, TypeScript, @nuxt/content, i18n, SEO, PWA, supporting multilingual content management, structured data, and SEO best practices.
 
 [中文](./README.zh.md) | [日本語](./README.ja.md)
 
@@ -12,7 +12,7 @@ This is the personal website and portfolio of BarZ Hsieh, built with modern fron
 
 ## Features
 
-- **Nuxt 3 + TypeScript**: Modern SSR/SPA architecture with lightning-fast development experience
+- **Nuxt 4 + TypeScript**: Modern SSR/SPA architecture with lightning-fast development experience
 - **@nuxt/content**: Markdown-driven content management with multilingual support
 - **Internationalization (i18n)**: Support for Chinese/English switching with URL prefix_except_default strategy
 - **SEO & Schema.org**: Auto-generated structured data, Sitemap, Open Graph, Twitter Card
@@ -117,7 +117,7 @@ This project is configured for Netlify deployment with:
 ## Related Links
 
 - [Live Website](https://barz.app)
-- [Nuxt 3 Documentation](https://nuxt.com/docs/getting-started/introduction)
+- [Nuxt 4 Documentation](https://nuxt.com/docs/getting-started/introduction)
 - [License Information](https://barz.app/license)
 
 ---

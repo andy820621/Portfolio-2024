@@ -4,7 +4,7 @@
 
 [![Deploy Status](https://www.netlify.com/img/deploy/button.svg)](https://www.netlify.com/)
 
-このプロジェクトは BarZ Hsieh の個人ウェブサイト兼ポートフォリオで、Nuxt 3、TypeScript、@nuxt/content、i18n、SEO、PWA などの最新フロントエンド技術を採用し、多言語対応、コンテンツ管理、構造化データ、SEO ベストプラクティスをサポートしています。
+このプロジェクトは BarZ Hsieh の個人ウェブサイト兼ポートフォリオで、Nuxt 4、TypeScript、@nuxt/content、i18n、SEO、PWA などの最新フロントエンド技術を採用し、多言語対応、コンテンツ管理、構造化データ、SEO ベストプラクティスをサポートしています。
 
 [中文](./README.zh.md) | [English](./README.md)
 
@@ -12,7 +12,7 @@
 
 ## 主な機能
 
-- **Nuxt 3 + TypeScript**: 高速開発体験を提供するモダンなSSR/SPAアーキテクチャ
+- **Nuxt 4 + TypeScript**: 高速開発体験を提供するモダンなSSR/SPAアーキテクチャ
 - **@nuxt/content**: 多言語対応のMarkdownベースコンテンツ管理システム
 - **国際化 (i18n)**: 中国語・英語切り替え対応、URL prefix_except_default戦略
 - **SEO & Schema.org**: 構造化データ、サイトマップ、Open Graph、Twitter Cardの自動生成
@@ -117,7 +117,7 @@ pnpm typecheck    # TypeScript型チェックを実行
 ## 関連リンク
 
 - [ライブウェブサイト](https://barz.app)
-- [Nuxt 3 ドキュメント](https://nuxt.com/docs/getting-started/introduction)
+- [Nuxt 4 ドキュメント](https://nuxt.com/docs/getting-started/introduction)
 - [ライセンス情報](https://barz.app/license)
 
 ---

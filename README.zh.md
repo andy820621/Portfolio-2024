@@ -4,7 +4,7 @@
 
 [![Deploy Status](https://www.netlify.com/img/deploy/button.svg)](https://www.netlify.com/)
 
-本專案是 BarZ Hsieh 的個人網站與作品集，採用 Nuxt 3、TypeScript、@nuxt/content、i18n、SEO、PWA 等現代前端技術，支援多語系、內容管理、結構化資料與最佳 SEO 實踐。
+本專案是 BarZ Hsieh 的個人網站與作品集，採用 Nuxt 4、TypeScript、@nuxt/content、i18n、SEO、PWA 等現代前端技術，支援多語系、內容管理、結構化資料與最佳 SEO 實踐。
 
 [English](./README.md) | [日本語](./README.ja.md)
 
@@ -12,7 +12,7 @@
 
 ## 特色功能
 
-- **Nuxt 3 + TypeScript**：現代化 SSR/SPA 架構，極速開發體驗
+- **Nuxt 4 + TypeScript**：現代化 SSR/SPA 架構，極速開發體驗
 - **@nuxt/content**：Markdown 驅動內容管理，支援多語系
 - **多語系 (i18n)**：支援中英文切換，URL prefix_except_default 策略
 - **SEO & Schema.org**：自動產生結構化資料、Sitemap、Open Graph、Twitter Card
@@ -118,7 +118,7 @@ pnpm typecheck    # 執行 TypeScript 型別檢查
 ## 相關連結
 
 - [線上網站](https://barz.app)
-- [Nuxt 3 官方文件](https://nuxt.com/docs/getting-started/introduction)
+- [Nuxt 4 官方文件](https://nuxt.com/docs/getting-started/introduction)
 - [授權說明](https://barz.app/zh/license)
 
 ---
