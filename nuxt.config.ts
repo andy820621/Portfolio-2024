@@ -238,7 +238,9 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'all',
+      // 避免將 Nuxt 內建錯誤路由 /__nuxt_error 也套用語系前綴，導致遞迴
+      // 僅在根路徑觸發語系導向
+      redirectOn: 'root',
       fallbackLocale: 'en',
       // trying...
       alwaysRedirect: false,

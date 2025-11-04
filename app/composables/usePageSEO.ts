@@ -16,28 +16,25 @@ interface PageSeoOptions {
 
 export function usePageSeo(options: PageSeoOptions = {}) {
   // 計算完整的頁面標題
-  const pageTitle = computed(() => options.title || seoData.ogTitle)
+  const pageTitle = options.title || seoData.ogTitle
 
-  const pageDescription = computed(() =>
-    options.description
-    || seoData.description,
-  )
+  const pageDescription = options.description || seoData.description
 
   // 計算完整的規範連結
   const { baseUrl, fullPath } = useUrl()
   const { locale } = useI18n()
 
-  const pageKeywords = computed(() => {
+  const pageKeywords = () => {
     if (Array.isArray(options.keywords) || typeof options.keywords === 'string')
       return getKeywords(locale.value, options.keywords)
     return getKeywords(locale.value)
-  })
+  }
 
   // SEO 元數據
   useSeoMeta({
-    title: pageTitle.value,
-    description: pageDescription.value,
-    keywords: pageKeywords.value,
+    title: pageTitle,
+    description: pageDescription,
+    keywords: pageKeywords,
     robots: options.noIndex ? 'noindex, nofollow' : 'index, follow',
     ...(options.addModifiedTime && {
       articleModifiedTime: getSitemapDateFormat(Date.now()),
@@ -49,8 +46,8 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     defineOgImageComponent('Nuxt', {
       url: fullPath.value,
       headline: seoData.ogHeadline,
-      title: pageTitle.value,
-      description: pageDescription.value,
+      title: pageTitle,
+      description: pageDescription,
       siteName: baseUrl.value,
     })
   }

@@ -12,21 +12,24 @@ watch([searchText, selectedTags], () => {
   pageNumber.value = 1
 })
 
-// 設置頁面元數據
+// 計算頁面關鍵字（避免在 setup 頂層直接訪問 allTags.value）
+const pageKeywords = computed(() => [
+  'Blog',
+  '文章',
+  'BarZ',
+  'BarZ Hsieh',
+  'Hsieh Yao Tsu',
+  'ヒカル',
+  '前端',
+  '技術',
+  ...allTags.value,
+])
+
+// 設置頁面元數據 - 使用 computed 的值
 usePageSeo({
   title: 'Blog',
   description: t('blogsPage.description'),
-  keywords: [
-    'Blog',
-    '文章',
-    'BarZ',
-    'BarZ Hsieh',
-    'Hsieh Yao Tsu',
-    'ヒカル',
-    '前端',
-    '技術',
-    ...allTags.value,
-  ],
+  keywords: pageKeywords.value,
 })
 
 const { baseUrl, fullPath } = useUrl()

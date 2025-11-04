@@ -45,22 +45,11 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
     }
   })
 
-  const processedContents = computed(() => {
+  const formattedData = computed(() => {
     if (!contentDatas.value)
       return []
 
-    return contentDatas.value.map((content) => {
-      const wordCount = content.body ? countWords(content.body) : 0
-      return {
-        ...content,
-        wordCount,
-        readingTime: useEstimateReadingTime(wordCount, t),
-      }
-    })
-  })
-
-  const formattedData = computed(() => {
-    return processedContents.value?.map(content => ({
+    return contentDatas.value.map(content => ({
       path: content.path,
       title: content.title || 'no-title available',
       description: content.description || 'no-description available',
