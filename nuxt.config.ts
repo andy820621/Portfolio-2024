@@ -415,7 +415,9 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/posts/**': {
-      prerender: true,
+      // Use ISR so detail pages are generated on-demand and cached,
+      // fixing missing _payload.json when links are prefetched.
+      isr: 86400, // 1 day
       headers: { 'Cache-Control': 'public, max-age=86400' },
       robots: true,
     },
