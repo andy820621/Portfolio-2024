@@ -50,6 +50,10 @@ sitemap:
 **對稱加密**（如 AES）速度快、實作簡單，但雙方需事先共用密鑰，傳輸過程易被竊取。
 **非對稱加密**（如 RSA、ECC）使用公鑰與私鑰一對。公鑰可公開，私鑰保密，無需事先交換秘密，讓安全通訊成為可能。
 
+::LightBoxUrls{:urls='["https://www.ssl2buy.com/wp-content/uploads/2015/12/Symmetric-Encryption.png", "https://www.ssl2buy.com/wp-content/uploads/2015/12/Asymmetric-Encryption.png"]'}
+::
+
+
 ---
 
 ## 什麼是 PKI、它解決了什麼問題

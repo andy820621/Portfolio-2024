@@ -50,6 +50,9 @@ In the early days of the internet, data was transmitted in clear text. Anyone in
 Symmetric encryption (e.g., AES) is fast and easy to implement, but both parties must share a secret key in advance, which can be stolen during exchange.
 Asymmetric encryption (e.g., RSA, ECC) uses a key pair—a public key and a private key. The public key can be shared openly, while the private key must be kept secret. No prior secret exchange is required, enabling secure communication.
 
+::LightBoxUrls{:urls='["https://www.ssl2buy.com/wp-content/uploads/2015/12/Symmetric-Encryption.png", "https://www.ssl2buy.com/wp-content/uploads/2015/12/Asymmetric-Encryption.png"]'}
+::
+
 ---
 
 ## What PKI is and the problems it solves
