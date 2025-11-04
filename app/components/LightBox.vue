@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import type { LightGallery } from 'lightgallery/lightgallery'
-import type { Swiper as SwiperClass } from 'swiper'
-import lightGallery from 'lightgallery'
-import lgShare from 'lightgallery/plugins/share'
-import lgThumbnail from 'lightgallery/plugins/thumbnail'
-// import lgVideo from 'lightgallery/plugins/video'
-import lgZoom from 'lightgallery/plugins/zoom'
-
-import { Navigation } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
+import type { Swiper as SwiperClass, SwiperModule } from 'swiper/types'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
@@ -31,23 +23,51 @@ const {
   showDescription?: boolean
 }>()
 
-const plugins = [
-  lgThumbnail,
-  // lgVideo,
-  lgZoom,
-  lgShare,
-]
+// Lazy-load Swiper components
+const Swiper = defineAsyncComponent(() =>
+  import('swiper/vue').then(m => m.Swiper),
+)
+const SwiperSlide = defineAsyncComponent(() =>
+  import('swiper/vue').then(m => m.SwiperSlide),
+)
 
 const swiper = ref<typeof Swiper>()
 const popup = ref<LightGallery>()
 const activeIndex = ref(0)
 const lightBoxBtn = ref<HTMLButtonElement>()
+const Navigation = ref<SwiperModule | null>(null)
+const isReady = ref(false)
 
 const deBounceHandleWheel = useDebounceFn(handleWheel, 16)
 
-onMounted(() => {
+onMounted(async () => {
   if (!photos.length)
     return
+
+  // Dynamically import lightgallery and plugins only when needed
+  const [
+    { default: lightGallery },
+    { default: lgThumbnail },
+    { default: lgZoom },
+    { default: lgShare },
+    swiperModules,
+  ] = await Promise.all([
+    import('lightgallery'),
+    import('lightgallery/plugins/thumbnail'),
+    import('lightgallery/plugins/zoom'),
+    import('lightgallery/plugins/share'),
+    import('swiper/modules'),
+  ])
+
+  Navigation.value = swiperModules.Navigation
+  isReady.value = true
+
+  const plugins = [
+    lgThumbnail,
+    lgZoom,
+    lgShare,
+  ]
+
   const dynamicEl = photos.map(
     (sliderImg) => {
       return {
@@ -60,6 +80,7 @@ onMounted(() => {
       }
     },
   )
+
   if (lightBoxBtn.value) {
     popup.value = lightGallery(lightBoxBtn.value, {
       mode,
@@ -140,32 +161,35 @@ function onSlideChange(_swiper: SwiperClass) {
       <span i-iconoir:expand />
     </button>
 
-    <Swiper
-      ref="swiper"
-      :modules="[Navigation]"
-      :slides-per-view="1"
-      navigation
-      normalize-slide-index
-      class="custom-swiper"
-      @slide-change="onSlideChange"
-    >
-      <SwiperSlide
-        v-for="(photo, index) in photos"
-        :key="index"
-        @click="openGallery(index)"
+    <ClientOnly>
+      <Swiper
+        v-if="isReady && Navigation"
+        ref="swiper"
+        :modules="[Navigation]"
+        :slides-per-view="1"
+        navigation
+        normalize-slide-index
+        class="custom-swiper"
+        @slide-change="onSlideChange"
       >
-        <NuxtImg class="photo" :src="photo.src" :alt="photo.description" placeholder />
+        <SwiperSlide
+          v-for="(photo, index) in photos"
+          :key="index"
+          @click="openGallery(index)"
+        >
+          <NuxtImg class="photo" :src="photo.src" :alt="photo.description" placeholder />
 
-        <div v-if="showTitle && photo.title" class="photo-title">
-          <div class="title">
-            {{ photo.title }}
+          <div v-if="showTitle && photo.title" class="photo-title">
+            <div class="title">
+              {{ photo.title }}
+            </div>
+            <div v-if="showDescription" class="description">
+              <span>{{ photo.description }}</span>
+            </div>
           </div>
-          <div v-if="showDescription" class="description">
-            <span>{{ photo.description }}</span>
-          </div>
-        </div>
-      </SwiperSlide>
-    </Swiper>
+        </SwiperSlide>
+      </Swiper>
+    </ClientOnly>
   </div>
 </template>
 

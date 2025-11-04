@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import lightGallery from 'lightgallery'
-import lgShare from 'lightgallery/plugins/share'
-import lgThumbnail from 'lightgallery/plugins/thumbnail'
-import lgZoom from 'lightgallery/plugins/zoom'
+import type { LightGallerySettings } from 'lightgallery/lg-settings'
+import type { LightGallery } from 'lightgallery/lightgallery'
+import type lgShareType from 'lightgallery/plugins/share'
+import type lgThumbnailType from 'lightgallery/plugins/thumbnail'
+import type lgZoomType from 'lightgallery/plugins/zoom'
 
 const { images, title } = defineProps<{
   images: string[]
@@ -10,7 +11,13 @@ const { images, title } = defineProps<{
 }>()
 
 const lightGalleryContainer = ref<HTMLDivElement | null>(null)
-const lightGalleryInstance = ref<ReturnType<typeof lightGallery> | null>(null)
+const lightGalleryInstance = ref<LightGallery | null>(null)
+const isLibraryLoaded = ref(false)
+
+let lightGallery: ((el: HTMLElement, options?: LightGallerySettings) => LightGallery) | null = null
+let lgThumbnail: typeof lgThumbnailType | null = null
+let lgZoom: typeof lgZoomType | null = null
+let lgShare: typeof lgShareType | null = null
 
 const lightGalleryDynamicEl = computed(() =>
   images.map(src => ({
@@ -20,8 +27,34 @@ const lightGalleryDynamicEl = computed(() =>
   })),
 )
 
-function openLightGallery(startIndex: number) {
-  lightGalleryInstance.value = lightGallery(lightGalleryContainer.value!, {
+onMounted(async () => {
+  // Dynamically import lightgallery and plugins
+  const [
+    lgModule,
+    lgThumbnailModule,
+    lgZoomModule,
+    lgShareModule,
+  ] = await Promise.all([
+    import('lightgallery'),
+    import('lightgallery/plugins/thumbnail'),
+    import('lightgallery/plugins/zoom'),
+    import('lightgallery/plugins/share'),
+  ])
+
+  lightGallery = lgModule.default
+  lgThumbnail = lgThumbnailModule.default
+  lgZoom = lgZoomModule.default
+  lgShare = lgShareModule.default
+
+  isLibraryLoaded.value = true
+})
+
+async function openLightGallery(startIndex: number) {
+  // Ensure library is loaded
+  if (!isLibraryLoaded.value || !lightGalleryContainer.value || !lightGallery || !lgThumbnail || !lgZoom || !lgShare)
+    return
+
+  lightGalleryInstance.value = lightGallery(lightGalleryContainer.value, {
     dynamic: true,
     dynamicEl: lightGalleryDynamicEl.value,
     index: startIndex,
@@ -49,6 +82,7 @@ defineExpose({
 </template>
 
 <style>
+/* LightGallery CSS will be loaded dynamically when needed */
 @import 'lightgallery/css/lightgallery.css';
 @import 'lightgallery/css/lg-thumbnail.css';
 @import 'lightgallery/css/lg-zoom.css';

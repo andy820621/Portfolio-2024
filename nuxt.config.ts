@@ -48,6 +48,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
+    '@nuxt/fonts',
   ],
   // HTML optimization
   htmlValidator: {
