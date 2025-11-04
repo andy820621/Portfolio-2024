@@ -50,7 +50,7 @@ function isHeadingActive(id: string): boolean {
 
 <template>
   <div class="hidden justify-self-end lg:col-span-3 lg:block">
-    <div class="sticky top-20 max-h-[calc(100vh-5rem)] overflow-y-auto">
+    <div class="sticky top-10 overflow-y-auto">
       <div class="min-w-[200px] border rounded-md p-3 dark:border-gray-800 dark:bg-slate-900">
         <div mb-3 flex items-center border-b pb-2 space-x-2 dark:border-gray-800>
           <Icon name="i-ri-menu-2-fill" aria-hidden="true" />
