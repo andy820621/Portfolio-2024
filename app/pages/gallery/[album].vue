@@ -16,6 +16,7 @@ const album = computed(() =>
 const { getAlbumImages } = useGalleryImages()
 const images = ref<string[]>([])
 const error = ref<Error | null>(null)
+const loading = ref(true)
 
 onMounted(async () => {
   try {
@@ -24,6 +25,9 @@ onMounted(async () => {
   catch (err) {
     error.value = err instanceof Error ? err : new Error(String(err))
     console.error('Failed to fetch gallery images:', err)
+  }
+  finally {
+    loading.value = false
   }
 })
 
@@ -266,8 +270,21 @@ watchEffect(() => {
         :title="album.title"
       />
 
+      <!-- Loading 狀態 -->
+      <div v-if="loading" class="min-h-[400px] flex items-center justify-center">
+        <div class="text-center">
+          <div class="mb-4 inline-block h-12 w-12 animate-spin border-4 border-current border-r-transparent rounded-full border-solid motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <p class="text-zinc-600 dark:text-zinc-400">
+            Loading images...
+          </p>
+        </div>
+      </div>
+
+      <!-- 圖片網格 -->
       <div
-        v-if="images && images.length"
+        v-else-if="images && images.length"
         grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
         class="text-zinc-600"
       >
@@ -298,8 +315,17 @@ watchEffect(() => {
           </div>
         </div>
       </div>
-      <div v-else class="text-center">
-        No images found
+
+      <!-- 沒有圖片 -->
+      <div v-else class="min-h-[400px] flex items-center justify-center">
+        <div class="text-center text-zinc-600 dark:text-zinc-400">
+          <p class="mb-2 text-lg font-medium">
+            No images found
+          </p>
+          <p class="text-sm">
+            This album appears to be empty.
+          </p>
+        </div>
       </div>
     </ClientOnly>
   </div>
