@@ -63,10 +63,22 @@ async function renderMermaid() {
 
 onMounted(() => {
   if (mermaidContainer.value) {
-    // Prefer content inside a <pre> if present (nuxt/content often wraps code)
+    // Extract content from <code> or <pre> tags (Nuxt Content wraps ``` blocks in these)
     const pre = mermaidContainer.value.querySelector('pre')
-    const sourceNode = pre ?? mermaidContainer.value
-    mermaidDefinition = serializeMermaidFromNode(sourceNode).trim()
+    const code = mermaidContainer.value.querySelector('code')
+
+    if (code) {
+      // Prefer <code> content (most common for ``` blocks)
+      mermaidDefinition = code.textContent?.trim() || ''
+    }
+    else if (pre) {
+      // Fallback to <pre> if no <code>
+      mermaidDefinition = pre.textContent?.trim() || ''
+    }
+    else {
+      // Last resort: serialize the entire slot
+      mermaidDefinition = serializeMermaidFromNode(mermaidContainer.value).trim()
+    }
 
     observer = new IntersectionObserver(
       (entries) => {
