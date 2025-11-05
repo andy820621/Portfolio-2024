@@ -11,13 +11,18 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-if (error.value || !contentData.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page Not Found',
-    message: error.value?.message || 'Content not found',
-    fatal: true,
-  })
+// 錯誤處理
+watchEffect(() => {
+  if (error.value) {
+    console.error('Fetch error:', error.value)
+    // navigateTo(localePath('/404'))
+  }
+})
+
+// 從 contentData 中提取主要數據
+if (!contentData.value) {
+  console.error('No content data found')
+  navigateTo(localePath('/404'))
 }
 
 const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)

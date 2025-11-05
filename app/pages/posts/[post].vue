@@ -8,13 +8,13 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-// 錯誤處理 - 使用 Nuxt 的錯誤處理機制
+// 錯誤處理 - 如果沒有資料,拋出 404 錯誤
 if (error.value || !contentData.value) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Page Not Found',
-    message: error.value?.message || 'Content not found',
-    fatal: true,
+    message: 'Post not found',
+    fatal: false,
   })
 }
 

@@ -17,8 +17,11 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
   // 構建完整路徑
   const fullPath = localePath(`/${basePageName}/${contentPath}`)
 
+  // 使用更穩定的 cache key: 基於內容路徑而非 route.path
+  const cacheKey = `${basePageName}-${locale.value}-${contentPath}`
+
   const { data: contentData, error } = await useAsyncData(
-    `${paramName}-${route.path}`,
+    cacheKey,
     async () => {
       try {
         // 獲取主要內容
@@ -40,7 +43,7 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
       }
     },
     {
-      watch: [locale],
+      getCachedData: key => useNuxtApp().payload.data[key] || useNuxtApp().static.data[key],
     },
   )
 

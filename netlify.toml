@@ -1,6 +1,6 @@
 [build]
 command = "pnpm run build"
-publish = "dist"
+publish = ".output/public"
 
 [build.environment]
 NODE_VERSION = "22.21.0"
@@ -14,10 +14,7 @@ external_node_modules = [ "better-sqlite3" ]
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
 # used by Nuxt Image in production. Add any other remote sources here.
-remote_images = [
-  "https://www.netrust.net/*",
-  "https://upload.wikimedia.org/*",
-]
+remote_images = ["https://*/*"]
 
 # HTTP 到 HTTPS 的重定向
 [[redirects]]

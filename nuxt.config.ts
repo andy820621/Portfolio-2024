@@ -460,7 +460,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/projects/**': {
-      prerender: true,
+      isr: 86400, // 1 day
       sitemap: { changefreq: 'daily', priority: 0.9 },
       robots: true,
     },
