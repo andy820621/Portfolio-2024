@@ -34,14 +34,24 @@ onMounted(async () => {
 watch(album, (newAlbum) => {
   if (!newAlbum) {
     console.error('Album not found:', albumId)
-    navigateTo(useLocalePath()('/404'))
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Page Not Found',
+      message: 'Album not found',
+      fatal: false,
+    })
   }
 }, { immediate: true })
 
 watch(error, (newError) => {
   if (newError) {
     console.error('Fetch error:', newError)
-    navigateTo(useLocalePath()('/404'))
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      message: newError.message || 'Failed to fetch album images',
+      fatal: false,
+    })
   }
 })
 

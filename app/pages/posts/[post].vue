@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { AllCollectionItem } from '~~/types/main'
 
-const localePath = useLocalePath()
-
 // 獲取內容數據
 const paramName = 'post'
 const { contentData, error } = await useContentData({
@@ -10,18 +8,15 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-// 錯誤處理
-watchEffect(() => {
-  if (error.value) {
-    console.error('Fetch error:', error.value)
-    // navigateTo(localePath('/404'))
-  }
-})
-
-// 從 contentData 中提取主要數據
-if (!contentData.value) {
-  console.error('No content data found')
-  navigateTo(localePath('/404'))
+// SSR 友善錯誤處理：不要導向 /404（那不是實體路由），直接丟 404 顯示 `app/error.vue`
+if (error.value || !contentData.value) {
+  console.error('Post not found or fetch error:', error.value)
+  // throw createError({
+  //   statusCode: 404,
+  //   statusMessage: 'Page Not Found',
+  //   message: 'Post not found',
+  //   fatal: false,
+  // })
 }
 
 const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)

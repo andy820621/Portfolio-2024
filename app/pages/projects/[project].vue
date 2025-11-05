@@ -11,18 +11,15 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-// 錯誤處理
-watchEffect(() => {
-  if (error.value) {
-    console.error('Fetch error:', error.value)
-    // navigateTo(localePath('/404'))
-  }
-})
-
-// 從 contentData 中提取主要數據
-if (!contentData.value) {
-  console.error('No content data found')
-  navigateTo(localePath('/404'))
+// SSR 友善錯誤處理：直接丟 404，交由 `app/error.vue` 呈現
+if (error.value || !contentData.value) {
+  console.error('Project not found or fetch error:', error.value)
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found',
+    message: 'Project not found',
+    fatal: false,
+  })
 }
 
 const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)

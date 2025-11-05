@@ -38,11 +38,10 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
     },
   )
 
+  // 列表頁不導向 /404，保留頁面並顯示空清單或 NoResults
   watchEffect(() => {
-    if (error.value) {
+    if (error.value)
       console.error('Fetch error:', error.value)
-      navigateTo(localePath('/404'))
-    }
   })
 
   const formattedData = computed(() => {
