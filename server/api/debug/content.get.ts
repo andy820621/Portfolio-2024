@@ -1,6 +1,8 @@
 import { defineEventHandler, getQuery } from 'h3'
 
 export default defineEventHandler(async (event) => {
+  // Cast queryCollection to a server-friendly signature to satisfy typecheck
+  const qc = queryCollection as unknown as (event: any, collection: string) => any
   const q = getQuery(event)
   const locale = String(q.locale || 'en')
   const base = String(q.base || 'posts')
@@ -26,8 +28,7 @@ export default defineEventHandler(async (event) => {
     for (const p of candidates) {
       const normalized = p.endsWith('/') ? p.slice(0, -1) : p
       triedPaths.push(normalized)
-      // @ts-expect-error runtime content query
-      const found = await queryCollection(collection).path(normalized).first()
+      const found = await qc(event, collection).path(normalized).first()
       if (found) {
         matchedPath = normalized
         item = found
@@ -43,10 +44,11 @@ export default defineEventHandler(async (event) => {
   let examples: any[] = []
   let count = 0
   try {
-    // @ts-expect-error runtime content query
-    const all = await queryCollection(collection).select(['path', 'title', 'id']).all()
+    const all = await qc(event, collection).all()
     count = Array.isArray(all) ? all.length : 0
-    examples = Array.isArray(all) ? all.slice(0, 20) : []
+    examples = Array.isArray(all)
+      ? all.slice(0, 20).map((it: any) => ({ path: it.path, title: it.title, id: it.id }))
+      : []
   }
   catch {
     // ignore listing errors
