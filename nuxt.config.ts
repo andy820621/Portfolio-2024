@@ -49,6 +49,7 @@ export default defineNuxtConfig({
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
     '@nuxt/fonts',
+    '@netlify/nuxt',
   ],
   // HTML optimization
   htmlValidator: {
@@ -385,7 +386,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   const defaultRules: RouteRules = {
     '/': {
       prerender: true,
-      headers: { 'Cache-Control': 'public, max-age=3600' },
+      headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -402,7 +403,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     },
     '/posts': {
       prerender: true,
-      headers: { 'Cache-Control': 'public, max-age=3600' },
+      headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -421,13 +422,13 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       // Use ISR so detail pages are generated on-demand and cached,
       // fixing missing _payload.json when links are prefetched.
       isr: 86400, // 1 day
-      headers: { 'Cache-Control': 'public, max-age=86400' },
+      headers: { 'cache-control': 'public, max-age=86400' },
       robots: true,
     },
 
     '/demos': {
       prerender: true,
-      headers: { 'Cache-Control': 'public, max-age=3600' },
+      headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
         lastmod,
         changefreq: 'daily',
@@ -490,12 +491,12 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     // 靜態資源優化
     '/assets/**': {
       headers: {
-        'Cache-Control': 'public, max-age=31536000, immutable',
+        'cache-control': 'public, max-age=31536000, immutable',
       },
     },
     '/_nuxt/**': {
       headers: {
-        'Cache-Control': 'public, max-age=31536000, immutable',
+        'cache-control': 'public, max-age=31536000, immutable',
       },
     },
   }

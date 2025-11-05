@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@intlify/shared": "^11.1.12",
+    "@netlify/nuxt": "0.2.8",
     "@nuxt/fonts": "0.11.4",
     "@nuxtjs/i18n": "^10.2.0",
     "better-sqlite3": "^12.4.1",
@@ -75,6 +76,7 @@
       "@parcel/watcher",
       "better-sqlite3",
       "esbuild",
+      "protobufjs",
       "sharp"
     ]
   },
