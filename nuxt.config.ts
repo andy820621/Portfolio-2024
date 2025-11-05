@@ -33,6 +33,8 @@ export default defineNuxtConfig({
         trailingSlash: 'append',
       },
     },
+    // Disable payload extraction to avoid 500 errors on prerendered pages with Netlify Functions
+    payloadExtraction: false,
   },
   modules: [
     '@vueuse/nuxt',
