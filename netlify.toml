@@ -14,7 +14,7 @@ external_node_modules = [ "better-sqlite3" ]
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
 # used by Nuxt Image in production. Add any other remote sources here.
-remote_images = ["https://*/*"]
+remote_images = [ "https://*/*" ]
 
 # HTTP 到 HTTPS 的重定向
 [[redirects]]
