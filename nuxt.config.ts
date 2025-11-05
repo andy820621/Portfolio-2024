@@ -33,8 +33,7 @@ export default defineNuxtConfig({
         trailingSlash: 'append',
       },
     },
-    // Disable payload extraction to avoid 500 errors on prerendered pages with Netlify Functions
-    payloadExtraction: false,
+    payloadExtraction: true,
   },
   modules: [
     '@vueuse/nuxt',
@@ -320,6 +319,7 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: false, // 防止某些 404 錯誤中斷建置
       crawlLinks: true,
+      // 確保所有靜態頁面和動態內容頁面都被預渲染
       routes: [
         '/',
         '/posts',
@@ -327,7 +327,72 @@ export default defineNuxtConfig({
         '/projects',
         '/zh/projects',
       ],
-      ignore: ['/api/_content', '/api/**', '/__nuxt_content/**', '/__prerender'],
+      // 忽略 API 和內容查詢 endpoints，避免嘗試預渲染它們
+      ignore: [
+        '/api/_content',
+        '/api/**',
+        '/__nuxt_content/**',
+      ],
+    },
+    hooks: {
+      'prerender:routes': async function (routes: Set<string>) {
+        // 動態添加所有內容路由
+        try {
+          const fs = await import('node:fs/promises')
+          const path = await import('node:path')
+          const { fileURLToPath } = await import('node:url')
+
+          const __dirname = fileURLToPath(new URL('.', import.meta.url))
+          const contentDir = path.join(__dirname, 'content')
+
+          // 掃描 content 目錄獲取所有 .md 檔案
+          async function scanContentDir(dir: string, locale: string, type: string): Promise<string[]> {
+            try {
+              const files = await fs.readdir(dir, { withFileTypes: true })
+              const routes: string[] = []
+
+              for (const file of files) {
+                const fullPath = path.join(dir, file.name)
+                if (file.isDirectory()) {
+                  routes.push(...await scanContentDir(fullPath, locale, type))
+                }
+                else if (file.name.endsWith('.md')) {
+                  // 將檔案路徑轉換為路由
+                  const slug = file.name.replace(/\.md$/, '')
+                  const routePath = locale === 'en'
+                    ? `/${type}/${slug}`
+                    : `/zh/${type}/${slug}`
+                  routes.push(routePath)
+                }
+              }
+
+              return routes
+            }
+            catch {
+              return []
+            }
+          }
+
+          // 掃描所有內容目錄
+          const [postsEn, postsZh, projectsEn, projectsZh] = await Promise.all([
+            scanContentDir(path.join(contentDir, 'en', 'posts'), 'en', 'posts'),
+            scanContentDir(path.join(contentDir, 'zh', 'posts'), 'zh', 'posts'),
+            scanContentDir(path.join(contentDir, 'en', 'projects'), 'en', 'projects'),
+            scanContentDir(path.join(contentDir, 'zh', 'projects'), 'zh', 'projects'),
+          ])
+
+          const contentRoutes = [...postsEn, ...postsZh, ...projectsEn, ...projectsZh]
+
+          for (const route of contentRoutes) {
+            routes.add(route)
+          }
+
+          console.warn(`[Nitro Hooks] Added ${contentRoutes.length} content routes for prerendering`)
+        }
+        catch (error) {
+          console.error('[Nitro Hooks] Failed to scan content routes:', error)
+        }
+      },
     },
     minify: true,
     future: {
@@ -420,11 +485,10 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/posts/**': {
-      // Use prerender instead of ISR to avoid SQLite runtime dependency on Netlify
-      // All post pages will be generated at build time
       prerender: true,
       headers: { 'cache-control': 'public, max-age=86400' },
       robots: true,
+      swr: false, // 強制使用預渲染，禁用 server-side rendering
     },
 
     '/demos': {
@@ -462,10 +526,10 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/projects/**': {
-      // Use prerender instead of ISR to avoid SQLite runtime dependency on Netlify
       prerender: true,
       sitemap: { changefreq: 'daily', priority: 0.9 },
       robots: true,
+      swr: false, // 強制使用預渲染，禁用 server-side rendering
     },
 
     '/gallery': {

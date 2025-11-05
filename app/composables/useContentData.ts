@@ -45,7 +45,16 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
       }
     },
     {
-      getCachedData: key => useNuxtApp().payload.data[key] || useNuxtApp().static.data[key],
+      // 監聽語言變化，自動重新取得內容
+      watch: [locale],
+      // 確保在預渲染時正確提取數據 (需要配合 nuxt.config.ts 的 payloadExtraction: true)
+      getCachedData: (key, nuxtApp) => {
+        // 使用 Nuxt 預設的快取策略
+        // hydrating 時從 payload.data 讀取，否則從 static.data 讀取
+        return nuxtApp.isHydrating
+          ? nuxtApp.payload.data[key]
+          : nuxtApp.static.data[key]
+      },
     },
   )
 
