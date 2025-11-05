@@ -318,12 +318,16 @@ export default defineNuxtConfig({
       },
     ],
     prerender: {
-      // failOnError: false, // 防止 404 錯誤中斷建置
+      failOnError: false, // 防止某些 404 錯誤中斷建置
       crawlLinks: true,
       routes: [
         '/',
+        '/posts',
+        '/zh/posts',
+        '/projects',
+        '/zh/projects',
       ],
-      ignore: ['/api/_content', '/api/**', '/__nuxt_content/**'],
+      ignore: ['/api/_content', '/api/**', '/__nuxt_content/**', '/__prerender'],
     },
     minify: true,
     future: {

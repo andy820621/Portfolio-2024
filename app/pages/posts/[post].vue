@@ -8,15 +8,14 @@ const { contentData, error } = await useContentData({
   paramName,
 })
 
-// SSR 友善錯誤處理：不要導向 /404（那不是實體路由），直接丟 404 顯示 `app/error.vue`
 if (error.value || !contentData.value) {
   console.error('Post not found or fetch error:', error.value)
-  // throw createError({
-  //   statusCode: 404,
-  //   statusMessage: 'Page Not Found',
-  //   message: 'Post not found',
-  //   fatal: false,
-  // })
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found',
+    message: 'Post not found',
+    fatal: false,
+  })
 }
 
 const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)

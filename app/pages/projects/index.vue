@@ -97,40 +97,30 @@ useSchemaOrg([
     <ContentSearch v-model:search-test="searchText" />
 
     <!-- 專案列表 -->
-    <ClientOnly>
-      <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 px-4 space-y-5">
-        <template v-for="post in paginatedData" :key="post.title">
-          <postCard
-            :path="localePath(post.path!)"
-            :title="post.title"
-            :date="post.date"
-            :description="post.description"
-            :image="post.image"
-            :alt="post.alt"
-            :og-image="post.ogImage"
-            :tags="post.tags"
-            :published="post.published"
-            :word-count="post.wordCount"
-            :reading-time="post.readingTime"
-            :image-class="post.imageClass"
-          />
-        </template>
-      </div>
-
-      <NoResults
-        v-else
-        :clear-filters="clearFilters"
-        :description="$t('projectsPage.noResultDescription')"
-      />
-
-      <!-- this will be rendered on server side -->
-      <template #fallback>
-        <div class="my-5 px-4 space-y-5">
-          <postLoader />
-          <postLoader />
-        </div>
+    <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 px-4 space-y-5">
+      <template v-for="post in paginatedData" :key="post.title">
+        <postCard
+          :path="localePath(post.path!)"
+          :title="post.title"
+          :date="post.date"
+          :description="post.description"
+          :image="post.image"
+          :alt="post.alt"
+          :og-image="post.ogImage"
+          :tags="post.tags"
+          :published="post.published"
+          :word-count="post.wordCount"
+          :reading-time="post.readingTime"
+          :image-class="post.imageClass"
+        />
       </template>
-    </ClientOnly>
+    </div>
+
+    <NoResults
+      v-else
+      :clear-filters="clearFilters"
+      :description="$t('projectsPage.noResultDescription')"
+    />
 
     <div v-if="paginatedData && paginatedData.length" class="flex items-center justify-center space-x-6">
       <button type="button" title="Previous page" aria-label="Previous page" :disabled="pageNumber <= 1" @click="onPreviousPageClick">
