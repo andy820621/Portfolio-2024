@@ -3,14 +3,11 @@ command = "pnpm run build"
 
 [build.environment]
 NODE_VERSION = "22.21.0"
+# Force rebuild better-sqlite3 for Amazon Linux compatibility
 NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 PNPM_FLAGS = "--shamefully-hoist"
-
-[functions]
-# Use zisi for native modules like better-sqlite3 to ensure Amazon Linux compatibility
-node_bundler = "zisi"
-# Ensure native module is included; zisi detects and vendors native deps
-included_files = [ "node_modules/better-sqlite3/**" ]
+# AWS Lambda requires specific GLIBC version - ensure proper rebuild
+AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
 
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
