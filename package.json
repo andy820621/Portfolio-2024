@@ -9,7 +9,6 @@
   "scripts": {
     "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js",
     "generate:metadata": "node scripts/generate-project-images-metadata.js",
-    "postbuild": "node scripts/test-prerender.js",
     "test:prerender": "node scripts/test-prerender.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
