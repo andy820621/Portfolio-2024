@@ -414,9 +414,9 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/posts/**': {
-      // Use ISR so detail pages are generated on-demand and cached,
-      // fixing missing _payload.json when links are prefetched.
-      isr: 86400, // 1 day
+      // Use prerender instead of ISR to avoid SQLite runtime dependency on Netlify
+      // All post pages will be generated at build time
+      prerender: true,
       headers: { 'cache-control': 'public, max-age=86400' },
       robots: true,
     },
@@ -456,7 +456,8 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       robots: true,
     },
     '/projects/**': {
-      isr: 86400, // 1 day
+      // Use prerender instead of ISR to avoid SQLite runtime dependency on Netlify
+      prerender: true,
       sitemap: { changefreq: 'daily', priority: 0.9 },
       robots: true,
     },
