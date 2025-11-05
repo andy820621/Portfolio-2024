@@ -301,9 +301,6 @@ export default defineNuxtConfig({
           },
           sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
         },
-        external: [
-          'better-sqlite3',
-        ],
       },
       sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
     },
@@ -330,9 +327,7 @@ export default defineNuxtConfig({
     future: {
       nativeSWR: true,
     },
-    externals: {
-      external: ['better-sqlite3'],
-    },
+    // Let the target preset/package manager handle native module resolution
     rollupConfig: {
       // TODO：暫時解決 VueUse v14 在 SSR 下的語法問題，確認未來版本是否已修正此問題後可移除
       plugins: [

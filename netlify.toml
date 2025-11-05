@@ -7,8 +7,10 @@ NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 PNPM_FLAGS = "--shamefully-hoist"
 
 [functions]
-node_bundler = "esbuild"
-external_node_modules = [ "better-sqlite3" ]
+# Use zisi for native modules like better-sqlite3 to ensure Amazon Linux compatibility
+node_bundler = "zisi"
+# Ensure native module is included; zisi detects and vendors native deps
+included_files = [ "node_modules/better-sqlite3/**" ]
 
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
