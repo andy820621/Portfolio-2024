@@ -132,7 +132,8 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: process.env.I18N_BASE_URL,
+    // Fallback to Vercel preview URL when I18N_BASE_URL is not provided (useful for Preview deployments)
+    url: (process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined)) as string | undefined,
     name: navbarData.homeTitle,
     identity: {
       type: 'Person',
@@ -186,7 +187,7 @@ export default defineNuxtConfig({
       props: {
         title: seoData.ogTitle,
         description: seoData.description,
-        url: process.env.I18N_BASE_URL,
+        url: process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
         twitterSite: seoData.twitterLink,
         siteName: seoData.ogTitle,
       },
@@ -196,7 +197,7 @@ export default defineNuxtConfig({
     ],
   },
   socialShare: {
-    baseUrl: process.env.I18N_BASE_URL,
+    baseUrl: process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
   },
   image: {
     format: ['webp', 'gif', 'jpg', 'png'],
@@ -237,7 +238,7 @@ export default defineNuxtConfig({
     // },
   },
   i18n: {
-    baseUrl: process.env.I18N_BASE_URL,
+    baseUrl: process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
     locales,
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
@@ -289,7 +290,6 @@ export default defineNuxtConfig({
   vite: {
     build: {
       rollupOptions: {
-        treeshake: true,
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {
@@ -312,7 +312,7 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
-    preset: process.env.NETLIFY ? 'netlify' : undefined,
+    preset: process.env.VERCEL ? 'vercel' : (process.env.NETLIFY ? 'netlify' : undefined),
     plugins: ['~~/server/plugins/sitemap'],
     publicAssets: [
       {
@@ -606,6 +606,21 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       [`/${dir}/**`]: { index: false, robots: 'noindex' },
     }), {}),
   })
+
+  // Redirects (migrated from netlify.toml). Note: scheme-based redirects (http->https) and host-based (www->apex)
+  // should be configured at the domain/DNS layer in Vercel. Path-level redirects can live here safely.
+  // Object.assign(rules, {
+  //   // English prefix removed: /en/foo -> /foo
+  //   '/en': { redirect: { to: '/', statusCode: 301 } },
+  //   '/en/': { redirect: { to: '/', statusCode: 301 } },
+  //   '/en/**': { redirect: { to: '/:splat', statusCode: 301 } },
+
+  //   // Fix abnormal locale combinations
+  //   '/zh/en/**': { redirect: { to: '/zh/:splat', statusCode: 301 } },
+  //   '/en/zh/**': { redirect: { to: '/en/:splat', statusCode: 301 } },
+  //   '/zh/zh/**': { redirect: { to: '/zh/:splat', statusCode: 301 } },
+  //   '/en/en/**': { redirect: { to: '/en/:splat', statusCode: 301 } },
+  // })
 
   return rules
 }
