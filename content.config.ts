@@ -66,6 +66,7 @@ export default defineContentConfig({
           include: 'en/**/*.md',
           exclude: ['en/posts/*.md', 'en/projects/*.md', 'en/demos/*.md'],
           prefix: '',
+          cwd: 'content',
         },
         schema: commonContentSchema,
       }),
@@ -77,6 +78,7 @@ export default defineContentConfig({
           include: 'zh/**/*.md',
           exclude: ['zh/posts/*.md', 'zh/projects/*.md', 'zh/demos/*.md'],
           prefix: '',
+          cwd: 'content',
         },
         schema: commonContentSchema,
       }),
@@ -89,6 +91,7 @@ export default defineContentConfig({
         source: {
           include: 'en/posts/*.md',
           prefix: '/posts',
+          cwd: 'content',
         },
         schema: articleSchema,
       }),
@@ -99,6 +102,7 @@ export default defineContentConfig({
         source: {
           include: 'zh/posts/*.md',
           prefix: '/zh/posts',
+          cwd: 'content',
         },
         schema: articleSchema,
       }),
@@ -111,6 +115,7 @@ export default defineContentConfig({
         source: {
           include: 'en/projects/*.md',
           prefix: '/projects',
+          cwd: 'content',
         },
         schema: projectSchema,
       }),
@@ -121,6 +126,7 @@ export default defineContentConfig({
         source: {
           include: 'zh/projects/*.md',
           prefix: '/zh/projects',
+          cwd: 'content',
         },
         schema: projectSchema,
       }),
@@ -133,6 +139,7 @@ export default defineContentConfig({
         source: {
           include: 'en/demos/*.md',
           prefix: '/demos',
+          cwd: 'content',
         },
         schema: demoSchema,
       }),
@@ -143,6 +150,7 @@ export default defineContentConfig({
         source: {
           include: 'zh/demos/*.md',
           prefix: '/zh/demos',
+          cwd: 'content',
         },
         schema: demoSchema,
       }),

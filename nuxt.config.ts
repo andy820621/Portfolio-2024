@@ -210,14 +210,6 @@ export default defineNuxtConfig({
     },
   },
   content: {
-    // 在 CI 環境中提供 Git 資訊,避免解析失敗
-    preview: {
-      gitInfo: {
-        name: 'Portfolio-2024',
-        owner: 'andy820621',
-        url: 'https://github.com/andy820621/Portfolio-2024',
-      },
-    },
     build: {
       markdown: {
         toc: {
