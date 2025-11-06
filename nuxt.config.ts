@@ -210,6 +210,8 @@ export default defineNuxtConfig({
     },
   },
   content: {
+    // @ts-expect-error repository property type mismatch
+    repository: false,
     build: {
       markdown: {
         toc: {
