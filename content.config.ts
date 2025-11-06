@@ -1,6 +1,5 @@
-import { defineCollection, defineContentConfig } from '@nuxt/content'
+import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 import { asSeoCollection } from '@nuxtjs/seo/content'
-import { z } from 'zod/v4'
 // import { asOgImageCollection } from 'nuxt-og-image/content'
 
 // 通用內容模式
@@ -61,94 +60,93 @@ const demoSchema = z.object({
 export default defineContentConfig({
   collections: {
     // 主要內容集合（不包括特定子目錄）
-    content_en: defineCollection({
-      ...asSeoCollection({
+    content_en: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'en/**/*.md',
           exclude: ['en/posts/*.md', 'en/projects/*.md', 'en/demos/*.md'],
           prefix: '',
         },
+        schema: commonContentSchema,
       }),
-      schema: commonContentSchema,
-    }),
-    content_zh: defineCollection({
-      ...asSeoCollection({
+    ),
+    content_zh: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'zh/**/*.md',
           exclude: ['zh/posts/*.md', 'zh/projects/*.md', 'zh/demos/*.md'],
           prefix: '',
         },
+        schema: commonContentSchema,
       }),
-      schema: commonContentSchema,
-    }),
+    ),
 
     // Blog 集合
-    posts_en: defineCollection({
-      ...asSeoCollection({
+    posts_en: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'en/posts/*.md',
           prefix: '/posts',
         },
+        schema: articleSchema,
       }),
-      schema: articleSchema,
-    }),
-    posts_zh: defineCollection({
-      ...asSeoCollection({
+    ),
+    posts_zh: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'zh/posts/*.md',
           prefix: '/zh/posts',
         },
+        schema: articleSchema,
       }),
-      schema: articleSchema,
-    }),
+    ),
 
-    // Projects集合
-    // 將 SEO 增強與自訂 schema 分離，避免 Zod 實例不一致導致欄位未建立
-    projects_en: defineCollection({
-      ...asSeoCollection({
+    // Projects 集合
+    projects_en: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'en/projects/*.md',
           prefix: '/projects',
         },
+        schema: projectSchema,
       }),
-      schema: projectSchema,
-    }),
-    projects_zh: defineCollection({
-      ...asSeoCollection({
+    ),
+    projects_zh: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'zh/projects/*.md',
           prefix: '/zh/projects',
         },
+        schema: projectSchema,
       }),
-      schema: projectSchema,
-    }),
+    ),
 
     // Demos 集合
-    demos_en: defineCollection({
-      ...asSeoCollection({
+    demos_en: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'en/demos/*.md',
           prefix: '/demos',
         },
+        schema: demoSchema,
       }),
-      schema: demoSchema,
-    }),
-    demos_zh: defineCollection({
-      ...asSeoCollection({
+    ),
+    demos_zh: defineCollection(
+      asSeoCollection({
         type: 'page',
         source: {
           include: 'zh/demos/*.md',
           prefix: '/zh/demos',
         },
+        schema: demoSchema,
       }),
-      schema: demoSchema,
-    }),
+    ),
   },
 })
