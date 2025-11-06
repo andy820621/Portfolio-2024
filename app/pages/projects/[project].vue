@@ -42,7 +42,13 @@ watchEffect(() => {
       ? 'https://creativecommons.org/licenses/by/4.0/'
       : 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hant'
 
-    useSchemaOrg([
+    // 在開發環境中檢查必要欄位
+    if (import.meta.dev && !mainData.value.date) {
+      console.warn(`[SEO Warning] Project "${mainData.value.title}" is missing a date field`)
+    }
+
+    // 建立基本的 schema
+    const schemas: Parameters<typeof useSchemaOrg>[0] = [
       defineWebPage({
         '@type': 'WebPage',
         '@id': nowPageId,
@@ -55,60 +61,73 @@ watchEffect(() => {
       }),
 
       defineBreadcrumb(getBreadcrumbListSchema(mainData.value.title)),
+    ]
 
-      defineArticle({
-        '@type': 'Article',
-        '@id': articleId,
-        'headline': mainData.value.title,
-        'description': mainData.value.description,
-        'isPartOf': {
-          '@id': nowPageId,
-        },
-        'mainEntityOfPage': {
-          '@id': nowPageId,
-        },
-        'datePublished': new Date(mainData.value.date!).toISOString(),
-        'dateModified': new Date(mainData.value.updatedAt! || mainData.value.date!).toISOString(),
-        'author': {
-          '@id': personId,
-        },
-        'publisher': {
-          '@id': personId,
-        },
-        'image': mainData.value.image
-          ? [`${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`]
-          : undefined,
-        'articleBody': mainData.value.rawbody || '',
-        'wordCount': mainData.value.wordCount,
-        'keywords': keywords,
-        'articleSection': articleSection,
-        'inLanguage': localeProperties.value.language,
-        'copyrightYear': (() => {
-          const stableYear = useStableYear()
-          return mainData.value.date
-            ? new Date(mainData.value.date).getFullYear().toString()
-            : stableYear.value
-        })(),
-        'copyrightHolder': {
-          '@id': personId,
-        },
-      }),
+    // 只有在有日期的情況下才加入 Article schema
+    if (mainData.value.date) {
+      const publishDate = new Date(mainData.value.date)
+      const modifiedDate = mainData.value.updatedAt
+        ? new Date(mainData.value.updatedAt)
+        : publishDate
+      const copyrightYear = publishDate.getFullYear().toString()
 
-      defineImage({
-        '@type': 'ImageObject',
-        'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value?.image}`,
-        'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value?.image}`,
-        'license': licensePageUrl,
-        'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
-        'creditText': 'BarZ Hsieh',
-        'creator': {
-          '@type': 'Person',
-          '@id': personId,
-          'name': 'BarZ Hsieh',
-        },
-        'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
-      }),
-    ])
+      schemas.push(
+        defineArticle({
+          '@type': 'Article',
+          '@id': articleId,
+          'headline': mainData.value.title,
+          'description': mainData.value.description,
+          'isPartOf': {
+            '@id': nowPageId,
+          },
+          'mainEntityOfPage': {
+            '@id': nowPageId,
+          },
+          'datePublished': publishDate.toISOString(),
+          'dateModified': modifiedDate.toISOString(),
+          'author': {
+            '@id': personId,
+          },
+          'publisher': {
+            '@id': personId,
+          },
+          'image': mainData.value.image
+            ? [`${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`]
+            : undefined,
+          'articleBody': mainData.value.rawbody || '',
+          'wordCount': mainData.value.wordCount,
+          'keywords': keywords,
+          'articleSection': articleSection,
+          'inLanguage': localeProperties.value.language,
+          'copyrightYear': copyrightYear,
+          'copyrightHolder': {
+            '@id': personId,
+          },
+        }),
+      )
+    }
+
+    // Image schema 可以獨立存在
+    if (mainData.value.image) {
+      schemas.push(
+        defineImage({
+          '@type': 'ImageObject',
+          'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`,
+          'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`,
+          'license': licensePageUrl,
+          'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
+          'creditText': 'BarZ Hsieh',
+          'creator': {
+            '@type': 'Person',
+            '@id': personId,
+            'name': 'BarZ Hsieh',
+          },
+          'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
+        }),
+      )
+    }
+
+    useSchemaOrg(schemas)
   }
 })
 </script>

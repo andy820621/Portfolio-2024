@@ -23,18 +23,24 @@ const { y: scroll } = useWindowScroll()
     >
       <Logo />
     </NuxtLink>
-    <!-- //TODO: 考慮要不要使用他 -->
-    <button
-      type="button"
-      title="Scroll to top"
-      aria-label="Scroll to top"
+    <!-- 僅在客戶端渲染，避免 SSR/CSR 滾動位置差異造成 hydration mismatch -->
+    <ClientOnly>
+      <button
+        type="button"
+        title="Scroll to top"
+        aria-label="Scroll to top"
 
-      fixed bottom-3 right-3 z-100 h-10 w-10 rounded-full transition duration-300 print:hidden hover-bg-hex-8883 hover:op100
-      :class="scroll > 300 ? 'op30' : 'op0! pointer-events-none'"
-      @click="toTop"
-    >
-      <span i-ri-arrow-up-line />
-    </button>
+        fixed bottom-3 right-3 z-100 h-10 w-10 rounded-full transition duration-300 print:hidden hover-bg-hex-8883 hover:op100
+        :class="scroll > 300 ? 'op30' : 'op0! pointer-events-none'"
+        @click="toTop"
+      >
+        <span i-ri-arrow-up-line />
+      </button>
+      <template #fallback>
+        <!-- 保持 SSR 標記穩定的空節點 -->
+        <span aria-hidden="true" />
+      </template>
+    </ClientOnly>
     <nav class="nav" aria-label="Main navigation">
       <div class="spacer" />
       <div class="right" print:op0>

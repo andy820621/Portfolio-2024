@@ -31,16 +31,3 @@ export function useFormatDate(date: MaybeRefOrGetter<DateLike>, onlyDate = true)
     return dateValue.format('LL')
   })
 }
-
-// export function useFormatDate(date: MaybeRefOrGetter<DateLike>, onlyDate = true) {
-//   const { d, locale } = useI18n()
-
-//   return computed(() => {
-//     const dateValue = new Date(date)
-
-//     if (onlyDate || dateValue.getFullYear() === new Date(Date.now()).getFullYear())
-//       return d(dateValue, 'short', locale.value)
-
-//     return d(dateValue, 'long', locale.value)
-//   })
-// }

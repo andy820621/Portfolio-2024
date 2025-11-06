@@ -52,7 +52,6 @@ withDefaults(defineProps<Props>(), {
             <div class="flex flex-wrap items-center gap-1">
               <Icon name="ri:calendar-line" />
               <p> {{ useFormatDate(date, false) || '' }}</p>
-              <!-- <p> {{ $d(new Date(date), 'long', 'zh') }}</p> -->
             </div>
 
             <div v-if="wordCount" class="flex flex-wrap items-center gap-1">

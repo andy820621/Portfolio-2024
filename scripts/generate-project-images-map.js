@@ -49,7 +49,7 @@ function main() {
 
   fs.writeFileSync(
     path.join(projectRoot, 'public', 'project-images-map.json'),
-    JSON.stringify(imageMap, null, 2),
+    `${JSON.stringify(imageMap, null, 2)}\n`,
   )
 
   console.log('Image map generated successfully!')

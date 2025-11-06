@@ -85,7 +85,7 @@ function main() {
     // 將元數據寫入檔案
     fs.writeFileSync(
       metadataPath,
-      JSON.stringify(metadata, null, 2),
+      `${JSON.stringify(metadata, null, 2)}\n`,
     )
 
     console.log('元數據檔案已生成：public/project-images-metadata.json')

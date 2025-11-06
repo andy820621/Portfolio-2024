@@ -35,8 +35,13 @@ watchEffect(() => {
     const articleId = `${fullPath.value}#article`
     const personId = `${baseUrl.value}#identity`
 
-    // TODO: Consider using the schemaOrg parameter from the .md file to control this
-    useSchemaOrg([
+    // 在開發環境中檢查必要欄位
+    if (import.meta.dev && !mainData.value.date) {
+      console.warn(`[SEO Warning] Post "${mainData.value.title}" is missing a date field`)
+    }
+
+    // 建立基本的 schema
+    const schemas: Parameters<typeof useSchemaOrg>[0] = [
       defineWebPage({
         '@type': 'WebPage',
         '@id': nowPageId,
@@ -49,45 +54,50 @@ watchEffect(() => {
       }),
 
       defineBreadcrumb(getBreadcrumbListSchema(mainData.value.title)),
+    ]
 
-      defineArticle({
-        '@type': 'BlogPosting',
-        '@id': articleId,
-        'headline': mainData.value.title,
-        'description': mainData.value.description,
-        'isPartOf': {
-          '@id': nowPageId,
-        },
-        'mainEntityOfPage': {
-          '@id': nowPageId,
-        },
-        'datePublished': new Date(mainData.value.date!).toISOString(),
-        'dateModified': mainData.value.updatedAt || mainData.value.date,
-        'author': {
-          '@id': personId,
-        },
-        'publisher': {
-          '@id': personId,
-        },
-        'image': mainData.value.image
-          ? [`${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`]
-          : undefined,
-        'articleBody': mainData.value.rawbody || '',
-        'wordCount': mainData.value.wordCount,
-        keywords,
-        articleSection,
-        'inLanguage': localeProperties.value.language,
-        'copyrightYear': (() => {
-          const stableYear = useStableYear()
-          return mainData.value.date
-            ? new Date(mainData.value.date).getFullYear().toString()
-            : stableYear.value
-        })(),
-        'copyrightHolder': {
-          '@id': personId,
-        },
-      }),
-    ])
+    // 只有在有日期的情況下才加入 Article schema
+    if (mainData.value.date) {
+      const articleDate = new Date(mainData.value.date)
+      const copyrightYear = articleDate.getFullYear().toString()
+
+      schemas.push(
+        defineArticle({
+          '@type': 'BlogPosting',
+          '@id': articleId,
+          'headline': mainData.value.title,
+          'description': mainData.value.description,
+          'isPartOf': {
+            '@id': nowPageId,
+          },
+          'mainEntityOfPage': {
+            '@id': nowPageId,
+          },
+          'datePublished': articleDate.toISOString(),
+          'dateModified': mainData.value.updatedAt || mainData.value.date,
+          'author': {
+            '@id': personId,
+          },
+          'publisher': {
+            '@id': personId,
+          },
+          'image': mainData.value.image
+            ? [`${trailingSlashUrlOrNot(baseUrl.value, false)}${mainData.value.image}`]
+            : undefined,
+          'articleBody': mainData.value.rawbody || '',
+          'wordCount': mainData.value.wordCount,
+          keywords,
+          articleSection,
+          'inLanguage': localeProperties.value.language,
+          'copyrightYear': copyrightYear,
+          'copyrightHolder': {
+            '@id': personId,
+          },
+        }),
+      )
+    }
+
+    useSchemaOrg(schemas)
   }
 })
 </script>

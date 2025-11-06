@@ -19,11 +19,10 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
     false,
   )
 
-  // 使用更穩定的 cache key: 基於內容路徑而非 route.path
-  const cacheKey = `${basePageName}-${locale.value}-${contentPath}`
+  // 使用函式型 key 維持與語言、內容路徑的反應式綁定
 
   const { data: contentData, error } = await useAsyncData(
-    cacheKey,
+    () => `${basePageName}-${locale.value}-${contentPath}`,
     async () => {
       try {
         // 獲取主要內容
@@ -43,18 +42,6 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
         console.error('Error fetching content data:', error)
         return null
       }
-    },
-    {
-      // 監聽語言變化，自動重新取得內容
-      watch: [locale],
-      // 確保在預渲染時正確提取數據 (需要配合 nuxt.config.ts 的 payloadExtraction: true)
-      getCachedData: (key, nuxtApp) => {
-        // 使用 Nuxt 預設的快取策略
-        // hydrating 時從 payload.data 讀取，否則從 static.data 讀取
-        return nuxtApp.isHydrating
-          ? nuxtApp.payload.data[key]
-          : nuxtApp.static.data[key]
-      },
     },
   )
 

@@ -53,7 +53,7 @@ function main() {
   const outputPath = path.join(projectRoot, 'public', 'gallery-images-map.json')
   fs.writeFileSync(
     outputPath,
-    JSON.stringify(imageMap, null, 2),
+    `${JSON.stringify(imageMap, null, 2)}\n`,
   )
 
   console.log('Gallery image map generated successfully!')

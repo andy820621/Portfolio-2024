@@ -47,7 +47,7 @@ const itemListElement = formattedData.value.map((post, index) => ({
     'applicationCategory': 'WebApplication',
     'operatingSystem': 'Web-based',
     'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${post.path}`,
-    'datePublished': new Date(post.date).toISOString(),
+    ...post.date ? { datePublished: new Date(post.date).toISOString() } : {},
     'image': {
       '@type': 'ImageObject',
       'url': trailingSlashUrlOrNot(baseUrl.value, false) + post.image,

@@ -6,7 +6,7 @@ const { t, locale, localeProperties } = useI18n()
 
 // 使用 useAsyncData 獲取內容
 const { data: content, error } = await useAsyncData(
-  `content-${locale.value}`,
+  () => `content-${locale.value}`,
   async () => {
     try {
       const collection = (`content_${locale.value}`) as keyof Collections
@@ -22,9 +22,6 @@ const { data: content, error } = await useAsyncData(
       return null
     }
   },
-  // {
-  //   watch: [locale], // 當語言變更時重新獲取資料
-  // },
 )
 
 // 錯誤處理

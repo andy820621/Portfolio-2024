@@ -16,6 +16,9 @@ const locales: LocaleObject<SupportedLocale>[] = [
 const lastmod = getSitemapDateFormat(Date.now())
 
 export default defineNuxtConfig({
+  // debug: {
+  //   hydration: true,
+  // },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   router: {
@@ -72,7 +75,7 @@ export default defineNuxtConfig({
   delayHydration: {
     // enables nuxt-delay-hydration in dev mode for testing
     // NOTE: you should disable this once you've finished testing, it will break HMR
-    debug: process.env.NODE_ENV === 'development',
+    debug: process.env.NODE_ENV !== 'production',
   },
 
   routeRules: generateRouteRules({
@@ -178,7 +181,7 @@ export default defineNuxtConfig({
     debug: process.env.NODE_ENV !== 'production',
   },
   ogImage: {
-    debug: true,
+    debug: process.env.NODE_ENV !== 'production',
     defaults: {
       props: {
         title: seoData.ogTitle,
@@ -317,11 +320,12 @@ export default defineNuxtConfig({
       },
     ],
     prerender: {
-      failOnError: false, // 防止某些 404 錯誤中斷建置
+      failOnError: process.env.NODE_ENV !== 'production', // 防止某些 404 錯誤中斷建置
       crawlLinks: true,
       // 確保所有靜態頁面和動態內容頁面都被預渲染
       routes: [
         '/',
+        '/zh',
         '/posts',
         '/zh/posts',
         '/projects',
