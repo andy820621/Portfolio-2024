@@ -59,7 +59,6 @@ const demoSchema = z.object({
 
 export default defineContentConfig({
   collections: {
-    // 主要內容集合（不包括特定子目錄）
     content_en: defineCollection(
       asSeoCollection({
         type: 'page',
