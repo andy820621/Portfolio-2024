@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
     '@nuxt/fonts',
-    '@netlify/nuxt',
+    '@nuxthub/core',
   ],
   // HTML optimization
   htmlValidator: {
@@ -133,8 +133,8 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    // Fallback to Vercel preview URL when I18N_BASE_URL is not provided (useful for Preview deployments)
-    url: (process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined)) as string | undefined,
+    // Fallback to Cloudflare Pages preview URL when I18N_BASE_URL is not provided (useful for Preview deployments)
+    url: (process.env.I18N_BASE_URL || (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : undefined)) as string | undefined,
     name: navbarData.homeTitle,
     identity: {
       type: 'Person',
@@ -188,7 +188,7 @@ export default defineNuxtConfig({
       props: {
         title: seoData.ogTitle,
         description: seoData.description,
-        url: process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+        url: process.env.I18N_BASE_URL || (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : undefined),
         twitterSite: seoData.twitterLink,
         siteName: seoData.ogTitle,
       },
@@ -198,7 +198,7 @@ export default defineNuxtConfig({
     ],
   },
   socialShare: {
-    baseUrl: process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+    baseUrl: process.env.I18N_BASE_URL || (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : undefined),
   },
   image: {
     format: ['webp', 'gif', 'jpg', 'png'],
@@ -239,7 +239,7 @@ export default defineNuxtConfig({
     // },
   },
   i18n: {
-    baseUrl: process.env.I18N_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+    baseUrl: process.env.I18N_BASE_URL || (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : undefined),
     locales,
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
@@ -359,7 +359,7 @@ export default defineNuxtConfig({
               for (const file of files) {
                 const fullPath = path.join(dir, file.name)
                 if (file.isDirectory()) {
-                  routes.push(...await scanContentDir(fullPath, locale, type))
+                  routes.push(...(await scanContentDir(fullPath, locale, type)))
                 }
                 else if (file.name.endsWith('.md')) {
                   // 將檔案路徑轉換為路由
