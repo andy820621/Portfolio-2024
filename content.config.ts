@@ -66,7 +66,6 @@ export default defineContentConfig({
           include: 'en/**/*.md',
           exclude: ['en/posts/*.md', 'en/projects/*.md', 'en/demos/*.md'],
           prefix: '',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: commonContentSchema,
       }),
@@ -78,7 +77,6 @@ export default defineContentConfig({
           include: 'zh/**/*.md',
           exclude: ['zh/posts/*.md', 'zh/projects/*.md', 'zh/demos/*.md'],
           prefix: '',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: commonContentSchema,
       }),
@@ -91,7 +89,6 @@ export default defineContentConfig({
         source: {
           include: 'en/posts/*.md',
           prefix: '/posts',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: articleSchema,
       }),
@@ -102,7 +99,6 @@ export default defineContentConfig({
         source: {
           include: 'zh/posts/*.md',
           prefix: '/zh/posts',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: articleSchema,
       }),
@@ -115,7 +111,6 @@ export default defineContentConfig({
         source: {
           include: 'en/projects/*.md',
           prefix: '/projects',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: projectSchema,
       }),
@@ -126,7 +121,6 @@ export default defineContentConfig({
         source: {
           include: 'zh/projects/*.md',
           prefix: '/zh/projects',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: projectSchema,
       }),
@@ -139,7 +133,6 @@ export default defineContentConfig({
         source: {
           include: 'en/demos/*.md',
           prefix: '/demos',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: demoSchema,
       }),
@@ -150,7 +143,6 @@ export default defineContentConfig({
         source: {
           include: 'zh/demos/*.md',
           prefix: '/zh/demos',
-          repository: 'https://github.com/andy820621/Portfolio-2024',
         },
         schema: demoSchema,
       }),
