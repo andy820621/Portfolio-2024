@@ -319,7 +319,7 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
-    preset: process.env.VERCEL ? 'vercel' : (process.env.NETLIFY ? 'netlify' : undefined),
+    preset: process.env.CF_PAGES ? 'cloudflare_pages' : (process.env.VERCEL ? 'vercel' : (process.env.NETLIFY ? 'netlify' : undefined)),
     plugins: ['~~/server/plugins/sitemap'],
     publicAssets: [
       {
