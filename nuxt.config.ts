@@ -54,13 +54,7 @@ export default defineNuxtConfig({
     '@nuxtjs/html-validator',
     'nuxt-delay-hydration',
     '@nuxt/fonts',
-    '@nuxthub/core',
   ],
-
-  // NuxtHub configuration
-  hub: {
-    database: true, // Enable D1 database for Nuxt Content
-  },
 
   // HTML optimization
   htmlValidator: {
@@ -240,9 +234,11 @@ export default defineNuxtConfig({
         },
       },
     },
-    // experimental: {
-    //   sqliteConnector: 'native',
-    // },
+    // Cloudflare Pages D1 database configuration for Nuxt Content
+    database: {
+      type: 'd1',
+      bindingName: 'DB',
+    },
   },
   i18n: {
     baseUrl: process.env.I18N_BASE_URL || (process.env.CF_PAGES_URL ? `https://${process.env.CF_PAGES_URL}` : undefined),
