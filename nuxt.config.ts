@@ -56,6 +56,12 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxthub/core',
   ],
+
+  // NuxtHub configuration
+  hub: {
+    database: true, // Enable D1 database for Nuxt Content
+  },
+
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
