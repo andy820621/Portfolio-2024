@@ -66,6 +66,8 @@ export default defineContentConfig({
           include: 'en/**/*.md',
           exclude: ['en/posts/*.md', 'en/projects/*.md', 'en/demos/*.md'],
           prefix: '',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: commonContentSchema,
       }),
@@ -77,6 +79,8 @@ export default defineContentConfig({
           include: 'zh/**/*.md',
           exclude: ['zh/posts/*.md', 'zh/projects/*.md', 'zh/demos/*.md'],
           prefix: '',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: commonContentSchema,
       }),
@@ -89,6 +93,8 @@ export default defineContentConfig({
         source: {
           include: 'en/posts/*.md',
           prefix: '/posts',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: articleSchema,
       }),
@@ -99,6 +105,8 @@ export default defineContentConfig({
         source: {
           include: 'zh/posts/*.md',
           prefix: '/zh/posts',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: articleSchema,
       }),
@@ -111,6 +119,8 @@ export default defineContentConfig({
         source: {
           include: 'en/projects/*.md',
           prefix: '/projects',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: projectSchema,
       }),
@@ -121,6 +131,8 @@ export default defineContentConfig({
         source: {
           include: 'zh/projects/*.md',
           prefix: '/zh/projects',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: projectSchema,
       }),
@@ -133,6 +145,8 @@ export default defineContentConfig({
         source: {
           include: 'en/demos/*.md',
           prefix: '/demos',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: demoSchema,
       }),
@@ -143,6 +157,8 @@ export default defineContentConfig({
         source: {
           include: 'zh/demos/*.md',
           prefix: '/zh/demos',
+          // @ts-expect-error - repository: false is needed for Vercel deployment
+          repository: false,
         },
         schema: demoSchema,
       }),
