@@ -27,7 +27,8 @@ export default defineNuxtConfig({
     },
   },
   seo: {
-    redirectToCanonicalSiteUrl: true,
+    // 僅在 production 且已設定正式網域時才強制導向 canonical，避免 Preview/臨時域名造成重導迴圈
+    redirectToCanonicalSiteUrl: process.env.NODE_ENV === 'production' && !!process.env.I18N_BASE_URL,
   },
   experimental: {
     // inlineRouteRules: true,
