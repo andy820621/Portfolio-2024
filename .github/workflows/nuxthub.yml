@@ -3,28 +3,31 @@ on: push
 
 jobs:
   deploy:
-    name: Deploy to NuxtHub
+    name: "Deploy to NuxtHub"
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
-      - name: Setup pnpm
+      - name: Install pnpm
         uses: pnpm/action-setup@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v4
         with:
-          node-version: 22.21.0
-          cache: pnpm
+          node-version: 22
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
+
+      - name: Ensure NuxtHub module is installed
+        run: pnpx nuxthub@latest ensure
 
       - name: Build & Deploy to NuxtHub
         uses: nuxt-hub/action@v2
         with:
-          project-key: portfolio-2024-g8hw
+          project-key: portfolio-2024-20xk
