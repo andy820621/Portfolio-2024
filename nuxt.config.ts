@@ -201,9 +201,9 @@ export default defineNuxtConfig({
   image: {
     format: ['avif', 'webp', 'jpg', 'png', 'gif'],
     quality: 81,
-    // 使用 IPX 而不是 Netlify provider 來避免預渲染錯誤
-    // Netlify Image CDN 仍會在生產環境中自動優化圖片
-    provider: 'ipx',
+    // 使用 'none' provider 來完全禁用圖片優化,直接提供原始圖片
+    // 這樣可以避免 IPX 的 URL 格式問題
+    provider: 'none',
   },
   content: {
     renderer: {
@@ -332,11 +332,12 @@ export default defineNuxtConfig({
         '/projects',
         '/zh/projects',
       ],
-      // 忽略 API 和內容查詢 endpoints，避免嘗試預渲染它們
+      // 忽略 API 和內容查詢 endpoints,避免嘗試預渲染它們
       ignore: [
         '/api/_content',
         '/api/**',
         '/__nuxt_content/**',
+        '/.well-known/**', // 忽略 Chrome DevTools 請求
       ],
     },
     hooks: {
