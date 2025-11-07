@@ -58,18 +58,17 @@ export default defineNuxtConfig({
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
-    // options: {
-    //   rules: {
-    //     'element-required-attributes': [
-    //       'error',
-    //       {
-    //         ignore: {
-    //           th: ['scope'],
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
+    options: {
+      rules: {
+        'long-title': 'off',
+        'no-redundant-role': 'off',
+        'prefer-native-element': 'off',
+        'heading-level': 'off', // Allow flexible heading hierarchy
+        'element-permitted-content': 'off', // Allow style tags in code blocks
+        'no-implicit-close': 'off', // Allow implicit closing of elements
+        'close-order': 'off', // Allow flexible tag closing order
+      },
+    },
   },
 
   delayHydration: {

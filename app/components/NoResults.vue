@@ -9,9 +9,9 @@ const { description = 'We couldn\'t find any posts matching your search.' } = de
   <div class="flex flex-col items-center justify-center px-4 py-12 lg:px-8 sm:px-6">
     <div class="text-center">
       <Icon name="emojione:magnifying-glass-tilted-left" class="mx-auto h-24 w-24 text-gray-400" />
-      <h3 class="mt-2 text-2xl text-gray-900 font-semibold dark:text-gray-100">
+      <h2 class="mt-2 text-2xl text-gray-900 font-semibold dark:text-gray-100">
         {{ $t('no results found') }}
-      </h3>
+      </h2>
       <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
         {{ description }}
       </p>
