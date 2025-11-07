@@ -22,7 +22,7 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
   // 使用函式型 key 維持與語言、內容路徑的反應式綁定
 
   const { data: contentData, error } = await useAsyncData(
-    () => `${basePageName}-${locale.value}-${contentPath}`,
+    `${basePageName}-${locale.value}-${contentPath}`,
     async () => {
       try {
         // 獲取主要內容

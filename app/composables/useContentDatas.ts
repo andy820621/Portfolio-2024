@@ -9,7 +9,7 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
   const collection = (`${folderName}_${locale.value}`) as keyof Collections
 
   const { data: contentDatas, error } = await useAsyncData(
-    () => `list-${folderName}-${locale.value}`,
+    `list-${folderName}-${locale.value}`,
     async () => {
       try {
         // 使用新的 API 查詢內容

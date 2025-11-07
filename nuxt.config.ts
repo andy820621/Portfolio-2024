@@ -202,8 +202,14 @@ export default defineNuxtConfig({
     format: ['avif', 'webp', 'jpg', 'png', 'gif'],
     quality: 81,
     // 使用 'none' provider 來完全禁用圖片優化,直接提供原始圖片
-    // 這樣可以避免 IPX 的 URL 格式問題
+    // 這樣可以避免 IPX 的 URL 格式問題 // TODO: 等待 v2.0.1 或更高版本修正後考慮改成 IPX
     provider: 'none',
+    // ipx: {
+    //   modifiers: {
+    //     format: 'webp',
+    //     formats: ['webp', 'gif', 'jpg', 'png'],
+    //   },
+    // },
   },
   content: {
     renderer: {

@@ -5,7 +5,7 @@ const { locale, localeProperties } = useI18n()
 
 // 使用 useAsyncData 獲取內容
 const { data: content, error } = await useAsyncData(
-  () => `license-${locale.value}`,
+  `license-${locale.value}`,
   async () => {
     try {
       const collection = (`content_${locale.value}`) as keyof Collections
