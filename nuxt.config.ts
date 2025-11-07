@@ -201,8 +201,14 @@ export default defineNuxtConfig({
   image: {
     format: ['avif', 'webp', 'jpg', 'png', 'gif'],
     quality: 81,
+    // 使用 IPX 而不是 Netlify provider 來避免預渲染錯誤
+    // Netlify Image CDN 仍會在生產環境中自動優化圖片
+    provider: 'ipx',
   },
   content: {
+    renderer: {
+      anchorLinks: { h2: true, h3: true, h4: true },
+    },
     build: {
       markdown: {
         toc: {
