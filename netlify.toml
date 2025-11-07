@@ -3,8 +3,8 @@ command = "pnpm run build"
 
 [build.environment]
 NODE_VERSION = "22.21.0"
-# Force rebuild better-sqlite3 for Amazon Linux compatibility
-NPM_CONFIG_BUILD_FROM_SOURCE = "true"
+# Only rebuild better-sqlite3 from source to avoid forcing sharp to build
+NPM_CONFIG_BUILD_FROM_SOURCE = "better-sqlite3"
 PNPM_FLAGS = "--shamefully-hoist"
 # AWS Lambda requires specific GLIBC version - ensure proper rebuild
 AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
