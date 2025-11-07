@@ -29,6 +29,18 @@ export default defineNuxtConfig({
   seo: {
     redirectToCanonicalSiteUrl: true,
   },
+  linkChecker: {
+    enabled: true,
+    skipInspections: [
+      'no-uppercase-chars',
+      'no-non-ascii-chars',
+      'no-baseless',
+      'trailing-slash',
+      'missing-hash',
+    ],
+    showLiveInspections: false,
+    failOnError: false,
+  },
   experimental: {
     // inlineRouteRules: true,
     defaults: {
