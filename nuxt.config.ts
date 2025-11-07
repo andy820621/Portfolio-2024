@@ -199,13 +199,8 @@ export default defineNuxtConfig({
     baseUrl: process.env.I18N_BASE_URL,
   },
   image: {
-    format: ['webp', 'gif', 'jpg', 'png'],
-    ipx: {
-      modifiers: {
-        format: 'webp',
-        formats: ['webp', 'gif', 'jpg', 'png'],
-      },
-    },
+    format: ['avif', 'webp', 'jpg', 'png', 'gif'],
+    quality: 81,
   },
   content: {
     build: {
