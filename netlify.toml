@@ -1,31 +1,18 @@
 [build]
-command = "pnpm install && pnpm run build"
-publish = "dist"
-
-[[plugins]]
-package = "netlify-plugin-apt-get"
-
-[plugins.inputs]
-packages = [
-  "build-essential",
-  "pkg-config",
-  "python3",
-  "libvips-dev",
-  "libglib2.0-dev",
-  "libexpat1-dev",
-  "libxml2-dev"
-]
-
-[images]
-# Allow Netlify Image CDN to fetch and transform external images
-# used by Nuxt Image in production. Add any other remote sources here.
-remote_images = [ "https://*/*" ]
+command = "pnpm run build"
 
 [build.environment]
 NODE_VERSION = "22.21.0"
 # Force rebuild better-sqlite3 for Amazon Linux compatibility
 NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 PNPM_FLAGS = "--shamefully-hoist"
+# AWS Lambda requires specific GLIBC version - ensure proper rebuild
+AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
+
+[images]
+# Allow Netlify Image CDN to fetch and transform external images
+# used by Nuxt Image in production. Add any other remote sources here.
+remote_images = [ "https://*/*" ]
 
 # HTTP 到 HTTPS 的重定向
 [[redirects]]
