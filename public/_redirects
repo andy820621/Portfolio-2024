@@ -1,9 +1,0 @@
-# Cloudflare Pages Redirects
-# https://developers.cloudflare.com/pages/configuration/redirects/
-
-# Remove www subdomain
-https://www.barz.app/* https://barz.app/:splat 301
-
-# Redirect /en/ to root (English is default locale)
-/en/* /:splat 301
-/en/ / 301

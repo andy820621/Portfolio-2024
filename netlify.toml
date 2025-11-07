@@ -6,8 +6,6 @@ NODE_VERSION = "22.21.0"
 # Force rebuild better-sqlite3 for Amazon Linux compatibility
 NPM_CONFIG_BUILD_FROM_SOURCE = "true"
 PNPM_FLAGS = "--shamefully-hoist"
-# AWS Lambda requires specific GLIBC version - ensure proper rebuild
-AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
 
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
@@ -18,60 +16,64 @@ remote_images = [ "https://*/*" ]
 [[redirects]]
 from = "http://barz.app/*"
 to = "https://barz.app/:splat"
-status = 301
+status = 308
 force = true
 
 [[redirects]]
 from = "http://www.barz.app/*"
 to = "https://barz.app/:splat"
-status = 301
+status = 308
 force = true
 
 # 移除 www 子網域
 [[redirects]]
 from = "https://www.barz.app/*"
 to = "https://barz.app/:splat"
-status = 301
+status = 308
 force = true
 
 # 將 /en/ 永久重定向到根目錄 (/)
 [[redirects]]
 from = "/en/*"
 to = "/:splat" # 將 /en/foo 重定向到 /foo, /en/ 重定向到 /
-status = 301
+status = 308
 force = true
 
 # 處理 /en/ 的情況
 [[redirects]]
 from = "/en/"
 to = "/"
-status = 301
+status = 308
 force = true
 
 # 修正異常語系組合 /zh/en/* 轉址到正確路徑
 [[redirects]]
 from = "/zh/en/*"
 to = "/zh/:splat"
-status = 301
+status = 308
 force = true
 
 # 修正異常語系組合 /en/zh/* 轉址到正確路徑
 [[redirects]]
 from = "/en/zh/*"
 to = "/en/:splat"
-status = 301
+status = 308
 force = true
 
 # 修正異常語系組合 /zh/zh/* 轉址到正確路徑
 [[redirects]]
 from = "/zh/zh/*"
 to = "/zh/:splat"
-status = 301
+status = 308
 force = true
 
 # 修正異常語系組合 /en/en/* 轉址到正確路徑
 [[redirects]]
 from = "/en/en/*"
 to = "/en/:splat"
-status = 301
+status = 308
 force = true
+
+# Nuxt SSR 入口：將所有請求導到 Nitro 產生的 Netlify Functions
+[functions]
+directory = ".netlify/functions-internal"
