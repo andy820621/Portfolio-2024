@@ -422,30 +422,8 @@ export default defineNuxtConfig({
       nativeSWR: true,
     },
     // Let the target preset/package manager handle native module resolution
-    rollupConfig: {
-      // TODO：暫時解決 VueUse v14 在 SSR 下的語法問題，確認未來版本是否已修正此問題後可移除
-      plugins: [
-        {
-          name: 'vueuse-ssr-fix',
-          transform(code, id) {
-            // Fix VueUse v14 SSR syntax issue with template literals
-            if (id.includes('@vueuse') || id.includes('node_modules/.cache/nuxt')) {
-              // Fix the specific pattern causing the error
-              const fixed = code.replace(
-                /typeof\s+(\w+)\$1\.matchMedia/g,
-                'typeof $1.matchMedia',
-              ).replace(
-                /"undefined"\$1\.matchMe/g,
-                '"undefined" !== typeof $1 && "matchMe',
-              )
-              if (fixed !== code) {
-                return { code: fixed, map: null }
-              }
-            }
-          },
-        },
-      ],
-    },
+    // rollupConfig: {
+    // },
     // experimental: {
     //   database: true
     // },
