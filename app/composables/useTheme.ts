@@ -3,14 +3,16 @@ export function useTheme() {
   const isTransitioning = ref(false)
 
   async function toggleDark(event: MouseEvent) {
-    // Ensure this only runs on client to avoid SSR pitfalls
     if (!import.meta.client)
       return null
+
     // 如果正在過渡中，不做任何操作
     if (isTransitioning.value)
       return null
 
     isTransitioning.value = true
+
+    // console.log({ Edg: navigator.userAgent.includes('Edg') })
 
     try {
       // 檢查瀏覽器支持
@@ -52,6 +54,7 @@ export function useTheme() {
           {
             duration: 400,
             easing: 'ease-out',
+            fill: 'forwards',
             pseudoElement: isDark.value
               ? '::view-transition-old(root)'
               : '::view-transition-new(root)',
@@ -61,12 +64,9 @@ export function useTheme() {
 
       // 等待動畫完成
       await transition.finished
-
-      return transition
     }
     catch (error) {
       console.error('Theme transition failed:', error)
-      return null
     }
     finally {
       setTimeout(() => {
