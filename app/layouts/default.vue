@@ -2,7 +2,7 @@
   <div class="gd-container">
     <NavBar />
 
-    <main class="px-7 py-10">
+    <main class="px-7 py-3 sm:py-10">
       <slot />
     </main>
 

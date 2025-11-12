@@ -201,12 +201,12 @@ useSchemaOrg([
         :description="$t('galleryPage.description')"
       />
 
-      <TagsFilter
+      <FiltersBar
+        v-model:search-text="searchText"
         v-model:selected-tags="selectedTags"
         :all-tags="allTags"
+        @clear="clearFilters"
       />
-
-      <ContentSearch v-model:search-test="searchText" />
     </div>
 
     <ClientOnly>

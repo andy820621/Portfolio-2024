@@ -86,15 +86,15 @@ useSchemaOrg([
       :description="$t('blogsPage.description')"
     />
 
-    <TagsFilter
+    <FiltersBar
+      v-model:search-text="searchText"
       v-model:selected-tags="selectedTags"
       :all-tags="allTags"
+      @clear="clearFilters"
     />
 
-    <ContentSearch v-model:search-test="searchText" />
-
     <!-- 文章列表 -->
-    <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 px-4 space-y-5">
+    <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 space-y-5 sm:px-4">
       <template v-for="post in paginatedData" :key="post.title">
         <postCard
           :path="localePath(post.path!)"

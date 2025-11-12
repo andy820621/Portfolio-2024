@@ -27,7 +27,7 @@ This is the personal website and portfolio of BarZ Hsieh, built with modern fron
 - `pages/`: Nuxt route pages (home, blog, projects, gallery, license, etc.)
 - `content/`: Markdown content (multilingual about, license, posts, projects, demos)
 - `data/`: Static data (galleryData, navbarData, SEO configurations, etc.)
-- `components/`: UI components (NavBar, Footer, LightBox, TagsFilter...)
+- `components/`: UI components (NavBar, Footer, LightBox, TagsFilterDropdown...)
 - `composables/`: Reusable logic (SEO, Breadcrumb, content queries...)
 - `public/`: Static assets (images, favicon...)
 - `scripts/`: Automation scripts (image metadata/mapping generation)

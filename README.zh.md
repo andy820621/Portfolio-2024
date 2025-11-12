@@ -27,7 +27,7 @@
 - `pages/`：Nuxt 路由頁面（首頁、部落格、專案、相簿、授權等）
 - `content/`：Markdown 內容（多語系 about、license、posts、projects、demos）
 - `data/`：靜態資料（galleryData、navbarData、SEO 設定等）
-- `components/`：UI 元件（NavBar、Footer、LightBox、TagsFilter...）
+- `components/`：UI 元件（NavBar、Footer、LightBox、TagsFilterDropdown...）
 - `composables/`：可重用邏輯（SEO、Breadcrumb、內容查詢...）
 - `public/`：靜態資源（圖片、favicon...）
 - `scripts/`：自動化腳本（圖片 metadata/map 生成）

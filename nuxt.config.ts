@@ -65,6 +65,7 @@ export default defineNuxtConfig({
     'nuxt-delay-hydration',
     '@nuxt/fonts',
     '@netlify/nuxt',
+    'nuxt-headlessui',
   ],
   // HTML optimization
   htmlValidator: {
@@ -371,7 +372,7 @@ export default defineNuxtConfig({
               for (const file of files) {
                 const fullPath = path.join(dir, file.name)
                 if (file.isDirectory()) {
-                  routes.push(...await scanContentDir(fullPath, locale, type))
+                  routes.push(...(await scanContentDir(fullPath, locale, type)))
                 }
                 else if (file.name.endsWith('.md')) {
                   // 將檔案路徑轉換為路由

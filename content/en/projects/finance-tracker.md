@@ -6,7 +6,7 @@ image: /project-images/finance-tracker.webp
 alt: Personal Finance Tracking System
 ogImage: /project-images/finance-tracker.webp
 tags: ['Finance Management', 'Nuxt 3', 'Vue 3', 'Supabase', 'TypeScript', 'Tailwind CSS']
-categories: ['Project Case', 'Web Development', 'SaaS', 'Personal Finance']
+categories: ['Web Development', 'SaaS', 'Personal Finance']
 published: true
 imageClass: object-left-top
 

@@ -54,5 +54,11 @@
   "read more": "Read more",
   "collapse": "Collapse",
   "404": "404",
-  "404 - Page Not Found | BarZ Hsieh": "404 - Page Not Found | BarZ Hsieh"
+  "404 - Page Not Found | BarZ Hsieh": "404 - Page Not Found | BarZ Hsieh",
+  "filtersBar": {
+    "Search": "Search",
+    "Clear All": "Clear All",
+    "Select Tags": "Select Tags",
+    "Search Tags": "Search Tags"
+  }
 }

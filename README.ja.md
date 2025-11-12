@@ -27,7 +27,7 @@
 - `pages/`: Nuxtルートページ（ホーム、ブログ、プロジェクト、ギャラリー、ライセンスなど）
 - `content/`: Markdownコンテンツ（多言語about、license、posts、projects、demos）
 - `data/`: 静的データ（galleryData、navbarData、SEO設定など）
-- `components/`: UIコンポーネント（NavBar、Footer、LightBox、TagsFilter...）
+- `components/`: UIコンポーネント（NavBar、Footer、LightBox、TagsFilterDropdown...）
 - `composables/`: 再利用可能なロジック（SEO、Breadcrumb、コンテンツクエリ...）
 - `public/`: 静的アセット（画像、favicon...）
 - `scripts/`: 自動化スクリプト（画像メタデータ/マッピング生成）

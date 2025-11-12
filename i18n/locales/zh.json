@@ -54,5 +54,11 @@
   "read more": "閱讀更多",
   "collapse": "收起",
   "404": "404",
-  "404 - Page Not Found | BarZ Hsieh": "404 找不到正確頁面 | BarZ Hsieh"
+  "404 - Page Not Found | BarZ Hsieh": "404 找不到正確頁面 | BarZ Hsieh",
+  "filtersBar": {
+    "Search": "搜尋",
+    "Clear All": "清除全部",
+    "Select Tags": "選擇標籤",
+    "Search Tags": "搜尋標籤"
+  }
 }

@@ -6,13 +6,13 @@ defineProps<{
 </script>
 
 <template>
-  <div class="container mx-auto mb-10">
+  <div class="container mx-auto mb-6 sm:mb-10">
     <!-- <div class="grid grid-cols-1 sm:grid-cols-2 items-center"> -->
     <div class="px-6">
-      <h1 class="my-5 text-4xl text-black font-semibold leading-tight slide-enter-50 md:text-5xl dark:text-zinc-300">
+      <h1 class="my-5 text-center text-4xl text-black font-semibold leading-tight slide-enter-50 sm:text-left md:text-5xl dark:text-zinc-300">
         {{ title }}
       </h1>
-      <p class="slide-enter whitespace-pre-line italic dark:text-zinc-300">
+      <p class="slide-enter hidden whitespace-pre-line italic sm:block dark:text-zinc-300">
         {{ description }}
       </p>
     </div>
@@ -22,3 +22,9 @@ defineProps<{
       </div> -->
   </div>
 </template>
+
+<style scoped>
+.container {
+  max-width: 100%;
+}
+</style>

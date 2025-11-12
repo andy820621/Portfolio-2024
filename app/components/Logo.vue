@@ -328,7 +328,7 @@ function handleLeave() {
 
 <template>
   <svg
-    id="container"
+    id="logo"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 63.78 63.78"
     :class="{ hoverable: isHoverable, hovered: isHovered }"

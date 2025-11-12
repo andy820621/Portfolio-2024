@@ -40,6 +40,7 @@ withDefaults(defineProps<Props>(), {
           placeholder
         />
       </div>
+
       <div class="p-5 sm:col-span-7">
         <h2 class="pb-1 text-xl text-base font-semibold transition-color duration-300 group-hover:text-primary">
           {{ title }}
@@ -47,6 +48,7 @@ withDefaults(defineProps<Props>(), {
         <p class="line-clamp-2 text-ellipsis dark:text-slate-400">
           {{ description }}
         </p>
+
         <div class="grid mb-1 mt-2 gap-1 text-sm text-black dark:text-zinc-300">
           <div class="flex justify-between gap-8 md:justify-initial">
             <div class="flex flex-wrap items-center gap-1">
