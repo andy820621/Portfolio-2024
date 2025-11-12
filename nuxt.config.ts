@@ -58,7 +58,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     'floating-vue/nuxt',
     '@nuxt/icon',
-    '@nuxtjs/color-mode',
     '@formkit/auto-animate',
     '@stefanobartoletti/nuxt-social-share',
     '@nuxt/image',
@@ -288,11 +287,6 @@ export default defineNuxtConfig({
     //     dir: './assets/svgIcons',
     //   },
     // ],
-  },
-  colorMode: {
-    classSuffix: '',
-    // preference: 'dark',
-    // fallback: 'light',
   },
   build: {
     transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
