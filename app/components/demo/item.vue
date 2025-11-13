@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import type { DemoContent } from '~~/types/main'
+import type { DemoCollectionItem } from '~~/types/main'
 import { linkConfig } from '~~/data'
 import ProseTh from '../content/ProseTh.vue'
 
 const { content, baseName, thumbnailType, title } = defineProps<{
-  content: DemoContent
+  content: DemoCollectionItem
   baseName: string
   thumbnailType: string
   title: string
 }>()
-
-// console.log({ thumbnail: `/demos/thumbnail/${baseName}.${thumbnailType}` })
 
 const updateDate = computed(() => content.updatedAt ? useFormatDate(content.updatedAt, false) : '')
 

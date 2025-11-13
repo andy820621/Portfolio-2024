@@ -1,21 +1,9 @@
 import type { MDCNode, MDCRoot } from '@nuxtjs/mdc'
+import type { DemoCollectionItem } from '~~/types/main'
 
 // 擴展處理節點類型，包含 minimal 格式
 type ProcessNode = MDCRoot | MDCNode | string | { type: string, value: any, [key: string]: any }
-
-// 定義內容類型的基本接口
-interface ContentBase {
-  body?: Record<string, unknown> | null
-  [key: string]: any
-}
-
-/**
- * 截斷內容函數 - 泛型版本
- * @param content 任何包含 body 屬性的內容對象
- * @param maxChars 最大字符數
- * @returns 截斷後的內容和是否被截斷的標誌
- */
-export function truncateContent<T extends ContentBase>(content: T, maxChars: number): { content: T, isTruncated: boolean } {
+export function truncateContent<T extends DemoCollectionItem>(content: T, maxChars: number): { content: T, isTruncated: boolean } {
   let charCount = 0 // 已處理的字符數
   let shouldTruncate = false
 

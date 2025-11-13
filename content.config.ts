@@ -53,7 +53,8 @@ const demoSchema = z.object({
   thumbnailType: z.string().optional(),
   tags: z.array(z.string()),
   published: z.boolean().default(true),
-  date: z.coerce.date(),
+  date: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
   keywords: z.array(z.string()).optional(),
 })
 

@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import type { Collections } from '@nuxt/content'
-import type { DemoContent } from '~~/types/main'
+import type { DemoCollectionItem } from '~~/types/main'
 import { breakpointsTailwind } from '@vueuse/core'
 
 const { t, locale } = useI18n()
-
-// 定義轉換後的 Demo 項目類型
-interface DemoItem {
-  baseName: string
-  content: DemoContent
-  title: string
-  tags: string[]
-  thumbnailType: string
-}
 
 // 格式化標題函數
 function formatTitle(fileName: string): string {
@@ -25,12 +16,13 @@ function formatTitle(fileName: string): string {
     .join(' ')
 }
 
+export type FormattedPost = Awaited<ReturnType<typeof useContentDatas>>['formattedData']['value'][number]
+
 // 查詢 Demos 的邏輯
-const { data: demoItems } = await useAsyncData<DemoItem[]>(`demos-${locale.value}`, async () => {
-  const collection = `demos_${locale.value}` as keyof Collections
+const { data: demoItems } = await useAsyncData(`demos-${locale.value}`, async () => {
+  const collection = `demos_${locale.value}` as keyof Pick<Collections, 'demos_en' | 'demos_zh'>
 
   const docsQuery = await queryCollection(collection)
-    // .where('published', '<>', false)
     .all()
     .then(sortDemos)
 
@@ -41,9 +33,9 @@ const { data: demoItems } = await useAsyncData<DemoItem[]>(`demos-${locale.value
 
 // 排序 Demos 的獨立函數
 // 排序 Demos 的獨立函數
-function sortDemos<T extends DemoContent>(docs: T[]): T[] {
+function sortDemos(docs: DemoCollectionItem[]) {
   return docs.sort((a, b) => {
-    const getNumber = (item: DemoContent): number => {
+    function getNumber(item: DemoCollectionItem) {
       // 從 stem 屬性中提取數字
       if (typeof item.stem === 'string') {
         // 從路徑中提取檔案名稱部分
@@ -61,7 +53,7 @@ function sortDemos<T extends DemoContent>(docs: T[]): T[] {
 }
 
 // 轉換 Demo 項目的獨立函數
-function transformDemoItem<T extends DemoContent>(doc: T): DemoItem {
+function transformDemoItem(doc: DemoCollectionItem) {
   const stemPath = doc.stem || ''
   const fileName = stemPath.split('/').pop() || ''
   const baseName = fileName.replace(/^\d+\./, '').toLowerCase()
@@ -91,7 +83,7 @@ const allTags = computed(() => {
   return Array.from(tagSet)
 })
 
-const debouncedFilteredDemoItems = ref<DemoItem[]>(demoItems.value || [])
+const debouncedFilteredDemoItems = ref(demoItems.value || [])
 
 const updateFilteredItems = useDebounceFn(() => {
   debouncedFilteredDemoItems.value = (demoItems.value || []).filter((item) => {
@@ -100,7 +92,7 @@ const updateFilteredItems = useDebounceFn(() => {
     const tagMatch = selectedTags.value.length === 0
       || (item.tags && selectedTags.value.every(tag => item.tags.includes(tag)))
     return titleMatch && tagMatch
-  })
+  }) as ReturnType<typeof transformDemoItem>[]
 }, 400)
 
 watch([searchText, selectedTags, demoItems], updateFilteredItems, { immediate: true })
@@ -125,13 +117,12 @@ const parts = computed(() => {
   if (!items)
     return []
 
-  return items.reduce((result, item, index) => {
+  const columns: typeof items[] = Array.from({ length: cols.value }, () => [])
+  items.forEach((item, index) => {
     const col = index % cols.value
-    if (!result[col])
-      result[col] = []
-    ;(result[col] as typeof items).push(item)
-    return result
-  }, [] as Array<typeof items>)
+    columns[col]!.push(item)
+  })
+  return columns
 })
 
 // 清除篩選器
@@ -247,7 +238,7 @@ useSchemaOrg([
           <div v-for="item in items" :key="item.baseName">
             <DemoItem
               :base-name="item.baseName"
-              :content="item.content"
+              :content="item.content as DemoCollectionItem"
               :title="item.title"
               :thumbnail-type="item.thumbnailType"
               class="slide-enter"

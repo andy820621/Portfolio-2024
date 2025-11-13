@@ -33,7 +33,7 @@ function removeTag(tag: string) {
 </script>
 
 <template>
-  <section class="mb-4 px-2 sm:px-6">
+  <section class="px-2 pb-2 sm:px-6 sm:pb-4">
     <div class="relative z-30 border border-zinc-200 rounded-xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70 lg:p-6">
       <div class="flex flex-col gap-4 md:flex-row md:items-start">
         <div class="w-full md:flex-1">

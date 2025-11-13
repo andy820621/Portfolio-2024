@@ -1,5 +1,3 @@
-import type { FormattedPost } from '~~/types/main'
-
 export function useContentListsFilter(formattedData: Ref<FormattedPost[]>) {
   const searchText = ref('') // 搜索關鍵字
   const selectedTags = ref<string[]>([]) // 選中的標籤

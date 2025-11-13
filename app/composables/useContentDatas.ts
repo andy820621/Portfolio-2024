@@ -1,12 +1,13 @@
 import type { Collections } from '@nuxt/content'
-import type { BlogPost } from '~~/types/main'
 
-export async function useContentDatas<T extends BlogPost>(folderName: string = 'projects') {
+export type FormattedPost = Awaited<ReturnType<typeof useContentDatas>>['formattedData']['value'][number]
+
+export async function useContentDatas(folderName = 'projects') {
   const { t, locale } = useI18n()
   const localePath = useLocalePath()
 
   // 根據當前語言選擇正確的集合
-  const collection = (`${folderName}_${locale.value}`) as keyof Collections
+  const collection = `${folderName}_${locale.value}` as keyof Pick<Collections, 'projects_en' | 'projects_zh' | 'posts_en' | 'posts_zh'>
 
   const { data: contentDatas, error } = await useAsyncData(
     `list-${folderName}-${locale.value}`,
@@ -16,8 +17,21 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
 
         const contents = await queryCollection(collection)
           .where('published', '=', true)
+          .select(
+            'path',
+            'title',
+            'description',
+            'image',
+            'alt',
+            'ogImage',
+            'date',
+            'tags',
+            'published',
+            'body',
+            'imageClass',
+          )
           .order('date', 'DESC')
-          .all() as unknown as T[]
+          .all()
 
         return contents.map((content) => {
           const wordCount = content.body ? countWords(content.body) : 0
@@ -65,7 +79,6 @@ export async function useContentDatas<T extends BlogPost>(folderName: string = '
     t,
     locale,
     localePath,
-    contentDatas: contentDatas as unknown as T[],
     error,
     formattedData,
   }
