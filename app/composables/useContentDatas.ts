@@ -66,7 +66,7 @@ export async function useContentDatas(folderName = 'projects') {
       image: content.image || '/not-found.jpg',
       alt: content.alt || 'no alter data available',
       ogImage: content.ogImage || '/not-found.jpg',
-      date: content.date || 'not-date-available',
+      date: content.date || undefined,
       tags: content.tags || [],
       published: content.published ?? true,
       wordCount: content.wordCount || 0,
