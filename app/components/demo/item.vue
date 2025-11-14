@@ -121,7 +121,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
   </article>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .imageBox {
   @apply overflow-hidden;
 }
