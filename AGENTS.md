@@ -44,11 +44,13 @@ node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 ## Contents 新增流程（from `CONTENT_MANAGEMENT.md`）
 
 ### Gallery
+
 - 圖片置於 `public/gallery-images/{album-id}/`；封面圖片放在 `public/gallery-images/{album-id}.webp`。
 - 在 `data/galleryData.ts` 登記 `GalleryGroup`，`id` 必須與資料夾一致。
 - 更新後執行 `node scripts/generate-gallery-images-map.js`（或等待 `pnpm build` prebuild）生成 `public/gallery-images-map.json`。
 
 ### Projects
+
 - 圖片置於 `public/project-images/{project}/`（可含子資料夾）；建議 `01.intro.hero.webp` 這類檔名以控制排序。
 - 執行 `node scripts/generate-project-images-map.js` 產生 `public/project-images-map.json`。
 - 若有新圖片需更新描述，執行 `pnpm run generate:metadata` 生成/合併 `project-images-metadata.json` 與 `project-images-metadata.zh.json`，再視需要手動調整。
@@ -62,7 +64,13 @@ node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 - **影像最佳化**：目前 `@nuxt/image` provider 設為 `none`，上傳圖片需自行控制格式與大小（建議 WebP/AVIF）。
 - **自動產出檔**：`public/*-map.json` 與 `project-images-metadata*.json` 須納入版控，避免開發者環境不一致。
 - **UnoCSS**：`unocss.config.ts` 影響全域原子樣式，若新增大量自訂 class，務必同步更新 UNO 設定與 ESLint UnoCSS plugin。
-- **自動化**： Nuxt 使用 `unplugin-auto-import` 與 `unplugin-vue-components` 進行自動匯入與組件註冊。(`/components/`, `/composables/`, `/uitils/` 等皆可直接使用)
+- **自動匯入機制**：Nuxt 內建 `unplugin-auto-import` 與 `unplugin-vue-components`，會自動匯入以下內容，**無需手動 import**：
+  - `app/components/` 中的所有 Vue 組件（可直接在 template 中使用）
+  - `app/composables/` 中的 composables 函式
+  - `app/utils/` 中的工具函式
+  - Nuxt、Vue、Vue Router 等框架 API（如 `ref`, `computed`, `useRoute`, `useFetch` 等）
+  - 這些檔案中定義的 **TypeScript 類型/介面也會自動匯入**，可直接使用而不需要 `import type { ... }`
+  - 當撰寫或修改程式碼時，請記住這些資源已全域可用，避免多餘的 import 語句
 
 ## 驗證清單（提交前）
 

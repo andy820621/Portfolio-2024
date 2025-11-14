@@ -1,93 +1,26 @@
 <script setup lang="ts">
-const CONTENT_SEARCH_SOURCES = [
-  {
-    type: 'post',
-    label: 'Posts',
-    icon: 'ri:article-line',
-    badge: 'bg-sky-100 text-sky-600 dark:bg-sky-500/20 dark:text-sky-200',
-    indexKey: 'posts',
-  },
-  {
-    type: 'project',
-    label: 'Projects',
-    icon: 'ri:projector-line',
-    badge: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-200',
-    indexKey: 'projects',
-  },
-] as const
+import type { ComponentPublicInstance } from 'vue'
 
-type ContentSearchSource = typeof CONTENT_SEARCH_SOURCES[number]
-type ResultType = ContentSearchSource['type']
-
-interface GlobalSearchResult {
-  id: string
-  type: ResultType
-  url: string
-  documentTitle: string
-  sectionTitle: string
-  snippet: string
-  documentTitleHtml: string
-  sectionTitleHtml: string
-  snippetHtml: string
-  score: number
-}
-
-const typeMeta = CONTENT_SEARCH_SOURCES.reduce(
-  (acc, source) => {
-    acc[source.type] = {
-      label: source.label,
-      icon: source.icon,
-      badge: source.badge,
-    }
-    return acc
-  },
-  {} as Record<ResultType, { label: string, icon: string, badge: string }>,
-)
-
-type SearchSourceWithIndex = ContentSearchSource & { search: SearchSectionsFn }
-
-const searchSources = await Promise.all(
-  CONTENT_SEARCH_SOURCES.map(async (source) => {
-    const { search } = await useContentSearchIndex(source.indexKey)
-    return {
-      ...source,
-      search,
-    }
-  }),
-) as SearchSourceWithIndex[]
-
-const MAX_RESULTS = 30
+const {
+  query,
+  results,
+  groupedResults,
+  suggestions,
+  hasSuggestions,
+  hasResults,
+  hintKeys,
+  isSearching,
+  performSearch,
+  debouncedSearch,
+  typeMeta,
+  toggleTheme,
+  themeIcon,
+  themeLabel,
+} = await useGlobalSearchData()
 
 const isOpen = ref(false)
-const query = ref('')
-const results = ref<GlobalSearchResult[]>([])
 const selectedResult = ref<GlobalSearchResult | null>(null)
-const isSearching = ref(false)
-const inputRef = ref<HTMLInputElement | null>(null)
-
-const hintKeys = computed(() => {
-  if (import.meta.server)
-    return 'Ctrl K'
-
-  return /Mac|iPhone|iPod|iPad/i.test(navigator.userAgent) ? '⌘ K' : 'Ctrl K'
-})
-
-const groupedResults = computed(() => {
-  const bucket: Partial<Record<ResultType, GlobalSearchResult[]>> = {}
-  for (const item of results.value) {
-    if (!bucket[item.type])
-      bucket[item.type] = []
-    bucket[item.type]!.push(item)
-  }
-
-  return CONTENT_SEARCH_SOURCES.map(source => ({
-    key: source.type,
-    label: source.label,
-    items: bucket[source.type] || [],
-  }))
-})
-
-const hasResults = computed(() => results.value.length > 0)
+const inputRef = ref<ComponentPublicInstance | HTMLInputElement | null>(null)
 
 function openModal() {
   isOpen.value = true
@@ -106,92 +39,16 @@ function onInput(event: Event) {
 
 const displayQuery = () => query.value
 
-function escapeHtml(text: string) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
+function focusSearchInput() {
+  nextTick(() => {
+    const element = inputRef.value
 
-function highlightText(text: string, keyword: string) {
-  const safeText = escapeHtml(text)
-  const trimmed = keyword.trim()
-  if (trimmed.length < 2)
-    return safeText
-
-  const escapedKeyword = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const regex = new RegExp(escapedKeyword, 'gi')
-  return safeText.replace(regex, match => `<mark>${match}</mark>`)
-}
-
-function buildSnippet(content: string, keyword: string) {
-  if (!content)
-    return ''
-
-  const lowerContent = content.toLowerCase()
-  const lowerKeyword = keyword.toLowerCase()
-  const index = lowerContent.indexOf(lowerKeyword)
-
-  if (index === -1)
-    return content.length > 140 ? `${content.slice(0, 140)}...` : content
-
-  const start = Math.max(0, index - 40)
-  const end = Math.min(content.length, index + keyword.length + 60)
-
-  let snippet = content.slice(start, end)
-  if (start > 0)
-    snippet = `...${snippet}`
-  if (end < content.length)
-    snippet = `${snippet}...`
-  return snippet
-}
-
-function mapResults(sections: ContentSearchSection[], type: ResultType, keyword: string) {
-  return sections.map((section) => {
-    const documentTitle = section.titles?.[0] || section.title
-    const sectionTitle = section.title
-    const snippet = buildSnippet(section.content || '', keyword)
-
-    return {
-      id: section.id,
-      type,
-      url: section.id,
-      documentTitle,
-      sectionTitle,
-      snippet,
-      documentTitleHtml: highlightText(documentTitle, keyword),
-      sectionTitleHtml: highlightText(sectionTitle, keyword),
-      snippetHtml: highlightText(snippet, keyword),
-      score: section.score || 0,
-    }
+    if (!element)
+      return
+    const target = ('$el' in element ? element.$el : element) as HTMLInputElement | null
+    target?.focus()
   })
 }
-
-function performSearch() {
-  const keyword = query.value.trim()
-  if (!keyword) {
-    results.value = []
-    return
-  }
-
-  isSearching.value = true
-  try {
-    const aggregatedResults = searchSources.flatMap(source =>
-      mapResults(source.search(keyword), source.type, keyword),
-    )
-
-    results.value = aggregatedResults
-      .sort((a, b) => b.score - a.score)
-      .slice(0, MAX_RESULTS)
-  }
-  finally {
-    isSearching.value = false
-  }
-}
-
-const debouncedSearch = useDebounceFn(performSearch, 200)
 
 watch(query, () => {
   if (!isOpen.value)
@@ -201,21 +58,36 @@ watch(query, () => {
 
 watch(isOpen, (value) => {
   if (value) {
-    nextTick(() => inputRef.value?.focus())
+    focusSearchInput()
     if (query.value)
       performSearch()
   }
 })
 
 const router = useRouter()
+const route = useRoute()
+
+function isExternalLink(item: GlobalSearchResult) {
+  return Boolean(item.external) || item.url.startsWith('http') || item.url.startsWith('mailto:')
+}
+
+function isActiveResult(item: GlobalSearchResult) {
+  const normalize = (value: string) => value.replace(/\/$/, '')
+  return normalize(route.fullPath) === normalize(item.url)
+}
+
 watch(selectedResult, async (item) => {
   if (!item)
     return
-  await router.push(item.url)
+
+  if (isExternalLink(item))
+    window.open(item.url, '_blank', 'noopener')
+  else
+    await router.push(item.url)
+
   closeModal()
 })
 
-const route = useRoute()
 watch(() => route.fullPath, () => {
   if (isOpen.value)
     closeModal()
@@ -269,16 +141,84 @@ if (import.meta.client) {
                     ref="inputRef"
                     :display-value="displayQuery"
                     class="flex-1 border-0 bg-transparent text-base text-zinc-800 outline-none dark:text-zinc-50 placeholder:text-zinc-400"
-                    placeholder="Search posts and projects..."
+                    :placeholder="$t('searchModal.placeholder')"
                     @input="onInput"
                   />
+                  <button
+                    type="button"
+                    class="hidden items-center gap-2 border border-zinc-200 rounded-md px-2 py-1 text-xs text-zinc-500 transition md:inline-flex dark:border-slate-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-slate-800"
+                    :aria-label="themeLabel"
+                    @click="toggleTheme"
+                  >
+                    <Icon :name="themeIcon" size="16" />
+                    <span>{{ themeLabel }}</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="inline-flex items-center gap-1 border border-zinc-200 rounded-md px-2 py-1 text-xs text-zinc-500 transition md:hidden dark:border-slate-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-slate-800"
+                    :aria-label="themeLabel"
+                    @click="toggleTheme"
+                  >
+                    <Icon :name="themeIcon" size="16" />
+                    <span class="sr-only">{{ themeLabel }}</span>
+                  </button>
                   <span class="border border-zinc-200 rounded-md px-2 py-1 text-xs text-zinc-500 dark:border-slate-700 dark:text-zinc-300">
                     {{ hintKeys }}
                   </span>
                 </div>
 
                 <div class="max-h-[480px] overflow-y-auto px-2 py-2">
-                  <p v-if="!query" class="px-3 py-6 text-sm text-zinc-400">
+                  <HeadlessComboboxOptions v-if="!query && hasSuggestions" static>
+                    <template v-for="(group, index) in suggestions" :key="group.key">
+                      <div
+                        v-if="group.items.length"
+                        class="py-3"
+                        :class="index < suggestions.length - 1 ? 'border-b border-zinc-100 dark:border-slate-800' : ''"
+                      >
+                        <p class="px-3 py-1 text-xs text-zinc-400 font-semibold tracking-wide uppercase">
+                          {{ group.label }}
+                        </p>
+                        <HeadlessComboboxOption
+                          v-for="item in group.items"
+                          :key="item.id"
+                          v-slot="{ active }"
+                          :value="item"
+                          as="template"
+                        >
+                          <li
+                            class="flex cursor-pointer items-start gap-4 rounded-lg px-2 py-3 text-left transition"
+                            :class="[
+                              active ? 'bg-zinc-50 dark:bg-slate-800/70' : '',
+                              isActiveResult(item) ? 'ring-1 ring-emerald-200 dark:ring-emerald-400/50' : '',
+                            ]"
+                            :aria-current="isActiveResult(item) ? 'true' : undefined"
+                          >
+                            <div class="flex flex-none items-center gap-2 text-xs text-zinc-500 font-medium dark:text-zinc-300">
+                              <Icon :name="item.icon || typeMeta[item.type].icon" size="16" class="text-zinc-400" />
+                              <span class="rounded-full px-2 py-0.5 text-[11px] font-semibold" :class="typeMeta[item.type].badge">
+                                {{ typeMeta[item.type].label }}
+                              </span>
+                            </div>
+                            <div class="flex flex-1 flex-col gap-1 overflow-hidden">
+                              <p class="min-w-0 flex flex-wrap items-center gap-2 text-sm text-zinc-800 font-semibold dark:text-zinc-100">
+                                <span class="truncate" v-html="item.documentTitleHtml" />
+                                <template v-if="item.sectionTitle">
+                                  <span class="text-zinc-300 dark:text-slate-600">›</span>
+                                  <span class="truncate" v-html="item.sectionTitleHtml" />
+                                </template>
+                                <span v-if="isActiveResult(item)" class="text-xs text-emerald-600 font-semibold dark:text-emerald-300">
+                                  {{ $t('searchModal.activePage') }}
+                                </span>
+                              </p>
+                              <p v-if="item.snippet" class="truncate text-xs text-zinc-400 dark:text-zinc-500" v-html="item.snippetHtml" />
+                            </div>
+                          </li>
+                        </HeadlessComboboxOption>
+                      </div>
+                    </template>
+                  </HeadlessComboboxOptions>
+
+                  <p v-else-if="!query" class="px-3 py-6 text-sm text-zinc-400">
                     {{ $t('searchModal.placeholder') }}
                   </p>
 
@@ -305,21 +245,30 @@ if (import.meta.client) {
                         >
                           <li
                             class="flex cursor-pointer items-start gap-4 rounded-lg px-2 py-3 text-left transition"
-                            :class="active ? 'bg-zinc-50 dark:bg-slate-800/70' : ''"
+                            :class="[
+                              active ? 'bg-zinc-50 dark:bg-slate-800/70' : '',
+                              isActiveResult(item) ? 'ring-1 ring-emerald-200 dark:ring-emerald-400/50' : '',
+                            ]"
+                            :aria-current="isActiveResult(item) ? 'true' : undefined"
                           >
                             <div class="flex flex-none items-center gap-2 text-xs text-zinc-500 font-medium dark:text-zinc-300">
-                              <Icon :name="typeMeta[item.type].icon" size="16" class="text-zinc-400" />
+                              <Icon :name="item.icon || typeMeta[item.type].icon" size="16" class="text-zinc-400" />
                               <span class="rounded-full px-2 py-0.5 text-[11px] font-semibold" :class="typeMeta[item.type].badge">
                                 {{ typeMeta[item.type].label }}
                               </span>
                             </div>
                             <div class="flex flex-1 flex-col gap-1 overflow-hidden">
-                              <p class="min-w-0 flex items-center gap-2 text-sm text-zinc-800 font-semibold dark:text-zinc-100">
+                              <p class="min-w-0 flex flex-wrap items-center gap-2 text-sm text-zinc-800 font-semibold dark:text-zinc-100">
                                 <span class="truncate" v-html="item.documentTitleHtml" />
-                                <span class="text-zinc-300 dark:text-slate-600">›</span>
-                                <span class="truncate" v-html="item.sectionTitleHtml" />
+                                <template v-if="item.sectionTitle">
+                                  <span class="text-zinc-300 dark:text-slate-600">›</span>
+                                  <span class="truncate" v-html="item.sectionTitleHtml" />
+                                </template>
+                                <span v-if="isActiveResult(item)" class="text-xs text-emerald-600 font-semibold dark:text-emerald-300">
+                                  {{ $t('searchModal.activePage') }}
+                                </span>
                               </p>
-                              <p class="truncate text-xs text-zinc-400 dark:text-zinc-500" v-html="item.snippetHtml" />
+                              <p v-if="item.snippet" class="truncate text-xs text-zinc-400 dark:text-zinc-500" v-html="item.snippetHtml" />
                             </div>
                           </li>
                         </HeadlessComboboxOption>

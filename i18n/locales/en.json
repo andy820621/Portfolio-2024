@@ -63,6 +63,28 @@
   },
   "searchModal": {
     "placeholder": "Type a command or search…",
-    "noResults": "No results found."
+    "noResults": "No results found.",
+    "activePage": "Current page",
+    "themeLight": "Switch to light mode",
+    "themeDark": "Switch to dark mode",
+    "suggestionTitles": {
+      "navigation": "Start exploring",
+      "actions": "Quick actions"
+    },
+    "navDescriptions": {
+      "home": "Head back to the homepage and latest updates.",
+      "posts": "Browse every blog post and tutorial.",
+      "projects": "See the curated list of highlighted projects.",
+      "demos": "Play with experimental demos and ideas.",
+      "gallery": "View the photography gallery."
+    },
+    "actions": {
+      "contact": "Contact me",
+      "contactDescription": "Send me an email and start a conversation.",
+      "github": "Open GitHub",
+      "githubDescription": "Discover repositories and starred projects.",
+      "instagram": "View Instagram",
+      "instagramDescription": "Follow daily moments outside of code."
+    }
   }
 }

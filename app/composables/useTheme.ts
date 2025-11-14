@@ -2,7 +2,7 @@ export function useTheme() {
   const isDark = useDark()
   const isTransitioning = ref(false)
 
-  async function toggleDark(event: MouseEvent) {
+  async function toggleDark(event?: MouseEvent) {
     if (!import.meta.client)
       return null
 
