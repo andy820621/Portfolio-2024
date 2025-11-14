@@ -7,6 +7,8 @@
     </main>
 
     <Footer />
+
+    <GlobalSearchModal />
   </div>
 </template>
 

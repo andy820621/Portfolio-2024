@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const { t, localePath, formattedData } = await useContentDatas('posts')
 
-const { searchText, selectedTags, filteredData, allTags, clearFilters } = useContentListsFilter(formattedData)
+const { searchText, selectedTags, filteredData, allTags, clearFilters }
+  = useContentListsFilter(formattedData)
 
 const elementPerPage = ref(5)
 const { pageNumber, totalPage, paginatedData, onPreviousPageClick, onNextPageClick }

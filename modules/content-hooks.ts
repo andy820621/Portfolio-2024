@@ -10,8 +10,6 @@ export default defineNuxtModule({
     nuxt.hook('content:file:afterParse', async (ctx: any) => {
       const { file, content } = ctx
 
-      console.warn({ file, content })
-
       // 只處理 markdown 文件
       if (file.extension !== '.md' || (!file.id.startsWith('posts') && !file.id.startsWith('projects')))
         return

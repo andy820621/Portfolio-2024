@@ -1,6 +1,6 @@
 export function useContentListsFilter(formattedData: Ref<FormattedPost[]>) {
-  const searchText = ref('') // 搜索關鍵字
-  const selectedTags = ref<string[]>([]) // 選中的標籤
+  const searchText = ref('')
+  const selectedTags = ref<string[]>([])
   const filteredData = ref<FormattedPost[]>([])
 
   // 獲取所有唯一標籤
@@ -12,21 +12,37 @@ export function useContentListsFilter(formattedData: Ref<FormattedPost[]>) {
     return Array.from(tags)
   })
 
-  const updateFilteredData = useDebounceFn(() => {
+  function updateFilteredData() {
+    const normalizedQuery = searchText.value.trim().toLocaleLowerCase()
+
     filteredData.value = formattedData.value.filter((data) => {
       const lowerTitle = data.title.toLocaleLowerCase()
-      const titleMatch = lowerTitle.includes(searchText.value.toLocaleLowerCase())
-      const tagMatch = selectedTags.value.length === 0
-        || selectedTags.value.every(tag => data.tags.includes(tag))
-      return titleMatch && tagMatch
-    })
-  }, 400)
+      const lowerDescription = data.description.toLocaleLowerCase()
 
-  watch([searchText, selectedTags, formattedData], updateFilteredData, { immediate: true })
+      const tagsMatch = selectedTags.value.length === 0
+        || selectedTags.value.every(tag => data.tags.includes(tag))
+
+      if (!tagsMatch)
+        return false
+
+      if (!normalizedQuery)
+        return true
+
+      return lowerTitle.includes(normalizedQuery)
+        || lowerDescription.includes(normalizedQuery)
+    })
+  }
+
+  const debouncedUpdate = useDebounceFn(updateFilteredData, 300)
+
+  updateFilteredData()
+
+  watch([searchText, selectedTags, formattedData], debouncedUpdate)
 
   function clearFilters() {
     searchText.value = ''
     selectedTags.value = []
+    updateFilteredData()
   }
 
   return {

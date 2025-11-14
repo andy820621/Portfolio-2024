@@ -60,5 +60,9 @@
     "Clear All": "清除全部",
     "Select Tags": "選擇標籤",
     "Search Tags": "搜尋標籤"
+  },
+  "searchModal": {
+    "placeholder": "輸入關鍵字搜尋段落",
+    "noResults": "找不到相符結果"
   }
 }

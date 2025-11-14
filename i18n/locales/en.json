@@ -60,5 +60,9 @@
     "Clear All": "Clear All",
     "Select Tags": "Select Tags",
     "Search Tags": "Search Tags"
+  },
+  "searchModal": {
+    "placeholder": "Type a command or search…",
+    "noResults": "No results found."
   }
 }
