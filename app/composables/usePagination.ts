@@ -1,4 +1,4 @@
-export function usePagination(filteredData: Ref<any[]>, elementPerPage: Ref<number>) {
+export function usePagination(filteredData: Ref<FormattedPost[]>, elementPerPage: Ref<number>) {
   const pageNumber = ref(1)
 
   const totalPage = computed(() => {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Collections } from '@nuxt/content'
-import type { DemoCollectionItem } from '~~/types/main'
+import type { DemoCollectionItem, DemoCollectionsKey } from '~~/types/main'
 import { breakpointsTailwind } from '@vueuse/core'
 
 const { t, locale } = useI18n()
@@ -16,11 +15,9 @@ function formatTitle(fileName: string): string {
     .join(' ')
 }
 
-export type FormattedPost = Awaited<ReturnType<typeof useContentDatas>>['formattedData']['value'][number]
-
 // 查詢 Demos 的邏輯
 const { data: demoItems } = await useAsyncData(`demos-${locale.value}`, async () => {
-  const collection = `demos_${locale.value}` as keyof Pick<Collections, 'demos_en' | 'demos_zh'>
+  const collection = `demos_${locale.value}` as DemoCollectionsKey
 
   const docsQuery = await queryCollection(collection)
     .all()

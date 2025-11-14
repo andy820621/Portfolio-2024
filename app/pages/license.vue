@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Collections } from '@nuxt/content'
+import type { ContentCollectionsKey } from '~~/types/main'
 
 const { locale, localeProperties } = useI18n()
 
@@ -8,7 +8,7 @@ const { data: content, error } = await useAsyncData(
   `license-${locale.value}`,
   async () => {
     try {
-      const collection = (`content_${locale.value}`) as keyof Collections
+      const collection = `content_${locale.value}` as ContentCollectionsKey
 
       const result = await queryCollection(collection)
         .path('/license')

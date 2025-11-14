@@ -10,7 +10,7 @@ interface Props {
   tags?: Array<string>
   published?: boolean
   wordCount?: number
-  readingTime?: ComputedRef<string> | string
+  readingTime?: number
   imageClass?: string
 }
 
@@ -61,7 +61,7 @@ withDefaults(defineProps<Props>(), {
               <Icon name="ri:time-line" />
               <p>{{ wordCount }} {{ $t('words') }} </p>
               <p v-if="readingTime">
-                ({{ readingTime }})
+                ({{ readingTime }} {{ $t('min') }})
               </p>
             </div>
           </div>

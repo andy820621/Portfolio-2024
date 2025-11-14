@@ -1,5 +1,5 @@
-import type { LocaleObject } from '@nuxtjs/i18n'
 /* eslint-disable node/prefer-global/process */
+import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack'
 import { getSitemapDateFormat } from './app/utils/dayjs'
 import { getKeywords, navbarData, seoData } from './data'
@@ -51,6 +51,7 @@ export default defineNuxtConfig({
     payloadExtraction: true,
   },
   modules: [
+    '~~/modules/content-hooks',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@nuxtjs/seo',
@@ -79,6 +80,7 @@ export default defineNuxtConfig({
         'element-permitted-content': 'off', // Allow style tags in code blocks
         'no-implicit-close': 'off', // Allow implicit closing of elements
         'close-order': 'off', // Allow flexible tag closing order
+        'no-redundant-aria-label': 'off',
       },
     },
   },

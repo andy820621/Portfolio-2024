@@ -1,8 +1,8 @@
-import type { Collections } from '@nuxt/content'
+import type { BasePostCollectionsKey } from '~~/types/main'
 
 interface UsePostDataOptions {
-  basePageName: string // 如 'posts' 或 'projects'
-  paramName: string // 路由參數名稱，如 'post' 或 'project'
+  basePageName: 'posts' | 'projects'
+  paramName: 'post' | 'project'
 }
 
 export async function useContentData({ basePageName, paramName }: UsePostDataOptions) {
@@ -12,7 +12,7 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
 
   const contentPath = route.params[paramName]
   // 根據當前語言和基礎頁面名稱選擇正確的集合
-  const collection = (`${basePageName}_${locale.value}`) as keyof Collections
+  const collection = (`${basePageName}_${locale.value}`) as BasePostCollectionsKey
 
   const fullPath = trailingSlashUrlOrNot(
     localePath(`/${basePageName}/${contentPath}`),

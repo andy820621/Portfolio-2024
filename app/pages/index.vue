@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Collections } from '@nuxt/content'
+import type { ContentCollectionsKey } from '~~/types/main'
 import ProseTh from '~/components/content/ProseTh.vue'
 
 const { t, locale, localeProperties } = useI18n()
@@ -9,7 +9,7 @@ const { data: content, error } = await useAsyncData(
   `content-${locale.value}`,
   async () => {
     try {
-      const collection = (`content_${locale.value}`) as keyof Collections
+      const collection = `content_${locale.value}` as ContentCollectionsKey
 
       const result = await queryCollection(collection)
         .path('/about')

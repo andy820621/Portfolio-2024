@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { AllCollectionItem, ContentDetailDataReturn } from '~~/types/main'
 import ProseTh from './content/ProseTh.vue'
 
 const { contenDetailData, redirectLink = '/posts' } = defineProps<{
-  contenDetailData: ContentDetailDataReturn<AllCollectionItem>
+  contenDetailData: ContentDetailData
   redirectLink?: string
 }>()
 

@@ -1,4 +1,4 @@
-import type { Collections } from '@nuxt/content'
+import type { BasePostCollectionsKey } from '~~/types/main'
 
 export type FormattedPost = Awaited<ReturnType<typeof useContentDatas>>['formattedData']['value'][number]
 
@@ -7,7 +7,7 @@ export async function useContentDatas(folderName = 'projects') {
   const localePath = useLocalePath()
 
   // 根據當前語言選擇正確的集合
-  const collection = `${folderName}_${locale.value}` as keyof Pick<Collections, 'projects_en' | 'projects_zh' | 'posts_en' | 'posts_zh'>
+  const collection = `${folderName}_${locale.value}` as BasePostCollectionsKey
 
   const { data: contentDatas, error } = await useAsyncData(
     `list-${folderName}-${locale.value}`,
@@ -27,20 +27,14 @@ export async function useContentDatas(folderName = 'projects') {
             'date',
             'tags',
             'published',
-            'body',
             'imageClass',
+            'wordCount',
+            'readingTime',
           )
           .order('date', 'DESC')
           .all()
 
-        return contents.map((content) => {
-          const wordCount = content.body ? countWords(content.body) : 0
-          return {
-            ...content,
-            wordCount,
-            readingTime: useEstimateReadingTime(wordCount, t),
-          }
-        })
+        return contents
       }
       catch (e) {
         console.error(`Error fetching ${folderName}:`, e)

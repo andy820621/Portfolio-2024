@@ -8,7 +8,7 @@ interface Props {
   date?: string
   tags?: Array<string>
   wordCount?: number
-  readingTime?: ComputedRef<string> | string
+  readingTime?: number
   imageClass?: string
 }
 
@@ -54,10 +54,10 @@ const {
           <div v-if="wordCount" class="mr-1 flex flex-wrap items-center gap-1">
             <Icon name="ph:read-cv-logo" />
             <p class="m-0!">
-              {{ wordCount }} words
+              {{ wordCount }} {{ $t('words') }}
             </p>
             <p v-if="readingTime" class="m-0!">
-              ({{ readingTime }})
+              ({{ readingTime }} {{ $t('min') }})
             </p>
           </div>
         </div>

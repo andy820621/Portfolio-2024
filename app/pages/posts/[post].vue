@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { AllCollectionItem } from '~~/types/main'
-
 // 獲取內容數據
 const paramName = 'post'
 const { contentData, error } = await useContentData({
@@ -18,7 +16,7 @@ if (error.value || !contentData.value) {
   })
 }
 
-const contenDetailData = useContentDetailData<AllCollectionItem>(contentData)
+const contenDetailData = useContentDetailData(contentData)
 const { mainData } = contenDetailData
 
 const { localeProperties } = useI18n()

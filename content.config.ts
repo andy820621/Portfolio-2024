@@ -26,6 +26,8 @@ const articleSchema = z.object({
   rawbody: z.string(),
   imageClass: z.string().optional(),
   keywords: z.array(z.string()).optional(),
+  wordCount: z.number().optional(),
+  readingTime: z.number().optional(),
 })
 
 // projects 內容模式
@@ -43,6 +45,8 @@ const projectSchema = z.object({
   rawbody: z.string(),
   imageClass: z.string().optional(),
   keywords: z.array(z.string()).optional(),
+  wordCount: z.number().optional(),
+  readingTime: z.number().optional(),
 })
 
 // demos 內容模式
