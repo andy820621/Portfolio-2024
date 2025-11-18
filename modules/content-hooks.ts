@@ -25,10 +25,10 @@ export default defineNuxtModule({
       content.wordCount = wordCount
       content.readingTime = readingTime
 
-      console.warn({
-        filePath: file.id,
-        content,
-      })
+      // console.warn({
+      //   filePath: file.id,
+      //   content,
+      // })
     })
   },
 })
