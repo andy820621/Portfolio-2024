@@ -13,9 +13,6 @@ const {
   performSearch,
   debouncedSearch,
   typeMeta,
-  toggleTheme,
-  themeIcon,
-  themeLabel,
 } = await useGlobalSearchData()
 
 const isOpen = ref(false)
@@ -71,7 +68,7 @@ function isExternalLink(item: GlobalSearchResult) {
   return Boolean(item.external) || item.url.startsWith('http') || item.url.startsWith('mailto:')
 }
 
-function isActiveResult(item: GlobalSearchResult) {
+function isNowPageItem(item: GlobalSearchResult) {
   const normalize = (value: string) => value.replace(/\/$/, '')
   return normalize(route.fullPath) === normalize(item.url)
 }
@@ -79,6 +76,14 @@ function isActiveResult(item: GlobalSearchResult) {
 watch(selectedResult, async (item) => {
   if (!item)
     return
+
+  if (item.onSelect) {
+    await item.onSelect()
+    selectedResult.value = null
+    if (item.closeOnSelect !== false)
+      closeModal()
+    return
+  }
 
   if (isExternalLink(item))
     window.open(item.url, '_blank', 'noopener')
@@ -144,38 +149,21 @@ if (import.meta.client) {
                     :placeholder="$t('searchModal.placeholder')"
                     @input="onInput"
                   />
-                  <button
-                    type="button"
-                    class="hidden items-center gap-2 border border-zinc-200 rounded-md px-2 py-1 text-xs text-zinc-500 transition md:inline-flex dark:border-slate-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-slate-800"
-                    :aria-label="themeLabel"
-                    @click="toggleTheme"
-                  >
-                    <Icon :name="themeIcon" size="16" />
-                    <span>{{ themeLabel }}</span>
-                  </button>
-                  <button
-                    type="button"
-                    class="inline-flex items-center gap-1 border border-zinc-200 rounded-md px-2 py-1 text-xs text-zinc-500 transition md:hidden dark:border-slate-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-slate-800"
-                    :aria-label="themeLabel"
-                    @click="toggleTheme"
-                  >
-                    <Icon :name="themeIcon" size="16" />
-                    <span class="sr-only">{{ themeLabel }}</span>
-                  </button>
                   <span class="border border-zinc-200 rounded-md px-2 py-1 text-xs text-zinc-500 dark:border-slate-700 dark:text-zinc-300">
                     {{ hintKeys }}
                   </span>
                 </div>
 
-                <div class="max-h-[480px] overflow-y-auto px-2 py-2">
-                  <HeadlessComboboxOptions v-if="!query && hasSuggestions" static>
+                <div class="max-h-[480px] overflow-y-auto scroll-smooth px-2 py-2">
+                  <!-- 建議列表（無搜尋時） -->
+                  <HeadlessComboboxOptions v-if="!query && hasSuggestions" hold static>
                     <template v-for="(group, index) in suggestions" :key="group.key">
                       <div
                         v-if="group.items.length"
                         class="py-3"
                         :class="index < suggestions.length - 1 ? 'border-b border-zinc-100 dark:border-slate-800' : ''"
                       >
-                        <p class="px-3 py-1 text-xs text-zinc-400 font-semibold tracking-wide uppercase">
+                        <p class="px-3 pb-3 pt-1 text-xs text-zinc-400 font-semibold tracking-wide uppercase">
                           {{ group.label }}
                         </p>
                         <HeadlessComboboxOption
@@ -186,12 +174,12 @@ if (import.meta.client) {
                           as="template"
                         >
                           <li
-                            class="flex cursor-pointer items-start gap-4 rounded-lg px-2 py-3 text-left transition"
+                            class="flex cursor-pointer items-start gap-4 rounded-lg px-2 py-3 text-left"
                             :class="[
                               active ? 'bg-zinc-50 dark:bg-slate-800/70' : '',
-                              isActiveResult(item) ? 'ring-1 ring-emerald-200 dark:ring-emerald-400/50' : '',
+                              isNowPageItem(item) ? 'outline outline-1 outline-emerald-200 dark:outline-emerald-400/50' : '',
                             ]"
-                            :aria-current="isActiveResult(item) ? 'true' : undefined"
+                            :aria-current="isNowPageItem(item) ? 'true' : undefined"
                           >
                             <div class="flex flex-none items-center gap-2 text-xs text-zinc-500 font-medium dark:text-zinc-300">
                               <Icon :name="item.icon || typeMeta[item.type].icon" size="16" class="text-zinc-400" />
@@ -206,7 +194,7 @@ if (import.meta.client) {
                                   <span class="text-zinc-300 dark:text-slate-600">›</span>
                                   <span class="truncate" v-html="item.sectionTitleHtml" />
                                 </template>
-                                <span v-if="isActiveResult(item)" class="text-xs text-emerald-600 font-semibold dark:text-emerald-300">
+                                <span v-if="isNowPageItem(item)" class="text-xs text-emerald-600 font-semibold dark:text-emerald-300">
                                   {{ $t('searchModal.activePage') }}
                                 </span>
                               </p>
@@ -218,22 +206,25 @@ if (import.meta.client) {
                     </template>
                   </HeadlessComboboxOptions>
 
+                  <!-- 空狀態 -->
                   <p v-else-if="!query" class="px-3 py-6 text-sm text-zinc-400">
                     {{ $t('searchModal.placeholder') }}
                   </p>
 
+                  <!-- 無結果 -->
                   <p v-else-if="!hasResults && !isSearching" class="px-3 py-6 text-sm text-zinc-400">
                     {{ $t('searchModal.noResults') }}
                   </p>
 
-                  <HeadlessComboboxOptions v-else static>
+                  <!-- 搜尋結果 -->
+                  <HeadlessComboboxOptions v-else hold static>
                     <template v-for="(group, index) in groupedResults" :key="group.key">
                       <div
                         v-if="group.items.length"
                         class="py-3"
                         :class="index < groupedResults.length - 1 ? 'border-b border-zinc-100 dark:border-slate-800' : ''"
                       >
-                        <p class="px-3 py-1 text-xs text-zinc-400 font-semibold tracking-wide uppercase">
+                        <p class="px-3 pb-3 pt-1 text-xs text-zinc-400 font-semibold tracking-wide uppercase">
                           {{ group.label }}
                         </p>
                         <HeadlessComboboxOption
@@ -244,12 +235,12 @@ if (import.meta.client) {
                           as="template"
                         >
                           <li
-                            class="flex cursor-pointer items-start gap-4 rounded-lg px-2 py-3 text-left transition"
+                            class="flex cursor-pointer items-start gap-4 rounded-lg px-2 py-3 text-left"
                             :class="[
                               active ? 'bg-zinc-50 dark:bg-slate-800/70' : '',
-                              isActiveResult(item) ? 'ring-1 ring-emerald-200 dark:ring-emerald-400/50' : '',
+                              isNowPageItem(item) ? 'outline outline-1 outline-emerald-200 dark:outline-emerald-400/50' : '',
                             ]"
-                            :aria-current="isActiveResult(item) ? 'true' : undefined"
+                            :aria-current="isNowPageItem(item) ? 'true' : undefined"
                           >
                             <div class="flex flex-none items-center gap-2 text-xs text-zinc-500 font-medium dark:text-zinc-300">
                               <Icon :name="item.icon || typeMeta[item.type].icon" size="16" class="text-zinc-400" />
@@ -264,7 +255,7 @@ if (import.meta.client) {
                                   <span class="text-zinc-300 dark:text-slate-600">›</span>
                                   <span class="truncate" v-html="item.sectionTitleHtml" />
                                 </template>
-                                <span v-if="isActiveResult(item)" class="text-xs text-emerald-600 font-semibold dark:text-emerald-300">
+                                <span v-if="isNowPageItem(item)" class="text-xs text-emerald-600 font-semibold dark:text-emerald-300">
                                   {{ $t('searchModal.activePage') }}
                                 </span>
                               </p>

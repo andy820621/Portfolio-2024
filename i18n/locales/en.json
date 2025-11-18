@@ -62,29 +62,36 @@
     "Search Tags": "Search Tags"
   },
   "searchModal": {
-    "placeholder": "Type a command or search…",
-    "noResults": "No results found.",
+    "placeholder": "Search articles by keywords",
+    "noResults": "No results found",
     "activePage": "Current page",
     "themeLight": "Switch to light mode",
     "themeDark": "Switch to dark mode",
+    "localeNames": {
+      "en": "English",
+      "zh": "Chinese"
+    },
     "suggestionTitles": {
-      "navigation": "Start exploring",
-      "actions": "Quick actions"
+      "navigation": "Quick Navigation",
+      "actions": "Quick Actions"
     },
     "navDescriptions": {
-      "home": "Head back to the homepage and latest updates.",
-      "posts": "Browse every blog post and tutorial.",
-      "projects": "See the curated list of highlighted projects.",
-      "demos": "Play with experimental demos and ideas.",
-      "gallery": "View the photography gallery."
+      "home": "Go to home page.",
+      "posts": "Go to blog list.",
+      "projects": "Go to projects and portfolio.",
+      "demos": "Explore more experimental and interesting projects.",
+      "gallery": "Learn more about me through my photography."
     },
     "actions": {
-      "contact": "Contact me",
-      "contactDescription": "Send me an email and start a conversation.",
+      "contact": "Open Email",
+      "contactDescription": "Send me an email, and I'll get back to you as soon as possible.",
       "github": "Open GitHub",
-      "githubDescription": "Discover repositories and starred projects.",
-      "instagram": "View Instagram",
-      "instagramDescription": "Follow daily moments outside of code."
+      "githubDescription": "Explore more of my personal projects.",
+      "instagram": "Visit Instagram",
+      "instagramDescription": "If you'd like to learn more about my daily life, visit my Instagram.",
+      "themeDescription": "Toggle between light and dark mode instantly.",
+      "language": "Switch to {language}",
+      "languageDescription": "Change the site language to {language}."
     }
   }
 }

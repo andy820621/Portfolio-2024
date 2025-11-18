@@ -60,7 +60,3 @@ sitemap:
 | 前端 | - 框架：Vue 3<br>- UI庫：Quasar<br>- 編程語言：TypeScript<br>- 特殊功能：PWA（iOS推播支持）|
 | 後端 | - 開發框架：.NET Core <br>- 工作流引擎：WorkflowCore <br>- 通訊協議：WebSocket <br>- 跨平台通知：多通道整合 |
 <!-- prettier-ignore-end -->
-
-## 結語
-
-因為考慮到商業機密考量，無法展示完整的系統網頁，但我有做一個可以簡單的展示部分功能的 [Demo](https://metc.netlify.app/){target="\_blank" rel="noopener"}，如果有興趣的可以看看 。

@@ -68,7 +68,3 @@ During routine fire team training or actual emergencies, the disaster prevention
 | Frontend | - Framework: Vue 3<br>- UI Library: Quasar<br>- Programming Language: TypeScript<br>- Special Feature: PWA (iOS Push Notification Support) |
 | Backend | - Development Framework: .NET Core<br>- Workflow Engine: WorkflowCore<br>- Communication Protocol: WebSocket<br>- Cross-platform Notification: Multi-channel Integration |
 <!-- prettier-ignore-end -->
-
-## Conclusion
-
-Due to business confidentiality considerations, I cannot display the complete system webpage. However, I have created a [Demo](https://metc.netlify.app/){target="\_blank" rel="noopener"} that showcases some basic functionalities for those interested.
