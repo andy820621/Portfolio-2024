@@ -2,6 +2,7 @@
 const colorMode = useColorMode()
 const { $mermaid } = useNuxtApp()
 const mermaidContainer = ref<HTMLDivElement | null>(null)
+const isMounted = ref(false)
 const hasRenderedOnce = ref(false) // Track the initial render
 let mermaidDefinition = ''
 let observer: IntersectionObserver | null = null
@@ -61,7 +62,7 @@ async function renderMermaid() {
   }
 }
 
-onMounted(() => {
+function setupMermaidContainer() {
   if (mermaidContainer.value) {
     // Extract content from <code> or <pre> tags (Nuxt Content wraps ``` blocks in these)
     const pre = mermaidContainer.value.querySelector('pre')
@@ -97,6 +98,12 @@ onMounted(() => {
 
     observer.observe(mermaidContainer.value)
   }
+}
+
+onMounted(async () => {
+  isMounted.value = true
+  await nextTick()
+  setupMermaidContainer()
 })
 
 // Clean up the observer when the component is unmounted
@@ -115,16 +122,16 @@ watch(mermaidTheme, () => {
 </script>
 
 <template>
-  <ClientOnly>
-    <div ref="mermaidContainer" class="mermaid">
-      <slot />
-    </div>
-    <template #fallback>
-      <div class="mermaid">
-        <slot />
-      </div>
-    </template>
-  </ClientOnly>
+  <div
+    v-if="isMounted"
+    ref="mermaidContainer"
+    class="mermaid"
+  >
+    <slot />
+  </div>
+  <div v-else class="mermaid">
+    <slot />
+  </div>
 </template>
 
 <style lang="scss">
