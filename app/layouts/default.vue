@@ -8,7 +8,7 @@
 
     <Footer />
 
-    <GlobalSearchModal />
+    <LazyGlobalSearchModal />
   </div>
 </template>
 

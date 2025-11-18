@@ -115,9 +115,16 @@ watch(mermaidTheme, () => {
 </script>
 
 <template>
-  <div ref="mermaidContainer" class="mermaid">
-    <slot />
-  </div>
+  <ClientOnly>
+    <div ref="mermaidContainer" class="mermaid">
+      <slot />
+    </div>
+    <template #fallback>
+      <div class="mermaid">
+        <slot />
+      </div>
+    </template>
+  </ClientOnly>
 </template>
 
 <style lang="scss">
