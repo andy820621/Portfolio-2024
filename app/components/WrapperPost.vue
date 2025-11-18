@@ -33,6 +33,10 @@ const data = computed(() => ({
 useContentSEO(data)
 
 const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
+
+const { fullPath } = useUrl()
+// SocialShare 預設會讀取 route.fullPath（含 hash），手動給定無 hash 的 canonical URL 避免水合差異
+const shareUrl = computed(() => fullPath.value)
 </script>
 
 <template>
@@ -83,6 +87,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
             v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
             :key="network"
             :network="network"
+            :url="shareUrl"
             :styled="true"
             :label="true"
             class="p-1 text-slate-300"
