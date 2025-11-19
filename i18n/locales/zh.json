@@ -67,24 +67,31 @@
     "activePage": "目前頁面",
     "themeLight": "切換為淺色模式",
     "themeDark": "切換為深色模式",
+    "localeNames": {
+      "en": "英文",
+      "zh": "繁體中文"
+    },
     "suggestionTitles": {
       "navigation": "快速導覽",
       "actions": "快速操作"
     },
     "navDescriptions": {
-      "home": "回到首頁，查看最新動態。",
-      "posts": "瀏覽所有文章與教學。",
-      "projects": "查看精選專案與作品。",
-      "demos": "體驗實驗性與有趣的小作品。",
-      "gallery": "欣賞生活中的攝影作品。"
+      "home": "前往首頁。",
+      "posts": "前往部落格列表頁。",
+      "projects": "前往專案與作品集列表。",
+      "demos": "看更多我的實驗性與有趣的小作品。",
+      "gallery": "透過我的攝影更加了解我。"
     },
     "actions": {
-      "contact": "聯絡我",
-      "contactDescription": "寄信給我，開啟新的對話。",
+      "contact": "開啟郵件",
+      "contactDescription": "開啟郵件與我聯絡，我會儘快與您聯繫。",
       "github": "開啟 GitHub",
-      "githubDescription": "查看程式碼與星標專案。",
+      "githubDescription": "探索更多我個人的專案。",
       "instagram": "前往 Instagram",
-      "instagramDescription": "追蹤程式之外的日常紀錄。"
+      "instagramDescription": "如果想了解更多關於我的日常生活，請前往我的 Instagram。",
+      "themeDescription": "直接在這裡切換深淺色模式。",
+      "language": "切換為{language}",
+      "languageDescription": "立即將網站語言切換成{language}。"
     }
   }
 }

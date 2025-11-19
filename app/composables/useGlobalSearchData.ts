@@ -51,6 +51,26 @@ const NAV_LINKS_CONFIG = [
   },
 ] as const
 
+interface QuickActionConfig {
+  id: string
+  url: string
+  labelKey: string
+  descriptionKey: string
+  icon: string
+  external?: boolean
+}
+
+interface QuickActionItem {
+  id: string
+  url: string
+  title: string
+  description: string
+  icon: string
+  external?: boolean
+  onSelect?: () => void | Promise<void>
+  closeOnSelect?: boolean
+}
+
 const QUICK_ACTIONS_CONFIG = [
   {
     id: 'contact',
@@ -76,9 +96,9 @@ const QUICK_ACTIONS_CONFIG = [
     icon: 'ri:instagram-line',
     external: true,
   },
-] as const
+] satisfies QuickActionConfig[]
 
-export type ResultType = 'post' | 'project' | 'nav' | 'link'
+export type ResultType = 'post' | 'project' | 'nav' | 'action'
 
 export interface GlobalSearchResult {
   id: string
@@ -93,6 +113,8 @@ export interface GlobalSearchResult {
   score: number
   icon?: string
   external?: boolean
+  onSelect?: () => void | Promise<void>
+  closeOnSelect?: boolean
 }
 
 export interface SearchSuggestionGroup {
@@ -101,7 +123,7 @@ export interface SearchSuggestionGroup {
   items: GlobalSearchResult[]
 }
 
-const RESULT_GROUP_ORDER: ResultType[] = ['post', 'project', 'nav', 'link']
+const RESULT_GROUP_ORDER: ResultType[] = ['post', 'project', 'nav', 'action']
 
 const TYPE_META: Record<ResultType, { label: string, icon: string, badge: string }> = {
   post: {
@@ -119,9 +141,9 @@ const TYPE_META: Record<ResultType, { label: string, icon: string, badge: string
     icon: 'ri:compass-3-line',
     badge: 'bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-200',
   },
-  link: {
-    label: 'Links',
-    icon: 'ri:external-link-line',
+  action: {
+    label: 'Quick Actions',
+    icon: 'ri:flashlight-line',
     badge: 'bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-500/20 dark:text-fuchsia-200',
   },
 }
@@ -136,6 +158,8 @@ interface ResultPayload {
   score?: number
   icon?: string
   external?: boolean
+  onSelect?: () => void | Promise<void>
+  closeOnSelect?: boolean
 }
 
 function escapeHtml(text: string) {
@@ -197,6 +221,8 @@ function createResultPayload(payload: ResultPayload, keyword: string): GlobalSea
     score: payload.score ?? 0,
     icon: payload.icon,
     external: payload.external,
+    onSelect: payload.onSelect,
+    closeOnSelect: payload.closeOnSelect,
   }
 }
 
@@ -219,13 +245,32 @@ function mapContentSections(sections: ContentSearchSection[], type: ResultType, 
 }
 
 export async function useGlobalSearchData() {
-  const { t } = useI18n()
+  const { t, locale, locales, setLocale } = useI18n()
   const localePath = useLocalePath()
   const { isDark: isDarkMode, toggleDark } = useTheme()
 
   const query = ref('')
   const results = ref<GlobalSearchResult[]>([])
   const isSearching = ref(false)
+
+  const themeIcon = computed(() => (isDarkMode.value ? 'ri:sun-line' : 'ri:moon-line'))
+  const themeLabel = computed(() => (isDarkMode.value ? t('searchModal.themeLight') : t('searchModal.themeDark')))
+  const toggleTheme = (event?: MouseEvent) => {
+    toggleDark(event)
+  }
+
+  const nextLocale = computed(() => {
+    const localeList = unref(locales) ?? []
+    if (!Array.isArray(localeList) || localeList.length <= 1)
+      return null
+
+    const currentIndex = localeList.findIndex(loc => loc.code === locale.value)
+    if (currentIndex === -1)
+      return localeList[0]
+
+    const nextIndex = (currentIndex + 1) % localeList.length
+    return localeList[nextIndex]
+  })
 
   const navLinks = computed(() =>
     NAV_LINKS_CONFIG.map((item) => {
@@ -239,13 +284,48 @@ export async function useGlobalSearchData() {
     }),
   )
 
-  const quickActions = computed(() =>
-    QUICK_ACTIONS_CONFIG.map(action => ({
-      ...action,
+  const quickActions = computed<QuickActionItem[]>(() => {
+    const actions: QuickActionItem[] = [
+      {
+        id: 'toggle-theme',
+        url: 'action:toggle-theme',
+        title: themeLabel.value,
+        description: t('searchModal.actions.themeDescription'),
+        icon: themeIcon.value,
+        onSelect: () => toggleTheme(),
+        closeOnSelect: false,
+      },
+    ]
+
+    const targetLocale = nextLocale.value
+    if (targetLocale) {
+      const localeLabelKey = `searchModal.localeNames.${targetLocale.code}`
+      let localeLabel = t(localeLabelKey)
+      if (!localeLabel || localeLabel === localeLabelKey)
+        localeLabel = targetLocale.name || targetLocale.code.toUpperCase()
+
+      actions.push({
+        id: `switch-locale-${targetLocale.code}`,
+        url: `action:switch-locale:${targetLocale.code}`,
+        title: t('searchModal.actions.language', { language: localeLabel }),
+        description: t('searchModal.actions.languageDescription', { language: localeLabel }),
+        icon: 'material-symbols:translate-rounded',
+        onSelect: () => setLocale(targetLocale.code),
+        closeOnSelect: true,
+      })
+    }
+
+    const staticActions = QUICK_ACTIONS_CONFIG.map(action => ({
+      id: action.id,
+      url: action.url,
       title: t(action.labelKey),
       description: t(action.descriptionKey),
-    })),
-  )
+      icon: action.icon,
+      external: action.external,
+    }))
+
+    return [...actions, ...staticActions]
+  })
 
   interface SearchSource {
     type: ResultType
@@ -266,8 +346,14 @@ export async function useGlobalSearchData() {
     type: 'nav',
     search: (keyword: string) => {
       const term = keyword.toLowerCase()
+      const typeLabel = TYPE_META.nav.label.toLowerCase()
+      const matchesTypeLabel = typeLabel.includes(term)
       return navLinks.value
-        .filter(link => link.title.toLowerCase().includes(term) || link.description.toLowerCase().includes(term))
+        .filter((link) => {
+          if (matchesTypeLabel)
+            return true
+          return link.title.toLowerCase().includes(term) || link.description.toLowerCase().includes(term)
+        })
         .map(link => createResultPayload({
           id: `nav-${link.id}`,
           type: 'nav',
@@ -282,14 +368,20 @@ export async function useGlobalSearchData() {
   }
 
   const actionSearchSource: SearchSource = {
-    type: 'link',
+    type: 'action',
     search: (keyword: string) => {
       const term = keyword.toLowerCase()
+      const typeLabel = TYPE_META.action.label.toLowerCase()
+      const matchesTypeLabel = typeLabel.includes(term)
       return quickActions.value
-        .filter(action => action.title.toLowerCase().includes(term) || action.description.toLowerCase().includes(term))
+        .filter((action) => {
+          if (matchesTypeLabel)
+            return true
+          return action.title.toLowerCase().includes(term) || action.description.toLowerCase().includes(term)
+        })
         .map(action => createResultPayload({
           id: `action-${action.id}`,
-          type: 'link',
+          type: 'action',
           url: action.url,
           documentTitle: action.title,
           sectionTitle: t('searchModal.suggestionTitles.actions'),
@@ -297,6 +389,8 @@ export async function useGlobalSearchData() {
           score: 90,
           icon: action.icon,
           external: action.external,
+          onSelect: action.onSelect,
+          closeOnSelect: action.closeOnSelect,
         }, keyword))
     },
   }
@@ -345,13 +439,15 @@ export async function useGlobalSearchData() {
 
     const actionItems = quickActions.value.map(action => createResultPayload({
       id: `suggestion-action-${action.id}`,
-      type: 'link',
+      type: 'action',
       url: action.url,
       documentTitle: action.title,
       sectionTitle: t('searchModal.suggestionTitles.actions'),
       snippet: action.description,
       icon: action.icon,
       external: action.external,
+      onSelect: action.onSelect,
+      closeOnSelect: action.closeOnSelect,
     }, ''))
 
     return [
@@ -378,12 +474,6 @@ export async function useGlobalSearchData() {
     return /Mac|iPhone|iPod|iPad/i.test(navigator.userAgent) ? '⌘ K' : 'Ctrl K'
   })
 
-  const themeIcon = computed(() => (isDarkMode.value ? 'ri:sun-line' : 'ri:moon-line'))
-  const themeLabel = computed(() => (isDarkMode.value ? t('searchModal.themeLight') : t('searchModal.themeDark')))
-  const toggleTheme = (event?: MouseEvent) => {
-    toggleDark(event)
-  }
-
   return {
     query,
     results,
@@ -396,8 +486,5 @@ export async function useGlobalSearchData() {
     performSearch,
     debouncedSearch,
     typeMeta: TYPE_META,
-    toggleTheme,
-    themeIcon,
-    themeLabel,
   }
 }
