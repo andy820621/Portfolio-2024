@@ -2,10 +2,12 @@
 import type { Locale } from 'vue-i18n'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 
-const { locale, locales, setLocale } = useI18n()
+const { locale, locales, setLocale, setLocaleCookie } = useI18n()
 
-function handleLocaleChange(newLocale: Locale) {
-  setLocale(newLocale)
+async function handleLocaleChange(newLocale: Locale) {
+  await setLocale(newLocale)
+  // 確保偵測用 cookie 與當前語系一致，避免刷新後被舊值導回
+  setLocaleCookie(newLocale)
 }
 </script>
 

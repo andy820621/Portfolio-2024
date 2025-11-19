@@ -268,9 +268,9 @@ export default defineNuxtConfig({
       // 僅在根路徑觸發語系導向
       redirectOn: 'root',
       fallbackLocale: 'en',
-      // trying...
       alwaysRedirect: false,
-      cookieCrossOrigin: true,
+      // 僅在正式環境(HTTPS)啟用跨域 cookie，避免在本地/preview(HTTP) 寫入失敗
+      cookieCrossOrigin: process.env.NODE_ENV === 'production',
     },
   },
   unocss: {

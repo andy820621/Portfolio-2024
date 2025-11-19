@@ -245,7 +245,7 @@ function mapContentSections(sections: ContentSearchSection[], type: ResultType, 
 }
 
 export async function useGlobalSearchData() {
-  const { t, locale, locales, setLocale } = useI18n()
+  const { t, locale, locales, setLocale, setLocaleCookie } = useI18n()
   const localePath = useLocalePath()
   const { isDark: isDarkMode, toggleDark } = useTheme()
 
@@ -310,7 +310,10 @@ export async function useGlobalSearchData() {
         title: t('searchModal.actions.language', { language: localeLabel }),
         description: t('searchModal.actions.languageDescription', { language: localeLabel }),
         icon: 'material-symbols:translate-rounded',
-        onSelect: () => setLocale(targetLocale.code),
+        onSelect: async () => {
+          await setLocale(targetLocale.code)
+          setLocaleCookie(targetLocale.code)
+        },
         closeOnSelect: true,
       })
     }
