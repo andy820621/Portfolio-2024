@@ -7,6 +7,7 @@ const { contenDetailData, redirectLink = '/posts' } = defineProps<{
 }>()
 
 const localePath = useLocalePath()
+const route = useRoute()
 
 // 使用拆分後的 composables
 const { mainData, prevContent, nextContent } = contenDetailData
@@ -35,6 +36,42 @@ useContentSEO(data)
 const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 
 const { fullPath } = useUrl()
+
+if (import.meta.client) {
+  const HASH_OFFSET = 100
+
+  async function scrollToHash(hash: string, attempt = 0) {
+    await nextTick()
+    const target = document.querySelector(hash)
+
+    if (!target) {
+      if (attempt < 5)
+        setTimeout(() => scrollToHash(hash, attempt + 1), 100)
+      return
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - HASH_OFFSET
+    window.scrollTo({ top, behavior: 'smooth' })
+  }
+
+  const handleHashNavigation = (hash?: string | null) => {
+    if (!hash || !mainData.value)
+      return
+    scrollToHash(hash)
+  }
+
+  watch(
+    () => mainData.value,
+    () => handleHashNavigation(route.hash),
+    { flush: 'post', immediate: true },
+  )
+
+  watch(
+    () => route.hash,
+    hash => handleHashNavigation(hash),
+    { flush: 'post', immediate: true },
+  )
+}
 </script>
 
 <template>
