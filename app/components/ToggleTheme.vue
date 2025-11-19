@@ -21,34 +21,36 @@ const buttonTitle = computed(() => {
       aria-label="Toggle Color Scheme"
       @click="toggleDark"
     >
-      <span class="icon-container">
-        <!-- 暗色模式圖標 -->
-        <template v-if="isDark">
-          <Icon
-            name="i-line-md-moon"
-            class="icon icon-static"
-            :class="[{ 'icon-hide': isTransitioning }]"
-          />
-          <Icon
-            name="i-line-md-moon-twotone"
-            class="icon icon-animated"
-            :class="[{ 'icon-show': isTransitioning }]"
-          />
-        </template>
-        <!-- 亮色模式圖標 -->
-        <template v-else>
-          <Icon
-            name="i-line-md-sunny-outline"
-            class="icon icon-static"
-            :class="[{ 'icon-hide': isTransitioning }]"
-          />
-          <Icon
-            name="i-line-md-sunny-outline-twotone-loop"
-            class="icon icon-animated"
-            :class="[{ 'icon-show': isTransitioning }]"
-          />
-        </template>
-      </span>
+      <MyTooltip :text="buttonTitle">
+        <span class="icon-container">
+          <!-- 暗色模式圖標 -->
+          <template v-if="isDark">
+            <Icon
+              name="i-line-md-moon"
+              class="icon icon-static"
+              :class="[{ 'icon-hide': isTransitioning }]"
+            />
+            <Icon
+              name="i-line-md-moon-twotone"
+              class="icon icon-animated"
+              :class="[{ 'icon-show': isTransitioning }]"
+            />
+          </template>
+          <!-- 亮色模式圖標 -->
+          <template v-else>
+            <Icon
+              name="i-line-md-sunny-outline"
+              class="icon icon-static"
+              :class="[{ 'icon-hide': isTransitioning }]"
+            />
+            <Icon
+              name="i-line-md-sunny-outline-twotone-loop"
+              class="icon icon-animated"
+              :class="[{ 'icon-show': isTransitioning }]"
+            />
+          </template>
+        </span>
+      </MyTooltip>
     </button>
     <template #fallback>
       <div h="[1.4em]" w="[1.4em]" inline-flex items-center justify-center>

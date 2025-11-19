@@ -15,16 +15,12 @@ const {
   typeMeta,
 } = await useGlobalSearchData()
 
-const isOpen = ref(false)
+const { isOpen, open: openModal, close } = useGlobalSearchModalState()
 const selectedResult = ref<GlobalSearchResult | null>(null)
 const inputRef = ref<ComponentPublicInstance | HTMLInputElement | null>(null)
 
-function openModal() {
-  isOpen.value = true
-}
-
 function closeModal() {
-  isOpen.value = false
+  close()
   query.value = ''
   results.value = []
   selectedResult.value = null
