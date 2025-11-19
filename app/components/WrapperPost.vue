@@ -33,6 +33,8 @@ const data = computed(() => ({
 useContentSEO(data)
 
 const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
+
+const { fullPath } = useUrl()
 </script>
 
 <template>
@@ -83,6 +85,7 @@ const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
             v-for="network in ['facebook', 'twitter', 'linkedin', 'email']"
             :key="network"
             :network="network"
+            :url="fullPath"
             :styled="true"
             :label="true"
             class="p-1 text-slate-300"
