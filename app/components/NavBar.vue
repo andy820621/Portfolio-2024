@@ -60,7 +60,9 @@ const { y: scroll } = useWindowScroll()
         </NuxtLink>
 
         <NuxtLink :to="localePath('/gallery')" title="Gallery" aria-label="Gallery" inline-flex>
-          <Icon name="i-ri-camera-3-line" />
+          <MyTooltip text="Gallery">
+            <Icon name="i-ri-camera-3-line" />
+          </MyTooltip>
         </NuxtLink>
 
         <!-- <NuxtLink :to="localePath('/labs')" title="Labs" aria-label="Labs">
@@ -69,13 +71,21 @@ const { y: scroll } = useWindowScroll()
 
         <!-- Social Media -->
         <NuxtLink href="https://www.instagram.com/andy820621" target="_blank" title="Instagram" class="lt-md:hidden" aria-label="Instagram 個人頁面" rel="noopener noreferrer" md:inline-flex>
-          <Icon name="i-ri-instagram-line" aria-hidden="true" />
+          <MyTooltip text="Instagram">
+            <Icon name="i-ri-instagram-line" aria-hidden="true" />
+          </MyTooltip>
           <span class="sr-only">Instagram</span>
         </NuxtLink>
         <NuxtLink href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden" aria-label="GitHub 個人頁面" rel="noopener noreferrer" md:inline-flex>
-          <Icon name="i-ri-github-fill" aria-hidden="true" />
+          <MyTooltip text="GitHub">
+            <Icon name="i-ri-github-fill" aria-hidden="true" />
+          </MyTooltip>
           <span class="sr-only">GitHub</span>
         </NuxtLink>
+
+        <MyTooltip :text="$t('filtersBar.Search')" :kbds="['meta', 'K']">
+          <MyContentSearchButton class="nav-action" />
+        </MyTooltip>
 
         <ToggleTheme />
 

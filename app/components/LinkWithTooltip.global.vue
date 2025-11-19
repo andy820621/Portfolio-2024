@@ -15,22 +15,32 @@ const {
 </script>
 
 <template>
-  <ClientOnly>
-    <VTooltip class="h-fit w-fit">
+  <MyTooltip v-if="tooltipContent" :text="tooltipContent">
+    <template #default>
       <NuxtLink
         :to="to"
         :title="tooltipContent"
         :aria-label="tooltipContent || to"
         class="flex items-center border-b-none!"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <Icon :name="icon" :class="iconClass" :size="size" aria-hidden="true" />
         <span class="sr-only">{{ tooltipContent || to }}</span>
       </NuxtLink>
+    </template>
+  </MyTooltip>
 
-      <template #popper>
-        {{ tooltipContent }}
-      </template>
-    </VTooltip>
-  </ClientOnly>
+  <NuxtLink
+    v-else
+    :to="to"
+    :title="tooltipContent"
+    :aria-label="tooltipContent || to"
+    class="flex items-center border-b-none!"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Icon :name="icon" :class="iconClass" :size="size" aria-hidden="true" />
+    <span class="sr-only">{{ tooltipContent || to }}</span>
+  </NuxtLink>
 </template>
