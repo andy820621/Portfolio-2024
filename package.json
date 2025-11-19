@@ -51,7 +51,7 @@
     "@iconify-json/skill-icons": "^1.2.3",
     "@iconify-json/tabler": "^1.2.23",
     "@iconify-json/vscode-icons": "^1.2.35",
-    "@nuxt/content": "^3.8.0",
+    "@nuxt/content": "3.8.0",
     "@nuxt/icon": "^2.1.0",
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/html-validator": "^2.1.0",
