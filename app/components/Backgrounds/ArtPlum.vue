@@ -12,8 +12,8 @@ const { random } = Math
 const size = reactive(useWindowSize())
 
 const start = ref<Fn>(() => {})
-const MIN_BRANCH = 30
-const len = ref(6)
+const MIN_BRANCH = 30 // 分支計數門檻；在未達門檻前分支擴散機率較高，超過後下降以收斂。
+const len = ref(6) // 每一段分支的最大基礎長度上限（實際每段再乘隨機值）。
 const stopped = ref(false)
 
 function initCanvas(canvas: HTMLCanvasElement, width = 400, height = 400, _dpi?: number) {
@@ -23,7 +23,7 @@ function initCanvas(canvas: HTMLCanvasElement, width = 400, height = 400, _dpi?:
   // @ts-expect-error vendor
   const bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1
 
-  const dpi = _dpi || dpr / bsr
+  const dpi = _dpi || dpr / bsr // 計算 devicePixelRatio 與 backingStorePixelRatio，求得真實 DPI
 
   canvas.style.width = `${width}px`
   canvas.style.height = `${height}px`
@@ -48,7 +48,7 @@ onMounted(async () => {
   let steps: Fn[] = []
   let prevSteps: Fn[] = []
 
-  const step = (x: number, y: number, rad: number, counter: { value: number } = { value: 0 }) => {
+  function step(x: number, y: number, rad: number, counter: { value: number } = { value: 0 }) {
     const length = random() * len.value
     counter.value += 1
 
@@ -62,15 +62,17 @@ onMounted(async () => {
     ctx.lineTo(nx, ny)
     ctx.stroke()
 
+    // 輕微偏移角度
     const rad1 = rad + random() * r15
     const rad2 = rad - random() * r15
 
-    // out of bounds
+    // 新點落在畫布外太遠則不再延伸
     if (nx < -100 || nx > size.width + 100 || ny < -100 || ny > size.height + 100)
       return
 
+    // 分支延續機率
     const rate = counter.value <= MIN_BRANCH
-      ? 0.8
+      ? 0.81
       : 0.5
 
     // left branch
@@ -83,12 +85,12 @@ onMounted(async () => {
   }
 
   let lastTime = performance.now()
-  const interval = 1000 / 40 // 50fps
+  const interval = 1000 / 40 // 40fps，25ms 間隔
 
   let controls: ReturnType<typeof useRafFn>
 
-  const frame = () => {
-    if (performance.now() - lastTime < interval)
+  function frame() {
+    if (performance.now() - lastTime < interval) // 若距離上次幀不足則跳過
       return
 
     prevSteps = steps
@@ -112,10 +114,7 @@ onMounted(async () => {
 
   controls = useRafFn(frame, { immediate: false })
 
-  /**
-   * 0.2 - 0.8
-   */
-  const randomMiddle = () => random() * 0.6 + 0.2
+  const randomMiddle = () => random() * 0.6 + 0.2 // 0.2 ~ 0.8
 
   start.value = () => {
     controls.pause()
@@ -123,6 +122,7 @@ onMounted(async () => {
     ctx.lineWidth = 1
     ctx.strokeStyle = color
     prevSteps = []
+    // 設定上下左右四個起始點
     steps = [
       () => step(randomMiddle() * size.width, -5, r90),
       () => step(randomMiddle() * size.width, size.height + 5, -r90),
@@ -136,8 +136,20 @@ onMounted(async () => {
   }
 
   start.value()
+
+  const debouncedResize = useDebounceFn(() => {
+    const canvas = el.value!
+    initCanvas(canvas, size.width, size.height)
+    start.value()
+  }, 300)
+
+  watch(
+    () => [size.width, size.height],
+    debouncedResize,
+  )
 })
-const mask = computed(() => 'radial-gradient(circle, transparent, black);')
+
+const mask = 'radial-gradient(circle, #00000008, black);'
 </script>
 
 <template>
