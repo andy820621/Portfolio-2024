@@ -286,8 +286,8 @@ export default defineNuxtConfig({
     },
     // customCollections: [
     //   {
-    //     prefix: 'barz-icon',
-    //     dir: './assets/svgIcons',
+    //     prefix: 'my-icon',
+    //     dir: './app/assets/my-icons',
     //   },
     // ],
   },
