@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@intlify/shared": "^11.1.12",
-    "@netlify/nuxt": "^0.2.11",
+    "@netlify/nuxt": "^0.2.13",
     "@nuxt/fonts": "^0.12.1",
     "@nuxtjs/i18n": "^10.2.1",
     "better-sqlite3": "^12.4.1",
