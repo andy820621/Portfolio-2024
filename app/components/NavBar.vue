@@ -84,7 +84,7 @@ const { y: scroll } = useWindowScroll()
         </NuxtLink>
 
         <MyTooltip :text="$t('filtersBar.Search')" :kbds="['meta', 'K']">
-          <MyContentSearchButton class="nav-action" />
+          <MyContentSearchButton />
         </MyTooltip>
 
         <ToggleTheme />
