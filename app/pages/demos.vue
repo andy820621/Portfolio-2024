@@ -212,7 +212,9 @@ useSchemaOrg([
 <template>
   <div>
     <ClientOnly>
-      <BackgroundsArtDots />
+      <BackgroundsPortal>
+        <BackgroundsFlowDots />
+      </BackgroundsPortal>
     </ClientOnly>
 
     <div class="container mx-auto mb-5 max-w-5xl text-zinc-600">

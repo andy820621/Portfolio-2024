@@ -73,12 +73,33 @@ useSchemaOrg([
     },
   }),
 ])
+
+// 動態載入背景元件
+const backgroundImporters = import.meta.glob('~/components/Backgrounds/*.vue')
+const randomBackgroundComponent = shallowRef<Component | null>(null)
+
+onMounted(async () => {
+  const keys = Object.keys(backgroundImporters)
+  if (!keys.length)
+    return
+  const pickedIndex = Math.floor(Math.random() * keys.length)
+  const picked = keys[pickedIndex]!
+  try {
+    const mod = await (backgroundImporters[picked]! as () => Promise<{ default: Component }>)()
+    randomBackgroundComponent.value = mod.default
+  }
+  catch (e) {
+    console.error('Failed to load background component:', e)
+  }
+})
 </script>
 
 <template>
   <div class="relative">
-    <ClientOnly>
-      <BackgroundsArtPlum />
+    <ClientOnly v-if="randomBackgroundComponent">
+      <BackgroundsPortal>
+        <component :is="randomBackgroundComponent" />
+      </BackgroundsPortal>
     </ClientOnly>
 
     <div class="prose m-auto">

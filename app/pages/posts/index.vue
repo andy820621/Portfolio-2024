@@ -81,53 +81,61 @@ useSchemaOrg([
 </script>
 
 <template>
-  <div class="container mx-auto max-w-5xl text-zinc-600">
-    <PageHero
-      :title="$t('blogsPage.title')"
-      :description="$t('blogsPage.description')"
-    />
+  <div>
+    <ClientOnly>
+      <BackgroundsPortal>
+        <BackgroundsFlickeringGrid />
+      </BackgroundsPortal>
+    </ClientOnly>
 
-    <FiltersBar
-      v-model:search-text="searchText"
-      v-model:selected-tags="selectedTags"
-      :all-tags="allTags"
-      @clear="clearFilters"
-    />
+    <div class="container mx-auto max-w-5xl text-zinc-600">
+      <PageHero
+        :title="$t('blogsPage.title')"
+        :description="$t('blogsPage.description')"
+      />
 
-    <!-- 文章列表 -->
-    <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 space-y-5 sm:px-4">
-      <template v-for="post in paginatedData" :key="post.title">
-        <postCard
-          :path="localePath(post.path!)"
-          :title="post.title"
-          :date="post.date"
-          :description="post.description"
-          :image="post.image"
-          :alt="post.alt"
-          :og-image="post.ogImage"
-          :tags="post.tags"
-          :published="post.published"
-          :word-count="post.wordCount"
-          :reading-time="post.readingTime"
-          :image-class="post.imageClass"
-        />
-      </template>
-    </div>
+      <FiltersBar
+        v-model:search-text="searchText"
+        v-model:selected-tags="selectedTags"
+        :all-tags="allTags"
+        @clear="clearFilters"
+      />
 
-    <NoResults
-      v-else
-      :clear-filters="clearFilters"
-      :description="$t('blogsPage.noResultDescription')"
-    />
+      <!-- 文章列表 -->
+      <div v-if="paginatedData && paginatedData.length" v-auto-animate class="my-5 space-y-5 sm:px-4">
+        <template v-for="post in paginatedData" :key="post.title">
+          <postCard
+            :path="localePath(post.path!)"
+            :title="post.title"
+            :date="post.date"
+            :description="post.description"
+            :image="post.image"
+            :alt="post.alt"
+            :og-image="post.ogImage"
+            :tags="post.tags"
+            :published="post.published"
+            :word-count="post.wordCount"
+            :reading-time="post.readingTime"
+            :image-class="post.imageClass"
+          />
+        </template>
+      </div>
 
-    <div v-if="paginatedData && paginatedData.length" class="flex items-center justify-center space-x-6">
-      <button type="button" title="Previous page" aria-label="Previous page" :disabled="pageNumber <= 1" @click="onPreviousPageClick">
-        <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
-      </button>
-      <p>{{ pageNumber }} / {{ totalPage }}</p>
-      <button type="button" title="Next page" aria-label="Next page" :disabled="pageNumber >= totalPage" @click="onNextPageClick">
-        <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
-      </button>
+      <NoResults
+        v-else
+        :clear-filters="clearFilters"
+        :description="$t('blogsPage.noResultDescription')"
+      />
+
+      <div v-if="paginatedData && paginatedData.length" class="flex items-center justify-center space-x-6">
+        <button type="button" title="Previous page" aria-label="Previous page" :disabled="pageNumber <= 1" @click="onPreviousPageClick">
+          <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
+        </button>
+        <p>{{ pageNumber }} / {{ totalPage }}</p>
+        <button type="button" title="Next page" aria-label="Next page" :disabled="pageNumber >= totalPage" @click="onNextPageClick">
+          <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -102,9 +102,7 @@ function handlePointerLeave() {
   pointerState.lastMove = 0
 }
 
-// 計算「某個格點在流場下的方向角（弧度）」。
-// 這裡把 3D 噪聲的輸出（約 -1~1）平移/縮放成 [-π, π] 範圍，
-// 代表該點在此刻時間 z 下的「流動方向」。
+// 根據 (x,y,z) 回傳作用在該點的方向角（弧度）
 function getForceOnPoint(x: number, y: number, z: number) {
   return (noise3d(x / SCALE, y / SCALE, z) - 0.5) * 2 * Math.PI
 }
@@ -122,7 +120,6 @@ function createDotTexture(app: Application) {
 }
 
 // 依據目前 w/h 與 SPACING，將格點鋪滿畫面，並為「新格點」建立粒子
-// 使用 ParticleContainer 來批次渲染，提升大量物件的效能
 function addPoints({ dotTexture, particleContainer }: { dotTexture: Texture, particleContainer: ParticleContainer }) {
   for (let x = -SPACING / 2; x < w + SPACING; x += SPACING) {
     for (let y = -SPACING / 2; y < h + SPACING; y += SPACING) {
@@ -166,7 +163,7 @@ async function setup() {
   await app.init({
     background: '#ffffff',
     antialias: true, // 抗鋸齒：讓斜線/邊緣更平滑
-    resolution: window.devicePixelRatio, // 解析度：使用裝置像素倍率（Retina 螢幕更清晰）
+    resolution: window.devicePixelRatio, // 解析度：根據裝置像素倍率（Retina 螢幕更清晰）
     resizeTo: el.value, // 跟著 el 的大小自動調整畫布尺寸
     eventMode: 'none', // 關閉互動事件
     autoDensity: true, // 在高 DPI 下自動密度調整
@@ -297,9 +294,3 @@ onUnmounted(() => mountedScope.stop())
 <template>
   <div ref="el" pointer-events-none fixed bottom-0 left-0 right-0 top-0 z--1 size-screen dark:invert />
 </template>
-
-<style>
-.test {
-  color: #a5a5a5;
-}
-</style>
