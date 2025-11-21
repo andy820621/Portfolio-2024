@@ -265,83 +265,91 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div v-if="album" class="max-w-10xl container mx-auto mt-8">
-    <BreadcrumbList :custom-title="album.title" />
-
-    <h1 class="mb-24 text-center text-2xl font-bold">
-      {{ album.title }}
-    </h1>
-
+  <div>
     <ClientOnly>
-      <LightGallery
-        v-if="images && images.length"
-        ref="lightGalleryRef"
-        :images="images"
-        :title="album.title"
-      />
-
-      <!-- Loading 狀態 -->
-      <div v-if="loading" class="min-h-[400px] flex items-center justify-center">
-        <div class="text-center">
-          <div class="mb-4 inline-block h-12 w-12 animate-spin border-4 border-current border-r-transparent rounded-full border-solid motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-          <p class="text-zinc-600 dark:text-zinc-400">
-            Loading images...
-          </p>
-        </div>
-      </div>
-
-      <!-- 圖片網格 -->
-      <div
-        v-else-if="images && images.length"
-        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
-        class="text-zinc-600"
-      >
-        <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
-          <div
-            v-for="(src, rowIdx) in items"
-            :key="rowIdx"
-            :ref="handleImageRef"
-            :data-image-src="src"
-            class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
-            :class="{
-              'opacity-100 translate-y-0': isImageVisible(src),
-            }"
-            :style="{
-              transitionDelay: getTransitionDelay(items, src),
-            }"
-            @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
-          >
-            <NuxtImg
-              :src="src"
-              :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
-              class="h-auto w-full object-cover"
-              placeholder
-              loading="lazy"
-              format="webp"
-              quality="24"
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- 沒有圖片 -->
-      <div v-else class="min-h-[400px] flex items-center justify-center">
-        <div class="text-center text-zinc-600 dark:text-zinc-400">
-          <p class="mb-2 text-lg font-medium">
-            No images found
-          </p>
-          <p class="text-sm">
-            This album appears to be empty.
-          </p>
-        </div>
-      </div>
+      <BackgroundsPortal>
+        <BackgroundsUniverse />
+      </BackgroundsPortal>
     </ClientOnly>
-  </div>
 
-  <div v-else class="max-w-10xl container mx-auto mt-8">
-    Loading...
+    <div v-if="album" class="max-w-10xl container mx-auto mt-8">
+      <BreadcrumbList :custom-title="album.title" />
+
+      <h1 class="mb-24 text-center text-2xl font-bold">
+        {{ album.title }}
+      </h1>
+
+      <ClientOnly>
+        <LightGallery
+          v-if="images && images.length"
+          ref="lightGalleryRef"
+          :images="images"
+          :title="album.title"
+        />
+
+        <!-- Loading 狀態 -->
+        <div v-if="loading" class="min-h-[400px] flex items-center justify-center">
+          <div class="text-center">
+            <div class="mb-4 inline-block h-12 w-12 animate-spin border-4 border-current border-r-transparent rounded-full border-solid motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <p class="text-zinc-600 dark:text-zinc-400">
+              Loading images...
+            </p>
+          </div>
+        </div>
+
+        <!-- 圖片網格 -->
+        <div
+          v-else-if="images && images.length"
+          grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
+          class="text-zinc-600"
+        >
+          <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
+            <div
+              v-for="(src, rowIdx) in items"
+              :key="rowIdx"
+              :ref="handleImageRef"
+              :data-image-src="src"
+              class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
+              :class="{
+                'opacity-100 translate-y-0': isImageVisible(src),
+              }"
+              :style="{
+                transitionDelay: getTransitionDelay(items, src),
+              }"
+              @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
+            >
+              <NuxtImg
+                :src="src"
+                :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
+                class="h-auto w-full object-cover"
+                placeholder
+                loading="lazy"
+                format="webp"
+                quality="24"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 沒有圖片 -->
+        <div v-else class="min-h-[400px] flex items-center justify-center">
+          <div class="text-center text-zinc-600 dark:text-zinc-400">
+            <p class="mb-2 text-lg font-medium">
+              No images found
+            </p>
+            <p class="text-sm">
+              This album appears to be empty.
+            </p>
+          </div>
+        </div>
+      </ClientOnly>
+    </div>
+
+    <div v-else class="max-w-10xl container mx-auto mt-8">
+      Loading...
+    </div>
   </div>
 </template>
 

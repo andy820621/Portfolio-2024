@@ -131,5 +131,13 @@ watchEffect(() => {
 </script>
 
 <template>
-  <WrapperPost :conten-detail-data="contenDetailData" redirect-link="/projects" />
+  <div>
+    <ClientOnly>
+      <BackgroundsPortal>
+        <BackgroundsArtPlum />
+      </BackgroundsPortal>
+    </ClientOnly>
+
+    <WrapperPost :conten-detail-data="contenDetailData" redirect-link="/projects" />
+  </div>
 </template>
