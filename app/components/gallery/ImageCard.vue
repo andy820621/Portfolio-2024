@@ -8,11 +8,11 @@ const props = defineProps<{
 const imageSrc = computed(() => {
   // 如果有 coverImage 直接使用
   if (props.src)
-    return props.src
+    return encodeUrlPath(props.src)
 
   // 如果沒有 coverImage，使用 id 生成圖片路徑
   if (props.id) {
-    return `/gallery-images/${props.id}.webp`
+    return encodeUrlPath(`/gallery-images/${props.id}.webp`)
   }
 
   // 如果都沒有，返回預設或空圖片
@@ -49,7 +49,7 @@ const imageSrc = computed(() => {
   </article>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .imageBox {
   @apply overflow-hidden;
 }

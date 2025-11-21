@@ -106,6 +106,8 @@ function isGroupVisible(group: any) {
   return visibleGroups.value.includes(group.id)
 }
 
+let stopIntersectionObserver: (() => void) | undefined
+
 onMounted(() => {
   const observerOptions = {
     threshold: 0.1, // 當元素 10% 可見時觸發
@@ -131,7 +133,11 @@ onMounted(() => {
     observerOptions,
   )
 
-  onUnmounted(stop)
+  stopIntersectionObserver = stop
+})
+
+onUnmounted(() => {
+  stopIntersectionObserver?.()
 })
 
 const { baseUrl, fullPath } = useUrl()
@@ -195,6 +201,12 @@ useSchemaOrg([
 
 <template>
   <div>
+    <ClientOnly>
+      <BackgroundsPortal>
+        <BackgroundsUniverse />
+      </BackgroundsPortal>
+    </ClientOnly>
+
     <div class="container mx-auto mb-5 max-w-5xl text-zinc-600">
       <PageHero
         :title="$t('galleryPage.title')"

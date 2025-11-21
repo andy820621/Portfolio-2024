@@ -213,7 +213,7 @@ useSchemaOrg([
   <div>
     <ClientOnly>
       <BackgroundsPortal>
-        <BackgroundsFlowDots />
+        <BackgroundsFlickeringGrid />
       </BackgroundsPortal>
     </ClientOnly>
 

@@ -42,7 +42,7 @@ export function useGalleryImages() {
       throw new Error(`No images found for album: ${albumId}`)
     }
 
-    return imageFiles.map((file: string) => `/gallery-images/${albumId}/${file}`)
+    return imageFiles.map((file: string) => encodeUrlPath(`/gallery-images/${albumId}/${file}`))
   }
 
   return {
