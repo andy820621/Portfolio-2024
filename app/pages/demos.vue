@@ -211,6 +211,10 @@ useSchemaOrg([
 
 <template>
   <div>
+    <ClientOnly>
+      <BackgroundsArtDots />
+    </ClientOnly>
+
     <div class="container mx-auto mb-5 max-w-5xl text-zinc-600">
       <PageHero
         :title="$t('demosPage.title')"
