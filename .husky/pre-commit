@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 echo "🔍 Running pre-commit hook..."
 
@@ -10,7 +9,6 @@ pnpm exec lint-staged
 files="$(git diff --cached --name-only --diff-filter=ACM)"
 
 if [ -n "$files" ]; then
-  # 如果 grep 有找到 CR，就會進到 then
   if echo "$files" | xargs grep -m 1 -I $'\r' >/dev/null 2>&1; then
     echo "❌ CR 字元檢查失敗！請將檔案行尾改成 LF 再提交。"
     exit 1
