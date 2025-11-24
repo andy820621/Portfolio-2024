@@ -142,6 +142,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       trailingSlash: true,
+      mermaid: {
+        importSource:
+          process.env.MERMAID_IMPORT_SOURCE
+          ?? 'https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs',
+        init: {
+          startOnLoad: false,
+        },
+      },
     },
   },
   site: {
@@ -305,6 +313,7 @@ export default defineNuxtConfig({
     build: {
       rollupOptions: {
         treeshake: true,
+        external: ['mermaid'],
         output: {
           manualChunks(id) {
             if (id.includes('node_modules')) {

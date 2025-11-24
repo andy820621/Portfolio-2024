@@ -39,17 +39,18 @@ async function renderMermaid() {
     return
 
   try {
+    const mermaid = await $mermaid()
     mermaidContainer.value.removeAttribute('data-processed')
     mermaidContainer.value.textContent = mermaidDefinition
     await nextTick()
 
-    $mermaid().initialize({
+    mermaid.initialize({
       startOnLoad: false,
       theme: mermaidTheme.value,
       securityLevel: 'antiscript',
       flowchart: { htmlLabels: true },
     })
-    await $mermaid().run({
+    await mermaid.run({
       nodes: [mermaidContainer.value],
     })
     hasRenderedOnce.value = true // Mark as rendered
