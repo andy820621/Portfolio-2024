@@ -129,9 +129,9 @@ function normalizeIdentifier(value: string) {
 <template>
   <ClientOnly>
     <template #default>
-      <BackgroundsPortal v-if="resolvedComponent">
+      <BackgroundsBasePortal v-if="resolvedComponent">
         <component :is="resolvedComponent" />
-      </BackgroundsPortal>
+      </BackgroundsBasePortal>
     </template>
   </ClientOnly>
 </template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-interface BackgroundsPortalProps {
+interface PortalProps {
   class?: string
 }
 
-const props = defineProps<BackgroundsPortalProps>()
+const props = defineProps<PortalProps>()
 </script>
 
 <template>
