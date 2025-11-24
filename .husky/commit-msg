@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 用 pnpm exec 呼叫本地的 commitlint
+if ! pnpm exec commitlint --edit "$1"; then
+  echo ""
+  echo "🚫 偵測到無效的提交訊息格式。"
+  echo "請遵循 Conventional Commit 格式："
+  echo ""
+  echo "格式：<類型>: <簡短描述>"
+  echo ""
+  echo "允許的類型："
+  echo "  feat      新增功能"
+  echo "  fix       修復錯誤"
+  echo "  docs      文件異動"
+  echo "  style     程式碼格式調整、樣式修改"
+  echo "  refactor  程式碼重構"
+  echo "  perf      效能最佳化"
+  echo "  test      測試相關"
+  echo "  build     建置相關"
+  echo "  ci        CI 相關"
+  echo "  revert    撤銷提交"
+  echo "  chore     雜項任務"
+  echo ""
+  echo "💡 範例：feat: 新增使用者登入功能"
+  echo ""
+
+  exit 1
+fi
