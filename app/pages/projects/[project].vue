@@ -132,11 +132,7 @@ watchEffect(() => {
 
 <template>
   <div>
-    <ClientOnly>
-      <BackgroundsPortal>
-        <BackgroundsArtPlum />
-      </BackgroundsPortal>
-    </ClientOnly>
+    <RandomBackground :sources="['ArtPlum', 'FlowDots']" />
 
     <WrapperPost :conten-detail-data="contenDetailData" redirect-link="/projects" />
   </div>

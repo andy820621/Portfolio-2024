@@ -27,6 +27,8 @@ else {
 
 <template>
   <div>
+    <RandomBackground />
+
     This content will not be displayed. The error page (error.vue) will be shown instead.
   </div>
 </template>

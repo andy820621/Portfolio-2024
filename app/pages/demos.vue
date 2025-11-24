@@ -211,11 +211,7 @@ useSchemaOrg([
 
 <template>
   <div>
-    <ClientOnly>
-      <BackgroundsPortal>
-        <BackgroundsFlickeringGrid />
-      </BackgroundsPortal>
-    </ClientOnly>
+    <RandomBackground :sources="['FlickeringGrid', 'Silk', 'Universe']" />
 
     <div class="container mx-auto mb-5 max-w-5xl text-zinc-600">
       <PageHero

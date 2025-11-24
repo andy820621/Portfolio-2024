@@ -266,11 +266,7 @@ watchEffect(() => {
 
 <template>
   <div>
-    <ClientOnly>
-      <BackgroundsPortal>
-        <BackgroundsUniverse />
-      </BackgroundsPortal>
-    </ClientOnly>
+    <RandomBackground :sources="['Silk', 'Universe']" />
 
     <div v-if="album" class="max-w-10xl container mx-auto mt-8">
       <BreadcrumbList :custom-title="album.title" />

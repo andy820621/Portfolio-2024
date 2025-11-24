@@ -201,11 +201,7 @@ useSchemaOrg([
 
 <template>
   <div>
-    <ClientOnly>
-      <BackgroundsPortal>
-        <BackgroundsUniverse />
-      </BackgroundsPortal>
-    </ClientOnly>
+    <RandomBackground :sources="['Silk', 'Universe']" />
 
     <div class="container mx-auto mb-5 max-w-5xl text-zinc-600">
       <PageHero

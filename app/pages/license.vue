@@ -52,6 +52,8 @@ useSchemaOrg([
 
 <template>
   <div class="prose mx-auto">
+    <RandomBackground />
+
     <article>
       <ContentRenderer v-if="content" :value="content" />
 

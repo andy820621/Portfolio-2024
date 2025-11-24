@@ -85,11 +85,7 @@ useSchemaOrg([
 
 <template>
   <div>
-    <ClientOnly>
-      <BackgroundsPortal>
-        <BackgroundsArtPlum />
-      </BackgroundsPortal>
-    </ClientOnly>
+    <RandomBackground :sources="['ArtPlum', 'FlowDots']" />
 
     <div class="container mx-auto max-w-5xl text-zinc-600">
       <PageHero
