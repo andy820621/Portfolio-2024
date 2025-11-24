@@ -2,9 +2,9 @@ name: Lint & Typecheck
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   lint-and-typecheck:
@@ -17,12 +17,12 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          run_install: false  # 不指定 version，自動對齊 packageManager
+          run_install: false # 不指定 version，自動對齊 packageManager
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
+          node-version-file: package.json # 自動對齊 engines.node
           cache: pnpm
 
       - name: Install dependencies
