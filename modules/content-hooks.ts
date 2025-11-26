@@ -1,50 +1,11 @@
-import type { FileBeforeParseHook } from '@nuxt/content'
 import { defineNuxtModule } from '@nuxt/kit'
 import { countWords } from '~/utils/countWords'
-
-const MERMAID_CODE_BLOCK_REGEX = /```mermaid([\s\S]*?)```/gi
-
-function escapeHtml(text: string) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
-
-function transformMermaidCodeBlocks(body: string) {
-  return body.replace(MERMAID_CODE_BLOCK_REGEX, (_, rawCode = '') => {
-    const code = rawCode.trim()
-    if (!code)
-      return _
-
-    const escaped = escapeHtml(code)
-    return `<Mermaid>
-<pre><code>${escaped}
-</code></pre>
-</Mermaid>`
-  })
-}
 
 export default defineNuxtModule({
   meta: {
     name: 'content-reading-time',
   },
   setup(_, nuxt) {
-    nuxt.hook('content:file:beforeParse', (ctx: FileBeforeParseHook) => {
-      const { file } = ctx
-
-      if (!file.id?.endsWith('.md'))
-        return
-
-      if (!file.body.toLowerCase().includes('```mermaid'))
-        return
-
-      file.body = transformMermaidCodeBlocks(file.body)
-    })
-
-    // 註冊 content:file:afterParse hook
     nuxt.hook('content:file:afterParse', async (ctx: any) => {
       const { file, content } = ctx
 
