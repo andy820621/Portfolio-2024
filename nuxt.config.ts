@@ -13,6 +13,17 @@ const locales: LocaleObject<SupportedLocale>[] = [
   { code: 'zh', language: 'zh-TW', name: 'Chinese', file: 'zh.json' },
 ]
 
+const chunkMap: Record<string, string> = {
+  'nitropack': 'nitropack',
+  '@iconify-json': 'iconify-icons',
+  'lightgallery': 'lightgallery',
+  'pixi.js': 'pixi',
+  'ogl': 'ogl',
+  'swiper': 'swiper',
+  'minisearch': 'minisearch',
+  '@barzhsieh/nuxt-content-mermaid': 'nuxt-mermaid',
+}
+
 const lastmod = getSitemapDateFormat(Date.now())
 
 export default defineNuxtConfig({
@@ -309,21 +320,20 @@ export default defineNuxtConfig({
         treeshake: true,
         output: {
           manualChunks(id) {
-            if (id.includes('node_modules')) {
-              // Try to fix `useNitroApp` warning about circular dependency.
-              if (id.includes('nitropack')) {
-                return 'nitropack'
-              }
-              if (id.includes('@iconify-json')) {
-                return 'iconify-icons'
-              }
-              return 'vendor'
-            }
+            if (!id.includes('node_modules'))
+              return
+
+            const entry = Object.entries(chunkMap).find(([key]) => id.includes(key))
+            if (entry)
+              return entry[1]
+
+            return 'vendor'
           },
           sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
         },
       },
       sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
+      chunkSizeWarningLimit: 2500,
     },
   },
   nitro: {
