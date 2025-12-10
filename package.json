@@ -23,6 +23,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@intlify/shared": "^11.2.2",
     "@netlify/nuxt": "^0.2.15",
     "@nuxt/fonts": "^0.12.1",
     "@nuxtjs/i18n": "^10.2.1",
