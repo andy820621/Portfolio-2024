@@ -23,6 +23,9 @@ importers:
       better-sqlite3:
         specifier: ^12.5.0
         version: 12.5.0
+      glob:
+        specifier: ^10.5.0
+        version: 10.5.0
       lightgallery:
         specifier: ^2.9.0
         version: 2.9.0
