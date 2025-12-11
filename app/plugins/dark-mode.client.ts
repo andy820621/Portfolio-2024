@@ -5,6 +5,7 @@ export default defineNuxtPlugin(() => {
     try {
       const colorMode = useColorMode()
       const storedColorMode = useLocalStorage<'light' | 'dark' | 'auto'>('vueuse-color-scheme', 'auto')
+      const { setMermaidTheme, resetMermaidTheme } = useMermaidTheme()
 
       // 監聽 storedColorMode 的變化
       watch(storedColorMode, (newValue) => {
@@ -15,9 +16,18 @@ export default defineNuxtPlugin(() => {
 
       // 根據 colorMode 更新 HTML 類
       watch(colorMode, (newValue) => {
-        if (newValue === 'dark')
+        if (newValue === 'dark') {
           document.documentElement.classList.add('dark')
-        else document.documentElement.classList.remove('dark')
+          setMermaidTheme('dark')
+        }
+        else if (newValue === 'light') {
+          document.documentElement.classList.remove('dark')
+          setMermaidTheme('light')
+        }
+        else {
+          document.documentElement.classList.remove('dark')
+          resetMermaidTheme()
+        }
       }, { immediate: true })
     }
     catch (error) {

@@ -79,6 +79,12 @@ export default defineNuxtConfig({
     '@netlify/nuxt',
     'nuxt-headlessui',
   ],
+  contentMermaid: {
+    theme: {
+      light: 'default',
+      dark: 'dark',
+    },
+  },
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
