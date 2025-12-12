@@ -74,7 +74,7 @@ withDefaults(defineProps<Props>(), {
           </div>
         </div>
         <div
-          class="custom-btn-underline w-fit flex items-center pt-2 text-sub transition-all duration-300 underline-base group-hover:underline-base-hover"
+          class="custom-btn-underline w-fit flex items-center pt-2 text-primary transition-all duration-300 underline-base dark:text-sub group-hover:underline-base-hover"
         >
           <p>{{ $t('read more') }}</p>
           <Icon name="ri:arrow-right-line" />
@@ -87,9 +87,9 @@ withDefaults(defineProps<Props>(), {
 <style scoped>
 .glass-card {
   --border-width: 1px;
-  --border-start: rgba(128, 141, 124, 0.5);
-  --border-end: rgba(128, 141, 124, 0.1);
-  --background-color: rgba(8, 24, 81, 0.08);
+  --border-start: rgba(47, 94, 98, 0.5);
+  --border-end: rgba(47, 94, 98, 0.1);
+  --background-color: hsla(168, 24%, 24%, 0.1);
 
   position: relative;
   background-color: var(--background-color);

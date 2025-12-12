@@ -31,10 +31,10 @@ const selectionSummary = computed(() => {
     <HeadlessListbox v-slot="{ open }" v-model="selectedTags" multiple>
       <div class="relative">
         <HeadlessListboxButton
-          class="w-full flex items-center justify-between border border-zinc-200 rounded-xl bg-zinc-50 px-4 py-2.5 text-left text-sm text-zinc-700 font-medium shadow-sm transition-colors dark:border-slate-700 dark:bg-slate-800 dark:text-zinc-200 focus-visible:outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400/95"
+          class="focus-visible:ring-primary/50 w-full flex items-center justify-between border border-base/20 rounded-xl px-4 py-2.5 text-left text-sm font-medium shadow-sm transition-colors bg-base! text-base! focus-visible:outline-none focus:outline-none focus-visible:ring-1"
         >
           <span class="truncate">{{ selectionSummary }}</span>
-          <Icon name="mdi:chevron-down" size="20" class="text-zinc-400 transition-transform duration-150" :class="{ 'rotate-180': open }" />
+          <Icon name="mdi:chevron-down" size="20" class="text-base/40 transition-transform duration-150" :class="{ 'rotate-180': open }" />
         </HeadlessListboxButton>
 
         <transition
@@ -46,19 +46,19 @@ const selectionSummary = computed(() => {
           leave-to-class="opacity-0 translate-y-1"
         >
           <HeadlessListboxOptions
-            class="absolute left-0 right-0 z-[80] mt-2 w-full overflow-hidden border border-zinc-200 rounded-xl bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900 focus-visible:outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400/95"
+            class="focus-visible:ring-primary/50 absolute left-0 right-0 z-[80] mt-2 w-full overflow-hidden border border-base/24 rounded-xl bg-base shadow-2xl focus-visible:outline-none focus:outline-none focus-visible:ring-1"
           >
-            <div class="sticky top-0 border-b border-zinc-100 bg-white/95 px-3 py-2 backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/95">
+            <div class="sticky top-0 border-b border-base/10 bg-base/95 px-3 py-2 backdrop-blur-sm">
               <label class="sr-only" for="tags-filter-search">
                 {{ $t('filtersBar.Search Tags') }}
               </label>
-              <div class="flex items-center gap-2 border border-zinc-200 rounded-xl bg-zinc-50 px-3 py-2 text-sm text-zinc-600 dark:border-slate-700 dark:bg-slate-800 dark:text-zinc-300">
-                <Icon name="mdi:magnify" size="18" class="text-zinc-400" />
+              <div class="flex items-center gap-2 border border-base/20 rounded-xl bg-base px-3 py-2 text-sm text-base/80">
+                <Icon name="mdi:magnify" size="18" class="text-base/40" />
                 <input
                   id="tags-filter-search"
                   v-model="query"
                   type="text"
-                  class="w-full bg-transparent text-sm text-zinc-700 outline-none dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                  class="w-full bg-transparent text-sm text-base outline-none placeholder:text-base/40"
                   :placeholder="`${$t('filtersBar.Search Tags')}...`"
                 >
               </div>
@@ -76,7 +76,7 @@ const selectionSummary = computed(() => {
                   <li
                     class="flex cursor-pointer items-center justify-between px-4 py-2 text-sm"
                     :class="[
-                      active ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-50' : 'text-zinc-700 dark:text-zinc-200',
+                      active ? 'bg-primary/10 text-primary' : 'text-base',
                       selected ? 'font-semibold' : 'font-normal',
                     ]"
                   >
@@ -90,7 +90,7 @@ const selectionSummary = computed(() => {
                   </li>
                 </HeadlessListboxOption>
               </template>
-              <p v-else class="px-4 py-6 text-center text-sm text-zinc-400">
+              <p v-else class="px-4 py-6 text-center text-sm text-base/40">
                 沒有符合的標籤
               </p>
             </div>

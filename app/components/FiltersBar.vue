@@ -34,7 +34,7 @@ function removeTag(tag: string) {
 
 <template>
   <section class="px-2 pb-2 sm:px-6 sm:pb-4">
-    <div class="relative z-30 border border-zinc-200 rounded-xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/70 lg:p-6">
+    <div class="glass-effect relative z-30 rounded-xl px-4 py-3 shadow-sm lg:p-6">
       <div class="flex flex-col gap-4 md:flex-row md:items-start">
         <div class="w-full md:flex-1">
           <ContentSearch v-model:search-test="searchText" />
@@ -44,19 +44,19 @@ function removeTag(tag: string) {
         </div>
       </div>
 
-      <div v-if="selectedTagList.length" class="mt-4 border-t border-zinc-200 pt-3 dark:border-slate-800">
+      <div v-if="selectedTagList.length" class="mt-4 border-t border-base/20 pt-3">
         <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div class="flex flex-wrap items-center gap-2">
             <Icon name="ri:price-tag-3-line" />
             <span
               v-for="tag in selectedTagList"
               :key="tag"
-              class="inline-flex items-center items-center gap-1 rounded-full bg-primary py-[2.4px] pl-[10px] pr-[6px] text-sm text-base dark:bg-slate-800"
+              class="inline-flex items-center items-center gap-1 rounded-full bg-primary py-[2.4px] pl-[10px] pr-[6px] text-sm text-base"
             >
               {{ tag }}
               <button
                 type="button"
-                class="flex items-center justify-center text-zinc-400 transition hover:text-zinc-600 dark:hover:text-zinc-200"
+                class="flex items-center justify-center text-base/40 transition hover:text-base"
                 @click="removeTag(tag)"
               >
                 <Icon name="mdi:close" size="16" />
@@ -65,7 +65,7 @@ function removeTag(tag: string) {
           </div>
           <button
             type="button"
-            class="self-start border border-transparent rounded-md px-3 py-1 text-sm text-primary font-medium transition disabled:cursor-not-allowed lg:self-auto disabled:text-zinc-400 hover:opacity-80 dark:disabled:text-zinc-600"
+            class="self-start border border-transparent rounded-md px-3 py-1 text-sm text-primary font-medium transition disabled:cursor-not-allowed lg:self-auto disabled:text-base/40 hover:opacity-80"
             :disabled="!hasFilters"
             @click="handleClear"
           >
@@ -76,3 +76,43 @@ function removeTag(tag: string) {
     </div>
   </section>
 </template>
+
+<style scoped>
+.glass-effect {
+  --border-width: 1px;
+  --border-start: rgba(47, 94, 98, 0.5);
+  --border-end: rgba(47, 94, 98, 0.1);
+  --background-color: hsla(168, 24%, 24%, 0.1);
+
+  position: relative;
+  background-color: var(--background-color);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: none;
+}
+
+:global(.dark .glass-effect) {
+  --border-start: rgba(255, 255, 255, 0.24);
+  --border-end: rgba(255, 255, 255, 0.05);
+  --background-color: hsla(185, 34%, 29%, 0.3);
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--border-width) solid transparent;
+  background: linear-gradient(135deg, var(--border-start), var(--border-end)) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+</style>

@@ -1,32 +1,35 @@
 :root {
-  --clr-primary-green: #808d7c;
-  --clr-sub-green: #9ca986;
-  --clr-bg-green: #c2d0c7;
-  --clr-contrast-green: #5f6f65;
-  --clr-hover-green: #9da99a;
-  --clr-bg: #e6ede2;
-  --clr-text: #333333;
-  --clr-btn: #7c8d87;
-  --clr-btn-text: #e0e5e5;
-  --clr-btn-hover: #98afa7;
-  --clr-btn-disabled: #c3c8c6;
-  --clr-scrollbar: #eee;
-  --clr-scrollbar-hover: #bbb;
-  --clr-underline: #33333300;
-  --clr-underline-hover: #333333;
-  --clr-active-border: hsl(22, 99%, 34%);
-  --swiper-navBtn: #3b4039;
-  --swiper-navBtnHover: var(--clr-underline-hover);
-  --swiper-navBtnHoverBg: hsla(90, 1%, 62%, 0.81);
+  --clr-primary-green: #2f5e62;
+  --clr-sub-green: #5a8588;
+  --clr-bg-green: #cfe0e0;
+  --clr-contrast-green: #d69e76;
+  --clr-hover-green: #407074;
+  --clr-bg: #f0f5f4;
+  --clr-text: #2d3333;
+  --clr-btn: #316064;
+  --clr-btn-text: #ffffff;
+  --clr-btn-hover: #457b80;
+  --clr-btn-disabled: #b0c4c5;
+  --clr-scrollbar: #e0e5e5;
+  --clr-scrollbar-hover: #b0c4c5;
+  --clr-underline: rgba(47, 94, 98, 0);
+  --clr-underline-hover: #2f5e62;
+  --clr-active-border: #d69e76;
+  --swiper-navBtn: #2f5e62;
+  --swiper-navBtnHover: #d69e76;
+  --swiper-navBtnHoverBg: rgba(207, 224, 224, 0.8);
 
   --box-shadow:
-    0px 0.7px 2.2px rgba(0, 0, 0, 0.02), 0px 1.7px 5.3px rgba(0, 0, 0, 0.028), 0px 3.1px 10px rgba(0, 0, 0, 0.035),
-    0px 5.6px 17.9px rgba(0, 0, 0, 0.042), 0px 10.4px 33.4px rgba(0, 0, 0, 0.05), 0px 24px 80px rgba(0, 0, 0, 0.07);
+    0px 0.7px 2.2px rgba(47, 94, 98, 0.02), 0px 1.7px 5.3px rgba(47, 94, 98, 0.028),
+    0px 3.1px 10px rgba(47, 94, 98, 0.035), 0px 5.6px 17.9px rgba(47, 94, 98, 0.042),
+    0px 10.4px 33.4px rgba(47, 94, 98, 0.05), 0px 24px 80px rgba(47, 94, 98, 0.07);
   --box-shadow-hover:
-    0px 1.1px 1.4px rgba(0, 0, 0, 0.032), 2px 2.6px 3.5px rgba(0, 0, 0, 0.043), -2px 2.6px 3.5px rgba(0, 0, 0, 0.043),
-    4px 4.6px 6.5px rgba(0, 0, 0, 0.049), -4px 4.6px 6.5px rgba(0, 0, 0, 0.049), 7px 7.3px 11.6px rgba(0, 0, 0, 0.054),
-    -7px 7.3px 11.6px rgba(0, 0, 0, 0.054), 11px 11.1px 21.7px rgba(0, 0, 0, 0.06),
-    -11px 11.1px 21.7px rgba(0, 0, 0, 0.06), 17px 17px 52px rgba(0, 0, 0, 0.07), -17px 17px 52px rgba(0, 0, 0, 0.07);
+    0px 1.1px 1.4px rgba(47, 94, 98, 0.032), 2px 2.6px 3.5px rgba(47, 94, 98, 0.043),
+    -2px 2.6px 3.5px rgba(47, 94, 98, 0.043), 4px 4.6px 6.5px rgba(47, 94, 98, 0.049),
+    -4px 4.6px 6.5px rgba(47, 94, 98, 0.049), 7px 7.3px 11.6px rgba(47, 94, 98, 0.054),
+    -7px 7.3px 11.6px rgba(47, 94, 98, 0.054), 11px 11.1px 21.7px rgba(47, 94, 98, 0.06),
+    -11px 11.1px 21.7px rgba(47, 94, 98, 0.06), 17px 17px 52px rgba(47, 94, 98, 0.07),
+    -17px 17px 52px rgba(47, 94, 98, 0.07);
 
   /* testing color */
   --clr-primary-transparent: rgba(196, 165, 141, 0.15);
@@ -55,34 +58,35 @@
 } */
 
 html.dark {
-  --clr-primary-green: #285658;
-  --clr-sub-green: #749596;
-  --clr-bg-green: #152c2c;
-  --clr-contrast-green: #abdde0;
-  --clr-hover-green: #496d6d;
-  --clr-bg: #121212;
-  --clr-text: #e0e0e0;
-  --clr-btn: #397c80;
-  --clr-btn-hover: #4d9397;
-  --clr-btn-text: #e0e5e5;
-  --clr-btn-disabled: #3f4444;
-  --clr-scrollbar: #212929;
-  --clr-scrollbar-hover: #2b3535;
+  --clr-primary-green: #8ec6c9;
+  --clr-sub-green: #6b8c8e;
+  --clr-dark-green: #0e3c3e;
+  --clr-bg-green: #316064;
+  --clr-contrast-green: #e0cda8;
+  --clr-hover-green: #427579;
+  --clr-bg: #0b1415;
+  --clr-text: #e6e6e6;
+  --clr-btn: #316064;
+  --clr-btn-hover: #427579;
+  --clr-btn-text: #e6e6e6;
+  --clr-btn-disabled: #2a3f41;
+  --clr-scrollbar: #1a2628;
+  --clr-scrollbar-hover: #2a3f41;
   --clr-underline: #e0e0e000;
-  --clr-underline-hover: #e0e0e0;
+  --clr-underline-hover: #8ec6c9;
   --swiper-navBtn: var(--clr-primary-green);
   --swiper-navBtnHover: var(--clr-btn-hover);
-  --swiper-navBtnHoverBg: hsla(0, 0%, 24%, 0.81);
+  --swiper-navBtnHoverBg: hsla(185, 30%, 20%, 0.81);
 
   --box-shadow:
-    0px 0.7px 2.2px rgba(126, 126, 126, 0.02), 0px 1.7px 5.3px rgba(126, 126, 126, 0.028),
-    0px 3.1px 10px rgba(126, 126, 126, 0.035), 0px 5.6px 17.9px rgba(126, 126, 126, 0.042),
-    0px 10.4px 33.4px rgba(126, 126, 126, 0.05), 0px 24px 80px rgba(126, 126, 126, 0.07);
+    0px 0.7px 2.2px rgba(49, 96, 100, 0.05), 0px 1.7px 5.3px rgba(49, 96, 100, 0.06),
+    0px 3.1px 10px rgba(49, 96, 100, 0.08), 0px 5.6px 17.9px rgba(49, 96, 100, 0.1),
+    0px 10.4px 33.4px rgba(49, 96, 100, 0.12), 0px 24px 80px rgba(49, 96, 100, 0.15);
 
   --box-shadow-hover:
-    0px 0.7px 2.2px rgba(180, 180, 180, 0.02), 0px 1.7px 5.3px rgba(180, 180, 180, 0.028),
-    0px 3.1px 10px rgba(180, 180, 180, 0.035), 0px 5.6px 17.9px rgba(180, 180, 180, 0.042),
-    0px 10.4px 33.4px rgba(180, 180, 180, 0.05), 0px 24px 80px rgba(180, 180, 180, 0.07);
+    0px 0.7px 2.2px rgba(142, 198, 201, 0.05), 0px 1.7px 5.3px rgba(142, 198, 201, 0.06),
+    0px 3.1px 10px rgba(142, 198, 201, 0.08), 0px 5.6px 17.9px rgba(142, 198, 201, 0.1),
+    0px 10.4px 33.4px rgba(142, 198, 201, 0.12), 0px 24px 80px rgba(142, 198, 201, 0.15);
 }
 
 .custom-btn-underline {

@@ -18,6 +18,9 @@ export default defineConfig({
       'base-focus': 'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--clr-primary-green)]',
     },
     [/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
+    [/^border-base\/(\d+)$/, ([_, op]) => `border-[color-mix(in_srgb,var(--clr-text)_${op}%,transparent)]`],
+    [/^text-base\/(\d+)$/, ([_, op]) => `text-[color-mix(in_srgb,var(--clr-text)_${op}%,transparent)]`],
+    [/^bg-base\/(\d+)$/, ([_, op]) => `bg-[color-mix(in_srgb,var(--clr-bg)_${op}%,transparent)]`],
   ],
   rules: [
     [/^slide-enter-(\d+)$/, ([_, n]) => ({

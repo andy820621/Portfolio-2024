@@ -14,7 +14,7 @@ body {
 }
 
 ::selection {
-  background: #8884;
+  background: rgba(47, 94, 98, 0.25);
 }
 
 #nprogress {
@@ -22,7 +22,7 @@ body {
 }
 
 #nprogress .bar {
-  background: #888;
+  background: var(--clr-primary-green);
   opacity: 0.75;
   position: fixed;
   z-index: 1031;
