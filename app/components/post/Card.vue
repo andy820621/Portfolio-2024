@@ -28,7 +28,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <article class="group m-2 overflow-hidden border-base rounded-xl text-base shadow-base transition-shadow duration-300 hover:shadow-base-hover">
+  <article class="glass-card group m-2 overflow-hidden rounded-xl text-base shadow-base transition-shadow duration-300 hover:shadow-base-hover">
     <NuxtLink :to="path" class="grid grid-cols-1 gap-1 sm:grid-cols-10">
       <div class="sm:col-span-3">
         <NuxtImg
@@ -83,3 +83,40 @@ withDefaults(defineProps<Props>(), {
     </NuxtLink>
   </article>
 </template>
+
+<style scoped>
+.glass-card {
+  --border-width: 1px;
+  --border-start: rgba(128, 141, 124, 0.5);
+  --border-end: rgba(128, 141, 124, 0.1);
+  --background-color: rgba(8, 24, 81, 0.08);
+
+  position: relative;
+  background-color: var(--background-color);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: none;
+}
+
+:global(.dark .glass-card) {
+  --border-start: rgba(255, 255, 255, 0.24);
+  --border-end: rgba(255, 255, 255, 0.05);
+  --background-color: rgba(81, 81, 81, 0.08);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--border-width) solid transparent;
+  background: linear-gradient(135deg, var(--border-start), var(--border-end)) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+</style>
