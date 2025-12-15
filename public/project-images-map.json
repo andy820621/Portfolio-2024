@@ -1,8 +1,50 @@
 {
   "": [
-    "ti-ho-healthcare.webp",
+    "finance-tracker.webp",
     "metc.webp",
-    "finance-tracker.webp"
+    "ti-ho-healthcare.webp"
+  ],
+  "finance-tracker": [
+    "overview.webp"
+  ],
+  "finance-tracker/magic-link": [
+    "01.login.webp",
+    "02.login-after-send-email.webp",
+    "03.email-get-magic-link-for-login.webp",
+    "04.after-login-will-go-to-main-page.webp"
+  ],
+  "finance-tracker/settings": [
+    "01.settings-profile.webp",
+    "02.settings-avatar.webp",
+    "03.settings-preferences.webp"
+  ],
+  "metc": [
+    "01.intro.webp",
+    "02.function.webp",
+    "04.process.webp"
+  ],
+  "metc/en": [
+    "01.intro.webp"
+  ],
+  "metc/en/dailyOrEmergency": [
+    "01.daily.png",
+    "02.emergency.png"
+  ],
+  "metc/en/monitor": [
+    "01.monitor.png",
+    "02.device.webp",
+    "03.marshaling.webp",
+    "04.people.webp",
+    "05.graphic.webp",
+    "06.cctv.webp"
+  ],
+  "metc/monitor": [
+    "01.monitor.webp",
+    "02.device.webp",
+    "03.marshaling.webp",
+    "04.people.webp",
+    "05.graphic.webp",
+    "06.cctv.webp"
   ],
   "ti-ho-healthcare": [
     "1.home.webp",
@@ -15,47 +57,5 @@
     "8.product.webp",
     "9.dental-technology.webp",
     "10.contact.webp"
-  ],
-  "metc": [
-    "01.intro.webp",
-    "02.function.webp",
-    "04.process.webp"
-  ],
-  "metc/monitor": [
-    "01.monitor.webp",
-    "02.device.webp",
-    "03.marshaling.webp",
-    "04.people.webp",
-    "05.graphic.webp",
-    "06.cctv.webp"
-  ],
-  "metc/en": [
-    "01.intro.webp"
-  ],
-  "metc/en/monitor": [
-    "01.monitor.png",
-    "02.device.webp",
-    "03.marshaling.webp",
-    "04.people.webp",
-    "05.graphic.webp",
-    "06.cctv.webp"
-  ],
-  "metc/en/dailyOrEmergency": [
-    "01.daily.png",
-    "02.emergency.png"
-  ],
-  "finance-tracker": [
-    "overview.webp"
-  ],
-  "finance-tracker/settings": [
-    "01.settings-profile.webp",
-    "02.settings-avatar.webp",
-    "03.settings-preferences.webp"
-  ],
-  "finance-tracker/magic-link": [
-    "01.login.webp",
-    "02.login-after-send-email.webp",
-    "03.email-get-magic-link-for-login.webp",
-    "04.after-login-will-go-to-main-page.webp"
   ]
 }

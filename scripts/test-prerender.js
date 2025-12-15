@@ -30,6 +30,23 @@ async function findHtmlFiles(dir, baseDir = dir) {
   return files
 }
 
+async function findPayloadFiles(dir, baseDir = dir) {
+  const entries = await readdir(dir, { withFileTypes: true })
+  const files = []
+
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...await findPayloadFiles(fullPath, baseDir))
+    }
+    else if (entry.name === '_payload.json') {
+      files.push(fullPath.replace(baseDir, '').replace(/\\/g, '/'))
+    }
+  }
+
+  return files
+}
+
 async function checkPrerenderedPages() {
   try {
     console.log('🔍 檢查預渲染的頁面...\n')
@@ -60,9 +77,7 @@ async function checkPrerenderedPages() {
     console.log(`  總計:           ${htmlFiles.length} 個頁面\n`)
 
     // 檢查是否有 payload.json 檔案
-    const payloadPattern = '**/_payload.json'
-    const { glob } = await import('glob')
-    const payloadFiles = await glob(payloadPattern, { cwd: outputDir })
+    const payloadFiles = await findPayloadFiles(outputDir)
     console.log(`📦 Payload 檔案: ${payloadFiles.length} 個\n`)
 
     // 顯示前 10 個 posts 和 projects
