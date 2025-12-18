@@ -395,6 +395,32 @@ export default defineNuxtConfig({
                   routes.push(...(await scanContentDir(fullPath, locale, type)))
                 }
                 else if (file.name.endsWith('.md')) {
+                  // 只預渲染已發布內容：避免 draft/unpublished 內容被納入 sitemap 與產物
+                  let shouldSkip = false
+                  try {
+                    const raw = await fs.readFile(fullPath, 'utf8')
+                    if (raw.startsWith('---')) {
+                      const lines = raw.split(/\r?\n/)
+                      for (let i = 1; i < lines.length; i++) {
+                        const line = (lines[i] || '').trim()
+                        if (line === '---')
+                          break
+                        if (line.toLowerCase().startsWith('published:')) {
+                          const value = line.split(':')[1]?.trim().replace(/^['"]|['"]$/g, '').toLowerCase()
+                          if (value === 'false') {
+                            shouldSkip = true
+                            break
+                          }
+                        }
+                      }
+                    }
+                  }
+                  catch {
+                    // 讀取失敗時保守地保留路由，避免誤漏
+                  }
+                  if (shouldSkip)
+                    continue
+
                   // 將檔案路徑轉換為路由
                   const slug = file.name.replace(/\.md$/, '')
                   const routePath = locale === 'en'

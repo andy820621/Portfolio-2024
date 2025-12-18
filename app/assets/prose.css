@@ -1,7 +1,22 @@
 .prose {
+  --fg-light: #888;
+  --fg: #555;
+  --fg-deep: #222;
+  --fg-deeper: #000;
+
   max-width: 65ch;
   font-size: 1rem;
   line-height: 1.75;
+  color: var(--fg);
+}
+.prose a:hover {
+  border-bottom: 1px solid var(--fg);
+}
+html.dark .prose {
+  --fg-light: #888;
+  --fg: #bbb;
+  --fg-deep: #ddd;
+  --fg-deeper: #fff;
 }
 .prose [class~='lead'] {
   color: #4b5563;
@@ -81,20 +96,14 @@
 }
 .prose blockquote {
   font-weight: 500;
-  font-style: italic;
+  font-style: normal;
   color: inherit;
   border-left-width: 0.25rem;
   border-color: rgba(125, 125, 125, 0.3);
-  quotes: '\201C' '\201D' '\2018' '\2019';
+  /* quotes: '\201C' '\201D' '\2018' '\2019'; */
   margin-top: 1.6em;
   margin-bottom: 1.6em;
   padding-left: 1em;
-}
-.prose blockquote p:first-of-type::before {
-  content: open-quote;
-}
-.prose blockquote p:last-of-type::after {
-  content: close-quote;
 }
 .prose h1 {
   color: var(--fg-deeper);
@@ -178,6 +187,17 @@
 .prose pre code::after {
   content: none;
 }
+.prose pre:not(.shiki) {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+.prose .shiki {
+  font-family: 'DM Mono', 'Input Mono', 'Fira Code', monospace;
+  font-size: 0.92em;
+  line-height: 1.4;
+  margin: 0.5em 0;
+}
 .prose table {
   width: 100%;
   table-layout: auto;
@@ -216,6 +236,12 @@
 .prose p {
   margin-top: 1.25em;
   margin-bottom: 1.25em;
+}
+.prose p > img {
+  width: 100%;
+  --uno: shadow rounded-lg;
+  transform: scale(1.05);
+  margin: 2.6em 0;
 }
 .prose img {
   width: 100%;
@@ -312,8 +338,13 @@
 .prose b {
   color: var(--fg-deep);
 }
+.prose s {
+  opacity: 0.5;
+}
 .prose em {
   color: inherit;
+  --uno: font-serif;
+  font-size: 1.05em;
 }
 .prose-sm {
   font-size: 0.875rem;

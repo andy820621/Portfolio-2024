@@ -108,7 +108,7 @@ useSchemaOrg([
             :title="post.title"
             :date="post.date"
             :description="post.description"
-            :image="post.image"
+            :image="post.cover ?? post.image"
             :alt="post.alt"
             :og-image="post.ogImage"
             :tags="post.tags"
@@ -117,6 +117,7 @@ useSchemaOrg([
             :reading-time="post.readingTime"
             :image-class="post.imageClass"
           />
+          <!-- <pre>{{ post }}</pre> -->
         </template>
       </div>
 

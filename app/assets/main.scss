@@ -33,7 +33,7 @@ body {
 }
 
 * {
-  scrollbar-color: var(--clr-scrollbar) var(--c-bg);
+  scrollbar-color: var(--clr-scrollbar) var(--clr-bg);
 }
 
 .sponsorkit-avatar {
@@ -58,7 +58,7 @@ body {
 }
 ::-webkit-scrollbar-track,
 ::-webkit-scrollbar-corner {
-  background: var(--c-bg);
+  background: var(--clr-bg);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
@@ -69,7 +69,7 @@ body {
   background: var(--clr-scrollbar-hover);
 }
 
-h2 + p > em:first-child {
+.prose h2 + p > em:first-child {
   opacity: 0.5;
   display: block;
   margin-top: -20px;

@@ -102,6 +102,13 @@ pnpm typecheck    # 執行 TypeScript 型別檢查
 - **樣式設計**：在全域樣式中自訂 CSS 變數
 - **多語系**：在 `i18n/` 目錄新增翻譯內容
 
+### Markdown / Prose 樣式
+
+- **Typography 主規則**：`app/assets/prose.css`（集中管理 `.prose` 的排版與顏色變數）
+- **工具輸出樣式**：`app/assets/markdown.css`（Shiki/Twoslash/標題錨點等，避免再放 `.prose` 基礎規則）
+- **預覽頁（不發布）**：`content/en/posts/typography-preview.md`、`content/zh/posts/typography-preview.md`（`published: false`，用於檢查常見 Markdown 覆蓋面）
+- **注意事項**：`app/components/content/Prose*.vue` 會覆寫 Nuxt Content 的渲染元件，若輸出語意（inline/block）改了，排版就會跟著變
+
 ---
 
 ## 部署

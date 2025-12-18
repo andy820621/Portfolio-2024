@@ -35,7 +35,7 @@ const breadcrumbs = computed(() => getBreadcrumbItems(customTitle))
         <NuxtLink
           v-if="index < breadcrumbs.length - 1"
           :to="localePath(item.item)"
-          class="breadcrumb-link transition-colors duration-200 hover:underline"
+          class="breadcrumb-link transition-colors duration-200 hover:underline hover:text-[#999]!"
           :aria-label="`Navigate to ${item.name || 'Untitled'}`"
         >
           {{ item.name || 'Untitled' }}
@@ -43,7 +43,7 @@ const breadcrumbs = computed(() => getBreadcrumbItems(customTitle))
         <!-- 當前頁面（不可點擊） -->
         <span
           v-else
-          class="breadcrumb-current text-base font-medium"
+          class="breadcrumb-current text-base font-medium dark:text-[#aaa]!"
           aria-current="page"
         >
           {{ item.name || 'Untitled' }}
