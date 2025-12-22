@@ -108,7 +108,7 @@ sitemap:
 
 ## 專案連結
 
-- [**Live Site**](https://barz.app)
+- [**Live Site**](/zh/)
 - [**GitHub**](https://github.com/andy820621/portfolio-2024)
 
 ---
