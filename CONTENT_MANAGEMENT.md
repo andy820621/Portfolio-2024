@@ -126,7 +126,7 @@ pnpm build  # prebuild 會自動執行此腳本
 #### 3. 生成元數據文件（首次或添加新圖片時）
 
 ```bash
-pnpm run build:originaldata
+pnpm run generate:metadata
 # 或
 node scripts/generate-project-images-metadata.js
 ```
@@ -164,7 +164,7 @@ node scripts/generate-project-images-metadata.js
 }
 ```
 
-**重要：** 手動編輯的元數據會被保留！再次執行 `build:originaldata` 不會覆蓋已編輯的內容。
+**重要：** 手動編輯的元數據會被保留！再次執行 `generate:metadata` 不會覆蓋已編輯的內容。
 
 #### 5. 創建 Markdown 內容
 
@@ -227,7 +227,7 @@ nuxt build
 ### 手動執行流程（元數據管理）
 
 ```
-[手動執行] pnpm run build:originaldata
+[手動執行] pnpm run generate:metadata
   ↓
 generate-project-images-metadata.js
   ├── 讀取：public/project-images-map.json
@@ -254,11 +254,11 @@ generate-project-images-metadata.js
 
 - [ ] 在 `public/project-images/project-name/` 放入圖片
 - [ ] 執行 `node scripts/generate-project-images-map.js`
-- [ ] **首次或有新圖片時**執行 `pnpm run build:originaldata`
+- [ ] **首次或有新圖片時**執行 `pnpm run generate:metadata`
 - [ ] （可選）手動編輯 `project-images-metadata.json` 優化內容
 - [ ] 創建 `content/en/projects/project-name.md`
 - [ ] 創建 `content/zh/projects/project-name.md`
-- [ ] 在 Markdown 中使用 `::ProjectLightBox{folder="project-name"}::`
+- [ ] 在 Markdown 中使用 `::ProjectLightBox{folder="project-name"}`（並以 `::` 結尾）
 - [ ] 測試訪問 `/projects/project-name`
 
 ---
@@ -279,13 +279,13 @@ generate-project-images-metadata.js
 **A:**
 
 - **Gallery**: 重新執行 `node scripts/generate-gallery-images-map.js`
-- **Projects**: 重新執行 `node scripts/generate-project-images-map.js`，如果有新圖片再執行 `pnpm run build:originaldata`
+- **Projects**: 重新執行 `node scripts/generate-project-images-map.js`，如果有新圖片再執行 `pnpm run generate:metadata`
 
 ### Q: 元數據會被覆蓋嗎？
 
 **A:** 不會！`generate-project-images-metadata.js` 會保留已存在的自定義元數據，只為新圖片生成初始元數據。
 
-### Q: 什麼時候需要執行 `build:originaldata`？
+### Q: 什麼時候需要執行 `generate:metadata`？
 
 **A:**
 

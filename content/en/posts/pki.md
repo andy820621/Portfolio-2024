@@ -7,7 +7,9 @@ alt: What is PKI? The digital foundation from encryption to trust
 ogImage: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 tags: [PKI, Public Key Infrastructure, Cybersecurity, Encryption, Digital Signatures, Security, Digital Certificates]
 categories: [Security, PKI]
+updatedAt: 2025/12/31
 published: true
+
 schemaOrg:
   - "@type": "BlogPosting"
     headline: "What is PKI? The digital foundation from encryption to trust"

@@ -160,7 +160,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       trailingSlash: true,
-
     },
   },
   site: {

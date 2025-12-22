@@ -13,7 +13,7 @@ published: true
 sitemap:
   lastmod: 2025-12-31
   changefreq: weekly
-  priority: 0.8
+  priority: 0.96
   images:
     - loc: /project-images/nuxt-content-mermaid.webp
       title: nuxt-content-mermaid

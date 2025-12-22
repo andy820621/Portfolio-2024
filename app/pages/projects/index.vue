@@ -106,7 +106,7 @@ useSchemaOrg([
           <postCard
             :path="localePath(post.path!)"
             :title="post.title"
-            :date="post.date"
+            :date="post.updatedAt ?? post.date"
             :description="post.description"
             :image="post.cover ?? post.image"
             :alt="post.alt"

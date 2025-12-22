@@ -11,6 +11,26 @@
     "finance-tracker.webp": {
       "title": "Finance Tracker",
       "description": "Finance Tracker"
+    },
+    "cert-apply.png": {
+      "title": "Cert Apply",
+      "description": "Cert Apply"
+    },
+    "nuxt-content-mermaid-wide.webp": {
+      "title": "Nuxt Content Mermaid Wide",
+      "description": "Nuxt Content Mermaid Wide"
+    },
+    "nuxt-content-mermaid.webp": {
+      "title": "Nuxt Content Mermaid",
+      "description": "Nuxt Content Mermaid"
+    },
+    "portfolio-2024-hero.webp": {
+      "title": "Portfolio 2024 Hero",
+      "description": "Portfolio 2024 Hero"
+    },
+    "portfolio-2024.webp": {
+      "title": "Portfolio 2024",
+      "description": "Portfolio 2024"
     }
   },
   "ti-ho-healthcare": {
@@ -141,6 +161,10 @@
     "main-page.webp": {
       "title": "Main Page",
       "description": "Finance Tracker - Main Page"
+    },
+    "overview.webp": {
+      "title": "Overview",
+      "description": "Finance Tracker - Overview"
     }
   },
   "finance-tracker/settings": {

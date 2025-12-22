@@ -155,7 +155,7 @@ html.dark .prose {
   content: '`';
 }
 .prose a code {
-  color: #111827;
+  color: #818181;
 }
 .prose pre {
   color: #e5e7eb;

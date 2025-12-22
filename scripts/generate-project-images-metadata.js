@@ -6,89 +6,112 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '..')
 
+const imageMapPath = path.join(projectRoot, 'public', 'project-images-map.json')
+const metadataPathEn = path.join(projectRoot, 'public', 'project-images-metadata.json')
+const metadataPathZh = path.join(projectRoot, 'public', 'project-images-metadata.zh.json')
+
+function readJsonFileOrFallback(filePath, fallback = {}) {
+  try {
+    if (!fs.existsSync(filePath))
+      return fallback
+    const content = fs.readFileSync(filePath, 'utf8')
+    return JSON.parse(content)
+  }
+  catch (error) {
+    console.warn(`讀取 JSON 失敗，將使用 fallback：${filePath}`, error)
+    return fallback
+  }
+}
+
+function writeJsonFile(filePath, data) {
+  fs.writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`)
+}
+
+function titleCase(text) {
+  return text.split(' ')
+    .filter(Boolean)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
+function titleCasePath(folderPath) {
+  return folderPath
+    .split('/')
+    .map(segment => titleCase(segment.replace(/-/g, ' ')))
+    .join('/')
+}
+
+function buildDefaultMetadata({ folder, image }) {
+  const nameWithoutExt = image.substring(0, image.lastIndexOf('.'))
+
+  // 嘗試從檔名解析信息： "01.id.title" 或 "01.id"
+  const orderNameMatch = nameWithoutExt.match(/^(\d+)\.([^.]+)(?:\.([^.]+))?$/)
+
+  let titleRaw
+  if (orderNameMatch) {
+    const [, , id, customTitle] = orderNameMatch
+    titleRaw = customTitle || id
+  }
+  else {
+    titleRaw = nameWithoutExt
+  }
+
+  const title = titleCase(titleRaw.replace(/-/g, ' '))
+  const folderLabel = folder ? titleCasePath(folder) : ''
+  const description = folderLabel ? `${folderLabel} - ${title}` : title
+
+  return { title, description }
+}
+
+function fillMissingMetadata({ imageMap, existingMetadata }) {
+  const metadata = { ...existingMetadata }
+  let addedCount = 0
+
+  Object.entries(imageMap).forEach(([folder, images]) => {
+    if (!metadata[folder])
+      metadata[folder] = {}
+
+    images.forEach((image) => {
+      if (metadata[folder]?.[image])
+        return
+
+      metadata[folder][image] = buildDefaultMetadata({ folder, image })
+      addedCount += 1
+    })
+  })
+
+  return { metadata, addedCount }
+}
+
 function main() {
   try {
     // 讀取已有的專案圖片映射檔
-    const imageMapPath = path.join(projectRoot, 'public', 'project-images-map.json')
     const imageMapContent = fs.readFileSync(imageMapPath, 'utf8')
     const imageMap = JSON.parse(imageMapContent)
 
-    // 嘗試讀取已有的元數據檔案 (如果存在)
-    const metadataPath = path.join(projectRoot, 'public', 'project-images-metadata.json')
-    let existingMetadata = {}
+    const existingMetadataEn = readJsonFileOrFallback(metadataPathEn, {})
+    const existingMetadataZh = readJsonFileOrFallback(metadataPathZh, {})
 
-    try {
-      if (fs.existsSync(metadataPath)) {
-        const metadataContent = fs.readFileSync(metadataPath, 'utf8')
-        existingMetadata = JSON.parse(metadataContent)
-        console.log('找到現有的元數據檔案，將保留已存在的自定義值')
-      }
-    }
-    catch (readErr) {
-      console.warn('讀取現有元數據檔案失敗，將創建新檔案', readErr)
-    }
+    if (Object.keys(existingMetadataEn).length)
+      console.log('找到現有的英文元數據檔案，將保留已存在的自定義值')
+    if (Object.keys(existingMetadataZh).length)
+      console.log('找到現有的中文元數據檔案，將保留已存在的自定義值')
 
-    // 初始化元數據物件 (以現有資料為基礎)
-    const metadata = { ...existingMetadata }
-
-    // 為每個專案資料夾建立元數據
-    Object.entries(imageMap).forEach(([folder, images]) => {
-      // 確保資料夾存在於元數據中
-      if (!metadata[folder]) {
-        metadata[folder] = {}
-      }
-
-      images.forEach((image) => {
-        // 檢查此圖片是否已有自定義元數據
-        if (metadata[folder]?.[image]) {
-          // 已有自定義元數據，保留不修改
-          console.log(`保留現有元數據: ${folder}/${image}`)
-          return // 跳過此圖片
-        }
-
-        // 否則生成新的元數據
-        const nameWithoutExt = image.substring(0, image.lastIndexOf('.'))
-
-        // 嘗試從檔名解析信息
-        const orderNameMatch = nameWithoutExt.match(/^(\d+)\.([^.]+)(?:\.([^.]+))?$/)
-
-        let title, description
-
-        if (orderNameMatch) {
-          const [, , id, customTitle] = orderNameMatch
-          title = customTitle ? customTitle.replace(/-/g, ' ') : id.replace(/-/g, ' ')
-        }
-        else {
-          title = nameWithoutExt.replace(/-/g, ' ')
-        }
-
-        // 首字大寫
-        title = title.split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ')
-
-        description = `${folder.replace(/-/g, ' ')} - ${title}`
-
-        // 將專案名稱首字大寫
-        description = description.split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ')
-
-        // 設置新的元數據
-        if (!metadata[folder]) {
-          metadata[folder] = {}
-        }
-        metadata[folder][image] = { title, description }
-      })
+    const { metadata: metadataEn, addedCount: addedEn } = fillMissingMetadata({
+      imageMap,
+      existingMetadata: existingMetadataEn,
+    })
+    const { metadata: metadataZh, addedCount: addedZh } = fillMissingMetadata({
+      imageMap,
+      existingMetadata: existingMetadataZh,
     })
 
-    // 將元數據寫入檔案
-    fs.writeFileSync(
-      metadataPath,
-      `${JSON.stringify(metadata, null, 2)}\n`,
-    )
+    writeJsonFile(metadataPathEn, metadataEn)
+    writeJsonFile(metadataPathZh, metadataZh)
 
-    console.log('元數據檔案已生成：public/project-images-metadata.json')
+    console.log('元數據檔案已生成/更新：')
+    console.log(`- public/project-images-metadata.json (+${addedEn})`)
+    console.log(`- public/project-images-metadata.zh.json (+${addedZh})`)
   }
   catch (error) {
     console.error('Error generating image metadata:', error)

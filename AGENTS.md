@@ -25,7 +25,7 @@ pnpm preview           # 預覽產物
 pnpm lint / lint:fix   # ESLint（基於 @antfu/eslint-config + UnoCSS plugin）
 pnpm typecheck         # vue-tsc
 pnpm test:prerender    # 跑 scripts/test-prerender.js 驗證 Nitro 預渲染
-pnpm run generate:metadata  # 手動生成/更新 project image metadata（CONTENT_MANAGEMENT.md 中的 build:originaldata 即此指令）
+pnpm run generate:metadata  # 手動生成/更新 project image metadata
 node scripts/generate-gallery-images-map.js   # 可單獨更新 gallery 映射
 node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 ```
@@ -54,7 +54,7 @@ node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 - 圖片置於 `public/project-images/{project}/`（可含子資料夾）；建議 `01.intro.hero.webp` 這類檔名以控制排序。
 - 執行 `node scripts/generate-project-images-map.js` 產生 `public/project-images-map.json`。
 - 若有新圖片需更新描述，執行 `pnpm run generate:metadata` 生成/合併 `project-images-metadata.json` 與 `project-images-metadata.zh.json`，再視需要手動調整。
-- 於 `content/en/projects/*.md` 與 `content/zh/projects/*.md` 撰寫內容並透過 `::ProjectLightBox{folder="project"}::` 插槽載入圖片。
+- 於 `content/en/projects/*.md` 與 `content/zh/projects/*.md` 撰寫內容並透過 `::ProjectLightBox{folder="project"}` 區塊載入圖片（並以 `::` 結尾）。
 
 ## 開發注意事項
 

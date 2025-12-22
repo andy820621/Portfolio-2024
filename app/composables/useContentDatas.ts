@@ -26,13 +26,13 @@ export async function useContentDatas(folderName = 'projects') {
             'alt',
             'ogImage',
             'date',
+            'updatedAt',
             'tags',
             'published',
             'imageClass',
             'wordCount',
             'readingTime',
           )
-          .order('date', 'DESC')
           .all()
 
         return contents
@@ -51,24 +51,39 @@ export async function useContentDatas(folderName = 'projects') {
   })
 
   const formattedData = computed(() => {
-    if (!contentDatas.value)
-      return []
+    const list = contentDatas.value ?? []
 
-    return contentDatas.value.map(content => ({
-      path: content.path,
-      title: content.title || 'no-title available',
-      description: content.description || 'no-description available',
-      cover: content.cover || undefined,
-      image: content.image || '/not-found.jpg',
-      alt: content.alt || 'no alter data available',
-      ogImage: content.ogImage || '/not-found.jpg',
-      date: content.date || undefined,
-      tags: content.tags || [],
-      published: content.published ?? true,
-      wordCount: content.wordCount || 0,
-      readingTime: content.readingTime || undefined,
-      imageClass: content.imageClass || '',
-    }))
+    // 轉成 timestamp，無效就回 0（會排到最後）
+    const toTs = (v?: string | Date) => {
+      if (!v)
+        return 0
+      const d = typeof v === 'string' ? new Date(v) : v
+      const ts = d.getTime()
+      return Number.isFinite(ts) ? ts : 0
+    }
+
+    return [...list]
+      .sort((a, b) => {
+        const aTs = toTs(a.updatedAt || a.date)
+        const bTs = toTs(b.updatedAt || b.date)
+        return bTs - aTs
+      })
+      .map(content => ({
+        path: content.path,
+        title: content.title || 'no-title available',
+        description: content.description || 'no-description available',
+        cover: content.cover || undefined,
+        image: content.image || '/not-found.jpg',
+        alt: content.alt || 'no alter data available',
+        ogImage: content.ogImage || '/not-found.jpg',
+        date: content.date || undefined,
+        updatedAt: content.updatedAt || undefined,
+        tags: content.tags || [],
+        published: content.published ?? true,
+        wordCount: content.wordCount || 0,
+        readingTime: content.readingTime || undefined,
+        imageClass: content.imageClass || '',
+      }))
   })
 
   return {
