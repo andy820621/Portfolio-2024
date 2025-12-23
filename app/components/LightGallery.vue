@@ -90,13 +90,13 @@ defineExpose({
 @import 'lightgallery/css/lg-transitions.css';
 
 .lg-backdrop {
-  background-color: hsla(24, 8%, 8%, 0.85);
+  background-color: color-mix(in oklab, var(--clr-black) 85%, transparent);
   backdrop-filter: blur(2.4px);
 }
 
 .lg-outer .lg-thumb-item {
   border-radius: 4px;
-  border: 2px solid #fff;
+  border: 2px solid var(--clr-white);
   transition: border-color 0.25s ease;
 }
 .lg-outer .lg-thumb-item.active,

@@ -1,5 +1,5 @@
 ---
-title: Bilingual Nuxt Content v3 + i18n: a maintainable content system
+title: "Bilingual Nuxt Content v3 + i18n: a maintainable content system"
 date: 2025/12/21
 description: Using a real portfolio as an example, this post explains how to manage bilingual Markdown with @nuxt/content v3 collections and Zod schemas to build a consistent, extensible, SEO-friendly content system.
 cover: /blog-images/nuxt-content-v3-i18n-bilingual-site-cover.webp

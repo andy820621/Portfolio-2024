@@ -2,21 +2,21 @@
 .dark .shiki,
 .dark .shiki span {
   color: var(--s-dark, inherit);
-  --twoslash-popup-bg: #191919;
-  --twoslash-border-color: #8884;
+  --twoslash-popup-bg: var(--p-color-bg-surface2, var(--clr-bg));
+  --twoslash-border-color: var(--p-color-border, color-mix(in oklab, var(--clr-text) 24%, transparent));
 }
 .dark .shiki {
-  background-color: #0e0e0e;
+  background-color: var(--p-code-block-color-bg, var(--clr-bg));
 }
 
 html:not(.dark) .shiki {
-  background-color: #fafafa;
+  background-color: var(--p-code-block-color-bg, var(--clr-bg));
 }
 
 html:not(.dark) .shiki,
 html:not(.dark) .shiki span {
   color: var(--s-light, inherit);
-  --twoslash-popup-bg: #fafafa;
+  --twoslash-popup-bg: var(--p-color-bg-surface2, var(--clr-bg));
 }
 
 /* Twoslash */

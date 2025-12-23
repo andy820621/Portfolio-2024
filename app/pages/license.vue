@@ -51,21 +51,23 @@ useSchemaOrg([
 </script>
 
 <template>
-  <div class="prose mx-auto">
+  <div class="relative">
     <RandomBackground />
 
-    <article>
-      <ContentRenderer v-if="content" :value="content" />
+    <div class="prose mx-auto">
+      <article>
+        <ContentRenderer v-if="content" :value="content" />
 
-      <div v-else-if="error" class="grid h-[80vh] w-[80vw] items-center justify-center">
-        <h1>{{ $t('error.occurred') }}</h1>
-        <p>{{ error.message }}</p>
-      </div>
+        <div v-else-if="error" class="grid h-[80vh] w-[80vw] items-center justify-center">
+          <h1>{{ $t('error.occurred') }}</h1>
+          <p>{{ error.message }}</p>
+        </div>
 
-      <div v-else class="grid h-[80vh] w-[80vw] items-center justify-center">
-        <h1>{{ $t('loading') }}</h1>
-        <Icon name="mdi:loading" class="animate-spin" size="81" />
-      </div>
-    </article>
+        <div v-else class="grid h-[80vh] w-[80vw] items-center justify-center">
+          <h1>{{ $t('loading') }}</h1>
+          <Icon name="mdi:loading" class="animate-spin" size="81" />
+        </div>
+      </article>
+    </div>
   </div>
 </template>

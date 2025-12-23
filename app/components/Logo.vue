@@ -363,7 +363,7 @@ function handleLeave() {
 #path4,
 #path5,
 #circle {
-  stroke: #303030;
+  stroke: var(--clr-text);
   stroke-width: 0.5;
   transition:
     stroke 0.3s,
@@ -378,7 +378,7 @@ svg #circle {
 #path3,
 #path4,
 #path5 {
-  fill: #303030;
+  fill: var(--clr-text);
 }
 
 #circle {
@@ -393,7 +393,7 @@ svg #circle {
   #path4,
   #path5,
   #circle {
-    stroke: #fdfdfd;
+    stroke: var(--clr-text);
   }
 
   #path1,
@@ -401,7 +401,7 @@ svg #circle {
   #path3,
   #path4,
   #path5 {
-    fill: #fdfdfd;
+    fill: var(--clr-text);
   }
 }
 

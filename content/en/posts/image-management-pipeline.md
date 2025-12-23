@@ -1,7 +1,7 @@
 ---
-title: Image management at scale: JSON maps, metadata, LightBox, and Schema.org licensing
+title: "Image management at scale: JSON maps, metadata, LightBox, and Schema.org licensing"
 date: 2025/12/18
-description: How this portfolio manages a large image library: build-time JSON maps, optional per-image metadata, deterministic ordering, and LightBox integration (plus Schema.org licensing fields).
+description: "How this portfolio manages a large image library: build-time JSON maps, optional per-image metadata, deterministic ordering, and LightBox integration (plus Schema.org licensing fields)."
 image: /blog-images/image-management-pipeline.webp
 alt: Projects and gallery image pipeline
 ogImage: /blog-images/image-management-pipeline.webp

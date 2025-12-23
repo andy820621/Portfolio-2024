@@ -35,7 +35,7 @@ const breadcrumbs = computed(() => getBreadcrumbItems(customTitle))
         <NuxtLink
           v-if="index < breadcrumbs.length - 1"
           :to="localePath(item.item)"
-          class="breadcrumb-link transition-colors duration-200 hover:underline hover:text-[#999]!"
+          class="breadcrumb-link transition-colors duration-200 hover:underline hover:text-[var(--clr-grey)]!"
           :aria-label="`Navigate to ${item.name || 'Untitled'}`"
         >
           {{ item.name || 'Untitled' }}
@@ -43,7 +43,7 @@ const breadcrumbs = computed(() => getBreadcrumbItems(customTitle))
         <!-- 當前頁面（不可點擊） -->
         <span
           v-else
-          class="breadcrumb-current text-base font-medium dark:text-[#aaa]!"
+          class="breadcrumb-current text-base font-medium dark:text-[var(--clr-lightgrey)]!"
           aria-current="page"
         >
           {{ item.name || 'Untitled' }}
@@ -78,15 +78,15 @@ const breadcrumbs = computed(() => getBreadcrumbItems(customTitle))
 }
 
 .breadcrumb-link {
-  color: var(--c-text-light, #6b7280);
+  color: var(--c-text-light, var(--clr-grey));
 }
 
 .breadcrumb-link:hover {
-  color: var(--c-text, #374151);
+  color: var(--c-text, var(--clr-text));
 }
 
 .breadcrumb-current {
-  color: var(--c-text, #374151);
+  color: var(--c-text, var(--clr-text));
 }
 
 @media (max-width: 640px) {

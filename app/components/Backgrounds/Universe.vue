@@ -174,7 +174,9 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
 `
 
 const mask = computed(() => {
-  return colorMode.value === 'dark' ? '' : 'radial-gradient(circle, #00000008, black);'
+  return colorMode.value === 'dark'
+    ? ''
+    : 'radial-gradient(circle, color-mix(in oklab, var(--clr-black) 8%, transparent), var(--clr-black))'
 })
 </script>
 

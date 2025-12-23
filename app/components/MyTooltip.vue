@@ -76,13 +76,13 @@ const normalizedKbds = computed(() => props.kbds
   min-height: 1.5rem;
   padding: 0.25rem 0.6rem;
   border-radius: 0.35rem;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  background: rgba(248, 250, 252, 0.95);
-  color: #0f172a;
+  border: 1px solid color-mix(in oklab, var(--clr-black) 14%, transparent);
+  background: color-mix(in oklab, var(--clr-white) 95%, transparent);
+  color: var(--clr-black);
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.1;
-  box-shadow: 0 10px 35px rgba(15, 15, 30, 0.25);
+  box-shadow: 0 10px 35px color-mix(in oklab, var(--clr-black) 25%, transparent);
   pointer-events: auto;
   opacity: 0;
   transform: scale(0.94);
@@ -90,10 +90,10 @@ const normalizedKbds = computed(() => props.kbds
 }
 
 .dark .my-tooltip {
-  background: rgba(15, 23, 42, 0.95);
-  color: #f8fafc;
-  border-color: rgba(148, 163, 184, 0.35);
-  box-shadow: 0 15px 35px rgba(2, 6, 23, 0.55);
+  background: color-mix(in oklab, var(--clr-bg) 95%, transparent);
+  color: var(--clr-text);
+  border-color: color-mix(in oklab, var(--clr-text) 35%, transparent);
+  box-shadow: 0 15px 35px color-mix(in oklab, var(--clr-black) 55%, transparent);
 }
 
 .my-tooltip__label {
@@ -131,9 +131,9 @@ const normalizedKbds = computed(() => props.kbds
   padding: 0 0.35rem;
   padding-top: 0.03rem;
   border-radius: 0.2rem;
-  border: 1px solid rgba(15, 23, 42, 0.2);
-  background: rgba(255, 255, 255, 0.85);
-  color: #0f172a;
+  border: 1px solid color-mix(in oklab, var(--clr-black) 20%, transparent);
+  background: color-mix(in oklab, var(--clr-white) 85%, transparent);
+  color: var(--clr-black);
   font-size: 0.65rem;
   font-weight: 600;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
@@ -142,9 +142,9 @@ const normalizedKbds = computed(() => props.kbds
 }
 
 .dark .my-tooltip__kbd {
-  border-color: rgba(248, 250, 252, 0.25);
-  background: rgba(15, 23, 42, 0.65);
-  color: #f8fafc;
+  border-color: color-mix(in oklab, var(--clr-text) 25%, transparent);
+  background: color-mix(in oklab, var(--clr-bg) 65%, transparent);
+  color: var(--clr-text);
 }
 
 .my-tooltip[data-state='delayed-open'],

@@ -8,6 +8,8 @@ const elementPerPage = ref(5)
 const { pageNumber, totalPage, paginatedData, onPreviousPageClick, onNextPageClick }
   = usePagination(filteredData, elementPerPage)
 
+usePaginationQuerySync({ pageNumber, totalPage })
+
 // 重置分頁當過濾條件改變時 - 使用 watch 代替 watchEffect 避免無限循環
 watch([searchText, selectedTags], () => {
   pageNumber.value = 1

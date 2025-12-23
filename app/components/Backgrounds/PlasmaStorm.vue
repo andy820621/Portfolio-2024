@@ -74,7 +74,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 const colorMode = useColorMode()
 const mask = computed(() => {
-  return colorMode.value === 'dark' ? 'radial-gradient(circle, #00000008, #eee)' : 'radial-gradient(circle, #00000008, black);'
+  return colorMode.value === 'dark'
+    ? 'radial-gradient(circle, color-mix(in oklab, var(--clr-black) 8%, transparent), var(--clr-bgLight))'
+    : 'radial-gradient(circle, color-mix(in oklab, var(--clr-black) 8%, transparent), var(--clr-black))'
 })
 </script>
 

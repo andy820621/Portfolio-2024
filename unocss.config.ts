@@ -27,12 +27,12 @@ export default defineConfig({
       '--enter-stage': n,
     })],
     ['underline-base', {
-      'text-decoration': 'underline 0.15em var(--clr-underline, rgba(0, 0, 0, 1))',
+      'text-decoration': 'underline 0.15em var(--clr-underline, var(--clr-text))',
       'text-underline-offset': '0.2em',
       'transition': 'text-decoration-color 300ms, text-underline-offset 300ms',
     }],
     ['underline-base-hover', {
-      'text-decoration-color': 'var(--clr-underline-hover, rgba(0, 0, 255, 1))',
+      'text-decoration-color': 'var(--clr-underline-hover, var(--clr-primary-green))',
       'text-underline-offset': '0.3em',
     }],
   ],

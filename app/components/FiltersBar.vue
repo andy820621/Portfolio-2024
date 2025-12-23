@@ -80,9 +80,9 @@ function removeTag(tag: string) {
 <style scoped>
 .glass-effect {
   --border-width: 1px;
-  --border-start: rgba(47, 94, 98, 0.5);
-  --border-end: rgba(47, 94, 98, 0.1);
-  --background-color: hsla(168, 24%, 24%, 0.1);
+  --border-start: color-mix(in oklab, var(--clr-primary-green) 50%, transparent);
+  --border-end: color-mix(in oklab, var(--clr-primary-green) 10%, transparent);
+  --background-color: color-mix(in oklab, var(--clr-primary-green) 10%, transparent);
 
   position: relative;
   background-color: var(--background-color);
@@ -92,9 +92,9 @@ function removeTag(tag: string) {
 }
 
 :global(.dark .glass-effect) {
-  --border-start: rgba(255, 255, 255, 0.24);
-  --border-end: rgba(255, 255, 255, 0.05);
-  --background-color: hsla(185, 34%, 29%, 0.3);
+  --border-start: color-mix(in oklab, var(--clr-text) 24%, transparent);
+  --border-end: color-mix(in oklab, var(--clr-text) 5%, transparent);
+  --background-color: color-mix(in oklab, var(--clr-dark-green) 30%, transparent);
 }
 
 .glass-effect::before {
@@ -107,11 +107,11 @@ function removeTag(tag: string) {
   border: var(--border-width) solid transparent;
   background: linear-gradient(135deg, var(--border-start), var(--border-end)) border-box;
   -webkit-mask:
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(var(--clr-white) 0 0) padding-box,
+    linear-gradient(var(--clr-white) 0 0);
   mask:
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(var(--clr-white) 0 0) padding-box,
+    linear-gradient(var(--clr-white) 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }

@@ -105,6 +105,7 @@ Want the implementation details? I wrote a series of deep dives:
 6. [Nuxt 4 SEO guide](/posts/nuxt-seo-guide)
 
 ---
+
 ## Project Links
 
 - [**Live Site**](/)

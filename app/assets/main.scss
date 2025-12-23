@@ -14,7 +14,7 @@ body {
 }
 
 ::selection {
-  background: rgba(47, 94, 98, 0.25);
+  background: color-mix(in oklab, var(--clr-primary-green) 25%, transparent);
 }
 
 #nprogress {

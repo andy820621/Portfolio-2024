@@ -1,40 +1,119 @@
 .prose {
-  --fg-light: #888;
-  --fg: #555;
-  --fg-deep: #222;
-  --fg-deeper: #000;
+  --p-color-text-strong: var(--clr-text-strong);
+  --p-color-text: var(--clr-text);
+  --p-color-text-muted: var(--clr-text-muted);
+  --p-color-text-xmuted: var(--clr-text-xmuted);
+  --p-color-text-disabled: var(--clr-text-disabled);
+  --p-color-text-accent: var(--clr-text-accent);
+  --p-color-text-note: var(--clr-text-note);
+  --p-color-text-info: var(--clr-text-info);
+  --p-color-text-warning: var(--clr-text-warning);
+  --p-color-text-success: var(--clr-text-success);
+  --p-color-text-danger: var(--clr-text-danger);
+  --p-color-text-syntax1: var(--clr-syntax-1);
+  --p-color-text-syntax2: var(--clr-syntax-2);
+  --p-color-text-syntax3: var(--clr-syntax-3);
+  --p-color-text-syntax4: var(--clr-syntax-4);
+  --p-color-bg: var(--clr-bg);
+  --p-color-bg-surface1: var(--clr-surface-1);
+  --p-color-bg-surface1hover: var(--clr-surface-1-hover);
+  --p-color-bg-surface2: var(--clr-surface-2);
+  --p-color-bg-surface2hover: var(--clr-surface-2-hover);
+  --p-color-bg-surface2active: var(--clr-surface-2-active);
+  --p-color-bg-accent: var(--clr-bg-accent);
+  --p-color-bg-note: var(--clr-bg-note);
+  --p-color-bg-info: var(--clr-bg-info);
+  --p-color-bg-warning: var(--clr-bg-warning);
+  --p-color-bg-success: var(--clr-bg-success);
+  --p-color-bg-danger: var(--clr-bg-danger);
+  --p-color-border: var(--clr-border);
+  --p-color-border-subtle: var(--clr-border-subtle);
+  --p-color-border-outline: var(--clr-border-outline);
+  --p-link-text-color: var(--p-color-text-accent);
+  --p-link-text-decoration-color: color-mix(in oklab, var(--p-color-text-accent) 25%, transparent);
+  --p-code-block-color-bg: var(--p-color-bg-surface2);
+  --p-code-block-color-text: var(--p-color-text);
+  --p-code-block-color-constant: var(--p-color-text-syntax1);
+  --p-code-block-color-string: var(--p-color-text-syntax2);
+  --p-code-block-color-comment: var(--p-color-text-muted);
+  --p-code-block-color-keyword: var(--p-color-text-syntax3);
+  --p-code-block-color-parameter: var(--p-color-text);
+  --p-code-block-color-function: var(--p-color-text-syntax4);
+  --p-code-block-color-string-expression: var(--p-color-text-syntax2);
+  --p-code-block-color-punctuation: var(--p-color-text);
+  --p-code-block-color-link: var(--p-color-text-syntax2);
+  --p-code-block-line-number-color-text: var(--p-color-text-xmuted);
+  --shiki-foreground: var(--p-code-block-color-text);
+  --shiki-background: var(--p-code-block-color-bg);
+  --shiki-token-constant: var(--p-code-block-color-constant);
+  --shiki-token-string: var(--p-code-block-color-string);
+  --shiki-token-comment: var(--p-code-block-color-comment);
+  --shiki-token-keyword: var(--p-code-block-color-keyword);
+  --shiki-token-parameter: var(--p-code-block-color-parameter);
+  --shiki-token-function: var(--p-code-block-color-function);
+  --shiki-token-string-expression: var(--p-code-block-color-string-expression);
+  --shiki-token-punctuation: var(--p-code-block-color-punctuation);
+  --shiki-token-link: var(--p-code-block-color-link);
 
   max-width: 65ch;
   font-size: 1rem;
   line-height: 1.75;
-  color: var(--fg);
+  color: var(--p-color-text);
 }
 .prose a:hover {
-  border-bottom: 1px solid var(--fg);
+  border-bottom-color: color-mix(in oklab, var(--p-color-text-accent) 70%, transparent);
 }
 html.dark .prose {
-  --fg-light: #888;
-  --fg: #bbb;
-  --fg-deep: #ddd;
-  --fg-deeper: #fff;
+  --p-color-text-strong: var(--clr-text-strong);
+  --p-color-text: var(--clr-text);
+  --p-color-text-muted: var(--clr-text-muted);
+  --p-color-text-xmuted: var(--clr-text-xmuted);
+  --p-color-text-disabled: var(--clr-text-disabled);
+  --p-color-text-accent: var(--clr-text-accent);
+  --p-color-text-note: var(--clr-text-note);
+  --p-color-text-info: var(--clr-text-info);
+  --p-color-text-warning: var(--clr-text-warning);
+  --p-color-text-success: var(--clr-text-success);
+  --p-color-text-danger: var(--clr-text-danger);
+  --p-color-text-syntax1: var(--clr-syntax-1);
+  --p-color-text-syntax2: var(--clr-syntax-2);
+  --p-color-text-syntax3: var(--clr-syntax-3);
+  --p-color-text-syntax4: var(--clr-syntax-4);
+  --p-color-bg: var(--clr-bg);
+  --p-color-bg-surface1: var(--clr-surface-1);
+  --p-color-bg-surface1hover: var(--clr-surface-1-hover);
+  --p-color-bg-surface2: var(--clr-surface-2);
+  --p-color-bg-surface2hover: var(--clr-surface-2-hover);
+  --p-color-bg-surface2active: var(--clr-surface-2-active);
+  --p-color-bg-accent: var(--clr-bg-accent);
+  --p-color-bg-note: var(--clr-bg-note);
+  --p-color-bg-info: var(--clr-bg-info);
+  --p-color-bg-warning: var(--clr-bg-warning);
+  --p-color-bg-success: var(--clr-bg-success);
+  --p-color-bg-danger: var(--clr-bg-danger);
+  --p-color-border: var(--clr-border);
+  --p-color-border-subtle: var(--clr-border-subtle);
+  --p-color-border-outline: var(--clr-border-outline);
 }
 .prose [class~='lead'] {
-  color: #4b5563;
+  color: var(--p-color-text-muted);
   font-size: 1.25em;
   line-height: 1.6;
   margin-top: 1.2em;
   margin-bottom: 1.2em;
 }
 .prose a {
-  color: var(--fg-deeper);
+  color: var(--p-link-text-color);
   text-decoration: none;
   font-weight: 500;
   font-weight: inherit;
-  border-bottom: 1px solid rgba(125, 125, 125, 0.3);
-  transition: border 0.3s ease-in-out;
+  border-bottom: 1px solid var(--p-link-text-decoration-color);
+  transition:
+    color 0.2s ease,
+    border-bottom-color 0.2s ease;
 }
 .prose strong {
-  color: var(--fg-deep);
+  color: var(--p-color-text-strong);
   font-weight: 600;
 }
 .prose ol[type='A'] {
@@ -72,7 +151,7 @@ html.dark .prose {
   content: counter(list-item, var(--list-counter-style, decimal)) '.';
   position: absolute;
   font-weight: 400;
-  color: #6b7280;
+  color: var(--p-color-text-muted);
   left: 0;
 }
 .prose ul > li {
@@ -82,7 +161,7 @@ html.dark .prose {
 .prose ul > li::before {
   content: '';
   position: absolute;
-  background-color: #d1d5db;
+  background-color: var(--p-color-border);
   border-radius: 50%;
   width: 0.375em;
   height: 0.375em;
@@ -90,7 +169,7 @@ html.dark .prose {
   left: 0.25em;
 }
 .prose hr {
-  border-color: rgba(125, 125, 125, 0.3);
+  border-color: var(--p-color-border);
   width: 50px;
   margin: 3em auto;
 }
@@ -99,14 +178,14 @@ html.dark .prose {
   font-style: normal;
   color: inherit;
   border-left-width: 0.25rem;
-  border-color: rgba(125, 125, 125, 0.3);
+  border-color: var(--p-color-text-note);
   /* quotes: '\201C' '\201D' '\2018' '\2019'; */
   margin-top: 1.6em;
   margin-bottom: 1.6em;
   padding-left: 1em;
 }
 .prose h1 {
-  color: var(--fg-deeper);
+  color: var(--p-color-text-strong);
   font-weight: 800;
   font-size: 2.25em;
   margin-top: 0;
@@ -114,7 +193,7 @@ html.dark .prose {
   line-height: 1.1111111;
 }
 .prose h2 {
-  color: var(--fg-deep);
+  color: var(--p-color-text-strong);
   font-weight: 700;
   font-size: 1.5em;
   margin-top: 2em;
@@ -138,13 +217,13 @@ html.dark .prose {
   line-height: 1.5;
 }
 .prose figure figcaption {
-  color: #6b7280;
+  color: var(--p-color-text-muted);
   font-size: 0.875em;
   line-height: 1.4285714;
   margin-top: 0.8571429em;
 }
 .prose code {
-  color: var(--fg-deep);
+  color: var(--p-color-text-strong);
   font-weight: 600;
   font-size: 0.875em;
 }
@@ -155,10 +234,10 @@ html.dark .prose {
   content: '`';
 }
 .prose a code {
-  color: #818181;
+  color: var(--p-color-text-muted);
 }
 .prose pre {
-  color: #e5e7eb;
+  color: var(--p-code-block-color-text);
   overflow-x: auto;
   font-size: 0.875em;
   line-height: 1.7142857;
@@ -197,6 +276,7 @@ html.dark .prose {
   font-size: 0.92em;
   line-height: 1.4;
   margin: 0.5em 0;
+  background-color: var(--p-code-block-color-bg);
 }
 .prose table {
   width: 100%;
@@ -208,10 +288,10 @@ html.dark .prose {
   line-height: 1.7142857;
 }
 .prose thead {
-  color: var(--fg-deep);
+  color: var(--p-color-text-strong);
   font-weight: 600;
   border-bottom-width: 1px;
-  border-bottom-color: #8882;
+  border-bottom-color: var(--p-color-border-subtle);
 }
 .prose thead th {
   vertical-align: bottom;
@@ -221,7 +301,7 @@ html.dark .prose {
 }
 .prose tbody tr {
   border-bottom-width: 1px;
-  border-bottom-color: #8882;
+  border-bottom-color: var(--p-color-border-subtle);
 }
 .prose tbody tr:last-child {
   border-bottom-width: 0;
@@ -336,7 +416,7 @@ html.dark .prose {
   margin-bottom: 0;
 }
 .prose b {
-  color: var(--fg-deep);
+  color: var(--p-color-text-strong);
 }
 .prose s {
   opacity: 0.5;

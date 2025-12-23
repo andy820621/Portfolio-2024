@@ -149,7 +149,7 @@ onMounted(async () => {
   )
 })
 
-const mask = 'radial-gradient(circle, #00000008, black);'
+const mask = 'radial-gradient(circle, color-mix(in oklab, var(--clr-black) 8%, transparent), var(--clr-black));'
 </script>
 
 <template>

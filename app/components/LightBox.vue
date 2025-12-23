@@ -202,12 +202,12 @@ function onSlideChange(_swiper: SwiperClass) {
 /* @import 'lightgallery/css/lg-vedio.css'; */
 
 .lg-backdrop {
-  background-color: hsla(0, 0%, 0%, 0.81);
+  background-color: color-mix(in oklab, var(--clr-black) 81%, transparent);
   backdrop-filter: blur(8px);
 }
 .lg-outer .lg-thumb-item {
   border-radius: 4px;
-  border: 2px solid #fff;
+  border: 2px solid var(--clr-white);
   transition: border-color 0.25s ease;
 }
 .lg-outer .lg-thumb-item.active,
@@ -235,7 +235,7 @@ function onSlideChange(_swiper: SwiperClass) {
     height: 450px;
     overflow: hidden;
     border-radius: 0.8rem;
-    background-color: hsla(0, 0%, 24%, 0.24);
+    background-color: color-mix(in oklab, var(--clr-lightblack) 24%, transparent);
 
     .photo-title {
       position: absolute;
@@ -244,9 +244,9 @@ function onSlideChange(_swiper: SwiperClass) {
       right: 0;
       padding: 0.2rem;
       padding-left: 0.8rem;
-      background-color: hsla(0, 0%, 15%, 0.45);
+      background-color: color-mix(in oklab, var(--clr-lightblack) 45%, transparent);
       backdrop-filter: blur(8px);
-      color: hsl(0, 0%, 94%);
+      color: var(--clr-white);
       font-size: 0.8rem;
       text-align: left;
       transition:

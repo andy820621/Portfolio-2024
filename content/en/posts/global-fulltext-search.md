@@ -1,7 +1,7 @@
 ---
-title: Global search with MiniSearch + Nuxt Content: section indexing for Markdown
+title: Implementing Site-wide Search with MiniSearch + Nuxt Content Using Segmented Indexing
 date: 2025/12/19
-description: How I built a keyboard-first global search (Cmd/Ctrl+K) for my portfolio: MiniSearch + queryCollectionSearchSections() so search understands Markdown sections, plus a simple scoring/grouping UI.
+description: "I implemented a site-wide Cmd/Ctrl+K search feature on my portfolio website: using MiniSearch with queryCollectionSearchSections() to make search understand Markdown sections and paragraphs, not just simple title searches."
 image: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 alt: MiniSearch + Nuxt Content global search
 ogImage: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
@@ -10,8 +10,8 @@ categories: ['Nuxt', 'UX', 'Content System']
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
-    headline: "Global search with MiniSearch + Nuxt Content: section indexing for Markdown"
-    description: "How I built a keyboard-first global search (Cmd/Ctrl+K) for my portfolio: MiniSearch + queryCollectionSearchSections() so search understands Markdown sections, plus a simple scoring/grouping UI."
+    headline: "Implementing Site-wide Search with MiniSearch + Nuxt Content Using Segmented Indexing"
+    description: "I implemented a site-wide Cmd/Ctrl+K search feature on my portfolio website: using MiniSearch with queryCollectionSearchSections() to make search understand Markdown sections and paragraphs, not just simple title searches."
     author:
       "@type": "Person"
       name: "BarZ Hsieh"
