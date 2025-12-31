@@ -50,6 +50,10 @@ This module packages the above into a “content transformer + runtime component
 ## How It Works (Simplified)
 
 ````mermaid
+---
+toolbar:
+  title: nuxt-content-mermaid Basic Flow
+---
 flowchart TD
   MD["Write a<br><b>```mermaid</b> block<br>in Markdown"] --> Hook["Nuxt Content hook<br/><b>content:file:beforeParse</b>"]
   Hook --> Comp["Output a <Mermaid> component"]

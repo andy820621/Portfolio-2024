@@ -70,6 +70,10 @@ sitemap:
 ## 整體架構: 從建置到輸出
 
 ```mermaid
+---
+toolbar:
+  title: Nitro Prerender Workflow
+---
 flowchart TB
   A[nuxt build] --> B[Nitro Prerender 啟動]
   B --> C[執行 prerender:routes hook]

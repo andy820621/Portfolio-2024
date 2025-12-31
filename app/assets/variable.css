@@ -78,6 +78,37 @@
   --clr-white-transparent: oklch(0.939 0 0 / 0.1);
   --clr-alert: oklch(0.579 0.183 24.96);
   --clr-success: oklch(0.493 0.078 170.12);
+
+  /* 覆蓋 nuxt-content-mermaid */
+  --ncm-code-bg: var(--clr-surface-2);
+  --ncm-code-bg-hover: color-mix(in oklab, var(--clr-surface-2) 90%, var(--clr-text) 10%);
+  --ncm-border: none;
+  --ncm-border-bottom: var(--ncm-border-width) var(--ncm-border-style) var(--ncm-border-color);
+  --ncm-text: var(--clr-text);
+  --ncm-text-muted: color-mix(in oklab, var(--clr-text) 60%, var(--clr-bg) 40%);
+  --ncm-text-xmuted: color-mix(in oklab, var(--clr-text) 40%, var(--clr-bg) 60%);
+  /* --ncm-overlay-opacity: 0.95;
+  --ncm-overlay-backdrop: blur(2px); */
+  /* --ncm-zoom-target-bg: color-mix(
+    in oklab,
+    var(--ncm-overlay-bg, var(--clr-surface-1)) 90%,
+    var(--clr-surface-2) 10%
+  ); */
+}
+
+html[data-theme='dark'],
+.dark {
+  --ncm-code-bg: color-mix(in oklab, var(--clr-bg) 70%, var(--clr-dark-green) 30%);
+  --ncm-code-bg-hover: color-mix(in oklab, var(--ncm-code-bg) 80%, var(--clr-text) 20%);
+  --ncm-border: none;
+  --ncm-border-bottom: var(--ncm-border-width) var(--ncm-border-style) var(--ncm-border-color);
+  --ncm-text: var(--clr-text);
+  --ncm-text-muted: color-mix(in oklab, var(--clr-text) 70%, var(--clr-bg) 30%);
+  --ncm-text-xmuted: color-mix(in oklab, var(--clr-text) 50%, var(--clr-bg) 50%);
+  --ncm-overlay-bg: var(--ncm-code-bg);
+  --ncm-overlay-opacity: 0.95;
+  --ncm-overlay-backdrop: blur(2px);
+  --ncm-zoom-target-bg: color-mix(in oklab, var(--ncm-overlay-bg, var(--clr-surface-1)) 90%, var(--clr-bg) 10%);
 }
 
 /* @media (prefers-color-scheme: dark) {

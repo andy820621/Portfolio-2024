@@ -156,6 +156,10 @@ A digital certificate is like an “ID card for a public key,” following the X
 When verifying a certificate, the system doesn’t just trust Alice’s certificate directly—it validates the entire chain of trust:
 
 ```mermaid
+---
+toolbar:
+  title: Chain of Trust and Trust Anchor
+---
   graph TD
   A[Root CA<br>Root certificate] --> B[Intermediate CA<br>Intermediate certificate]
   B --> C[End-Entity Certificate<br>Alice's certificate]

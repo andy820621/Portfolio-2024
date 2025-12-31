@@ -155,6 +155,10 @@ PKI 的目標是讓每一把公鑰安全地綁定到可驗證的身份上，並�
 驗證憑證時，系統不會直接只信任 Alice 的憑證，而是沿著「信任鏈」逐層驗證:
 
 ```mermaid
+---
+toolbar:
+  title: 信任鏈示意圖
+---
 graph TD
   A[Root CA<br>根憑證] --> B[Intermediate CA<br>中繼憑證]
   B --> C[End-Entity Certificate<br>憑證持有者 Alice]

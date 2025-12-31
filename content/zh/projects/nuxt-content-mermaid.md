@@ -50,6 +50,10 @@ sitemap:
 ## 工作原理簡單示意
 
 ````mermaid
+---
+toolbar:
+  title: nuxt-content-mermaid Basic Flow
+---
 flowchart TD
   MD["在 Markdown 寫下<br><b>```mermaid</b> 區塊"] --> Hook["Nuxt Content hook<br/><b>content:file:beforeParse</b>"]
   Hook --> Comp["輸出 <Mermaid> 元件"]

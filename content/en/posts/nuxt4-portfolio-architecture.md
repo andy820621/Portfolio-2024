@@ -86,6 +86,10 @@ Scripts under `scripts/` generate image maps, metadata, and prerender checks to 
 `nuxt.config.ts`, `server/`, and `netlify.toml` handle Nitro prerender, sitemap endpoints, redirects, and platform configuration.
 
 ```mermaid
+---
+toolbar:
+  title: Portfolio Architecture Overview
+---
 flowchart LR
   subgraph ContentLayer["Content layer (Nuxt Content + i18n)"]
     CEN["content/en/**/*.md"]

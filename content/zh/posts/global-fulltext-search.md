@@ -276,6 +276,10 @@ return snippet
 ## 簡易邏輯流程
 
 ```mermaid
+---
+toolbar:
+  title: Global Search Flow
+---
 sequenceDiagram
   participant User as 使用者
   participant Modal as GlobalSearchModal

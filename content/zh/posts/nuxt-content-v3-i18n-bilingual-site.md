@@ -88,6 +88,10 @@ sitemap:
 ### 資料流程（Markdown → Content → Page）
 
 ```mermaid
+---
+toolbar:
+  title: Nuxt Content v3 + i18n 資料流程
+---
 flowchart TD
   A["撰寫 Markdown<br/>content/(en|zh)/(posts|projects)/*.md"] --> B["@nuxt/content 解析 Markdown"]
   B --> C["套用 collections + schema<br/>content.config.ts（Zod）"]

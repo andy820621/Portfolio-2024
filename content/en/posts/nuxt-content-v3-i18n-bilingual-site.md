@@ -88,6 +88,10 @@ Before diving into collections/schemas, here’s where content lives and how it 
 ### Data flow (Markdown → Content → Page)
 
 ```mermaid
+---
+toolbar:
+  title: Nuxt Content v3 + i18n Data Flow
+---
 flowchart TD
   A["Write Markdown<br/>content/(en|zh)/(posts|projects)/*.md"] --> B["@nuxt/content parses Markdown"]
   B --> C["Apply collections + schema<br/>content.config.ts (Zod)"]

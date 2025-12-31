@@ -269,6 +269,10 @@ UI logic in `GlobalSearchModal.vue`:
 ## Flow (simplified)
 
 ```mermaid
+---
+toolbar:
+  title: Global Search Flow
+---
 sequenceDiagram
   participant User
   participant Modal as GlobalSearchModal

@@ -70,6 +70,10 @@ If you only rely on `prerender: { crawlLinks: true }`, you’ll often run into:
 ## Architecture: from build to output
 
 ```mermaid
+---
+toolbar:
+  title: Nitro Prerender Workflow
+---
 flowchart TB
   A[nuxt build] --> B[Nitro prerender starts]
   B --> C[Run prerender:routes hook]

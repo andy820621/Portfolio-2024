@@ -85,6 +85,10 @@ sitemap:
 透過 `nuxt.config.ts`、`server/` 目錄、`netlify.toml` 處理 Nitro prerender、sitemap、redirects 等平台配置。
 
 ```mermaid
+---
+toolbar:
+  title: 基本架構概覽
+---
 flowchart LR
   subgraph ContentLayer["內容層（Nuxt Content + i18n）"]
     CEN["content/en/**/*.md"]

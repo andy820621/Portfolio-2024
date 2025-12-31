@@ -340,6 +340,11 @@ export default defineNuxtConfig({
       sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
       chunkSizeWarningLimit: 2500,
     },
+    server: {
+      fs: {
+        strict: !(process.env.NODE_ENV === 'development'),
+      },
+    },
   },
   nitro: {
     compressPublicAssets: true,
