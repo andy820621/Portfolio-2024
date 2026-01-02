@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # 用 pnpm exec 呼叫本地的 commitlint
 if ! pnpm exec commitlint --edit "$1"; then
   echo ""

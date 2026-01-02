@@ -10,36 +10,35 @@ const route = useRoute()
 const activeTocIds = ref(new Set<string>())
 const lastVisibleHeading = ref('')
 
+/**
+ * 觸發區域設定：-80% 代表標題進入視窗上方 20% 區域時視為 active
+ * 這是為了符合使用者的閱讀習慣（通常關注標題下方的內容）
+ */
+const TOC_ROOT_MARGIN = '0px 0px -80% 0px'
+
 onMounted(() => {
-  const observer = new IntersectionObserver(callback, {
-    root: null,
-    rootMargin: '0px 0px -80% 0px',
-    threshold: [0, 0.25, 0.5, 0.75, 1],
-  })
+  const elements = Array.from(document.querySelectorAll('h2, h3')) as HTMLElement[]
 
-  const elements = document.querySelectorAll('h2, h3')
+  useIntersectionObserver(
+    elements,
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = entry.target.id
 
-  for (const element of elements)
-    observer.observe(element)
-
-  onBeforeUnmount(() => {
-    for (const element of elements)
-      observer.unobserve(element)
-  })
-
-  function callback(entries: IntersectionObserverEntry[]) {
-    entries.forEach((entry) => {
-      const id = entry.target.id
-
-      if (entry.isIntersecting) {
-        lastVisibleHeading.value = id
-        activeTocIds.value.add(id)
-      }
-      else {
-        activeTocIds.value.delete(id)
-      }
-    })
-  }
+        if (entry.isIntersecting) {
+          lastVisibleHeading.value = id
+          activeTocIds.value.add(id)
+        }
+        else {
+          activeTocIds.value.delete(id)
+        }
+      })
+    },
+    {
+      rootMargin: TOC_ROOT_MARGIN,
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+    },
+  )
 })
 
 // 檢查標題是否活躍
@@ -51,8 +50,8 @@ function isHeadingActive(id: string): boolean {
 <template>
   <div class="hidden justify-self-end lg:col-span-3 lg:block">
     <div class="sticky top-10 overflow-y-auto">
-      <div class="min-w-[200px] border rounded-md p-3 dark:border-gray-800 dark:bg-slate-900">
-        <div mb-3 flex items-center border-b pb-2 space-x-2 dark:border-gray-800>
+      <div class="glass-effect rounded-xl px-4 py-3 shadow-sm">
+        <div class="toc-header" mb-3 flex items-center border-b pb-2 space-x-2>
           <Icon name="i-ri-menu-2-fill" aria-hidden="true" />
           <h2
             id="toc-title"
@@ -77,7 +76,7 @@ function isHeadingActive(id: string): boolean {
               <!-- 主項目標題 -->
               <NuxtLink
                 :to="{ path: route.path, hash: `#${link.id}` }"
-                class="block text-xs hover:underline"
+                class="toc-link block text-xs hover:underline"
                 :class="{ 'text-active': isHeadingActive(link.id) }"
                 :aria-label="`${link.text}的錨點連結`"
                 :title="`${link.text}的錨點連結`"
@@ -102,7 +101,7 @@ function isHeadingActive(id: string): boolean {
                 >
                   <NuxtLink
                     :to="{ path: route.path, hash: `#${sublink.id}` }"
-                    class="block text-xs hover:underline"
+                    class="toc-link block text-xs hover:underline"
                     :class="{ 'text-active': isHeadingActive(sublink.id) }"
                     :aria-label="`${sublink.text}'s anchor link`"
                     :title="`${sublink.text}'s anchor link`"
@@ -121,7 +120,61 @@ function isHeadingActive(id: string): boolean {
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+.glass-effect {
+  /* 抽取 magic number */
+  --toc-min-width: 200px;
+  min-width: var(--toc-min-width);
+
+  --border-width: 1px;
+  --border-start: color-mix(in oklab, var(--clr-primary-green) 50%, transparent);
+  --border-end: color-mix(in oklab, var(--clr-primary-green) 10%, transparent);
+  --background-color: color-mix(in oklab, var(--clr-primary-green) 10%, transparent);
+
+  position: relative;
+  background-color: var(--background-color);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: none;
+
+  :global(.dark &) {
+    --border-start: color-mix(in oklab, var(--clr-text) 24%, transparent);
+    --border-end: color-mix(in oklab, var(--clr-text) 5%, transparent);
+    --background-color: color-mix(in oklab, var(--clr-dark-green) 30%, transparent);
+  }
+}
+
+.glass-effect::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--border-width) solid transparent;
+  background: linear-gradient(135deg, var(--border-start), var(--border-end)) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.toc-header {
+  border-color: var(--clr-border);
+}
+
+.toc-link {
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--clr-text-accent);
+  }
+}
+
 .text-active {
   color: var(--clr-sub-green);
   @apply font-bold;
