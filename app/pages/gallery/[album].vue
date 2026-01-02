@@ -80,18 +80,7 @@ function calculateOriginalIndex(colIdx: number, rowIdx: number) {
 
 // 追蹤可見圖片的響應式狀態
 const visibleImages = ref<string[]>([])
-const imageRefs = ref<HTMLElement[]>([])
-
-// 創建一個方法來處理 ref 邏輯
-function handleImageRef(ref: Element | ComponentPublicInstance | null) {
-  if (!ref)
-    return // Vue 的 ref 在元素卸載時會傳入 null
-
-  // 確保是 HTMLElement
-  const el = ref instanceof HTMLElement ? ref : null
-  if (el && !imageRefs.value.includes(el))
-    imageRefs.value.push(el)
-}
+const imageRefs = useTemplateRefsList<HTMLElement>()
 
 // 計算轉場延遲
 function getTransitionDelay(images: string[], image: string) {
@@ -103,44 +92,21 @@ function isImageVisible(image: string) {
   return visibleImages.value.includes(image)
 }
 
-let stop: (() => void) | undefined
+useIntersectionObserver(
+  imageRefs,
+  (entries) => {
+    entries.forEach((entry) => {
+      const imageSrc = (entry.target as HTMLElement).dataset.imageSrc
 
-if (import.meta.client) {
-  watch(parts, (newParts) => {
-    if (newParts.length > 0) {
-      setTimeout(() => {
-        const observerOptions = {
-          threshold: 0.1,
+      if (entry.isIntersecting) {
+        if (imageSrc && !visibleImages.value.includes(imageSrc)) {
+          visibleImages.value.push(imageSrc)
         }
-
-        const observerResult = useIntersectionObserver(
-          imageRefs,
-          (entries) => {
-            entries.forEach((entry) => {
-              const imageSrc = (entry.target as HTMLElement).dataset.imageSrc
-
-              if (entry.isIntersecting) {
-                if (imageSrc && !visibleImages.value.includes(imageSrc)) {
-                  nextTick(() => {
-                    visibleImages.value.push(imageSrc)
-                  })
-                }
-              }
-            })
-          },
-          observerOptions,
-        )
-
-        stop = observerResult.stop
-      })
-    }
-  }, { immediate: true })
-}
-
-onUnmounted(() => {
-  if (stop)
-    stop()
-})
+      }
+    })
+  },
+  { threshold: 0.1 },
+)
 
 // 設定 SEO
 usePageSeo({
@@ -297,7 +263,7 @@ watchEffect(() => {
           <div
             v-for="(src, rowIdx) in items"
             :key="rowIdx"
-            :ref="handleImageRef"
+            :ref="imageRefs.set"
             :data-image-src="src"
             class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
             :class="{
