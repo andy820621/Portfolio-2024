@@ -312,8 +312,8 @@ export default defineNuxtConfig({
   build: {
     transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
     analyze: {
-      enabled: true,
-      open: true,
+      enabled: process.env.NODE_ENV !== 'production',
+      open: process.env.NODE_ENV !== 'production',
     },
   },
   features: {
