@@ -250,7 +250,7 @@ export async function useGlobalSearchData() {
   const { isDark: isDarkMode, toggleDark } = useTheme()
 
   const query = ref('')
-  const results = ref<GlobalSearchResult[]>([])
+  const results = shallowRef<GlobalSearchResult[]>([])
   const isSearching = ref(false)
 
   const themeIcon = computed(() => (isDarkMode.value ? 'ri:sun-line' : 'ri:moon-line'))

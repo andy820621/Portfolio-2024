@@ -31,11 +31,11 @@ const SwiperSlide = defineAsyncComponent(() =>
   import('swiper/vue').then(m => m.SwiperSlide),
 )
 
-const swiper = ref<typeof Swiper>()
-const popup = ref<LightGallery>()
+const swiper = shallowRef<typeof Swiper>()
+const popup = shallowRef<LightGallery>()
 const activeIndex = ref(0)
 const lightBoxBtn = ref<HTMLButtonElement>()
-const Navigation = ref<SwiperModule | null>(null)
+const Navigation = shallowRef<SwiperModule | null>(null)
 const isReady = ref(false)
 
 const deBounceHandleWheel = useDebounceFn(handleWheel, 16)

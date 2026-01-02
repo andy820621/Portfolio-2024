@@ -10,8 +10,8 @@ const { images, title } = defineProps<{
   title?: string
 }>()
 
-const lightGalleryContainer = ref<HTMLDivElement | null>(null)
-const lightGalleryInstance = ref<LightGallery | null>(null)
+const lightGalleryContainer = shallowRef<HTMLDivElement | null>(null)
+const lightGalleryInstance = shallowRef<LightGallery | null>(null)
 const isLibraryLoaded = ref(false)
 
 let lightGallery: ((el: HTMLElement, options?: LightGallerySettings) => LightGallery) | null = null

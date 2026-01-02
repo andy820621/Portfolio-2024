@@ -1,7 +1,7 @@
 export function useGalleryImages() {
   const loading = ref(false)
   const error = ref<Error | null>(null)
-  const imageMap = ref<Record<string, string[]>>({})
+  const imageMap = shallowRef<Record<string, string[]>>({})
   const hasLoadedMap = ref(false)
   const mapPath = '/gallery-images-map.json'
 

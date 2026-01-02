@@ -80,7 +80,7 @@ const allTags = computed(() => {
   return Array.from(tagSet)
 })
 
-const debouncedFilteredDemoItems = ref(demoItems.value || [])
+const debouncedFilteredDemoItems = shallowRef(demoItems.value || [])
 
 const updateFilteredItems = useDebounceFn(() => {
   debouncedFilteredDemoItems.value = (demoItems.value || []).filter((item) => {

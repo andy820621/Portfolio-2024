@@ -35,7 +35,7 @@ usePageSeo({
 })
 
 // 防抖過濾後的圖片組
-const debouncedFilteredGroups = ref(galleryGroups)
+const debouncedFilteredGroups = shallowRef(galleryGroups)
 
 const updateFilteredGroups = useDebounceFn(() => {
   debouncedFilteredGroups.value = galleryGroups.filter((group) => {

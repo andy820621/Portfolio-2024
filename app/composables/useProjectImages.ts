@@ -1,8 +1,8 @@
 export function useProjectImages() {
   const loading = ref(false)
   const error = ref<Error | null>(null)
-  const imageMap = ref<Record<string, string[]>>({})
-  const metadataMap = ref<Record<string, Record<string, { title: string, description: string }>>>({})
+  const imageMap = shallowRef<Record<string, string[]>>({})
+  const metadataMap = shallowRef<Record<string, Record<string, { title: string, description: string }>>>({})
   const hasLoadedMap = ref(false)
 
   const { locale } = useI18n()
