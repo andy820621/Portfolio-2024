@@ -12,53 +12,42 @@ const album = computed(() =>
   galleryGroups.find(group => group.id === albumId),
 )
 
+if (!album.value) {
+  console.error('Album not found:', albumId)
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found',
+    message: 'Album not found',
+    fatal: false,
+  })
+}
+
+const hasHydrated = shallowRef(false)
+onMounted(() => (hasHydrated.value = true))
+
 // 動態獲取資料夾內的照片
 const { getAlbumImages } = useGalleryImages()
-const images = ref<string[]>([])
-const error = ref<Error | null>(null)
-const loading = ref(true)
+const { data: images, pending: loading, error } = await useAsyncData(
+  `gallery-images-${albumId}`,
+  () => getAlbumImages(albumId),
+  { default: () => [] },
+)
 
-onMounted(async () => {
-  try {
-    images.value = await getAlbumImages(albumId)
-  }
-  catch (err) {
-    error.value = err instanceof Error ? err : new Error(String(err))
-    console.error('Failed to fetch gallery images:', err)
-  }
-  finally {
-    loading.value = false
-  }
-})
-
-watch(album, (newAlbum) => {
-  if (!newAlbum) {
-    console.error('Album not found:', albumId)
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Page Not Found',
-      message: 'Album not found',
-      fatal: false,
-    })
-  }
-}, { immediate: true })
-
-watch(error, (newError) => {
-  if (newError) {
-    console.error('Fetch error:', newError)
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Internal Server Error',
-      message: newError.message || 'Failed to fetch album images',
-      fatal: false,
-    })
-  }
-})
+if (error.value) {
+  throw createError({
+    statusCode: 500,
+    statusMessage: 'Internal Server Error',
+    message: error.value.message || 'Failed to fetch album images',
+    fatal: false,
+  })
+}
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 // 根據斷點計算列數
 const cols = computed(() => {
+  if (!hasHydrated.value)
+    return 2
   if (breakpoints['2xl'].value)
     return 4
   if (breakpoints.xl.value || breakpoints.lg.value)
@@ -116,35 +105,37 @@ function isImageVisible(image: string) {
 
 let stop: (() => void) | undefined
 
-watch(parts, (newParts) => {
-  if (newParts.length > 0) {
-    setTimeout(() => {
-      const observerOptions = {
-        threshold: 0.1,
-      }
+if (import.meta.client) {
+  watch(parts, (newParts) => {
+    if (newParts.length > 0) {
+      setTimeout(() => {
+        const observerOptions = {
+          threshold: 0.1,
+        }
 
-      const observerResult = useIntersectionObserver(
-        imageRefs,
-        (entries) => {
-          entries.forEach((entry) => {
-            const imageSrc = (entry.target as HTMLElement).dataset.imageSrc
+        const observerResult = useIntersectionObserver(
+          imageRefs,
+          (entries) => {
+            entries.forEach((entry) => {
+              const imageSrc = (entry.target as HTMLElement).dataset.imageSrc
 
-            if (entry.isIntersecting) {
-              if (imageSrc && !visibleImages.value.includes(imageSrc)) {
-                nextTick(() => {
-                  visibleImages.value.push(imageSrc)
-                })
+              if (entry.isIntersecting) {
+                if (imageSrc && !visibleImages.value.includes(imageSrc)) {
+                  nextTick(() => {
+                    visibleImages.value.push(imageSrc)
+                  })
+                }
               }
-            }
-          })
-        },
-        observerOptions,
-      )
+            })
+          },
+          observerOptions,
+        )
 
-      stop = observerResult.stop
-    })
-  }
-}, { immediate: true })
+        stop = observerResult.stop
+      })
+    }
+  }, { immediate: true })
+}
 
 onUnmounted(() => {
   if (stop)
@@ -282,65 +273,65 @@ watchEffect(() => {
           :images="images"
           :title="album.title"
         />
-
-        <!-- Loading 狀態 -->
-        <div v-if="loading" class="min-h-[400px] flex items-center justify-center">
-          <div class="text-center">
-            <div class="mb-4 inline-block h-12 w-12 animate-spin border-4 border-current border-r-transparent rounded-full border-solid motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-            <p class="text-zinc-600 dark:text-zinc-400">
-              Loading images...
-            </p>
-          </div>
-        </div>
-
-        <!-- 圖片網格 -->
-        <div
-          v-else-if="images && images.length"
-          grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
-          class="text-zinc-600"
-        >
-          <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
-            <div
-              v-for="(src, rowIdx) in items"
-              :key="rowIdx"
-              :ref="handleImageRef"
-              :data-image-src="src"
-              class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
-              :class="{
-                'opacity-100 translate-y-0': isImageVisible(src),
-              }"
-              :style="{
-                transitionDelay: getTransitionDelay(items, src),
-              }"
-              @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
-            >
-              <NuxtImg
-                :src="src"
-                :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
-                class="h-auto w-full object-cover"
-                placeholder
-                loading="lazy"
-                format="webp"
-                quality="24"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- 沒有圖片 -->
-        <div v-else class="min-h-[400px] flex items-center justify-center">
-          <div class="text-center text-zinc-600 dark:text-zinc-400">
-            <p class="mb-2 text-lg font-medium">
-              No images found
-            </p>
-            <p class="text-sm">
-              This album appears to be empty.
-            </p>
-          </div>
-        </div>
       </ClientOnly>
+
+      <!-- Loading 狀態 -->
+      <div v-if="loading" class="min-h-[400px] flex items-center justify-center">
+        <div class="text-center">
+          <div class="mb-4 inline-block h-12 w-12 animate-spin border-4 border-current border-r-transparent rounded-full border-solid motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <p class="text-zinc-600 dark:text-zinc-400">
+            Loading images...
+          </p>
+        </div>
+      </div>
+
+      <!-- 圖片網格 -->
+      <div
+        v-else-if="images && images.length"
+        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
+        class="text-zinc-600"
+      >
+        <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
+          <div
+            v-for="(src, rowIdx) in items"
+            :key="rowIdx"
+            :ref="handleImageRef"
+            :data-image-src="src"
+            class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
+            :class="{
+              'opacity-100 translate-y-0': isImageVisible(src),
+            }"
+            :style="{
+              transitionDelay: getTransitionDelay(items, src),
+            }"
+            @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
+          >
+            <NuxtImg
+              :src="src"
+              :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
+              class="h-auto w-full object-cover"
+              placeholder
+              loading="lazy"
+              format="webp"
+              quality="24"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 沒有圖片 -->
+      <div v-else class="min-h-[400px] flex items-center justify-center">
+        <div class="text-center text-zinc-600 dark:text-zinc-400">
+          <p class="mb-2 text-lg font-medium">
+            No images found
+          </p>
+          <p class="text-sm">
+            This album appears to be empty.
+          </p>
+        </div>
+      </div>
     </div>
 
     <div v-else class="max-w-10xl container mx-auto mt-8">
