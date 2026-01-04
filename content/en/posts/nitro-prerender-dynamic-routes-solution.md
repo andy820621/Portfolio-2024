@@ -473,7 +473,7 @@ Expected output:
 
 After a successful prerender, `.output/public/` looks like:
 
-```
+```shell
 .output/public/
 ├── index.html                    # English home
 ├── zh/

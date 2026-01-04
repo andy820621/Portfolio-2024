@@ -63,9 +63,9 @@ Nuxt Content 提供 [queryCollectionSearchSections](https://content.nuxt.com/doc
 透過他可以把每篇文件依 heading 拆成多段索引。
 在 `app/composables/useContentSearchIndex.ts`：
 
-- 用 `queryCollectionSearchSections(collectionKey)` 把 sections 拉下來
+- 用 `queryCollectionSearchSections(collectionKey)` **按需拉 sections**
 - 映射成有穩定 `documentPath` 的 documents（用來對應清單頁）
-- 建立 `MiniSearch` index
+- **延遲建立** `MiniSearch` index（首次開啟 modal 或第一次搜尋），sections 透過 `useState` 快取，索引留在 module memory
 
 下面是核心查詢邏輯：
 
@@ -105,6 +105,10 @@ const instance = new MiniSearch<ContentSearchSection>({
 ```
 
 `storeFields` 會把 `content`（段落文字）一起存起來，後續會用來做 snippet 與 hilight。
+
+### 延遲初始化（效能）
+
+索引不會在頁面載入時就建立，而是由 `ensureContentSearchReady()` 在「開啟搜尋 modal」或「第一次輸入搜尋」時準備完成，避免初始載入做重工。
 
 ## 一個 modal，聚合多種結果類型
 
@@ -289,7 +293,7 @@ sequenceDiagram
 
   User->>Modal: Cmd/Ctrl+K
   Modal->>Data: open + focus input
-  Data->>Index: 建索引（posts/projects）
+  Data->>Index: 確保索引就緒（lazy，首次開啟/搜尋）
   User->>Modal: 輸入關鍵字
   Modal->>Data: debouncedSearch()
   Data->>Mini: search(keyword)

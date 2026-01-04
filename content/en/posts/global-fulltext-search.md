@@ -63,9 +63,9 @@ Nuxt Content provides [`queryCollectionSearchSections`](https://content.nuxt.com
 
 In `app/composables/useContentSearchIndex.ts`:
 
-- fetch sections via `queryCollectionSearchSections(collectionKey)`
+- fetch sections via `queryCollectionSearchSections(collectionKey)` **on demand**
 - map them into documents with a stable `documentPath` (used to link back to list cards)
-- build a `MiniSearch` index
+- build a `MiniSearch` index **lazily** (first modal open or first query), cache sections via `useState`, and keep the index in module memory
 
 Core mapping logic:
 
@@ -98,6 +98,10 @@ const instance = new MiniSearch<ContentSearchSection>({
 ```
 
 Because `storeFields` includes `content`, we can build snippets and highlights without extra fetching.
+
+### Lazy initialization (performance)
+
+The index is no longer built on page load. Instead, `ensureContentSearchReady()` runs when the search modal opens (or the first query happens). This keeps initial navigation fast, while still making the first search responsive.
 
 ## One modal, multiple result types
 
@@ -282,7 +286,7 @@ sequenceDiagram
 
   User->>Modal: Cmd/Ctrl+K
   Modal->>Data: open + focus input
-  Data->>Index: build index (posts/projects)
+  Data->>Index: ensure index ready (lazy, first open/search)
   User->>Modal: type keyword
   Modal->>Data: debouncedSearch()
   Data->>Mini: search(keyword)

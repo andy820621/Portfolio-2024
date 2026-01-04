@@ -333,17 +333,19 @@ export async function useGlobalSearchData() {
   interface SearchSource {
     type: ResultType
     search: (keyword: string) => GlobalSearchResult[]
+    prepare?: () => Promise<void>
+    isReady?: ComputedRef<boolean>
   }
 
-  const contentSearchSources: SearchSource[] = await Promise.all(
-    CONTENT_SEARCH_SOURCES.map(async (source) => {
-      const { search } = await useContentSearchIndex(source.indexKey)
-      return {
-        type: source.type,
-        search: (keyword: string) => mapContentSections(search(keyword), source.type, keyword),
-      }
-    }),
-  )
+  const contentSearchSources: SearchSource[] = CONTENT_SEARCH_SOURCES.map((source) => {
+    const { search, prepare, isReady } = useContentSearchIndex(source.indexKey)
+    return {
+      type: source.type,
+      prepare,
+      isReady,
+      search: (keyword: string) => mapContentSections(search(keyword), source.type, keyword),
+    }
+  })
 
   const navSearchSource: SearchSource = {
     type: 'nav',
@@ -400,7 +402,23 @@ export async function useGlobalSearchData() {
 
   const searchSources: SearchSource[] = [...contentSearchSources, navSearchSource, actionSearchSource]
 
-  function performSearch() {
+  const isContentSearchReady = computed(() => {
+    if (!contentSearchSources.length)
+      return true
+    return contentSearchSources.every(source => source.isReady?.value)
+  })
+
+  // Ensure content indices are ready (e.g. modal open or first search).
+  async function ensureContentSearchReady() {
+    if (import.meta.server)
+      return
+    if (isContentSearchReady.value)
+      return
+    await Promise.all(contentSearchSources.map(source => source.prepare?.()))
+  }
+
+  // Run a full search; ensures content indices are ready before querying.
+  async function performSearch() {
     const keyword = query.value.trim()
     if (!keyword) {
       results.value = []
@@ -409,6 +427,7 @@ export async function useGlobalSearchData() {
 
     isSearching.value = true
     try {
+      await ensureContentSearchReady()
       const aggregatedResults = searchSources.flatMap(source => source.search(keyword))
       results.value = aggregatedResults
         .sort((a, b) => b.score - a.score)
@@ -419,7 +438,10 @@ export async function useGlobalSearchData() {
     }
   }
 
-  const debouncedSearch = useDebounceFn(performSearch, 200)
+  // Debounce async search without returning a pending promise to the watcher.
+  const debouncedSearch = useDebounceFn(() => {
+    void performSearch()
+  }, 200)
 
   const groupedResults = computed(() => {
     return RESULT_GROUP_ORDER.map(type => ({
@@ -487,6 +509,7 @@ export async function useGlobalSearchData() {
     hintKeys,
     isSearching,
     performSearch,
+    ensureContentSearchReady,
     debouncedSearch,
     typeMeta: TYPE_META,
   }

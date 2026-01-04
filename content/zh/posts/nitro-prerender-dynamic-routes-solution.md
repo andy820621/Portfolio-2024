@@ -477,7 +477,7 @@ pnpm test:prerender
 
 成功預渲染後,`.output/public/` 的結構會是:
 
-```
+```shell
 .output/public/
 ├── index.html                    # 英文首頁
 ├── zh/

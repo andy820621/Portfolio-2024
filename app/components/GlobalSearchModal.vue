@@ -11,6 +11,7 @@ const {
   hintKeys,
   isSearching,
   performSearch,
+  ensureContentSearchReady,
   debouncedSearch,
   typeMeta,
 } = await useGlobalSearchData()
@@ -49,9 +50,10 @@ watch(query, () => {
   debouncedSearch()
 })
 
-watch(isOpen, (value) => {
+watch(isOpen, async (value) => {
   if (value) {
     focusSearchInput()
+    await ensureContentSearchReady()
     if (query.value)
       performSearch()
   }
