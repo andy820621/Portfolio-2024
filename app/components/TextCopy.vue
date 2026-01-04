@@ -5,7 +5,7 @@ const props = defineProps<{
 }>()
 
 const { copy: _copy, copied } = useClipboard()
-const el = ref<HTMLElement | null>(null)
+const el = useTemplateRef<HTMLElement>('el')
 
 function copy() {
   _copy(

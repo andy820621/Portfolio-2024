@@ -18,7 +18,7 @@ const {
 
 const { isOpen, open: openModal, close } = useGlobalSearchModalState()
 const selectedResult = ref<GlobalSearchResult | null>(null)
-const inputRef = ref<ComponentPublicInstance | HTMLInputElement | null>(null)
+const inputRef = useTemplateRef<ComponentPublicInstance | HTMLInputElement>('inputRef')
 
 function closeModal() {
   close()

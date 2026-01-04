@@ -31,10 +31,9 @@ const SwiperSlide = defineAsyncComponent(() =>
   import('swiper/vue').then(m => m.SwiperSlide),
 )
 
-const swiper = shallowRef<typeof Swiper>()
 const popup = shallowRef<LightGallery>()
 const activeIndex = ref(0)
-const lightBoxBtn = ref<HTMLButtonElement>()
+const lightBoxBtn = useTemplateRef<HTMLButtonElement>('lightBoxBtn')
 const Navigation = shallowRef<SwiperModule | null>(null)
 const isReady = ref(false)
 
@@ -164,7 +163,6 @@ function onSlideChange(_swiper: SwiperClass) {
     <ClientOnly>
       <Swiper
         v-if="isReady && Navigation"
-        ref="swiper"
         :modules="[Navigation]"
         :slides-per-view="1"
         navigation

@@ -10,7 +10,7 @@ const { images, title } = defineProps<{
   title?: string
 }>()
 
-const lightGalleryContainer = shallowRef<HTMLDivElement | null>(null)
+const lightGalleryContainer = useTemplateRef<HTMLDivElement>('lightGalleryContainer')
 const lightGalleryInstance = shallowRef<LightGallery | null>(null)
 const isLibraryLoaded = ref(false)
 

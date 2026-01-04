@@ -68,7 +68,7 @@ const parts = computed(() => {
   }, [] as string[][])
 })
 
-const lightGalleryRef = ref<InstanceType<typeof LightGallery> | null>(null)
+const lightGalleryRef = useTemplateRef<InstanceType<typeof LightGallery>>('lightGalleryRef')
 
 function openLightGallery(startIndex: number) {
   lightGalleryRef.value?.openLightGallery(startIndex)

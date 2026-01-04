@@ -6,7 +6,7 @@ const r90 = Math.PI / 2
 const r15 = Math.PI / 12
 const color = '#88888825'
 
-const el = ref<HTMLCanvasElement | null>(null)
+const el = useTemplateRef<HTMLCanvasElement>('el')
 
 const { random } = Math
 const size = reactive(useWindowSize())

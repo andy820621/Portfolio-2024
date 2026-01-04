@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
   damping: 0,
 })
 
-const containerRef = ref<HTMLElement>()
+const containerRef = useTemplateRef<HTMLElement>('containerRef')
 let shader: ShaderToy | undefined
 
 onMounted(() => {
