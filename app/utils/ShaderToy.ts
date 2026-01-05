@@ -18,6 +18,7 @@ export interface HSVControls {
 }
 
 export type MouseMode = 'click' | 'hover'
+type AutoPauseReason = 'visibility' | 'intersection'
 
 export class ShaderToy {
   private renderer: Renderer
@@ -26,6 +27,9 @@ export class ShaderToy {
   private geometry: Geometry
   private program: Program | null = null
   private mesh: Mesh | null = null
+  private cleanupFns: Array<() => void> = []
+  private autoPauseReasons: Set<AutoPauseReason> = new Set()
+  private autoPauseWasPlaying: boolean = false
 
   // Timing
   private isPlaying: boolean = false
@@ -182,6 +186,7 @@ export class ShaderToy {
   private setup(): void {
     this.setupMouseEvents()
     this.setupResizeHandler()
+    this.setupVisibilityHandling()
   }
 
   private setupMouseEvents(): void {
@@ -203,7 +208,7 @@ export class ShaderToy {
       }
     }
 
-    canvas.addEventListener('mousemove', (event: MouseEvent) => {
+    this.cleanupFns.push(useEventListener(canvas, 'mousemove', (event: MouseEvent) => {
       const { x: newX, y: newY } = getScaledMousePos(event)
 
       // Apply damping with configurable factor
@@ -219,9 +224,9 @@ export class ShaderToy {
         this.iMouse.clickX = newX
         this.iMouse.clickY = newY
       }
-    })
+    }))
 
-    canvas.addEventListener('mousedown', (event: MouseEvent) => {
+    this.cleanupFns.push(useEventListener(canvas, 'mousedown', (event: MouseEvent) => {
       isMouseDown = true
       const { x: clickX, y: clickY } = getScaledMousePos(event)
 
@@ -229,14 +234,14 @@ export class ShaderToy {
         this.iMouse.clickX = clickX
         this.iMouse.clickY = clickY
       }
-    })
+    }))
 
-    canvas.addEventListener('mouseup', () => {
+    this.cleanupFns.push(useEventListener(canvas, 'mouseup', () => {
       isMouseDown = false
-    })
+    }))
 
     // Handle touch events for mobile
-    canvas.addEventListener('touchmove', (event: TouchEvent) => {
+    this.cleanupFns.push(useEventListener(canvas, 'touchmove', (event: TouchEvent) => {
       event.preventDefault()
       const touch = event.touches[0]
       if (!touch)
@@ -250,9 +255,9 @@ export class ShaderToy {
         this.iMouse.clickX = newX
         this.iMouse.clickY = newY
       }
-    })
+    }, { passive: false }))
 
-    canvas.addEventListener('touchstart', (event: TouchEvent) => {
+    this.cleanupFns.push(useEventListener(canvas, 'touchstart', (event: TouchEvent) => {
       event.preventDefault()
       isMouseDown = true
       const touch = event.touches[0]
@@ -264,19 +269,17 @@ export class ShaderToy {
         this.iMouse.clickX = clickX
         this.iMouse.clickY = clickY
       }
-    })
+    }, { passive: false }))
 
-    canvas.addEventListener('touchend', () => {
+    this.cleanupFns.push(useEventListener(canvas, 'touchend', () => {
       isMouseDown = false
-    })
+    }))
   }
 
   private setupResizeHandler(): void {
-    let debounceId: number | null = null
     const debounceDelay = 180
 
     const applyResize = () => {
-      debounceId = null
       const width = this.container.clientWidth
       const height = this.container.clientHeight
       const dpr = window.devicePixelRatio
@@ -300,13 +303,63 @@ export class ShaderToy {
       }
     }
 
-    const resizeObserver = new ResizeObserver(() => {
-      if (debounceId !== null)
-        window.clearTimeout(debounceId)
-      debounceId = window.setTimeout(applyResize, debounceDelay)
+    const { start: scheduleResize, stop: cancelResize } = useTimeoutFn(
+      applyResize,
+      debounceDelay,
+      { immediate: false },
+    )
+
+    this.cleanupFns.push(cancelResize)
+
+    const { stop: stopResizeObserver } = useResizeObserver(this.container, () => {
+      cancelResize()
+      scheduleResize()
     })
 
-    resizeObserver.observe(this.container)
+    this.cleanupFns.push(stopResizeObserver)
+  }
+
+  private requestAutoPause(reason: AutoPauseReason): void {
+    this.autoPauseReasons.add(reason)
+    if (this.isPlaying) {
+      this.autoPauseWasPlaying = true
+      this.pause(false)
+    }
+  }
+
+  private requestAutoResume(reason: AutoPauseReason): void {
+    if (this.autoPauseReasons.has(reason))
+      this.autoPauseReasons.delete(reason)
+
+    if (this.autoPauseReasons.size === 0 && this.autoPauseWasPlaying) {
+      this.autoPauseWasPlaying = false
+      this.play()
+    }
+  }
+
+  private setupVisibilityHandling(): void {
+    if (typeof document === 'undefined')
+      return
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState !== 'visible')
+        this.requestAutoPause('visibility')
+      else
+        this.requestAutoResume('visibility')
+    }
+
+    this.cleanupFns.push(useEventListener(document, 'visibilitychange', handleVisibilityChange))
+    handleVisibilityChange()
+
+    const { stop: stopIntersection } = useIntersectionObserver(this.container, ([entry]) => {
+      const isVisible = !!entry?.isIntersecting && (entry?.intersectionRatio ?? 0) > 0
+      if (isVisible)
+        this.requestAutoResume('intersection')
+      else
+        this.requestAutoPause('intersection')
+    }, { threshold: 0.01 })
+
+    this.cleanupFns.push(stopIntersection)
   }
 
   private compileProgram(): boolean {
@@ -352,25 +405,26 @@ export class ShaderToy {
     }
   }
 
-  private draw(): void {
+  private draw(now: number): void {
     if (!this.program || !this.mesh) {
       console.warn('Program or mesh not initialized')
       return
     }
 
-    const now = this.isPlaying ? Date.now() : this.prevDrawTime
-
     // Frame rate limiting
     if (this.isPlaying && this.targetFPS < 60) {
       const elapsed = now - this.lastFrameTime
       if (elapsed < this.frameInterval) {
-        requestAnimationFrame(() => this.animate())
+        requestAnimationFrame(this.animate)
         return
       }
       this.lastFrameTime = now - (elapsed % this.frameInterval)
     }
 
-    const date = new Date(now)
+    const nowEpoch = typeof performance !== 'undefined' && typeof performance.timeOrigin === 'number'
+      ? performance.timeOrigin + now
+      : Date.now()
+    const date = new Date(nowEpoch)
 
     if (this.firstDrawTime === 0) {
       this.firstDrawTime = now
@@ -382,7 +436,7 @@ export class ShaderToy {
 
     const iTimeDelta = (now - this.prevDrawTime) * 0.001 * this._speed
     const iTime = (now - this.firstDrawTime) * 0.001 * this._speed
-    const iDate = [date.getFullYear(), date.getMonth(), date.getDate(), date.getTime() * 0.001]
+    const iDate = [date.getFullYear(), date.getMonth(), date.getDate(), nowEpoch * 0.001]
 
     if (this.program && this.mesh) {
       // Update uniforms
@@ -413,9 +467,9 @@ export class ShaderToy {
     this.iFrame++
   }
 
-  private animate = (): void => {
+  private animate = (now: number): void => {
     if (this.isPlaying) {
-      this.draw()
+      this.draw(now)
       requestAnimationFrame(this.animate)
     }
   }
@@ -427,7 +481,7 @@ export class ShaderToy {
 
     // If playing, trigger a redraw
     if (success && this.isPlaying) {
-      this.draw()
+      this.draw(performance.now())
     }
 
     return success
@@ -443,7 +497,7 @@ export class ShaderToy {
 
     // Update immediately if not playing
     if (!this.isPlaying && this.program && this.mesh) {
-      this.draw()
+      this.draw(this.prevDrawTime)
     }
   }
 
@@ -452,7 +506,7 @@ export class ShaderToy {
 
     // Update immediately if not playing
     if (!this.isPlaying && this.program && this.mesh) {
-      this.draw()
+      this.draw(this.prevDrawTime)
     }
   }
 
@@ -461,7 +515,7 @@ export class ShaderToy {
 
     // Update immediately if not playing
     if (!this.isPlaying && this.program && this.mesh) {
-      this.draw()
+      this.draw(this.prevDrawTime)
     }
   }
 
@@ -470,7 +524,7 @@ export class ShaderToy {
 
     // Update immediately if not playing
     if (!this.isPlaying && this.program && this.mesh) {
-      this.draw()
+      this.draw(this.prevDrawTime)
     }
   }
 
@@ -484,7 +538,7 @@ export class ShaderToy {
 
     // Update immediately if not playing
     if (!this.isPlaying && this.program && this.mesh) {
-      this.draw()
+      this.draw(this.prevDrawTime)
     }
   }
 
@@ -514,32 +568,41 @@ export class ShaderToy {
   }
 
   public reset(): void {
-    const now = Date.now()
+    const now = performance.now()
     this.firstDrawTime = now
     this.prevDrawTime = now
     this.lastFrameTime = now
     this.iFrame = 0
-    this.draw()
+    this.draw(now)
   }
 
-  public pause(): void {
+  public pause(isManual: boolean = true): void {
+    if (isManual)
+      this.autoPauseWasPlaying = false
     this.isPlaying = false
   }
 
   public play(): void {
+    if (this.autoPauseReasons.size > 0) {
+      this.autoPauseWasPlaying = true
+      return
+    }
+
     if (!this.isPlaying) {
       this.isPlaying = true
-      const now = Date.now()
+      const now = performance.now()
       const elapsed = this.prevDrawTime - this.firstDrawTime
       this.firstDrawTime = now - elapsed
       this.prevDrawTime = now
       this.lastFrameTime = now
-      this.animate()
+      requestAnimationFrame(this.animate)
     }
   }
 
   public dispose(): void {
     this.pause()
+    this.cleanupFns.forEach(cleanup => cleanup())
+    this.cleanupFns = []
     if (this.renderer.gl.canvas.parentElement) {
       this.renderer.gl.canvas.parentElement.removeChild(this.renderer.gl.canvas)
     }
