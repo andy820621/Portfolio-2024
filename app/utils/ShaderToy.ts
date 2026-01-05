@@ -48,6 +48,10 @@ export class ShaderToy {
 
   private _speed: number = 1 // Speed multiplier
 
+  private renderWidth: number = 0
+  private renderHeight: number = 0
+  private renderDpr: number = 1
+
   // Shader source
   private shaderSource: string = ''
 
@@ -133,11 +137,15 @@ export class ShaderToy {
       this.setFrameRate(fps)
     }
 
+    this.renderWidth = this.container.clientWidth
+    this.renderHeight = this.container.clientHeight
+    this.renderDpr = window.devicePixelRatio
+
     // Create renderer with WebGL 2 context
     this.renderer = new Renderer({
-      width: this.container.clientWidth,
-      height: this.container.clientHeight,
-      dpr: window.devicePixelRatio,
+      width: this.renderWidth,
+      height: this.renderHeight,
+      dpr: this.renderDpr,
       alpha: true,
       depth: false,
       stencil: false,
@@ -264,29 +272,38 @@ export class ShaderToy {
   }
 
   private setupResizeHandler(): void {
-    const resizeObserver = new ResizeObserver(() => {
+    let debounceId: number | null = null
+    const debounceDelay = 180
+
+    const applyResize = () => {
+      debounceId = null
       const width = this.container.clientWidth
       const height = this.container.clientHeight
+      const dpr = window.devicePixelRatio
 
-      // Update renderer size
+      if (!width || !height)
+        return
+
+      if (width === this.renderWidth && height === this.renderHeight && dpr === this.renderDpr)
+        return
+
+      this.renderWidth = width
+      this.renderHeight = height
+      this.renderDpr = dpr
+
+      this.renderer.dpr = dpr
       this.renderer.setSize(width, height)
+      this.renderer.gl.viewport(0, 0, width * dpr, height * dpr)
 
-      // Update viewport
-      this.renderer.gl.viewport(
-        0,
-        0,
-        width * window.devicePixelRatio,
-        height * window.devicePixelRatio,
-      )
-
-      // Update resolution uniform if program exists
       if (this.program) {
-        this.program.uniforms.iResolution.value = [
-          width * window.devicePixelRatio,
-          height * window.devicePixelRatio,
-          window.devicePixelRatio,
-        ]
+        this.program.uniforms.iResolution.value = [width * dpr, height * dpr, dpr]
       }
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (debounceId !== null)
+        window.clearTimeout(debounceId)
+      debounceId = window.setTimeout(applyResize, debounceDelay)
     })
 
     resizeObserver.observe(this.container)
@@ -305,9 +322,9 @@ export class ShaderToy {
         uniforms: {
           iResolution: {
             value: [
-              this.container.clientWidth * window.devicePixelRatio,
-              this.container.clientHeight * window.devicePixelRatio,
-              window.devicePixelRatio,
+              this.renderWidth * this.renderDpr,
+              this.renderHeight * this.renderDpr,
+              this.renderDpr,
             ],
           },
           iTime: { value: 0 },
@@ -370,9 +387,9 @@ export class ShaderToy {
     if (this.program && this.mesh) {
       // Update uniforms
       this.program.uniforms.iResolution.value = [
-        this.container.clientWidth * window.devicePixelRatio,
-        this.container.clientHeight * window.devicePixelRatio,
-        window.devicePixelRatio,
+        this.renderWidth * this.renderDpr,
+        this.renderHeight * this.renderDpr,
+        this.renderDpr,
       ]
       this.program.uniforms.iTime.value = iTime
       this.program.uniforms.iTimeDelta.value = iTimeDelta
