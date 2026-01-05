@@ -30,7 +30,14 @@ const backgroundSources: BackgroundSource[] = Object.entries(backgroundImporters
   }
 })
 
+const colorMode = useColorMode()
+
 const resolvedComponent = shallowRef<Component | null>(null)
+const isBackgroundReady = ref(false)
+
+const fallbackStyle = computed(() => ({
+  backgroundColor: colorMode.value === 'dark' ? 'var(--clr-bg)' : 'var(--clr-bgLight)',
+}))
 
 let loadId = 0
 
@@ -77,8 +84,10 @@ function resolveCandidates() {
 }
 
 async function loadBackgroundComponent() {
+  isBackgroundReady.value = false
   if (!backgroundSources.length) {
     resolvedComponent.value = null
+    isBackgroundReady.value = false
     console.warn('[RandomBackground] 找不到任何背景元件。')
     return
   }
@@ -86,6 +95,7 @@ async function loadBackgroundComponent() {
   const { items, exactMatch } = resolveCandidates()
   if (!items.length) {
     resolvedComponent.value = null
+    isBackgroundReady.value = false
     return
   }
 
@@ -94,18 +104,23 @@ async function loadBackgroundComponent() {
 
   if (!targetSource) {
     resolvedComponent.value = null
+    isBackgroundReady.value = false
     return
   }
 
   const currentLoadId = ++loadId
   try {
     const mod = await targetSource.loader()
-    if (currentLoadId === loadId)
+    if (currentLoadId === loadId) {
       resolvedComponent.value = mod.default
+      isBackgroundReady.value = true
+    }
   }
   catch (error) {
-    if (currentLoadId === loadId)
+    if (currentLoadId === loadId) {
       resolvedComponent.value = null
+      isBackgroundReady.value = false
+    }
     console.error('[RandomBackground] 載入背景元件失敗：', error)
   }
 }
@@ -129,8 +144,13 @@ function normalizeIdentifier(value: string) {
 <template>
   <ClientOnly>
     <template #default>
-      <BackgroundsBasePortal v-if="resolvedComponent">
-        <component :is="resolvedComponent" />
+      <BackgroundsBasePortal>
+        <component :is="resolvedComponent" v-if="resolvedComponent" />
+        <div
+          class="absolute inset-0 transition-opacity duration-500 ease-out"
+          :class="isBackgroundReady ? 'opacity-0' : 'opacity-100'"
+          :style="fallbackStyle"
+        />
       </BackgroundsBasePortal>
     </template>
   </ClientOnly>
