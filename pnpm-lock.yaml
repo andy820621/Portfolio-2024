@@ -55,8 +55,8 @@ importers:
         specifier: ^7.4.3
         version: 7.4.3(@unocss/eslint-plugin@66.6.0(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint-plugin-format@1.4.0(eslint@10.0.1(jiti@2.6.1)))(eslint@10.0.1(jiti@2.6.1))(typescript@5.9.3)
       '@barzhsieh/nuxt-content-mermaid':
-        specifier: 2.2.2
-        version: 2.2.2(@nuxt/content@3.11.2(better-sqlite3@12.6.2)(magicast@0.5.2))(magicast@0.5.2)(nuxt@4.3.1(@netlify/blobs@10.7.0)(@parcel/watcher@2.5.6)(@types/node@25.3.0)(@vue/compiler-sfc@3.5.28)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.6.2))(eslint@10.0.1(jiti@2.6.1))(ioredis@5.9.3)(lightningcss@1.31.1)(magicast@0.5.2)(meow@13.2.0)(optionator@0.9.4)(rollup@4.59.0)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue-tsc@3.2.5(typescript@5.9.3))(yaml@2.8.2))
+        specifier: 2.2.3
+        version: 2.2.3(@nuxt/content@3.11.2(better-sqlite3@12.6.2)(magicast@0.5.2))(magicast@0.5.2)(nuxt@4.3.1(@netlify/blobs@10.7.0)(@parcel/watcher@2.5.6)(@types/node@25.3.0)(@vue/compiler-sfc@3.5.28)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.6.2))(eslint@10.0.1(jiti@2.6.1))(ioredis@5.9.3)(lightningcss@1.31.1)(magicast@0.5.2)(meow@13.2.0)(optionator@0.9.4)(rollup@4.59.0)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue-tsc@3.2.5(typescript@5.9.3))(yaml@2.8.2))
       '@commitlint/cli':
         specifier: ^20.4.2
         version: 20.4.2(@types/node@25.3.0)(typescript@5.9.3)
@@ -376,8 +376,8 @@ packages:
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
 
-  '@barzhsieh/nuxt-content-mermaid@2.2.2':
-    resolution: {integrity: sha512-UvRSI1jVYkvYglRhEXMMx1A/hRbH5eENAqiRf+vrY0mchh3tdU+tlk3K7ce1+nPW9w3rWHRnktW9CcKt9aznew==}
+  '@barzhsieh/nuxt-content-mermaid@2.2.3':
+    resolution: {integrity: sha512-MwONyzIjc0PZZQLFPxFNQ11M3kGkmIzziiShJNahQpwKHRKs4a/TlOxDdMDTmQpdsTGcY/sTgraauGwRoGScpw==}
     peerDependencies:
       '@nuxt/content': '>=3.5.0'
       nuxt: ^3.20.1 || ^4.1.0
@@ -8962,7 +8962,7 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@barzhsieh/nuxt-content-mermaid@2.2.2(@nuxt/content@3.11.2(better-sqlite3@12.6.2)(magicast@0.5.2))(magicast@0.5.2)(nuxt@4.3.1(@netlify/blobs@10.7.0)(@parcel/watcher@2.5.6)(@types/node@25.3.0)(@vue/compiler-sfc@3.5.28)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.6.2))(eslint@10.0.1(jiti@2.6.1))(ioredis@5.9.3)(lightningcss@1.31.1)(magicast@0.5.2)(meow@13.2.0)(optionator@0.9.4)(rollup@4.59.0)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue-tsc@3.2.5(typescript@5.9.3))(yaml@2.8.2))':
+  '@barzhsieh/nuxt-content-mermaid@2.2.3(@nuxt/content@3.11.2(better-sqlite3@12.6.2)(magicast@0.5.2))(magicast@0.5.2)(nuxt@4.3.1(@netlify/blobs@10.7.0)(@parcel/watcher@2.5.6)(@types/node@25.3.0)(@vue/compiler-sfc@3.5.28)(better-sqlite3@12.6.2)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.6.2))(eslint@10.0.1(jiti@2.6.1))(ioredis@5.9.3)(lightningcss@1.31.1)(magicast@0.5.2)(meow@13.2.0)(optionator@0.9.4)(rollup@4.59.0)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2))(vue-tsc@3.2.5(typescript@5.9.3))(yaml@2.8.2))':
     dependencies:
       '@nuxt/content': 3.11.2(better-sqlite3@12.6.2)(magicast@0.5.2)
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
