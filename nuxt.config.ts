@@ -21,7 +21,6 @@ const chunkMap: Record<string, string> = {
   'ogl': 'ogl',
   'swiper': 'swiper',
   'minisearch': 'minisearch',
-  '@barzhsieh/nuxt-content-mermaid': 'nuxt-mermaid',
 }
 
 const lastmod = getSitemapDateFormat(Date.now())
@@ -331,8 +330,6 @@ export default defineNuxtConfig({
             const entry = Object.entries(chunkMap).find(([key]) => id.includes(key))
             if (entry)
               return entry[1]
-
-            return 'vendor'
           },
           sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
         },
