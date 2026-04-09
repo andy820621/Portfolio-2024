@@ -1,3 +1,6 @@
+const ORDER_NAME_PATTERN = /^(\d+)\.([^.]+)(?:\.([^.]+))?$/
+const HYPHEN_PATTERN = /-/g
+
 export function useProjectImages() {
   const loading = ref(false)
   const error = ref<Error | null>(null)
@@ -63,15 +66,15 @@ export function useProjectImages() {
     const nameWithoutExt = file.substring(0, file.lastIndexOf('.'))
 
     // 檢查是否使用命名慣例 "01.order-name.title"
-    const orderNameMatch = nameWithoutExt.match(/^(\d+)\.([^.]+)(?:\.([^.]+))?$/)
+    const orderNameMatch = nameWithoutExt.match(ORDER_NAME_PATTERN)
 
     if (orderNameMatch) {
       // 有排序格式
       const [, order, id, title] = orderNameMatch
       return {
         order: order ? Number.parseInt(order, 10) : 999,
-        id: id ? id.replace(/-/g, ' ') : nameWithoutExt,
-        title: title ? title.replace(/-/g, ' ') : id ? id.replace(/-/g, ' ') : nameWithoutExt,
+        id: id ? id.replace(HYPHEN_PATTERN, ' ') : nameWithoutExt,
+        title: title ? title.replace(HYPHEN_PATTERN, ' ') : id ? id.replace(HYPHEN_PATTERN, ' ') : nameWithoutExt,
       }
     }
 
@@ -79,7 +82,7 @@ export function useProjectImages() {
     return {
       order: 999, // 預設順序在最後
       id: nameWithoutExt,
-      title: nameWithoutExt.replace(/-/g, ' '),
+      title: nameWithoutExt.replace(HYPHEN_PATTERN, ' '),
     }
   }
 

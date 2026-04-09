@@ -19,10 +19,14 @@ interface BackgroundSource {
   loader: BackgroundModule
 }
 
+const VUE_EXTENSION_REGEX = /\.vue$/i
+const PATH_SEPARATOR_REGEX = /[\\/]/
+const WHITESPACE_UNDERSCORE_DASH_REGEX = /[\s_-]+/g
+
 const backgroundImporters = import.meta.glob<{ default: Component }>('~/components/Backgrounds/*.vue')
 
 const backgroundSources: BackgroundSource[] = Object.entries(backgroundImporters).map(([path, loader]) => {
-  const name = path.split('/').pop()?.replace(/\.vue$/i, '') ?? path
+  const name = path.split('/').pop()?.replace(VUE_EXTENSION_REGEX, '') ?? path
   return {
     name,
     normalized: normalizeIdentifier(name),
@@ -133,10 +137,10 @@ if (import.meta.client) {
 
 function normalizeIdentifier(value: string) {
   return value
-    .replace(/\.vue$/i, '')
-    .split(/[\\/]/)
+    .replace(VUE_EXTENSION_REGEX, '')
+    .split(PATH_SEPARATOR_REGEX)
     .pop()
-    ?.replace(/[\s_-]+/g, '')
+    ?.replace(WHITESPACE_UNDERSCORE_DASH_REGEX, '')
     .toLowerCase() || ''
 }
 </script>

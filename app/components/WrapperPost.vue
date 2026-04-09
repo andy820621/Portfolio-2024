@@ -46,7 +46,7 @@ if (import.meta.client) {
 
     if (!target) {
       if (attempt < 5)
-        setTimeout(() => scrollToHash(hash, attempt + 1), 100)
+        setTimeout(scrollToHash, 100, hash, attempt + 1)
       return
     }
 

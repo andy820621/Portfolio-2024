@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance } from 'vue'
 
+const TRAILING_SLASH_REGEX = /\/$/
+
 const {
   query,
   results,
@@ -67,7 +69,7 @@ function isExternalLink(item: GlobalSearchResult) {
 }
 
 function isNowPageItem(item: GlobalSearchResult) {
-  const normalize = (value: string) => value.replace(/\/$/, '')
+  const normalize = (value: string) => value.replace(TRAILING_SLASH_REGEX, '')
   return normalize(route.fullPath) === normalize(item.url)
 }
 

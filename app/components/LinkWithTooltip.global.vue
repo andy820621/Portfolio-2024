@@ -23,7 +23,9 @@ const props = withDefaults(defineProps<LinkWithTooltipProps>(), {
 const { to, tooltipContent, iconClass } = toRefs(props)
 const size = computed(() => String(props.size)) // 將 size 統一轉為字串方便處理單位
 
-const isRemoteSource = (value?: string) => !!value && /^(?:https?:)?\/\//.test(value)
+const REMOTE_URL_REGEX = /^(?:https?:)?\/\//
+const UNIT_ONLY_REGEX = /^\d+$/
+const isRemoteSource = (value?: string) => !!value && REMOTE_URL_REGEX.test(value)
 
 // 判斷 icon 是否為本地 iconify 名稱（非 URL）
 const iconName = computed(() => (props.icon && !isRemoteSource(props.icon) ? props.icon : ''))
@@ -38,7 +40,7 @@ const iconUrl = computed(() => {
 })
 
 // 與 Icon 預設大小對齊；使用 px 為主要單位，若傳入已帶單位則直接套用
-const ensureUnit = (val: string) => (/^\d+$/.test(val) ? `${val}px` : val)
+const ensureUnit = (val: string) => (UNIT_ONLY_REGEX.test(val) ? `${val}px` : val)
 const resolvedImgSize = computed(() => ensureUnit(size.value))
 const imageSizeStyle = computed(() => ({
   width: resolvedImgSize.value,

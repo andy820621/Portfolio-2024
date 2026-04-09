@@ -10,6 +10,10 @@ const imageMapPath = path.join(projectRoot, 'public', 'project-images-map.json')
 const metadataPathEn = path.join(projectRoot, 'public', 'project-images-metadata.json')
 const metadataPathZh = path.join(projectRoot, 'public', 'project-images-metadata.zh.json')
 
+// Regular expressions for reuse
+const HYPHEN_REGEX = /-/g
+const FILENAME_PARSE_REGEX = /^(\d+)\.([^.]+)(?:\.([^.]+))?$/
+
 function readJsonFileOrFallback(filePath, fallback = {}) {
   try {
     if (!fs.existsSync(filePath))
@@ -37,7 +41,7 @@ function titleCase(text) {
 function titleCasePath(folderPath) {
   return folderPath
     .split('/')
-    .map(segment => titleCase(segment.replace(/-/g, ' ')))
+    .map(segment => titleCase(segment.replace(HYPHEN_REGEX, ' ')))
     .join('/')
 }
 
@@ -45,7 +49,7 @@ function buildDefaultMetadata({ folder, image }) {
   const nameWithoutExt = image.substring(0, image.lastIndexOf('.'))
 
   // 嘗試從檔名解析信息： "01.id.title" 或 "01.id"
-  const orderNameMatch = nameWithoutExt.match(/^(\d+)\.([^.]+)(?:\.([^.]+))?$/)
+  const orderNameMatch = nameWithoutExt.match(FILENAME_PARSE_REGEX)
 
   let titleRaw
   if (orderNameMatch) {
@@ -56,7 +60,7 @@ function buildDefaultMetadata({ folder, image }) {
     titleRaw = nameWithoutExt
   }
 
-  const title = titleCase(titleRaw.replace(/-/g, ' '))
+  const title = titleCase(titleRaw.replace(HYPHEN_REGEX, ' '))
   const folderLabel = folder ? titleCasePath(folder) : ''
   const description = folderLabel ? `${folderLabel} - ${title}` : title
 

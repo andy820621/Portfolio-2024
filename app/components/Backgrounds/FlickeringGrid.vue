@@ -16,6 +16,17 @@ import type { Texture } from 'pixi.js'
 import { Application, Graphics, Particle, ParticleContainer } from 'pixi.js'
 import { createNoise3D } from 'simplex-noise'
 
+// 預設值設定
+const props = withDefaults(defineProps<FlickeringGridProps>(), {
+  squareSize: 4,
+  gridGap: 8,
+  flickerChance: 0.15,
+  color: '#00ff81',
+})
+
+// 預編譯的正則表達式
+const RGB_REGEX = /rgba?\(([^)]+)\)/i
+
 // 元件可調整參數
 interface FlickeringGridProps {
   squareSize?: number // 單一方塊邊長
@@ -27,14 +38,6 @@ interface FlickeringGridProps {
   class?: string
   maxOpacity?: number // 透明度上限(粒子亮度最大值)
 }
-
-// 預設值設定
-const props = withDefaults(defineProps<FlickeringGridProps>(), {
-  squareSize: 4,
-  gridGap: 8,
-  flickerChance: 0.15,
-  color: '#00ff81',
-})
 
 // 取得可觀察的 refs 方便 watch
 const { squareSize, gridGap, flickerChance, color, maxOpacity, width, height } = toRefs(props)
@@ -109,7 +112,7 @@ function colorToRgb(value: string | undefined): RGBColor {
     }
   }
 
-  const rgbMatch = hex.match(/rgba?\(([^)]+)\)/i)
+  const rgbMatch = hex.match(RGB_REGEX)
   if (rgbMatch && rgbMatch[1]) {
     const values = rgbMatch[1].split(',')
       .map(token => Number.parseFloat(token.trim()))

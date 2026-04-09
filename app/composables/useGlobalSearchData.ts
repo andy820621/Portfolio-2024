@@ -148,6 +148,17 @@ const TYPE_META: Record<ResultType, { label: string, icon: string, badge: string
   },
 }
 
+const ESCAPE_HTML_REGEX = {
+  ampersand: /&/g,
+  lessThan: /</g,
+  greaterThan: />/g,
+  quote: /"/g,
+  apostrophe: /'/g,
+}
+
+const REGEX_SPECIAL_CHARS = /[.*+?^${}()|[\]\\]/g
+const REGEX_USER_AGENT_MAC = /Mac|iPhone|iPod|iPad/i
+
 interface ResultPayload {
   id: string
   type: ResultType
@@ -164,11 +175,11 @@ interface ResultPayload {
 
 function escapeHtml(text: string) {
   return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
+    .replace(ESCAPE_HTML_REGEX.ampersand, '&amp;')
+    .replace(ESCAPE_HTML_REGEX.lessThan, '&lt;')
+    .replace(ESCAPE_HTML_REGEX.greaterThan, '&gt;')
+    .replace(ESCAPE_HTML_REGEX.quote, '&quot;')
+    .replace(ESCAPE_HTML_REGEX.apostrophe, '&#39;')
 }
 
 function highlightText(text: string, keyword: string) {
@@ -177,7 +188,7 @@ function highlightText(text: string, keyword: string) {
   if (!trimmed || trimmed.length < 2)
     return safeText
 
-  const escapedKeyword = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const escapedKeyword = trimmed.replace(REGEX_SPECIAL_CHARS, '\\$&')
   const regex = new RegExp(escapedKeyword, 'gi')
   return safeText.replace(regex, match => `<mark>${match}</mark>`)
 }
@@ -496,7 +507,7 @@ export async function useGlobalSearchData() {
     if (import.meta.server)
       return 'Ctrl K'
 
-    return /Mac|iPhone|iPod|iPad/i.test(navigator.userAgent) ? '⌘ K' : 'Ctrl K'
+    return REGEX_USER_AGENT_MAC.test(navigator.userAgent) ? '⌘ K' : 'Ctrl K'
   })
 
   return {

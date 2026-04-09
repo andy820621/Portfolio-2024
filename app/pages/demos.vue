@@ -4,12 +4,18 @@ import { breakpointsTailwind } from '@vueuse/core'
 
 const { t, locale } = useI18n()
 
+// Regular expressions at module scope
+const LEADING_NUMBER_REGEX = /^\d+\./
+const SEPARATOR_REGEX = /[-_]/g
+const MD_EXTENSION_REGEX = /\.md$/
+const NUMBER_EXTRACT_REGEX = /^(\d+)\./
+
 // 格式化標題函數
 function formatTitle(fileName: string): string {
   return fileName
-    .replace(/^\d+\./, '') // 移除開頭數字
-    .replace(/[-_]/g, ' ') // 替換連字符和底線
-    .replace(/\.md$/, '') // 移除 .md 副檔名
+    .replace(LEADING_NUMBER_REGEX, '') // 移除開頭數字
+    .replace(SEPARATOR_REGEX, ' ') // 替換連字符和底線
+    .replace(MD_EXTENSION_REGEX, '') // 移除 .md 副檔名
     .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ')
@@ -38,7 +44,7 @@ function sortDemos(docs: DemoCollectionItem[]) {
         // 從路徑中提取檔案名稱部分
         const fileName = item.stem.split('/').pop() || ''
         // 提取檔案名稱中的數字部分
-        const numStr = fileName.match(/^(\d+)\./)?.[1] ?? '0'
+        const numStr = fileName.match(NUMBER_EXTRACT_REGEX)?.[1] ?? '0'
         return Number.parseInt(numStr, 10)
       }
       return 0
@@ -53,7 +59,7 @@ function sortDemos(docs: DemoCollectionItem[]) {
 function transformDemoItem(doc: DemoCollectionItem) {
   const stemPath = doc.stem || ''
   const fileName = stemPath.split('/').pop() || ''
-  const baseName = fileName.replace(/^\d+\./, '').toLowerCase()
+  const baseName = fileName.replace(LEADING_NUMBER_REGEX, '').toLowerCase()
 
   return {
     baseName,
@@ -114,7 +120,7 @@ const parts = computed(() => {
   if (!items)
     return []
 
-  const columns: typeof items[] = Array.from({ length: cols.value }, () => [])
+  const columns: typeof items[] = Array.from({ length: cols.value }).fill(null).map(() => [])
   items.forEach((item, index) => {
     const col = index % cols.value
     columns[col]!.push(item)

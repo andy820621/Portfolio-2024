@@ -9,6 +9,8 @@ const projectImagesDir = path.join(projectRoot, 'public/project-images')
 const imageMap = {}
 
 const IMAGE_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp'])
+const BACKSLASH_REGEX = /\\/g
+const NUMERIC_PREFIX_REGEX = /^(\d+)/
 
 function collectImageFiles(dir, baseDir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true })
@@ -22,7 +24,7 @@ function collectImageFiles(dir, baseDir) {
     else {
       const ext = path.extname(entry.name).toLowerCase()
       if (IMAGE_EXTENSIONS.has(ext)) {
-        files.push(path.relative(baseDir, fullPath).replace(/\\/g, '/'))
+        files.push(path.relative(baseDir, fullPath).replace(BACKSLASH_REGEX, '/'))
       }
     }
   }
@@ -53,8 +55,8 @@ function main() {
   Object.keys(imageMap).forEach((dirKey) => {
     imageMap[dirKey].sort((a, b) => {
       // 使用正則表達式從檔案名提取數字前綴
-      const numA = Number.parseInt(a.match(/^(\d+)/)?.[1] || '0')
-      const numB = Number.parseInt(b.match(/^(\d+)/)?.[1] || '0')
+      const numA = Number.parseInt(a.match(NUMERIC_PREFIX_REGEX)?.[1] || '0')
+      const numB = Number.parseInt(b.match(NUMERIC_PREFIX_REGEX)?.[1] || '0')
       // 按數字大小排序，若相同則自然排序
       if (numA !== numB)
         return numA - numB

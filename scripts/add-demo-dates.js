@@ -3,6 +3,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
+const FRONTMATTER_REGEX = /^---\n([\s\S]*?)\n---/
+
 /**
  * 從 Git 歷史中取得檔案的創建日期和最後修改日期
  */
@@ -42,8 +44,7 @@ function updateFrontmatter(filePath) {
   const content = fs.readFileSync(filePath, 'utf-8')
 
   // 檢查是否已有 frontmatter
-  const frontmatterRegex = /^---\n([\s\S]*?)\n---/
-  const match = content.match(frontmatterRegex)
+  const match = content.match(FRONTMATTER_REGEX)
 
   if (!match) {
     console.warn(`${filePath} 沒有 frontmatter，跳過`)
@@ -67,7 +68,7 @@ function updateFrontmatter(filePath) {
   // 在 frontmatter 的最後加入 date 和 updatedAt
   const newFrontmatter = `${frontmatter}\ndate: ${formatDate(date)}\nupdatedAt: ${formatDate(updatedAt)}`
 
-  const newContent = content.replace(frontmatterRegex, `---\n${newFrontmatter}\n---`)
+  const newContent = content.replace(FRONTMATTER_REGEX, `---\n${newFrontmatter}\n---`)
 
   fs.writeFileSync(filePath, newContent, 'utf-8')
   console.log(`✅ 已更新 ${path.basename(filePath)} - date: ${formatDate(date)}, updatedAt: ${formatDate(updatedAt)}`)

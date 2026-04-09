@@ -1,3 +1,5 @@
+const URL_PROTOCOL_REGEX = /^[a-z][\w+\-.]*:\/\//i
+
 export function normalizePath(path: string) {
   if (!path)
     return ''
@@ -9,7 +11,7 @@ export function encodeUrlPath(path: string) {
   if (!path)
     return ''
 
-  const hasProtocol = /^[a-z][\w+\-.]*:\/\//i.test(path)
+  const hasProtocol = URL_PROTOCOL_REGEX.test(path)
 
   if (hasProtocol) {
     try {
