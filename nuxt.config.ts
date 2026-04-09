@@ -25,6 +25,11 @@ const chunkMap: Record<string, string> = {
 
 const lastmod = getSitemapDateFormat(Date.now())
 
+// Rex Rules
+const NEWLINE_REGEX = /\r?\n/
+const QUOTE_TRIM_REGEX = /^['"]|['"]$/g
+const MD_EXT_REGEX = /\.md$/
+
 export default defineNuxtConfig({
   // debug: {
   //   hydration: true,
@@ -58,7 +63,9 @@ export default defineNuxtConfig({
         trailingSlash: 'append',
       },
     },
-    payloadExtraction: true,
+    // Avoid dev cache key collision at .nuxt/cache/nuxt/payload (file vs directory).
+    // Keep extraction for production static output only.
+    payloadExtraction: process.env.NODE_ENV === 'production',
   },
   modules: [
     '@barzhsieh/nuxt-content-mermaid',
@@ -401,13 +408,13 @@ export default defineNuxtConfig({
                   try {
                     const raw = await fs.readFile(fullPath, 'utf8')
                     if (raw.startsWith('---')) {
-                      const lines = raw.split(/\r?\n/)
+                      const lines = raw.split(NEWLINE_REGEX)
                       for (let i = 1; i < lines.length; i++) {
                         const line = (lines[i] || '').trim()
                         if (line === '---')
                           break
                         if (line.toLowerCase().startsWith('published:')) {
-                          const value = line.split(':')[1]?.trim().replace(/^['"]|['"]$/g, '').toLowerCase()
+                          const value = line.split(':')[1]?.trim().replace(QUOTE_TRIM_REGEX, '').toLowerCase()
                           if (value === 'false') {
                             shouldSkip = true
                             break
@@ -423,7 +430,7 @@ export default defineNuxtConfig({
                     continue
 
                   // 將檔案路徑轉換為路由
-                  const slug = file.name.replace(/\.md$/, '')
+                  const slug = file.name.replace(MD_EXT_REGEX, '')
                   const routePath = locale === 'en'
                     ? `/${type}/${slug}`
                     : `/zh/${type}/${slug}`
