@@ -2,7 +2,7 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack'
 import { getSitemapDateFormat } from './app/utils/dayjs'
-import { getKeywords, navbarData, seoData } from './data'
+import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
 type SupportedLocale = 'en' | 'zh'
@@ -24,6 +24,8 @@ const chunkMap: Record<string, string> = {
 }
 
 const lastmod = getSitemapDateFormat(Date.now())
+const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
+const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 
 // Rex Rules
 const NEWLINE_REGEX = /\r?\n/
@@ -169,8 +171,9 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: process.env.I18N_BASE_URL,
+    url: canonicalSiteUrl,
     name: navbarData.homeTitle,
+    indexable: true,
     identity: {
       type: 'Person',
     },
@@ -212,28 +215,23 @@ export default defineNuxtConfig({
   robots: {
     blockNonSeoBots: true,
     blockAiBots: true,
+    sitemap: ['/sitemap_index.xml'],
   },
   schemaOrg: {
     defaults: false,
     debug: process.env.NODE_ENV !== 'production',
+    identity: {
+      type: 'Person',
+      ...createPersonIdentity({
+        baseUrl: canonicalSiteUrl,
+      }),
+    },
   },
   ogImage: {
     debug: process.env.NODE_ENV !== 'production',
-    defaults: {
-      props: {
-        title: seoData.ogTitle,
-        description: seoData.description,
-        url: process.env.I18N_BASE_URL,
-        twitterSite: seoData.twitterLink,
-        siteName: seoData.ogTitle,
-      },
-    },
-    fonts: [
-      'Noto+Sans+SC:400',
-    ],
   },
   socialShare: {
-    baseUrl: process.env.I18N_BASE_URL,
+    baseUrl: canonicalSiteUrl,
   },
   image: {
     format: ['avif', 'webp', 'jpg', 'png', 'gif'],
@@ -281,7 +279,7 @@ export default defineNuxtConfig({
     // },
   },
   i18n: {
-    baseUrl: process.env.I18N_BASE_URL,
+    baseUrl: canonicalSiteUrl,
     locales,
     strategy: 'prefix_except_default',
     defaultLocale: 'en',

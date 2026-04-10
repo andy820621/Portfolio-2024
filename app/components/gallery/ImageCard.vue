@@ -2,7 +2,7 @@
 const props = defineProps<{
   title: string
   src?: string
-  id?: string
+  albumId?: string
 }>()
 
 const imageSrc = computed(() => {
@@ -11,8 +11,8 @@ const imageSrc = computed(() => {
     return encodeUrlPath(props.src)
 
   // 如果沒有 coverImage，使用 id 生成圖片路徑
-  if (props.id) {
-    return encodeUrlPath(`/gallery-images/${props.id}.webp`)
+  if (props.albumId) {
+    return encodeUrlPath(`/gallery-images/${props.albumId}.webp`)
   }
 
   // 如果都沒有，返回預設或空圖片

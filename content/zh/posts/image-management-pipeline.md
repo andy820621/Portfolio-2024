@@ -127,7 +127,7 @@ pnpm run generate:metadata
 
 1. 放到 `public/gallery-images/{album}/`
 2. 準備封面 `public/gallery-images/{album}.webp`
-3. 更新 `data/galleryData.ts`（`id` 必須與資料夾一致）
+3. 更新 `content/gallery/*.yml`（`albumId` 必須與資料夾一致）
 4. 生成 map：
 
 ```bash

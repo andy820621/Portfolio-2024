@@ -1,13 +1,13 @@
 ---
 title: What is PKI? The digital foundation from encryption to trust
-date: 2025/11/03
+date: 2025-11-03
 description: Understand why PKI is the foundation of digital trust in the modern era
 image: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 alt: What is PKI? The digital foundation from encryption to trust
 ogImage: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 tags: [PKI, Public Key Infrastructure, Cybersecurity, Encryption, Digital Signatures, Security, Digital Certificates]
 categories: [Security, PKI]
-updatedAt: 2025/12/31
+updatedAt: 2025-12-31
 published: true
 
 schemaOrg:
@@ -17,14 +17,14 @@ schemaOrg:
     author:
       "@type": "Person"
       name: "BarZ Hsieh"
-    datePublished: "2025/11/03"
-    dateModified: "2025/11/03"
+    datePublished: "2025-11-03"
+    dateModified: "2025-12-31"
     image: "https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg"
     keywords: ["Security", "PKI", "Encryption", "Digital Certificates"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025/11/03
+  lastmod: 2025-12-31
   changefreq: weekly
   priority: 0.8
   images:

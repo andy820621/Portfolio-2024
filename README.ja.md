@@ -92,7 +92,7 @@ pnpm typecheck    # TypeScript型チェックを実行
 
 1. **ブログ投稿**: `content/en/` または `content/zh/` にMarkdownファイルを追加
 2. **プロジェクト**: `content/en/projects/` または `content/zh/projects/` にプロジェクトデータを追加
-3. **ギャラリー**: `data/galleryData.ts` に新しいアルバムと画像を追加, 画像は `public/images/gallery/` に配置
+3. **ギャラリー**: `content/gallery/*.yml` にアルバム metadata を追加し、`albumId` をフォルダ名に合わせ、画像は `public/gallery-images/` に配置
 
 ### カスタマイズ
 

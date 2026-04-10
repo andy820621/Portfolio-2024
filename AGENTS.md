@@ -35,8 +35,8 @@ node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 - `app/pages/*`：頁面路由（`/posts`, `/projects`, `/gallery`, `/license` 等）；頁面大多透過 content composable 組裝資料。
 - `app/components/`：共用 UI（LightBox、TagsFilterDropdown、NavBar、Footer 等）；`app/components/content/ProjectLightBox.vue` 與 Gallery 組件負責圖片燈箱邏輯。
 - `app/composables/`：搜尋索引、內容過濾、SEO meta、路徑工具（例如 `app/utils/pathUtils.ts`）。
-- `content/{en,zh}/`：Markdown 內容，posts/projects/demos/about/license 等。
-- `data/`：靜態資料與設定（`navbarData.ts`, `seoData.ts`, `galleryData.ts`, `bundleIcons.ts`…）。
+- `content/{en,zh}/`：Markdown 內容，posts/projects/demos/about/license 等；`content/gallery/*.yml` 存放 Gallery 相簿 metadata。
+- `data/`：靜態資料與設定（`navbarData.ts`, `seoData.ts`, `bundleIcons.ts`…）。
 - `public/`：靜態資源與自動產生的 JSON，如 `gallery-images-map.json`, `project-images-map.json`, `project-images-metadata(.zh).json`。
 - `scripts/`：影像映射/中繼資料生成與預渲染測試；建置前會先執行 `generate-project-images-map.js` 與 `generate-gallery-images-map.js`。
 - `modules/content-hooks`：Nuxt layer/模組掛勾內容流程
@@ -46,7 +46,7 @@ node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 ### Gallery
 
 - 圖片置於 `public/gallery-images/{album-id}/`；封面圖片放在 `public/gallery-images/{album-id}.webp`。
-- 在 `data/galleryData.ts` 登記 `GalleryGroup`，`id` 必須與資料夾一致。
+- 在 `content/gallery/*.yml` 建立相簿 metadata，`albumId` 必須與資料夾一致。
 - 更新後執行 `node scripts/generate-gallery-images-map.js`（或等待 `pnpm build` prebuild）生成 `public/gallery-images-map.json`。
 
 ### Projects
@@ -59,7 +59,7 @@ node scripts/generate-project-images-map.js   # 可單獨更新 project 映射
 ## 開發注意事項
 
 - **i18n**：`@nuxtjs/i18n` 以 `prefix_except_default` 策略，新增頁面時確保 `en` 為預設，`zh` 有對應內容或 fallback。
-- **環境變數**：`process.env.I18N_BASE_URL` 會用於 site/url、OG image、social share，Netlify 需設定；`NETLIFY=true` 時 Nitro preset 會切換。
+- **環境變數**：`NUXT_SITE_URL` 是 canonical site URL，會用於 `site.url`、`@nuxtjs/i18n` 的 `baseUrl`、social share 與 sitemap/OG 等 SEO 輸出；`NETLIFY=true` 時 Nitro preset 會切換。
 - **HTML 驗證**：在非 production 模式 `@nuxtjs/html-validator` 會啟動，避免引入 validator 無法處理的自訂元素。
 - **影像最佳化**：目前 `@nuxt/image` provider 設為 `none`，上傳圖片需自行控制格式與大小（建議 WebP/AVIF）。
 - **自動產出檔**：`public/*-map.json` 與 `project-images-metadata*.json` 須納入版控，避免開發者環境不一致。

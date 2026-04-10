@@ -112,7 +112,7 @@ useSchemaOrg([
             :description="post.description"
             :image="post.cover ?? post.image"
             :alt="post.alt"
-            :og-image="post.ogImage"
+            :og-image="typeof post.ogImage === 'string' ? post.ogImage : post.ogImage?.url"
             :tags="post.tags"
             :published="post.published"
             :word-count="post.wordCount"

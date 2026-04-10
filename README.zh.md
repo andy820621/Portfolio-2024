@@ -93,7 +93,7 @@ pnpm typecheck    # 執行 TypeScript 型別檢查
 
 1. **部落格文章**：在 `content/en/` 或 `content/zh/` 新增 Markdown 檔案
 2. **專案項目**：在 `content/en/projects/` 或 `content/zh/projects/` 新增專案資料
-3. **相簿內容**：更新 `data/galleryData.ts` 新增相簿與圖片資料設定，並確保圖片已放到至 `public/images/gallery/` 目錄
+3. **相簿內容**：在 `content/gallery/*.yml` 新增相簿 metadata，確保 `albumId` 與相簿資料夾名稱一致，並將圖片放到 `public/gallery-images/` 目錄
 
 ### 客製化設定
 

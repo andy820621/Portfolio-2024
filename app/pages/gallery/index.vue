@@ -1,8 +1,22 @@
 <script setup lang="ts">
+import type { GalleryAlbum } from '~/utils/galleryCollection'
 import { breakpointsTailwind } from '@vueuse/core'
-import { galleryGroups } from '~~/data/galleryData'
+import { fetchGalleryAlbums } from '~/utils/galleryCollection'
 
 const { t, localeProperties, locale } = useI18n()
+
+const { data: galleryGroups, error } = await useAsyncData(
+  'gallery-groups',
+  () => fetchGalleryAlbums(),
+  { default: () => [] },
+)
+
+watchEffect(() => {
+  if (error.value)
+    console.error('Error fetching gallery groups:', error.value)
+})
+
+const galleryGroupsList = computed(() => galleryGroups.value ?? [])
 
 // 搜索文本和選中的標籤
 const searchText = ref('')
@@ -11,7 +25,7 @@ const selectedTags = ref<string[]>([])
 // 計算所有唯一標籤
 const allTags = computed(() => {
   const tagSet = new Set<string>()
-  galleryGroups.forEach((group) => {
+  galleryGroupsList.value.forEach((group) => {
     group.tags.forEach(tag => tagSet.add(tag))
   })
   return Array.from(tagSet)
@@ -35,10 +49,10 @@ usePageSeo({
 })
 
 // 防抖過濾後的圖片組
-const debouncedFilteredGroups = shallowRef(galleryGroups)
+const debouncedFilteredGroups = shallowRef<GalleryAlbum[]>(galleryGroupsList.value)
 
 const updateFilteredGroups = useDebounceFn(() => {
-  debouncedFilteredGroups.value = galleryGroups.filter((group) => {
+  debouncedFilteredGroups.value = galleryGroupsList.value.filter((group) => {
     const lowerTitle = group.title.toLocaleLowerCase()
     const titleMatch = lowerTitle.includes(searchText.value.toLocaleLowerCase())
 
@@ -51,7 +65,7 @@ const updateFilteredGroups = useDebounceFn(() => {
 }, 400)
 
 // 監聽搜索文本和選中標籤的變化
-watch([searchText, selectedTags], updateFilteredGroups, { immediate: true })
+watch([searchText, selectedTags, galleryGroupsList], updateFilteredGroups, { immediate: true })
 
 // 使用斷點檢測
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -97,13 +111,13 @@ function handleGroupRef(el: HTMLElement | null) {
 }
 
 // 計算轉場延遲
-function getTransitionDelay(groups: any[], group: any) {
+function getTransitionDelay(groups: GalleryAlbum[], group: GalleryAlbum) {
   return `${groups.indexOf(group) * 100}ms`
 }
 
 // 檢查是否可見的方法
-function isGroupVisible(group: any) {
-  return visibleGroups.value.includes(group.id)
+function isGroupVisible(group: GalleryAlbum) {
+  return visibleGroups.value.includes(group.albumId)
 }
 
 let stopIntersectionObserver: (() => void) | undefined
@@ -157,7 +171,7 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
   'item': {
     '@type': 'CreativeWork',
     'name': group.title,
-    'url': `${fullPath.value}${group.id}`,
+    'url': `${fullPath.value}${group.albumId}`,
     'thumbnail': group.coverImage ? `${trailingSlashUrlOrNot(baseUrl.value, false) + group.coverImage}` : undefined,
     'description': group.description || t('galleryPage.title'),
     'keywords': group.tags || undefined,
@@ -230,9 +244,9 @@ useSchemaOrg([
         >
           <div
             v-for="(group) in groups"
-            :key="group.id"
+            :key="group.albumId"
             :ref="(el) => handleGroupRef(el as HTMLElement)"
-            :data-group-id="group.id"
+            :data-group-id="group.albumId"
             class="gallery-item translate-y-10 transform opacity-0 transition-all duration-700 ease-out"
             :class="{
               'opacity-100 translate-y-0': isGroupVisible(group),
@@ -241,9 +255,9 @@ useSchemaOrg([
               transitionDelay: getTransitionDelay(groups, group),
             }"
           >
-            <NuxtLink :to="`/gallery/${group.id}`" :title="group.title" :aria-label="group.title">
+            <NuxtLink :to="`/gallery/${group.albumId}`" :title="group.title" :aria-label="group.title">
               <GalleryImageCard
-                :id="group.id"
+                :album-id="group.albumId"
                 :title="group.title"
                 :src="group.coverImage"
               />

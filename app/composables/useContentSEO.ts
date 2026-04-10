@@ -4,7 +4,7 @@ interface ContentData {
   title?: string
   description?: string
   image?: string
-  ogImage?: string
+  ogImage?: string | { url?: string }
   noIndex?: boolean
 }
 
@@ -33,8 +33,6 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
     return merged.join(', ')
   })
 
-  const { baseUrl, fullPath } = useUrl()
-
   // SEO 元數據
   useSeoMeta({
     title: pageTitle.value,
@@ -45,12 +43,9 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
 
   // OG 圖片
   if (!data.value.noIndex) {
-    defineOgImageComponent('Nuxt', {
-      url: fullPath.value,
-      headline: seoData.ogHeadline,
+    defineOgImage('NuxtSeo', {
       title: pageTitle.value,
       description: pageDescription.value,
-      siteName: baseUrl.value,
     })
   }
 

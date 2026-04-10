@@ -1,6 +1,6 @@
 ---
 title: PKI 是什麼？從加密到信任的數位基石
-date: 2025/11/03
+date: 2025-11-03
 description: 了解 PKI 為什麼是數位時代信任的基礎
 image: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 alt: PKI 是什麼？從加密到信任的數位基石
@@ -15,14 +15,14 @@ schemaOrg:
     author:
       "@type": "Person"
       name: "BarZ Hsieh"
-    datePublished: "2025/11/03"
-    dateModified: "2025/11/03"
+    datePublished: "2025-11-03"
+    dateModified: "2025-11-03"
     image: "https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg"
     keywords: ["Security", "PKI", "Encryption", "Digital Certificates"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025/11/03
+  lastmod: 2025-11-03
   changefreq: weekly
   priority: 0.8
   images:

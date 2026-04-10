@@ -25,6 +25,46 @@ export const seoData = {
   googleSiteVerification: 'Q4b0n0FVQLUp85bYQ7sBxLsxxvm7f5fJ2gwvpO2Ti4I',
 }
 
+const TRAILING_SLASH_REGEX = /\/$/
+const ABSOLUTE_URL_REGEX = /^https?:\/\//
+
+function normalizeBaseUrl(baseUrl: string): string {
+  return baseUrl.replace(TRAILING_SLASH_REGEX, '')
+}
+
+function resolveAbsoluteImageUrl(baseUrl: string, imagePath: string): string {
+  if (ABSOLUTE_URL_REGEX.test(imagePath))
+    return imagePath
+
+  const normalizedImagePath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`
+  return `${normalizeBaseUrl(baseUrl)}${normalizedImagePath}`
+}
+
+interface PersonIdentityOptions {
+  baseUrl: string
+  imagePath?: string
+}
+
+export function createPersonIdentity({ baseUrl, imagePath = seoData.icon }: PersonIdentityOptions) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl)
+
+  return {
+    name: navbarData.homeTitle,
+    alternateName: 'Hsieh Yao Tsu',
+    url: normalizedBaseUrl,
+    image: resolveAbsoluteImageUrl(normalizedBaseUrl, imagePath),
+    description: seoData.description,
+    email: seoData.email,
+    sameAs: [
+      seoData.twitterLink,
+      seoData.instagramLink,
+      seoData.githubLink,
+    ],
+    jobTitle: 'Frontend Engineer',
+    knowsLanguage: ['en-US', 'zh-TW', 'ja-JP'],
+  }
+}
+
 export const linkConfig = {
   link: { name: 'Demo', icon: 'mdi:link-variant' },
   github: { name: 'GitHub', icon: 'mdi:github' },

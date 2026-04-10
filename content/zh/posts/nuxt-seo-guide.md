@@ -60,7 +60,7 @@ sitemap:
 - robots（例如 noindex）
 - canonical / trailing slash 正規化（避免 `/about` 與 `/about/` 被視為不同頁面）
 
-在開發過程中，我在 **base URL** 的部分有過採雷的經驗：需要確保在 production/preview 都有「同一個來源」能拿到正確的正確 URL（例如 `NUXT_PUBLIC_SITE_URL` 或 `I18N_BASE_URL`），否則 `og:url` / `og:image` 常會在 preview 環境失效。
+在開發過程中，我在 **base URL** 的部分有過採雷的經驗：需要確保在 production/preview 都有「同一個來源」能拿到正確的正確 URL（例如 `NUXT_SITE_URL`），否則 `og:url` / `og:image` 常會在 preview 環境失效。
 
 ```ts
 interface PageSeoOptions {
@@ -75,7 +75,7 @@ export function usePageSeo(options: PageSeoOptions) {
   const route = useRoute()
   const config = useRuntimeConfig()
 
-  const baseUrl = config.public.siteUrl // 例如 NUXT_PUBLIC_SITE_URL / I18N_BASE_URL
+  const baseUrl = config.public.siteUrl // 例如 NUXT_SITE_URL
   const fullUrl = `${baseUrl}${route.path}` // 多語系前綴會自然出現在 route.path
 
   useSeoMeta({

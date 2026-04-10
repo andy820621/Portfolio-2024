@@ -129,7 +129,7 @@ pnpm run generate:metadata
 
 1. Put photos under `public/gallery-images/{album}/`
 2. Add cover `public/gallery-images/{album}.webp`
-3. Update `data/galleryData.ts` (`id` must match folder name)
+3. Add or update `content/gallery/*.yml` (`albumId` must match folder name)
 4. Generate the map:
 
 ```bash

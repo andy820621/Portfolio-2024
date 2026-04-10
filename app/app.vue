@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navbarData, seoData } from '~~/data'
+import { createPersonIdentity, navbarData } from '~~/data'
 import './assets/variable.css'
 import '@unocss/reset/tailwind.css'
 import './assets/main.scss'
@@ -49,15 +49,16 @@ useHead({
   // ],
 })
 
-const websiteId = `${baseUrl.value}#website`
-const personId = `${baseUrl.value}#identity`
+const siteBaseUrl = trailingSlashUrlOrNot(baseUrl.value, false)
+const websiteId = `${siteBaseUrl}#website`
+const personId = `${siteBaseUrl}#identity`
 
 useSchemaOrg([
   defineWebSite({
     '@id': websiteId,
     '@type': 'WebSite',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
-    'url': baseUrl.value,
+    'url': siteBaseUrl,
     'inLanguage': localeProperties.value.language,
     'publisher': {
       '@id': personId,
@@ -66,24 +67,15 @@ useSchemaOrg([
   definePerson({
     '@id': personId,
     '@type': 'Person',
-    'name': navbarData.homeTitle,
-    'alternateName': 'Hsieh Yao Tsu',
-    'url': baseUrl.value,
-    'image': `${baseUrl.value}me.jpg`,
-    'description': seoData.description,
-    'email': seoData.email,
-    'sameAs': [
-      seoData.twitterLink,
-      seoData.instagramLink,
-      seoData.githubLink,
-    ],
-    'jobTitle': 'Frontend Engineer',
+    ...createPersonIdentity({
+      baseUrl: siteBaseUrl,
+      imagePath: '/me.jpg',
+    }),
     // 'worksFor': {
     //   '@type': 'Organization',
     //   'name': 'Mercury Fire',
     //   'url': `${seoData.jobCompany}/`,
     // },
-    'knowsLanguage': ['en-US', 'zh-TW', 'ja-JP'],
   }),
 ])
 </script>

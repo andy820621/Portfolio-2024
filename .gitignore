@@ -29,3 +29,6 @@ logs
 # Local using or testing files
 Google Console Problem
 .vercel
+
+# Skilld references (recreated by `skilld install`)
+.skilld

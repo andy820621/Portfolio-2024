@@ -25,22 +25,22 @@ public/gallery-images/
 - 建議使用 `.webp` 格式以優化性能
 - 圖片會按檔名自然排序（支援數字順序）
 
-#### 2. 更新 Gallery 數據配置
+#### 2. 更新 Gallery metadata
 
-編輯 `data/galleryData.ts`：
+在 `content/gallery/` 建立新的 YAML 檔案，例如 `content/gallery/10-your-album.yml`：
 
-```typescript
-export const galleryGroups: GalleryGroup[] = [
-  // ... 現有相簿
-  {
-    id: 'Your-Album-Name', // 必須與資料夾名稱完全一致
-    title: '相簿標題',
-    chTitle: '中文標題（可選）',
-    coverImage: '/gallery-images/Your-Album-Name.webp', // 封面圖（放在 gallery-images 根目錄）
-    description: '相簿描述',
-    tags: ['標籤1', '標籤2', 'Japan'],
-  },
-]
+```yaml
+albumId: 'Your-Album-Name' # 必須與資料夾名稱完全一致
+order: 10
+title: '相簿標題'
+chTitle: '中文標題（可選）'
+coverImage: '/gallery-images/Your-Album-Name.webp' # 封面圖（放在 gallery-images 根目錄）
+description: '相簿描述'
+tags:
+  - 標籤1
+  - 標籤2
+  - Japan
+published: true
 ```
 
 #### 3. 生成圖片映射文件
@@ -246,7 +246,7 @@ generate-project-images-metadata.js
 
 - [ ] 在 `public/gallery-images/Album-Name/` 放入圖片
 - [ ] 準備封面圖 `public/gallery-images/Album-Name.webp`
-- [ ] 更新 `data/galleryData.ts` 配置
+- [ ] 在 `content/gallery/*.yml` 新增相簿 metadata
 - [ ] 執行 `node scripts/generate-gallery-images-map.js`（或等構建時自動執行）
 - [ ] 測試訪問 `/gallery/Album-Name`
 
@@ -270,7 +270,7 @@ generate-project-images-metadata.js
 **A:** 檢查以下項目：
 
 1. 圖片是否在 `public/gallery-images/{album-id}/` 目錄中
-2. `galleryData.ts` 中的 `id` 是否與資料夾名稱一致
+2. `content/gallery/*.yml` 中的 `albumId` 是否與資料夾名稱一致
 3. 是否執行了 `generate-gallery-images-map.js`
 4. 檢查 `public/gallery-images-map.json` 是否包含該相簿
 
@@ -315,7 +315,7 @@ generate-project-images-metadata.js
 
 ### 數據源
 
-- `data/galleryData.ts` - Gallery 配置
+- `content/gallery/*.yml` - Gallery metadata
 - `public/gallery-images/` - Gallery 圖片目錄
 - `public/project-images/` - Project 圖片目錄
 

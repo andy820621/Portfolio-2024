@@ -21,7 +21,6 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   const pageDescription = options.description || seoData.description
 
   // 計算完整的規範連結
-  const { baseUrl, fullPath } = useUrl()
   const { locale } = useI18n()
 
   const pageKeywords = () => {
@@ -43,12 +42,9 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex) {
-    defineOgImageComponent('Nuxt', {
-      url: fullPath.value,
-      headline: seoData.ogHeadline,
+    defineOgImage('NuxtSeo', {
       title: pageTitle,
       description: pageDescription,
-      siteName: baseUrl.value,
     })
   }
 

@@ -60,7 +60,7 @@ Create a SEO composable that centrally handles:
 - robots flags (e.g. noindex)
 - canonical and trailing-slash normalization (avoid `/about` and `/about/` being treated as separate pages)
 
-One common pitfall is **base URL**: you need a single source of truth that works in production and previews (e.g. `NUXT_PUBLIC_SITE_URL` or `I18N_BASE_URL`), otherwise `og:url`/`og:image` often break in preview environments.
+One common pitfall is **base URL**: you need a single source of truth that works in production and previews (e.g. `NUXT_SITE_URL`), otherwise `og:url`/`og:image` often break in preview environments.
 
 ```ts
 interface PageSeoOptions {
@@ -75,7 +75,7 @@ export function usePageSeo(options: PageSeoOptions) {
   const route = useRoute()
   const config = useRuntimeConfig()
 
-  const baseUrl = config.public.siteUrl // e.g. NUXT_PUBLIC_SITE_URL / I18N_BASE_URL
+  const baseUrl = config.public.siteUrl // e.g. NUXT_SITE_URL
   const fullUrl = `${baseUrl}${route.path}` // locale prefix is part of route.path
 
   useSeoMeta({

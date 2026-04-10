@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
 import { useStableYear } from '~~/app/composables/useStableNow'
-import { galleryGroups } from '~~/data/galleryData'
+import { fetchGalleryAlbumById } from '~/utils/galleryCollection'
 
 const LightGallery = defineAsyncComponent(() => import('@/components/LightGallery.vue'))
 
 const route = useRoute()
 const albumId = route.params.album as string
 
-const album = computed(() =>
-  galleryGroups.find(group => group.id === albumId),
+const { data: album, error: albumError } = await useAsyncData(
+  `gallery-album-${albumId}`,
+  () => fetchGalleryAlbumById(albumId),
+  { default: () => null },
 )
+
+if (albumError.value) {
+  throw createError({
+    statusCode: 500,
+    statusMessage: 'Internal Server Error',
+    message: albumError.value.message || 'Failed to fetch album data',
+    fatal: false,
+  })
+}
 
 if (!album.value) {
   console.error('Album not found:', albumId)

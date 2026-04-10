@@ -92,7 +92,7 @@ pnpm typecheck    # Run TypeScript type checking
 
 1. **Blog Posts**: Add markdown files to `content/en/` or `content/zh/`.
 2. **Projects**: Add project data to `content/en/projects/` or `content/zh/projects/`.
-3. **Gallery**: Update `data/galleryData.ts` with new albums and images, ensure images are placed in `public/images/gallery/`.
+3. **Gallery**: Add album metadata under `content/gallery/*.yml`, ensure `albumId` matches the album folder name, and place images in `public/gallery-images/`.
 
 ### Customization
 
