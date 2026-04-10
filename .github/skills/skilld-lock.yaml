@@ -208,3 +208,10 @@ skills:
     source: "https://github.com/harlan-zw/nuxt-seo-utils/tree/v8.1.7/docs"
     syncedAt: 2026-04-10
     generator: skilld
+  nuxt-og-image-skilld:
+    packageName: nuxt-og-image
+    version: 6.3.7
+    repo: nuxt-modules/og-image
+    source: "https://github.com/nuxt-modules/og-image/tree/v6.3.7/docs"
+    syncedAt: 2026-04-10
+    generator: skilld
