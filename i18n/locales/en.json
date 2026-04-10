@@ -19,7 +19,7 @@
   },
   "blogsPage": {
     "title": "All Blogs",
-    "description": "\nWelcome to explore my technical blog, where I share personal insights about frontend development and web technologies. \nI cannot guarantee that all content is completely accurate, but I hope you can find some useful information here. \n\nOccasionally, I also share some of my personal stories and life thoughts.",
+    "description": "Welcome to my technical blog sharing insights on frontend development and web technologies. While not every detail is guaranteed accurate, I hope you'll find valuable information here alongside occasional personal reflections.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
   "projectsPage": {
