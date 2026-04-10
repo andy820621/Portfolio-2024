@@ -201,3 +201,10 @@ skills:
     source: shipped
     syncedAt: 2026-04-10
     generator: skilld
+  nuxt-seo-utils-skilld:
+    packageName: nuxt-seo-utils
+    version: 8.1.7
+    repo: harlan-zw/nuxt-seo-utils
+    source: "https://github.com/harlan-zw/nuxt-seo-utils/tree/v8.1.7/docs"
+    syncedAt: 2026-04-10
+    generator: skilld

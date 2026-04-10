@@ -443,15 +443,68 @@ export default defineNuxtConfig({
             }
           }
 
+          async function scanGalleryDir(dir: string): Promise<string[]> {
+            try {
+              const files = await fs.readdir(dir, { withFileTypes: true })
+              const routes: string[] = []
+
+              for (const file of files) {
+                if (!file.isFile() || !(file.name.endsWith('.yml') || file.name.endsWith('.yaml')))
+                  continue
+
+                const fullPath = path.join(dir, file.name)
+
+                try {
+                  const raw = await fs.readFile(fullPath, 'utf8')
+                  const lines = raw.split(NEWLINE_REGEX)
+
+                  let albumId = ''
+                  let published = true
+
+                  for (const rawLine of lines) {
+                    const line = rawLine.trim()
+
+                    if (!line || line.startsWith('#') || line.startsWith('-'))
+                      continue
+
+                    if (!albumId && line.startsWith('albumId:')) {
+                      albumId = line.split(':').slice(1).join(':').trim().replace(QUOTE_TRIM_REGEX, '')
+                      continue
+                    }
+
+                    if (line.toLowerCase().startsWith('published:')) {
+                      const value = line.split(':').slice(1).join(':').trim().replace(QUOTE_TRIM_REGEX, '').toLowerCase()
+                      published = value !== 'false'
+                    }
+                  }
+
+                  if (published && albumId) {
+                    routes.push(`/gallery/${albumId}`)
+                    routes.push(`/zh/gallery/${albumId}`)
+                  }
+                }
+                catch {
+                  // 讀取失敗時跳過單一相簿，避免中斷整體 prerender 路由生成
+                }
+              }
+
+              return routes
+            }
+            catch {
+              return []
+            }
+          }
+
           // 掃描所有內容目錄
-          const [postsEn, postsZh, projectsEn, projectsZh] = await Promise.all([
+          const [postsEn, postsZh, projectsEn, projectsZh, galleryRoutes] = await Promise.all([
             scanContentDir(path.join(contentDir, 'en', 'posts'), 'en', 'posts'),
             scanContentDir(path.join(contentDir, 'zh', 'posts'), 'zh', 'posts'),
             scanContentDir(path.join(contentDir, 'en', 'projects'), 'en', 'projects'),
             scanContentDir(path.join(contentDir, 'zh', 'projects'), 'zh', 'projects'),
+            scanGalleryDir(path.join(contentDir, 'gallery')),
           ])
 
-          const contentRoutes = [...postsEn, ...postsZh, ...projectsEn, ...projectsZh]
+          const contentRoutes = [...postsEn, ...postsZh, ...projectsEn, ...projectsZh, ...galleryRoutes]
 
           for (const route of contentRoutes) {
             routes.add(route)
