@@ -1,9 +1,9 @@
-albumId: 'Blossom Passage'
+albumId: Blossom Passage
 order: 3
-title: 'Blossom Passage'
-chTitle: '花徑穿梭'
-coverImage: '/gallery-images/Blossom Passage.webp'
-description: "An enchanting series exploring the intersection of cherry blossoms and urban transportation in Japan, highlighting the beauty of spring travel."
+title: Blossom Passage
+chTitle: 花徑穿梭
+coverImage: /gallery-images/Blossom Passage.webp
+description: 'An enchanting series exploring the intersection of cherry blossoms and urban transportation in Japan, highlighting the beauty of spring travel.'
 tags:
   - Japan
   - Sakura

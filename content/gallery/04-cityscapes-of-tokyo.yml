@@ -1,7 +1,7 @@
-albumId: 'Cityscapes of Tokyo'
+albumId: Cityscapes of Tokyo
 order: 4
-title: 'Cityscapes of Tokyo'
-coverImage: '/gallery-images/Cityscapes of Tokyo.webp'
+title: Cityscapes of Tokyo
+coverImage: /gallery-images/Cityscapes of Tokyo.webp
 description: "A vibrant collection showcasing the diverse urban landscapes, culinary scenes, and daily life in Tokyo, capturing the city's dynamic spirit."
 tags:
   - Travel
