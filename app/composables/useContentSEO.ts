@@ -1,14 +1,18 @@
-import { seoData } from '~~/data'
+import type { OgImageComponents } from '#og-image/components'
+import { navbarData, seoData } from '~~/data'
 
 interface ContentData {
+  alt?: string
   title?: string
   description?: string
   image?: string
-  ogImage?: string | { url?: string }
+  ogImage?: SeoOgImageValue
   noIndex?: boolean
 }
 
 export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] }>) {
+  const { baseUrl } = useUrl()
+
   const pageTitle = computed(() => {
     const title = data.value.title
     return title || seoData.ogTitle
@@ -33,20 +37,55 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
     return merged.join(', ')
   })
 
+  const ogImageUrl = computed(() => {
+    if (data.value.noIndex)
+      return undefined
+
+    return resolveStaticOgImageUrl(baseUrl.value, data.value.ogImage, data.value.image)
+  })
+
+  const ogImageAlt = computed(() => {
+    if (data.value.noIndex || !ogImageUrl.value)
+      return undefined
+
+    return resolveOgImageAlt(data.value.ogImage, data.value.alt, pageTitle.value)
+  })
+
   // SEO 元數據
   useSeoMeta({
-    title: pageTitle.value,
+    title: pageTitle,
     description: pageDescription,
-    keywords: mergedKeywords.value,
-    robots: data.value.noIndex ? 'noindex, nofollow' : 'index, follow',
+    keywords: mergedKeywords,
+    robots: () => data.value.noIndex ? 'noindex, nofollow' : 'index, follow',
+    twitterCard: 'summary_large_image',
+    ogImage: ogImageUrl,
+    ogImageAlt,
+    twitterImage: ogImageUrl,
+    twitterImageAlt: ogImageAlt,
   })
 
   // OG 圖片
-  if (!data.value.noIndex) {
-    defineOgImage('NuxtSeo.takumi', {
-      title: pageTitle.value,
-      description: pageDescription.value,
-    })
+  if (import.meta.server && !data.value.noIndex && !ogImageUrl.value) {
+    const dynamicOgImage = resolveDynamicOgImageDefinition(data.value.ogImage)
+
+    if (dynamicOgImage) {
+      defineOgImage(dynamicOgImage.component as keyof OgImageComponents, {
+        title: pageTitle.value,
+        description: pageDescription.value,
+        ...dynamicOgImage.props,
+      }, {
+        alt: ogImageAlt.value,
+      })
+    }
+    else if (!isOgImageDisabled(data.value.ogImage)) {
+      defineOgImage('SiteSeo', {
+        title: pageTitle.value,
+        description: pageDescription.value,
+        siteName: navbarData.homeTitle,
+      }, {
+        alt: ogImageAlt.value,
+      })
+    }
   }
 
   return {

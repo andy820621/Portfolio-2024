@@ -229,6 +229,8 @@ export default defineNuxtConfig({
   },
   ogImage: {
     debug: process.env.NODE_ENV !== 'production',
+    zeroRuntime: process.env.NODE_ENV === 'production',
+    fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
   },
   socialShare: {
     baseUrl: canonicalSiteUrl,
