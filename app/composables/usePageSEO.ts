@@ -42,7 +42,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex) {
-    defineOgImage('NuxtSeo', {
+    defineOgImage('NuxtSeo.takumi', {
       title: pageTitle,
       description: pageDescription,
     })

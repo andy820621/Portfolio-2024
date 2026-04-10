@@ -43,7 +43,7 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
 
   // OG 圖片
   if (!data.value.noIndex) {
-    defineOgImage('NuxtSeo', {
+    defineOgImage('NuxtSeo.takumi', {
       title: pageTitle.value,
       description: pageDescription.value,
     })
