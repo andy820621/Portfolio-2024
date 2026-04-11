@@ -31,7 +31,6 @@
     "@netlify/nuxt": "^0.2.37",
     "@nuxt/fonts": "^0.14.0",
     "@nuxtjs/i18n": "^10.2.4",
-    "@takumi-rs/core": "^0.73.1",
     "better-sqlite3": "^12.8.0",
     "lightgallery": "^2.9.0",
     "minisearch": "^7.2.0",
