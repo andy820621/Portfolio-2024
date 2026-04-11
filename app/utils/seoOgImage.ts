@@ -1,3 +1,5 @@
+import { encodeUrlPath } from './pathUtils'
+
 const ABSOLUTE_URL_REGEX = /^[a-z][\w+\-.]*:\/\//i
 
 export interface SeoOgImageObject {
@@ -61,11 +63,11 @@ function resolveAbsoluteSeoImageUrl(baseUrl: string, image?: string) {
     return undefined
 
   if (ABSOLUTE_URL_REGEX.test(image))
-    return image
+    return encodeUrlPath(image)
 
   const normalizedBaseUrl = trailingSlashUrlOrNot(baseUrl, false)
   const normalizedImagePath = image.startsWith('/') ? image : `/${image}`
-  return `${normalizedBaseUrl}${normalizedImagePath}`
+  return `${normalizedBaseUrl}${encodeUrlPath(normalizedImagePath)}`
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

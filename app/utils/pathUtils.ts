@@ -31,6 +31,15 @@ function encodePathSegments(path: string) {
   return path.split('/').map((segment, index) => {
     if (segment === '' && index === 0)
       return ''
-    return encodeURIComponent(segment)
+    return encodePathSegment(segment)
   }).join('/')
+}
+
+function encodePathSegment(segment: string) {
+  try {
+    return encodeURIComponent(decodeURIComponent(segment))
+  }
+  catch {
+    return encodeURIComponent(segment)
+  }
 }
