@@ -9,6 +9,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const projectRoot = resolve(__dirname, '..')
 const defaultOutputDir = join(projectRoot, '.output', 'public')
 
+const TITLE_CHAR_RANGE = { min: 30, max: 60 }
 const TITLE_WIDTH_RANGE = { min: 35, max: 65 }
 const DESCRIPTION_CHAR_RANGE = { min: 70, max: 150 }
 const DESCRIPTION_WIDTH_RANGE = { min: 70, max: 150 }
@@ -329,11 +330,11 @@ function auditHead(htmlSource, route) {
   if (!report.title) {
     report.findings.push(createFinding('error', 'missing-title', '缺少 <title>'))
   }
-  else if (report.titleWidth < TITLE_WIDTH_RANGE.min) {
-    report.findings.push(createFinding('warning', 'title-short', `title 偏短 (${report.titleWidth})`))
+  else if (report.titleLength < TITLE_CHAR_RANGE.min || report.titleWidth < TITLE_WIDTH_RANGE.min) {
+    report.findings.push(createFinding('warning', 'title-short', `title 偏短 (${report.titleLength} chars / ${report.titleWidth} units)`))
   }
-  else if (report.titleWidth > TITLE_WIDTH_RANGE.max) {
-    report.findings.push(createFinding('warning', 'title-long', `title 可能過長 (${report.titleWidth})`))
+  else if (report.titleLength > TITLE_CHAR_RANGE.max || report.titleWidth > TITLE_WIDTH_RANGE.max) {
+    report.findings.push(createFinding('warning', 'title-long', `title 可能過長 (${report.titleLength} chars / ${report.titleWidth} units)`))
   }
 
   if (!report.description) {
