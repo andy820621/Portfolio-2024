@@ -27,7 +27,7 @@ const siteDomain = computed(() =>
 </script>
 
 <template>
-  <div class="relative h-full w-full overflow-hidden bg-[#091215] text-white">
+  <div class="relative h-full w-full overflow-hidden bg-[#091215] text-white" style="font-family: Inter, 'Noto Sans TC', 'Noto Sans JP', sans-serif;">
     <div
       class="absolute inset-0"
       style="background:

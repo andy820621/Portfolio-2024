@@ -14,26 +14,36 @@
   "min": "min",
   "homePage": {
     "title": "home",
+    "seoTitle": "BarZ Hsieh's Personal Website",
+    "seoDescription": "I'm BarZ Hsieh, a frontend developer in Taipei. I specialize in building websites, writing technical blog, and sharing my projects and photography.",
     "description": "Hello, I'm BarZ Hsieh. \nWelcome to my personal blog website. I am a software engineer who loves technology, specializing in frontend development with expertise in Nuxt, Vue, TypeScript, and other modern technologies. \nHere you can explore my technical articles and personal projects, and I also share my life through the lens in the Gallery.",
     "noResultDescription": "We couldn't find correct page matching your search."
   },
   "blogsPage": {
     "title": "All Blogs",
+    "seoTitle": "BarZ Hsieh's Personal Blog",
+    "seoDescription": "Technical articles on Nuxt, Vue, TypeScript, SEO, and frontend engineering, focused on maintainable product-quality web development.",
     "description": "Welcome to my technical blog sharing insights on frontend development and web technologies. While not every detail is guaranteed accurate, I hope you'll find valuable information here alongside occasional personal reflections.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
   "projectsPage": {
     "title": "Projects",
+    "seoTitle": "BarZ Hsieh's Projects Portfolio",
+    "seoDescription": "Selected client work, in-house builds, and personal side projects built with Nuxt, Vue, TypeScript, and modern web standards.",
     "description": "\nWelcome to explore my project portfolio.\nHere you'll find work from company collaborations, client projects, to personal experimental side projects.\nInnovative solutions built with Vue, Nuxt, TypeScript, and cutting-edge web standards.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
   "demosPage": {
     "title": "Demos",
+    "seoTitle": "Creative Frontend Demos and Web Experiments",
+    "seoDescription": "Interactive demos, creative coding experiments, and technical prototypes exploring frontend animation, graphics, and modern web APIs.",
     "description": "\nThis section mainly showcases experimental and interesting applications, along with personal development practice projects. I aim to explore new technologies and test creative ideas to expand the possibilities of my web development skills.\n\nI believe that utilizing modern web technologies can create more innovative and practical user experiences.",
     "noResultDescription": "We couldn't find any demos matching your search."
   },
   "galleryPage": {
     "title": "Gallery",
+    "seoTitle": "Photography Gallery: Travel and Daily Life",
+    "seoDescription": "A photography collection of travel, street scenes, daily moments, and visual stories captured by BarZ Hsieh beyond the coding workspace.",
     "description": "\n“ Photography is an elegant way of collecting; through it, we gather the world, memories, and life stories captured in light and shadow. „ \n\nTravel adventures, everyday moments, cherished memories.\nBeyond the world of programming and development, I hope to share more of my life through the language of photography.",
     "noResultDescription": "We couldn't find any photos matching your current search.\n Please search again or clear the search criteria."
   },

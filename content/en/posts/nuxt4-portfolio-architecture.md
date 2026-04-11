@@ -2,6 +2,8 @@
 title: Building a Nuxt 4 portfolio as a product
 date: 2025/12/22
 description: Most portfolios stop at “looking good”. This time I build a Nuxt 4 site that can evolve like a product—systematic content, SEO, automation, and deployment, designed for long-term maintenance.
+seoTitle: "Building a Nuxt 4 Portfolio as a Product"
+seoDescription: "A real-world look at building a Nuxt 4 portfolio with product thinking, covering content architecture, SEO, automation, and long-term maintainability."
 image: https://nuxt.com/assets/blog/v4.png
 alt: Nuxt 4 portfolio architecture design
 ogImage: https://nuxt.com/assets/blog/v4.png

@@ -2,6 +2,8 @@
 title: What is PKI? The digital foundation from encryption to trust
 date: 2025-11-03
 description: Understand why PKI is the foundation of digital trust in the modern era
+seoTitle: "What Is PKI? Encryption, Certificates, and Trust"
+seoDescription: "Understand how PKI connects encryption, certificates, and digital signatures to establish trust across websites, software, and online services."
 image: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 alt: What is PKI? The digital foundation from encryption to trust
 ogImage: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg

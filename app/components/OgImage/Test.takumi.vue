@@ -7,7 +7,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="h-full w-full flex items-start justify-start border-[12px] border-blue-500 border-solid bg-gray-50">
+  <div class="h-full w-full flex items-start justify-start border-[12px] border-blue-500 border-solid bg-gray-50" style="font-family: Inter, 'Noto Sans TC', 'Noto Sans JP', sans-serif;">
     <div class="h-full flex items-start justify-start">
       <div class="h-full w-full flex flex-col justify-between">
         <h1 class="p-20 text-left text-[80px] font-black">

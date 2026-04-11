@@ -30,8 +30,8 @@ const pageKeywords = computed(() => [
 
 // 設置 SEO
 usePageSeo({
-  title: 'Projects',
-  description: t('projectsPage.description'),
+  title: t('projectsPage.seoTitle'),
+  description: t('projectsPage.seoDescription'),
   keywords: pageKeywords.value,
 })
 
@@ -66,7 +66,7 @@ useSchemaOrg([
     '@id': nowPageId,
     '@type': 'CollectionPage',
     'name': t('projectsPage.title'),
-    'description': t('projectsPage.description'),
+    'description': t('projectsPage.seoDescription'),
     'url': fullPath.value,
     'isPartOf': {
       '@id': websiteId,

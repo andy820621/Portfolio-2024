@@ -5,6 +5,8 @@ interface ContentData {
   alt?: string
   title?: string
   description?: string
+  seoTitle?: string
+  seoDescription?: string
   image?: string
   ogImage?: SeoOgImageValue
   noIndex?: boolean
@@ -14,12 +16,12 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
   const { baseUrl } = useUrl()
 
   const pageTitle = computed(() => {
-    const title = data.value.title
+    const title = data.value.seoTitle || data.value.title
     return title || seoData.ogTitle
   })
 
   const pageDescription = computed(() =>
-    data.value.description || seoData.description,
+    data.value.seoDescription || data.value.description || seoData.description,
   )
 
   const mergedKeywords = computed(() => {
@@ -58,6 +60,8 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
     keywords: mergedKeywords,
     robots: () => data.value.noIndex ? 'noindex, nofollow' : 'index, follow',
     twitterCard: 'summary_large_image',
+    twitterTitle: pageTitle,
+    twitterDescription: pageDescription,
     ogImage: ogImageUrl,
     ogImageAlt,
     twitterImage: ogImageUrl,

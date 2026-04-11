@@ -2,6 +2,8 @@
 title: 如何用 Nitro Hooks 解決 Nuxt Content 動態路由的預渲染問題
 date: 2025/12/20
 description: 深入解析如何用 Nitro hooks 自動掃描 Markdown 檔案、過濾草稿、產生靜態路由，並透過測試腳本確保所有內容都被正確預渲染。
+seoTitle: "Nitro Hooks 預渲染 Nuxt Content 動態路由"
+seoDescription: "說明如何用 Nitro hooks 掃描 Markdown、排除草稿、產生靜態路由，並驗證所有 Nuxt Content 頁面都被正確預渲染。"
 cover: /blog-images/nitro-prerender-dynamic-routes-solution-cover.webp
 image: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 alt: Nitro 預渲染 Nuxt Content 路由完整指南

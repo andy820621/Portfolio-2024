@@ -2,6 +2,8 @@
 title: 鈦和生醫官方網站
 date: 2022/10/15
 description: 鈦和生醫官方網站。
+seoTitle: "鈦和生醫品牌形象官方網站"
+seoDescription: "為鈦和生醫打造的品牌官網，聚焦響應式設計、內容可讀性、無障礙體驗與醫療產業形象呈現。"
 image: /project-images/ti-ho-healthcare.webp
 alt: 鈦和生醫官方網站開發
 ogImage: /project-images/ti-ho-healthcare.webp

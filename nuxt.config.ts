@@ -157,9 +157,6 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon/apple-touch-icon-180x180.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
-        // 優化字型載入速度
-        { rel: 'preconnect', href: 'https://fonts.bunny.net', crossorigin: '' },
-        { rel: 'dns-prefetch', href: 'https://fonts.bunny.net' },
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
@@ -231,6 +228,54 @@ export default defineNuxtConfig({
     debug: process.env.NODE_ENV !== 'production',
     zeroRuntime: process.env.NODE_ENV === 'production',
     fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
+    buildCache: process.env.NODE_ENV === 'production'
+      ? { base: '.cache/og-image' }
+      : false,
+  },
+  fonts: {
+    families: [
+      {
+        name: 'Inter',
+        provider: 'google',
+        weights: [400, 600, 700, 800],
+        global: true,
+      },
+      {
+        name: 'Noto Sans TC',
+        provider: 'google',
+        weights: [400, 500, 700],
+        global: true,
+        preload: false,
+      },
+      {
+        name: 'Noto Sans JP',
+        provider: 'google',
+        weights: [400, 500, 700],
+        global: true,
+        preload: false,
+      },
+      {
+        name: 'DM Mono',
+        provider: 'google',
+        weights: [400, 500, 700],
+        global: true,
+        preload: false,
+      },
+      {
+        name: 'Roboto Condensed',
+        provider: 'google',
+        weights: [400, 700],
+        global: true,
+        preload: false,
+      },
+      {
+        name: 'Bad Script',
+        provider: 'google',
+        weights: [400],
+        global: true,
+        preload: false,
+      },
+    ],
   },
   socialShare: {
     baseUrl: canonicalSiteUrl,

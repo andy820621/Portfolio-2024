@@ -32,10 +32,12 @@ watchEffect(() => {
 })
 
 const pageTitle = computed(() => t('home'))
+const pageSeoTitle = computed(() => content.value?.seoTitle || t('homePage.seoTitle') || pageTitle.value || 'Home')
+const pageSeoDescription = computed(() => content.value?.seoDescription || t('homePage.seoDescription') || content.value?.description || t('homePage.description') || '')
 
 usePageSeo({
-  title: pageTitle.value || 'home',
-  description: content.value?.description || t('homePage.description') || '',
+  title: pageSeoTitle.value,
+  description: pageSeoDescription.value,
   keywords: [
     'BarZ',
     'Hsieh Yao Tsu',
@@ -60,7 +62,7 @@ useSchemaOrg([
   defineWebPage({
     '@id': webpageId,
     '@type': 'ProfilePage',
-    'description': t('homePage.description') || 'BarZ Hsieh\'s Portfolio',
+    'description': pageSeoDescription.value || 'BarZ Hsieh\'s Portfolio',
     'name': 'BarZ Hsieh\'s Personal Portfolio Website',
     'url': baseUrl.value,
     // 'about':  NodeRelation<Organization>,

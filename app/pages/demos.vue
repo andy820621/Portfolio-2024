@@ -136,8 +136,8 @@ function clearFilters() {
 
 // SEO 優化
 usePageSeo({
-  title: 'Demos',
-  description: t('demosPage.description'),
+  title: t('demosPage.seoTitle'),
+  description: t('demosPage.seoDescription'),
   keywords: [
     'Demos',
     'BarZ',
@@ -195,7 +195,7 @@ useSchemaOrg([
     '@id': nowPageId,
     '@type': 'CollectionPage',
     'name': t('demosPage.title'),
-    'description': t('demosPage.description'),
+    'description': t('demosPage.seoDescription'),
     'url': fullPath.value,
     'inLanguage': localeProperties.value.language,
     'isPartOf': {

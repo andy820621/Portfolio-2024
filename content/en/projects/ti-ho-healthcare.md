@@ -2,6 +2,8 @@
 title: Ti-He Healthcare Official Website
 date: 2022/10/15
 description: Ti-He Healthcare official website.
+seoTitle: "Ti-He Healthcare Brand Website"
+seoDescription: "A brand website for Ti-He Healthcare, focused on accessibility, clear product communication, and a polished healthcare industry presentation."
 image: /project-images/ti-ho-healthcare.webp
 alt: Ti-He Healthcare Official Website Development
 ogImage: /project-images/ti-ho-healthcare.webp

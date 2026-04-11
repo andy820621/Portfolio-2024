@@ -10,6 +10,7 @@
     "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js",
     "generate:metadata": "node scripts/generate-project-images-metadata.js",
     "test:prerender": "node scripts/test-prerender.js",
+    "audit:seo": "node scripts/audit-seo.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "dev:netlify": "netlify dev",

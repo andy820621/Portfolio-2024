@@ -2,6 +2,8 @@
 title: Nuxt 4 SEO 開發指南
 date: 2025/12/17
 description: 以雙語 Nuxt 4 內容型網站為例，整理一套可落地的 SEO 實作：一致的 meta、OG image 生成、Schema.org（含圖片授權）、動態 sitemap endpoints，以及部署前後的驗證清單與常見陷阱。
+seoTitle: "Nuxt 4 SEO：Meta、Schema.org 與 Sitemap 實作"
+seoDescription: "以雙語 Nuxt 4 內容網站為例，整理 meta、OG image、Schema.org、sitemap 與驗證流程，建立可維護的 SEO 實作方式。"
 image: /blog-images/nuxt-seo-guide.webp
 alt: Nuxt 4 SEO：Meta、Schema.org 與 Sitemap
 ogImage: /blog-images/nuxt-seo-guide.webp

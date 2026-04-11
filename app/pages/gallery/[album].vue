@@ -53,6 +53,22 @@ if (error.value) {
   })
 }
 
+const { localeProperties, locale } = useI18n()
+
+const localizedAlbumTitle = computed(() => {
+  if (locale.value === 'zh')
+    return album.value?.chTitle || album.value?.title || 'Gallery'
+
+  return album.value?.title || 'Gallery'
+})
+
+const pageSeoTitle = computed(() => {
+  if (locale.value === 'zh')
+    return `${localizedAlbumTitle.value} - 生活影像紀錄`
+
+  return `Photo Gallery Album: ${localizedAlbumTitle.value}`
+})
+
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 // 根據斷點計算列數
@@ -121,11 +137,12 @@ useIntersectionObserver(
 
 // 設定 SEO
 usePageSeo({
-  title: album.value?.title || 'Gallery',
+  title: pageSeoTitle.value,
   description: album.value?.description || 'Gallery\'s description',
   image: album.value?.coverImage,
   keywords: [
     album.value?.title,
+    album.value?.chTitle,
     'Gallery',
     '相簿',
     'BarZ',
@@ -137,7 +154,6 @@ usePageSeo({
 })
 
 // 將這段代碼放在 usePageSeo 之後
-const { localeProperties, locale } = useI18n()
 const { baseUrl, fullPath } = useUrl()
 const { getBreadcrumbListSchema } = useBreadcrumb()
 const localePath = useLocalePath()

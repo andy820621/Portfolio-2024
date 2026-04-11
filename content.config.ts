@@ -16,6 +16,8 @@ const seoSchemaFields = {
 const commonContentSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
   date: z.coerce.date(),
   keywords: z.array(z.string()).optional(),
   updatedAt: z.coerce.date().optional(),
@@ -25,6 +27,8 @@ const commonContentSchema = z.object({
 const articleSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
   date: z.coerce.date(),
   updatedAt: z.coerce.date().optional(),
   cover: z.string().optional(),
@@ -45,6 +49,8 @@ const articleSchema = z.object({
 const projectSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
+  seoTitle: z.string().optional(),
+  seoDescription: z.string().optional(),
   date: z.coerce.date(),
   updatedAt: z.coerce.date().optional(),
   cover: z.string().optional(),

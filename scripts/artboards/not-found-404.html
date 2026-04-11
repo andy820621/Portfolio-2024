@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=400, initial-scale=1" />
+    <title>Not Found 404 Artboard</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 400px;
+        height: 200px;
+        margin: 0;
+        overflow: hidden;
+        background: #091215;
+      }
+
+      body {
+        position: relative;
+        color: #fff;
+        font-family: inherit;
+      }
+
+      body::before {
+        position: absolute;
+        inset: 0;
+        content: '';
+        background:
+          radial-gradient(circle at top left, rgba(110, 231, 183, 0.24), transparent 42%),
+          radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.18), transparent 36%),
+          linear-gradient(135deg, #071013 0%, #0f1f23 48%, #081215 100%);
+      }
+
+      body::after {
+        position: absolute;
+        top: 24px;
+        right: -72px;
+        width: 164px;
+        height: 164px;
+        content: '';
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        background: rgba(110, 231, 183, 0.12);
+        filter: blur(42px);
+      }
+
+      .canvas {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 18px 22px 18px 22px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .logo-shell {
+        position: relative;
+        display: flex;
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-shell::before {
+        position: absolute;
+        inset: 0;
+        content: '';
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .logo-mark {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        width: 24px;
+        height: 24px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 4px;
+      }
+
+      .logo-mark img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 7px;
+        object-fit: cover;
+      }
+
+      .brand-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 2px;
+      }
+
+      .brand-copy strong {
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: #8ce6c2;
+      }
+
+      .brand-copy span {
+        font-size: 11px;
+        line-height: 1.2;
+        color: rgba(255, 255, 255, 0.58);
+      }
+
+      .hero {
+        display: grid;
+        gap: 12px;
+      }
+
+      .code {
+        margin: 0;
+        margin-top: 16px;
+
+        display: flex;
+        align-items: baseline;
+        gap: 10px; /* ✨ 控制 404 和文字距離 */
+      }
+
+      /* 404 */
+      .code-main {
+        font-size: 36px; /* 原本 40 → 稍微縮 */
+        font-weight: 800;
+        line-height: 0.9;
+        letter-spacing: -0.04em; /* ✨ 原本太擠，放鬆一點 */
+      }
+
+      /* Not Found */
+      .code-sub {
+        font-size: 16px; /* ✨ 明顯小一階 */
+        font-weight: 600;
+        letter-spacing: 0.08em; /* ✨ 拉開字距 */
+        text-transform: uppercase;
+        opacity: 0.7;
+      }
+
+      .message {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 18px;
+        align-self: flex-start;
+      }
+
+      .message .eyebrow {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.62);
+      }
+
+      .message .description {
+        margin: 0;
+        font-size: 11px;
+        line-height: 1.36;
+        color: rgba(255, 255, 255, 0.66);
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.58);
+      }
+
+      .footer span:last-child {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 6px 11px;
+        font-size: 9px;
+        line-height: 1;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .hero {
+        position: relative;
+      }
+
+      .hero::before {
+        content: '404';
+        position: absolute;
+        top: -10px;
+        left: 0;
+        font-size: 81px;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.03);
+        pointer-events: none;
+      }
+
+      .message {
+        border-left: 2px solid rgba(140, 230, 194, 0.4);
+        padding-left: 10px;
+      }
+
+      .canvas {
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="canvas">
+      <section class="brand">
+        <div class="logo-shell">
+          <div class="logo-mark">
+            <img src="../../public/apple-touch-icon/apple-touch-icon.png" alt="" />
+          </div>
+        </div>
+        <div class="brand-copy">
+          <strong>BarZ Hsieh</strong>
+          <span>Portfolio | Blogger | Creativity</span>
+        </div>
+      </section>
+
+      <section class="hero">
+        <h1 class="code">
+          <span class="code-main">404</span>
+          <span class="code-sub">Not Found</span>
+        </h1>
+        <div class="message">
+          <p class="eyebrow">Page Missing</p>
+          <p class="description">The link may be outdated, moved, or no longer available.</p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>barz.app</span>
+        <span>Not Found</span>
+      </footer>
+    </main>
+  </body>
+</html>

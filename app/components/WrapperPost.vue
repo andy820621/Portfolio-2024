@@ -19,6 +19,8 @@ const nextForNav = computed(() => nextContent.value ?? undefined)
 const data = computed(() => ({
   title: mainData.value?.title,
   description: mainData.value?.description,
+  seoTitle: mainData.value?.seoTitle,
+  seoDescription: mainData.value?.seoDescription,
   image: mainData.value?.image,
   alt: mainData.value?.alt,
   ogImage: mainData.value?.ogImage,

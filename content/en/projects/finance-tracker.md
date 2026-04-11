@@ -2,6 +2,8 @@
 title: Personal Finance Tracking System
 date: 2025/5/10
 description: EconoMe - A Simple and Effective Personal Finance Management Solution
+seoTitle: "EconoMe Personal Finance Tracker App"
+seoDescription: "A personal finance web app built with Nuxt 3, Vue 3, Supabase, and Tailwind CSS to simplify budgeting, expense tracking, and money management."
 image: /project-images/finance-tracker.webp
 alt: Personal Finance Tracking System
 ogImage: /project-images/finance-tracker.webp

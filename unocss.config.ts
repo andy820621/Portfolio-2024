@@ -1,6 +1,14 @@
-import { defineConfig, presetAttributify, presetIcons, presetMini, presetWebFonts, presetWind3, transformerDirectives } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetMini, presetWind3, transformerDirectives } from 'unocss'
 
 export default defineConfig({
+  theme: {
+    fontFamily: {
+      sans: 'Inter, "Noto Sans TC", "Noto Sans JP", system-ui, sans-serif',
+      mono: '"DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace',
+      condensed: '"Roboto Condensed", "Inter", "Noto Sans TC", "Noto Sans JP", sans-serif',
+      wisper: '"Bad Script", cursive',
+    },
+  },
   shortcuts: [
     {
       'bg-base': 'bg-[var(--clr-bg)]',
@@ -49,19 +57,6 @@ export default defineConfig({
     presetWind3(),
     presetMini({
       dark: 'class',
-    }),
-    presetWebFonts({
-      provider: 'bunny',
-      fonts: {
-        sans: 'Inter:400,600,800',
-        mono: 'DM Mono:400,600',
-        condensed: 'Roboto Condensed',
-        wisper: 'Bad Script',
-      },
-      timeouts: {
-        warning: 800,
-        failure: 5000,
-      },
     }),
   ],
   transformers: [

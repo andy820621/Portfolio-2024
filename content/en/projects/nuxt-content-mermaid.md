@@ -2,6 +2,8 @@
 title: nuxt-content-mermaid
 date: 2025/12/31
 description: Automatically converts Mermaid code blocks in Nuxt Content into a renderable Mermaid component, with lazy loading and dark/light theme support.
+seoTitle: "nuxt-content-mermaid for Nuxt Content"
+seoDescription: "A Nuxt module that transforms Mermaid code blocks in Nuxt Content into renderable components with lazy loading and dark-light theme support."
 cover: /project-images/nuxt-content-mermaid.webp
 image: /project-images/nuxt-content-mermaid-wide.webp
 alt: nuxt-content-mermaid

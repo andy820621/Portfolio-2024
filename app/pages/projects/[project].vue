@@ -30,6 +30,7 @@ watchEffect(() => {
   if (mainData.value) {
     const keywords = mainData.value.tags || []
     const articleSection = mainData.value.categories || mainData.value.tags || []
+    const schemaDescription = mainData.value.seoDescription || mainData.value.description
     const { baseUrl, fullPath } = useUrl()
 
     const websiteId = `${baseUrl.value}#website`
@@ -51,7 +52,7 @@ watchEffect(() => {
         '@type': 'WebPage',
         '@id': nowPageId,
         'name': mainData.value.title,
-        'description': mainData.value.description,
+        'description': schemaDescription,
         'isPartOf': {
           '@id': websiteId,
         },
@@ -74,7 +75,7 @@ watchEffect(() => {
           '@type': 'Article',
           '@id': articleId,
           'headline': mainData.value.title,
-          'description': mainData.value.description,
+          'description': schemaDescription,
           'isPartOf': {
             '@id': nowPageId,
           },

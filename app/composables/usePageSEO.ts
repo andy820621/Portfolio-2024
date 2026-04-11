@@ -53,6 +53,8 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     keywords: pageKeywords,
     robots: () => options.noIndex ? 'noindex, nofollow' : 'index, follow',
     twitterCard: 'summary_large_image',
+    twitterTitle: pageTitle,
+    twitterDescription: pageDescription,
     ogImage: ogImageUrl,
     ogImageAlt,
     twitterImage: ogImageUrl,

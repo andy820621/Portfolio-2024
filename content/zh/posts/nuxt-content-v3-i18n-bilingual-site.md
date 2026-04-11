@@ -2,6 +2,8 @@
 title: 透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站
 date: 2025/12/21
 description: 以實際作品集為例，說明如何使用 @nuxt/content v3 的 collections 與 schema 管理中英 Markdown，建立一致、可擴充且對 SEO 友善的內容系統。
+seoTitle: "Nuxt Content v3 與 i18n 雙語內容架構"
+seoDescription: "以實際作品集為例，整理如何結合 Nuxt Content v3、collections、schema 與 i18n，建立可長期維護且對 SEO 友善的雙語內容系統。"
 cover: /blog-images/nuxt-content-v3-i18n-bilingual-site-cover.webp
 image: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 alt: Nuxt Content v3 雙語 collections

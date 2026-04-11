@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
+import { navbarData } from '~~/data'
 
 const props = defineProps({
   error: Object as () => NuxtError,
@@ -7,6 +8,7 @@ const props = defineProps({
 
 const { t } = useI18n()
 const localePath = useLocalePath()
+const { baseUrl } = useUrl()
 
 const pageTitle = computed(() => {
   if (props.error?.statusCode === 404) {
@@ -22,13 +24,38 @@ const pageDescription = computed(() => {
   return props.error?.message || t('errorPage.genericDescription', '抱歉，發生了一些錯誤。')
 })
 
-// SEO metadata for the error page
-useHead({
+const shouldUseStaticOgImage = computed(() => {
+  const statusCode = props.error?.statusCode || 500
+  return statusCode >= 400 && statusCode < 500
+})
+
+const ogImageUrl = computed(() => {
+  if (!shouldUseStaticOgImage.value)
+    return undefined
+
+  return resolveStaticOgImageUrl(baseUrl.value, '/not-found-404.jpg')
+})
+
+const ogImageAlt = computed(() => {
+  if (!ogImageUrl.value)
+    return undefined
+
+  return `${pageTitle.value} | ${navbarData.homeTitle}`
+})
+
+useSeoMeta({
   title: pageTitle,
-  meta: [
-    { name: 'description', content: pageDescription },
-    { name: 'robots', content: 'noindex, nofollow' },
-  ],
+  description: pageDescription,
+  robots: 'noindex, nofollow',
+  twitterCard: () => ogImageUrl.value ? 'summary_large_image' : undefined,
+  twitterTitle: () => ogImageUrl.value ? pageTitle.value : undefined,
+  twitterDescription: () => ogImageUrl.value ? pageDescription.value : undefined,
+  ogTitle: () => ogImageUrl.value ? pageTitle.value : undefined,
+  ogDescription: () => ogImageUrl.value ? pageDescription.value : undefined,
+  ogImage: ogImageUrl,
+  ogImageAlt,
+  twitterImage: ogImageUrl,
+  twitterImageAlt: ogImageAlt,
 })
 
 const handleError = () => clearError({ redirect: localePath('/') })

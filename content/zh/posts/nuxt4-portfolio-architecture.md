@@ -2,6 +2,8 @@
 title: 以產品思維打造 Nuxt 4 個人網站
 date: 2025/12/22
 description: 過去的作品集只做到「好看」就停了，後續維護困難重重。這次我要打造一個像產品一樣可長期迭代的個人網站——從內容管理到 SEO，從自動化到部署，每個環節都經過系統化設計。
+seoTitle: "以產品思維打造 Nuxt 4 作品集網站"
+seoDescription: "從內容架構、SEO、自動化到部署，拆解如何把 Nuxt 4 個人作品集做成能長期演進、真正可維護的產品型網站。"
 image: https://nuxt.com/assets/blog/v4.png
 alt: Nuxt 4 作品集架構設計
 ogImage: https://nuxt.com/assets/blog/v4.png

@@ -1,6 +1,8 @@
 ---
 title: License
 description: Licensing terms and usage guidelines for content and images on this website.
+seoTitle: Website Content and Image Licensing Terms
+seoDescription: Learn how BarZ Hsieh's website content and photography may be shared, credited, adapted, and reused under the CC BY-NC-SA 4.0 license.
 keywords: [license, copyright, CC, Creative Commons, BarZ Hsieh]
 ---
 

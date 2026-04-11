@@ -30,8 +30,8 @@ const pageKeywords = computed(() => [
 
 // 設置頁面元數據 - 使用 computed 的值
 usePageSeo({
-  title: 'Blog',
-  description: t('blogsPage.description'),
+  title: t('blogsPage.seoTitle'),
+  description: t('blogsPage.seoDescription'),
   keywords: pageKeywords.value,
 })
 
@@ -63,7 +63,7 @@ useSchemaOrg([
     '@id': nowPageId,
     '@type': 'CollectionPage',
     'name': t('blogsPage.title'),
-    'description': t('blogsPage.description'),
+    'description': t('blogsPage.seoDescription'),
     'url': fullPath.value,
     'isPartOf': {
       '@id': websiteId,

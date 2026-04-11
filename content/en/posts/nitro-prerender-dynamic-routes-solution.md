@@ -2,6 +2,8 @@
 title: Prerendering Nuxt Content dynamic routes with Nitro hooks
 date: 2025/12/20
 description: A deep dive into scanning Markdown files at build time, filtering drafts, generating static routes, and verifying that all content is actually prerendered.
+seoTitle: "Nitro Hooks for Nuxt Content Prerendering"
+seoDescription: "Use Nitro hooks to scan Markdown content, exclude drafts, generate static routes, and verify every Nuxt Content page is prerendered correctly."
 cover: /blog-images/nitro-prerender-dynamic-routes-solution-cover.webp
 image: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 alt: A complete guide to prerendering Nuxt Content routes with Nitro

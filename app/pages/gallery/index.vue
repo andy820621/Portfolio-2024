@@ -33,8 +33,8 @@ const allTags = computed(() => {
 
 // 設置 SEO
 usePageSeo({
-  title: 'Gallery',
-  description: t('galleryPage.description'),
+  title: t('galleryPage.seoTitle'),
+  description: t('galleryPage.seoDescription'),
   keywords: [
     'Gallery',
     '相簿',
@@ -193,7 +193,7 @@ useSchemaOrg([
     '@id': nowPageId,
     '@type': ['WebPage', 'CollectionPage'],
     'name': t('galleryPage.title'),
-    'description': t('galleryPage.description'),
+    'description': t('galleryPage.seoDescription'),
     'url': fullPath.value,
     'inLanguage': localeProperties.value.language,
     'isPartOf': {

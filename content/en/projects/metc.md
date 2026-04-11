@@ -2,6 +2,8 @@
 title: Smart Fire Protection System
 date: 2024/3/31
 description: Smart Fire Protection System - Community Disaster Prevention IoT Solution
+seoTitle: "Smart Fire Protection IoT System"
+seoDescription: "A community disaster-prevention platform that combines IoT devices, real-time monitoring, and workflow automation for smarter fire safety management."
 image: /project-images/metc.webp
 alt: Smart Fire Protection System
 ogImage: /project-images/metc.webp

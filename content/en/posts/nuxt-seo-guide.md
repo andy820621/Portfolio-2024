@@ -2,6 +2,8 @@
 title: "Nuxt 4 SEO guide: meta, Schema.org, sitemap, and validation"
 date: 2025/12/17
 description: "A practical SEO setup for a bilingual Nuxt 4 content site: consistent meta, OG image generation, Schema.org (including image licensing), dynamic sitemap endpoints, and a validation checklist with common pitfalls."
+seoTitle: "Nuxt 4 SEO Meta, Schema, and Sitemap Guide"
+seoDescription: "A practical Nuxt 4 SEO setup for bilingual content sites, covering meta tags, OG images, Schema.org, sitemap endpoints, and validation workflows."
 image: /blog-images/nuxt-seo-guide.webp
 alt: "Nuxt 4 SEO: Meta, Schema.org, and sitemap"
 ogImage: /blog-images/nuxt-seo-guide.webp

@@ -25,8 +25,8 @@ const { data: content, error } = await useAsyncData(
 
 // 設置 SEO
 usePageSeo({
-  title: content.value?.title || 'License',
-  description: content.value?.description || '',
+  title: content.value?.seoTitle || content.value?.title || 'License',
+  description: content.value?.seoDescription || content.value?.description || '',
   keywords: content.value?.keywords || [],
 })
 
@@ -40,7 +40,7 @@ useSchemaOrg([
     '@id': nowPageId,
     '@type': 'WebPage',
     'name': content.value?.title || 'License',
-    'description': content.value?.description || '',
+    'description': content.value?.seoDescription || content.value?.description || '',
     'url': fullPath.value,
     'inLanguage': localeProperties.value.language,
     'isPartOf': {

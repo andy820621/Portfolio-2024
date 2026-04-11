@@ -2,6 +2,8 @@
 title: Personal Portfolio Website
 date: 2025/12/18
 description: A Nuxt 4 portfolio built with a product mindset—bilingual Nuxt Content, i18n, global search, automated image pipeline, and comprehensive SEO for long-term maintainability.
+seoTitle: "Nuxt 4 Personal Portfolio Website"
+seoDescription: "A bilingual Nuxt 4 portfolio with Nuxt Content, i18n, global search, automated image pipelines, and a maintainable end-to-end SEO setup."
 cover: /project-images/portfolio-2024.webp
 image: /project-images/portfolio-2024-hero.webp
 alt: Nuxt 4 personal portfolio website

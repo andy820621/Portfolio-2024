@@ -1,6 +1,8 @@
 ---
 title: 授權說明
 description: 本網站內容與圖片的授權方式與使用規範。
+seoTitle: 網站內容與攝影作品授權說明
+seoDescription: 說明本站文章、圖片與攝影作品的授權方式、引用標示規範，以及 CC BY-NC-SA 4.0 下可分享、改作與非商業使用的條件。
 keywords: [授權, 版權, CC, Creative Commons, BarZ Hsieh]
 ---
 

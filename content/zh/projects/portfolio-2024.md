@@ -2,6 +2,8 @@
 title: 個人作品集網站
 date: 2025/12/18
 description: 以產品思維打造的 Nuxt 4 作品集——整合 Nuxt Content、i18n、全站搜尋、自動化圖片管線與完整 SEO 優化，可長期維護的個人網站專案。
+seoTitle: "Nuxt 4 個人作品集網站與內容系統"
+seoDescription: "一個整合 Nuxt Content、i18n、全站搜尋、自動化圖片管線與完整 SEO 架構的雙語 Nuxt 4 個人作品集網站。"
 cover: /project-images/portfolio-2024.webp
 image: /project-images/portfolio-2024-hero.webp
 alt: Nuxt 4 個人作品集網站

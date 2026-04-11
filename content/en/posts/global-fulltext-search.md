@@ -2,6 +2,8 @@
 title: Implementing Site-wide Search with MiniSearch + Nuxt Content Using Segmented Indexing
 date: 2025/12/19
 description: "I implemented a site-wide Cmd/Ctrl+K search feature on my portfolio website: using MiniSearch with queryCollectionSearchSections() to make search understand Markdown sections and paragraphs, not just simple title searches."
+seoTitle: "MiniSearch + Nuxt Content Global Search"
+seoDescription: "Build a site-wide Cmd/Ctrl+K search in Nuxt Content with MiniSearch, segmented indexing, and results that jump to matching sections and paragraphs."
 image: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 alt: MiniSearch + Nuxt Content global search
 ogImage: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
