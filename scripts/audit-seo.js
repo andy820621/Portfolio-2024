@@ -9,26 +9,17 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const projectRoot = resolve(__dirname, '..')
 const defaultOutputDir = join(projectRoot, '.output', 'public')
 
-const TITLE_CHAR_RANGE = { min: 30, max: 60 }
-const TITLE_WIDTH_RANGE = { min: 35, max: 65 }
-const DESCRIPTION_CHAR_RANGE = { min: 70, max: 150 }
-const DESCRIPTION_WIDTH_RANGE = { min: 70, max: 150 }
-const DESCRIPTION_HARD_MAX = 160
+const SEO_UTILS_THRESHOLDS = {
+  TITLE_MIN_CHARS: 30,
+  TITLE_WARN_CHARS: 50,
+  TITLE_MAX_CHARS: 60,
+  TITLE_MAX_PIXELS: 580,
+  DESCRIPTION_MIN_CHARS: 70,
+  DESCRIPTION_WARN_CHARS: 150,
+  DESCRIPTION_MAX_CHARS: 160,
+  DESCRIPTION_MAX_PIXELS: 920,
+}
 const SKIPPED_HTML_FILES = new Set(['/200.html', '/404.html'])
-
-const WIDE_RANGES = [
-  [0x1100, 0x115F],
-  [0x2329, 0x232A],
-  [0x2E80, 0x303E],
-  [0x3040, 0xA4CF],
-  [0xAC00, 0xD7A3],
-  [0xF900, 0xFAFF],
-  [0xFE10, 0xFE19],
-  [0xFE30, 0xFE6F],
-  [0xFF01, 0xFF60],
-  [0xFFE0, 0xFFE6],
-  [0x1F300, 0x1FAFF],
-]
 
 const WINDOWS_PATH_SEPARATOR_RE = /\\/g
 const HTML_SUFFIX_RE = /\.html$/i
@@ -38,7 +29,6 @@ const HEAD_RE = /<head[^>]*>([\s\S]*?)<\/head>/i
 const TITLE_RE = /<title[^>]*>([\s\S]*?)<\/title>/i
 const MULTIPLE_WHITESPACE_RE = /\s+/g
 const ABSOLUTE_URL_RE = /^https?:\/\//i
-const META_CODE_SEPARATOR_RE = /:/g
 
 const HTML_ENTITY_HEX_RE = /&#x([\da-f]+);/gi
 const HTML_ENTITY_DEC_RE = /&#(\d+);/g
@@ -200,23 +190,59 @@ function truncateText(value, maxLength = 120) {
   return `${value.slice(0, maxLength - 1)}…`
 }
 
-function isWideCodePoint(codePoint) {
-  return WIDE_RANGES.some(([start, end]) => codePoint >= start && codePoint <= end)
-}
-
-function getVisualWidth(value = '') {
-  let width = 0
-
-  for (const character of value) {
-    const codePoint = character.codePointAt(0) || 0
-    width += isWideCodePoint(codePoint) ? 2 : 1
-  }
-
-  return width
-}
-
 function getCharacterCount(value = '') {
   return Array.from(value).length
+}
+
+function getEstimatedPixelWidth(value = '', fontSize = 16) {
+  return Math.round(getCharacterCount(value) * fontSize * 0.55)
+}
+
+function getSeoUtilsTitleStatus(titleLength) {
+  if (titleLength > SEO_UTILS_THRESHOLDS.TITLE_MAX_CHARS)
+    return 'error'
+
+  if (titleLength < SEO_UTILS_THRESHOLDS.TITLE_MIN_CHARS)
+    return 'warning'
+
+  return 'success'
+}
+
+function getSeoUtilsDescriptionStatus(descriptionLength) {
+  if (descriptionLength > SEO_UTILS_THRESHOLDS.DESCRIPTION_MAX_CHARS)
+    return 'error'
+
+  if (descriptionLength > SEO_UTILS_THRESHOLDS.DESCRIPTION_WARN_CHARS || descriptionLength < SEO_UTILS_THRESHOLDS.DESCRIPTION_MIN_CHARS)
+    return 'warning'
+
+  return 'success'
+}
+
+function buildSeoUtilsEssentialTags(report) {
+  return [
+    { category: 'Basic', name: 'title', present: !!report.title, value: report.title },
+    { category: 'Basic', name: 'description', present: !!report.description, value: report.description },
+    { category: 'Basic', name: 'canonical', present: !!report.canonical, value: report.canonical },
+    { category: 'Open Graph', name: 'og:title', present: !!report.ogTitle, value: report.ogTitle },
+    { category: 'Open Graph', name: 'og:description', present: !!report.ogDescription, value: report.ogDescription },
+    { category: 'Open Graph', name: 'og:image', present: !!report.ogImage, value: report.ogImage },
+    { category: 'Open Graph', name: 'og:url', present: !!report.ogUrl, value: report.ogUrl },
+    { category: 'Twitter', name: 'twitter:card', present: !!report.twitterCard, value: report.twitterCard },
+    {
+      category: 'Twitter',
+      name: 'twitter:title',
+      present: !!report.twitterTitle,
+      value: report.twitterTitle,
+      fallback: report.ogTitle ? 'og:title' : undefined,
+    },
+    {
+      category: 'Twitter',
+      name: 'twitter:image',
+      present: !!report.twitterImage,
+      value: report.twitterImage,
+      fallback: report.ogImage ? 'og:image' : undefined,
+    },
+  ]
 }
 
 function parseAttributes(tagSource) {
@@ -275,10 +301,10 @@ function auditHead(htmlSource, route) {
       htmlLang,
       title: '',
       titleLength: 0,
-      titleWidth: 0,
+      titlePixelWidth: 0,
       description: '',
       descriptionLength: 0,
-      descriptionWidth: 0,
+      descriptionPixelWidth: 0,
       canonical: '',
       ogTitle: '',
       ogDescription: '',
@@ -289,6 +315,10 @@ function auditHead(htmlSource, route) {
       twitterDescription: '',
       twitterImage: '',
       hreflangs: [],
+      essentialTags: [],
+      essentialTagsPresent: 0,
+      essentialTagsTotal: 0,
+      essentialTagScore: 0,
       findings: [createFinding('error', 'missing-head', '缺少 <head> 區塊')],
     }
   }
@@ -308,10 +338,10 @@ function auditHead(htmlSource, route) {
     htmlLang,
     title,
     titleLength: getCharacterCount(title),
-    titleWidth: getVisualWidth(title),
+    titlePixelWidth: getEstimatedPixelWidth(title),
     description,
     descriptionLength: getCharacterCount(description),
-    descriptionWidth: getVisualWidth(description),
+    descriptionPixelWidth: getEstimatedPixelWidth(description),
     canonical: normalizeText(canonicalLinks[0]?.href || ''),
     ogTitle: normalizeText(findMetaContent(metas, 'property', 'og:title')),
     ogDescription: normalizeText(findMetaContent(metas, 'property', 'og:description')),
@@ -324,58 +354,81 @@ function auditHead(htmlSource, route) {
     hreflangs: alternateLinks
       .map(link => ({ hreflang: normalizeText(link.hreflang), href: normalizeText(link.href) }))
       .filter(link => link.hreflang && link.href),
+    essentialTags: [],
+    essentialTagsPresent: 0,
+    essentialTagsTotal: 0,
+    essentialTagScore: 0,
     findings: [],
   }
+
+  report.essentialTags = buildSeoUtilsEssentialTags(report)
+  report.essentialTagsPresent = report.essentialTags.filter(tag => tag.present || tag.fallback).length
+  report.essentialTagsTotal = report.essentialTags.length
+  report.essentialTagScore = report.essentialTagsTotal > 0
+    ? Math.round((report.essentialTagsPresent / report.essentialTagsTotal) * 100)
+    : 0
 
   if (!report.title) {
     report.findings.push(createFinding('error', 'missing-title', '缺少 <title>'))
   }
-  else if (report.titleLength < TITLE_CHAR_RANGE.min || report.titleWidth < TITLE_WIDTH_RANGE.min) {
-    report.findings.push(createFinding('warning', 'title-short', `title 偏短 (${report.titleLength} chars / ${report.titleWidth} units)`))
+  else if (getSeoUtilsTitleStatus(report.titleLength) === 'warning') {
+    report.findings.push(createFinding('warning', 'title-short', `title 偏短 (${report.titleLength} chars / ~${report.titlePixelWidth}px)`))
   }
-  else if (report.titleLength > TITLE_CHAR_RANGE.max || report.titleWidth > TITLE_WIDTH_RANGE.max) {
-    report.findings.push(createFinding('warning', 'title-long', `title 可能過長 (${report.titleLength} chars / ${report.titleWidth} units)`))
+  else if (getSeoUtilsTitleStatus(report.titleLength) === 'error') {
+    report.findings.push(createFinding('warning', 'title-long', `title 可能過長 (${report.titleLength} chars / ~${report.titlePixelWidth}px)`))
   }
 
   if (!report.description) {
-    report.findings.push(createFinding('error', 'missing-description', '缺少 meta description'))
+    report.findings.push(createFinding('warning', 'missing-description', '缺少 meta description'))
   }
-  else if (report.descriptionLength < DESCRIPTION_CHAR_RANGE.min || report.descriptionWidth < DESCRIPTION_WIDTH_RANGE.min) {
-    report.findings.push(createFinding('warning', 'description-short', `description 偏短 (${report.descriptionLength} chars / ${report.descriptionWidth} units)`))
+  else if (getSeoUtilsDescriptionStatus(report.descriptionLength) === 'warning') {
+    if (report.descriptionLength < SEO_UTILS_THRESHOLDS.DESCRIPTION_MIN_CHARS) {
+      report.findings.push(createFinding('warning', 'description-short', `description 偏短 (${report.descriptionLength} chars / ~${report.descriptionPixelWidth}px)`))
+    }
+    else {
+      report.findings.push(createFinding('warning', 'description-near-limit', `description 接近截斷區，建議控制在 ${SEO_UTILS_THRESHOLDS.DESCRIPTION_WARN_CHARS} 內 (${report.descriptionLength} chars / ~${report.descriptionPixelWidth}px)`))
+    }
   }
-  else if (report.descriptionLength > DESCRIPTION_HARD_MAX || report.descriptionWidth > DESCRIPTION_HARD_MAX) {
-    report.findings.push(createFinding('warning', 'description-long', `description 可能過長 (${report.descriptionLength} chars / ${report.descriptionWidth} units)`))
-  }
-  else if (report.descriptionLength > DESCRIPTION_CHAR_RANGE.max || report.descriptionWidth > DESCRIPTION_WIDTH_RANGE.max) {
-    report.findings.push(createFinding('warning', 'description-near-limit', `description 接近截斷區，建議控制在 150 內 (${report.descriptionLength} chars / ${report.descriptionWidth} units)`))
+  else if (getSeoUtilsDescriptionStatus(report.descriptionLength) === 'error') {
+    report.findings.push(createFinding('warning', 'description-long', `description 可能過長 (${report.descriptionLength} chars / ~${report.descriptionPixelWidth}px)`))
   }
 
   if (!report.canonical)
-    report.findings.push(createFinding('error', 'missing-canonical', '缺少 canonical link'))
+    report.findings.push(createFinding('warning', 'missing-canonical', '缺少 canonical link'))
   else if (!ABSOLUTE_URL_RE.test(report.canonical))
     report.findings.push(createFinding('warning', 'canonical-not-absolute', 'canonical 不是絕對 URL'))
 
   if (canonicalLinks.length > 1)
     report.findings.push(createFinding('warning', 'duplicate-canonical', `找到 ${canonicalLinks.length} 個 canonical link`))
 
-  const metaRequirements = [
-    ['og:title', report.ogTitle],
-    ['og:description', report.ogDescription],
-    ['og:image', report.ogImage],
-    ['og:url', report.ogUrl],
-    ['twitter:card', report.twitterCard],
-    ['twitter:title', report.twitterTitle],
-    ['twitter:description', report.twitterDescription],
-    ['twitter:image', report.twitterImage],
-    ['robots', normalizeText(findMetaContent(metas, 'name', 'robots'))],
-  ]
+  const robotsDirective = normalizeText(findMetaContent(metas, 'name', 'robots'))
 
-  for (const [label, value] of metaRequirements) {
-    if (!value) {
-      const level = ['og:title', 'og:description', 'og:image', 'twitter:card'].includes(label) ? 'error' : 'warning'
-      report.findings.push(createFinding(level, `missing-${label.replace(META_CODE_SEPARATOR_RE, '-')}`, `缺少 ${label}`))
-    }
-  }
+  if (!report.ogTitle)
+    report.findings.push(createFinding('warning', 'missing-og-title', '缺少 og:title'))
+
+  if (!report.ogDescription)
+    report.findings.push(createFinding('warning', 'missing-og-description', '缺少 og:description'))
+
+  if (!report.ogImage)
+    report.findings.push(createFinding('warning', 'missing-og-image', '缺少 og:image'))
+
+  if (!report.ogUrl)
+    report.findings.push(createFinding('warning', 'missing-og-url', '缺少 og:url'))
+
+  if (!report.twitterCard)
+    report.findings.push(createFinding('warning', 'missing-twitter-card', '缺少 twitter:card'))
+
+  if (!report.twitterTitle && !report.ogTitle)
+    report.findings.push(createFinding('warning', 'missing-twitter-title', '缺少 twitter:title'))
+
+  if (!report.twitterImage && !report.ogImage)
+    report.findings.push(createFinding('warning', 'missing-twitter-image', '缺少 twitter:image'))
+
+  if (!report.twitterDescription && !report.ogDescription)
+    report.findings.push(createFinding('warning', 'missing-twitter-description', '缺少 twitter:description'))
+
+  if (!robotsDirective)
+    report.findings.push(createFinding('warning', 'missing-robots', '缺少 robots'))
 
   if (countMetaTags(metas, 'name', 'description') > 1)
     report.findings.push(createFinding('warning', 'duplicate-description', '找到多個 meta description'))
@@ -521,10 +574,11 @@ function printDetailedReport(reports) {
     const warningTotal = report.findings.filter(finding => finding.level === 'warning').length
 
     console.log(`\n[${errorTotal} error / ${warningTotal} warning] ${report.route}`)
+    console.log(`  essential tags (${report.essentialTagScore}%): ${report.essentialTagsPresent}/${report.essentialTagsTotal}`)
     if (report.title)
-      console.log(`  title (${report.titleLength} chars / ${report.titleWidth} units): ${truncateText(report.title)}`)
+      console.log(`  title (${report.titleLength} chars / ~${report.titlePixelWidth}px): ${truncateText(report.title)}`)
     if (report.description)
-      console.log(`  description (${report.descriptionLength} chars / ${report.descriptionWidth} units): ${truncateText(report.description, 160)}`)
+      console.log(`  description (${report.descriptionLength} chars / ~${report.descriptionPixelWidth}px): ${truncateText(report.description, 160)}`)
     if (report.canonical)
       console.log(`  canonical: ${truncateText(report.canonical, 100)}`)
 
@@ -541,10 +595,11 @@ function printVerboseReport(reports) {
     const warningTotal = report.findings.filter(finding => finding.level === 'warning').length
 
     console.log(`\n[${errorTotal} error / ${warningTotal} warning] ${report.route}`)
+    console.log(`  essential tags (${report.essentialTagScore}%): ${report.essentialTagsPresent}/${report.essentialTagsTotal}`)
     if (report.title)
-      console.log(`  title (${report.titleLength} chars / ${report.titleWidth} units): ${truncateText(report.title)}`)
+      console.log(`  title (${report.titleLength} chars / ~${report.titlePixelWidth}px): ${truncateText(report.title)}`)
     if (report.description)
-      console.log(`  description (${report.descriptionLength} chars / ${report.descriptionWidth} units): ${truncateText(report.description, 160)}`)
+      console.log(`  description (${report.descriptionLength} chars / ~${report.descriptionPixelWidth}px): ${truncateText(report.description, 160)}`)
     if (report.canonical)
       console.log(`  canonical: ${truncateText(report.canonical, 100)}`)
 
