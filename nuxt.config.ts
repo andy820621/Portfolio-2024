@@ -27,6 +27,36 @@ const lastmod = getSitemapDateFormat(Date.now())
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 
+const AI_SEARCH_BOTS = [
+  'OAI-SearchBot',
+  'Claude-SearchBot',
+  'PerplexityBot',
+]
+
+const AI_USER_FETCH_BOTS = [
+  'ChatGPT-User',
+  'Claude-User',
+]
+
+const GALLERY_IMAGE_PATH_PREFIX = '/gallery-images/'
+
+const AI_TRAINING_BOTS = [
+  'GPTBot',
+  'ClaudeBot',
+  'Claude-Web',
+  'anthropic-ai',
+  'Applebot-Extended',
+  'Bytespider',
+  'CCBot',
+  'cohere-ai',
+  'Diffbot',
+  'FacebookBot',
+  'Google-Extended',
+  'ImagesiftBot',
+  'OmigiliBot',
+  'Omigili',
+]
+
 // Rex Rules
 const NEWLINE_REGEX = /\r?\n/
 const QUOTE_TRIM_REGEX = /^['"]|['"]$/g
@@ -211,8 +241,26 @@ export default defineNuxtConfig({
   },
   robots: {
     blockNonSeoBots: true,
-    blockAiBots: true,
-    sitemap: ['/sitemap_index.xml'],
+    blockAiBots: false,
+    groups: [
+      {
+        comment: ['Allow AI search bots'],
+        userAgent: AI_SEARCH_BOTS,
+        allow: ['/'],
+        disallow: [GALLERY_IMAGE_PATH_PREFIX],
+      },
+      {
+        comment: ['Allow user-triggered AI fetchers'],
+        userAgent: AI_USER_FETCH_BOTS,
+        allow: ['/'],
+        disallow: [GALLERY_IMAGE_PATH_PREFIX],
+      },
+      {
+        comment: ['Block AI training crawlers'],
+        userAgent: AI_TRAINING_BOTS,
+        disallow: ['/'],
+      },
+    ],
   },
   schemaOrg: {
     defaults: false,
@@ -738,11 +786,20 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   })
 
   // Special routes and static assets
-  const noIndexPaths = ['page-cover', 'gallery-images', 'project-images', 'opt']
+  const noIndexPaths = ['page-cover', 'project-images', 'opt']
 
   Object.assign(rules, {
     '/sitemap.xml': {
       prerender: true,
+    },
+
+    [`${GALLERY_IMAGE_PATH_PREFIX}**`]: {
+      index: false,
+      robots: {
+        noindex: true,
+        noai: true,
+        noimageai: true,
+      },
     },
 
     ...noIndexPaths.reduce((acc, dir) => ({
