@@ -3,7 +3,7 @@ title: nuxt-content-mermaid
 date: 2025/12/31
 description: 將 Nuxt Content 的 mermaid 程式碼區塊自動轉成可渲染的 Mermaid 元件，支援 Lazy Loading 與暗亮主題切換
 seoTitle: "nuxt-content-mermaid：Nuxt Content 的 Mermaid 模組"
-seoDescription: "將 Nuxt Content 中的 Mermaid 程式碼區塊自動轉成可渲染元件，支援 lazy loading 與暗色、亮色主題切換。"
+seoDescription: "將 Nuxt Content 中的 Mermaid 程式碼區塊自動轉成可渲染元件，支援 lazy loading 與暗色、亮色主題切換，提升文件寫作與圖表呈現效率。"
 cover: /project-images/nuxt-content-mermaid.webp
 image: /project-images/nuxt-content-mermaid-wide.webp
 alt: nuxt-content-mermaid

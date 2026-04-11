@@ -3,7 +3,7 @@ title: 個人財務追蹤系統
 date: 2025/5/10
 description: EconoMe - 簡單易用的個人財務管理解決方案
 seoTitle: "EconoMe 個人財務追蹤與記帳系統"
-seoDescription: "以 Nuxt 3、Vue 3、Supabase 與 Tailwind CSS 打造的個人理財工具，協助追蹤收支、整理預算與日常財務管理。"
+seoDescription: "以 Nuxt 3、Vue 3、Supabase 與 Tailwind CSS 打造的個人理財工具，協助追蹤收支、整理預算、檢視財務趨勢，建立更清楚的日常金流管理方式。"
 image: /project-images/finance-tracker.webp
 alt: 個人財務追蹤系統
 ogImage: /project-images/finance-tracker.webp

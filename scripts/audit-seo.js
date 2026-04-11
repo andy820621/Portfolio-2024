@@ -10,6 +10,7 @@ const projectRoot = resolve(__dirname, '..')
 const defaultOutputDir = join(projectRoot, '.output', 'public')
 
 const TITLE_WIDTH_RANGE = { min: 35, max: 65 }
+const DESCRIPTION_CHAR_RANGE = { min: 70, max: 150 }
 const DESCRIPTION_WIDTH_RANGE = { min: 70, max: 150 }
 const DESCRIPTION_HARD_MAX = 160
 const SKIPPED_HTML_FILES = new Set(['/200.html', '/404.html'])
@@ -86,6 +87,9 @@ function parseArgs(argv) {
 
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index]
+
+    if (arg === '--')
+      continue
 
     if (arg === '--dir') {
       const next = argv[index + 1]
@@ -210,6 +214,10 @@ function getVisualWidth(value = '') {
   return width
 }
 
+function getCharacterCount(value = '') {
+  return Array.from(value).length
+}
+
 function parseAttributes(tagSource) {
   const attributes = {}
 
@@ -265,8 +273,10 @@ function auditHead(htmlSource, route) {
       route,
       htmlLang,
       title: '',
+      titleLength: 0,
       titleWidth: 0,
       description: '',
+      descriptionLength: 0,
       descriptionWidth: 0,
       canonical: '',
       ogTitle: '',
@@ -296,8 +306,10 @@ function auditHead(htmlSource, route) {
     route,
     htmlLang,
     title,
+    titleLength: getCharacterCount(title),
     titleWidth: getVisualWidth(title),
     description,
+    descriptionLength: getCharacterCount(description),
     descriptionWidth: getVisualWidth(description),
     canonical: normalizeText(canonicalLinks[0]?.href || ''),
     ogTitle: normalizeText(findMetaContent(metas, 'property', 'og:title')),
@@ -327,14 +339,14 @@ function auditHead(htmlSource, route) {
   if (!report.description) {
     report.findings.push(createFinding('error', 'missing-description', '缺少 meta description'))
   }
-  else if (report.descriptionWidth < DESCRIPTION_WIDTH_RANGE.min) {
-    report.findings.push(createFinding('warning', 'description-short', `description 偏短 (${report.descriptionWidth})`))
+  else if (report.descriptionLength < DESCRIPTION_CHAR_RANGE.min || report.descriptionWidth < DESCRIPTION_WIDTH_RANGE.min) {
+    report.findings.push(createFinding('warning', 'description-short', `description 偏短 (${report.descriptionLength} chars / ${report.descriptionWidth} units)`))
   }
-  else if (report.descriptionWidth > DESCRIPTION_HARD_MAX) {
-    report.findings.push(createFinding('warning', 'description-long', `description 可能過長 (${report.descriptionWidth})`))
+  else if (report.descriptionLength > DESCRIPTION_HARD_MAX || report.descriptionWidth > DESCRIPTION_HARD_MAX) {
+    report.findings.push(createFinding('warning', 'description-long', `description 可能過長 (${report.descriptionLength} chars / ${report.descriptionWidth} units)`))
   }
-  else if (report.descriptionWidth > DESCRIPTION_WIDTH_RANGE.max) {
-    report.findings.push(createFinding('warning', 'description-near-limit', `description 接近截斷區，建議控制在 150 內 (${report.descriptionWidth})`))
+  else if (report.descriptionLength > DESCRIPTION_CHAR_RANGE.max || report.descriptionWidth > DESCRIPTION_WIDTH_RANGE.max) {
+    report.findings.push(createFinding('warning', 'description-near-limit', `description 接近截斷區，建議控制在 150 內 (${report.descriptionLength} chars / ${report.descriptionWidth} units)`))
   }
 
   if (!report.canonical)
@@ -509,9 +521,9 @@ function printDetailedReport(reports) {
 
     console.log(`\n[${errorTotal} error / ${warningTotal} warning] ${report.route}`)
     if (report.title)
-      console.log(`  title (${report.title.length} chars / ${report.titleWidth} units): ${truncateText(report.title)}`)
+      console.log(`  title (${report.titleLength} chars / ${report.titleWidth} units): ${truncateText(report.title)}`)
     if (report.description)
-      console.log(`  description (${report.description.length} chars / ${report.descriptionWidth} units): ${truncateText(report.description, 160)}`)
+      console.log(`  description (${report.descriptionLength} chars / ${report.descriptionWidth} units): ${truncateText(report.description, 160)}`)
     if (report.canonical)
       console.log(`  canonical: ${truncateText(report.canonical, 100)}`)
 
@@ -529,9 +541,9 @@ function printVerboseReport(reports) {
 
     console.log(`\n[${errorTotal} error / ${warningTotal} warning] ${report.route}`)
     if (report.title)
-      console.log(`  title (${report.title.length} chars / ${report.titleWidth} units): ${truncateText(report.title)}`)
+      console.log(`  title (${report.titleLength} chars / ${report.titleWidth} units): ${truncateText(report.title)}`)
     if (report.description)
-      console.log(`  description (${report.description.length} chars / ${report.descriptionWidth} units): ${truncateText(report.description, 160)}`)
+      console.log(`  description (${report.descriptionLength} chars / ${report.descriptionWidth} units): ${truncateText(report.description, 160)}`)
     if (report.canonical)
       console.log(`  canonical: ${truncateText(report.canonical, 100)}`)
 

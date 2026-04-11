@@ -63,8 +63,12 @@ const localizedAlbumTitle = computed(() => {
 })
 
 const pageSeoTitle = computed(() => {
-  if (locale.value === 'zh')
-    return `${localizedAlbumTitle.value} - 生活影像紀錄`
+  if (locale.value === 'zh') {
+    if (localizedAlbumTitle.value.length > 12)
+      return `BarZ Hsieh 攝影相簿：${localizedAlbumTitle.value}`
+
+    return `BarZ Hsieh 攝影相簿：${localizedAlbumTitle.value} 影像故事紀錄`
+  }
 
   return `Photo Gallery Album: ${localizedAlbumTitle.value}`
 })
