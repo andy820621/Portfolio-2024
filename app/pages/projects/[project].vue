@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { createPersonReference } from '~~/data'
+
 const localePath = useLocalePath()
 const { locale } = useI18n()
 
@@ -84,9 +86,10 @@ watchEffect(() => {
           },
           'datePublished': publishDate.toISOString(),
           'dateModified': modifiedDate.toISOString(),
-          'author': {
-            '@id': personId,
-          },
+          'author': createPersonReference({
+            baseUrl: baseUrl.value,
+            includeName: true,
+          }),
           'publisher': {
             '@id': personId,
           },
@@ -116,11 +119,7 @@ watchEffect(() => {
           'license': licensePageUrl,
           'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
           'creditText': 'BarZ Hsieh',
-          'creator': {
-            '@type': 'Person',
-            '@id': personId,
-            'name': 'BarZ Hsieh',
-          },
+          'creator': createPersonReference({ baseUrl: baseUrl.value }),
           'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
         }),
       )

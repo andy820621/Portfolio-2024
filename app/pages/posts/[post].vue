@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { createPersonReference } from '~~/data'
+
 // 獲取內容數據
 const paramName = 'post'
 const { contentData, error } = await useContentData({
@@ -58,6 +60,9 @@ watchEffect(() => {
     // 只有在有日期的情況下才加入 Article schema
     if (mainData.value.date) {
       const articleDate = new Date(mainData.value.date)
+      const modifiedDate = mainData.value.updatedAt
+        ? new Date(mainData.value.updatedAt)
+        : articleDate
       const copyrightYear = articleDate.getFullYear().toString()
 
       schemas.push(
@@ -73,10 +78,11 @@ watchEffect(() => {
             '@id': nowPageId,
           },
           'datePublished': articleDate.toISOString(),
-          'dateModified': mainData.value.updatedAt || mainData.value.date,
-          'author': {
-            '@id': personId,
-          },
+          'dateModified': modifiedDate.toISOString(),
+          'author': createPersonReference({
+            baseUrl: baseUrl.value,
+            includeName: true,
+          }),
           'publisher': {
             '@id': personId,
           },

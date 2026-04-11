@@ -44,7 +44,7 @@ const itemListElement = formattedData.value.map((post, index) => ({
   '@type': 'ListItem',
   'position': index + 1,
   'item': {
-    '@type': 'SoftwareApplication',
+    '@type': 'WebApplication',
     'name': post.title,
     'headline': post.title,
     'applicationCategory': 'WebApplication',

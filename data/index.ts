@@ -27,6 +27,7 @@ export const seoData = {
 
 const TRAILING_SLASH_REGEX = /\/$/
 const ABSOLUTE_URL_REGEX = /^https?:\/\//
+const WWW_SUBDOMAIN_REGEX = /^www\./
 
 function normalizeBaseUrl(baseUrl: string): string {
   return baseUrl.replace(TRAILING_SLASH_REGEX, '')
@@ -43,6 +44,44 @@ function resolveAbsoluteImageUrl(baseUrl: string, imagePath: string): string {
 interface PersonIdentityOptions {
   baseUrl: string
   imagePath?: string
+}
+
+interface SiteOrganizationReferenceOptions {
+  baseUrl: string
+}
+
+interface PersonReferenceOptions {
+  baseUrl: string
+  includeName?: boolean
+}
+
+function getSiteBrandName(baseUrl: string): string {
+  try {
+    return new URL(baseUrl).hostname.replace(WWW_SUBDOMAIN_REGEX, '')
+  }
+  catch {
+    return navbarData.homeTitle
+  }
+}
+
+export function createSiteOrganizationReference({ baseUrl }: SiteOrganizationReferenceOptions) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl)
+
+  return {
+    '@id': `${normalizedBaseUrl}#organization`,
+    'name': getSiteBrandName(normalizedBaseUrl),
+    'url': normalizedBaseUrl,
+    'logo': resolveAbsoluteImageUrl(normalizedBaseUrl, seoData.icon),
+  }
+}
+
+export function createPersonReference({ baseUrl, includeName = false }: PersonReferenceOptions) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl)
+
+  return {
+    '@id': `${normalizedBaseUrl}#identity`,
+    ...(includeName ? { name: navbarData.homeTitle } : {}),
+  }
 }
 
 export function createPersonIdentity({ baseUrl, imagePath = seoData.icon }: PersonIdentityOptions) {
@@ -62,6 +101,9 @@ export function createPersonIdentity({ baseUrl, imagePath = seoData.icon }: Pers
     ],
     jobTitle: 'Frontend Engineer',
     knowsLanguage: ['en-US', 'zh-TW', 'ja-JP'],
+    worksFor: createSiteOrganizationReference({
+      baseUrl: normalizedBaseUrl,
+    }),
   }
 }
 

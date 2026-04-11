@@ -177,7 +177,7 @@ const itemListElement = demoItems.value?.map((item, index) => {
     'name': item.title,
     'position': index + 1,
     'item': {
-      '@type': 'SoftwareApplication',
+      '@type': 'WebApplication',
       'name': item.title,
       'description': item.content.description || '',
       'applicationCategory': 'WebApplication',

@@ -11,6 +11,7 @@
     "generate:metadata": "node scripts/generate-project-images-metadata.js",
     "test:prerender": "node scripts/test-prerender.js",
     "audit:seo": "pnpm build && node scripts/audit-seo.js",
+    "audit:schema-org": "pnpm build && node scripts/audit-schema-org.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "dev:netlify": "netlify dev",

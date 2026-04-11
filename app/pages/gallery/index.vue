@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { GalleryAlbum } from '~/utils/galleryCollection'
 import { breakpointsTailwind } from '@vueuse/core'
+import { createPersonReference } from '~~/data'
 import { fetchGalleryAlbums } from '~/utils/galleryCollection'
 
 const { t, localeProperties, locale } = useI18n()
@@ -158,7 +159,6 @@ const { baseUrl, fullPath } = useUrl()
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`
 const itemListId = `${fullPath.value}#itemlist`
-const personId = `${baseUrl.value}#identity`
 const localePath = useLocalePath()
 
 const licensePageUrl = locale.value === 'en'
@@ -179,11 +179,7 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
     'license': licensePageUrl,
     'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
     'creditText': 'BarZ Hsieh',
-    'creator': {
-      '@type': 'Person',
-      '@id': personId,
-      'name': 'BarZ Hsieh',
-    },
+    'creator': createPersonReference({ baseUrl: baseUrl.value }),
     'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
   },
 }))

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { createPersonReference } from '~~/data'
+
 const { t, localePath, formattedData } = await useContentDatas('posts')
 
 const { searchText, selectedTags, filteredData, allTags, clearFilters }
@@ -40,23 +42,29 @@ const nowPageId = `${fullPath.value}#webpage`
 const websiteId = `${baseUrl.value}#website`
 const itemListId = `${fullPath.value}#itemlist`
 
-const itemListElement = formattedData.value.map((post, index) => ({
-  '@type': 'ListItem',
-  'position': index + 1,
-  'item': {
-    '@type': 'BlogPosting',
-    'headline': post.title,
-    'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${post.path}`,
-    ...post.date ? { datePublished: new Date(post.date).toISOString() } : {},
-    'image': {
-      '@type': 'ImageObject',
-      'url': post.ogImage,
+const itemListElement = formattedData.value.map((post, index) => {
+  const modifiedDate = post.updatedAt ?? post.date
+
+  return {
+    '@type': 'ListItem',
+    'position': index + 1,
+    'item': {
+      '@type': 'BlogPosting',
+      'headline': post.title,
+      'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${post.path}`,
+      ...post.date ? { datePublished: new Date(post.date).toISOString() } : {},
+      ...modifiedDate ? { dateModified: new Date(modifiedDate).toISOString() } : {},
+      'image': {
+        '@type': 'ImageObject',
+        'url': post.ogImage,
+      },
+      'author': createPersonReference({
+        baseUrl: baseUrl.value,
+        includeName: true,
+      }),
     },
-    'author': {
-      '@id': `${baseUrl.value}#identity`,
-    },
-  },
-})) || []
+  }
+}) || []
 
 useSchemaOrg([
   defineWebPage({

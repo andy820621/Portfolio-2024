@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core'
 import { useStableYear } from '~~/app/composables/useStableNow'
+import { createPersonReference } from '~~/data'
 import { fetchGalleryAlbumById } from '~/utils/galleryCollection'
 
 const LightGallery = defineAsyncComponent(() => import('@/components/LightGallery.vue'))
@@ -164,7 +165,6 @@ const localePath = useLocalePath()
 
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`
-const personId = `${baseUrl.value}#identity`
 
 // 創意共享授權 URL
 const licensePageUrl = locale.value === 'en'
@@ -195,19 +195,13 @@ watchEffect(() => {
           'license': licensePageUrl,
           'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
           'creditText': 'BarZ Hsieh',
-          'creator': {
-            '@type': 'Person',
-            '@id': personId,
-            'name': 'BarZ Hsieh',
-          },
+          'creator': createPersonReference({ baseUrl: baseUrl.value }),
           'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
           'copyrightYear': (() => {
             const stableYear = useStableYear()
             return stableYear.value
           })(),
-          'copyrightHolder': {
-            '@id': personId,
-          },
+          'copyrightHolder': createPersonReference({ baseUrl: baseUrl.value }),
         }),
       )
 
