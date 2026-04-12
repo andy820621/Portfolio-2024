@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { GalleryAlbum } from '~/utils/galleryCollection'
-import { breakpointsTailwind } from '@vueuse/core'
 import { createPersonReference } from '~~/data'
 import { fetchGalleryAlbums } from '~/utils/galleryCollection'
 
@@ -98,92 +97,11 @@ const updateFilteredGroups = useDebounceFn(() => {
 // 監聽搜索文本和選中標籤的變化
 watch([searchText, selectedTags, galleryGroupsList], updateFilteredGroups, { immediate: true })
 
-// 使用斷點檢測
-const breakpoints = useBreakpoints(breakpointsTailwind)
-// 根據斷點動態計算列數
-const cols = computed(() => {
-  if (breakpoints['2xl'].value)
-    return 4
-  if (breakpoints.xl.value || breakpoints.lg.value)
-    return 3
-  return 2
-})
-
-// 將圖片組按列均勻分佈
-const parts = computed(() => {
-  const groups = debouncedFilteredGroups.value
-
-  return groups.reduce((result, group, index) => {
-    const col = index % cols.value
-    if (!result[col])
-      result[col] = []
-    result[col].push(group)
-    return result
-  }, [] as Array<typeof groups>)
-})
-
 // 清除所有篩選器
 function clearFilters() {
   searchText.value = ''
   selectedTags.value = []
 }
-
-// 追蹤可見圖片組的響應式狀態
-const visibleGroups = ref<string[]>([])
-const groupRefs = ref<HTMLElement[]>([])
-
-// 創建一個方法來處理 ref 邏輯
-function handleGroupRef(el: HTMLElement | null) {
-  if (el) {
-    if (!groupRefs.value.includes(el)) {
-      groupRefs.value.push(el)
-    }
-  }
-}
-
-// 計算轉場延遲
-function getTransitionDelay(groups: GalleryAlbum[], group: GalleryAlbum) {
-  return `${groups.indexOf(group) * 100}ms`
-}
-
-// 檢查是否可見的方法
-function isGroupVisible(group: GalleryAlbum) {
-  return visibleGroups.value.includes(group.albumId)
-}
-
-let stopIntersectionObserver: (() => void) | undefined
-
-onMounted(() => {
-  const observerOptions = {
-    threshold: 0.1, // 當元素 10% 可見時觸發
-  }
-
-  // 使用交叉觀察器實現延遲加載和淡入效果
-  const { stop } = useIntersectionObserver(
-    groupRefs,
-    (entries) => {
-      entries.forEach((entry) => {
-        // 當元素進入可視區域
-        if (entry.isIntersecting) {
-          const groupId = (entry.target as HTMLElement).dataset.groupId
-          // 避免重複添加
-          if (groupId && !visibleGroups.value.includes(groupId)) {
-            nextTick(() => {
-              visibleGroups.value.push(groupId)
-            })
-          }
-        }
-      })
-    },
-    observerOptions,
-  )
-
-  stopIntersectionObserver = stop
-})
-
-onUnmounted(() => {
-  stopIntersectionObserver?.()
-})
 
 const { baseUrl, fullPath } = useUrl()
 const websiteId = `${baseUrl.value}#website`
@@ -256,60 +174,69 @@ useSchemaOrg([
       />
     </div>
 
-    <ClientOnly>
+    <div
+      v-if="debouncedFilteredGroups.length"
+      class="gallery-columns max-w-10xl container mx-auto mt-10 text-zinc-600"
+    >
       <div
-        v-if="debouncedFilteredGroups.length"
-        grid="~ cols-2 sm:cols-2 lg:cols-3 2xl:cols-4 gap-1 sm:gap-2 lg:gap-[.55rem]"
-        class="max-w-10xl container mx-auto mt-10 text-zinc-600"
+        v-for="group in debouncedFilteredGroups"
+        :key="group.albumId"
+        class="gallery-item"
       >
-        <div
-          v-for="(groups, idx) in parts"
-          :key="idx"
-          flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]"
-        >
-          <div
-            v-for="(group) in groups"
-            :key="group.albumId"
-            :ref="(el) => handleGroupRef(el as HTMLElement)"
-            :data-group-id="group.albumId"
-            class="gallery-item translate-y-10 transform opacity-0 transition-all duration-700 ease-out"
-            :class="{
-              'opacity-100 translate-y-0': isGroupVisible(group),
-            }"
-            :style="{
-              transitionDelay: getTransitionDelay(groups, group),
-            }"
-          >
-            <NuxtLink :to="getGalleryAlbumPath(group.albumId)" :title="group.title" :aria-label="group.title">
-              <GalleryImageCard
-                :album-id="group.albumId"
-                :title="group.title"
-                :src="group.coverImage"
-              />
-            </NuxtLink>
-          </div>
-        </div>
+        <NuxtLink :to="getGalleryAlbumPath(group.albumId)" :title="group.title" :aria-label="group.title" class="block">
+          <GalleryImageCard
+            :album-id="group.albumId"
+            :title="group.title"
+            :src="group.coverImage"
+          />
+        </NuxtLink>
       </div>
+    </div>
 
-      <NoResults
-        v-else
-        :clear-filters="clearFilters"
-        :description="$t('galleryPage.noResults')"
-      />
-    </ClientOnly>
+    <NoResults
+      v-else
+      :clear-filters="clearFilters"
+      :description="$t('galleryPage.noResults')"
+    />
   </div>
 </template>
 
 <style scoped>
-/* 圖片組動畫效果 */
-.gallery-item {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.gallery-columns {
+  column-count: 2;
+  column-gap: 0.25rem;
 }
 
-.gallery-item.opacity-100.translate-y-0 {
-  opacity: 1;
-  transform: translateY(0);
+.gallery-item {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-columns {
+    column-gap: 0.5rem;
+  }
+
+  .gallery-item {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-columns {
+    column-count: 3;
+    column-gap: 0.55rem;
+  }
+
+  .gallery-item {
+    margin-bottom: 0.55rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .gallery-columns {
+    column-count: 4;
+  }
 }
 </style>
