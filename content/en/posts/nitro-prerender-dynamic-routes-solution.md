@@ -26,8 +26,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-20
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: /blog-images/nitro-prerender-dynamic-routes-solution.webp
       title: "Prerendering Nuxt Content dynamic routes with Nitro hooks"

@@ -25,8 +25,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-19
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
       title: "透過 MiniSearch + Nuxt Content 實現全站搜尋、分段索引"

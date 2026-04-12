@@ -26,8 +26,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-21
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
       title: "Bilingual Nuxt Content v3 + i18n"

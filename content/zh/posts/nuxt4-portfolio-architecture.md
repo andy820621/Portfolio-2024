@@ -25,8 +25,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-22
-  changefreq: monthly
-  priority: 0.8
   images:
     - loc: /page-cover/blog.webp
       title: "以產品思維打造 Nuxt 4 個人網站"

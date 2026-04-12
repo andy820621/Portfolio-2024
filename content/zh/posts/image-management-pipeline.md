@@ -25,8 +25,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-18
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: /page-cover/blog.webp
       title: "Projects / Gallery 圖片管線"

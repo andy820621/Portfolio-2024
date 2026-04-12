@@ -13,8 +13,6 @@ published: true
 
 sitemap:
   lastmod: 2025-04-17
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: /project-images/ti-ho-healthcare.webp
       title: "Ti-He Healthcare Official Website Development"

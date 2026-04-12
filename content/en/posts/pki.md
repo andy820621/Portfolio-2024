@@ -27,8 +27,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-31
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
       title: "What is PKI? The digital foundation from encryption to trust"

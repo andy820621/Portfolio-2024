@@ -14,8 +14,6 @@ imageClass: object-left-top
 
 sitemap:
   lastmod: 2025-05-10
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: /project-images/finance-tracker.webp
       title: Personal Finance Tracking System

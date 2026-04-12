@@ -25,8 +25,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-22
-  changefreq: monthly
-  priority: 0.8
   images:
     - loc: /page-cover/blog.webp
       title: "Building a Nuxt 4 portfolio as a product"

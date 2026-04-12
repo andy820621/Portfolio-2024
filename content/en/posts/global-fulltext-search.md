@@ -25,8 +25,6 @@ schemaOrg:
 
 sitemap:
   lastmod: 2025-12-19
-  changefreq: weekly
-  priority: 0.8
   images:
     - loc: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
       title: "Global search with MiniSearch + Nuxt Content"

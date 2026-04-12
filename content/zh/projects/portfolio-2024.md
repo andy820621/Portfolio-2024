@@ -15,8 +15,6 @@ published: true
 
 sitemap:
   lastmod: 2025-12-18
-  changefreq: monthly
-  priority: 0.95
   images:
     - loc: /project-images/portfolio-2024-hero.webp
       title: "Nuxt 4 個人作品集網站"

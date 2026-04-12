@@ -237,18 +237,12 @@ export default defineNuxtConfig({
     xslTips: false,
     xsl: '/__sitemap__/style.xsl',
     xslColumns: [
-      { label: 'URL', width: '50%' },
+      { label: 'URL', width: '55%' },
       { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
-      { label: 'Images', select: 'count(image:image)', width: '5%' },
+      { label: 'Images', select: 'count(image:image)', width: '10%' },
       // { label: 'First Image', select: 'substring(image:image[1]/image:loc, 1, 30)', width: '15%' },
-      { label: 'Hreflangs', select: 'count(xhtml:link)', width: '5%' },
-      { label: 'Priority', select: 'sitemap:priority', width: '5%' },
-      { label: 'Change Frequency', select: 'sitemap:changefreq', width: '10%' },
+      { label: 'Hreflangs', select: 'count(xhtml:link)', width: '10%' },
     ],
-    defaults: {
-      changefreq: 'weekly',
-      priority: 1,
-    },
     discoverImages: true,
     discoverVideos: true,
     exclude: [
@@ -673,8 +667,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        changefreq: 'daily',
-        priority: 1,
         images: [
           {
             loc: '/page-cover/home.webp',
@@ -689,8 +681,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        changefreq: 'daily',
-        priority: 0.9,
         images: [
           {
             loc: '/page-cover/blog.webp',
@@ -712,8 +702,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        changefreq: 'daily',
-        priority: 0.9,
         images: [
           {
             loc: '/page-cover/demos.webp',
@@ -728,8 +716,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/projects': {
       prerender: true,
       sitemap: {
-        changefreq: 'daily',
-        priority: 0.9,
         images: [
           {
             loc: '/page-cover/projects.webp',
@@ -742,7 +728,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     },
     '/projects/**': {
       prerender: true,
-      sitemap: { changefreq: 'daily', priority: 0.9 },
       robots: true,
       swr: false, // 強制使用預渲染，禁用 server-side rendering
     },
@@ -750,8 +735,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/gallery': {
       prerender: true,
       sitemap: {
-        changefreq: 'daily',
-        priority: 0.9,
         images: [
           {
             loc: '/page-cover/gallery.webp',
@@ -764,7 +747,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     },
     '/gallery/**': {
       prerender: true,
-      sitemap: { changefreq: 'daily', priority: 0.8 },
       robots: true,
     },
 
