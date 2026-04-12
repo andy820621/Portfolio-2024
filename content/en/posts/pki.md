@@ -87,7 +87,7 @@ To make the system reliable, PKI involves several key roles:
 - Policy & Procedures
   Define who can obtain which certificate, renewal frequency, and revocation procedures to ensure transparency.
 
-![PKI architecture](https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Public-Key-Infrastructure.svg/1600px-Public-Key-Infrastructure.svg.png)
+![PKI architecture](https://upload.wikimedia.org/wikipedia/commons/3/34/Public-Key-Infrastructure.svg)
 
 ---
 
