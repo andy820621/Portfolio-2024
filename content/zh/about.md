@@ -1,30 +1,30 @@
 ---
 title: BarZ Hsieh
-description: BarZ Hsieh 的個人網站
+description: BarZ Hsieh 的前端工程師作品集與技術網站
 ---
 
 # BarZ Hsieh
 
 ## About Me
 
-嗨，我是 BarZ Hsieh，是一位創意網頁開發者。
+嗨，我是 BarZ Hsieh，一位住在台北的前端工程師與 Nuxt 開發者。
 
-我對於構思創意並將其實現充滿熱情。你可以在這裡查看我完整的 [專案列表](/projects)。<br>
-我也時常透過 coding 探索生成藝術、與使用者交互體驗的相關實驗。更多內容可以在 [Demos](/demos) 查看。
+我專注於用 Nuxt、Vue、TypeScript 打造內容型網站、技術產品，以及可長期維護的 Web 體驗。你可以先從 [專案列表](/zh/projects/) 認識我的實作方向。<br>
+我也持續透過程式探索生成藝術與互動體驗，更多實驗可以在 [Demos](/zh/demos/) 查看。
 
-此外，我會不定時的撰寫有關前端開發、編程、生活等等的 [文章](/posts)。<br>
+這個網站本身也是我的產品化實驗場：我會在 [文章](/zh/posts/) 裡整理前端工程、內容架構、SEO、搜尋與網站維護相關的技術筆記。<br>
 
 在程式設計之外，偶爾我也會透過旅行和攝影來記錄我的生活。<br>
-如果你有興趣，可以查看 [gallery](/gallery) 或 [我的 Instagram](https://www.instagram.com/andy820621)。<br>
+如果你有興趣，也可以逛逛 [gallery](/zh/gallery/) 或 [我的 Instagram](https://www.instagram.com/andy820621)。<br>
 
-我目前住在台北。如果你在附近，隨時可以聯繫我，我們可以一起喝杯咖啡或創作更多有趣的事情。
+我目前住在台北。如果你正在做產品網站、內容型網站，或需要前端工程支援，歡迎直接與我聯繫。
 
 ## What can I do
 
 ### 網頁開發
 
-我目前的主要從事網頁前端開發。<br>
-如果你有任何相關需求，歡迎隨時聯絡我。
+我目前主要專注在前端工程，特別是 Nuxt、Vue、TypeScript、內容架構與產品思維的網站開發。<br>
+如果你需要協助打造可維護的網站或前端產品，歡迎隨時聯絡我。
 
 :TechStackGrid
 

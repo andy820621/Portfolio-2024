@@ -14,9 +14,9 @@
   "min": "分",
   "homePage": {
     "title": "首頁",
-    "seoTitle": "BarZ Hsieh 的個人部落格與開發作品集",
-    "seoDescription": "我是 BarZ Hsieh，一位在台北的前端工程師，專注於網站開發、技術文章寫作，也分享精選專案、產品化實作經驗與攝影作品，記錄設計與開發之間的觀察。",
-    "description": "你好，我是 BarZ Hsieh。 \n歡迎來到我的個人部落格網站。我是一位熱愛技術的軟體工程師，專精於前端開發，擅長運用 Nuxt、Vue、TypeScript 等現代化技術。 \n在這裡您可以探索我的技術文章、個人專案，我也會在 Gallery 透過鏡頭語言分享我的生活。",
+    "seoTitle": "前端工程師與 Nuxt 開發者作品集",
+    "seoDescription": "台北前端工程師作品集與技術網站，聚焦 Nuxt、Vue、TypeScript、雙語內容架構、SEO、搜尋體驗、技術文章與可維護的產品化網站實作。",
+    "description": "你好，我是 BarZ Hsieh。 \n我是一位住在台北的前端工程師與 Nuxt 開發者，專注於用 Nuxt、Vue、TypeScript 打造內容型網站、技術產品與可長期維護的 Web 體驗。 \n在這裡你可以看到我的作品集、技術文章與創意實驗，也能更完整地認識我的工作方式。",
     "noResultDescription": "我們找不到與您現在的搜尋的頁面，請重新搜尋。"
   },
   "blogsPage": {

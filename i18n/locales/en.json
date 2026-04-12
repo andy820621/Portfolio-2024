@@ -14,9 +14,9 @@
   "min": "min",
   "homePage": {
     "title": "home",
-    "seoTitle": "BarZ Hsieh's Personal Website",
-    "seoDescription": "I'm BarZ Hsieh, a frontend developer in Taipei. I specialize in building websites, writing technical blog, and sharing my projects and photography.",
-    "description": "Hello, I'm BarZ Hsieh. \nWelcome to my personal blog website. I am a software engineer who loves technology, specializing in frontend development with expertise in Nuxt, Vue, TypeScript, and other modern technologies. \nHere you can explore my technical articles and personal projects, and I also share my life through the lens in the Gallery.",
+    "seoTitle": "Frontend Engineer and Nuxt Developer in Taipei",
+    "seoDescription": "Frontend engineer in Taipei building Nuxt, Vue, and TypeScript products. Portfolio, technical writing, bilingual content systems, and web experiments.",
+    "description": "Hello, I'm BarZ Hsieh. \nI'm a frontend engineer and Nuxt developer based in Taipei, focused on building content-driven websites, technical products, and maintainable web experiences with Nuxt, Vue, and TypeScript. \nThis site brings together my portfolio, technical writing, and creative experiments.",
     "noResultDescription": "We couldn't find correct page matching your search."
   },
   "blogsPage": {

@@ -34,22 +34,34 @@ watchEffect(() => {
 const pageTitle = computed(() => t('home'))
 const pageSeoTitle = computed(() => content.value?.seoTitle || t('homePage.seoTitle') || pageTitle.value || 'Home')
 const pageSeoDescription = computed(() => content.value?.seoDescription || t('homePage.seoDescription') || content.value?.description || t('homePage.description') || '')
+const homepageKeywords = computed(() => {
+  const sharedKeywords = ['BarZ', 'BarZ Hsieh', 'Hsieh Yao Tsu', 'andy820621']
+
+  if (locale.value.startsWith('zh')) {
+    return [
+      ...sharedKeywords,
+      '前端工程師',
+      'Nuxt 開發者',
+      '個人作品集',
+      '技術部落格',
+      '台北',
+    ]
+  }
+
+  return [
+    ...sharedKeywords,
+    'Frontend Engineer',
+    'Nuxt Developer',
+    'Personal Portfolio',
+    'Technical Blog',
+    'Taipei',
+  ]
+})
 
 usePageSeo({
   title: pageSeoTitle.value,
   description: pageSeoDescription.value,
-  keywords: [
-    'BarZ',
-    'Hsieh Yao Tsu',
-    'Portfolio',
-    'Frontend',
-    'Developer',
-    'Nuxt',
-    'Vue',
-    'About Me',
-    'BarZ Hsieh',
-    t('home'),
-  ],
+  keywords: homepageKeywords.value,
 })
 
 const { baseUrl } = useUrl()
@@ -63,7 +75,7 @@ useSchemaOrg([
     '@id': webpageId,
     '@type': 'ProfilePage',
     'description': pageSeoDescription.value || 'BarZ Hsieh\'s Portfolio',
-    'name': 'BarZ Hsieh\'s Personal Portfolio Website',
+    'name': pageSeoTitle.value || 'BarZ Hsieh',
     'url': baseUrl.value,
     // 'about':  NodeRelation<Organization>,
     'mainEntity': {

@@ -219,6 +219,7 @@ UI 則由共用的 `WrapperPost.vue` 處理：
 讓 Markdown 中的 ` ```mermaid ` 區塊直接渲染為 Svg。
 
 這讓技術文章可以自然地加入流程圖、架構圖。
+如果你想看這個模組本身的實作與使用方式，可以直接閱讀 [nuxt-content-mermaid](/zh/projects/nuxt-content-mermaid/)。
 
 ---
 
@@ -235,5 +236,6 @@ Nuxt Content v3 提供的 collections 與 hooks，
 
 ### 延伸閱讀
 
+- [nuxt-content-mermaid](/zh/projects/nuxt-content-mermaid)
 - [如何用 Nitro Hooks 解決 Nuxt Content 動態路由的預渲染問題](/zh/posts/nitro-prerender-dynamic-routes-solution)
 - [以產品思維打造 Nuxt 4 個人網站](/zh/posts/nuxt4-portfolio-architecture)

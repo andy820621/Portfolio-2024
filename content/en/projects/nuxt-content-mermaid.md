@@ -1,9 +1,9 @@
 ---
 title: nuxt-content-mermaid
 date: 2025/12/31
-description: Automatically converts Mermaid code blocks in Nuxt Content into a renderable Mermaid component, with lazy loading and dark/light theme support.
-seoTitle: "nuxt-content-mermaid for Nuxt Content"
-seoDescription: "A Nuxt module that transforms Mermaid code blocks in Nuxt Content into renderable components with lazy loading and dark-light theme support."
+description: Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support.
+seoTitle: "nuxt-content-mermaid for Nuxt Content v3"
+seoDescription: "Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support."
 cover: /project-images/nuxt-content-mermaid.webp
 image: /project-images/nuxt-content-mermaid-wide.webp
 alt: nuxt-content-mermaid
@@ -26,6 +26,8 @@ sitemap:
 
 This module integrates [**Nuxt Content v3**](https://content.nuxt.com/docs/getting-started){target="\_blank" rel="noopener"} and [**Mermaid**](https://mermaid.js.org/){target="\_blank" rel="noopener"}.
 It automatically turns Mermaid fenced code blocks (\`\`\`mermaid) in Markdown into a responsive diagram component, with lazy loading and dark/light theme switching built in.
+
+If you want to see how this module fits into a larger content workflow, read [Bilingual Nuxt Content v3 + i18n: a maintainable content system](/posts/nuxt-content-v3-i18n-bilingual-site/). That article covers the broader architecture; this page focuses on the Mermaid integration layer.
 
 ## Problems It Solves
 
@@ -97,5 +99,6 @@ graph LR
 
 ## Links
 
+- Related article: [Bilingual Nuxt Content v3 + i18n: a maintainable content system](/posts/nuxt-content-v3-i18n-bilingual-site/)
 - NPM: [https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid](https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid){target="\_blank" rel="noopener"}
 - GitHub: [https://github.com/andy820621/nuxt-content-mermaid](https://github.com/andy820621/nuxt-content-mermaid){target="\_blank" rel="noopener"}

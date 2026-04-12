@@ -217,6 +217,7 @@ This project uses my package [**@barzhsieh/nuxt-content-mermaid**](https://www.n
 so Markdown ` ```mermaid ` blocks render directly as SVG diagrams.
 
 That makes technical posts much easier to read, because architecture and flowcharts can live naturally inside Markdown.
+If you want the module-focused implementation details, see [nuxt-content-mermaid](/projects/nuxt-content-mermaid/).
 
 ---
 
@@ -231,5 +232,6 @@ Nuxt Content v3 collections and hooks let content scale naturally into SEO, sear
 
 ### Further reading
 
+- [nuxt-content-mermaid](/projects/nuxt-content-mermaid)
 - [Prerendering dynamic Markdown routes with Nitro hooks](/posts/nitro-prerender-dynamic-routes-solution)
 - [Building a Nuxt 4 portfolio as a product](/posts/nuxt4-portfolio-architecture)

@@ -1,9 +1,9 @@
 ---
 title: nuxt-content-mermaid
 date: 2025/12/31
-description: 將 Nuxt Content 的 mermaid 程式碼區塊自動轉成可渲染的 Mermaid 元件，支援 Lazy Loading 與暗亮主題切換
-seoTitle: "nuxt-content-mermaid：Nuxt Content 的 Mermaid 模組"
-seoDescription: "將 Nuxt Content 中的 Mermaid 程式碼區塊自動轉成可渲染元件，支援 lazy loading 與暗色、亮色主題切換，提升文件寫作與圖表呈現效率。"
+description: 把 Nuxt Content 的 Mermaid 程式碼區塊轉成可渲染元件，支援 lazy loading、深淺主題切換與 Markdown 技術文件的流程圖整合，適合內容網站與教學文件。
+seoTitle: "nuxt-content-mermaid：Nuxt Content Mermaid 模組"
+seoDescription: "把 Nuxt Content 的 Mermaid 程式碼區塊轉成可渲染元件，支援 lazy loading、深淺主題切換與 Markdown 技術文件的流程圖整合，適合內容網站與教學文件。"
 cover: /project-images/nuxt-content-mermaid.webp
 image: /project-images/nuxt-content-mermaid-wide.webp
 alt: nuxt-content-mermaid
@@ -26,6 +26,8 @@ sitemap:
 
 主要功能是整合 [**Nuxt Content v3**](https://content.nuxt.com/docs/getting-started) 跟 [**Mermaid**](https://mermaid.js.org/) 的模組。
 能自動將 Markdown 中的 \`\`\`mermaid 區塊轉換為響應式的圖表元件，並支援 Lazy Loading 與深色模式切換。
+
+如果你想看這個模組在完整內容系統裡的定位，可以繼續閱讀 [透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site/)。那篇文章講整體架構，這一頁則專注在 Mermaid 整合本身。
 
 ## 解決的問題
 
@@ -97,5 +99,6 @@ graph LR
 
 ## 相關連結
 
+- 延伸閱讀：[透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site/)
 - NPM：[https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid](https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid){:target="\_blank"}
 - GitHub：[https://github.com/andy820621/nuxt-content-mermaid](https://github.com/andy820621/nuxt-content-mermaid){:target="\_blank"}

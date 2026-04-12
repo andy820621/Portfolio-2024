@@ -1,29 +1,29 @@
 ---
 title: BarZ Hsieh
-description: BarZ Hsieh's Portfolio
+description: Frontend engineer and Nuxt developer portfolio by BarZ Hsieh.
 ---
 
 # BarZ Hsieh
 
 ## About me
 
-I'm BarZ, I'm creative web developer based in Taiwan, Taipei.
+I'm BarZ Hsieh, a frontend engineer and Nuxt developer based in Taipei.
 
-My passion lies in dreaming up ideas and bringing them to life. You can explore my complete list of [full projects list here](/projects) here.<br>
-I also explore generative art and interactive experiments through code, and you can see more on the [Demos](/demos) page.
+I build content-driven websites, technical products, and maintainable web experiences with Nuxt, Vue, and TypeScript. You can start from my [selected projects](/projects/).<br>
+I also explore generative art and interactive experiments through code, and you can see more on the [Demos](/demos/) page.
 
-Additionally, I give write [blog posts](/posts) about frontend developer, coding, life, etc.<br>
+This site doubles as a living product: I write [technical posts](/posts/) about frontend engineering, content architecture, SEO, search, and the systems behind a maintainable portfolio.<br>
 
 Outside of programming, I enjoy doing photography and traveling.<br>
-If you're interested, some of my photos can be you can check out [my gallery](/gallery), or on [my Instagram](https://www.instagram.com/andy820621).<br>
-Right now I live in Taipei. If you are around, feel free to reach me out, we could have some coffee or work together.
+If you're interested, you can also check out [my gallery](/gallery/) or [Instagram](https://www.instagram.com/andy820621).<br>
+I currently live in Taipei. If you're working on a product, content site, or frontend-heavy project, feel free to reach out.
 
 ## What can I do
 
 ### Web Development
 
-My primary occupation is currently in web front-end development.<br>
-If you have any related needs, feel free to contact me anytime.
+My main focus is frontend engineering, especially Nuxt, Vue, TypeScript, content architecture, and product-minded web development.<br>
+If you need help building a maintainable website or frontend product, feel free to contact me.
 
 :TechStackGrid
 
