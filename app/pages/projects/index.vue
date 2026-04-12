@@ -1,6 +1,12 @@
 <script setup lang="ts">
 const { t, localePath, formattedData } = await useContentDatas('projects')
 
+prerenderRoutes(
+  formattedData.value
+    .map(post => post.path)
+    .filter((path): path is string => Boolean(path)),
+)
+
 const { searchText, selectedTags, filteredData, allTags, clearFilters }
   = useContentListsFilter(formattedData)
 

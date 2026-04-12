@@ -19,6 +19,14 @@ watchEffect(() => {
 
 const galleryGroupsList = computed(() => galleryGroups.value ?? [])
 
+prerenderRoutes(
+  galleryGroupsList.value.map((group) => {
+    return locale.value === 'en'
+      ? `/gallery/${group.albumId}`
+      : `/zh/gallery/${group.albumId}`
+  }),
+)
+
 // 搜索文本和選中的標籤
 const searchText = ref('')
 const selectedTags = ref<string[]>([])

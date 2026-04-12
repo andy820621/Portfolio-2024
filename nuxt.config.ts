@@ -56,11 +56,6 @@ const AI_TRAINING_BOTS = [
   'Omigili',
 ]
 
-// Rex Rules
-const NEWLINE_REGEX = /\r?\n/
-const QUOTE_TRIM_REGEX = /^['"]|['"]$/g
-const MD_EXT_REGEX = /\.md$/
-
 function stripSyntheticSitemapRoutes(pages: NuxtPage[], locales: LocaleObject[]): void {
   const localizedSitemapPaths = new Set<string>(['/sitemap.xml'])
 
@@ -481,6 +476,8 @@ export default defineNuxtConfig({
         '/zh/posts',
         '/projects',
         '/zh/projects',
+        '/gallery',
+        '/zh/gallery',
       ],
       // 忽略 API 和內容查詢 endpoints,避免嘗試預渲染它們
       ignore: [
@@ -489,145 +486,6 @@ export default defineNuxtConfig({
         '/__nuxt_content/**',
         '/.well-known/**', // 忽略 Chrome DevTools 請求
       ],
-    },
-    hooks: {
-      'prerender:routes': async function (routes: Set<string>) {
-        // 動態添加所有內容路由
-        try {
-          const fs = await import('node:fs/promises')
-          const path = await import('node:path')
-          const { fileURLToPath } = await import('node:url')
-
-          const __dirname = fileURLToPath(new URL('.', import.meta.url))
-          const contentDir = path.join(__dirname, 'content')
-
-          // 掃描 content 目錄獲取所有 .md 檔案
-          async function scanContentDir(dir: string, locale: string, type: string): Promise<string[]> {
-            try {
-              const files = await fs.readdir(dir, { withFileTypes: true })
-              const routes: string[] = []
-
-              for (const file of files) {
-                const fullPath = path.join(dir, file.name)
-                if (file.isDirectory()) {
-                  routes.push(...(await scanContentDir(fullPath, locale, type)))
-                }
-                else if (file.name.endsWith('.md')) {
-                  // 只預渲染已發布內容：避免 draft/unpublished 內容被納入 sitemap 與產物
-                  let shouldSkip = false
-                  try {
-                    const raw = await fs.readFile(fullPath, 'utf8')
-                    if (raw.startsWith('---')) {
-                      const lines = raw.split(NEWLINE_REGEX)
-                      for (let i = 1; i < lines.length; i++) {
-                        const line = (lines[i] || '').trim()
-                        if (line === '---')
-                          break
-                        if (line.toLowerCase().startsWith('published:')) {
-                          const value = line.split(':')[1]?.trim().replace(QUOTE_TRIM_REGEX, '').toLowerCase()
-                          if (value === 'false') {
-                            shouldSkip = true
-                            break
-                          }
-                        }
-                      }
-                    }
-                  }
-                  catch {
-                    // 讀取失敗時保守地保留路由，避免誤漏
-                  }
-                  if (shouldSkip)
-                    continue
-
-                  // 將檔案路徑轉換為路由
-                  const slug = file.name.replace(MD_EXT_REGEX, '')
-                  const routePath = locale === 'en'
-                    ? `/${type}/${slug}`
-                    : `/zh/${type}/${slug}`
-                  routes.push(routePath)
-                }
-              }
-
-              return routes
-            }
-            catch {
-              return []
-            }
-          }
-
-          async function scanGalleryDir(dir: string): Promise<string[]> {
-            try {
-              const files = await fs.readdir(dir, { withFileTypes: true })
-              const routes: string[] = []
-
-              for (const file of files) {
-                if (!file.isFile() || !(file.name.endsWith('.yml') || file.name.endsWith('.yaml')))
-                  continue
-
-                const fullPath = path.join(dir, file.name)
-
-                try {
-                  const raw = await fs.readFile(fullPath, 'utf8')
-                  const lines = raw.split(NEWLINE_REGEX)
-
-                  let albumId = ''
-                  let published = true
-
-                  for (const rawLine of lines) {
-                    const line = rawLine.trim()
-
-                    if (!line || line.startsWith('#') || line.startsWith('-'))
-                      continue
-
-                    if (!albumId && line.startsWith('albumId:')) {
-                      albumId = line.split(':').slice(1).join(':').trim().replace(QUOTE_TRIM_REGEX, '')
-                      continue
-                    }
-
-                    if (line.toLowerCase().startsWith('published:')) {
-                      const value = line.split(':').slice(1).join(':').trim().replace(QUOTE_TRIM_REGEX, '').toLowerCase()
-                      published = value !== 'false'
-                    }
-                  }
-
-                  if (published && albumId) {
-                    routes.push(`/gallery/${albumId}`)
-                    routes.push(`/zh/gallery/${albumId}`)
-                  }
-                }
-                catch {
-                  // 讀取失敗時跳過單一相簿，避免中斷整體 prerender 路由生成
-                }
-              }
-
-              return routes
-            }
-            catch {
-              return []
-            }
-          }
-
-          // 掃描所有內容目錄
-          const [postsEn, postsZh, projectsEn, projectsZh, galleryRoutes] = await Promise.all([
-            scanContentDir(path.join(contentDir, 'en', 'posts'), 'en', 'posts'),
-            scanContentDir(path.join(contentDir, 'zh', 'posts'), 'zh', 'posts'),
-            scanContentDir(path.join(contentDir, 'en', 'projects'), 'en', 'projects'),
-            scanContentDir(path.join(contentDir, 'zh', 'projects'), 'zh', 'projects'),
-            scanGalleryDir(path.join(contentDir, 'gallery')),
-          ])
-
-          const contentRoutes = [...postsEn, ...postsZh, ...projectsEn, ...projectsZh, ...galleryRoutes]
-
-          for (const route of contentRoutes) {
-            routes.add(route)
-          }
-
-          console.warn(`[Nitro Hooks] Added ${contentRoutes.length} content routes for prerendering`)
-        }
-        catch (error) {
-          console.error('[Nitro Hooks] Failed to scan content routes:', error)
-        }
-      },
     },
     minify: true,
     future: {
