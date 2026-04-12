@@ -5,11 +5,27 @@ import { defineOgImageSchema } from 'nuxt-og-image/content'
 import { defineSchemaOrgSchema } from 'nuxt-schema-org/content'
 
 // SEO schema fields，取代已棄用的 asSeoCollection
-const seoSchemaFields = {
+const baseSeoSchemaFields = {
   robots: defineRobotsSchema(),
-  sitemap: defineSitemapSchema(),
   ogImage: defineOgImageSchema(),
   schemaOrg: defineSchemaOrgSchema(),
+}
+
+function prependZhLocalePrefix(url: { loc: string }) {
+  if (!url.loc.startsWith('/zh'))
+    url.loc = `/zh${url.loc}`
+}
+
+function createSeoSchemaFields(name: string, onUrl?: (url: { loc: string }) => void) {
+  return {
+    ...baseSeoSchemaFields,
+    sitemap: defineSitemapSchema({
+      z,
+      name,
+      filter: (entry: { published?: boolean }) => entry.published !== false,
+      ...(onUrl ? { onUrl } : {}),
+    }),
+  }
 }
 
 // 通用內容模式
@@ -21,6 +37,7 @@ const commonContentSchema = z.object({
   date: z.coerce.date(),
   keywords: z.array(z.string()).optional(),
   updatedAt: z.coerce.date().optional(),
+  published: z.boolean().default(true),
 })
 
 // Blogs 內容模式
@@ -100,7 +117,7 @@ export default defineContentConfig({
         exclude: ['en/posts/*.md', 'en/projects/*.md', 'en/demos/*.md'],
         prefix: '',
       },
-      schema: commonContentSchema.extend(seoSchemaFields),
+      schema: commonContentSchema.extend(createSeoSchemaFields('content_en')),
     }),
     content_zh: defineCollection({
       type: 'page',
@@ -109,7 +126,7 @@ export default defineContentConfig({
         exclude: ['zh/posts/*.md', 'zh/projects/*.md', 'zh/demos/*.md'],
         prefix: '',
       },
-      schema: commonContentSchema.extend(seoSchemaFields),
+      schema: commonContentSchema.extend(createSeoSchemaFields('content_zh', prependZhLocalePrefix)),
     }),
 
     // Blog 集合
@@ -119,7 +136,7 @@ export default defineContentConfig({
         include: 'en/posts/*.md',
         prefix: '/posts',
       },
-      schema: articleSchema.extend(seoSchemaFields),
+      schema: articleSchema.extend(createSeoSchemaFields('posts_en')),
     }),
     posts_zh: defineCollection({
       type: 'page',
@@ -127,7 +144,7 @@ export default defineContentConfig({
         include: 'zh/posts/*.md',
         prefix: '/zh/posts',
       },
-      schema: articleSchema.extend(seoSchemaFields),
+      schema: articleSchema.extend(createSeoSchemaFields('posts_zh')),
     }),
 
     // Projects 集合
@@ -137,7 +154,7 @@ export default defineContentConfig({
         include: 'en/projects/*.md',
         prefix: '/projects',
       },
-      schema: projectSchema.extend(seoSchemaFields),
+      schema: projectSchema.extend(createSeoSchemaFields('projects_en')),
     }),
     projects_zh: defineCollection({
       type: 'page',
@@ -145,7 +162,7 @@ export default defineContentConfig({
         include: 'zh/projects/*.md',
         prefix: '/zh/projects',
       },
-      schema: projectSchema.extend(seoSchemaFields),
+      schema: projectSchema.extend(createSeoSchemaFields('projects_zh')),
     }),
 
     // Demos 集合
@@ -155,7 +172,7 @@ export default defineContentConfig({
         include: 'en/demos/*.md',
         prefix: '/demos',
       },
-      schema: demoSchema.extend(seoSchemaFields),
+      schema: demoSchema.extend(createSeoSchemaFields('demos_en')),
     }),
     demos_zh: defineCollection({
       type: 'page',
@@ -163,7 +180,7 @@ export default defineContentConfig({
         include: 'zh/demos/*.md',
         prefix: '/zh/demos',
       },
-      schema: demoSchema.extend(seoSchemaFields),
+      schema: demoSchema.extend(createSeoSchemaFields('demos_zh')),
     }),
 
     gallery: defineCollection({

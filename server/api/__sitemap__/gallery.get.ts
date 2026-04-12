@@ -1,7 +1,6 @@
 import type { SitemapUrl } from '#sitemap/types'
 import type { GalleryAlbum } from '~/utils/galleryCollection'
 import { queryCollection } from '@nuxt/content/server'
-import { getSitemapDateFormat } from '~/utils/dayjs'
 import { sortGalleryAlbums } from '~/utils/galleryCollection'
 import { encodeUrlPath } from '~/utils/pathUtils'
 
@@ -16,7 +15,6 @@ export default defineSitemapEventHandler(async (event) => {
       .all() as unknown as GalleryAlbum[],
   )
 
-  const lastmod = getSitemapDateFormat(Date.now())
   const entries: SitemapUrl[] = []
 
   for (const album of galleryGroups) {
@@ -29,7 +27,6 @@ export default defineSitemapEventHandler(async (event) => {
     // 默認語言
     entries.push({
       loc: defaultPath,
-      lastmod,
       changefreq: 'weekly',
       priority: 0.8,
       ...(encodedCoverImage && {
@@ -45,7 +42,6 @@ export default defineSitemapEventHandler(async (event) => {
     if (i18nStrategy !== 'prefix_except_default' || defaultLocale !== 'en') {
       entries.push({
         loc: `/en/gallery/${album.albumId}`,
-        lastmod,
         changefreq: 'weekly',
         priority: 0.8,
         ...(encodedCoverImage && {
@@ -61,7 +57,6 @@ export default defineSitemapEventHandler(async (event) => {
     // 非默認語言總是生成前綴版本
     entries.push({
       loc: zhPath,
-      lastmod,
       changefreq: 'weekly',
       priority: 0.8,
       ...(encodedCoverImage && {

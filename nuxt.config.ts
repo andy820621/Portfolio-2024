@@ -1,7 +1,7 @@
 /* eslint-disable node/prefer-global/process */
+import type { NuxtPage } from '@nuxt/schema'
 import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack'
-import { getSitemapDateFormat } from './app/utils/dayjs'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
@@ -23,7 +23,6 @@ const chunkMap: Record<string, string> = {
   'minisearch': 'minisearch',
 }
 
-const lastmod = getSitemapDateFormat(Date.now())
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 
@@ -61,6 +60,29 @@ const AI_TRAINING_BOTS = [
 const NEWLINE_REGEX = /\r?\n/
 const QUOTE_TRIM_REGEX = /^['"]|['"]$/g
 const MD_EXT_REGEX = /\.md$/
+
+function stripSyntheticSitemapRoutes(pages: NuxtPage[], locales: LocaleObject[]): void {
+  const localizedSitemapPaths = new Set<string>(['/sitemap.xml'])
+
+  for (const locale of locales)
+    localizedSitemapPaths.add(`/${locale.code}/sitemap.xml`)
+
+  function prunePages(routePages: NuxtPage[]) {
+    const retainedPages: NuxtPage[] = []
+
+    for (const page of routePages) {
+      if (page.children?.length)
+        prunePages(page.children)
+
+      if (!page.path || !localizedSitemapPaths.has(page.path))
+        retainedPages.push(page)
+    }
+
+    routePages.splice(0, routePages.length, ...retainedPages)
+  }
+
+  prunePages(pages)
+}
 
 export default defineNuxtConfig({
   // debug: {
@@ -149,6 +171,11 @@ export default defineNuxtConfig({
   routeRules: generateRouteRules({
     locales,
   }),
+  hooks: {
+    'pages:resolved': (pages) => {
+      stripSyntheticSitemapRoutes(pages, locales)
+    },
+  },
   app: {
     head: {
       charset: 'utf-8',
@@ -221,7 +248,6 @@ export default defineNuxtConfig({
     defaults: {
       changefreq: 'weekly',
       priority: 1,
-      lastmod,
     },
     discoverImages: true,
     discoverVideos: true,
@@ -235,9 +261,10 @@ export default defineNuxtConfig({
     ],
     sources: [
       '/api/__sitemap__/gallery',
-      '/api/__sitemap__',
     ],
     autoI18n: true,
+    // Build sitemap XML during production builds; keep runtime generation in dev for debugging.
+    zeroRuntime: process.env.NODE_ENV === 'production',
   },
   robots: {
     blockNonSeoBots: true,
@@ -447,7 +474,6 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
     preset: process.env.NETLIFY ? 'netlify' : undefined,
-    plugins: ['~~/server/plugins/sitemap'],
     publicAssets: [
       {
         dir: 'public',
@@ -650,7 +676,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        lastmod,
         changefreq: 'daily',
         priority: 1,
         images: [
@@ -667,7 +692,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        lastmod,
         changefreq: 'daily',
         priority: 0.9,
         images: [
@@ -691,7 +715,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        lastmod,
         changefreq: 'daily',
         priority: 0.9,
         images: [
@@ -708,7 +731,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/projects': {
       prerender: true,
       sitemap: {
-        lastmod,
         changefreq: 'daily',
         priority: 0.9,
         images: [
@@ -731,7 +753,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/gallery': {
       prerender: true,
       sitemap: {
-        lastmod,
         changefreq: 'daily',
         priority: 0.9,
         images: [
