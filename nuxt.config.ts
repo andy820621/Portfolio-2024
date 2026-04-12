@@ -259,9 +259,6 @@ export default defineNuxtConfig({
       '/en/about',
       '/zh/about',
     ],
-    sources: [
-      '/api/__sitemap__/gallery',
-    ],
     autoI18n: true,
     // Build sitemap XML during production builds; keep runtime generation in dev for debugging.
     zeroRuntime: process.env.NODE_ENV === 'production',
