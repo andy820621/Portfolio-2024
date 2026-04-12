@@ -5,6 +5,11 @@ import { createPersonReference } from '~~/data'
 import { fetchGalleryAlbums } from '~/utils/galleryCollection'
 
 const { t, localeProperties, locale } = useI18n()
+const localePath = useLocalePath()
+
+function getGalleryAlbumPath(albumId: string) {
+  return localePath(`/gallery/${albumId}`)
+}
 
 const { data: galleryGroups, error } = await useAsyncData(
   'gallery-groups',
@@ -20,11 +25,7 @@ watchEffect(() => {
 const galleryGroupsList = computed(() => galleryGroups.value ?? [])
 
 prerenderRoutes(
-  galleryGroupsList.value.map((group) => {
-    return locale.value === 'en'
-      ? `/gallery/${group.albumId}`
-      : `/zh/gallery/${group.albumId}`
-  }),
+  galleryGroupsList.value.map(group => getGalleryAlbumPath(group.albumId)),
 )
 
 // 搜索文本和選中的標籤
@@ -188,7 +189,6 @@ const { baseUrl, fullPath } = useUrl()
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`
 const itemListId = `${fullPath.value}#itemlist`
-const localePath = useLocalePath()
 
 const licensePageUrl = locale.value === 'en'
   ? 'https://creativecommons.org/licenses/by/4.0/'
@@ -280,7 +280,7 @@ useSchemaOrg([
               transitionDelay: getTransitionDelay(groups, group),
             }"
           >
-            <NuxtLink :to="`/gallery/${group.albumId}`" :title="group.title" :aria-label="group.title">
+            <NuxtLink :to="getGalleryAlbumPath(group.albumId)" :title="group.title" :aria-label="group.title">
               <GalleryImageCard
                 :album-id="group.albumId"
                 :title="group.title"
