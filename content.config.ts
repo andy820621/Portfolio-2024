@@ -105,6 +105,7 @@ const gallerySchema = z.object({
   coverImage: z.string().optional(),
   description: z.string().optional(),
   tags: z.array(z.string()),
+  updatedAt: z.coerce.date().optional(),
   published: z.boolean().default(true),
 })
 

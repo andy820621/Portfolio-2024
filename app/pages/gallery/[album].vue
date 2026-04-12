@@ -74,6 +74,8 @@ const pageSeoTitle = computed(() => {
   return `Photo Gallery Album: ${localizedAlbumTitle.value}`
 })
 
+const pageModifiedTime = computed(() => album.value?.updatedAt)
+
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 // 根據斷點計算列數
@@ -145,6 +147,7 @@ usePageSeo({
   title: pageSeoTitle.value,
   description: album.value?.description || 'Gallery\'s description',
   image: album.value?.coverImage,
+  modifiedTime: pageModifiedTime.value,
   keywords: [
     album.value?.title,
     album.value?.chTitle,

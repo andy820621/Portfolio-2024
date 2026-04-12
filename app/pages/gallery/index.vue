@@ -32,10 +32,31 @@ const allTags = computed(() => {
   return Array.from(tagSet)
 })
 
+const pageModifiedTime = computed(() => {
+  const timestamps = galleryGroupsList.value
+    .map((group) => {
+      if (!group.updatedAt)
+        return undefined
+
+      const date = group.updatedAt instanceof Date
+        ? group.updatedAt
+        : new Date(group.updatedAt)
+
+      return Number.isNaN(date.getTime()) ? undefined : date.getTime()
+    })
+    .filter((timestamp): timestamp is number => typeof timestamp === 'number')
+
+  if (!timestamps.length)
+    return undefined
+
+  return new Date(Math.max(...timestamps))
+})
+
 // 設置 SEO
 usePageSeo({
   title: t('galleryPage.seoTitle'),
   description: t('galleryPage.seoDescription'),
+  modifiedTime: pageModifiedTime.value,
   keywords: [
     'Gallery',
     '相簿',

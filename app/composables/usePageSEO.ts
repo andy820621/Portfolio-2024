@@ -1,4 +1,5 @@
 import type { OgImageComponents } from '#og-image/components'
+import type { DateLike } from '~~/types/main'
 import { getKeywords, navbarData, seoData } from '~~/data'
 
 interface PageSeoOptions {
@@ -12,8 +13,21 @@ interface PageSeoOptions {
     hreflang: string
     href: string
   }[]
-  addModifiedTime?: boolean
+  modifiedTime?: DateLike
+  publishedTime?: DateLike
   keywords?: string | string[]
+}
+
+function normalizeSitemapMetaDate(value?: DateLike) {
+  if (!value)
+    return undefined
+
+  const date = value instanceof Date ? value : new Date(value)
+
+  if (Number.isNaN(date.getTime()))
+    return undefined
+
+  return getSitemapDateFormat(date.getTime())
 }
 
 export function usePageSeo(options: PageSeoOptions = {}) {
@@ -46,6 +60,9 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     return resolveOgImageAlt(options.ogImage, options.alt, pageTitle.value)
   })
 
+  const publishedTime = computed(() => normalizeSitemapMetaDate(options.publishedTime))
+  const modifiedTime = computed(() => normalizeSitemapMetaDate(options.modifiedTime))
+
   // SEO 元數據
   useSeoMeta({
     title: pageTitle,
@@ -59,9 +76,8 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     ogImageAlt,
     twitterImage: ogImageUrl,
     twitterImageAlt: ogImageAlt,
-    ...(options.addModifiedTime && {
-      articleModifiedTime: getSitemapDateFormat(Date.now()),
-    }),
+    articlePublishedTime: publishedTime,
+    articleModifiedTime: modifiedTime,
   })
 
   // 確保 OG 圖片在 Server 端生成

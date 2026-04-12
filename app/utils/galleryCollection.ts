@@ -1,3 +1,4 @@
+import type { DateLike } from '~~/types/main'
 import { queryCollection } from '#imports'
 
 export interface GalleryAlbum {
@@ -8,6 +9,7 @@ export interface GalleryAlbum {
   coverImage?: string
   description?: string
   tags: string[]
+  updatedAt?: DateLike
   published: boolean
 }
 
