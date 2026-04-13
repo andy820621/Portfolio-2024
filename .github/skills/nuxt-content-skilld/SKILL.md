@@ -3,7 +3,7 @@ name: nuxt-content-skilld
 description: "Write your content inside your Nuxt app. ALWAYS use when writing code importing \"@nuxt/content\". Consult for debugging, best practices, or modifying @nuxt/content, nuxt/content, nuxt content, content."
 metadata:
   version: 3.12.0
-  generated_at: 2026-04-10
+  generated_at: 2026-04-13
 ---
 
 # nuxt/content `@nuxt/content@3.12.0`

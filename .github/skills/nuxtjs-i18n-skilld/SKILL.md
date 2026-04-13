@@ -3,7 +3,7 @@ name: nuxtjs-i18n-skilld
 description: "Internationalization for Nuxt. ALWAYS use when writing code importing \"@nuxtjs/i18n\". Consult for debugging, best practices, or modifying @nuxtjs/i18n, nuxtjs/i18n, nuxtjs i18n, i18n."
 metadata:
   version: 10.2.4
-  generated_at: 2026-04-10
+  generated_at: 2026-04-13
 ---
 
 # nuxt-modules/i18n `@nuxtjs/i18n@10.2.4`

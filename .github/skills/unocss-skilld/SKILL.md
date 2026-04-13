@@ -3,7 +3,7 @@ name: unocss-skilld
 description: "The instant on-demand Atomic CSS engine. ALWAYS use when writing code importing \"unocss\". Consult for debugging, best practices, or modifying unocss."
 metadata:
   version: 66.6.8
-  generated_at: 2026-04-10
+  generated_at: 2026-04-13
 ---
 
 # unocss/unocss `unocss@66.6.8`

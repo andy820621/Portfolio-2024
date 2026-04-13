@@ -3,7 +3,7 @@ name: nuxt-image-skilld
 description: "Nuxt Image Module. ALWAYS use when writing code importing \"@nuxt/image\". Consult for debugging, best practices, or modifying @nuxt/image, nuxt/image, nuxt image, image."
 metadata:
   version: 2.0.0
-  generated_at: 2026-04-10
+  generated_at: 2026-04-13
 ---
 
 # nuxt/image `@nuxt/image@2.0.0`
