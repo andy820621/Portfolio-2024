@@ -1,38 +1,57 @@
-import { access, readFile } from 'node:fs/promises'
-import { join } from 'node:path'
-import { cwd } from 'node:process'
 import { createError, getQuery } from 'h3'
-import { encodeUrlPath } from '~/utils/pathUtils'
+import galleryImagesMap from '../../public/gallery-images-map.json' with { type: 'json' }
 
-const GALLERY_IMAGE_MAP_PATHS = [
-  join(cwd(), 'public', 'gallery-images-map.json'),
-  join(cwd(), '.output', 'public', 'gallery-images-map.json'),
-  join(cwd(), '..', 'public', 'gallery-images-map.json'),
-]
+const URL_PROTOCOL_REGEX = /^[a-z][\w+\-.]*:\/\//i
 
-let cachedImageMap: Record<string, string[]> | null = null
+function encodeUrlPath(path: string) {
+  if (!path)
+    return ''
 
-async function readGalleryImageMap() {
-  if (cachedImageMap)
-    return cachedImageMap
+  const hasProtocol = URL_PROTOCOL_REGEX.test(path)
 
-  for (const filePath of GALLERY_IMAGE_MAP_PATHS) {
+  if (hasProtocol) {
     try {
-      await access(filePath)
-      const raw = await readFile(filePath, 'utf8')
-      cachedImageMap = JSON.parse(raw) as Record<string, string[]>
-      return cachedImageMap
+      const url = new URL(path)
+      const encodedPathname = encodePathSegments(url.pathname)
+      return `${url.origin}${encodedPathname}${url.search}${url.hash}`
     }
     catch {
-      continue
+      return encodePathSegments(path)
     }
   }
 
-  throw createError({
-    statusCode: 500,
-    statusMessage: 'Internal Server Error',
-    message: 'Failed to locate gallery image map on server.',
-  })
+  return encodePathSegments(path)
+}
+
+function encodePathSegments(path: string) {
+  return path.split('/').map((segment, index) => {
+    if (segment === '' && index === 0)
+      return ''
+    return encodePathSegment(segment)
+  }).join('/')
+}
+
+function encodePathSegment(segment: string) {
+  try {
+    return encodeURIComponent(decodeURIComponent(segment))
+  }
+  catch {
+    return encodeURIComponent(segment)
+  }
+}
+
+export function resolveGalleryImageUrls(albumId: string) {
+  const imageFiles = (galleryImagesMap as Record<string, string[]>)[albumId]
+
+  if (!imageFiles || imageFiles.length === 0) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Not Found',
+      message: `No images found for album: ${albumId}`,
+    })
+  }
+
+  return imageFiles.map(file => encodeUrlPath(`/gallery-images/${albumId}/${file}`))
 }
 
 export default defineEventHandler(async (event) => {
@@ -46,16 +65,5 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const imageMap = await readGalleryImageMap()
-  const imageFiles = imageMap[albumId]
-
-  if (!imageFiles || imageFiles.length === 0) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Not Found',
-      message: `No images found for album: ${albumId}`,
-    })
-  }
-
-  return imageFiles.map(file => encodeUrlPath(`/gallery-images/${albumId}/${file}`))
+  return resolveGalleryImageUrls(albumId)
 })
