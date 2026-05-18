@@ -91,6 +91,8 @@ export default defineNuxtConfig({
     },
   },
   seo: {
+    // Preserve intentional mixed-case content paths such as gallery album IDs.
+    canonicalLowercase: false,
     redirectToCanonicalSiteUrl: true,
   },
   linkChecker: {
