@@ -1,6 +1,7 @@
 <!-- skilld -->
 
 Before modifying code:
+
 - Quickly scan available skills
 - Only use skills that are clearly relevant to the task
 - Do NOT over-evaluate or block execution if uncertain
@@ -12,11 +13,13 @@ Before modifying code:
 ## 1. Planning (When Required)
 
 Trigger planning when:
+
 - Task involves 3+ steps
 - Architectural decisions are needed
 - Refactoring or debugging complex issues
 
 ### Output format:
+
 - Step 1: ...
 - Step 2: ...
 - Step 3: ...
@@ -50,6 +53,7 @@ Before finishing, always check:
 - Could this break existing behavior?
 
 If applicable:
+
 - Compare behavior before vs after changes
 - Validate assumptions explicitly
 
@@ -77,9 +81,10 @@ When encountering an issue:
 ## 7. Communication
 
 Before coding:
+
 - Briefly explain the approach (1–3 sentences)
-1
-After coding:
+  1
+  After coding:
 - Summarize what changed
 - Highlight any trade-offs or risks
 
