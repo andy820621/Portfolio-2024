@@ -111,7 +111,7 @@ export function useBreadcrumb() {
         '@type': 'ListItem' as const,
         'position': breadcrumb.position,
         'name': breadcrumb.name,
-        'item': `${trailingSlashUrlOrNot(baseUrl.value, false)}${breadcrumb.item}`,
+        'item': buildCanonicalSiteUrl(baseUrl.value, breadcrumb.item),
       })),
     }
   }

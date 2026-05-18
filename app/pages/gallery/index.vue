@@ -7,7 +7,7 @@ const { t, localeProperties, locale } = useI18n()
 const localePath = useLocalePath()
 
 function getGalleryAlbumPath(albumId: string) {
-  return localePath(`/gallery/${albumId}`)
+  return encodeCanonicalPagePath(localePath(`/gallery/${albumId}`))
 }
 
 const { data: galleryGroups, error } = await useAsyncData(
@@ -118,7 +118,7 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
   'item': {
     '@type': 'CreativeWork',
     'name': group.title,
-    'url': `${fullPath.value}${group.albumId}`,
+    'url': buildCanonicalSiteUrl(baseUrl.value, getGalleryAlbumPath(group.albumId)),
     'thumbnail': group.coverImage ? `${trailingSlashUrlOrNot(baseUrl.value, false) + group.coverImage}` : undefined,
     'description': group.description || t('galleryPage.title'),
     'keywords': group.tags || undefined,
@@ -183,13 +183,13 @@ useSchemaOrg([
         :key="group.albumId"
         class="gallery-item"
       >
-        <NuxtLink :to="getGalleryAlbumPath(group.albumId)" :title="group.title" :aria-label="group.title" class="block">
+        <a :href="getGalleryAlbumPath(group.albumId)" :title="group.title" :aria-label="group.title" class="block">
           <GalleryImageCard
             :album-id="group.albumId"
             :title="group.title"
             :src="group.coverImage"
           />
-        </NuxtLink>
+        </a>
       </div>
     </div>
 

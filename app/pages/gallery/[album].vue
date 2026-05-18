@@ -7,7 +7,8 @@ import { fetchGalleryAlbumById } from '~/utils/galleryCollection'
 const LightGallery = defineAsyncComponent(() => import('@/components/LightGallery.vue'))
 
 const route = useRoute()
-const albumId = route.params.album as string
+const encodedAlbumId = route.params.album as string
+const albumId = decodeRouteParam(encodedAlbumId)
 
 const { data: album, error: albumError } = await useAsyncData(
   `gallery-album-${albumId}`,
