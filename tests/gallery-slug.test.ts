@@ -1,3 +1,4 @@
+import type { GallerySlugAlbum } from '../app/utils/gallerySlug.ts'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -17,6 +18,11 @@ interface GalleryFixture {
   coverImage?: string
 }
 
+interface GallerySlugFixture extends GallerySlugAlbum {
+  title: string
+  coverImage?: string
+}
+
 const projectRoot = fileURLToPath(new URL('..', import.meta.url))
 const galleryDir = join(projectRoot, 'content/gallery')
 
@@ -29,14 +35,18 @@ function loadGalleryFixtures() {
     })
 }
 
+function hasGallerySlug(album: GalleryFixture): album is GallerySlugFixture {
+  return isValidGallerySlug(album.slug)
+}
+
 describe('gallery slugs', () => {
   const albums = loadGalleryFixtures()
+  const sluggedAlbums = albums.filter(hasGallerySlug)
 
   it('requires every gallery album to define a valid unique slug', () => {
-    const slugs = albums.map(album => album.slug)
+    expect(sluggedAlbums).toHaveLength(albums.length)
 
-    expect(slugs.every(slug => typeof slug === 'string' && isValidGallerySlug(slug))).toBe(true)
-    expect(new Set(slugs).size).toBe(slugs.length)
+    expect(() => validateGallerySlugs(sluggedAlbums)).not.toThrow()
   })
 
   it('builds lowercase canonical album paths', () => {
@@ -45,11 +55,11 @@ describe('gallery slugs', () => {
   })
 
   it('resolves legacy route segments to explicit slugs', () => {
-    expect(findGalleryAlbumByRouteSegment(albums, 'Chasing Blossoms')?.slug).toBe('chasing-blossoms')
-    expect(findGalleryAlbumByRouteSegment(albums, 'chasing blossoms')?.slug).toBe('chasing-blossoms')
-    expect(findGalleryAlbumByRouteSegment(albums, 'Chasing%20Blossoms')?.slug).toBe('chasing-blossoms')
-    expect(findGalleryAlbumByRouteSegment(albums, 'Blossoms & Kids')?.slug).toBe('blossoms-and-kids')
-    expect(findGalleryAlbumByRouteSegment(albums, 'blossoms-and-kids')?.albumId).toBe('Blossoms & Kids')
+    expect(findGalleryAlbumByRouteSegment(sluggedAlbums, 'Chasing Blossoms')?.slug).toBe('chasing-blossoms')
+    expect(findGalleryAlbumByRouteSegment(sluggedAlbums, 'chasing blossoms')?.slug).toBe('chasing-blossoms')
+    expect(findGalleryAlbumByRouteSegment(sluggedAlbums, 'Chasing%20Blossoms')?.slug).toBe('chasing-blossoms')
+    expect(findGalleryAlbumByRouteSegment(sluggedAlbums, 'Blossoms & Kids')?.slug).toBe('blossoms-and-kids')
+    expect(findGalleryAlbumByRouteSegment(sluggedAlbums, 'blossoms-and-kids')?.albumId).toBe('Blossoms & Kids')
   })
 
   it('keeps gallery image assets keyed by albumId, not slug', () => {

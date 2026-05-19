@@ -2,7 +2,6 @@ import { createReadStream, existsSync } from 'node:fs'
 import { extname, normalize, resolve, sep } from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { defineEventHandler, getRequestURL, sendStream, setHeader } from 'h3'
 
 const galleryImagesDir = fileURLToPath(new URL('../../public/gallery-images/', import.meta.url))
 const galleryImagesRoot = resolve(galleryImagesDir)

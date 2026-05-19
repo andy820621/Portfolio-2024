@@ -6,6 +6,12 @@ const projectRoot = fileURLToPath(new URL('..', import.meta.url))
 
 it('seo config disables canonical lowercasing for mixed-case routes', async () => {
   const config = await loadNuxtConfig({ cwd: projectRoot })
+  const seoConfig = config.seo
 
-  expect(config.seo?.canonicalLowercase).toBe(false)
+  expect(seoConfig).not.toBe(false)
+
+  if (!seoConfig)
+    throw new Error('Expected seo module options to be enabled.')
+
+  expect(seoConfig.canonicalLowercase).toBe(false)
 })

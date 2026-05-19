@@ -1,7 +1,27 @@
 import { describe, expect, it } from 'vitest'
 
+interface GalleryApiErrorInput {
+  statusCode?: number
+  statusMessage?: string
+  message?: string
+}
+
+interface GalleryApiError extends Error {
+  statusCode?: number
+  statusMessage?: string
+}
+
+type DefineEventHandlerStub = <THandler extends (...args: any[]) => any>(handler: THandler) => THandler
+
 async function loadGalleryImagesApi() {
-  globalThis.defineEventHandler ??= (handler => handler) as typeof defineEventHandler
+  const globalScope = globalThis as typeof globalThis & {
+    createError?: (input: GalleryApiErrorInput) => GalleryApiError
+    defineEventHandler?: DefineEventHandlerStub
+  }
+  const defineEventHandlerStub: DefineEventHandlerStub = handler => handler
+
+  globalScope.defineEventHandler ??= defineEventHandlerStub
+  globalScope.createError ??= input => Object.assign(new Error(input.message ?? input.statusMessage ?? 'Error'), input)
   return import('../server/api/gallery-images.get.ts')
 }
 

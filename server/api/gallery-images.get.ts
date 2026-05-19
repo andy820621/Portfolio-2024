@@ -1,4 +1,3 @@
-import { createError, getQuery } from 'h3'
 import galleryImagesMap from '../../public/gallery-images-map.json' with { type: 'json' }
 
 const URL_PROTOCOL_REGEX = /^[a-z][\w+\-.]*:\/\//i

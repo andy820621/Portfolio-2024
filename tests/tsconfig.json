@@ -1,0 +1,10 @@
+{
+  "extends": "../.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "../.nuxt/**/*.d.ts",
+    "./**/*.ts"
+  ]
+}
