@@ -10,10 +10,9 @@ const imageSrc = computed(() => {
   if (props.src)
     return encodeUrlPath(props.src)
 
-  // 如果沒有 coverImage，使用 id 生成圖片路徑
-  if (props.albumId) {
+  // 如果沒有 coverImage，使用 albumId 生成圖片路徑
+  if (props.albumId)
     return encodeUrlPath(`/gallery-images/${props.albumId}.webp`)
-  }
 
   // 如果都沒有，返回預設或空圖片
   return ''

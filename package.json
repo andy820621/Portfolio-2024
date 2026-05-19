@@ -17,13 +17,17 @@
     "dev:netlify": "netlify dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && (npx skilld prepare || true)",
     "typecheck": "vue-tsc --noEmit",
     "lint": "NODE_OPTIONS=--no-warnings eslint .",
     "lint:fix": "NODE_OPTIONS=--no-warnings eslint . --fix",
     "lint:md": "remark . --use remark-preset-lint-recommended --quiet",
     "format:md": "remark . --output --quiet",
-    "check": "pnpm typecheck && pnpm lint",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:build-output": "AUDIT_BUILD_OUTPUT=1 vitest run tests/gallery-build-output.test.ts",
+    "test:watch": "vitest",
+    "check": "pnpm typecheck && pnpm lint && pnpm test:unit && pnpm build && pnpm test:build-output && pnpm test:prerender",
     "prepare": "husky && (npx skilld prepare || true)"
   },
   "dependencies": {
@@ -83,7 +87,9 @@
     "swiper": "^12.1.3",
     "typescript": "^6.0.2",
     "unocss": "^66.6.8",
-    "vue-tsc": "^3.2.6"
+    "vitest": "^3.2.4",
+    "vue-tsc": "^3.2.6",
+    "yaml": "^2.9.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

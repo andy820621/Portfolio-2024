@@ -99,6 +99,7 @@ const demoSchema = z.object({
 
 const gallerySchema = z.object({
   albumId: z.string(),
+  slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   order: z.number().int().positive(),
   title: z.string(),
   chTitle: z.string().optional(),

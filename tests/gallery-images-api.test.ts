@@ -1,29 +1,24 @@
-/* eslint-disable test/no-import-node-test */
-import assert from 'node:assert/strict'
-import test from 'node:test'
+import { describe, expect, it } from 'vitest'
 
 async function loadGalleryImagesApi() {
   globalThis.defineEventHandler ??= (handler => handler) as typeof defineEventHandler
   return import('../server/api/gallery-images.get.ts')
 }
 
-test('resolveGalleryImageUrls returns encoded image URLs for albums with spaces', async () => {
-  const { resolveGalleryImageUrls } = await loadGalleryImagesApi()
-  const imageUrls = resolveGalleryImageUrls('Blossoms & Kids')
+describe('gallery images API helpers', () => {
+  it('preserves albumId image lookup and existing encoded image URLs', async () => {
+    const { resolveGalleryImageUrls } = await loadGalleryImagesApi()
+    const imageUrls = resolveGalleryImageUrls('Blossoms & Kids')
 
-  assert.ok(imageUrls.length > 0)
-  assert.equal(imageUrls[0]?.startsWith('/gallery-images/Blossoms%20%26%20Kids/'), true)
-})
+    expect(imageUrls.length).toBeGreaterThan(0)
+    expect(imageUrls[0]?.startsWith('/gallery-images/Blossoms%20%26%20Kids/')).toBe(true)
+  })
 
-test('resolveGalleryImageUrls throws a 404-style error for unknown albums', async () => {
-  const { resolveGalleryImageUrls } = await loadGalleryImagesApi()
+  it('throws a 404-style error for unknown albums', async () => {
+    const { resolveGalleryImageUrls } = await loadGalleryImagesApi()
 
-  assert.throws(
-    () => resolveGalleryImageUrls('__missing_album__'),
-    (error: unknown) => {
-      assert.equal(typeof error, 'object')
-      assert.equal(error !== null && 'statusCode' in error ? error.statusCode : undefined, 404)
-      return true
-    },
-  )
+    expect(() => resolveGalleryImageUrls('__missing_album__')).toThrowError(
+      expect.objectContaining({ statusCode: 404 }),
+    )
+  })
 })

@@ -2,17 +2,18 @@
 import { breakpointsTailwind } from '@vueuse/core'
 import { useStableYear } from '~~/app/composables/useStableNow'
 import { createPersonReference } from '~~/data'
-import { fetchGalleryAlbumById } from '~/utils/galleryCollection'
+import { resolveGalleryAlbumRouteSegment } from '~/utils/galleryCollection'
 
 const LightGallery = defineAsyncComponent(() => import('@/components/LightGallery.vue'))
 
 const route = useRoute()
-const encodedAlbumId = route.params.album as string
-const albumId = decodeRouteParam(encodedAlbumId)
+const localePath = useLocalePath()
+const encodedRouteSegment = route.params.album as string
+const routeSegment = decodeRouteParam(encodedRouteSegment)
 
 const { data: album, error: albumError } = await useAsyncData(
-  `gallery-album-${albumId}`,
-  () => fetchGalleryAlbumById(albumId),
+  `gallery-album-${routeSegment}`,
+  () => resolveGalleryAlbumRouteSegment(routeSegment),
   { default: () => null },
 )
 
@@ -26,7 +27,7 @@ if (albumError.value) {
 }
 
 if (!album.value) {
-  console.error('Album not found:', albumId)
+  console.error('Album not found:', routeSegment)
   throw createError({
     statusCode: 404,
     statusMessage: 'Page Not Found',
@@ -35,14 +36,19 @@ if (!album.value) {
   })
 }
 
+const canonicalAlbumPath = encodeCanonicalPagePath(localePath(`/gallery/${album.value.slug}`))
+if (encodeCanonicalPagePath(route.path) !== canonicalAlbumPath) {
+  await navigateTo(canonicalAlbumPath, { redirectCode: 301 })
+}
+
 const hasHydrated = shallowRef(false)
 onMounted(() => (hasHydrated.value = true))
 
 // 動態獲取資料夾內的照片
 const { getAlbumImages } = useGalleryImages()
 const { data: images, pending: loading, error } = await useAsyncData(
-  `gallery-images-${albumId}`,
-  () => getAlbumImages(albumId),
+  `gallery-images-${album.value.albumId}`,
+  () => getAlbumImages(album.value!.albumId),
   { default: () => [] },
 )
 
@@ -165,7 +171,6 @@ usePageSeo({
 // 將這段代碼放在 usePageSeo 之後
 const { baseUrl, fullPath } = useUrl()
 const { getBreadcrumbListSchema } = useBreadcrumb()
-const localePath = useLocalePath()
 
 const websiteId = `${baseUrl.value}#website`
 const nowPageId = `${fullPath.value}#webpage`

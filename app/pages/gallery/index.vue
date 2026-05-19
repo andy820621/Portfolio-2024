@@ -6,8 +6,8 @@ import { fetchGalleryAlbums } from '~/utils/galleryCollection'
 const { t, localeProperties, locale } = useI18n()
 const localePath = useLocalePath()
 
-function getGalleryAlbumPath(albumId: string) {
-  return encodeCanonicalPagePath(localePath(`/gallery/${albumId}`))
+function getGalleryAlbumPath(slug: string) {
+  return encodeCanonicalPagePath(localePath(`/gallery/${slug}`))
 }
 
 const { data: galleryGroups, error } = await useAsyncData(
@@ -24,7 +24,7 @@ watchEffect(() => {
 const galleryGroupsList = computed(() => galleryGroups.value ?? [])
 
 prerenderRoutes(
-  galleryGroupsList.value.map(group => getGalleryAlbumPath(group.albumId)),
+  galleryGroupsList.value.map(group => getGalleryAlbumPath(group.slug)),
 )
 
 // 搜索文本和選中的標籤
@@ -118,7 +118,7 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
   'item': {
     '@type': 'CreativeWork',
     'name': group.title,
-    'url': buildCanonicalSiteUrl(baseUrl.value, getGalleryAlbumPath(group.albumId)),
+    'url': buildCanonicalSiteUrl(baseUrl.value, getGalleryAlbumPath(group.slug)),
     'thumbnail': group.coverImage ? `${trailingSlashUrlOrNot(baseUrl.value, false) + group.coverImage}` : undefined,
     'description': group.description || t('galleryPage.title'),
     'keywords': group.tags || undefined,
@@ -183,7 +183,7 @@ useSchemaOrg([
         :key="group.albumId"
         class="gallery-item"
       >
-        <a :href="getGalleryAlbumPath(group.albumId)" :title="group.title" :aria-label="group.title" class="block">
+        <a :href="getGalleryAlbumPath(group.slug)" :title="group.title" :aria-label="group.title" class="block">
           <GalleryImageCard
             :album-id="group.albumId"
             :title="group.title"

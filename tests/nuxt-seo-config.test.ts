@@ -1,13 +1,11 @@
-/* eslint-disable test/no-import-node-test */
-import assert from 'node:assert/strict'
-import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { loadNuxtConfig } from '@nuxt/kit'
+import { expect, it } from 'vitest'
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url))
 
-test('seo config disables canonical lowercasing for mixed-case routes', async () => {
+it('seo config disables canonical lowercasing for mixed-case routes', async () => {
   const config = await loadNuxtConfig({ cwd: projectRoot })
 
-  assert.equal(config.seo?.canonicalLowercase, false)
+  expect(config.seo?.canonicalLowercase).toBe(false)
 })

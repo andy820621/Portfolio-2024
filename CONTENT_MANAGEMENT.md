@@ -11,9 +11,9 @@
 #### 1. 準備圖片文件
 
 ```bash
-# 在 public/gallery-images/ 下創建新資料夾
+# 在 public/gallery-images/ 下創建新資料夾；資料夾名稱使用 albumId
 public/gallery-images/
-  └── Your-Album-Name/
+  └── Your Album Name/
       ├── image1.webp
       ├── image2.webp
       └── image3.webp
@@ -21,7 +21,7 @@ public/gallery-images/
 
 **注意事項：**
 
-- 資料夾名稱可以包含空格和特殊字符（如 `Blossoms & Kids`）
+- 資料夾名稱必須與 YAML 的 `albumId` 完全一致；URL 使用 `slug`，圖片路徑仍使用 `albumId`
 - 建議使用 `.webp` 格式以優化性能
 - 圖片會按檔名自然排序（支援數字順序）
 
@@ -30,11 +30,12 @@ public/gallery-images/
 在 `content/gallery/` 建立新的 YAML 檔案，例如 `content/gallery/10-your-album.yml`：
 
 ```yaml
-albumId: 'Your-Album-Name' # 必須與資料夾名稱完全一致
+albumId: 'Your Album Name' # 必須與圖片資料夾名稱完全一致
+slug: your-album-name # Gallery 頁面的 lowercase URL slug，例如 /gallery/your-album-name/
 order: 10
 title: '相簿標題'
 chTitle: '中文標題（可選）'
-coverImage: '/gallery-images/Your-Album-Name.webp' # 封面圖（放在 gallery-images 根目錄）
+coverImage: '/gallery-images/Your Album Name.webp' # 封面圖（放在 gallery-images 根目錄）
 description: '相簿描述'
 tags:
   - 標籤1
@@ -64,7 +65,7 @@ pnpm dev
 
 # 訪問：
 # /gallery - 查看相簿列表
-# /gallery/Your-Album-Name - 查看相簿內容
+# /gallery/your-album-name - 查看相簿內容
 ```
 
 ---
@@ -244,11 +245,11 @@ generate-project-images-metadata.js
 
 ### 新增 Gallery 相簿
 
-- [ ] 在 `public/gallery-images/Album-Name/` 放入圖片
-- [ ] 準備封面圖 `public/gallery-images/Album-Name.webp`
-- [ ] 在 `content/gallery/*.yml` 新增相簿 metadata
+- [ ] 在 `public/gallery-images/Your Album Name/` 放入圖片
+- [ ] 準備封面圖 `public/gallery-images/Your Album Name.webp`
+- [ ] 在 `content/gallery/*.yml` 新增相簿 metadata，並設定唯一 lowercase `slug`
 - [ ] 執行 `node scripts/generate-gallery-images-map.js`（或等構建時自動執行）
-- [ ] 測試訪問 `/gallery/Album-Name`
+- [ ] 測試訪問 `/gallery/your-album-name`
 
 ### 新增 Project 專案
 
@@ -269,10 +270,12 @@ generate-project-images-metadata.js
 
 **A:** 檢查以下項目：
 
-1. 圖片是否在 `public/gallery-images/{album-id}/` 目錄中
-2. `content/gallery/*.yml` 中的 `albumId` 是否與資料夾名稱一致
-3. 是否執行了 `generate-gallery-images-map.js`
-4. 檢查 `public/gallery-images-map.json` 是否包含該相簿
+1. 圖片是否在 `public/gallery-images/{albumId}/` 目錄中
+2. 封面圖是否在 `public/gallery-images/{albumId}.webp`
+3. `content/gallery/*.yml` 中的 `albumId` 是否與圖片資料夾名稱一致
+4. `content/gallery/*.yml` 中的 `slug` 是否為唯一 lowercase slug（URL 使用 slug，圖片資料夾仍使用 albumId）
+5. 是否執行了 `generate-gallery-images-map.js`
+6. 檢查 `public/gallery-images-map.json` 是否包含該相簿的 `albumId`
 
 ### Q: 修改圖片後需要做什麼？
 
