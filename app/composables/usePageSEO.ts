@@ -1,5 +1,5 @@
-import type { OgImageComponents } from '#og-image/components'
 import type { DateLike } from '~~/types/main'
+import type { OgImageComponents } from '#og-image/components'
 import { getKeywords, navbarData, seoData } from '~~/data'
 
 interface PageSeoOptions {
