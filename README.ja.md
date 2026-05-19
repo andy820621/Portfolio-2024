@@ -46,7 +46,7 @@
 
 ### お勧め前提条件
 
-- Node.js 22.21.1以上
+- Node.js 22.22.1以上
 - pnpm（お勧め）
 
 推奨: Node.js は Volta で、pnpm は Corepack で管理すると、Git hooks（例: pre-commit lint）や開発フローが安定して動作します。
@@ -61,7 +61,7 @@ curl https://get.volta.sh | bash
 corepack enable
 
 # ⚠️ 初めて Volta を使う場合、必要な Node バージョンをインストール（初回のみ）
-volta install node@22.21.1
+volta install node@22.22.1
 ```
 
 このプロジェクトでは `package.json` に以下を指定しています:
@@ -69,7 +69,7 @@ volta install node@22.21.1
 ```json
 {
   "volta": {
-    "node": "22.21.1"
+    "node": "22.22.1"
   },
   "packageManager": "pnpm@11.1.3+sha512..."
 }
