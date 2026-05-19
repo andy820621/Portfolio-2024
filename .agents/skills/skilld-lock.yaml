@@ -1,0 +1,57 @@
+skills:
+  vue-skilld:
+    packageName: vue
+    version: 3.5.32
+    packages: "vue@3.5.32"
+    repo: vuejs/core
+    source: "https://github.com/vuejs/core/tree/main/docs"
+    syncedAt: 2026-04-13
+    generator: skilld
+  vue-router-skilld:
+    packageName: vue-router
+    version: 4.5.1
+    packages: "vue-router@4.5.1"
+    repo: vuejs/router
+    source: "https://github.com/vuejs/router/tree/v4.5.1/docs"
+    syncedAt: 2026-04-13
+    generator: skilld
+  vite-skilld:
+    packageName: vite
+    version: 6.3.5
+    packages: "vite@6.3.5"
+    repo: vitejs/vite
+    source: "https://github.com/vitejs/vite/tree/v6.3.5/docs"
+    syncedAt: 2026-04-13
+    generator: skilld
+  pinia-skilld:
+    packageName: pinia
+    version: 3.0.4
+    packages: "pinia@3.0.4"
+    repo: vuejs/pinia
+    source: "https://github.com/vuejs/pinia/tree/v3.0.4/docs"
+    syncedAt: 2026-04-13
+    generator: skilld
+  quasar-vite-plugin-skilld:
+    packageName: "@quasar/vite-plugin"
+    version: 1.11.0
+    packages: "@quasar/vite-plugin@1.11.0"
+    repo: quasarframework/quasar
+    source: "https://quasar.dev/**"
+    syncedAt: 2026-04-13
+    generator: skilld
+  quasar-skilld:
+    packageName: quasar
+    version: 2.19.3
+    packages: "quasar@2.19.3"
+    repo: quasarframework/quasar
+    source: "https://github.com/quasarframework/quasar/tree/dev/docs"
+    syncedAt: 2026-04-13
+    generator: skilld
+  vue-tsc-skilld:
+    packageName: vue-tsc
+    version: 2.2.10
+    packages: "vue-tsc@2.2.10"
+    repo: vuejs/language-tools
+    source: "https://deepwiki.com/vuejs/language-tools/**"
+    syncedAt: 2026-04-13
+    generator: skilld
