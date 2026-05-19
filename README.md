@@ -57,6 +57,9 @@ We recommend using Volta to manage Node.js and Corepack to manage pnpm, so that 
 # Install Volta (once)
 curl https://get.volta.sh | bash
 
+# Enable Corepack (once)
+corepack enable
+
 # ⚠️ If it is your first time using Volta, install the required version (once)
 volta install node@22.21.1
 ```
@@ -68,7 +71,7 @@ This project specifies the following in `package.json`:
   "volta": {
     "node": "22.21.1"
   },
-  "packageManager": "pnpm@10.19.0"
+  "packageManager": "pnpm@11.1.3+sha512..."
 }
 ```
 

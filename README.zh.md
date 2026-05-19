@@ -57,6 +57,9 @@
 # 安裝 Volta（只需一次）
 curl https://get.volta.sh | bash
 
+# 啟用 Corepack（只需一次）
+corepack enable
+
 # ⚠️ 若首次使用 Volta，請手動安裝對應版本（僅需一次）
 volta install node@22.21.1
 ```
@@ -66,10 +69,9 @@ volta install node@22.21.1
 ```json
 {
   "volta": {
-    "node": "22.21.1",
-    "pnpm": "10.6.2"
+    "node": "22.21.1"
   },
-  "packageManager": "pnpm@10.19.0"
+  "packageManager": "pnpm@11.1.3+sha512..."
 }
 ```
 
