@@ -33,7 +33,7 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@intlify/shared": "^11.4.4",
-    "@netlify/nuxt": "^0.2.37",
+    "@netlify/nuxt": "^0.3.6",
     "@nuxt/fonts": "^0.14.0",
     "@nuxtjs/i18n": "^10.3.0",
     "@takumi-rs/core": "^1.2.1",
