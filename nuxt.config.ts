@@ -1,7 +1,10 @@
 /* eslint-disable node/prefer-global/process */
-import type { NuxtPage } from '@nuxt/schema'
+/// <reference path="./.nuxt/nuxt.d.ts" />
+/// <reference path="./.nuxt/nuxt.node.d.ts" />
 import type { LocaleObject } from '@nuxtjs/i18n'
-import type { NitroConfig } from 'nitropack'
+import type { NitroRouteConfig } from 'nitropack/types'
+import type { NuxtPage } from 'nuxt/schema'
+import { defineNuxtConfig } from 'nuxt/config'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
@@ -169,7 +172,7 @@ export default defineNuxtConfig({
     locales,
   }),
   hooks: {
-    'pages:resolved': (pages) => {
+    'pages:resolved': (pages: NuxtPage[]) => {
       stripSyntheticSitemapRoutes(pages, locales)
     },
   },
@@ -438,7 +441,7 @@ export default defineNuxtConfig({
       rollupOptions: {
         treeshake: true,
         output: {
-          manualChunks(id) {
+          manualChunks(id: string) {
             if (!id.includes('node_modules'))
               return
 
@@ -512,7 +515,8 @@ export default defineNuxtConfig({
   },
 })
 
-type RouteRules = NitroConfig['routeRules']
+type RouteRule = NitroRouteConfig
+type RouteRules = Record<string, RouteRule>
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
@@ -640,7 +644,8 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     }
 
     // 原有的帶斜線路徑規則
-    Object.entries(defaultRules).forEach(([path, rule]) => {
+    const localizedRules = Object.entries(defaultRules) as Array<[string, RouteRule]>
+    localizedRules.forEach(([path, rule]) => {
       rules[`${prefix}${path}`] = { ...rule }
     })
   })
