@@ -449,7 +449,7 @@ export default defineNuxtConfig({
           sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
         },
       },
-      sourcemap: process.env.NODE_ENV === 'development' ? true : 'hidden',
+      sourcemap: process.env.NODE_ENV === 'development',
       chunkSizeWarningLimit: 2500,
     },
     server: {

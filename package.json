@@ -25,7 +25,7 @@
     "format:md": "remark . --output --quiet",
     "test": "vitest run",
     "test:unit": "vitest run",
-    "test:build-output": "AUDIT_BUILD_OUTPUT=1 vitest run tests/gallery-build-output.test.ts",
+    "test:build-output": "pnpm generate && AUDIT_BUILD_OUTPUT=1 vitest run tests/gallery-build-output.test.ts",
     "test:watch": "vitest",
     "check": "pnpm typecheck && pnpm lint && pnpm test:unit && pnpm test:build-output && pnpm test:prerender",
     "prepare": "husky && (npx skilld prepare || true)"
