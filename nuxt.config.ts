@@ -443,7 +443,7 @@ export default defineNuxtConfig({
     // ],
   },
   build: {
-    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
+    transpile: ['fsevents', 'globby', 'vite-plugin-checker'],
     analyze: {
       enabled: process.env.NODE_ENV !== 'production',
       open: process.env.NODE_ENV !== 'production',
@@ -455,15 +455,25 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
-        'dayjs/locale/en',
-        'dayjs/locale/zh',
-        'dayjs/plugin/isToday.js',
-        'dayjs/plugin/localizedFormat',
-        'dayjs/plugin/timezone.js',
-        'dayjs/plugin/utc.js',
-        'dayjs/plugin/weekOfYear.js',
+        '@headlessui/vue',
+        'dayjs/locale/en', // CJS
+        'dayjs/locale/zh', // CJS
+        'dayjs/plugin/isToday.js', // CJS
+        'dayjs/plugin/localizedFormat', // CJS
+        'dayjs/plugin/timezone.js', // CJS
+        'dayjs/plugin/utc.js', // CJS
+        'dayjs/plugin/weekOfYear.js', // CJS
+        'lightgallery',
+        'lightgallery/plugins/share',
+        'lightgallery/plugins/thumbnail',
+        'lightgallery/plugins/zoom',
+        'minisearch',
+        'ogl',
         'pixi.js',
+        'reka-ui',
         'simplex-noise',
+        'swiper/modules',
+        'swiper/vue',
       ],
     },
     build: {
