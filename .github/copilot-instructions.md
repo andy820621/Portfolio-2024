@@ -2,97 +2,41 @@
 
 Before modifying code:
 
-- Quickly scan available skills
-- Only use skills that are clearly relevant to the task
-- Do NOT over-evaluate or block execution if uncertain
+- Quickly scan available skills.
+- Only use skills that are clearly relevant to the task.
+- Do not over-evaluate skills or block execution if relevance is uncertain.
 
 <!-- /skilld -->
 
-# Engineering Guidelines
+# Copilot Instructions
 
-## 1. Planning (When Required)
+## Primary Project Instructions
 
-Trigger planning when:
+- Follow the project-wide instructions in `AGENTS.md` first.
+- Treat this file as Copilot-specific guidance only.
+- Do not duplicate or override `AGENTS.md` unless explicitly stated here.
 
-- Task involves 3+ steps
-- Architectural decisions are needed
-- Refactoring or debugging complex issues
+## Copilot Working Style
 
-### Output format:
+- For non-trivial tasks, briefly explain the approach before editing.
+- Follow the smallest correct implementation path.
+- Avoid unrelated refactors, formatting churn, or new abstractions.
+- After editing, summarize:
+  - changed files
+  - key changes
+  - verification result
+  - known risks or unverified parts
 
-- Step 1: ...
-- Step 2: ...
-- Step 3: ...
+## Design Context
 
-Do NOT start coding before outlining steps.
+- For UI, layout, visual, or UX-related work, consult the relevant project skills under `.agents/skills/` first.
+- Use those skills to align with user needs, the existing visual language, and the repo's current patterns.
+- Do not apply design-specific guidance to unrelated non-UI tasks.
 
----
+## graphify
 
-## 2. Implementation
-
-- Follow the plan step-by-step
-- Make the smallest possible change to achieve the goal
-- Avoid introducing unnecessary abstractions
-
----
-
-## 3. Code Quality
-
-- Prefer simple and readable solutions
-- Avoid temporary or hacky fixes
-- Always fix root causes instead of symptoms
-
----
-
-## 4. Verification
-
-Before finishing, always check:
-
-- Does the logic actually work?
-- Are edge cases handled?
-- Could this break existing behavior?
-
-If applicable:
-
-- Compare behavior before vs after changes
-- Validate assumptions explicitly
-
----
-
-## 5. Debugging
-
-When encountering an issue:
-
-1. Identify the root cause (not just symptoms)
-2. Use logs, errors, or failing cases as evidence
-3. Apply a targeted fix
-4. Re-check that the issue is fully resolved
-
----
-
-## 6. Iteration
-
-- If a solution feels hacky, reconsider a cleaner approach
-- Do NOT over-engineer simple tasks
-- Balance simplicity and correctness
-
----
-
-## 7. Communication
-
-Before coding:
-
-- Briefly explain the approach (1–3 sentences)
-  1
-  After coding:
-- Summarize what changed
-- Highlight any trade-offs or risks
-
----
-
-## 8. Anti-Patterns (Avoid)
-
-- Jumping into code without a plan (for complex tasks)
-- Making large, unrelated changes
-- Fixing symptoms instead of root cause
-- Adding unnecessary abstractions
+- When `graphify-out/graph.json` exists, use `graphify` as a discovery aid for questions about this repo's architecture, structure, components, or file relationships.
+- Prefer `graphify query "<question>"` to narrow the search space, `graphify path "<A>" "<B>"` for relationship questions, and `graphify explain "<concept>"` for focused concepts.
+- If `graphify-out/wiki/index.md` exists, use it for broad navigation. Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review or when query/path/explain is not enough.
+- Treat graph output as navigation context, not as the source of truth. Before modifying code, confirming API shapes, or making behavior claims, read the relevant source files.
+- In Copilot Chat, `/graphify` can be used to build or update the graph when needed.
