@@ -75,3 +75,87 @@ skills:
     source: "http://pixijs.com/llms.txt"
     syncedAt: 2026-04-13
     generator: skilld
+  vueuse-nuxt-skilld:
+    packageName: "@vueuse/nuxt"
+    version: 14.3.0
+    repo: vueuse/vueuse
+    source: "https://github.com/vueuse/vueuse/tree/v14.3.0/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  nitropack-skilld:
+    packageName: nitropack
+    version: 2.13.4
+    repo: nitrojs/nitro
+    source: "https://github.com/nitrojs/nitro/tree/v2.13.4/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  unocss-nuxt-skilld:
+    packageName: "@unocss/nuxt"
+    version: 66.6.8
+    repo: unocss/unocss
+    source: "https://github.com/unocss/unocss/tree/v66.6.8/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  vitest-skilld:
+    packageName: vitest
+    version: 4.1.6
+    repo: vitest-dev/vitest
+    source: "https://github.com/vitest-dev/vitest/tree/v4.1.6/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  nuxt-kit-skilld:
+    packageName: "@nuxt/kit"
+    version: 4.4.6
+    repo: nuxt/nuxt
+    source: "https://github.com/nuxt/nuxt/tree/v4.4.6/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  nuxt-skilld:
+    packageName: nuxt
+    version: 4.4.6
+    repo: nuxt/nuxt
+    source: "https://github.com/nuxt/nuxt/tree/v4.4.6/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  antfu-eslint-config-skilld:
+    packageName: "@antfu/eslint-config"
+    version: 9.0.0
+    repo: antfu/eslint-config
+    source: "https://eslint-config.antfu.me/**"
+    syncedAt: 2026-05-20
+    generator: skilld
+  nuxt-icon-skilld:
+    packageName: "@nuxt/icon"
+    version: 2.2.2
+    repo: nuxt/icon
+    source: "https://stackblitz.com/edit/nuxt-icon-playground?file=app.vue/**"
+    syncedAt: 2026-05-20
+    generator: skilld
+  headlessui-vue-skilld:
+    packageName: "@headlessui/vue"
+    version: 1.7.23
+    repo: tailwindlabs/headlessui
+    source: "https://headlessui.com/**"
+    syncedAt: 2026-05-20
+    generator: skilld
+  nuxt-headlessui-skilld:
+    packageName: nuxt-headlessui
+    version: 1.2.2
+    repo: P4sca1/nuxt-headlessui
+    source: "ungh://P4sca1/nuxt-headlessui"
+    syncedAt: 2026-05-20
+    generator: skilld
+  simplex-noise-skilld:
+    packageName: simplex-noise
+    version: 4.0.3
+    repo: jwagner/simplex-noise.js
+    source: "ungh://jwagner/simplex-noise.js"
+    syncedAt: 2026-05-20
+    generator: skilld
+  netlify-nuxt-skilld:
+    packageName: "@netlify/nuxt"
+    version: 0.3.6
+    repo: netlify/primitives
+    source: "ungh://netlify/primitives/packages/nuxt-module"
+    syncedAt: 2026-05-20
+    generator: skilld
