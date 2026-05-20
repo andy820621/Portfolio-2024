@@ -9,7 +9,7 @@ metadata:
 # vitejs/vite `vite@8.0.13`
 **Tags:** alpha: 6.0.0-alpha.24, beta: 8.0.0-beta.18, previous: 7.3.3
 
-**References:** [package.json](./.skilld/pkg/package.json) • [Docs](./.skilld/docs/_INDEX.md)
+**References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Docs](./.skilld/docs/_INDEX.md)
 
 ## Search
 
