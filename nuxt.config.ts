@@ -453,6 +453,19 @@ export default defineNuxtConfig({
     inlineStyles: true,
   },
   vite: {
+    optimizeDeps: {
+      include: [
+        'dayjs/locale/en',
+        'dayjs/locale/zh',
+        'dayjs/plugin/isToday.js',
+        'dayjs/plugin/localizedFormat',
+        'dayjs/plugin/timezone.js',
+        'dayjs/plugin/utc.js',
+        'dayjs/plugin/weekOfYear.js',
+        'pixi.js',
+        'simplex-noise',
+      ],
+    },
     build: {
       rollupOptions: {
         treeshake: true,
