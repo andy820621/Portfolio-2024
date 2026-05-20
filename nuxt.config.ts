@@ -4,6 +4,7 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroRouteConfig } from 'nitropack/types'
 import type { NuxtPage } from 'nuxt/schema'
+import { defineNuxtModule } from '@nuxt/kit'
 import { defineNuxtConfig } from 'nuxt/config'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
@@ -82,6 +83,20 @@ function stripSyntheticSitemapRoutes(pages: NuxtPage[], locales: LocaleObject[])
   prunePages(pages)
 }
 
+const normalizeRouteRuleHeadersModule = defineNuxtModule({
+  meta: {
+    name: 'normalize-route-rule-headers',
+  },
+  setup(_options, nuxt) {
+    nuxt.hook('modules:done', () => {
+      normalizeRouteRuleHeaderNames(nuxt.options.nitro.routeRules)
+    })
+    nuxt.hook('nitro:config', (nitroConfig) => {
+      normalizeRouteRuleHeaderNames(nitroConfig.routeRules)
+    })
+  },
+})
+
 export default defineNuxtConfig({
   // debug: {
   //   hydration: true,
@@ -137,6 +152,7 @@ export default defineNuxtConfig({
     'nuxt-delay-hydration',
     '@nuxt/fonts',
     '@netlify/nuxt',
+    normalizeRouteRuleHeadersModule,
     'nuxt-headlessui',
   ],
   contentMermaid: {
@@ -520,6 +536,31 @@ type RouteRules = Record<string, RouteRule>
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
+}
+
+function normalizeRouteRuleHeaderNames(routeRules: RouteRules | undefined): void {
+  if (!routeRules)
+    return
+
+  for (const rule of Object.values(routeRules)) {
+    if (!rule.headers)
+      continue
+
+    const headers = rule.headers as Record<string, string>
+
+    for (const name of Object.keys(headers)) {
+      const lowerCaseName = name.toLowerCase()
+
+      if (name === lowerCaseName)
+        continue
+
+      const value = headers[name]
+      if (value !== undefined)
+        headers[lowerCaseName] ??= value
+
+      delete headers[name]
+    }
+  }
 }
 
 function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules {
