@@ -1,0 +1,38 @@
+# Nuxt dev/build outputs
+.output/
+.nuxt/
+.nitro/
+.netlify/
+.cache/
+dist/
+
+# Dependencies and package manager artifacts
+node_modules/
+.pnpm-store/
+
+# Agent, IDE, and generated hook helper files
+.agents/
+.github/skills/
+.vscode/
+.husky/
+
+# Graphify outputs; regenerate from the project root only
+graphify-out/
+**/graphify-out/
+graph-out/
+**/graph-out/
+
+# Large static media
+public/blog-images/
+public/page-cover/
+public/demos/thumbnail/
+public/gallery-images/
+public/project-images/
+public/apple-touch-icon/
+public/*.gif
+public/*.jpg
+public/*.webp
+
+# Generated image maps and metadata
+public/*-map.json
+public/project-images-metadata*.json

@@ -32,3 +32,9 @@ Google Console Problem
 
 # Skilld references (recreated by `skilld install`)
 .skilld
+
+# Local Graphify outputs
+graphify-out/
+**/graphify-out/
+graph-out/
+**/graph-out/
