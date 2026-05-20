@@ -1,0 +1,802 @@
+{
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/app.vue": {
+    "mtime": 1775792104.8754082,
+    "ast_hash": "ef64c8e9db9416036ae04c1754f8fe3b",
+    "semantic_hash": "ef64c8e9db9416036ae04c1754f8fe3b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/router.options.ts": {
+    "mtime": 1726167404.7507675,
+    "ast_hash": "58cac735cd0f704f1335c21de4ea4bd1",
+    "semantic_hash": "58cac735cd0f704f1335c21de4ea4bd1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/error.vue": {
+    "mtime": 1775899748.1756506,
+    "ast_hash": "09b66641f992ae339232762460698dcc",
+    "semantic_hash": "09b66641f992ae339232762460698dcc"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useContentSearchIndex.ts": {
+    "mtime": 1767558358.7770536,
+    "ast_hash": "299fe2089dea98556775922a335fed19",
+    "semantic_hash": "299fe2089dea98556775922a335fed19"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useBreadcrumb.ts": {
+    "mtime": 1779110104.0942655,
+    "ast_hash": "91e911d5aa430457c86ba56dc4ba70f3",
+    "semantic_hash": "91e911d5aa430457c86ba56dc4ba70f3"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useContentDatas.ts": {
+    "mtime": 1766392367.6923547,
+    "ast_hash": "be9f6cad927a7ce47b5f55df8caa20ba",
+    "semantic_hash": "be9f6cad927a7ce47b5f55df8caa20ba"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useProjectImages.ts": {
+    "mtime": 1775767516.6410332,
+    "ast_hash": "bba0d05b263ab02d2c74d368cebea5d6",
+    "semantic_hash": "bba0d05b263ab02d2c74d368cebea5d6"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useContentListsFilter.ts": {
+    "mtime": 1763100366.7471788,
+    "ast_hash": "5fb3c804914d0ea807b02e33196a33f9",
+    "semantic_hash": "5fb3c804914d0ea807b02e33196a33f9"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useEnglishOnly.ts": {
+    "mtime": 1761406152.0844417,
+    "ast_hash": "d9d58278aca739bfef8d30cf3b570345",
+    "semantic_hash": "d9d58278aca739bfef8d30cf3b570345"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useGalleryImages.ts": {
+    "mtime": 1775812715.3771324,
+    "ast_hash": "1640422a3c13397f3e6cf02b492c5ad5",
+    "semantic_hash": "1640422a3c13397f3e6cf02b492c5ad5"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/usePaginationQuerySync.ts": {
+    "mtime": 1766481350.701137,
+    "ast_hash": "fe7c8079de947f0b75366854c58b2d79",
+    "semantic_hash": "fe7c8079de947f0b75366854c58b2d79"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/usePageSEO.ts": {
+    "mtime": 1779214506.5354936,
+    "ast_hash": "e72f096170d5ce5a1187865b864d0c2e",
+    "semantic_hash": "e72f096170d5ce5a1187865b864d0c2e"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useGlobalSearchModalState.ts": {
+    "mtime": 1763543895.8859174,
+    "ast_hash": "4201e1ceb7638abc0a5a6519285cc2d1",
+    "semantic_hash": "4201e1ceb7638abc0a5a6519285cc2d1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useContentDetailData.ts": {
+    "mtime": 1763029067.6511047,
+    "ast_hash": "58e2511bf7d4c9040e7f5c3c579d3cfe",
+    "semantic_hash": "58e2511bf7d4c9040e7f5c3c579d3cfe"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useStableNow.ts": {
+    "mtime": 1762228769.3740492,
+    "ast_hash": "11ea3b94a830852860f0da361da94690",
+    "semantic_hash": "11ea3b94a830852860f0da361da94690"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useContentData.ts": {
+    "mtime": 1763026955.9693565,
+    "ast_hash": "ad1f45362a8b4eae4e21aa7a446fff92",
+    "semantic_hash": "ad1f45362a8b4eae4e21aa7a446fff92"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useTheme.ts": {
+    "mtime": 1763115625.382601,
+    "ast_hash": "f915c34e8014670972b7d415ad764876",
+    "semantic_hash": "f915c34e8014670972b7d415ad764876"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useGlobalSearchData.ts": {
+    "mtime": 1775767520.961132,
+    "ast_hash": "7cb8e0971cf8c29ccea74e6a520187da",
+    "semantic_hash": "7cb8e0971cf8c29ccea74e6a520187da"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useUrl.ts": {
+    "mtime": 1779106007.3743138,
+    "ast_hash": "e401f31fea2cb89b16593ccab863f5d3",
+    "semantic_hash": "e401f31fea2cb89b16593ccab863f5d3"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useHrefLang.ts": {
+    "mtime": 1746515532.5238848,
+    "ast_hash": "2f0274510c99a44c20e29571033f7eb6",
+    "semantic_hash": "2f0274510c99a44c20e29571033f7eb6"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/usePagination.ts": {
+    "mtime": 1763028555.0631943,
+    "ast_hash": "b0aa173a4f9eeb30e9bbfbd88fb452ba",
+    "semantic_hash": "b0aa173a4f9eeb30e9bbfbd88fb452ba"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useContentSEO.ts": {
+    "mtime": 1775849131.3366256,
+    "ast_hash": "48fdcf72c9443dac761a2cccf33c49db",
+    "semantic_hash": "48fdcf72c9443dac761a2cccf33c49db"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/composables/useFormateDate.ts": {
+    "mtime": 1762338353.3278232,
+    "ast_hash": "8aaa824da29c5c726407d90a6bfa625a",
+    "semantic_hash": "8aaa824da29c5c726407d90a6bfa625a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/plugins/dark-mode.client.ts": {
+    "mtime": 1765437784.813866,
+    "ast_hash": "a40f9363c5022ff1184588e4cd9d4d1c",
+    "semantic_hash": "a40f9363c5022ff1184588e4cd9d4d1c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/galleryCollection.ts": {
+    "mtime": 1779183305.483965,
+    "ast_hash": "4ec050ebadc57db2a6b75209e3f13425",
+    "semantic_hash": "4ec050ebadc57db2a6b75209e3f13425"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/truncateContent.ts": {
+    "mtime": 1763014263.480401,
+    "ast_hash": "4ca5a09e89f2cb7cd0a82be5cdf272f0",
+    "semantic_hash": "4ca5a09e89f2cb7cd0a82be5cdf272f0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/seoOgImage.ts": {
+    "mtime": 1775942046.5411377,
+    "ast_hash": "37a48e935f394a157edd984520254e16",
+    "semantic_hash": "37a48e935f394a157edd984520254e16"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/trailingSlashUrlOrNot.ts": {
+    "mtime": 1779106021.2799013,
+    "ast_hash": "bef5bf083ec8cf8d2e0ae292af0700d1",
+    "semantic_hash": "bef5bf083ec8cf8d2e0ae292af0700d1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/countWords.ts": {
+    "mtime": 1763020372.2971225,
+    "ast_hash": "81c37c72530349c0985cbdc9398c2d0a",
+    "semantic_hash": "81c37c72530349c0985cbdc9398c2d0a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/hotkeyDisplay.ts": {
+    "mtime": 1763543895.886617,
+    "ast_hash": "9444299a5936f0a9ce8c4906a9e669b5",
+    "semantic_hash": "9444299a5936f0a9ce8c4906a9e669b5"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/gallerySlug.ts": {
+    "mtime": 1779199086.57198,
+    "ast_hash": "149a82a89e8daf2c0d8f060a042713ad",
+    "semantic_hash": "149a82a89e8daf2c0d8f060a042713ad"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/dayjs.ts": {
+    "mtime": 1744963333.0806863,
+    "ast_hash": "52e6b69492de79496232ab8f2edb5b11",
+    "semantic_hash": "52e6b69492de79496232ab8f2edb5b11"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/pathUtils.ts": {
+    "mtime": 1779111340.0097494,
+    "ast_hash": "2d1dbbb6d23aabceb3ad93ea4644f980",
+    "semantic_hash": "2d1dbbb6d23aabceb3ad93ea4644f980"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/utils/ShaderToy.ts": {
+    "mtime": 1767643512.06409,
+    "ast_hash": "8d803a3575053a50487b3c4daf004898",
+    "semantic_hash": "8d803a3575053a50487b3c4daf004898"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/NavBar.vue": {
+    "mtime": 1766123285.9527879,
+    "ast_hash": "6713cb31016431f767ad05135d685321",
+    "semantic_hash": "6713cb31016431f767ad05135d685321"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/PageHero.vue": {
+    "mtime": 1762942965.7524488,
+    "ast_hash": "e8ac3089240d9ff7d24e56225b18e450",
+    "semantic_hash": "e8ac3089240d9ff7d24e56225b18e450"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/TextCopy.vue": {
+    "mtime": 1767560662.8836217,
+    "ast_hash": "d0ae473f0bfd22164b3bd061896c13f5",
+    "semantic_hash": "d0ae473f0bfd22164b3bd061896c13f5"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Logo404.vue": {
+    "mtime": 1762320598.5273747,
+    "ast_hash": "00ca05f3b6af31a67103e6ad695095c0",
+    "semantic_hash": "00ca05f3b6af31a67103e6ad695095c0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/BreadcrumbList.vue": {
+    "mtime": 1766481073.1520095,
+    "ast_hash": "2bef0a11a4662559ecf09af25d9841fe",
+    "semantic_hash": "2bef0a11a4662559ecf09af25d9841fe"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/MyContentSearchButton.vue": {
+    "mtime": 1763543895.884024,
+    "ast_hash": "f56caecace9b1c25ef1896df602cc1fc",
+    "semantic_hash": "f56caecace9b1c25ef1896df602cc1fc"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/ToggleTheme.vue": {
+    "mtime": 1763543895.885581,
+    "ast_hash": "7a1e4adda7cb10d7589725f24fee5eec",
+    "semantic_hash": "7a1e4adda7cb10d7589725f24fee5eec"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/GlobalSearchModal.vue": {
+    "mtime": 1775767372.4924114,
+    "ast_hash": "605cae43ec8f9bf6be1d0749a8295d2a",
+    "semantic_hash": "605cae43ec8f9bf6be1d0749a8295d2a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/LinkWithTooltip.global.vue": {
+    "mtime": 1775767405.1540859,
+    "ast_hash": "dfa21d32a38d8f98d5f7bf99282f6b9c",
+    "semantic_hash": "dfa21d32a38d8f98d5f7bf99282f6b9c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/TagsFilterDropdown.vue": {
+    "mtime": 1765522885.2560475,
+    "ast_hash": "a68c05826e5bd8dbf22e06fb9ce7e74a",
+    "semantic_hash": "a68c05826e5bd8dbf22e06fb9ce7e74a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Footer.vue": {
+    "mtime": 1766478594.6731412,
+    "ast_hash": "52c45104d113cdb49609d4fff506d63a",
+    "semantic_hash": "52c45104d113cdb49609d4fff506d63a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/RandomBackground.vue": {
+    "mtime": 1775767456.9283996,
+    "ast_hash": "59f3cfa8cb2b17a7aa5da6af8d348df5",
+    "semantic_hash": "59f3cfa8cb2b17a7aa5da6af8d348df5"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/NoResults.vue": {
+    "mtime": 1762497241.0161257,
+    "ast_hash": "e3385980557fba77ef437a2805cb1368",
+    "semantic_hash": "e3385980557fba77ef437a2805cb1368"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/MyTooltip.vue": {
+    "mtime": 1766481098.8413317,
+    "ast_hash": "7a23fcb5d1e5a44739561d8d4e2c41fd",
+    "semantic_hash": "7a23fcb5d1e5a44739561d8d4e2c41fd"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/ToggleLanguage.vue": {
+    "mtime": 1763604087.2365723,
+    "ast_hash": "d74c576df9c7fee66a4c6aea8da1f49c",
+    "semantic_hash": "d74c576df9c7fee66a4c6aea8da1f49c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Logo.vue": {
+    "mtime": 1766481079.9626522,
+    "ast_hash": "ff7450dd3781b05448ed12210d36e72f",
+    "semantic_hash": "ff7450dd3781b05448ed12210d36e72f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/ContentSearch.vue": {
+    "mtime": 1765522885.2560322,
+    "ast_hash": "3381c68d438d9e3c3855fa9d3848286a",
+    "semantic_hash": "3381c68d438d9e3c3855fa9d3848286a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/ShaderToy.vue": {
+    "mtime": 1767560648.4176447,
+    "ast_hash": "911da866413684498ca6cc7b5db49513",
+    "semantic_hash": "911da866413684498ca6cc7b5db49513"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/WrapperPost.vue": {
+    "mtime": 1775955716.627221,
+    "ast_hash": "8a5837c71ae1d5bd9ef9dabded7ee2a5",
+    "semantic_hash": "8a5837c71ae1d5bd9ef9dabded7ee2a5"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/FiltersBar.vue": {
+    "mtime": 1766481051.0232637,
+    "ast_hash": "267c60aabf527729c9dcb647fd3250c2",
+    "semantic_hash": "267c60aabf527729c9dcb647fd3250c2"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/LightGallery.vue": {
+    "mtime": 1767560646.0186677,
+    "ast_hash": "6cad714b7afb6679243951a658ca252a",
+    "semantic_hash": "6cad714b7afb6679243951a658ca252a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/LightBox.vue": {
+    "mtime": 1775826410.8539522,
+    "ast_hash": "6f26484b70411258c781084e563926a0",
+    "semantic_hash": "6f26484b70411258c781084e563926a0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/demo/item.vue": {
+    "mtime": 1766478565.2779036,
+    "ast_hash": "1f5e24c67cc0ea61fbdb59423a804264",
+    "semantic_hash": "1f5e24c67cc0ea61fbdb59423a804264"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/post/Loader.vue": {
+    "mtime": 1745682478.5233934,
+    "ast_hash": "c33ce9aa33d506afe3bab465126fa1a2",
+    "semantic_hash": "c33ce9aa33d506afe3bab465126fa1a2"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/post/Card.vue": {
+    "mtime": 1766481062.7802713,
+    "ast_hash": "68d0118b455df23e8a8efbd1ecbf6cc4",
+    "semantic_hash": "68d0118b455df23e8a8efbd1ecbf6cc4"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/post/Toc.vue": {
+    "mtime": 1767359027.1679962,
+    "ast_hash": "a73112e26730fd6b49f1340a25de5bf0",
+    "semantic_hash": "a73112e26730fd6b49f1340a25de5bf0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/post/Header.vue": {
+    "mtime": 1763028688.731486,
+    "ast_hash": "1002c51f9122c0468299915f465e33d4",
+    "semantic_hash": "1002c51f9122c0468299915f465e33d4"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/post/PrevNext.vue": {
+    "mtime": 1745397912.7993364,
+    "ast_hash": "187f8a13db87c3357e53df3122f251bb",
+    "semantic_hash": "187f8a13db87c3357e53df3122f251bb"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/gallery/ImageCard.vue": {
+    "mtime": 1779199068.9041228,
+    "ast_hash": "5e87af368db256f49964a471135a2e2b",
+    "semantic_hash": "5e87af368db256f49964a471135a2e2b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/BorderWrapper.vue": {
+    "mtime": 1745682478.5234454,
+    "ast_hash": "9f9fdc7f60d415ad5236ce16f3347e0c",
+    "semantic_hash": "9f9fdc7f60d415ad5236ce16f3347e0c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/ProseTh.vue": {
+    "mtime": 1745399903.820563,
+    "ast_hash": "050fd0af36bdc066b010e67dc062dfbb",
+    "semantic_hash": "050fd0af36bdc066b010e67dc062dfbb"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/LightBoxUrls.vue": {
+    "mtime": 1762249172.5657623,
+    "ast_hash": "eb9dc30a8e5edb0a4a612d8d61138b61",
+    "semantic_hash": "eb9dc30a8e5edb0a4a612d8d61138b61"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/TechStackGrid.vue": {
+    "mtime": 1763621490.9567852,
+    "ast_hash": "304b6655337d90988e332212a09e7415",
+    "semantic_hash": "304b6655337d90988e332212a09e7415"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/DesignToolsGrid.vue": {
+    "mtime": 1762415808.1637778,
+    "ast_hash": "7fb08792860fd9f673223ce56c946307",
+    "semantic_hash": "7fb08792860fd9f673223ce56c946307"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/ProjectLightBox.vue": {
+    "mtime": 1762239670.5697236,
+    "ast_hash": "a91072089383b7cbc2c9c1a8c3995064",
+    "semantic_hash": "a91072089383b7cbc2c9c1a8c3995064"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/content/Image.vue": {
+    "mtime": 1743178265.3712547,
+    "ast_hash": "b35b8784059e957b91ff9e023e35f8c1",
+    "semantic_hash": "b35b8784059e957b91ff9e023e35f8c1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/Silk.vue": {
+    "mtime": 1763716413.6214406,
+    "ast_hash": "0c28ccfcfe4a20ac84d763a9e2927e6a",
+    "semantic_hash": "0c28ccfcfe4a20ac84d763a9e2927e6a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/FlickeringGrid.vue": {
+    "mtime": 1775767338.0039465,
+    "ast_hash": "0ca8d2511d97d058db4b6abba565b9d9",
+    "semantic_hash": "0ca8d2511d97d058db4b6abba565b9d9"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/ArtPlum.vue": {
+    "mtime": 1767560650.7215455,
+    "ast_hash": "7387cda1347f28c01068a9b9609d8717",
+    "semantic_hash": "7387cda1347f28c01068a9b9609d8717"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/Universe.vue": {
+    "mtime": 1766481108.467259,
+    "ast_hash": "77de2bac09b67fb21c78ad974d8e3fce",
+    "semantic_hash": "77de2bac09b67fb21c78ad974d8e3fce"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/FlowDots.vue": {
+    "mtime": 1763710770.4376082,
+    "ast_hash": "8a8d1001fe1028772932d33d4a967bac",
+    "semantic_hash": "8a8d1001fe1028772932d33d4a967bac"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/PlasmaStorm.vue": {
+    "mtime": 1767638268.7864118,
+    "ast_hash": "3da47be1ff5aacbcd8b3b229383999a0",
+    "semantic_hash": "3da47be1ff5aacbcd8b3b229383999a0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/Backgrounds/Base/Portal.vue": {
+    "mtime": 1763962127.406775,
+    "ast_hash": "f48583bc173ba9e65ba4ca417cc2bb92",
+    "semantic_hash": "f48583bc173ba9e65ba4ca417cc2bb92"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/OgImage/Test.takumi.vue": {
+    "mtime": 1775850338.044688,
+    "ast_hash": "fcb1a6fdb69872d60205eb2848b38bc9",
+    "semantic_hash": "fcb1a6fdb69872d60205eb2848b38bc9"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/components/OgImage/SiteSeo.takumi.vue": {
+    "mtime": 1775850338.0442429,
+    "ast_hash": "0660d796e3753a0b56d59d5039a31f93",
+    "semantic_hash": "0660d796e3753a0b56d59d5039a31f93"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/layouts/error.vue": {
+    "mtime": 1747977360.2756362,
+    "ast_hash": "69157ec42e17d9562dcb7b42eb56cbf8",
+    "semantic_hash": "69157ec42e17d9562dcb7b42eb56cbf8"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/layouts/default.vue": {
+    "mtime": 1763542975.8994784,
+    "ast_hash": "3b0a3937be0383e880993795cea09ca0",
+    "semantic_hash": "3b0a3937be0383e880993795cea09ca0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/index.vue": {
+    "mtime": 1775948027.1858165,
+    "ast_hash": "f6e9a35f6b6684637a843ce26f083f1e",
+    "semantic_hash": "f6e9a35f6b6684637a843ce26f083f1e"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/demos.vue": {
+    "mtime": 1775938002.5144958,
+    "ast_hash": "3ecd68299accdbe11d75796af53f4de9",
+    "semantic_hash": "3ecd68299accdbe11d75796af53f4de9"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/[...slug].vue": {
+    "mtime": 1763951343.1881456,
+    "ast_hash": "e061a303e1342085bf91f77ec339e00b",
+    "semantic_hash": "e061a303e1342085bf91f77ec339e00b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/license.vue": {
+    "mtime": 1775849132.277547,
+    "ast_hash": "4a095ad34d3746c562239b8df4fb5809",
+    "semantic_hash": "4a095ad34d3746c562239b8df4fb5809"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/posts/index.vue": {
+    "mtime": 1779110103.7110991,
+    "ast_hash": "d454b93253d9416229871b6fce0a6750",
+    "semantic_hash": "d454b93253d9416229871b6fce0a6750"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/posts/[post].vue": {
+    "mtime": 1775955716.6296422,
+    "ast_hash": "9abe8b4b51334c382027522718db0e6a",
+    "semantic_hash": "9abe8b4b51334c382027522718db0e6a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/gallery/index.vue": {
+    "mtime": 1779199068.9046614,
+    "ast_hash": "57975123cd8f5c262c89959efaf7995d",
+    "semantic_hash": "57975123cd8f5c262c89959efaf7995d"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/gallery/[album].vue": {
+    "mtime": 1779199068.9054532,
+    "ast_hash": "f3e447bd831cf71817b95b1c409a2705",
+    "semantic_hash": "f3e447bd831cf71817b95b1c409a2705"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/projects/index.vue": {
+    "mtime": 1779110103.9929886,
+    "ast_hash": "4d09376cf76a32da1786649aa6a1e404",
+    "semantic_hash": "4d09376cf76a32da1786649aa6a1e404"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/app/pages/projects/[project].vue": {
+    "mtime": 1775955716.6314993,
+    "ast_hash": "42f1b4d472cc9e87dc2f76dd5b6cdfa1",
+    "semantic_hash": "42f1b4d472cc9e87dc2f76dd5b6cdfa1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/04-cityscapes-of-tokyo.yml": {
+    "mtime": 1779199068.90686,
+    "ast_hash": "ea5e36f090a29c8c108242cf7cf3b863",
+    "semantic_hash": "ea5e36f090a29c8c108242cf7cf3b863"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/01-blossoms-and-kids.yml": {
+    "mtime": 1779199068.9060435,
+    "ast_hash": "7da39419f3e3f76dcd2c64fd3fa3d79a",
+    "semantic_hash": "7da39419f3e3f76dcd2c64fd3fa3d79a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/03-blossom-passage.yml": {
+    "mtime": 1779199068.9066715,
+    "ast_hash": "75dec5819f648ccb3417a5c149637ae8",
+    "semantic_hash": "75dec5819f648ccb3417a5c149637ae8"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/05-bali.yml": {
+    "mtime": 1779183227.0001729,
+    "ast_hash": "36e8cb689dafd0dca56be319825dbcab",
+    "semantic_hash": "36e8cb689dafd0dca56be319825dbcab"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/06-sakura-park.yml": {
+    "mtime": 1779183227.0004098,
+    "ast_hash": "d673cdca8fa7bf0075ebec741da51c5a",
+    "semantic_hash": "d673cdca8fa7bf0075ebec741da51c5a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/02-nihonbashi.yml": {
+    "mtime": 1779199068.906215,
+    "ast_hash": "24e81a711060cc5c8c408c06b8c5bb7d",
+    "semantic_hash": "24e81a711060cc5c8c408c06b8c5bb7d"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/07-neko.yml": {
+    "mtime": 1779183227.0005918,
+    "ast_hash": "74744310d8cb718f66333531ba84debd",
+    "semantic_hash": "74744310d8cb718f66333531ba84debd"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/08-yanesen.yml": {
+    "mtime": 1779199068.9070926,
+    "ast_hash": "fb2fadff924880ae7019b7034077fe80",
+    "semantic_hash": "fb2fadff924880ae7019b7034077fe80"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/gallery/09-chasing-blossoms.yml": {
+    "mtime": 1779199068.907383,
+    "ast_hash": "7c07ce8743c638d3dfa85d82ea84c73a",
+    "semantic_hash": "7c07ce8743c638d3dfa85d82ea84c73a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/license.md": {
+    "mtime": 1775929196.2509508,
+    "ast_hash": "80814fc7ad19b2bf5ab98004d5bee357",
+    "semantic_hash": "80814fc7ad19b2bf5ab98004d5bee357"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/about.md": {
+    "mtime": 1775948026.815914,
+    "ast_hash": "c3083ab396323a2511fd01d63de38377",
+    "semantic_hash": "c3083ab396323a2511fd01d63de38377"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/nitro-prerender-dynamic-routes-solution.md": {
+    "mtime": 1776004010.4791667,
+    "ast_hash": "8d02db5cd91c219111b3fb4b58c46e09",
+    "semantic_hash": "8d02db5cd91c219111b3fb4b58c46e09"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/pki.md": {
+    "mtime": 1776004010.4790392,
+    "ast_hash": "dfef6839014af7a62db8891a3cb4a124",
+    "semantic_hash": "dfef6839014af7a62db8891a3cb4a124"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/nuxt4-portfolio-architecture.md": {
+    "mtime": 1776004010.4789948,
+    "ast_hash": "89de09f71769374019342b8f2e824fba",
+    "semantic_hash": "89de09f71769374019342b8f2e824fba"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/global-fulltext-search.md": {
+    "mtime": 1776004010.4788706,
+    "ast_hash": "2c4653640d293f929f577c71db1622c9",
+    "semantic_hash": "2c4653640d293f929f577c71db1622c9"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/nuxt-content-v3-i18n-bilingual-site.md": {
+    "mtime": 1776004010.4789383,
+    "ast_hash": "ef1772f3f495957df9d178888abca72f",
+    "semantic_hash": "ef1772f3f495957df9d178888abca72f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/image-management-pipeline.md": {
+    "mtime": 1776004010.4790018,
+    "ast_hash": "7c3396a0be995cb9243105fe9825be1f",
+    "semantic_hash": "7c3396a0be995cb9243105fe9825be1f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/posts/nuxt-seo-guide.md": {
+    "mtime": 1776004010.4789379,
+    "ast_hash": "39bacf23c0c62bdee7cc47fb94145a87",
+    "semantic_hash": "39bacf23c0c62bdee7cc47fb94145a87"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/projects/finance-tracker.md": {
+    "mtime": 1776004010.4791675,
+    "ast_hash": "01a2c29e54b8238195a2d54b37002c9b",
+    "semantic_hash": "01a2c29e54b8238195a2d54b37002c9b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/projects/nuxt-content-mermaid.md": {
+    "mtime": 1776004010.4957354,
+    "ast_hash": "8f0eb800c2926aa983b5631f748a76ad",
+    "semantic_hash": "8f0eb800c2926aa983b5631f748a76ad"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/projects/metc.md": {
+    "mtime": 1776004010.4800837,
+    "ast_hash": "377bc84c446cd5236c683c3f358e5ee0",
+    "semantic_hash": "377bc84c446cd5236c683c3f358e5ee0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/projects/portfolio-2024.md": {
+    "mtime": 1776004010.479777,
+    "ast_hash": "7a658165ed46bf0ec9719d918ab2e683",
+    "semantic_hash": "7a658165ed46bf0ec9719d918ab2e683"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/projects/ti-ho-healthcare.md": {
+    "mtime": 1776004010.4929516,
+    "ast_hash": "e1e5c5ce94b76bc82fb1dd16f5d7d26c",
+    "semantic_hash": "e1e5c5ce94b76bc82fb1dd16f5d7d26c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/10.coffee-editor.md": {
+    "mtime": 1766040546.501452,
+    "ast_hash": "521b58cc1c84c4066e418fc4f59e8f18",
+    "semantic_hash": "521b58cc1c84c4066e418fc4f59e8f18"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/6.movie-theater.md": {
+    "mtime": 1766040546.5056026,
+    "ast_hash": "3374c177a61e8af4fe4f28b3e9603fe3",
+    "semantic_hash": "3374c177a61e8af4fe4f28b3e9603fe3"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/15.graph-image-generator.md": {
+    "mtime": 1766040546.503171,
+    "ast_hash": "dc4d99cc5a07cf7acb11e3eadab9cc42",
+    "semantic_hash": "dc4d99cc5a07cf7acb11e3eadab9cc42"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/13.2048.md": {
+    "mtime": 1766040546.502534,
+    "ast_hash": "a21e0041bd58b9e9cf5b92f9c8fae92a",
+    "semantic_hash": "a21e0041bd58b9e9cf5b92f9c8fae92a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/12.frontend-mentor-challenge-with-tailwind.md": {
+    "mtime": 1766040546.5023315,
+    "ast_hash": "6758fc8351d686737764623323dbfe22",
+    "semantic_hash": "6758fc8351d686737764623323dbfe22"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/4.space-invaders.md": {
+    "mtime": 1766040546.5047526,
+    "ast_hash": "4e2207f1700a905b05a1d11882181420",
+    "semantic_hash": "4e2207f1700a905b05a1d11882181420"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/8.atom-with-threeJs.md": {
+    "mtime": 1766040546.506332,
+    "ast_hash": "30819333693657f7ba770382a73dfa71",
+    "semantic_hash": "30819333693657f7ba770382a73dfa71"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/16.coach-search-app.md": {
+    "mtime": 1766040546.5036743,
+    "ast_hash": "341e34ec9be0d32ca5a62d8e5502bd6f",
+    "semantic_hash": "341e34ec9be0d32ca5a62d8e5502bd6f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/1.dna-using-canvas.md": {
+    "mtime": 1766040546.5009017,
+    "ast_hash": "d872ed4270e2ee6353debce072d61579",
+    "semantic_hash": "d872ed4270e2ee6353debce072d61579"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/5.snake-game.md": {
+    "mtime": 1766040546.5051277,
+    "ast_hash": "f04d2d5d0351c6292a62078c495a186a",
+    "semantic_hash": "f04d2d5d0351c6292a62078c495a186a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/2.argr.md": {
+    "mtime": 1766040546.5039556,
+    "ast_hash": "88fd9f5abd33ee78f7a4254536a7f0f8",
+    "semantic_hash": "88fd9f5abd33ee78f7a4254536a7f0f8"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/7.animated-svg-radio.md": {
+    "mtime": 1766040546.5059655,
+    "ast_hash": "f724c1d73b7eed64885a85a3cd9fbbe3",
+    "semantic_hash": "f724c1d73b7eed64885a85a3cd9fbbe3"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/9.todolist-with-vanillaJS.md": {
+    "mtime": 1766040546.5066655,
+    "ast_hash": "4cea4d0dccfb95a0f1d03764ae76459a",
+    "semantic_hash": "4cea4d0dccfb95a0f1d03764ae76459a"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/3.ns-shaft.md": {
+    "mtime": 1766040546.5044107,
+    "ast_hash": "98713e4574b2e4aaf58aad22ee5ed3cf",
+    "semantic_hash": "98713e4574b2e4aaf58aad22ee5ed3cf"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/11.pacman.md": {
+    "mtime": 1766040546.5017915,
+    "ast_hash": "d09756303f76e9b4565cd0b21d927f00",
+    "semantic_hash": "d09756303f76e9b4565cd0b21d927f00"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/zh/demos/14.memory-music-blocks.md": {
+    "mtime": 1766040546.5028338,
+    "ast_hash": "ccfe1c56928d52b72068a08092b4878b",
+    "semantic_hash": "ccfe1c56928d52b72068a08092b4878b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/license.md": {
+    "mtime": 1775897586.7268167,
+    "ast_hash": "456ffad660189d85988c3eef5ec6d2be",
+    "semantic_hash": "456ffad660189d85988c3eef5ec6d2be"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/about.md": {
+    "mtime": 1775948026.8159142,
+    "ast_hash": "cf53dd6598c70678a0d6f11e464c5e9c",
+    "semantic_hash": "cf53dd6598c70678a0d6f11e464c5e9c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/nitro-prerender-dynamic-routes-solution.md": {
+    "mtime": 1776004010.47847,
+    "ast_hash": "e492ef9e38eee9fb83135b7a329f8859",
+    "semantic_hash": "e492ef9e38eee9fb83135b7a329f8859"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/pki.md": {
+    "mtime": 1776004010.478569,
+    "ast_hash": "61fa6f2c80ed0ddb721775361c3adf47",
+    "semantic_hash": "61fa6f2c80ed0ddb721775361c3adf47"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/nuxt4-portfolio-architecture.md": {
+    "mtime": 1776004010.4547746,
+    "ast_hash": "21a7fb048216e33e439d9f7c6b37d214",
+    "semantic_hash": "21a7fb048216e33e439d9f7c6b37d214"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/global-fulltext-search.md": {
+    "mtime": 1776004010.4783208,
+    "ast_hash": "4c85f8826bc0d72beb4597974127e8c1",
+    "semantic_hash": "4c85f8826bc0d72beb4597974127e8c1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/nuxt-content-v3-i18n-bilingual-site.md": {
+    "mtime": 1776004010.4784286,
+    "ast_hash": "cb51b8e2c1880de9155eb5f139e63b2f",
+    "semantic_hash": "cb51b8e2c1880de9155eb5f139e63b2f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/image-management-pipeline.md": {
+    "mtime": 1776004010.454839,
+    "ast_hash": "450c7b8efb8fc4bbb1a26c531c24a921",
+    "semantic_hash": "450c7b8efb8fc4bbb1a26c531c24a921"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/posts/nuxt-seo-guide.md": {
+    "mtime": 1776004010.4549687,
+    "ast_hash": "1f2f9d4b1bf545b08232336c5cefeca7",
+    "semantic_hash": "1f2f9d4b1bf545b08232336c5cefeca7"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/projects/finance-tracker.md": {
+    "mtime": 1776004010.478828,
+    "ast_hash": "21c1e4f117c80be8e5aeb667d272ccd3",
+    "semantic_hash": "21c1e4f117c80be8e5aeb667d272ccd3"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/projects/nuxt-content-mermaid.md": {
+    "mtime": 1776004010.4788642,
+    "ast_hash": "66095af254e4f3cadd463c9de126f6d5",
+    "semantic_hash": "66095af254e4f3cadd463c9de126f6d5"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/projects/metc.md": {
+    "mtime": 1776004010.4785104,
+    "ast_hash": "f354bf8cdf20d58a0f27ebc20e444be1",
+    "semantic_hash": "f354bf8cdf20d58a0f27ebc20e444be1"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/projects/portfolio-2024.md": {
+    "mtime": 1776004010.4788308,
+    "ast_hash": "bfa622d8c697fefb15b46e6cecc8803b",
+    "semantic_hash": "bfa622d8c697fefb15b46e6cecc8803b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/projects/ti-ho-healthcare.md": {
+    "mtime": 1776004010.4785461,
+    "ast_hash": "73b8c07d73cc3fd0323bd6532274e561",
+    "semantic_hash": "73b8c07d73cc3fd0323bd6532274e561"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/10.coffee-editor.md": {
+    "mtime": 1766040546.4858146,
+    "ast_hash": "80a71ec4c02924a72a62abc41d128713",
+    "semantic_hash": "80a71ec4c02924a72a62abc41d128713"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/6.movie-theater.md": {
+    "mtime": 1766040546.4919548,
+    "ast_hash": "9630f178919435ace6dfad5d6862db6e",
+    "semantic_hash": "9630f178919435ace6dfad5d6862db6e"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/15.graph-image-generator.md": {
+    "mtime": 1766040546.4883351,
+    "ast_hash": "593fbbfd72b313c55c9eb964e3fe7f6c",
+    "semantic_hash": "593fbbfd72b313c55c9eb964e3fe7f6c"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/13.2048.md": {
+    "mtime": 1766040546.487118,
+    "ast_hash": "13aebb5cfa325c15d9e0eee5d1f83f51",
+    "semantic_hash": "13aebb5cfa325c15d9e0eee5d1f83f51"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/12.frontend-mentor-challenge-with-tailwind.md": {
+    "mtime": 1766040546.4867396,
+    "ast_hash": "88209f9ef52e8d266cf0f43a5c218c4b",
+    "semantic_hash": "88209f9ef52e8d266cf0f43a5c218c4b"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/4.space-invaders.md": {
+    "mtime": 1766040546.4906807,
+    "ast_hash": "d41d9c371ae1339ffee8a91a425c00d7",
+    "semantic_hash": "d41d9c371ae1339ffee8a91a425c00d7"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/8.atom-with-threeJs.md": {
+    "mtime": 1766040546.4930258,
+    "ast_hash": "580783ea0e9164cd1d79606530d274ab",
+    "semantic_hash": "580783ea0e9164cd1d79606530d274ab"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/16.coach-search-app.md": {
+    "mtime": 1766040546.4889343,
+    "ast_hash": "880be29b869210b9b75b2771ae08e53f",
+    "semantic_hash": "880be29b869210b9b75b2771ae08e53f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/1.dna-using-canvas.md": {
+    "mtime": 1766040546.4852872,
+    "ast_hash": "235223246d02d68f0ab24046ac418dd9",
+    "semantic_hash": "235223246d02d68f0ab24046ac418dd9"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/5.snake-game.md": {
+    "mtime": 1766040546.4910536,
+    "ast_hash": "2ef419876aafe9f541dcd21ae6572de8",
+    "semantic_hash": "2ef419876aafe9f541dcd21ae6572de8"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/2.argr.md": {
+    "mtime": 1766040546.4893212,
+    "ast_hash": "27d2aad68ece92f7a855dc55a8eb09d3",
+    "semantic_hash": "27d2aad68ece92f7a855dc55a8eb09d3"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/7.animated-svg-radio.md": {
+    "mtime": 1766040546.4926867,
+    "ast_hash": "28046bc96a5b1eb69f74851d89f1fdf0",
+    "semantic_hash": "28046bc96a5b1eb69f74851d89f1fdf0"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/9.todolist-with-vanillaJS.md": {
+    "mtime": 1766040546.4935858,
+    "ast_hash": "a00ecaca6a01793e410e00d126d878ea",
+    "semantic_hash": "a00ecaca6a01793e410e00d126d878ea"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/3.ns-shaft.md": {
+    "mtime": 1766040546.4899297,
+    "ast_hash": "5f85bf30b58eb7d546f0889d3772993f",
+    "semantic_hash": "5f85bf30b58eb7d546f0889d3772993f"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/11.pacman.md": {
+    "mtime": 1766040546.4862294,
+    "ast_hash": "a7611f2adcb14018b040a3c45a445cbd",
+    "semantic_hash": "a7611f2adcb14018b040a3c45a445cbd"
+  },
+  "/Users/Andy/Documents/Code/Nuxt/Portfolio 2024/content/en/demos/14.memory-music-blocks.md": {
+    "mtime": 1766040546.4878545,
+    "ast_hash": "54cf2422a0cb568d90c8fb7e3be9390b",
+    "semantic_hash": "54cf2422a0cb568d90c8fb7e3be9390b"
+  }
+}
