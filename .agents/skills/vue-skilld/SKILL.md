@@ -2,11 +2,11 @@
 name: vue-skilld
 description: "The progressive JavaScript framework for building modern web UI. ALWAYS use when editing or working with *.vue files or code importing \"vue\". Consult for debugging, best practices, or modifying vue, core."
 metadata:
-  version: 3.5.32
-  generated_at: 2026-04-13
+  version: 3.5.34
+  generated_at: 2026-05-20
 ---
 
-# vuejs/core `vue@3.5.32`
+# vuejs/core `vue@3.5.34`
 **Tags:** csp: 1.0.28-csp, legacy: 2.7.16, v2-latest: 2.7.16
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Docs](./.skilld/docs/_INDEX.md)
