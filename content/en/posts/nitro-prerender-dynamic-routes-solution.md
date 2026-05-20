@@ -7,7 +7,8 @@ seoDescription: "Use Nitro hooks to scan Markdown content, exclude drafts, gener
 cover: /blog-images/nitro-prerender-dynamic-routes-solution-cover.webp
 image: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 alt: A complete guide to prerendering Nuxt Content routes with Nitro
-ogImage: /blog-images/nitro-prerender-dynamic-routes-solution.webp
+ogImage:
+  url: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 tags: ['Nuxt', 'Nitro', 'Prerender', 'Netlify', 'Nuxt Content', 'SSG', 'i18n', 'Deployment']
 categories: ['Nuxt', 'Deployment', 'SEO']
 published: true

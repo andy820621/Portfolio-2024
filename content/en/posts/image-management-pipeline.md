@@ -6,7 +6,8 @@ seoTitle: "Image Pipeline with JSON Maps and LightBox"
 seoDescription: "Build a scalable image workflow for Nuxt with JSON maps, per-image metadata, deterministic ordering, LightBox integration, and Schema.org licensing."
 image: /blog-images/image-management-pipeline.webp
 alt: Projects and gallery image pipeline
-ogImage: /blog-images/image-management-pipeline.webp
+ogImage:
+  url: /blog-images/image-management-pipeline.webp
 tags: ['Nuxt', 'Images', 'Automation', 'Gallery', 'LightBox', 'SEO', 'Schema.org']
 categories: ['Nuxt', 'Media', 'Automation']
 published: true

@@ -6,7 +6,8 @@ seoTitle: "What Is PKI? Certificates, Encryption, Trust"
 seoDescription: "Understand how PKI connects encryption, certificates, and digital signatures to establish trust across websites, software, and online services."
 image: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 alt: What is PKI? The digital foundation from encryption to trust
-ogImage: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
+ogImage:
+  url: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 tags: [PKI, Public Key Infrastructure, Cybersecurity, Encryption, Digital Signatures, Security, Digital Certificates]
 categories: [Security, PKI]
 updatedAt: 2025-12-31

@@ -6,7 +6,8 @@ seoTitle: "Building a Nuxt 4 Portfolio as a Product"
 seoDescription: "A real-world look at building a Nuxt 4 portfolio with product thinking, covering content architecture, SEO, automation, and long-term maintainability."
 image: https://nuxt.com/assets/blog/v4.png
 alt: Nuxt 4 portfolio architecture design
-ogImage: https://nuxt.com/assets/blog/v4.png
+ogImage:
+  url: https://nuxt.com/assets/blog/v4.png
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Portfolio', 'Architecture', 'DX', 'Nuxt Content', 'SEO']
 categories: ['Nuxt', 'Portfolio', 'Architecture']
 published: true

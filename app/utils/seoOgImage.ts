@@ -15,6 +15,20 @@ export function isOgImageDisabled(ogImage: SeoOgImageValue) {
   return ogImage === false
 }
 
+export function resolveStaticOgImagePath(ogImage: unknown, fallbackImage?: string) {
+  if (typeof ogImage === 'string')
+    return ogImage
+
+  if (ogImage && typeof ogImage === 'object' && !Array.isArray(ogImage)) {
+    const { url } = ogImage as { url?: unknown }
+
+    if (typeof url === 'string' && url)
+      return url
+  }
+
+  return fallbackImage
+}
+
 export function resolveStaticOgImageUrl(baseUrl: string, ogImage?: SeoOgImageValue, fallbackImage?: string) {
   if (isOgImageDisabled(ogImage))
     return undefined

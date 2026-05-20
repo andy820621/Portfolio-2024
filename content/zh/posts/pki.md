@@ -6,7 +6,8 @@ seoTitle: "PKI 是什麼？加密、憑證與信任機制"
 seoDescription: "快速理解 PKI 如何把加密、數位憑證與簽章串起來，成為網站、系統與線上服務建立信任的基礎，並看懂它在真實網路通訊中的角色、流程與常見應用場景。"
 image: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 alt: PKI 是什麼？從加密到信任的數位基石
-ogImage: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
+ogImage:
+  url: https://www.netrust.net/wp-content/uploads/2024/01/shutterstock_2372133363-1.jpg
 tags: [PKI, 公開金鑰基礎建設, 資安, 加密, 數位簽章, Security, Encryption, Digital Certificates]
 categories: [Security, PKI]
 published: true

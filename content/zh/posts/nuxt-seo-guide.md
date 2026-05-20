@@ -6,7 +6,8 @@ seoTitle: "Nuxt 4 SEO：Meta、Schema.org 與 Sitemap 實作"
 seoDescription: "以雙語 Nuxt 4 內容網站為例，整理 meta、OG image、Schema.org、sitemap 與驗證流程，建立可維護的 SEO 實作方式。"
 image: /blog-images/nuxt-seo-guide.webp
 alt: Nuxt 4 SEO：Meta、Schema.org 與 Sitemap
-ogImage: /blog-images/nuxt-seo-guide.webp
+ogImage:
+  url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Schema.org', 'Sitemap', 'Open Graph', 'i18n']
 categories: ['Nuxt', 'SEO']
 published: true

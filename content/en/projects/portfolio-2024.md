@@ -7,7 +7,8 @@ seoDescription: "A bilingual Nuxt 4 portfolio with Nuxt Content, i18n, global se
 cover: /project-images/portfolio-2024.webp
 image: /project-images/portfolio-2024-hero.webp
 alt: Nuxt 4 personal portfolio website
-ogImage: /project-images/portfolio-2024-hero.webp
+ogImage:
+  url: /project-images/portfolio-2024-hero.webp
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Nuxt Content', 'i18n', 'SEO', 'Schema.org', 'MiniSearch', 'Nitro', 'Netlify']
 categories: ['Portfolio', 'Nuxt', 'Full Stack']
 updatedAt: 2025/12/22

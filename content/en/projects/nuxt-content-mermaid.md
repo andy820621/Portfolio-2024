@@ -7,7 +7,8 @@ seoDescription: "Render Mermaid code blocks in Nuxt Content Markdown with lazy l
 cover: /project-images/nuxt-content-mermaid.webp
 image: /project-images/nuxt-content-mermaid-wide.webp
 alt: nuxt-content-mermaid
-ogImage: /project-images/nuxt-content-mermaid-wide.webp
+ogImage:
+  url: /project-images/nuxt-content-mermaid-wide.webp
 tags: ['Nuxt', 'Nuxt Module', 'Nuxt Content', 'Mermaid', 'Markdown', 'TypeScript', 'Vitest', 'Open Source']
 categories: ['Nuxt', 'Nuxt Content', 'Mermaid']
 published: true

@@ -75,7 +75,7 @@ export async function useContentDatas(folderName = 'projects') {
         cover: content.cover || undefined,
         image: content.image || '/not-found.jpg',
         alt: content.alt || 'no alter data available',
-        ogImage: content.ogImage || '/not-found.jpg',
+        ogImage: resolveStaticOgImagePath(content.ogImage, '/not-found.jpg'),
         date: content.date || undefined,
         updatedAt: content.updatedAt || undefined,
         tags: content.tags || [],

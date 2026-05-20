@@ -6,7 +6,8 @@ seoTitle: "Ti-He Healthcare Brand Website"
 seoDescription: "A brand website for Ti-He Healthcare, focused on accessibility, clear product communication, and a polished healthcare industry presentation."
 image: /project-images/ti-ho-healthcare.webp
 alt: Ti-He Healthcare Official Website Development
-ogImage: /project-images/ti-ho-healthcare.webp
+ogImage:
+  url: /project-images/ti-ho-healthcare.webp
 tags: ['Website Development', 'JavaScript', 'Responsive Design', 'Accessibility', 'UI/UX', 'Brand Collaboration', 'Dental Industry', 'Interactive Features']
 categories: ['Web Development', 'Healthcare Projects', 'Branding', 'Frontend Engineering']
 published: true

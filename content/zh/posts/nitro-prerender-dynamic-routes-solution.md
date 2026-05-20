@@ -7,7 +7,8 @@ seoDescription: "說明如何用 Nitro hooks 掃描 Markdown、排除草稿、�
 cover: /blog-images/nitro-prerender-dynamic-routes-solution-cover.webp
 image: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 alt: Nitro 預渲染 Nuxt Content 路由完整指南
-ogImage: /blog-images/nitro-prerender-dynamic-routes-solution.webp
+ogImage:
+  url: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 tags: ['Nuxt', 'Nitro', 'Prerender', 'Netlify', 'Nuxt Content', 'SSG', 'i18n', '部署']
 categories: ['Nuxt', '部署', 'SEO']
 published: true

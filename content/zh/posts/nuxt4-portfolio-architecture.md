@@ -6,7 +6,8 @@ seoTitle: "以產品思維打造 Nuxt 4 作品集網站"
 seoDescription: "從內容架構、SEO、自動化到部署，一步步拆解我是如何兼顧後續擴充彈性，把 Nuxt 4 個人作品集做成能長期演進、維護的產品思維開發的網站。"
 image: https://nuxt.com/assets/blog/v4.png
 alt: Nuxt 4 作品集架構設計
-ogImage: https://nuxt.com/assets/blog/v4.png
+ogImage:
+  url: https://nuxt.com/assets/blog/v4.png
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', '作品集', 'Architecture', 'DX', 'Nuxt Content', 'SEO']
 categories: ['Nuxt', '作品集', '架構設計']
 published: true

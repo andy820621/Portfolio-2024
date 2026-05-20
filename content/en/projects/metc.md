@@ -6,7 +6,8 @@ seoTitle: "Smart Fire Protection IoT System"
 seoDescription: "A community disaster-prevention platform that combines IoT devices, real-time monitoring, and workflow automation for smarter fire safety management."
 image: /project-images/metc.webp
 alt: Smart Fire Protection System
-ogImage: /project-images/metc.webp
+ogImage:
+  url: /project-images/metc.webp
 categories: ['IoT', 'Fire Safety', 'Smart Systems', 'Community Solutions']
 tags: ['IoT', 'Fire Protection', 'Disaster Prevention', 'Vue 3', 'Quasar', '.NET Core', 'WebSocket', 'PWA', 'WorkflowCore', 'Community Management']
 published: true

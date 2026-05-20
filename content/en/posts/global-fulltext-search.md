@@ -6,7 +6,8 @@ seoTitle: "MiniSearch + Nuxt Content Global Search"
 seoDescription: "Build a site-wide Cmd/Ctrl+K search in Nuxt Content with MiniSearch, segmented indexing, and results that jump to matching sections and paragraphs."
 image: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 alt: MiniSearch + Nuxt Content global search
-ogImage: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
+ogImage:
+  url: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 tags: ['Nuxt', 'Search', 'MiniSearch', 'Nuxt Content', 'UX', 'i18n']
 categories: ['Nuxt', 'UX', 'Content System']
 published: true

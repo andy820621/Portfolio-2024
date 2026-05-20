@@ -6,7 +6,8 @@ seoTitle: "鈦和生醫品牌形象與產品展示官方網站"
 seoDescription: "為鈦和生醫打造的品牌官網，聚焦響應式設計、內容可讀性、無障礙體驗與醫療產業形象呈現，兼顧品牌敘事與資訊傳達的清晰度，提升網站的信任感與專業辨識度。"
 image: /project-images/ti-ho-healthcare.webp
 alt: 鈦和生醫官方網站開發
-ogImage: /project-images/ti-ho-healthcare.webp
+ogImage:
+  url: /project-images/ti-ho-healthcare.webp
 tags: ['網站開發', 'JavaScript', '品牌合作', '互動設計', 'RWD', '無障礙', '前端技術', '企業網站', 'UI/UX']
 categories: ['專案案例', '前端開發', '品牌網站', '醫療產業']
 published: true

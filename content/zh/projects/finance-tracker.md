@@ -6,7 +6,8 @@ seoTitle: "EconoMe 個人財務追蹤與記帳系統"
 seoDescription: "以 Nuxt 3、Vue 3、Supabase 與 Tailwind CSS 打造的個人理財工具，協助追蹤收支、整理預算、檢視財務趨勢，建立更清楚的日常金流管理方式。"
 image: /project-images/finance-tracker.webp
 alt: 個人財務追蹤系統
-ogImage: /project-images/finance-tracker.webp
+ogImage:
+  url: /project-images/finance-tracker.webp
 tags: ['財務管理', 'Nuxt 3', 'Vue 3', 'Supabase', 'TypeScript', 'Tailwind CSS']
 categories: ['專案案例', 'Web開發', 'SaaS', '個人理財']
 published: true

@@ -6,7 +6,8 @@ seoTitle: "Nuxt 4 SEO Meta, Schema, and Sitemap Guide"
 seoDescription: "A practical Nuxt 4 SEO setup for bilingual content sites, covering meta tags, OG images, Schema.org, sitemap endpoints, and validation workflows."
 image: /blog-images/nuxt-seo-guide.webp
 alt: "Nuxt 4 SEO: Meta, Schema.org, and sitemap"
-ogImage: /blog-images/nuxt-seo-guide.webp
+ogImage:
+  url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Schema.org', 'Sitemap', 'Open Graph', 'i18n']
 categories: ['Nuxt', 'SEO']
 published: true

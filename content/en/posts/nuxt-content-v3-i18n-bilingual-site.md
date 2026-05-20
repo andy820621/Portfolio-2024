@@ -7,7 +7,8 @@ seoDescription: "Learn how to structure bilingual Nuxt Content v3 collections wi
 cover: /blog-images/nuxt-content-v3-i18n-bilingual-site-cover.webp
 image: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 alt: Nuxt Content v3 bilingual collections
-ogImage: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
+ogImage:
+  url: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 tags: ['Nuxt', 'Nuxt Content', 'Markdown', 'i18n', 'Collections', 'Schema', 'SEO']
 categories: ['Nuxt', 'Content System', 'i18n']
 published: true

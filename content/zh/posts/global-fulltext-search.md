@@ -6,7 +6,8 @@ seoTitle: "MiniSearch + Nuxt Content 全站搜尋實作"
 seoDescription: "以個人作品集為例，說明如何用 MiniSearch 與 Nuxt Content 建立 Cmd/Ctrl+K 全站搜尋，並讓結果精準對應到章節與段落。"
 image: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 alt: MiniSearch + Nuxt Content 全站搜尋
-ogImage: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
+ogImage:
+  url: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 tags: ['Nuxt', 'Search', 'MiniSearch', 'Nuxt Content', 'UX', 'i18n']
 categories: ['Nuxt', 'UX', '內容系統']
 published: true

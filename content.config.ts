@@ -1,14 +1,16 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 import { defineRobotsSchema } from '@nuxtjs/robots/content'
 import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
-import { defineOgImageSchema } from 'nuxt-og-image/content'
+// import { defineOgImageSchema } from 'nuxt-og-image/content'
 import { defineSchemaOrgSchema } from 'nuxt-schema-org/content'
 
-// SEO schema fields，取代已棄用的 asSeoCollection
 const baseSeoSchemaFields = {
-  robots: defineRobotsSchema(),
-  ogImage: defineOgImageSchema(),
-  schemaOrg: defineSchemaOrgSchema(),
+  robots: defineRobotsSchema({ z }),
+  // 當 @nuxt/content zod 升級到 v4 後，可以考慮用回 defineOgImageSchema 來定義 ogImage 的結構
+  ogImage: z.object({
+    url: z.string(),
+  }).optional(),
+  schemaOrg: defineSchemaOrgSchema({ z }),
 }
 
 function prependZhLocalePrefix(url: { loc: string }) {
@@ -22,7 +24,7 @@ function createSeoSchemaFields(name: string, onUrl?: (url: { loc: string }) => v
     sitemap: defineSitemapSchema({
       z,
       name,
-      filter: (entry: { published?: boolean }) => entry.published !== false,
+      filter: entry => entry.published !== false,
       ...(onUrl ? { onUrl } : {}),
     }),
   }
@@ -51,7 +53,6 @@ const articleSchema = z.object({
   cover: z.string().optional(),
   image: z.string().optional(),
   alt: z.string().optional(),
-  ogImage: z.string().optional(),
   tags: z.array(z.string()),
   categories: z.array(z.string()).optional(),
   published: z.boolean().default(true),
@@ -73,7 +74,6 @@ const projectSchema = z.object({
   cover: z.string().optional(),
   image: z.string().optional(),
   alt: z.string().optional(),
-  ogImage: z.string().optional(),
   tags: z.array(z.string()),
   categories: z.array(z.string()).optional(),
   published: z.boolean().default(true),

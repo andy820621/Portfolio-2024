@@ -6,7 +6,8 @@ seoTitle: "Nuxt 圖片管線：JSON Map、LightBox 與授權資料"
 seoDescription: "整理作品集的大量圖片管理流程，包含建置期 JSON map、圖片 metadata、排序策略、LightBox 整合與 Schema.org 授權標記。"
 image: /blog-images/image-management-pipeline.webp
 alt: Projects 與 Gallery 圖片自動化管線
-ogImage: /blog-images/image-management-pipeline.webp
+ogImage:
+  url: /blog-images/image-management-pipeline.webp
 tags: ['Nuxt', 'Images', 'Automation', 'Gallery', 'LightBox', 'SEO', 'Schema.org']
 categories: ['Nuxt', '媒體', '自動化']
 published: true
