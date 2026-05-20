@@ -1,9 +1,11 @@
 skills:
   nitro:
     packageName: nitro
-    version: 3.0.260311-beta
-    source: shipped
-    syncedAt: 2026-04-13
+    version: 3.0.260429-beta
+    packages: "nitro@3.0.260429-beta"
+    repo: nitrojs/nitro
+    source: "https://github.com/nitrojs/nitro/tree/v3.0.260429-beta/docs"
+    syncedAt: 2026-05-20
     generator: skilld
   nuxt-image-skilld:
     packageName: "@nuxt/image"
@@ -14,17 +16,19 @@ skills:
     generator: skilld
   nuxtjs-i18n-skilld:
     packageName: "@nuxtjs/i18n"
-    version: 10.2.4
+    version: 10.3.0
+    packages: "@nuxtjs/i18n@10.3.0"
     repo: nuxt-modules/i18n
-    source: "https://i18n.nuxtjs.org/llms.txt"
-    syncedAt: 2026-04-13
+    source: "https://github.com/nuxt-modules/i18n/tree/v10.3.0/docs"
+    syncedAt: 2026-05-20
     generator: skilld
   nuxt-content-skilld:
     packageName: "@nuxt/content"
-    version: 3.12.0
+    version: 3.14.0
+    packages: "@nuxt/content@3.14.0"
     repo: nuxt/content
-    source: "https://content.nuxt.com/llms.txt"
-    syncedAt: 2026-04-13
+    source: "https://github.com/nuxt/content/tree/v3.14.0/docs"
+    syncedAt: 2026-05-20
     generator: skilld
   nuxtjs-seo-skilld:
     packageName: "@nuxtjs/seo"
@@ -49,10 +53,11 @@ skills:
     generator: skilld
   vueuse-core-skilld:
     packageName: "@vueuse/core"
-    version: 14.2.1
+    version: 14.3.0
+    packages: "@vueuse/core@14.3.0"
     repo: vueuse/vueuse
-    source: "https://github.com/vueuse/vueuse/tree/v14.2.1/docs"
-    syncedAt: 2026-04-13
+    source: "https://github.com/vueuse/vueuse/tree/main/docs"
+    syncedAt: 2026-05-20
     generator: skilld
   barzhsieh-nuxt-content-mermaid-skilld:
     packageName: "@barzhsieh/nuxt-content-mermaid"
@@ -63,17 +68,19 @@ skills:
     generator: skilld
   reka-ui-skilld:
     packageName: reka-ui
-    version: 2.9.5
+    version: 2.9.7
+    packages: "reka-ui@2.9.7"
     repo: unovue/reka-ui
-    source: "https://reka-ui.com/llms.txt"
-    syncedAt: 2026-04-13
+    source: "https://github.com/unovue/reka-ui/tree/v2.9.7/docs"
+    syncedAt: 2026-05-20
     generator: skilld
   pixi.js-skilld:
     packageName: pixi.js
-    version: 8.17.1
+    version: 8.18.1
+    packages: "pixi.js@8.18.1"
     repo: pixijs/pixijs
     source: "http://pixijs.com/llms.txt"
-    syncedAt: 2026-04-13
+    syncedAt: 2026-05-20
     generator: skilld
   vueuse-nuxt-skilld:
     packageName: "@vueuse/nuxt"
@@ -157,5 +164,34 @@ skills:
     version: 0.3.6
     repo: netlify/primitives
     source: "ungh://netlify/primitives/packages/nuxt-module"
+    syncedAt: 2026-05-20
+    generator: skilld
+  vue-router-skilld:
+    packageName: vue-router
+    version: 5.0.7
+    repo: vuejs/router
+    source: "https://github.com/vuejs/router/tree/v5.0.7/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  vue-skilld:
+    packageName: vue
+    version: 3.5.34
+    repo: vuejs/core
+    source: "https://github.com/vuejs/core/tree/main/docs"
+    syncedAt: 2026-05-20
+    generator: skilld
+  vue-tsc-skilld:
+    packageName: vue-tsc
+    version: 3.3.1
+    repo: vuejs/language-tools
+    source: "https://deepwiki.com/vuejs/language-tools/**"
+    syncedAt: 2026-05-20
+    generator: skilld
+  vite-skilld:
+    packageName: vite
+    version: 8.0.13
+    packages: "vite@8.0.13"
+    repo: vitejs/vite
+    source: "https://github.com/vitejs/vite/tree/v8.0.13/docs"
     syncedAt: 2026-05-20
     generator: skilld

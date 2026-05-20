@@ -2,11 +2,11 @@
 name: pixi.js-skilld
 description: "ALWAYS use when writing code importing \"pixi.js\". Consult for debugging, best practices, or modifying pixi.js, pixijs."
 metadata:
-  version: 8.17.1
-  generated_at: 2026-04-13
+  version: 8.18.1
+  generated_at: 2026-05-20
 ---
 
-# pixijs/pixijs `pixi.js@8.17.1`
+# pixijs/pixijs `pixi.js@8.18.1`
 **Tags:** latest-4.x: 4.8.9, legacy: 4.8.9, latest-5.1.x: 5.1.6
 
 **References:** [package.json](./.skilld/pkg/package.json) • [README](./.skilld/pkg/README.md) • [Docs](./.skilld/docs/_INDEX.md)
