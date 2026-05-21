@@ -64,6 +64,7 @@ const pageModifiedTime = computed(() => {
 usePageSeo({
   title: t('galleryPage.seoTitle'),
   description: t('galleryPage.seoDescription'),
+  image: '/page-cover/gallery.webp',
   modifiedTime: pageModifiedTime.value,
   keywords: [
     'Gallery',

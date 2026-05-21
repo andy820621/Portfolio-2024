@@ -2,6 +2,7 @@ albumId: Neko
 slug: neko
 order: 7
 title: Neko
+coverImage: /gallery-images/Neko.webp
 description: 'A charming series dedicated to cats, highlighting their playful, mysterious, and adorable nature in various settings.'
 tags:
   - Animals

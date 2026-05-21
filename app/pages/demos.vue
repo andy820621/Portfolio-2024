@@ -138,6 +138,7 @@ function clearFilters() {
 usePageSeo({
   title: t('demosPage.seoTitle'),
   description: t('demosPage.seoDescription'),
+  image: '/page-cover/demos.webp',
   keywords: [
     'Demos',
     'BarZ',

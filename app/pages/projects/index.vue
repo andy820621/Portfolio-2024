@@ -38,6 +38,7 @@ const pageKeywords = computed(() => [
 usePageSeo({
   title: t('projectsPage.seoTitle'),
   description: t('projectsPage.seoDescription'),
+  image: '/page-cover/projects.webp',
   keywords: pageKeywords.value,
 })
 
