@@ -61,7 +61,6 @@ const homepageKeywords = computed(() => {
 usePageSeo({
   title: pageSeoTitle.value,
   description: pageSeoDescription.value,
-  image: '/page-cover/home.webp',
   keywords: homepageKeywords.value,
 })
 

@@ -27,7 +27,6 @@ const { data: content, error } = await useAsyncData(
 usePageSeo({
   title: content.value?.seoTitle || content.value?.title || 'License',
   description: content.value?.seoDescription || content.value?.description || '',
-  image: '/page-cover/home.webp',
   keywords: content.value?.keywords || [],
 })
 

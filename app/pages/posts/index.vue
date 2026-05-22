@@ -40,7 +40,6 @@ const pageKeywords = computed(() => [
 usePageSeo({
   title: t('blogsPage.seoTitle'),
   description: t('blogsPage.seoDescription'),
-  image: '/page-cover/blog.webp',
   keywords: pageKeywords.value,
 })
 
