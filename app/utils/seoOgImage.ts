@@ -72,6 +72,21 @@ export function resolveDynamicOgImageDefinition(ogImage: SeoOgImageValue) {
   }
 }
 
+export function prepareOgImagePrerenderContext() {
+  if (!import.meta.prerender)
+    return
+
+  const event = useRequestEvent()
+  if (!event)
+    return
+
+  const context = event.context as typeof event.context & {
+    _ogImagePrerenderPaths?: Map<string, string>
+  }
+
+  context._ogImagePrerenderPaths ||= new Map()
+}
+
 function resolveAbsoluteSeoImageUrl(baseUrl: string, image?: string) {
   if (!image)
     return undefined
