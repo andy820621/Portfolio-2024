@@ -534,6 +534,7 @@ export default defineNuxtConfig({
       ignore: [
         '/api/_content',
         '/api/**',
+        '/_og/**',
         '/__nuxt_content/**',
         '/.well-known/**', // 忽略 Chrome DevTools 請求
       ],

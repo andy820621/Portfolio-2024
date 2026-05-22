@@ -46,5 +46,18 @@
     "pcss",
     "postcss"
   ],
-  "scss.lint.unknownAtRules": "ignore"
+  "scss.lint.unknownAtRules": "ignore",
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.nuxt/**": true,
+    "**/.output/**": true,
+    "**/dist/**": true,
+    "**/.git/**": true
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/.nuxt/**": true,
+    "**/.output/**": true,
+    "**/dist/**": true
+  }
 }
