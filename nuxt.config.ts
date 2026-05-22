@@ -29,6 +29,9 @@ const chunkMap: Record<string, string> = {
 
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
+const isProduction = process.env.NODE_ENV === 'production'
+const isNetlifyRuntime = Boolean(process.env.NETLIFY)
+const useBuildTimeSeoArtifacts = isProduction && !isNetlifyRuntime
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
@@ -102,7 +105,7 @@ export default defineNuxtConfig({
   //   hydration: true,
   // },
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
+  devtools: { enabled: !isProduction },
   router: {
     options: {
       strict: false,
@@ -114,7 +117,7 @@ export default defineNuxtConfig({
     redirectToCanonicalSiteUrl: true,
   },
   linkChecker: {
-    enabled: true,
+    enabled: !isProduction,
     skipInspections: [
       'no-uppercase-chars',
       'no-non-ascii-chars',
@@ -124,6 +127,7 @@ export default defineNuxtConfig({
     ],
     showLiveInspections: false,
     failOnError: false,
+    runOnBuild: !isProduction,
   },
   experimental: {
     // inlineRouteRules: true,
@@ -270,8 +274,9 @@ export default defineNuxtConfig({
       '/zh/about',
     ],
     autoI18n: true,
-    // Build sitemap XML during production builds; keep runtime generation in dev for debugging.
-    zeroRuntime: process.env.NODE_ENV === 'production',
+    // Netlify builds already prerender the site itself; keep sitemap runtime-backed there
+    // to reduce build memory pressure and avoid producing extra static SEO artifacts.
+    zeroRuntime: useBuildTimeSeoArtifacts,
   },
   robots: {
     blockNonSeoBots: true,
@@ -308,9 +313,11 @@ export default defineNuxtConfig({
   },
   ogImage: {
     debug: process.env.NODE_ENV !== 'production',
-    zeroRuntime: process.env.NODE_ENV === 'production',
+    // Build-time OG image generation is the heaviest SEO artifact step on CI.
+    // Keep zero-runtime for non-Netlify production builds, but serve dynamically on Netlify.
+    zeroRuntime: useBuildTimeSeoArtifacts,
     fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
-    buildCache: process.env.NODE_ENV === 'production'
+    buildCache: useBuildTimeSeoArtifacts
       ? { base: '.cache/og-image' }
       : false,
   },
