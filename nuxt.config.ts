@@ -317,6 +317,9 @@ export default defineNuxtConfig({
     // Keep zero-runtime for non-Netlify production builds, but serve dynamically on Netlify.
     zeroRuntime: useBuildTimeSeoArtifacts,
     fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
+    security: {
+      renderTimeout: 45000,
+    },
     buildCache: useBuildTimeSeoArtifacts
       ? { base: '.cache/og-image' }
       : false,
