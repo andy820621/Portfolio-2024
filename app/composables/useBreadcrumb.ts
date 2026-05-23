@@ -1,4 +1,3 @@
-// Composable for generating BreadcrumbList structured data with NuxtSEO integration
 interface BreadcrumbItem {
   name: string
   item: string
@@ -8,7 +7,7 @@ interface BreadcrumbItem {
 export function useBreadcrumb() {
   const { t } = useI18n()
   const localePath = useLocalePath()
-  const { baseUrl, fullPath } = useUrl()
+  const { baseUrl } = useUrl()
   const route = useRoute()
 
   // Generate breadcrumb items based on current route
@@ -106,7 +105,7 @@ export function useBreadcrumb() {
 
     return {
       '@type': 'BreadcrumbList' as const,
-      '@id': `${fullPath.value}#breadcrumblist`,
+      '@id': buildSchemaPageNodeId(baseUrl.value, route.path, 'breadcrumblist'),
       'itemListElement': breadcrumbs.map(breadcrumb => ({
         '@type': 'ListItem' as const,
         'position': breadcrumb.position,

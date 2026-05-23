@@ -103,10 +103,10 @@ function clearFilters() {
   selectedTags.value = []
 }
 
-const { baseUrl, fullPath } = useUrl()
-const websiteId = `${baseUrl.value}#website`
-const nowPageId = `${fullPath.value}#webpage`
-const itemListId = `${fullPath.value}#itemlist`
+const { baseUrl, route } = useUrl()
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const itemListId = buildSchemaPageNodeId(baseUrl.value, route.path, 'itemlist')
 
 const licensePageUrl = locale.value === 'en'
   ? 'https://creativecommons.org/licenses/by/4.0/'
@@ -119,12 +119,12 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
     '@type': 'CreativeWork',
     'name': group.title,
     'url': buildCanonicalSiteUrl(baseUrl.value, getGalleryAlbumPath(group.slug)),
-    'thumbnail': group.coverImage ? `${trailingSlashUrlOrNot(baseUrl.value, false) + group.coverImage}` : undefined,
+    'thumbnail': resolveStaticOgImageUrl(baseUrl.value, group.coverImage),
     'description': group.description || t('galleryPage.title'),
     'keywords': group.tags || undefined,
     // 授權資訊
     'license': licensePageUrl,
-    'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
+    'acquireLicensePage': buildCanonicalSiteUrl(baseUrl.value, localePath('license')),
     'creditText': 'BarZ Hsieh',
     'creator': createPersonReference({ baseUrl: baseUrl.value }),
     'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
@@ -137,7 +137,7 @@ useSchemaOrg([
     '@type': ['WebPage', 'CollectionPage'],
     'name': t('galleryPage.title'),
     'description': t('galleryPage.seoDescription'),
-    'url': fullPath.value,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': websiteId,

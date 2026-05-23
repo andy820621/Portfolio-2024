@@ -152,14 +152,14 @@ usePageSeo({
 
 // Schema.org
 const { localeProperties } = useI18n()
-const { baseUrl, fullPath } = useUrl()
-const websiteId = `${baseUrl.value}#website`
-const nowPageId = `${fullPath.value}#webpage`
-const itemListId = `${fullPath.value}#itemlist`
+const { baseUrl, route } = useUrl()
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const itemListId = buildSchemaPageNodeId(baseUrl.value, route.path, 'itemlist')
 
 const itemListElement = demoItems.value?.map((item, index) => {
   // 參考 item.vue 中的邏輯，確定最佳 URL
-  let bestUrl = fullPath.value
+  let bestUrl = buildCanonicalSiteUrl(baseUrl.value, route.path)
 
   // 按優先級檢查可用連結
   if (item.content.link) {
@@ -184,7 +184,7 @@ const itemListElement = demoItems.value?.map((item, index) => {
       'url': bestUrl,
       'operatingSystem': 'Any',
       'screenshot': item.thumbnailType && item.thumbnailType === 'webp'
-        ? `${trailingSlashUrlOrNot(baseUrl.value, false)}/demos/thumbnail/${item.baseName}.${item.thumbnailType}`
+        ? `${normalizeBaseSiteUrl(baseUrl.value)}/demos/thumbnail/${item.baseName}.${item.thumbnailType}`
         : undefined,
     },
   }
@@ -196,7 +196,7 @@ useSchemaOrg([
     '@type': 'CollectionPage',
     'name': t('demosPage.title'),
     'description': t('demosPage.seoDescription'),
-    'url': fullPath.value,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': websiteId,

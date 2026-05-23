@@ -31,9 +31,9 @@ usePageSeo({
 })
 
 // Schema.org for legal page
-const { baseUrl, fullPath } = useUrl()
-const websiteId = `${baseUrl.value}#website`
-const nowPageId = `${fullPath.value}#webpage`
+const { baseUrl, route } = useUrl()
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
 
 useSchemaOrg([
   defineWebPage({
@@ -41,7 +41,7 @@ useSchemaOrg([
     '@type': 'WebPage',
     'name': content.value?.title || 'License',
     'description': content.value?.seoDescription || content.value?.description || '',
-    'url': fullPath.value,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     'inLanguage': localeProperties.value.language,
     'isPartOf': {
       '@id': websiteId,

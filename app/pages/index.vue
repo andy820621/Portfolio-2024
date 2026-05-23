@@ -64,11 +64,11 @@ usePageSeo({
   keywords: homepageKeywords.value,
 })
 
-const { baseUrl } = useUrl()
+const { baseUrl, route } = useUrl()
 
-const webpageId = `${baseUrl.value}#webpage`
-const websiteId = `${baseUrl.value}#website`
-const personId = `${baseUrl.value}#identity`
+const webpageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const personId = buildSchemaNodeId(baseUrl.value, 'identity')
 
 useSchemaOrg([
   defineWebPage({
@@ -76,7 +76,7 @@ useSchemaOrg([
     '@type': 'ProfilePage',
     'description': pageSeoDescription.value || 'BarZ Hsieh\'s Portfolio',
     'name': pageSeoTitle.value || 'BarZ Hsieh',
-    'url': baseUrl.value,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     // 'about':  NodeRelation<Organization>,
     'mainEntity': {
       '@id': personId,

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { buildCanonicalSiteUrl, canonicalizePagePath, decodeRouteParam, encodeCanonicalPagePath } from '../app/utils/pathUtils.ts'
+import { seoData } from '../data/index.ts'
 
 describe('path utilities', () => {
   it('appends a trailing slash to content paths', () => {
@@ -13,8 +14,8 @@ describe('path utilities', () => {
 
   it('builds canonical gallery slug URLs', () => {
     expect(
-      buildCanonicalSiteUrl('https://barz.app/', '/gallery/blossoms-and-kids'),
-    ).toBe('https://barz.app/gallery/blossoms-and-kids/')
+      buildCanonicalSiteUrl(seoData.mySite, '/gallery/blossoms-and-kids'),
+    ).toBe(`${seoData.mySite.replace(/\/$/, '')}/gallery/blossoms-and-kids/`)
   })
 
   it('encodes canonical gallery slug paths', () => {

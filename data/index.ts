@@ -104,6 +104,7 @@ export function createPersonIdentity({ baseUrl, imagePath = seoData.icon }: Pers
     worksFor: createSiteOrganizationReference({
       baseUrl: normalizedBaseUrl,
     }),
+    knowsAbout: ['Web Design', 'Frontend Development', 'Graphic Design', 'Blogs', 'SEO', 'UI/UX', 'Nuxt', 'Vue', 'TypeScript', 'JavaScript', 'HTML', 'CSS'],
   }
 }
 

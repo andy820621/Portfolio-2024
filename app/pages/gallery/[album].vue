@@ -169,90 +169,83 @@ usePageSeo({
 })
 
 // 將這段代碼放在 usePageSeo 之後
-const { baseUrl, fullPath } = useUrl()
+const { baseUrl } = useUrl()
 const { getBreadcrumbListSchema } = useBreadcrumb()
+const albumData = album.value
+const galleryImages = images.value || []
 
-const websiteId = `${baseUrl.value}#website`
-const nowPageId = `${fullPath.value}#webpage`
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const imageListId = buildSchemaPageNodeId(baseUrl.value, route.path, 'imagelist')
 
 // 創意共享授權 URL
 const licensePageUrl = locale.value === 'en'
   ? 'https://creativecommons.org/licenses/by/4.0/'
   : 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hant'
 
-// 添加完整的 Schema.org 結構化資料
-watchEffect(() => {
-  if (album.value && images.value) {
-    const imageDefinitions: any[] = []
+const stableYear = useStableYear()
+const imageDefinitions: any[] = []
 
-    const itemListElement = images.value.map((src, index) => {
-      const imageId = `${fullPath.value}#image-${index + 1}`
+const itemListElement = galleryImages.map((src, index) => {
+  const imageId = buildSchemaPageNodeId(baseUrl.value, route.path, `image-${index + 1}`)
 
-      // 為每張圖片創建 defineImage
-      imageDefinitions.push(
-        defineImage({
-          '@id': imageId,
-          '@type': 'ImageObject',
-          'contentUrl': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
-          'url': `${trailingSlashUrlOrNot(baseUrl.value, false)}${src}`,
-          'name': `${album.value!.title} - Image ${index + 1}`,
-          'description': `${album.value!.title} gallery image ${index + 1}`,
-          'representativeOfPage': index === 0,
-          'encodingFormat': 'image/webp',
-          'inLanguage': localeProperties.value.language,
-          // 授權資訊
-          'license': licensePageUrl,
-          'acquireLicensePage': `${trailingSlashUrlOrNot(baseUrl.value, false)}${localePath('license')}`,
-          'creditText': 'BarZ Hsieh',
-          'creator': createPersonReference({ baseUrl: baseUrl.value }),
-          'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
-          'copyrightYear': (() => {
-            const stableYear = useStableYear()
-            return stableYear.value
-          })(),
-          'copyrightHolder': createPersonReference({ baseUrl: baseUrl.value }),
-        }),
-      )
+  imageDefinitions.push(
+    defineImage({
+      '@id': imageId,
+      '@type': 'ImageObject',
+      'contentUrl': resolveStaticOgImageUrl(baseUrl.value, src),
+      'url': resolveStaticOgImageUrl(baseUrl.value, src),
+      'name': `${albumData.title} - Image ${index + 1}`,
+      'description': `${albumData.title} gallery image ${index + 1}`,
+      'representativeOfPage': index === 0,
+      'encodingFormat': 'image/webp',
+      'inLanguage': localeProperties.value.language,
+      'license': licensePageUrl,
+      'acquireLicensePage': buildCanonicalSiteUrl(baseUrl.value, localePath('license')),
+      'creditText': 'BarZ Hsieh',
+      'creator': createPersonReference({ baseUrl: baseUrl.value }),
+      'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
+      'copyrightYear': stableYear.value,
+      'copyrightHolder': createPersonReference({ baseUrl: baseUrl.value }),
+    }),
+  )
 
-      return {
-        '@type': 'ListItem',
-        'position': index + 1,
-        'item': {
-          '@id': imageId,
-        },
-      }
-    })
-
-    useSchemaOrg([
-      defineWebPage({
-        '@id': nowPageId,
-        '@type': 'WebPage',
-        'name': album.value.title,
-        'description': album.value.description,
-        'url': fullPath.value,
-        'inLanguage': localeProperties.value.language,
-        'isPartOf': {
-          '@id': websiteId,
-        },
-        'mainEntity': {
-          '@id': `${fullPath.value}#imagelist`,
-        },
-      }),
-
-      defineItemList({
-        '@id': `${fullPath.value}#imagelist`,
-        '@type': 'ItemList',
-        'numberOfItems': images.value.length,
-        itemListElement,
-      }),
-
-      defineBreadcrumb(getBreadcrumbListSchema(album.value.title)),
-
-      // 所有圖片的授權資訊
-      ...imageDefinitions,
-    ])
+  return {
+    '@type': 'ListItem',
+    'position': index + 1,
+    'item': {
+      '@id': imageId,
+    },
   }
 })
+
+useSchemaOrg([
+  defineWebPage({
+    '@id': nowPageId,
+    '@type': 'WebPage',
+    'name': albumData.title,
+    'description': albumData.description,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
+    'inLanguage': localeProperties.value.language,
+    'isPartOf': {
+      '@id': websiteId,
+    },
+    'mainEntity': {
+      '@id': imageListId,
+    },
+  }),
+
+  defineItemList({
+    '@id': imageListId,
+    '@type': 'ItemList',
+    'numberOfItems': galleryImages.length,
+    itemListElement,
+  }),
+
+  defineBreadcrumb(getBreadcrumbListSchema(albumData.title)),
+
+  ...imageDefinitions,
+])
 </script>
 
 <template>

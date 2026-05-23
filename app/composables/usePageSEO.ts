@@ -2,6 +2,8 @@ import type { DateLike } from '~~/types/main'
 import type { OgImageComponents } from '#og-image/components'
 import { getKeywords, navbarData, seoData } from '~~/data'
 
+type MaybeReactive<T> = T | Ref<T> | (() => T)
+
 interface PageSeoOptions {
   alt?: string
   title?: string
@@ -9,7 +11,8 @@ interface PageSeoOptions {
   image?: string
   ogImage?: SeoOgImageValue
   ogType?: 'website' | 'article'
-  noIndex?: boolean
+  noIndex?: MaybeReactive<boolean>
+  noIndexFollow?: MaybeReactive<boolean>
   alternateLinks?: {
     hreflang: string
     href: string
@@ -17,6 +20,13 @@ interface PageSeoOptions {
   modifiedTime?: DateLike
   publishedTime?: DateLike
   keywords?: string | string[]
+}
+
+function resolveOption<T>(value: MaybeReactive<T> | undefined): T | undefined {
+  if (typeof value === 'function')
+    return (value as () => T)()
+
+  return value === undefined ? undefined : unref(value)
 }
 
 function normalizeSitemapMetaDate(value?: DateLike) {
@@ -48,14 +58,14 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   })
 
   const ogImageUrl = computed(() => {
-    if (options.noIndex)
+    if (resolveOption(options.noIndex) || resolveOption(options.noIndexFollow))
       return undefined
 
     return resolveStaticOgImageUrl(baseUrl.value, options.ogImage, options.image)
   })
 
   const ogImageAlt = computed(() => {
-    if (options.noIndex || !ogImageUrl.value)
+    if (resolveOption(options.noIndex) || resolveOption(options.noIndexFollow) || !ogImageUrl.value)
       return undefined
 
     return resolveOgImageAlt(options.ogImage, options.alt, pageTitle.value)
@@ -66,13 +76,22 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   const publishedTime = computed(() => normalizeSitemapMetaDate(options.publishedTime))
   const modifiedTime = computed(() => normalizeSitemapMetaDate(options.modifiedTime))
+  const robots = computed(() => {
+    if (resolveOption(options.noIndexFollow))
+      return 'noindex, follow'
+
+    if (resolveOption(options.noIndex))
+      return 'noindex, nofollow'
+
+    return 'index, follow'
+  })
 
   // SEO 元數據
   useSeoMeta({
     title: pageTitle,
     description: pageDescription,
     keywords: pageKeywords,
-    robots: () => options.noIndex ? 'noindex, nofollow' : 'index, follow',
+    robots,
     ogTitle: pageTitle,
     ogDescription: pageDescription,
     ogUrl,
@@ -90,7 +109,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   })
 
   // 確保 OG 圖片在 Server 端生成
-  if (import.meta.server && !options.noIndex && !ogImageUrl.value) {
+  if (import.meta.server && !resolveOption(options.noIndex) && !resolveOption(options.noIndexFollow) && !ogImageUrl.value) {
     const dynamicOgImage = resolveDynamicOgImageDefinition(options.ogImage)
 
     if (dynamicOgImage) {

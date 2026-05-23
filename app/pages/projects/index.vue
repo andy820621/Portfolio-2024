@@ -13,6 +13,7 @@ const { searchText, selectedTags, filteredData, allTags, clearFilters }
 const elementPerPage = ref(5)
 const { pageNumber, totalPage, paginatedData, onPreviousPageClick, onNextPageClick }
   = usePagination(filteredData, elementPerPage)
+const isPaginatedPage = computed(() => pageNumber.value > 1)
 
 usePaginationQuerySync({ pageNumber, totalPage })
 
@@ -39,12 +40,13 @@ usePageSeo({
   title: t('projectsPage.seoTitle'),
   description: t('projectsPage.seoDescription'),
   keywords: pageKeywords.value,
+  noIndexFollow: () => isPaginatedPage.value,
 })
 
-const { baseUrl, fullPath } = useUrl()
-const nowPageId = `${fullPath.value}#webpage`
-const websiteId = `${baseUrl.value}#website`
-const itemListId = `${fullPath.value}#itemlist`
+const { baseUrl, route } = useUrl()
+const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const itemListId = buildSchemaPageNodeId(baseUrl.value, route.path, 'itemlist')
 
 const itemListElement = formattedData.value.map((post, index) => ({
   '@type': 'ListItem',
@@ -59,10 +61,10 @@ const itemListElement = formattedData.value.map((post, index) => ({
     ...post.date ? { datePublished: new Date(post.date).toISOString() } : {},
     'image': {
       '@type': 'ImageObject',
-      'url': trailingSlashUrlOrNot(baseUrl.value, false) + post.image,
+      'url': resolveStaticOgImageUrl(baseUrl.value, post.ogImage, post.cover ?? post.image),
     },
     'author': {
-      '@id': `${baseUrl.value}#identity`,
+      '@id': buildSchemaNodeId(baseUrl.value, 'identity'),
     },
   },
 })) || []
@@ -73,7 +75,7 @@ useSchemaOrg([
     '@type': 'CollectionPage',
     'name': t('projectsPage.title'),
     'description': t('projectsPage.seoDescription'),
-    'url': fullPath.value,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     'isPartOf': {
       '@id': websiteId,
     },

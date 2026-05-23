@@ -30,13 +30,27 @@ export function decodeRouteParam(value: string) {
 }
 
 export function buildCanonicalSiteUrl(baseUrl: string, path: string) {
-  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+  const normalizedBaseUrl = normalizeBaseSiteUrl(baseUrl)
   const canonicalPath = encodeCanonicalPagePath(path)
 
   if (!canonicalPath)
     return normalizedBaseUrl
 
   return `${normalizedBaseUrl}${canonicalPath}`
+}
+
+export function normalizeBaseSiteUrl(baseUrl: string) {
+  return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
+}
+
+export function buildSchemaNodeId(baseUrl: string, nodeName: string) {
+  const normalizedNodeName = nodeName.startsWith('#') ? nodeName.slice(1) : nodeName
+  return `${normalizeBaseSiteUrl(baseUrl)}#${normalizedNodeName}`
+}
+
+export function buildSchemaPageNodeId(baseUrl: string, path: string, nodeName: string) {
+  const normalizedNodeName = nodeName.startsWith('#') ? nodeName.slice(1) : nodeName
+  return `${buildCanonicalSiteUrl(baseUrl, path)}#${normalizedNodeName}`
 }
 
 export function encodeUrlPath(path: string) {

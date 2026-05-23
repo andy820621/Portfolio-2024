@@ -37,7 +37,7 @@ useHead({
     separator: '-',
     siteName: navbarData.homeTitle,
     schemaOrg: {
-      host: baseUrl.value,
+      host: normalizeBaseSiteUrl(baseUrl.value),
       path: route.path,
       inLanguage: 'en',
     },
@@ -49,9 +49,9 @@ useHead({
   // ],
 })
 
-const siteBaseUrl = trailingSlashUrlOrNot(baseUrl.value, false)
-const websiteId = `${siteBaseUrl}#website`
-const personId = `${siteBaseUrl}#identity`
+const siteBaseUrl = normalizeBaseSiteUrl(baseUrl.value)
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const personId = buildSchemaNodeId(baseUrl.value, 'identity')
 
 useSchemaOrg([
   defineWebSite({

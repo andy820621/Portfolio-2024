@@ -15,6 +15,7 @@ const { searchText, selectedTags, filteredData, allTags, clearFilters }
 const elementPerPage = ref(5)
 const { pageNumber, totalPage, paginatedData, onPreviousPageClick, onNextPageClick }
   = usePagination(filteredData, elementPerPage)
+const isPaginatedPage = computed(() => pageNumber.value > 1)
 
 usePaginationQuerySync({ pageNumber, totalPage })
 
@@ -41,12 +42,13 @@ usePageSeo({
   title: t('blogsPage.seoTitle'),
   description: t('blogsPage.seoDescription'),
   keywords: pageKeywords.value,
+  noIndexFollow: () => isPaginatedPage.value,
 })
 
-const { baseUrl, fullPath } = useUrl()
-const nowPageId = `${fullPath.value}#webpage`
-const websiteId = `${baseUrl.value}#website`
-const itemListId = `${fullPath.value}#itemlist`
+const { baseUrl, route } = useUrl()
+const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
+const itemListId = buildSchemaPageNodeId(baseUrl.value, route.path, 'itemlist')
 
 const itemListElement = formattedData.value.map((post, index) => {
   const modifiedDate = post.updatedAt ?? post.date
@@ -62,7 +64,7 @@ const itemListElement = formattedData.value.map((post, index) => {
       ...modifiedDate ? { dateModified: new Date(modifiedDate).toISOString() } : {},
       'image': {
         '@type': 'ImageObject',
-        'url': post.ogImage,
+        'url': resolveStaticOgImageUrl(baseUrl.value, post.ogImage, post.cover ?? post.image),
       },
       'author': createPersonReference({
         baseUrl: baseUrl.value,
@@ -78,7 +80,7 @@ useSchemaOrg([
     '@type': 'CollectionPage',
     'name': t('blogsPage.title'),
     'description': t('blogsPage.seoDescription'),
-    'url': fullPath.value,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     'isPartOf': {
       '@id': websiteId,
     },
