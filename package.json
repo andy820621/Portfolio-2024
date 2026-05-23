@@ -43,6 +43,7 @@
     "lightgallery": "^2.9.0",
     "minisearch": "^7.2.0",
     "nuxt": "^4.4.2",
+    "nuxt-gtag": "4.1.0",
     "ogl": "^1.0.11",
     "pixi.js": "^8.18.1",
     "reka-ui": "^2.9.8",

@@ -119,7 +119,7 @@ export default defineNuxtConfig({
     },
     // Avoid dev cache key collision at .nuxt/cache/nuxt/payload (file vs directory).
     // Keep extraction for production static output only.
-    payloadExtraction: process.env.NODE_ENV === 'production',
+    payloadExtraction: isProduction,
   },
   modules: [
     '@barzhsieh/nuxt-content-mermaid',
@@ -138,7 +138,12 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@netlify/nuxt',
     'nuxt-headlessui',
+    'nuxt-gtag',
   ],
+  gtag: {
+    id: process.env.NUXT_PUBLIC_GTAG_ID,
+    enabled: isProduction,
+  },
   contentMermaid: {
     theme: {
       light: 'default',
@@ -256,7 +261,7 @@ export default defineNuxtConfig({
     ],
     autoI18n: true,
     // Build sitemap XML during production builds; keep runtime generation in dev for debugging.
-    zeroRuntime: process.env.NODE_ENV === 'production',
+    zeroRuntime: isProduction,
   },
   robots: {
     blockNonSeoBots: true,
@@ -293,9 +298,9 @@ export default defineNuxtConfig({
   },
   ogImage: {
     debug: process.env.NODE_ENV !== 'production',
-    zeroRuntime: process.env.NODE_ENV === 'production',
+    zeroRuntime: isProduction,
     fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
-    buildCache: process.env.NODE_ENV === 'production'
+    buildCache: isProduction
       ? { base: '.cache/og-image' }
       : false,
   },
@@ -406,7 +411,7 @@ export default defineNuxtConfig({
       fallbackLocale: 'en',
       alwaysRedirect: false,
       // 僅在正式環境(HTTPS)啟用跨域 cookie，避免在本地/preview(HTTP) 寫入失敗
-      cookieCrossOrigin: process.env.NODE_ENV === 'production',
+      cookieCrossOrigin: isProduction,
     },
   },
   unocss: {
