@@ -439,6 +439,29 @@ export default defineNuxtConfig({
     inlineStyles: true,
   },
   vite: {
+    optimizeDeps: {
+      include: [
+        '@headlessui/vue',
+        'dayjs/locale/en', // CJS
+        'dayjs/locale/zh', // CJS
+        'dayjs/plugin/isToday.js', // CJS
+        'dayjs/plugin/localizedFormat', // CJS
+        'dayjs/plugin/timezone.js', // CJS
+        'dayjs/plugin/utc.js', // CJS
+        'dayjs/plugin/weekOfYear.js', // CJS
+        'lightgallery',
+        'lightgallery/plugins/share',
+        'lightgallery/plugins/thumbnail',
+        'lightgallery/plugins/zoom',
+        'minisearch',
+        'ogl',
+        'pixi.js',
+        'reka-ui',
+        'simplex-noise',
+        'swiper/modules',
+        'swiper/vue',
+      ],
+    },
     build: {
       rollupOptions: {
         treeshake: true,
