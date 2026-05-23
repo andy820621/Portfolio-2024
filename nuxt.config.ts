@@ -1,6 +1,4 @@
 /* eslint-disable node/prefer-global/process */
-/// <reference path="./.nuxt/nuxt.d.ts" />
-/// <reference path="./.nuxt/nuxt.node.d.ts" />
 import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroRouteConfig } from 'nitropack/types'
 import type { NuxtPage } from 'nuxt/schema'
@@ -441,7 +439,6 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
-        '@headlessui/vue',
         'dayjs/locale/en', // CJS
         'dayjs/locale/zh', // CJS
         'dayjs/plugin/isToday.js', // CJS

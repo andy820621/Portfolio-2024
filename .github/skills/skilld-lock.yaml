@@ -138,13 +138,6 @@ skills:
     source: "https://stackblitz.com/edit/nuxt-icon-playground?file=app.vue/**"
     syncedAt: 2026-05-20
     generator: skilld
-  headlessui-vue-skilld:
-    packageName: "@headlessui/vue"
-    version: 1.7.23
-    repo: tailwindlabs/headlessui
-    source: "https://headlessui.com/**"
-    syncedAt: 2026-05-20
-    generator: skilld
   nuxt-headlessui-skilld:
     packageName: nuxt-headlessui
     version: 1.2.2

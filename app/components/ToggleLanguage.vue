@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Locale } from 'vue-i18n'
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 
 const { locale, locales, setLocale, setLocaleCookie } = useI18n()
 
@@ -12,9 +11,9 @@ async function handleLocaleChange(newLocale: Locale) {
 </script>
 
 <template>
-  <Listbox v-slot="{ open }" v-model="locale" @update:model-value="handleLocaleChange">
+  <HeadlessListbox v-slot="{ open }" v-model="locale" @update:model-value="handleLocaleChange">
     <div class="relative mt-1">
-      <ListboxButton
+      <HeadlessListboxButton
         border="~ base"
         flex="~ items-center gap-1"
         class="rounded-full px-[.3rem] py-[0.2rem] text-sm"
@@ -24,7 +23,7 @@ async function handleLocaleChange(newLocale: Locale) {
           {{ locales.find(loc => loc.code === locale)?.code }}
         </span>
         <Icon name="ri:arrow-down-s-line" class="transition-transform duration-300" :class="[open && 'rotate-180']" />
-      </ListboxButton>
+      </HeadlessListboxButton>
       <Transition
         enter-active-class="transition duration-100 ease-out"
         enter-from-class="transform scale-95 opacity-0"
@@ -33,11 +32,11 @@ async function handleLocaleChange(newLocale: Locale) {
         leave-from-class="transform scale-100 opacity-100"
         leave-to-class="transform scale-95 opacity-0"
       >
-        <ListboxOptions
+        <HeadlessListboxOptions
           border="~ base"
           class="absolute left-1/2 mt-1 max-h-60 rounded-md py-[.24rem] -translate-x-1/2"
         >
-          <ListboxOption v-for="loc in locales" :key="loc.code" v-slot="{ active, selected }" :value="loc.code">
+          <HeadlessListboxOption v-for="loc in locales" :key="loc.code" v-slot="{ active, selected }" :value="loc.code">
             <li
               flex="~ justify-end items-center gap-1"
               text="sm base"
@@ -49,9 +48,9 @@ async function handleLocaleChange(newLocale: Locale) {
                 {{ loc.name }}
               </span>
             </li>
-          </ListboxOption>
-        </ListboxOptions>
+          </HeadlessListboxOption>
+        </HeadlessListboxOptions>
       </Transition>
     </div>
-  </Listbox>
+  </HeadlessListbox>
 </template>
