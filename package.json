@@ -43,7 +43,7 @@
     "better-sqlite3": "^12.10.0",
     "lightgallery": "^2.9.0",
     "minisearch": "^7.2.0",
-    "nuxt": "^4.4.6",
+    "nuxt": "^4.4.2",
     "ogl": "^1.0.11",
     "pixi.js": "^8.18.1",
     "reka-ui": "^2.9.7",

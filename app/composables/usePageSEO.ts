@@ -82,8 +82,6 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex && !ogImageUrl.value) {
-    prepareOgImagePrerenderContext()
-
     const dynamicOgImage = resolveDynamicOgImageDefinition(options.ogImage)
 
     if (dynamicOgImage) {

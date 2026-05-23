@@ -70,8 +70,6 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
 
   // OG 圖片
   if (import.meta.server && !data.value.noIndex && !ogImageUrl.value) {
-    prepareOgImagePrerenderContext()
-
     const dynamicOgImage = resolveDynamicOgImageDefinition(data.value.ogImage)
 
     if (dynamicOgImage) {

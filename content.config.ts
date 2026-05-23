@@ -1,101 +1,30 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { defineRobotsSchema } from '@nuxtjs/robots/content'
 import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
+import { defineOgImageSchema } from 'nuxt-og-image/content'
+import { defineSchemaOrgSchema } from 'nuxt-schema-org/content'
 
-interface SitemapUrl {
-  loc: string
-}
-
-const sitemapChangeFrequencySchema = z.union([
-  z.literal('always'),
-  z.literal('hourly'),
-  z.literal('daily'),
-  z.literal('weekly'),
-  z.literal('monthly'),
-  z.literal('yearly'),
-  z.literal('never'),
-])
-
-const sitemapSchema = z.object({
-  loc: z.string().optional(),
-  lastmod: z.coerce.date().optional(),
-  changefreq: sitemapChangeFrequencySchema.optional(),
-  priority: z.number().optional(),
-  images: z.array(z.object({
-    loc: z.string(),
-    caption: z.string().optional(),
-    geo_location: z.string().optional(),
-    title: z.string().optional(),
-    license: z.string().optional(),
-  })).optional(),
-  videos: z.array(z.object({
-    content_loc: z.string(),
-    player_loc: z.string().optional(),
-    duration: z.string().optional(),
-    expiration_date: z.coerce.date().optional(),
-    rating: z.number().optional(),
-    view_count: z.number().optional(),
-    publication_date: z.coerce.date().optional(),
-    family_friendly: z.boolean().optional(),
-    tag: z.string().optional(),
-    category: z.string().optional(),
-    restriction: z.object({
-      relationship: z.literal('allow').optional(),
-      value: z.string().optional(),
-    }).optional(),
-    gallery_loc: z.string().optional(),
-    price: z.string().optional(),
-    requires_subscription: z.boolean().optional(),
-    uploader: z.string().optional(),
-  })).optional(),
-}).optional()
-
-// TODO: When @nuxt/content and Nuxt SEO schema helpers resolve to the same Zod major,
-// replace these local compatibility schemas with the official helpers:
-// defineRobotsSchema(), defineOgImageSchema(), defineSchemaOrgSchema(), and
-// use defineSitemapSchema()'s return value directly in createSeoSchemaFields().
+// SEO schema fields，取代已棄用的 asSeoCollection
 const baseSeoSchemaFields = {
-  robots: z.union([z.string(), z.boolean()]).optional(),
-  ogImage: z.object({
-    url: z.string().optional(),
-    component: z.string().optional(),
-    props: z.record(z.string(), z.any()).optional(),
-  }).optional(),
-  schemaOrg: z.union([
-    z.record(z.string(), z.any()),
-    z.array(z.record(z.string(), z.any())),
-  ]).optional(),
+  robots: defineRobotsSchema(),
+  ogImage: defineOgImageSchema(),
+  schemaOrg: defineSchemaOrgSchema(),
 }
 
-function prependZhLocalePrefix(url: SitemapUrl) {
+function prependZhLocalePrefix(url: { loc: string }) {
   if (!url.loc.startsWith('/zh'))
     url.loc = `/zh${url.loc}`
 }
 
-function registerSitemapCollection(name: string, onUrl?: (url: SitemapUrl) => void) {
-  // TODO: Remove this typed bridge once defineSitemapSchema() returns a schema
-  // compatible with @nuxt/content's exported Zod instance. The call is still kept
-  // because Nuxt Sitemap registers collection filter/onUrl hooks as side effects.
-  const register = defineSitemapSchema as unknown as (options: {
-    filter: (entry: Record<string, unknown>) => boolean
-    name: string
-    onUrl?: (url: SitemapUrl) => void
-    z: unknown
-  }) => unknown
-
-  register({
-    z,
-    name,
-    filter: entry => entry.published !== false,
-    ...(onUrl ? { onUrl } : {}),
-  })
-}
-
-function createSeoSchemaFields(name: string, onUrl?: (url: SitemapUrl) => void) {
-  registerSitemapCollection(name, onUrl)
-
+function createSeoSchemaFields(name: string, onUrl?: (url: { loc: string }) => void) {
   return {
     ...baseSeoSchemaFields,
-    sitemap: sitemapSchema,
+    sitemap: defineSitemapSchema({
+      z,
+      name,
+      filter: entry => entry.published !== false,
+      ...(onUrl ? { onUrl } : {}),
+    }),
   }
 }
 
@@ -122,6 +51,7 @@ const articleSchema = z.object({
   cover: z.string().optional(),
   image: z.string().optional(),
   alt: z.string().optional(),
+  ogImage: z.string().optional(),
   tags: z.array(z.string()),
   categories: z.array(z.string()).optional(),
   published: z.boolean().default(true),
@@ -143,6 +73,7 @@ const projectSchema = z.object({
   cover: z.string().optional(),
   image: z.string().optional(),
   alt: z.string().optional(),
+  ogImage: z.string().optional(),
   tags: z.array(z.string()),
   categories: z.array(z.string()).optional(),
   published: z.boolean().default(true),

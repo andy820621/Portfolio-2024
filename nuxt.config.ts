@@ -4,7 +4,6 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroRouteConfig } from 'nitropack/types'
 import type { NuxtPage } from 'nuxt/schema'
-import { defineNuxtModule } from '@nuxt/kit'
 import { defineNuxtConfig } from 'nuxt/config'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
@@ -30,8 +29,6 @@ const chunkMap: Record<string, string> = {
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 const isProduction = process.env.NODE_ENV === 'production'
-const isNetlifyBuild = process.env.NETLIFY === 'true'
-const useBuildTimeSeoArtifacts = isProduction
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
@@ -86,26 +83,12 @@ function stripSyntheticSitemapRoutes(pages: NuxtPage[], locales: LocaleObject[])
   prunePages(pages)
 }
 
-const normalizeRouteRuleHeadersModule = defineNuxtModule({
-  meta: {
-    name: 'normalize-route-rule-headers',
-  },
-  setup(_options, nuxt) {
-    nuxt.hook('modules:done', () => {
-      normalizeRouteRuleHeaderNames(nuxt.options.nitro.routeRules)
-    })
-    nuxt.hook('nitro:config', (nitroConfig) => {
-      normalizeRouteRuleHeaderNames(nitroConfig.routeRules)
-    })
-  },
-})
-
 export default defineNuxtConfig({
   // debug: {
   //   hydration: true,
   // },
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: !isProduction },
+  devtools: { enabled: true },
   router: {
     options: {
       strict: false,
@@ -156,7 +139,6 @@ export default defineNuxtConfig({
     'nuxt-delay-hydration',
     '@nuxt/fonts',
     '@netlify/nuxt',
-    normalizeRouteRuleHeadersModule,
     'nuxt-headlessui',
   ],
   contentMermaid: {
@@ -274,9 +256,8 @@ export default defineNuxtConfig({
       '/zh/about',
     ],
     autoI18n: true,
-    // Netlify builds already prerender the site itself; keep sitemap runtime-backed there
-    // to reduce build memory pressure and avoid producing extra static SEO artifacts.
-    zeroRuntime: useBuildTimeSeoArtifacts,
+    // Build sitemap XML during production builds; keep runtime generation in dev for debugging.
+    zeroRuntime: process.env.NODE_ENV === 'production',
   },
   robots: {
     blockNonSeoBots: true,
@@ -313,16 +294,9 @@ export default defineNuxtConfig({
   },
   ogImage: {
     debug: process.env.NODE_ENV !== 'production',
-    // Build-time OG image generation is the heaviest SEO artifact step on CI.
-    // Keep zero-runtime for non-Netlify production builds, but serve dynamically on Netlify.
-    zeroRuntime: useBuildTimeSeoArtifacts,
+    zeroRuntime: process.env.NODE_ENV === 'production',
     fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
-    security: {
-      strict: isNetlifyBuild,
-      secret: process.env.NUXT_OG_IMAGE_SECRET,
-      renderTimeout: 45000,
-    },
-    buildCache: useBuildTimeSeoArtifacts
+    buildCache: process.env.NODE_ENV === 'production'
       ? { base: '.cache/og-image' }
       : false,
   },
@@ -455,7 +429,7 @@ export default defineNuxtConfig({
     // ],
   },
   build: {
-    transpile: ['fsevents', 'globby', 'vite-plugin-checker'],
+    transpile: ['shiki', 'fsevents', 'globby', 'vite-plugin-checker'],
     analyze: {
       enabled: process.env.NODE_ENV !== 'production',
       open: process.env.NODE_ENV !== 'production',
@@ -465,29 +439,6 @@ export default defineNuxtConfig({
     inlineStyles: true,
   },
   vite: {
-    optimizeDeps: {
-      include: [
-        '@headlessui/vue',
-        'dayjs/locale/en', // CJS
-        'dayjs/locale/zh', // CJS
-        'dayjs/plugin/isToday.js', // CJS
-        'dayjs/plugin/localizedFormat', // CJS
-        'dayjs/plugin/timezone.js', // CJS
-        'dayjs/plugin/utc.js', // CJS
-        'dayjs/plugin/weekOfYear.js', // CJS
-        'lightgallery',
-        'lightgallery/plugins/share',
-        'lightgallery/plugins/thumbnail',
-        'lightgallery/plugins/zoom',
-        'minisearch',
-        'ogl',
-        'pixi.js',
-        'reka-ui',
-        'simplex-noise',
-        'swiper/modules',
-        'swiper/vue',
-      ],
-    },
     build: {
       rollupOptions: {
         treeshake: true,
@@ -571,31 +522,6 @@ type RouteRules = Record<string, RouteRule>
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
-}
-
-function normalizeRouteRuleHeaderNames(routeRules: RouteRules | undefined): void {
-  if (!routeRules)
-    return
-
-  for (const rule of Object.values(routeRules)) {
-    if (!rule.headers)
-      continue
-
-    const headers = rule.headers as Record<string, string>
-
-    for (const name of Object.keys(headers)) {
-      const lowerCaseName = name.toLowerCase()
-
-      if (name === lowerCaseName)
-        continue
-
-      const value = headers[name]
-      if (value !== undefined)
-        headers[lowerCaseName] ??= value
-
-      delete headers[name]
-    }
-  }
 }
 
 function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules {
