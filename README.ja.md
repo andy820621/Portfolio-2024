@@ -71,9 +71,11 @@ volta install node@22.22.1
   "volta": {
     "node": "22.22.1"
   },
-  "packageManager": "pnpm@11.1.3+sha512..."
+  "packageManager": "pnpm@11.2.2+sha512..."
 }
 ```
+
+pnpm を更新したら、`package.json#packageManager` を変えてから `pnpm sync:pnpm` を実行すると、下の例が同期されます。
 
 ### 利用可能なスクリプト
 
@@ -85,6 +87,8 @@ pnpm preview      # 本番ビルドをプレビュー
 pnpm lint         # ESLintを実行
 pnpm lint:fix     # ESLintの問題を修正
 pnpm typecheck    # TypeScript型チェックを実行
+pnpm sync:pnpm    # package.json に合わせて pnpm 例を同期
+pnpm check:pnpm   # pnpm の記述が packageManager と一致するか確認
 ```
 
 ---

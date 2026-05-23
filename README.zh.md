@@ -71,9 +71,11 @@ volta install node@22.22.1
   "volta": {
     "node": "22.22.1"
   },
-  "packageManager": "pnpm@11.1.3+sha512..."
+  "packageManager": "pnpm@11.2.2+sha512..."
 }
 ```
+
+當 pnpm 版本變更時，只要更新 `package.json#packageManager`，再執行 `pnpm sync:pnpm`，就會同步下方範例。
 
 ### 可用指令
 
@@ -85,6 +87,8 @@ pnpm preview      # 預覽正式版本
 pnpm lint         # 執行 ESLint
 pnpm lint:fix     # 修正 ESLint 問題
 pnpm typecheck    # 執行 TypeScript 型別檢查
+pnpm sync:pnpm    # 依 package.json 同步 pnpm 版本範例
+pnpm check:pnpm   # 檢查 pnpm 文件是否與 packageManager 一致
 ```
 
 ---

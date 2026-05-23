@@ -97,7 +97,7 @@
 
 ## 技術棧與環境
 
-- Node.js 22.22.1（`package.json#engines` 與 `volta.node`），建議透過 Volta 安裝；封包管理使用 `pnpm 11.1.x`。
+- Node.js 22.22.1（`package.json#engines` 與 `volta.node`），建議透過 Volta 安裝；封包管理版本以 `package.json#packageManager` 為準，升級後執行 `pnpm sync:pnpm` 同步文件。
 - Nuxt 4、Vue 3、TypeScript 5，UnoCSS。
 - 主要模組：`@nuxt/content`（Markdown + 搜尋）、`@nuxtjs/i18n`（`prefix_except_default` 策略）、`@nuxtjs/seo`、`@nuxt/image`、`@nuxt/fonts`、`@nuxtjs/html-validator`、`nuxt-delay-hydration`、`nuxt-headlessui`、`floating-vue/nuxt`、`@stefanobartoletti/nuxt-social-share`。
 - 內容搜尋和列表功能位於 `app/composables/useContentSearchIndex.ts`、`app/composables/useContentListsFilter.ts`，依賴 `minisearch`、`dayjs` 等工具。

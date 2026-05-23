@@ -71,9 +71,11 @@ This project specifies the following in `package.json`:
   "volta": {
     "node": "22.22.1"
   },
-  "packageManager": "pnpm@11.1.3+sha512..."
+  "packageManager": "pnpm@11.2.2+sha512..."
 }
 ```
+
+When pnpm changes, update `package.json#packageManager` and run `pnpm sync:pnpm` to refresh the examples below.
 
 ### Available Scripts
 
@@ -85,6 +87,8 @@ pnpm preview      # Preview production build
 pnpm lint         # Run ESLint
 pnpm lint:fix     # Fix ESLint issues
 pnpm typecheck    # Run TypeScript type checking
+pnpm sync:pnpm    # Sync pnpm version examples from package.json
+pnpm check:pnpm   # Verify pnpm docs match packageManager
 ```
 
 ---
