@@ -728,6 +728,12 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
   const noIndexPaths = ['page-cover', 'project-images', 'opt']
 
   Object.assign(rules, {
+    '/api/**': {
+      headers: {
+        'X-Robots-Tag': 'noindex',
+      },
+    },
+
     '/sitemap.xml': {
       prerender: true,
     },

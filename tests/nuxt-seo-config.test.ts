@@ -39,3 +39,16 @@ it('llms config is enabled with key sections for AI tooling', async () => {
   expect(Array.isArray(llmsConfig.sections)).toBe(true)
   expect(llmsConfig.sections.length).toBeGreaterThan(0)
 })
+
+it('api route rules include X-Robots-Tag noindex header', async () => {
+  const config = await loadNuxtConfig({ cwd: projectRoot })
+  const routeRules = config.routeRules as Record<string, { headers?: Record<string, string> }> | undefined
+
+  expect(routeRules).toBeTruthy()
+
+  const apiRule = routeRules?.['/api/**']
+  expect(apiRule).toBeTruthy()
+
+  const xRobotsTag = apiRule?.headers?.['X-Robots-Tag'] ?? apiRule?.headers?.['x-robots-tag']
+  expect(xRobotsTag).toBe('noindex')
+})
