@@ -1,6 +1,6 @@
 /* eslint-disable node/prefer-global/process */
 import type { LocaleObject } from '@nuxtjs/i18n'
-import type { NitroRouteConfig } from 'nitropack/types'
+import type { NitroConfig } from 'nitropack/types'
 import type { NuxtPage } from 'nuxt/schema'
 import { defineNuxtConfig } from 'nuxt/config'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
@@ -145,6 +145,7 @@ export default defineNuxtConfig({
       dark: 'dark',
     },
   },
+  netlify: { database: { enabled: false } },
   // HTML optimization
   htmlValidator: {
     enabled: process.env.NODE_ENV !== 'production',
@@ -309,14 +310,14 @@ export default defineNuxtConfig({
       {
         name: 'Noto Sans TC',
         provider: 'google',
-        weights: [400, 500, 700],
+        weights: [400, 500, 600, 700],
         global: true,
         preload: false,
       },
       {
         name: 'Noto Sans JP',
         provider: 'google',
-        weights: [400, 500, 700],
+        weights: [400, 500, 600, 700],
         global: true,
         preload: false,
       },
@@ -537,8 +538,7 @@ export default defineNuxtConfig({
   },
 })
 
-type RouteRule = NitroRouteConfig
-type RouteRules = Record<string, RouteRule>
+type RouteRules = NitroConfig['routeRules']
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
@@ -666,8 +666,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     }
 
     // 原有的帶斜線路徑規則
-    const localizedRules = Object.entries(defaultRules) as Array<[string, RouteRule]>
-    localizedRules.forEach(([path, rule]) => {
+    Object.entries(defaultRules).forEach(([path, rule]) => {
       rules[`${prefix}${path}`] = { ...rule }
     })
   })
