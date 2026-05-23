@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navbarData, seoData } from '~~/data'
+import { navbarData, seoData } from '../../../data'
 
 const props = withDefaults(defineProps<{
   description?: string
