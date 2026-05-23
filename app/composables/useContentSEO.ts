@@ -14,6 +14,8 @@ interface ContentData {
 
 export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] }>) {
   const { baseUrl } = useUrl()
+  const runtimeConfig = useRuntimeConfig()
+  const isNetlify = !!runtimeConfig.public.isNetlify
 
   const pageTitle = computed(() => {
     const title = data.value.seoTitle || data.value.title
@@ -70,7 +72,9 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
 
   // OG 圖片
   if (import.meta.server && !data.value.noIndex && !ogImageUrl.value) {
-    prepareOgImagePrerenderContext()
+    // Netlify prerender 階段跳過 OG prerender context，避免 build 時大量產圖造成 OOM。
+    if (!(import.meta.prerender && isNetlify))
+      prepareOgImagePrerenderContext()
 
     const dynamicOgImage = resolveDynamicOgImageDefinition(data.value.ogImage)
 
