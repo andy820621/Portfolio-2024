@@ -22,14 +22,18 @@
   "blogsPage": {
     "title": "All Blogs",
     "seoTitle": "BarZ Hsieh's Personal Blog",
+    "seoTitlePaginated": "{title} - Page {page}",
     "seoDescription": "Technical articles on Nuxt, Vue, TypeScript, SEO, and frontend engineering, focused on maintainable product-quality web development.",
+    "seoDescriptionPaginated": "{description} Page {page}.",
     "description": "Welcome to my technical blog sharing insights on frontend development and web technologies. While not every detail is guaranteed accurate, I hope you'll find valuable information here alongside occasional personal reflections.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },
   "projectsPage": {
     "title": "Projects",
     "seoTitle": "BarZ Hsieh's Projects Portfolio",
+    "seoTitlePaginated": "{title} - Page {page}",
     "seoDescription": "Selected client work, in-house builds, and personal side projects built with Nuxt, Vue, TypeScript, and modern web standards.",
+    "seoDescriptionPaginated": "{description} Page {page}.",
     "description": "\nWelcome to explore my project portfolio.\nHere you'll find work from company collaborations, client projects, to personal experimental side projects.\nInnovative solutions built with Vue, Nuxt, TypeScript, and cutting-edge web standards.",
     "noResultDescription": "We couldn't find any posts matching your search."
   },

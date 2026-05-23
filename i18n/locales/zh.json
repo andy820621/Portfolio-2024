@@ -22,14 +22,18 @@
   "blogsPage": {
     "title": "My Blog",
     "seoTitle": "BarZ Hsieh 的個人部落格",
+    "seoTitlePaginated": "{title} - 第 {page} 頁",
     "seoDescription": "整理 Nuxt、Vue、TypeScript、SEO 與前端工程實務筆記，涵蓋架構設計、內容策略、效能優化與技術決策，分享可維護的產品化網站開發經驗。",
+    "seoDescriptionPaginated": "{description} 第 {page} 頁。",
     "description": "\n歡迎探索我的技術部落格，在這裡我會分享關於前端開發、網頁技術的個人見解。\n我無法保證所有內容都是正確無誤、但希望你能在這邊找到一些有用的資訊。\n偶爾也會分享一些我自己的小故事與生活想法。",
     "noResultDescription": "我們找不到與您現在的搜尋相符文章，請重新搜尋或是清除搜尋條件。"
   },
   "projectsPage": {
     "title": "Projects",
     "seoTitle": "BarZ Hsieh 的專案作品集",
+    "seoTitlePaginated": "{title} - 第 {page} 頁",
     "seoDescription": "收錄客戶案、公司合作與個人 Side Project，聚焦 Nuxt、Vue、TypeScript 與現代網頁技術實作，展示從產品策略、介面體驗到工程落地的完整過程。",
+    "seoDescriptionPaginated": "{description} 第 {page} 頁。",
     "description": "\n歡迎探索我的專案作品集，\n這裡包含公司參與的作品、客戶案件到個人實驗性 Side Projects。\n\n運用 Vue、Nuxt、TypeScript 與前沿網頁標準打造的創新解決方案。",
     "noResultDescription": "我們找不到符合您搜尋的項目，請重新搜尋或是清除搜尋條件。"
   },

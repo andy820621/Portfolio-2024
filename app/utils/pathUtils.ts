@@ -39,6 +39,23 @@ export function buildCanonicalSiteUrl(baseUrl: string, path: string) {
   return `${normalizedBaseUrl}${canonicalPath}`
 }
 
+export function buildCanonicalSiteUrlWithQuery(
+  baseUrl: string,
+  path: string,
+  query: Record<string, string | number | boolean | null | undefined> = {},
+) {
+  const url = new URL(buildCanonicalSiteUrl(baseUrl, path))
+
+  for (const [key, value] of Object.entries(query)) {
+    if (value === undefined || value === null || value === '')
+      continue
+
+    url.searchParams.set(key, String(value))
+  }
+
+  return url.toString()
+}
+
 export function normalizeBaseSiteUrl(baseUrl: string) {
   return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
 }

@@ -5,10 +5,11 @@ import { getKeywords, navbarData, seoData } from '~~/data'
 type MaybeReactive<T> = T | Ref<T> | (() => T)
 
 interface PageSeoOptions {
-  alt?: string
-  title?: string
-  description?: string
-  image?: string
+  alt?: MaybeReactive<string>
+  title?: MaybeReactive<string>
+  description?: MaybeReactive<string>
+  canonicalUrl?: MaybeReactive<string>
+  image?: MaybeReactive<string>
   ogImage?: SeoOgImageValue
   ogType?: 'website' | 'article'
   noIndex?: MaybeReactive<boolean>
@@ -43,9 +44,9 @@ function normalizeSitemapMetaDate(value?: DateLike) {
 
 export function usePageSeo(options: PageSeoOptions = {}) {
   // 計算完整的頁面標題
-  const pageTitle = computed(() => options.title || seoData.ogTitle)
+  const pageTitle = computed(() => resolveOption(options.title) || seoData.ogTitle)
 
-  const pageDescription = computed(() => options.description || seoData.description)
+  const pageDescription = computed(() => resolveOption(options.description) || seoData.description)
 
   // 計算完整的規範連結
   const { locale } = useI18n()
@@ -57,21 +58,23 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     return getKeywords(locale.value)
   })
 
+  const canonicalUrl = computed(() => resolveOption(options.canonicalUrl) || buildCanonicalSiteUrl(baseUrl.value, route.path))
+
   const ogImageUrl = computed(() => {
     if (resolveOption(options.noIndex) || resolveOption(options.noIndexFollow))
       return undefined
 
-    return resolveStaticOgImageUrl(baseUrl.value, options.ogImage, options.image)
+    return resolveStaticOgImageUrl(baseUrl.value, options.ogImage, resolveOption(options.image))
   })
 
   const ogImageAlt = computed(() => {
     if (resolveOption(options.noIndex) || resolveOption(options.noIndexFollow) || !ogImageUrl.value)
       return undefined
 
-    return resolveOgImageAlt(options.ogImage, options.alt, pageTitle.value)
+    return resolveOgImageAlt(options.ogImage, resolveOption(options.alt), pageTitle.value)
   })
 
-  const ogUrl = computed(() => buildCanonicalSiteUrl(baseUrl.value, route.path))
+  const ogUrl = computed(() => canonicalUrl.value)
   const ogType = computed(() => options.ogType || 'website')
 
   const publishedTime = computed(() => normalizeSitemapMetaDate(options.publishedTime))
@@ -106,6 +109,15 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     twitterImageAlt: ogImageAlt,
     articlePublishedTime: publishedTime,
     articleModifiedTime: modifiedTime,
+  })
+
+  useHead({
+    link: [
+      {
+        rel: 'canonical',
+        href: canonicalUrl,
+      },
+    ],
   })
 
   // 確保 OG 圖片在 Server 端生成

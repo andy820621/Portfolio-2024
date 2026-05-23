@@ -11,7 +11,7 @@ const { searchText, selectedTags, filteredData, allTags, clearFilters }
   = useContentListsFilter(formattedData)
 
 const elementPerPage = ref(5)
-const { pageNumber, totalPage, paginatedData, onPreviousPageClick, onNextPageClick }
+const { pageNumber, totalPage, paginatedData }
   = usePagination(filteredData, elementPerPage)
 const isPaginatedPage = computed(() => pageNumber.value > 1)
 
@@ -36,17 +36,36 @@ const pageKeywords = computed(() => [
 ])
 
 // 設置 SEO
+const { baseUrl, route } = useUrl()
+
+const seoTitle = computed(() => isPaginatedPage.value
+  ? t('projectsPage.seoTitlePaginated', {
+      title: t('projectsPage.seoTitle'),
+      page: pageNumber.value,
+    })
+  : t('projectsPage.seoTitle'))
+
+const seoDescription = computed(() => isPaginatedPage.value
+  ? t('projectsPage.seoDescriptionPaginated', {
+      description: t('projectsPage.seoDescription'),
+      page: pageNumber.value,
+    })
+  : t('projectsPage.seoDescription'))
+
+const paginatedCanonicalUrl = computed(() => buildCanonicalSiteUrlWithQuery(baseUrl.value, route.path, {
+  page: pageNumber.value > 1 ? pageNumber.value : undefined,
+}))
+
 usePageSeo({
-  title: t('projectsPage.seoTitle'),
-  description: t('projectsPage.seoDescription'),
+  title: seoTitle,
+  description: seoDescription,
+  canonicalUrl: paginatedCanonicalUrl,
   keywords: pageKeywords.value,
-  noIndexFollow: () => isPaginatedPage.value,
 })
 
-const { baseUrl, route } = useUrl()
-const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
+const nowPageId = computed(() => `${paginatedCanonicalUrl.value}#webpage`)
 const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
-const itemListId = buildSchemaPageNodeId(baseUrl.value, route.path, 'itemlist')
+const itemListId = computed(() => `${paginatedCanonicalUrl.value}#itemlist`)
 
 const itemListElement = formattedData.value.map((post, index) => ({
   '@type': 'ListItem',
@@ -71,21 +90,21 @@ const itemListElement = formattedData.value.map((post, index) => ({
 
 useSchemaOrg([
   defineWebPage({
-    '@id': nowPageId,
+    '@id': nowPageId.value,
     '@type': 'CollectionPage',
     'name': t('projectsPage.title'),
-    'description': t('projectsPage.seoDescription'),
-    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
+    'description': seoDescription.value,
+    'url': paginatedCanonicalUrl.value,
     'isPartOf': {
       '@id': websiteId,
     },
     'mainEntity': {
-      '@id': itemListId,
+      '@id': itemListId.value,
     },
   }),
 
   defineItemList({
-    '@id': itemListId,
+    '@id': itemListId.value,
     '@type': 'ItemList',
     'numberOfItems': formattedData.value.length || 0,
     itemListElement,
@@ -138,13 +157,29 @@ useSchemaOrg([
       />
 
       <div v-if="paginatedData && paginatedData.length" class="flex items-center justify-center space-x-6">
-        <button type="button" title="Previous page" aria-label="Previous page" :disabled="pageNumber <= 1" @click="onPreviousPageClick">
+        <NuxtLink
+          v-if="pageNumber > 1"
+          title="Previous page"
+          aria-label="Previous page"
+          :to="{ query: { ...route.query, page: pageNumber - 1 === 1 ? undefined : String(pageNumber - 1) } }"
+        >
           <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
-        </button>
+        </NuxtLink>
+        <span v-else title="Previous page" aria-label="Previous page" aria-disabled="true">
+          <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" />
+        </span>
         <p>{{ pageNumber }} / {{ totalPage }}</p>
-        <button type="button" title="Next page" aria-label="Next page" :disabled="pageNumber >= totalPage" @click="onNextPageClick">
+        <NuxtLink
+          v-if="pageNumber < totalPage"
+          title="Next page"
+          aria-label="Next page"
+          :to="{ query: { ...route.query, page: String(pageNumber + 1) } }"
+        >
           <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
-        </button>
+        </NuxtLink>
+        <span v-else title="Next page" aria-label="Next page" aria-disabled="true">
+          <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" />
+        </span>
       </div>
     </div>
   </div>

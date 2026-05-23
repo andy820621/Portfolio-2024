@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { buildCanonicalSiteUrl, canonicalizePagePath, decodeRouteParam, encodeCanonicalPagePath } from '../app/utils/pathUtils.ts'
+import { buildCanonicalSiteUrl, buildCanonicalSiteUrlWithQuery, canonicalizePagePath, decodeRouteParam, encodeCanonicalPagePath } from '../app/utils/pathUtils.ts'
 import { seoData } from '../data/index.ts'
 
 describe('path utilities', () => {
@@ -16,6 +16,18 @@ describe('path utilities', () => {
     expect(
       buildCanonicalSiteUrl(seoData.mySite, '/gallery/blossoms-and-kids'),
     ).toBe(`${seoData.mySite.replace(/\/$/, '')}/gallery/blossoms-and-kids/`)
+  })
+
+  it('builds canonical paginated URLs without page query for page 1', () => {
+    expect(
+      buildCanonicalSiteUrlWithQuery(seoData.mySite, '/posts', { page: undefined }),
+    ).toBe(`${seoData.mySite.replace(/\/$/, '')}/posts/`)
+  })
+
+  it('builds canonical paginated URLs with page query for page > 1', () => {
+    expect(
+      buildCanonicalSiteUrlWithQuery(seoData.mySite, '/posts', { page: 2 }),
+    ).toBe(`${seoData.mySite.replace(/\/$/, '')}/posts/?page=2`)
   })
 
   it('encodes canonical gallery slug paths', () => {

@@ -13,12 +13,51 @@ const localeHead = useLocaleHead({
 const { localeProperties } = useI18n()
 const { route, baseUrl } = useUrl()
 
-const links = localeHead.value.link?.map(link => ({
-  ...link,
-  href: trailingSlashUrlOrNot(link.href),
-})) || []
+const paginationPage = computed(() => {
+  const rawPage = route.query.page
+  const firstValue = Array.isArray(rawPage) ? rawPage[0] : rawPage
+  const parsed = firstValue ? Number.parseInt(firstValue, 10) : 1
+  return Number.isFinite(parsed) && parsed > 1 ? String(parsed) : undefined
+})
 
-const metas = localeHead.value.meta?.map((meta) => {
+function withPaginationQuery(href: string) {
+  const page = paginationPage.value
+  if (!page)
+    return href
+
+  try {
+    const parsed = new URL(href, baseUrl.value)
+    parsed.searchParams.set('page', page)
+    const normalizedPath = trailingSlashUrlOrNot(parsed.pathname)
+    const isAbsolute = /^[a-z][\w+\-.]*:\/\//i.test(href)
+
+    if (isAbsolute)
+      return `${parsed.origin}${normalizedPath}${parsed.search}${parsed.hash}`
+
+    return `${normalizedPath}${parsed.search}${parsed.hash}`
+  }
+  catch {
+    return href
+  }
+}
+
+const links = computed(() => localeHead.value.link?.map((link) => {
+  const normalizedHref = trailingSlashUrlOrNot(link.href)
+
+  if (link.rel === 'alternate') {
+    return {
+      ...link,
+      href: withPaginationQuery(normalizedHref),
+    }
+  }
+
+  return {
+    ...link,
+    href: normalizedHref,
+  }
+}) || [])
+
+const metas = computed(() => localeHead.value.meta?.map((meta) => {
   // 只對 URL 類型的 meta 標籤添加斜線
   if (meta.property === 'og:url' || meta.name === 'canonical' || meta.name === 'twitter:url') {
     return {
@@ -27,7 +66,7 @@ const metas = localeHead.value.meta?.map((meta) => {
     }
   }
   return meta
-}) || []
+}) || [])
 
 useHead({
   htmlAttrs: localeHead.value.htmlAttrs,
