@@ -25,6 +25,13 @@ to = "https://barz.app/:splat"
 status = 308
 force = true
 
+# 避免 https://www.barz.app/zh 產生額外一跳（www -> non-www -> trailing slash）
+[[redirects]]
+from = "https://www.barz.app/zh"
+to = "https://barz.app/zh/"
+status = 308
+force = true
+
 # 移除 www 子網域
 [[redirects]]
 from = "https://www.barz.app/*"

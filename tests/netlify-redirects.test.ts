@@ -26,3 +26,13 @@ it('malformed locale redirects are declared before the broad /en/* redirect', ()
   expect(malformedEnZhRedirectIndex).toBeLessThan(broadEnRedirectIndex)
   expect(malformedEnEnRedirectIndex).toBeLessThan(broadEnRedirectIndex)
 })
+
+it('https://www.barz.app/zh directly redirects to canonical slash URL before broad www redirect', () => {
+  const directZhWwwRedirectIndex = netlifyConfig.indexOf('from = "https://www.barz.app/zh"')
+  const broadWwwRedirectIndex = netlifyConfig.indexOf('from = "https://www.barz.app/*"')
+
+  expect(directZhWwwRedirectIndex).toBeGreaterThan(-1)
+  expect(broadWwwRedirectIndex).toBeGreaterThan(-1)
+  expect(directZhWwwRedirectIndex).toBeLessThan(broadWwwRedirectIndex)
+  expect(netlifyConfig).toContain('to = "https://barz.app/zh/"')
+})
