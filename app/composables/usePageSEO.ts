@@ -8,6 +8,7 @@ interface PageSeoOptions {
   description?: string
   image?: string
   ogImage?: SeoOgImageValue
+  ogType?: 'website' | 'article'
   noIndex?: boolean
   alternateLinks?: {
     hreflang: string
@@ -38,7 +39,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 計算完整的規範連結
   const { locale } = useI18n()
-  const { baseUrl } = useUrl()
+  const { baseUrl, route } = useUrl()
 
   const pageKeywords = computed(() => {
     if (Array.isArray(options.keywords) || typeof options.keywords === 'string')
@@ -60,6 +61,9 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     return resolveOgImageAlt(options.ogImage, options.alt, pageTitle.value)
   })
 
+  const ogUrl = computed(() => buildCanonicalSiteUrl(baseUrl.value, route.path))
+  const ogType = computed(() => options.ogType || 'website')
+
   const publishedTime = computed(() => normalizeSitemapMetaDate(options.publishedTime))
   const modifiedTime = computed(() => normalizeSitemapMetaDate(options.modifiedTime))
 
@@ -69,6 +73,11 @@ export function usePageSeo(options: PageSeoOptions = {}) {
     description: pageDescription,
     keywords: pageKeywords,
     robots: () => options.noIndex ? 'noindex, nofollow' : 'index, follow',
+    ogTitle: pageTitle,
+    ogDescription: pageDescription,
+    ogUrl,
+    ogType,
+    ogSiteName: navbarData.homeTitle,
     twitterCard: 'summary_large_image',
     twitterTitle: pageTitle,
     twitterDescription: pageDescription,

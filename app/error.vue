@@ -47,6 +47,8 @@ useSeoMeta({
   title: pageTitle,
   description: pageDescription,
   robots: 'noindex, nofollow',
+  ogType: 'website',
+  ogSiteName: navbarData.homeTitle,
   twitterCard: () => ogImageUrl.value ? 'summary_large_image' : undefined,
   twitterTitle: () => ogImageUrl.value ? pageTitle.value : undefined,
   twitterDescription: () => ogImageUrl.value ? pageDescription.value : undefined,

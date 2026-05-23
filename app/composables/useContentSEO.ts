@@ -13,7 +13,7 @@ interface ContentData {
 }
 
 export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] }>) {
-  const { baseUrl } = useUrl()
+  const { baseUrl, route } = useUrl()
 
   const pageTitle = computed(() => {
     const title = data.value.seoTitle || data.value.title
@@ -53,12 +53,19 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
     return resolveOgImageAlt(data.value.ogImage, data.value.alt, pageTitle.value)
   })
 
+  const ogUrl = computed(() => buildCanonicalSiteUrl(baseUrl.value, route.path))
+
   // SEO 元數據
   useSeoMeta({
     title: pageTitle,
     description: pageDescription,
     keywords: mergedKeywords,
     robots: () => data.value.noIndex ? 'noindex, nofollow' : 'index, follow',
+    ogTitle: pageTitle,
+    ogDescription: pageDescription,
+    ogUrl,
+    ogType: 'article',
+    ogSiteName: navbarData.homeTitle,
     twitterCard: 'summary_large_image',
     twitterTitle: pageTitle,
     twitterDescription: pageDescription,

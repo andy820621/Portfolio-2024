@@ -227,6 +227,8 @@ function buildSeoUtilsEssentialTags(report) {
     { category: 'Open Graph', name: 'og:description', present: !!report.ogDescription, value: report.ogDescription },
     { category: 'Open Graph', name: 'og:image', present: !!report.ogImage, value: report.ogImage },
     { category: 'Open Graph', name: 'og:url', present: !!report.ogUrl, value: report.ogUrl },
+    { category: 'Open Graph', name: 'og:type', present: !!report.ogType, value: report.ogType },
+    { category: 'Open Graph', name: 'og:site_name', present: !!report.ogSiteName, value: report.ogSiteName },
     { category: 'Twitter', name: 'twitter:card', present: !!report.twitterCard, value: report.twitterCard },
     {
       category: 'Twitter',
@@ -347,6 +349,8 @@ function auditHead(htmlSource, route) {
     ogDescription: normalizeText(findMetaContent(metas, 'property', 'og:description')),
     ogImage: normalizeText(findMetaContent(metas, 'property', 'og:image')),
     ogUrl: normalizeText(findMetaContent(metas, 'property', 'og:url')),
+    ogType: normalizeText(findMetaContent(metas, 'property', 'og:type')),
+    ogSiteName: normalizeText(findMetaContent(metas, 'property', 'og:site_name')),
     twitterCard: normalizeText(findMetaContent(metas, 'name', 'twitter:card')),
     twitterTitle: normalizeText(findMetaContent(metas, 'name', 'twitter:title')),
     twitterDescription: normalizeText(findMetaContent(metas, 'name', 'twitter:description')),
@@ -414,6 +418,12 @@ function auditHead(htmlSource, route) {
 
   if (!report.ogUrl)
     report.findings.push(createFinding('warning', 'missing-og-url', '缺少 og:url'))
+
+  if (!report.ogType)
+    report.findings.push(createFinding('warning', 'missing-og-type', '缺少 og:type'))
+
+  if (!report.ogSiteName)
+    report.findings.push(createFinding('warning', 'missing-og-site-name', '缺少 og:site_name'))
 
   if (!report.twitterCard)
     report.findings.push(createFinding('warning', 'missing-twitter-card', '缺少 twitter:card'))
