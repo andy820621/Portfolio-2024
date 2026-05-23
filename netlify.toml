@@ -19,6 +19,13 @@ to = "https://barz.app/:splat"
 status = 308
 force = true
 
+# 避免 http://www.barz.app/zh 產生額外一跳（http -> https -> trailing slash）
+[[redirects]]
+from = "http://www.barz.app/zh"
+to = "https://barz.app/zh/"
+status = 308
+force = true
+
 [[redirects]]
 from = "http://www.barz.app/*"
 to = "https://barz.app/:splat"

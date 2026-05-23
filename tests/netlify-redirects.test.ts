@@ -36,3 +36,13 @@ it('https://www.barz.app/zh directly redirects to canonical slash URL before bro
   expect(directZhWwwRedirectIndex).toBeLessThan(broadWwwRedirectIndex)
   expect(netlifyConfig).toContain('to = "https://barz.app/zh/"')
 })
+
+it('http://www.barz.app/zh directly redirects to canonical slash URL before broad http www redirect', () => {
+  const directZhHttpWwwRedirectIndex = netlifyConfig.indexOf('from = "http://www.barz.app/zh"')
+  const broadHttpWwwRedirectIndex = netlifyConfig.indexOf('from = "http://www.barz.app/*"')
+
+  expect(directZhHttpWwwRedirectIndex).toBeGreaterThan(-1)
+  expect(broadHttpWwwRedirectIndex).toBeGreaterThan(-1)
+  expect(directZhHttpWwwRedirectIndex).toBeLessThan(broadHttpWwwRedirectIndex)
+  expect(netlifyConfig).toContain('to = "https://barz.app/zh/"')
+})
