@@ -30,8 +30,8 @@ const chunkMap: Record<string, string> = {
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 const isProduction = process.env.NODE_ENV === 'production'
-const isNetlify = !!process.env.NETLIFY
-const useBuildTimeSeoArtifacts = isProduction && !isNetlify && process.env.NUXT_BUILD_TIME_SEO_ARTIFACTS === 'true'
+const isNetlifyBuild = process.env.NETLIFY === 'true'
+const useBuildTimeSeoArtifacts = isProduction
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
@@ -242,7 +242,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       trailingSlash: true,
-      isNetlify,
     },
   },
   site: {
@@ -318,6 +317,11 @@ export default defineNuxtConfig({
     // Keep zero-runtime for non-Netlify production builds, but serve dynamically on Netlify.
     zeroRuntime: useBuildTimeSeoArtifacts,
     fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
+    security: {
+      strict: isNetlifyBuild,
+      secret: process.env.NUXT_OG_IMAGE_SECRET,
+      renderTimeout: 45000,
+    },
     buildCache: useBuildTimeSeoArtifacts
       ? { base: '.cache/og-image' }
       : false,

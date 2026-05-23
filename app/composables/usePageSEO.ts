@@ -39,8 +39,6 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   // 計算完整的規範連結
   const { locale } = useI18n()
   const { baseUrl } = useUrl()
-  const runtimeConfig = useRuntimeConfig()
-  const isNetlify = !!runtimeConfig.public.isNetlify
 
   const pageKeywords = computed(() => {
     if (Array.isArray(options.keywords) || typeof options.keywords === 'string')
@@ -84,9 +82,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
 
   // 確保 OG 圖片在 Server 端生成
   if (import.meta.server && !options.noIndex && !ogImageUrl.value) {
-    // Netlify prerender 階段跳過 OG prerender context，避免 build 時大量產圖造成 OOM。
-    if (!(import.meta.prerender && isNetlify))
-      prepareOgImagePrerenderContext()
+    prepareOgImagePrerenderContext()
 
     const dynamicOgImage = resolveDynamicOgImageDefinition(options.ogImage)
 
