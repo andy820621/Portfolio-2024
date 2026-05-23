@@ -84,7 +84,7 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
       })
     }
     else if (!isOgImageDisabled(data.value.ogImage)) {
-      defineOgImage('SiteSeoTakumi', {
+      defineOgImage('SiteSeo', {
         title: pageTitle.value,
         description: pageDescription.value,
         siteName: navbarData.homeTitle,

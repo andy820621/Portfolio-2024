@@ -96,7 +96,7 @@ export function usePageSeo(options: PageSeoOptions = {}) {
       })
     }
     else if (!isOgImageDisabled(options.ogImage)) {
-      defineOgImage('SiteSeoTakumi', {
+      defineOgImage('SiteSeo', {
         title: pageTitle.value,
         description: pageDescription.value,
         siteName: navbarData.homeTitle,
