@@ -30,8 +30,7 @@ const chunkMap: Record<string, string> = {
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 const isProduction = process.env.NODE_ENV === 'production'
-const isNetlifyRuntime = Boolean(process.env.NETLIFY)
-const useBuildTimeSeoArtifacts = isProduction && !isNetlifyRuntime
+const useBuildTimeSeoArtifacts = isProduction
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
