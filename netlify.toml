@@ -32,25 +32,11 @@ to = "https://barz.app/:splat"
 status = 308
 force = true
 
-# 將 /en/ 永久重定向到根目錄 (/)
-[[redirects]]
-from = "/en/*"
-to = "/:splat" # 將 /en/foo 重定向到 /foo, /en/ 重定向到 /
-status = 308
-force = true
-
 # 舊文章路徑重新導向到目前最接近的 Nuxt Content 架構文章
 [[redirects]]
 from = "/posts/fetch-content-data-render-pages/"
 to = "/posts/nuxt-content-v3-i18n-bilingual-site/"
 status = 301
-force = true
-
-# 處理 /en/ 的情況
-[[redirects]]
-from = "/en/"
-to = "/"
-status = 308
 force = true
 
 # 避免 localized sitemap route 落回 Nuxt app shell
@@ -85,6 +71,13 @@ force = true
 [[redirects]]
 from = "/en/en/*"
 to = "/en/:splat"
+status = 308
+force = true
+
+# 將 /en/ 永久重定向到根目錄 (/)
+[[redirects]]
+from = "/en/*"
+to = "/:splat" # 將 /en/foo 重定向到 /foo, /en/ 重定向到 /
 status = 308
 force = true
 
