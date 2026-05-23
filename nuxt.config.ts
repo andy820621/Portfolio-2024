@@ -31,7 +31,7 @@ const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 const isProduction = process.env.NODE_ENV === 'production'
 const isNetlifyBuild = process.env.NETLIFY === 'true'
-const useBuildTimeSeoArtifacts = isProduction && !isNetlifyBuild
+const useBuildTimeSeoArtifacts = isProduction
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
