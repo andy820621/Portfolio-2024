@@ -14,6 +14,7 @@ type LinkWithTooltipProps = {
   tooltipContent?: string
   iconClass?: string
   size?: string | number
+  linkGroup?: string
 } & IconSource
 
 const props = withDefaults(defineProps<LinkWithTooltipProps>(), {
@@ -21,9 +22,11 @@ const props = withDefaults(defineProps<LinkWithTooltipProps>(), {
 })
 
 const { to, tooltipContent, iconClass } = toRefs(props)
+const { trackOutboundClick } = useAnalyticsOutboundClick()
 const size = computed(() => String(props.size)) // 將 size 統一轉為字串方便處理單位
 
 const REMOTE_URL_REGEX = /^(?:https?:)?\/\//
+const HTTP_URL_REGEX = /^https?:\/\//i
 const UNIT_ONLY_REGEX = /^\d+$/
 const isRemoteSource = (value?: string) => !!value && REMOTE_URL_REGEX.test(value)
 
@@ -48,6 +51,37 @@ const imageSizeStyle = computed(() => ({
   margin: 0,
 }))
 
+function resolveDestinationType(destinationUrl: URL): 'github' | 'npm' | 'tool' {
+  const hostname = destinationUrl.hostname.toLowerCase()
+
+  if (hostname === 'github.com' || hostname.endsWith('.github.com'))
+    return 'github'
+
+  if (hostname === 'npmjs.com' || hostname.endsWith('.npmjs.com'))
+    return 'npm'
+
+  return 'tool'
+}
+
+function trackLinkOutboundClick() {
+  if (!HTTP_URL_REGEX.test(props.to))
+    return
+
+  try {
+    const destinationUrl = new URL(props.to)
+
+    trackOutboundClick({
+      destinationType: resolveDestinationType(destinationUrl),
+      destinationUrl: destinationUrl.href,
+      linkGroup: props.linkGroup,
+      sourceComponent: 'link_with_tooltip',
+    })
+  }
+  catch {
+    // Ignore malformed URL props and avoid breaking navigation behavior.
+  }
+}
+
 // 若同時缺少 icon/url 會造成空內容，開發模式下提示一次
 if (import.meta.env.DEV && !iconName.value && !iconUrl.value) {
   console.warn('[LinkWithTooltip] Missing both icon and url props; nothing will be rendered inside link.')
@@ -64,6 +98,7 @@ if (import.meta.env.DEV && !iconName.value && !iconUrl.value) {
         class="flex items-center border-b-none!"
         target="_blank"
         rel="noopener noreferrer"
+        @click="trackLinkOutboundClick"
       >
         <Icon v-if="iconName" :name="iconName" :class="iconClass" :size="size" aria-hidden="true" />
         <NuxtImg
@@ -88,6 +123,7 @@ if (import.meta.env.DEV && !iconName.value && !iconUrl.value) {
     class="flex items-center border-b-none!"
     target="_blank"
     rel="noopener noreferrer"
+    @click="trackLinkOutboundClick"
   >
     <Icon v-if="iconName" :name="iconName" :class="iconClass" :size="size" aria-hidden="true" />
     <img

@@ -2,6 +2,10 @@
 import { useWindowScroll } from '@vueuse/core'
 
 const localePath = useLocalePath()
+const { trackOutboundClick } = useAnalyticsOutboundClick()
+
+const GITHUB_PROFILE_URL = 'https://github.com/andy820621'
+const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/andy820621'
 
 function toTop() {
   window.scrollTo({
@@ -11,6 +15,22 @@ function toTop() {
 }
 
 const { y: scroll } = useWindowScroll()
+
+function trackNavbarGithubClick() {
+  trackOutboundClick({
+    destinationType: 'github',
+    destinationUrl: GITHUB_PROFILE_URL,
+    sourceComponent: 'navbar',
+  })
+}
+
+function trackNavbarInstagramClick() {
+  trackOutboundClick({
+    destinationType: 'social',
+    destinationUrl: INSTAGRAM_PROFILE_URL,
+    sourceComponent: 'navbar',
+  })
+}
 </script>
 
 <template>
@@ -70,13 +90,13 @@ const { y: scroll } = useWindowScroll()
         </NuxtLink>  -->
 
         <!-- Social Media -->
-        <NuxtLink href="https://www.instagram.com/andy820621" target="_blank" title="Instagram" class="lt-md:hidden" aria-label="Instagram 個人頁面" rel="noopener noreferrer" md:inline-flex>
+        <NuxtLink href="https://www.instagram.com/andy820621" target="_blank" title="Instagram" class="lt-md:hidden" aria-label="Instagram 個人頁面" rel="noopener noreferrer" md:inline-flex @click="trackNavbarInstagramClick">
           <MyTooltip text="Instagram">
             <Icon name="i-ri-instagram-line" aria-hidden="true" />
           </MyTooltip>
           <span class="sr-only">Instagram</span>
         </NuxtLink>
-        <NuxtLink href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden" aria-label="GitHub 個人頁面" rel="noopener noreferrer" md:inline-flex>
+        <NuxtLink href="https://github.com/andy820621" target="_blank" title="GitHub" class="lt-md:hidden" aria-label="GitHub 個人頁面" rel="noopener noreferrer" md:inline-flex @click="trackNavbarGithubClick">
           <MyTooltip text="GitHub">
             <Icon name="i-ri-github-fill" aria-hidden="true" />
           </MyTooltip>

@@ -10,12 +10,15 @@ const { content, baseName, thumbnailType, title } = defineProps<{
   title: string
 }>()
 
+const { trackOutboundClick } = useAnalyticsOutboundClick()
+
 const updateDate = computed(() => content.updatedAt ? useFormatDate(content.updatedAt, false) : '')
 
 const contentLinks = computed(() =>
   Object.entries(linkConfig)
     .filter(([key]) => content[key as keyof typeof content])
     .map(([key, { name, icon }]) => ({
+      linkType: key,
       href: content[key as keyof typeof content] as string,
       name,
       icon,
@@ -33,6 +36,15 @@ function toggleContent() {
 }
 
 const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
+
+function trackDemoOutboundClick(href: string) {
+  trackOutboundClick({
+    destinationType: 'demo',
+    destinationUrl: href,
+    sourceComponent: 'demo_card',
+    itemId: baseName,
+  })
+}
 </script>
 
 <template>
@@ -66,7 +78,7 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
         </h2>
         <nav v-if="contentLinks.length" class="links flex flex-col gap-3" aria-label="Project links">
           <NuxtLink
-            v-for="{ href, icon, name } in contentLinks"
+            v-for="{ href, icon, name, linkType } in contentLinks"
             :key="href"
             :to="href"
             external
@@ -76,6 +88,8 @@ const vedioTypes = ['mov', 'mp4', 'webm', 'ogg']
             flex="~ items-center"
             :aria-label="`Visit ${name} for ${title || baseName}`"
             :title="`Visit ${name} for ${title || baseName}`"
+            :data-link-type="linkType"
+            @click="trackDemoOutboundClick(href)"
           >
             <div h-6 w-6 flex="~ items-center justify-center" aria-hidden="true">
               <Icon :name="icon" />

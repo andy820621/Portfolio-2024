@@ -8,6 +8,7 @@ const { contenDetailData, redirectLink = '/posts' } = defineProps<{
 
 const localePath = useLocalePath()
 const route = useRoute()
+const { trackOutboundClick } = useAnalyticsOutboundClick()
 
 // 使用拆分後的 composables
 const { mainData, prevContent, nextContent } = contenDetailData
@@ -38,6 +39,64 @@ useContentSEO(data)
 const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 
 const { fullPath } = useUrl()
+
+function resolveMarkdownDestinationType(url: URL) {
+  const hostname = url.hostname.toLowerCase()
+
+  if (hostname === 'github.com' || hostname.endsWith('.github.com'))
+    return 'github' as const
+
+  if (hostname === 'npmjs.com' || hostname.endsWith('.npmjs.com'))
+    return 'npm' as const
+
+  return undefined
+}
+
+function resolveContentItemId() {
+  const params = route.params as {
+    post?: string
+    project?: string
+  }
+
+  return params.post || params.project
+}
+
+function handleMarkdownOutboundClick(event: MouseEvent) {
+  const target = event.target as HTMLElement | null
+  const anchor = target?.closest('a[href]') as HTMLAnchorElement | null
+
+  if (!anchor)
+    return
+
+  const href = anchor.getAttribute('href')
+
+  if (!href || href.startsWith('#') || href.startsWith('/'))
+    return
+
+  let resolvedUrl: URL
+
+  try {
+    resolvedUrl = new URL(href, window.location.href)
+  }
+  catch {
+    return
+  }
+
+  if (resolvedUrl.origin === window.location.origin)
+    return
+
+  const destinationType = resolveMarkdownDestinationType(resolvedUrl)
+
+  if (!destinationType)
+    return
+
+  trackOutboundClick({
+    destinationType,
+    destinationUrl: resolvedUrl.href,
+    sourceComponent: 'markdown_content',
+    itemId: resolveContentItemId(),
+  })
+}
 
 if (import.meta.client) {
   const HASH_OFFSET = 100
@@ -95,11 +154,13 @@ if (import.meta.client) {
             :image-class="data.imageClass"
           />
 
-          <ContentRenderer v-if="mainData" :value="mainData" :components="{ th: ProseTh }">
-            <template #empty>
-              <p>No content found.</p>
-            </template>
-          </ContentRenderer>
+          <div v-if="mainData" @click.capture="handleMarkdownOutboundClick">
+            <ContentRenderer :value="mainData" :components="{ th: ProseTh }">
+              <template #empty>
+                <p>No content found.</p>
+              </template>
+            </ContentRenderer>
+          </div>
 
           <template v-else>
             <div grid mt-20 justify-center>
