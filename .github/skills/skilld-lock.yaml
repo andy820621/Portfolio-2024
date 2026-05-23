@@ -195,3 +195,10 @@ skills:
     source: "https://github.com/vitejs/vite/tree/v8.0.13/docs"
     syncedAt: 2026-05-20
     generator: skilld
+  nuxt-og-image-skilld:
+    packageName: nuxt-og-image
+    version: 6.3.10
+    repo: nuxt-modules/og-image
+    source: "https://github.com/nuxt-modules/og-image/tree/v6.3.10/docs"
+    syncedAt: 2026-05-23
+    generator: skilld
