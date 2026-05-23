@@ -127,6 +127,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@nuxtjs/seo',
+    'nuxt-llms',
     '@nuxt/content',
     '@nuxtjs/i18n',
     '@nuxt/icon',
@@ -239,6 +240,48 @@ export default defineNuxtConfig({
       type: 'Person',
     },
     trailingSlash: true,
+  },
+  llms: {
+    domain: canonicalSiteUrl,
+    title: `${navbarData.homeTitle} Knowledge Map`,
+    description: 'Portfolio content, technical posts, project breakdowns, and gallery albums by BarZ Hsieh (Hsieh, Yao- Tsu).',
+    sections: [
+      {
+        title: 'Start Here',
+        links: [
+          { title: 'Home', href: '/' },
+          { title: 'Posts', href: '/posts/' },
+          { title: 'Projects', href: '/projects/' },
+          { title: 'Gallery', href: '/gallery/' },
+          { title: 'License', href: '/license/' },
+        ],
+      },
+      {
+        title: 'Featured Technical Content',
+        links: [
+          {
+            title: 'Nuxt Content v3 i18n Bilingual Site',
+            href: '/posts/nuxt-content-v3-i18n-bilingual-site/',
+          },
+          {
+            title: 'Nuxt SEO Guide',
+            href: '/posts/nuxt-seo-guide/',
+          },
+          {
+            title: 'Nuxt Tips Collection',
+            href: '/posts/nuxt-tips/',
+          },
+        ],
+      },
+      {
+        title: 'Optional',
+        links: [
+          { title: 'Traditional Chinese Posts', href: '/zh/posts/' },
+          { title: 'Traditional Chinese Projects', href: '/zh/projects/' },
+          { title: 'Traditional Chinese Gallery', href: '/zh/gallery/' },
+        ],
+      },
+    ],
   },
   sitemap: {
     xslTips: false,

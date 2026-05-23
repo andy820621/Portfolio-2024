@@ -15,3 +15,21 @@ it('seo config disables canonical lowercasing for mixed-case routes', async () =
 
   expect(seoConfig.canonicalLowercase).toBe(false)
 })
+
+it('llms config is enabled with key sections for AI tooling', async () => {
+  const config = await loadNuxtConfig({ cwd: projectRoot })
+  const modules = config.modules
+  const llmsConfig = config.llms
+
+  expect(Array.isArray(modules)).toBe(true)
+  expect(modules).toContain('nuxt-llms')
+  expect(llmsConfig).toBeTruthy()
+
+  if (!llmsConfig)
+    throw new Error('Expected llms config to be enabled.')
+
+  expect(llmsConfig.domain).toMatch(/^https?:\/\//)
+  expect(llmsConfig.title).toContain('Knowledge Map')
+  expect(Array.isArray(llmsConfig.sections)).toBe(true)
+  expect(llmsConfig.sections.length).toBeGreaterThan(0)
+})

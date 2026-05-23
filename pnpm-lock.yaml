@@ -177,6 +177,9 @@ importers:
       nuxt-headlessui:
         specifier: ^1.2.2
         version: 1.2.2(magicast@0.5.3)(vue@3.5.34(typescript@6.0.3))
+      nuxt-llms:
+        specifier: ^0.2.0
+        version: 0.2.0(magicast@0.5.3)
       nuxt-og-image:
         specifier: 6.3.10
         version: 6.3.10(1c951456c9a595055f943ca963390244)
@@ -7923,6 +7926,9 @@ packages:
     resolution: {integrity: sha512-qAC9zAnFswijUxWz/cd9QNWK13U8jv7Rctjk6E0MNMHmyoISWYmM4tvVGyxoXl+kI+sEjA6zf5h/LxQAfShSSg==}
     peerDependencies:
       nuxt: ^3.9.0 || ^4.0.0
+
+  nuxt-llms@0.2.0:
+    resolution: {integrity: sha512-GoEW00x8zaZ1wS0R0aOYptt3b54JEaRwlyVtuAiQoH51BwYdjN5/3+00/+4wi39M5cT4j5XcnGwOxJ7v4WVb9A==}
 
   nuxt-og-image@6.3.10:
     resolution: {integrity: sha512-9yMgw5GcDWIu+CnwKCHxl5SIEWUiIwcUM43RKJq+yeHzFKOMqy97lFinhyx4/4Qu5LagwSziw03yZ7usMBcWoA==}
@@ -19216,6 +19222,12 @@ snapshots:
       - vite
       - vue
       - zod
+
+  nuxt-llms@0.2.0(magicast@0.5.3):
+    dependencies:
+      '@nuxt/kit': 4.4.6(magicast@0.5.3)
+    transitivePeerDependencies:
+      - magicast
 
   nuxt-og-image@6.3.10(1c951456c9a595055f943ca963390244):
     dependencies:
