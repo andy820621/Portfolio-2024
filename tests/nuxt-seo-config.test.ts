@@ -30,6 +30,12 @@ it('llms config is enabled with key sections for AI tooling', async () => {
 
   expect(llmsConfig.domain).toMatch(/^https?:\/\//)
   expect(llmsConfig.title).toContain('Knowledge Map')
+  expect(llmsConfig.full).toBeTruthy()
+
+  if (!llmsConfig.full)
+    throw new Error('Expected llms.full config to enable /llms-full.txt route.')
+
+  expect(llmsConfig.full.title).toContain('Full Documentation')
   expect(Array.isArray(llmsConfig.sections)).toBe(true)
   expect(llmsConfig.sections.length).toBeGreaterThan(0)
 })

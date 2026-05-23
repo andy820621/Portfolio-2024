@@ -245,6 +245,10 @@ export default defineNuxtConfig({
     domain: canonicalSiteUrl,
     title: `${navbarData.homeTitle} Knowledge Map`,
     description: 'Portfolio content, technical posts, project breakdowns, and gallery albums by BarZ Hsieh (Hsieh, Yao- Tsu).',
+    full: {
+      title: `${navbarData.homeTitle} Full Documentation`,
+      description: 'Extended documentation context for AI assistants and crawler tooling.',
+    },
     sections: [
       {
         title: 'Start Here',
