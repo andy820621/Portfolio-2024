@@ -182,6 +182,8 @@ content/
 ---
 title: Your Project Title
 description: Project description
+date: 2026-05-25
+updatedAt: 2026-05-25
 ---
 
 ## 功能展示
@@ -196,6 +198,12 @@ description: Project description
 ::ProjectLightBox{folder="your-project/feature-a"}
 ::
 ```
+
+**Frontmatter 時間欄位規範（Posts / Projects 共用）：**
+
+- 新增文章：必填 `date`（建立時間，`YYYY-MM-DD`）
+- 修改文章：保留原本 `date`，更新 `updatedAt`（最後修改時間，`YYYY-MM-DD`）
+- 若舊文沒有 `updatedAt`，第一次修改時補上
 
 #### 6. 測試
 
@@ -256,11 +264,20 @@ generate-project-images-metadata.js
 - [ ] 在 `public/project-images/project-name/` 放入圖片
 - [ ] 執行 `node scripts/generate-project-images-map.js`
 - [ ] **首次或有新圖片時**執行 `pnpm run generate:metadata`
+- [ ] 在 `content/en|zh/projects/*.md` frontmatter 設定 `date`
+- [ ] 修改既有 projects 文章時，更新 `updatedAt`
 - [ ] （可選）手動編輯 `project-images-metadata.json` 優化內容
 - [ ] 創建 `content/en/projects/project-name.md`
 - [ ] 創建 `content/zh/projects/project-name.md`
 - [ ] 在 Markdown 中使用 `::ProjectLightBox{folder="project-name"}`（並以 `::` 結尾）
 - [ ] 測試訪問 `/projects/project-name`
+
+### 新增/修改 Post 文章
+
+- [ ] 建立 `content/en/posts/post-name.md` 與 `content/zh/posts/post-name.md`
+- [ ] 新增文章時在 frontmatter 設定 `date`
+- [ ] 修改既有 posts 文章時，更新 `updatedAt`（保留原本 `date`）
+- [ ] 測試訪問 `/posts/post-name`（含語系路由）
 
 ---
 

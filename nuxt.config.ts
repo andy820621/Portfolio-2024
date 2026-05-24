@@ -94,8 +94,14 @@ function getLatestContentDate(directories: string[], extensions: RegExp) {
 }
 
 const listPageLastmod = {
-  posts: getLatestContentDate(['content/en/posts', 'content/zh/posts'], /\.md$/),
-  projects: getLatestContentDate(['content/en/projects', 'content/zh/projects'], /\.md$/),
+  en: {
+    posts: getLatestContentDate(['content/en/posts'], /\.md$/),
+    projects: getLatestContentDate(['content/en/projects'], /\.md$/),
+  },
+  zh: {
+    posts: getLatestContentDate(['content/zh/posts'], /\.md$/),
+    projects: getLatestContentDate(['content/zh/projects'], /\.md$/),
+  },
   gallery: getLatestContentDate(['content/gallery'], /\.ya?ml$/),
 }
 
@@ -643,9 +649,20 @@ export default defineNuxtConfig({
 })
 
 type RouteRules = NitroConfig['routeRules']
+type RouteRule = NonNullable<NonNullable<RouteRules>[string]>
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
+}
+
+function withSitemapLastmod(rule: RouteRule, lastmod: string | undefined) {
+  return {
+    ...rule,
+    sitemap: {
+      ...(typeof rule.sitemap === 'object' ? rule.sitemap : {}),
+      lastmod,
+    },
+  }
 }
 
 function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules {
@@ -671,7 +688,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
-        lastmod: listPageLastmod.posts,
+        lastmod: listPageLastmod.en.posts,
         images: [
           {
             loc: '/page-cover/blog.webp',
@@ -707,7 +724,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/projects': {
       prerender: true,
       sitemap: {
-        lastmod: listPageLastmod.projects,
+        lastmod: listPageLastmod.en.projects,
         images: [
           {
             loc: '/page-cover/projects.webp',
@@ -774,6 +791,16 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
 
     // 原有的帶斜線路徑規則
     Object.entries(defaultRules).forEach(([path, rule]) => {
+      if (path === '/posts') {
+        rules[`${prefix}${path}`] = withSitemapLastmod(rule, listPageLastmod.zh.posts)
+        return
+      }
+
+      if (path === '/projects') {
+        rules[`${prefix}${path}`] = withSitemapLastmod(rule, listPageLastmod.zh.projects)
+        return
+      }
+
       rules[`${prefix}${path}`] = { ...rule }
     })
   })

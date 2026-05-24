@@ -43,6 +43,14 @@
 - 當工作跨越多層時，優先沿著既有資料流追查與修改：page/component -> composable/utils -> content/server/scripts/config。
 - 若需求涉及內容、圖片或衍生資料，先確認來源檔與生成流程，再決定是否需要更新產物。
 
+## Content Frontmatter 時間欄位規範
+
+- 適用範圍：`content/{en,zh}/posts/*.md` 與 `content/{en,zh}/projects/*.md`。
+- 新增文章時：frontmatter 必須包含 `date`（建立時間，`YYYY-MM-DD`）。
+- 修改既有文章時：保留原本 `date`，並同步更新 `updatedAt`（最後修改時間，`YYYY-MM-DD`）。
+- 若 `updatedAt` 不存在，首次修改該文時應新增。
+- AI 在新增或修改 posts/projects 內容時，必須一併檢查並更新上述時間欄位，不可只改內文。
+
 ## Diff 紀律
 
 - 每一行修改都應能直接追溯到使用者需求。
