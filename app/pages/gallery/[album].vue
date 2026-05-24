@@ -106,8 +106,10 @@ const parts = computed(() => {
       result[col] = []
     result[col].push(image)
     return result
-  }, [] as string[][])
+  }, [] as GalleryImageAsset[][])
 })
+
+const galleryImageUrls = computed(() => images.value.map(image => image.src))
 
 const lightGalleryRef = useTemplateRef<InstanceType<typeof LightGallery>>('lightGalleryRef')
 
@@ -124,13 +126,13 @@ const visibleImages = ref<string[]>([])
 const imageRefs = useTemplateRefsList<HTMLElement>()
 
 // 計算轉場延遲
-function getTransitionDelay(images: string[], image: string) {
-  return `${images.indexOf(image) * 100}ms`
+function getTransitionDelay(images: GalleryImageAsset[], image: GalleryImageAsset) {
+  return `${images.findIndex(candidate => candidate.src === image.src) * 100}ms`
 }
 
 // 檢查是否可見的方法
-function isImageVisible(image: string) {
-  return visibleImages.value.includes(image)
+function isImageVisible(image: GalleryImageAsset) {
+  return visibleImages.value.includes(image.src)
 }
 
 useIntersectionObserver(
@@ -172,7 +174,7 @@ usePageSeo({
 const { baseUrl } = useUrl()
 const { getBreadcrumbListSchema } = useBreadcrumb()
 const albumData = album.value
-const galleryImages = images.value || []
+const galleryImages = galleryImageUrls.value
 
 const websiteId = buildSchemaNodeId(baseUrl.value, 'website')
 const nowPageId = buildSchemaPageNodeId(baseUrl.value, route.path, 'webpage')
@@ -263,7 +265,7 @@ useSchemaOrg([
         <LightGallery
           v-if="images && images.length"
           ref="lightGalleryRef"
-          :images="images"
+          :images="galleryImageUrls"
           :title="album.title"
         />
       </ClientOnly>
@@ -288,27 +290,29 @@ useSchemaOrg([
       >
         <div v-for="(items, colIdx) in parts" :key="colIdx" flex="~ col gap-1 sm:gap-2 lg:gap-[.55rem]">
           <div
-            v-for="(src, rowIdx) in items"
+            v-for="(image, rowIdx) in items"
             :key="rowIdx"
             :ref="imageRefs.set"
-            :data-image-src="src"
+            :data-image-src="image.src"
             class="gallery-item translate-y-10 transform cursor-zoom-in opacity-0 transition-all duration-700 ease-out"
             :class="{
-              'opacity-100 translate-y-0': isImageVisible(src),
+              'opacity-100 translate-y-0': isImageVisible(image),
             }"
             :style="{
-              transitionDelay: getTransitionDelay(items, src),
+              transitionDelay: getTransitionDelay(items, image),
             }"
             @click="openLightGallery(calculateOriginalIndex(colIdx, rowIdx))"
           >
             <NuxtImg
-              :src="src"
+              :src="image.src"
               :alt="`${album.title} - 第 ${calculateOriginalIndex(colIdx, rowIdx) + 1} 张图片`"
+              :width="image.width"
+              :height="image.height"
+              sizes="50vw lg:33vw 2xl:25vw"
+              :preload="calculateOriginalIndex(colIdx, rowIdx) === 0 ? { fetchPriority: 'high' } : false"
+              :loading="calculateOriginalIndex(colIdx, rowIdx) === 0 ? 'eager' : 'lazy'"
               class="h-auto w-full object-cover"
               placeholder
-              loading="lazy"
-              format="webp"
-              quality="24"
             />
           </div>
         </div>

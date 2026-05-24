@@ -7,8 +7,8 @@
     "node": "22.22.1"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js",
-    "generate:metadata": "node scripts/generate-project-images-metadata.js",
+    "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js && node scripts/generate-gallery-images-metadata.js",
+    "generate:metadata": "node scripts/generate-project-images-metadata.js && node scripts/generate-gallery-images-metadata.js",
     "test:prerender": "node scripts/test-prerender.js",
     "audit:seo": "pnpm build && node scripts/audit-seo.js",
     "audit:schema-org": "pnpm build && node scripts/audit-schema-org.js",
@@ -89,6 +89,7 @@
     "eslint": "^10.4.0",
     "eslint-plugin-format": "^2.0.1",
     "husky": "^9.1.7",
+    "image-size": "^2.0.2",
     "lint-staged": "^17.0.5",
     "nuxt-delay-hydration": "^1.3.8",
     "nuxt-headlessui": "^1.2.2",

@@ -26,18 +26,22 @@ async function loadGalleryImagesApi() {
 }
 
 describe('gallery images API helpers', () => {
-  it('preserves albumId image lookup and existing encoded image URLs', async () => {
-    const { resolveGalleryImageUrls } = await loadGalleryImagesApi()
-    const imageUrls = resolveGalleryImageUrls('Blossoms & Kids')
+  it('preserves albumId image lookup, existing encoded image URLs, and intrinsic dimensions', async () => {
+    const { resolveGalleryImageAssets } = await loadGalleryImagesApi()
+    const imageAssets = resolveGalleryImageAssets('Blossoms & Kids')
 
-    expect(imageUrls.length).toBeGreaterThan(0)
-    expect(imageUrls[0]?.startsWith('/gallery-images/Blossoms%20%26%20Kids/')).toBe(true)
+    expect(imageAssets.length).toBeGreaterThan(0)
+    expect(imageAssets[0]).toEqual(expect.objectContaining({
+      src: expect.stringMatching(/^\/gallery-images\/Blossoms & Kids\//),
+      width: expect.any(Number),
+      height: expect.any(Number),
+    }))
   })
 
   it('throws a 404-style error for unknown albums', async () => {
-    const { resolveGalleryImageUrls } = await loadGalleryImagesApi()
+    const { resolveGalleryImageAssets } = await loadGalleryImagesApi()
 
-    expect(() => resolveGalleryImageUrls('__missing_album__')).toThrowError(
+    expect(() => resolveGalleryImageAssets('__missing_album__')).toThrowError(
       expect.objectContaining({ statusCode: 404 }),
     )
   })

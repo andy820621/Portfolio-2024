@@ -5,6 +5,7 @@ interface Props {
   width?: number | string
   height?: number | string
   sizes?: string
+  loading?: 'lazy' | 'eager'
 }
 
 const {
@@ -13,6 +14,7 @@ const {
   width,
   height,
   sizes,
+  loading,
 } = defineProps<Props>()
 </script>
 
@@ -23,6 +25,7 @@ const {
     :width="width"
     :height="height"
     :sizes="sizes"
+    :loading="loading"
     class="h-auto w-full"
   />
 </template>

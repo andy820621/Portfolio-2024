@@ -179,7 +179,7 @@ useSchemaOrg([
       class="gallery-columns max-w-10xl container mx-auto mt-10 text-zinc-600"
     >
       <div
-        v-for="group in debouncedFilteredGroups"
+        v-for="(group, index) in debouncedFilteredGroups"
         :key="group.albumId"
         class="gallery-item"
       >
@@ -188,6 +188,9 @@ useSchemaOrg([
             :album-id="group.albumId"
             :title="group.title"
             :src="group.coverImage"
+            :width="group.coverImageWidth"
+            :height="group.coverImageHeight"
+            :priority="index === 0"
           />
         </NuxtLink>
       </div>

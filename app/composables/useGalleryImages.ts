@@ -1,7 +1,7 @@
 export function useGalleryImages() {
   const loading = ref(false)
   const error = ref<Error | null>(null)
-  const imagesByAlbum = shallowRef<Record<string, string[]>>({})
+  const imagesByAlbum = shallowRef<Record<string, GalleryImageAsset[]>>({})
 
   // 獲取特定相簿的圖片
   async function getAlbumImages(albumId: string) {
@@ -13,7 +13,7 @@ export function useGalleryImages() {
     error.value = null
 
     try {
-      const images = await $fetch<string[]>('/api/gallery-images', {
+      const images = await $fetch<GalleryImageAsset[]>('/api/gallery-images', {
         query: { albumId },
       })
 

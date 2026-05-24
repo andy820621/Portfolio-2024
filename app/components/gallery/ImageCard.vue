@@ -3,16 +3,19 @@ const props = defineProps<{
   title: string
   src?: string
   albumId?: string
+  width?: number
+  height?: number
+  priority?: boolean
 }>()
 
 const imageSrc = computed(() => {
   // 如果有 coverImage 直接使用
   if (props.src)
-    return encodeUrlPath(props.src)
+    return props.src
 
   // 如果沒有 coverImage，使用 albumId 生成圖片路徑
   if (props.albumId)
-    return encodeUrlPath(`/gallery-images/${props.albumId}.webp`)
+    return `/gallery-images/${props.albumId}.webp`
 
   // 如果都沒有，返回預設或空圖片
   return ''
@@ -29,11 +32,13 @@ const imageSrc = computed(() => {
       <NuxtImg
         :src="imageSrc"
         :alt="title"
+        :width="width"
+        :height="height"
+        sizes="50vw lg:33vw 2xl:25vw"
+        :preload="priority ? { fetchPriority: 'high' } : false"
+        :loading="priority ? 'eager' : 'lazy'"
         class="h-auto w-full object-cover"
         placeholder
-        loading="lazy"
-        format="webp"
-        quality="24"
       />
 
       <div

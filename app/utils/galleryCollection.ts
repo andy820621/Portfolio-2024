@@ -1,5 +1,8 @@
 import type { DateLike } from '~~/types/main'
+import type { GalleryImagesMetadata } from './galleryImageMetadata'
 import { queryCollection } from '#imports'
+import galleryImagesMetadata from '../../public/gallery-images-metadata.json' with { type: 'json' }
+import { enrichGalleryAlbumsWithCoverDimensions } from './galleryImageMetadata'
 import { findGalleryAlbumByRouteSegment, validateGallerySlugs } from './gallerySlug'
 
 export interface GalleryAlbum {
@@ -9,11 +12,15 @@ export interface GalleryAlbum {
   title: string
   chTitle?: string
   coverImage?: string
+  coverImageWidth?: number
+  coverImageHeight?: number
   description?: string
   tags: string[]
   updatedAt?: DateLike
   published: boolean
 }
+
+const galleryImagesMetadataMap = galleryImagesMetadata as GalleryImagesMetadata
 
 function createGalleryQuery() {
   return queryCollection('gallery')
@@ -30,7 +37,9 @@ export async function fetchGalleryAlbums(): Promise<GalleryAlbum[]> {
 
   validateGallerySlugs(albums)
 
-  return sortGalleryAlbums(albums)
+  return sortGalleryAlbums(
+    enrichGalleryAlbumsWithCoverDimensions(albums, galleryImagesMetadataMap),
+  )
 }
 
 export async function fetchGalleryAlbumById(id: string): Promise<GalleryAlbum | null> {
