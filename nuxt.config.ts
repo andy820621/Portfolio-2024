@@ -352,8 +352,7 @@ export default defineNuxtConfig({
     ],
   },
   sitemap: {
-    sources: ['/api/__sitemap__/gallery'],
-    xslTips: false,
+    xslTips: !isProduction,
     discoverImages: true,
     discoverVideos: true,
     exclude: [
