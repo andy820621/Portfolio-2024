@@ -55,6 +55,7 @@ const schemas: Parameters<typeof useSchemaOrg>[0] = [
     '@id': nowPageId,
     'name': post.title,
     'description': schemaDescription,
+    'url': buildCanonicalSiteUrl(baseUrl.value, route.path),
     'isPartOf': {
       '@id': websiteId,
     },

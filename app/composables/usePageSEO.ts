@@ -18,9 +18,9 @@ interface PageSeoOptions {
     hreflang: string
     href: string
   }[]
-  modifiedTime?: DateLike
-  publishedTime?: DateLike
-  keywords?: string | string[]
+  modifiedTime?: MaybeReactive<DateLike>
+  publishedTime?: MaybeReactive<DateLike>
+  keywords?: MaybeReactive<string | string[]>
 }
 
 function resolveOption<T>(value: MaybeReactive<T> | undefined): T | undefined {
@@ -53,8 +53,11 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   const { baseUrl, route } = useUrl()
 
   const pageKeywords = computed(() => {
-    if (Array.isArray(options.keywords) || typeof options.keywords === 'string')
-      return getKeywords(locale.value, options.keywords)
+    const keywords = resolveOption(options.keywords)
+
+    if (Array.isArray(keywords) || typeof keywords === 'string')
+      return getKeywords(locale.value, keywords)
+
     return getKeywords(locale.value)
   })
 
@@ -77,8 +80,8 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   const ogUrl = computed(() => canonicalUrl.value)
   const ogType = computed(() => options.ogType || 'website')
 
-  const publishedTime = computed(() => normalizeSitemapMetaDate(options.publishedTime))
-  const modifiedTime = computed(() => normalizeSitemapMetaDate(options.modifiedTime))
+  const publishedTime = computed(() => normalizeSitemapMetaDate(resolveOption(options.publishedTime)))
+  const modifiedTime = computed(() => normalizeSitemapMetaDate(resolveOption(options.modifiedTime)))
   const robots = computed(() => {
     if (resolveOption(options.noIndexFollow))
       return 'noindex, follow'

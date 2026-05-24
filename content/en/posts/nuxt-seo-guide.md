@@ -1,6 +1,7 @@
 ---
 title: "Nuxt 4 SEO guide: meta, Schema.org, sitemap, and validation"
 date: 2025/12/17
+updatedAt: 2026/05/25
 description: "A practical SEO setup for a bilingual Nuxt 4 content site: consistent meta, OG image generation, Schema.org (including image licensing), dynamic sitemap endpoints, and a validation checklist with common pitfalls."
 seoTitle: "Nuxt 4 SEO Meta, Schema, and Sitemap Guide"
 seoDescription: "A practical Nuxt 4 SEO setup for bilingual content sites, covering meta tags, OG images, Schema.org, sitemap endpoints, and validation workflows."
@@ -19,22 +20,22 @@ schemaOrg:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/17"
-    dateModified: "2025/12/17"
+    dateModified: "2026/05/25"
     image: "/blog-images/nuxt-seo-guide.webp"
     keywords: ["Nuxt SEO", "Schema.org", "Sitemap", "Open Graph", "i18n"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-17
+  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt 4 SEO guide"
       caption: "Meta + Schema.org + sitemap + OG images (with validation and common pitfalls)."
 ---
 
-On most sites, SEO is treated as “marketing”. But for a portfolio, SEO is part of product quality: every page should be reliably understandable, previewable, and shareable.
+Nuxt SEO for a bilingual content site works best when you treat it as one system: centralize page meta, derive content SEO from front matter, emit clear Schema.org, and validate sitemap plus previews continuously. This guide shows the exact stack and tradeoffs I use in a real Nuxt 4 portfolio.
 
-## Why portfolios still need SEO
+## Why does a portfolio still need SEO?
 
 For developers/designers, a portfolio is not only a showcase—it’s also:
 
@@ -44,7 +45,7 @@ For developers/designers, a portfolio is not only a showcase—it’s also:
 
 Portfolio SEO is also tricky: mixed content types (posts, projects, galleries), bilingual routing, and the need to generate canonical/OG/schema/sitemap correctly in SSG/SSR contexts.
 
-## The three pillars: Meta, Schema, Sitemap
+## What are the three pillars of a Nuxt SEO setup?
 
 - **Meta (OG/Twitter)**: controls SERP and share previews—most visible changes
 - **Schema.org**: helps search engines understand your content types and relationships (articles, lists, images, licensing)

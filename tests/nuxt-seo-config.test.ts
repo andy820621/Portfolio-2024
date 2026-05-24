@@ -51,6 +51,36 @@ it('llms config is enabled with key sections for AI tooling', async () => {
   expect(llmsConfig.full.title).toContain('Full Documentation')
   expect(Array.isArray(llmsConfig.sections)).toBe(true)
   expect(llmsConfig.sections.length).toBeGreaterThan(0)
+  expect(llmsConfig.sections.map(section => section.title)).toEqual([
+    'Start Here',
+    'Core Technical Guides',
+    'Featured Projects',
+    'Media & Licensing',
+    'Optional Chinese',
+  ])
+})
+
+it('robots config keeps AI search access while blocking AI training crawlers', async () => {
+  const config = await loadConfigWithEnv()
+  const robotsConfig = config.robots
+
+  expect(robotsConfig).toBeTruthy()
+
+  if (!robotsConfig)
+    throw new Error('Expected robots config to be enabled.')
+
+  expect(robotsConfig.blockAiBots).toBe(false)
+
+  const groups = robotsConfig.groups ?? []
+  const searchGroup = groups.find(group => group.comment?.includes('Allow AI search bots'))
+  const userFetchGroup = groups.find(group => group.comment?.includes('Allow user-triggered AI fetchers'))
+  const trainingGroup = groups.find(group => group.comment?.includes('Block AI training crawlers'))
+
+  expect(searchGroup?.allow).toEqual(['/'])
+  expect(searchGroup?.disallow).toEqual(['/gallery-images/'])
+  expect(userFetchGroup?.allow).toEqual(['/'])
+  expect(userFetchGroup?.disallow).toEqual(['/gallery-images/'])
+  expect(trainingGroup?.disallow).toEqual(['/'])
 })
 
 it('api route rules include X-Robots-Tag noindex header', async () => {

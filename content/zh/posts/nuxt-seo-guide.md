@@ -1,6 +1,7 @@
 ---
 title: Nuxt 4 SEO 開發指南
 date: 2025/12/17
+updatedAt: 2026/05/25
 description: 以雙語 Nuxt 4 內容型網站為例，整理一套可落地的 SEO 實作：一致的 meta、OG image 生成、Schema.org（含圖片授權）、動態 sitemap endpoints，以及部署前後的驗證清單與常見陷阱。
 seoTitle: "Nuxt 4 SEO：Meta、Schema.org 與 Sitemap 實作"
 seoDescription: "以雙語 Nuxt 4 內容網站為例，整理 meta、OG image、Schema.org、sitemap 與驗證流程，建立可維護的 SEO 實作方式。"
@@ -19,20 +20,20 @@ schemaOrg:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/17"
-    dateModified: "2025/12/17"
+    dateModified: "2026/05/25"
     image: "/blog-images/nuxt-seo-guide.webp"
     keywords: ["Nuxt SEO", "Schema.org", "Sitemap", "Open Graph", "i18n"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-17
+  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt 4 SEO 完整指南"
       caption: "Meta + Schema.org + sitemap + OG images（含驗證與常見陷阱）。"
 ---
 
-大多數的網站中 SEO 會被當作行銷手段的一環，但個人覺得在作品集網站，SEO 更像是整個品質的一部分：讓每一頁都能被可靠地理解、預覽與分發。
+在 Nuxt 內容型網站裡，SEO 最穩定的做法不是逐頁補標籤，而是把 page meta、front matter 推導、Schema.org 與 sitemap 驗證當成同一套系統。這篇文章用實際雙語作品集整理我採用的 Nuxt 4 SEO 結構與常見陷阱。
 
 ## 為什麼作品集網站需要 SEO？
 

@@ -1,6 +1,7 @@
 ---
 title: 透過 MiniSearch + Nuxt Content 實現全站搜尋、分段索引
 date: 2025/12/19
+updatedAt: 2026/05/25
 description: 我在個人作品集網站上實現 Cmd/Ctrl+K 功能的全站搜尋：用 MiniSearch 與 queryCollectionSearchSections() 讓搜尋理解 Markdown 的章節段落，而不只是簡單的標題搜索。
 seoTitle: "MiniSearch + Nuxt Content 全站搜尋實作"
 seoDescription: "以個人作品集為例，說明如何用 MiniSearch 與 Nuxt Content 建立 Cmd/Ctrl+K 全站搜尋，並讓結果精準對應到章節與段落。"
@@ -21,20 +22,20 @@ schemaOrg:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/19"
-    dateModified: "2025/12/19"
+    dateModified: "2026/05/25"
     image: "https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png"
     keywords: ["MiniSearch", "Nuxt Content", "Search Modal", "UX", "Cmd+K"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-19
+  lastmod: 2026-05-25
   images:
     - loc: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
       title: "透過 MiniSearch + Nuxt Content 實現全站搜尋、分段索引"
       caption: "Cmd/Ctrl+K 搜尋 posts 與 projects。"
 ---
 
-搜尋是一個很「小」但能瞬間拉高使用者體驗的功能：尤其是當內容量一多，沒有搜尋就很難快速找到想要的內容。
+在 Nuxt Content 站點裡，好用的全站搜尋應該同時做到鍵盤優先、能搜到章節段落，且不依賴外部服務。這篇文章整理我如何用 MiniSearch 搭配 queryCollectionSearchSections() 實作 Cmd/Ctrl+K 搜尋。
 
 在這個作品集網站，我希望全站搜尋同時滿足：
 

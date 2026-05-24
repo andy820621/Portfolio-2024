@@ -1,6 +1,7 @@
 ---
 title: Personal Portfolio Website
 date: 2025/12/18
+updatedAt: 2026/05/25
 description: A Nuxt 4 portfolio built with a product mindset—bilingual Nuxt Content, i18n, global search, automated image pipeline, and comprehensive SEO for long-term maintainability.
 seoTitle: "Nuxt 4 Personal Portfolio Website"
 seoDescription: "A bilingual Nuxt 4 portfolio with Nuxt Content, i18n, global search, automated image pipelines, and a maintainable end-to-end SEO setup."
@@ -18,18 +19,19 @@ relatedPages:
   - path: /posts/global-fulltext-search
   - path: /posts/image-management-pipeline
   - path: /posts/nuxt-seo-guide
-updatedAt: 2025/12/22
 published: true
 
 sitemap:
-  lastmod: 2025-12-18
+  lastmod: 2026-05-25
   images:
     - loc: /project-images/portfolio-2024-hero.webp
       title: "Nuxt 4 personal portfolio website"
       caption: "A bilingual Nuxt 4 portfolio site with content management, global search, and comprehensive SEO."
 ---
 
-## Project Overview
+This portfolio is a long-term Nuxt 4 product site, not a one-off landing page: it combines bilingual content, project and gallery publishing, section-aware search, automated image data, and a maintainable SEO stack in one codebase. The goal is to make publishing, discovery, and iteration feel like part of the product.
+
+## What is this project?
 
 This is a personal portfolio built with a **product mindset**: it's designed to be maintained long term, not just to look good once.
 It brings together a blog, projects, technical demos, and a gallery.
@@ -40,7 +42,7 @@ I treat every piece—content workflows, SEO, image/media pipeline, and deployme
 
 ---
 
-## Core Features
+## How does the site work day to day?
 
 ### Bilingual content system
 
@@ -76,7 +78,7 @@ A [Nitro](https://nitro.unjs.io/) prerender hook scans Markdown routes and filte
 
 ---
 
-## Design Principles
+## Why was it built this way?
 
 ### Maintainability first
 

@@ -1,6 +1,7 @@
 ---
 title: 透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站
 date: 2025/12/21
+updatedAt: 2026/05/25
 description: 以實際作品集為例，說明如何使用 @nuxt/content v3 的 collections 與 schema 管理中英 Markdown，建立一致、可擴充且對 SEO 友善的內容系統。
 seoTitle: "Nuxt Content v3 與 i18n 雙語內容架構"
 seoDescription: "以實際作品集為例，整理如何結合 Nuxt Content v3、collections、schema 與 i18n，建立可長期維護且對 SEO 友善的雙語內容系統。"
@@ -24,20 +25,20 @@ schemaOrg:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/21"
-    dateModified: "2025/12/21"
+    dateModified: "2026/05/25"
     image: "/blog-images/nuxt-content-v3-i18n-bilingual-site.webp"
     keywords: ["Nuxt Content", "Markdown", "i18n", "Collections", "Schema"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-21
+  lastmod: 2026-05-25
   images:
     - loc: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
       title: "透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站"
       caption: "以實際作品集為例，說明如何使用 @nuxt/content v3 的 collections 與 schema 管理中英 Markdown，建立一致、可擴充且對 SEO 友善的內容系統。"
 ---
 
-寫 Markdown 來管理內容快速又直覺，但**當內容開始成長，沒有結構的 Markdown 反而會成為維護上的負擔**。
+如果你想讓 Nuxt Content 的雙語內容長期可維護，核心做法是依語系與內容類型拆 collections，用 Zod 約束 front matter，並讓清單頁與詳情頁共用同一條資料管線。這篇文章用實際作品集說明整體結構。
 
 在我的個人作品集專案中，我把內容系統當成一個「產品模組」來設計，而不是單純的文章集合。這篇文章會說明我如何透過 **Nuxt Content v3 + i18n + collections + schema**，建立一套：
 

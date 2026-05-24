@@ -1,6 +1,7 @@
 ---
 title: "Bilingual Nuxt Content v3 + i18n: a maintainable content system"
 date: 2025/12/21
+updatedAt: 2026/05/25
 description: Using a real portfolio as an example, this post explains how to manage bilingual Markdown with @nuxt/content v3 collections and Zod schemas to build a consistent, extensible, SEO-friendly content system.
 seoTitle: "Bilingual Nuxt Content v3 with i18n"
 seoDescription: "Learn how to structure bilingual Nuxt Content v3 collections with Zod schemas and i18n for a maintainable, SEO-friendly Markdown workflow."
@@ -24,22 +25,22 @@ schemaOrg:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/21"
-    dateModified: "2025/12/21"
+    dateModified: "2026/05/25"
     image: "/blog-images/nuxt-content-v3-i18n-bilingual-site.webp"
     keywords: ["Nuxt Content", "Markdown", "i18n", "Collections", "Schema"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-21
+  lastmod: 2026-05-25
   images:
     - loc: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
       title: "Bilingual Nuxt Content v3 + i18n"
       caption: "Collections + schema for bilingual Markdown (en/zh), with a consistent, SEO-friendly content system."
 ---
 
-Markdown is fast and intuitive—but **once your content grows, unstructured Markdown becomes a maintenance burden**.
+If you want bilingual Nuxt Content to stay maintainable, split collections by locale and content type, validate front matter with Zod, and reuse one data pipeline for list and detail pages. That gives you predictable Markdown, consistent routing, and a content system that scales cleanly into SEO, search, and prerendering.
 
-In this portfolio project, I treat the content system like a “product module”, not just a pile of articles. This post explains how I use **Nuxt Content v3 + i18n + collections + schema** to build a system that is:
+In this portfolio project, I treat the content system like a “product module”, not just a pile of articles. That system needs to be:
 
 - predictable and consistent (front matter shape stays stable)
 - cleanly bilingual (en/zh split, consistent routing strategy)
@@ -50,7 +51,7 @@ In this portfolio project, I treat the content system like a “product module�
 
 ---
 
-## Quick tour: folders and data flow
+## How should you organize folders and data flow?
 
 Before diving into collections/schemas, here’s where content lives and how it flows into pages.
 
@@ -120,7 +121,7 @@ flowchart TD
 
 ---
 
-## Why content collections are non-negotiable
+## Why are content collections non-negotiable?
 
 Nuxt Content v3 **collections** are the backbone of this content architecture.
 

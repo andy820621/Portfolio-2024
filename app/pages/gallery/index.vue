@@ -60,22 +60,24 @@ const pageModifiedTime = computed(() => {
   return new Date(Math.max(...timestamps))
 })
 
+const pageKeywords = computed(() => [
+  'Gallery',
+  '相簿',
+  'BarZ',
+  'BarZ Hsieh',
+  'Hsieh Yao Tsu',
+  'ヒカル',
+  '攝影',
+  '相片牆',
+  ...allTags.value,
+])
+
 // 設置 SEO
 usePageSeo({
   title: t('galleryPage.seoTitle'),
   description: t('galleryPage.seoDescription'),
-  modifiedTime: pageModifiedTime.value,
-  keywords: [
-    'Gallery',
-    '相簿',
-    'BarZ',
-    'BarZ Hsieh',
-    'Hsieh Yao Tsu',
-    'ヒカル',
-    '攝影',
-    '相片牆',
-    ...allTags.value,
-  ],
+  modifiedTime: pageModifiedTime,
+  keywords: pageKeywords,
 })
 
 // 防抖過濾後的圖片組
@@ -112,7 +114,7 @@ const licensePageUrl = locale.value === 'en'
   ? 'https://creativecommons.org/licenses/by/4.0/'
   : 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hant'
 
-const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
+const itemListElement = computed(() => galleryGroupsList.value.map((group, index) => ({
   '@type': 'ListItem',
   'position': index + 1,
   'item': {
@@ -129,7 +131,7 @@ const itemListElement = debouncedFilteredGroups.value.map((group, index) => ({
     'creator': createPersonReference({ baseUrl: baseUrl.value }),
     'copyrightNotice': '2024-PRESENT © BarZ Hsieh',
   },
-}))
+})))
 
 useSchemaOrg([
   defineWebPage({
@@ -150,7 +152,7 @@ useSchemaOrg([
   defineItemList({
     '@id': itemListId,
     '@type': 'ItemList',
-    'numberOfItems': debouncedFilteredGroups.value.length,
+    'numberOfItems': computed(() => galleryGroupsList.value.length),
     'itemListElement': itemListElement,
   }),
 ])

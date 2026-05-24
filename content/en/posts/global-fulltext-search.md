@@ -1,6 +1,7 @@
 ---
 title: Implementing Site-wide Search with MiniSearch + Nuxt Content Using Segmented Indexing
 date: 2025/12/19
+updatedAt: 2026/05/25
 description: "I implemented a site-wide Cmd/Ctrl+K search feature on my portfolio website: using MiniSearch with queryCollectionSearchSections() to make search understand Markdown sections and paragraphs, not just simple title searches."
 seoTitle: "MiniSearch + Nuxt Content Global Search"
 seoDescription: "Build a site-wide Cmd/Ctrl+K search in Nuxt Content with MiniSearch, segmented indexing, and results that jump to matching sections and paragraphs."
@@ -22,20 +23,20 @@ schemaOrg:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/19"
-    dateModified: "2025/12/19"
+    dateModified: "2026/05/25"
     image: "https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png"
     keywords: ["MiniSearch", "Nuxt Content", "Search Modal", "UX", "Cmd+K"]
     articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-19
+  lastmod: 2026-05-25
   images:
     - loc: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
       title: "Global search with MiniSearch + Nuxt Content"
       caption: "Cmd/Ctrl+K search across posts and projects, indexed by sections."
 ---
 
-Search is a “small” feature that instantly makes a content-heavy site feel premium—especially once you have more than a handful of posts/projects.
+A good site-wide search for Nuxt Content should open from the keyboard, search inside sections instead of only titles, and return jumpable results without external services. This implementation uses MiniSearch plus `queryCollectionSearchSections()` to build a fast, section-aware Cmd/Ctrl+K workflow for a static-friendly portfolio.
 
 For this portfolio, my global search has two non-negotiables:
 
@@ -44,7 +45,7 @@ For this portfolio, my global search has two non-negotiables:
 
 > All code details are available in the [GitHub repository](https://github.com/andy820621/portfolio-2024).
 
-## Why MiniSearch
+## Why use MiniSearch for a Nuxt content site?
 
 MiniSearch fits the constraints of this project:
 
@@ -61,7 +62,7 @@ A quick comparison of common options:
 | FlexSearch            | Extreme performance, more language configuration      | Possible, but configuration/tuning cost is higher than needed here                                      |
 | Algolia / Meilisearch | Large sites, search as a product                      | Requires extra services/cost/maintenance; doesn’t match the “zero dependency” goal                      |
 
-## `queryCollectionSearchSections`
+## How does `queryCollectionSearchSections` improve search quality?
 
 Nuxt Content provides [`queryCollectionSearchSections`](https://content.nuxt.com/docs/utils/query-collection-search-sections) which splits a document into multiple “sections” by headings.
 

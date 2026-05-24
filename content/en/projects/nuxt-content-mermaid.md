@@ -1,6 +1,7 @@
 ---
 title: nuxt-content-mermaid
 date: 2025/12/31
+updatedAt: 2026/05/25
 description: Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support.
 seoTitle: "nuxt-content-mermaid for Nuxt Content v3"
 seoDescription: "Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support."
@@ -17,21 +18,23 @@ relatedPages:
 published: true
 
 sitemap:
-  lastmod: 2025-12-31
+  lastmod: 2026-05-25
   images:
     - loc: /project-images/nuxt-content-mermaid.webp
       title: nuxt-content-mermaid
       caption: nuxt-content-mermaid
 ---
 
-## Project Overview
+`nuxt-content-mermaid` is a Nuxt Content module that turns Mermaid fenced code blocks into lazy-loaded, theme-aware diagram components. It removes the usual Markdown-to-client-render plumbing, so documentation authors can write diagrams directly in Markdown while keeping SSR boundaries, performance, and theming under control.
+
+## What is nuxt-content-mermaid?
 
 This module integrates [**Nuxt Content v3**](https://content.nuxt.com/docs/getting-started){target="\_blank" rel="noopener"} and [**Mermaid**](https://mermaid.js.org/){target="\_blank" rel="noopener"}.
 It automatically turns Mermaid fenced code blocks (\`\`\`mermaid) in Markdown into a responsive diagram component, with lazy loading and dark/light theme switching built in.
 
 If you want to see how this module fits into a larger content workflow, read [Bilingual Nuxt Content v3 + i18n: a maintainable content system](/posts/nuxt-content-v3-i18n-bilingual-site/). That article covers the broader architecture; this page focuses on the Mermaid integration layer.
 
-## Problems It Solves
+## What problems does it solve?
 
 In Nuxt Content, Mermaid often requires you to manually handle the whole pipeline: “parse Markdown → transform → load Mermaid on the client → render”, while also taking care of:
 
@@ -53,7 +56,7 @@ This module packages the above into a “content transformer + runtime component
 - **TypeScript support**: Full TypeScript definitions for both the module and runtime components.
 - **Test coverage**: Unit tests written with Vitest to keep the module stable.
 
-## How It Works (Simplified)
+## How does it work?
 
 ````mermaid
 ---
@@ -68,7 +71,7 @@ flowchart TD
   Import --> Render["mermaid.run() generates SVG"]
 ````
 
-## Quick Start
+## How do you use it?
 
 1. Install:
 

@@ -327,7 +327,7 @@ export default defineNuxtConfig({
         ],
       },
       {
-        title: 'Featured Technical Content',
+        title: 'Core Technical Guides',
         links: [
           {
             title: 'Nuxt Content v3 i18n Bilingual Site',
@@ -338,13 +338,33 @@ export default defineNuxtConfig({
             href: '/posts/nuxt-seo-guide/',
           },
           {
-            title: 'Nuxt Tips Collection',
-            href: '/posts/nuxt-tips/',
+            title: 'Global Search with MiniSearch + Nuxt Content',
+            href: '/posts/global-fulltext-search/',
           },
         ],
       },
       {
-        title: 'Optional',
+        title: 'Featured Projects',
+        links: [
+          {
+            title: 'Personal Portfolio Website',
+            href: '/projects/portfolio-2024/',
+          },
+          {
+            title: 'nuxt-content-mermaid',
+            href: '/projects/nuxt-content-mermaid/',
+          },
+        ],
+      },
+      {
+        title: 'Media & Licensing',
+        links: [
+          { title: 'Gallery', href: '/gallery/' },
+          { title: 'License', href: '/license/' },
+        ],
+      },
+      {
+        title: 'Optional Chinese',
         links: [
           { title: 'Traditional Chinese Posts', href: '/zh/posts/' },
           { title: 'Traditional Chinese Projects', href: '/zh/projects/' },
