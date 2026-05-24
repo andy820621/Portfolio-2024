@@ -29,6 +29,7 @@ const chunkMap: Record<string, string> = {
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
 const isProduction = process.env.NODE_ENV === 'production'
+const isSearchIndexableDeployment = isProduction && (!process.env.NETLIFY || process.env.CONTEXT === 'production')
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
@@ -649,9 +650,41 @@ export default defineNuxtConfig({
 
 type RouteRules = NitroConfig['routeRules']
 type RouteRule = NonNullable<NonNullable<RouteRules>[string]>
+type RouteRuleHeaders = NonNullable<RouteRule['headers']>
 
 interface GenerateRouteRulesOptions {
   locales: LocaleObject[]
+}
+
+function getSecurityHeaders(): RouteRuleHeaders {
+  return {
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=()',
+    ...(isProduction && isSearchIndexableDeployment
+      ? { 'Strict-Transport-Security': 'max-age=31536000; includeSubDomains' }
+      : {}),
+    ...(!isSearchIndexableDeployment
+      ? { 'X-Robots-Tag': 'noindex, nofollow' }
+      : {}),
+  }
+}
+
+function withSecurityHeaders(rule: RouteRule): RouteRule {
+  return {
+    ...rule,
+    headers: {
+      ...getSecurityHeaders(),
+      ...(rule.headers ?? {}),
+    },
+  }
+}
+
+function withSecurityHeadersForRules(rules: RouteRules): RouteRules {
+  return Object.fromEntries(
+    Object.entries(rules ?? {}).map(([path, rule]) => [path, withSecurityHeaders(rule)]),
+  )
 }
 
 function withSitemapLastmod(rule: RouteRule, lastmod: string | undefined) {
@@ -829,5 +862,5 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     }), {}),
   })
 
-  return rules
+  return withSecurityHeadersForRules(rules)
 }
