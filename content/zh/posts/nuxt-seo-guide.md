@@ -188,7 +188,7 @@ export default defineSitemapEventHandler((): SitemapUrl[] => {
 
 - [ ] HTML 驗證：dev 模式開啟 HTML validator 檢查
 - [ ] 連結驗證：編譯時驗證 Markdown links（避免死連結）
-- [ ] Meta 檢查：瀏覽器 DevTools 或 https://metatags.io
+- [ ] Meta 檢查：瀏覽器 DevTools 或 <https://metatags.io>
 
 ### 部署前
 
