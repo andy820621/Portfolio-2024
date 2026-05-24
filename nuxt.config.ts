@@ -2,6 +2,8 @@
 import type { LocaleObject } from '@nuxtjs/i18n'
 import type { NitroConfig } from 'nitropack/types'
 import type { NuxtPage } from 'nuxt/schema'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { defineNuxtConfig } from 'nuxt/config'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
@@ -40,6 +42,62 @@ const AI_USER_FETCH_BOTS = [
 ]
 
 const GALLERY_IMAGE_PATH_PREFIX = '/gallery-images/'
+
+function walkContentFiles(directory: string, extensions: RegExp): string[] {
+  if (!existsSync(directory))
+    return []
+
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = join(directory, entry.name)
+
+    if (entry.isDirectory())
+      return walkContentFiles(entryPath, extensions)
+
+    return extensions.test(entry.name) ? [entryPath] : []
+  })
+}
+
+function extractFrontmatterDate(content: string, field: 'date' | 'updatedAt') {
+  const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? content
+  return frontmatter.match(new RegExp(`^${field}:\\s*['"]?([^'"\\n]+)['"]?`, 'm'))?.[1]
+}
+
+function normalizeSitemapDate(value?: string) {
+  if (!value)
+    return undefined
+
+  const date = new Date(value.trim().replaceAll('/', '-'))
+
+  if (Number.isNaN(date.getTime()))
+    return undefined
+
+  return date.toISOString().slice(0, 10)
+}
+
+function getLatestContentDate(directories: string[], extensions: RegExp) {
+  const timestamps = directories
+    .flatMap(directory => walkContentFiles(directory, extensions))
+    .map((filePath) => {
+      const content = readFileSync(filePath, 'utf8')
+      const date = normalizeSitemapDate(
+        extractFrontmatterDate(content, 'updatedAt') ?? extractFrontmatterDate(content, 'date'),
+      )
+
+      return date ? new Date(date).getTime() : undefined
+    })
+    .filter((timestamp): timestamp is number => typeof timestamp === 'number')
+
+  if (!timestamps.length)
+    return undefined
+
+  return new Date(Math.max(...timestamps)).toISOString().slice(0, 10)
+}
+
+const listPageLastmod = {
+  posts: getLatestContentDate(['content/en/posts', 'content/zh/posts'], /\.md$/),
+  projects: getLatestContentDate(['content/en/projects', 'content/zh/projects'], /\.md$/),
+  gallery: getLatestContentDate(['content/gallery'], /\.ya?ml$/),
+}
 
 const AI_TRAINING_BOTS = [
   'GPTBot',
@@ -290,14 +348,6 @@ export default defineNuxtConfig({
   sitemap: {
     sources: ['/api/__sitemap__/gallery'],
     xslTips: false,
-    xsl: '/__sitemap__/style.xsl',
-    xslColumns: [
-      { label: 'URL', width: '55%' },
-      { label: 'Last Modified', select: 'sitemap:lastmod', width: '25%' },
-      { label: 'Images', select: 'count(image:image)', width: '10%' },
-      // { label: 'First Image', select: 'substring(image:image[1]/image:loc, 1, 30)', width: '15%' },
-      { label: 'Hreflangs', select: 'count(xhtml:link)', width: '10%' },
-    ],
     discoverImages: true,
     discoverVideos: true,
     exclude: [
@@ -621,6 +671,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       prerender: true,
       headers: { 'cache-control': 'public, max-age=3600' },
       sitemap: {
+        lastmod: listPageLastmod.posts,
         images: [
           {
             loc: '/page-cover/blog.webp',
@@ -656,6 +707,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/projects': {
       prerender: true,
       sitemap: {
+        lastmod: listPageLastmod.projects,
         images: [
           {
             loc: '/page-cover/projects.webp',
@@ -675,6 +727,7 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
     '/gallery': {
       prerender: true,
       sitemap: {
+        lastmod: listPageLastmod.gallery,
         images: [
           {
             loc: '/page-cover/gallery.webp',
