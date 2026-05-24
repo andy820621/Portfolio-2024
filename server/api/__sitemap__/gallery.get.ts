@@ -1,3 +1,5 @@
+import { queryCollection } from '@nuxt/content/server'
+
 interface GallerySitemapItem {
   slug: string
   updatedAt?: string | Date
