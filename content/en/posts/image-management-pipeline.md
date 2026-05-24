@@ -10,6 +10,11 @@ ogImage:
   url: /blog-images/image-management-pipeline.webp
 tags: ['Nuxt', 'Images', 'Automation', 'Gallery', 'LightBox', 'SEO', 'Schema.org']
 categories: ['Nuxt', 'Media', 'Automation']
+relatedPages:
+  - path: /projects/portfolio-2024
+    title: BarZ Hsieh Portfolio 2024
+  - path: /posts/nuxt-seo-guide
+    title: Practical SEO in Nuxt 4: Schema.org, OG images, sitemap, and validation
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -67,7 +72,7 @@ node scripts/generate-project-images-map.js
 node scripts/generate-gallery-images-map.js
 ```
 
-2. Or let `pnpm build` run them via `package.json#scripts.prebuild`:
+1. Or let `pnpm build` run them via `package.json#scripts.prebuild`:
 
 ```bash
 pnpm build
@@ -118,13 +123,13 @@ Under the hood:
 node scripts/generate-project-images-map.js
 ```
 
-3. (Optional) Fill metadata:
+1. (Optional) Fill metadata:
 
 ```bash
 pnpm run generate:metadata
 ```
 
-4. Commit generated files: `public/project-images-map.json`, `public/project-images-metadata.json`, `public/project-images-metadata.zh.json`
+1. Commit generated files: `public/project-images-map.json`, `public/project-images-metadata.json`, `public/project-images-metadata.zh.json`
 
 ### Gallery
 
@@ -137,7 +142,7 @@ pnpm run generate:metadata
 node scripts/generate-gallery-images-map.js
 ```
 
-5. Commit generated file: `public/gallery-images-map.json`
+1. Commit generated file: `public/gallery-images-map.json`
 
 ## SEO: Schema.org `ImageObject` licensing
 
@@ -172,8 +177,3 @@ Example JSON-LD output (one `ImageObject` entry; Gallery case):
   "copyrightNotice": "2024-PRESENT © BarZ Hsieh"
 }
 ```
-
-## Related
-
-- Project landing: [BarZ Hsieh Portfolio 2024](/projects/portfolio-2024)
-- Next: [Practical SEO in Nuxt 4: Schema.org, OG images, sitemap, and validation](/posts/nuxt-seo-guide)

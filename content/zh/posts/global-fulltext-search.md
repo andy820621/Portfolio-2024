@@ -10,6 +10,8 @@ ogImage:
   url: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 tags: ['Nuxt', 'Search', 'MiniSearch', 'Nuxt Content', 'UX', 'i18n']
 categories: ['Nuxt', 'UX', '內容系統']
+relatedPages:
+  - path: /zh/posts/image-management-pipeline
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -307,7 +309,3 @@ sequenceDiagram
 
 因為索引使用 `collectionKey = <folder>_<locale>`，所以語系切換就等於切換索引，不需要額外的分支邏輯。
 搜尋 modal 甚至提供「切換語言」的 quick action。
-
-## 推薦閱讀
-
-- [Projects/Gallery 圖片管線：JSON map、metadata 與 LightBox 整合](/zh/posts/image-management-pipeline)

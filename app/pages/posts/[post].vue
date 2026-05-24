@@ -3,7 +3,7 @@ import { createPersonReference } from '~~/data'
 
 // 獲取內容數據
 const paramName = 'post'
-const { contentData, error } = await useContentData({
+const { contentData, error, collection } = await useContentData({
   basePageName: 'posts',
   paramName,
 })
@@ -18,8 +18,8 @@ if (error.value || !contentData.value) {
   })
 }
 
-const contenDetailData = useContentDetailData(contentData)
-const { mainData } = contenDetailData
+const contentDetailData = useContentDetailData(contentData, collection)
+const { mainData } = contentDetailData
 const post = mainData.value
 
 if (!post) {
@@ -115,6 +115,6 @@ useSchemaOrg(schemas)
   <div>
     <RandomBackground :sources="['Silk', 'FlowDots']" />
 
-    <WrapperPost :conten-detail-data="contenDetailData" redirect-link="/posts" />
+    <WrapperPost :content-detail-data="contentDetailData" redirect-link="/posts" />
   </div>
 </template>

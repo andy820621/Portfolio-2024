@@ -10,6 +10,9 @@ ogImage:
   url: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 tags: ['Nuxt', 'Search', 'MiniSearch', 'Nuxt Content', 'UX', 'i18n']
 categories: ['Nuxt', 'UX', 'Content System']
+relatedPages:
+  - path: /posts/image-management-pipeline
+  - title: Projects & Gallery image pipeline: generated JSON maps, metadata, and LightBox integration
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -300,7 +303,3 @@ sequenceDiagram
 
 Because indexes use `collectionKey = <folder>_<locale>`, switching language switches the index automatically—no special branching required.
 The modal even offers “Switch language” as a quick action.
-
-## Recommended reading
-
-- [Projects & Gallery image pipeline: generated JSON maps, metadata, and LightBox integration](/posts/image-management-pipeline)

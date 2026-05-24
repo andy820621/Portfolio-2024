@@ -11,6 +11,13 @@ ogImage:
   url: /project-images/portfolio-2024-hero.webp
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Nuxt Content', 'i18n', 'SEO', 'Schema.org', 'MiniSearch', 'Nitro', 'Netlify']
 categories: ['作品集', 'Nuxt', 'Full Stack']
+relatedPages:
+  - path: /zh/posts/nuxt4-portfolio-architecture
+  - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /zh/posts/nitro-prerender-dynamic-routes-solution
+  - path: /zh/posts/global-fulltext-search
+  - path: /zh/posts/image-management-pipeline
+  - path: /zh/posts/nuxt-seo-guide
 updatedAt: 2025/12/22
 published: true
 
@@ -88,22 +95,6 @@ sitemap:
 細節決定體驗——平滑捲動、鍵盤快捷鍵、即時搜尋、標籤篩選，每個功能都經過打磨。
 
 ---
-
-## 深入閱讀
-
-想了解更多實作細節? 我撰寫了一系列技術文章:
-
-1. [以產品思維打造 Nuxt 4 個人網站](/zh/posts/nuxt4-portfolio-architecture)
-
-2. [整合 Nuxt Content + i18n,打造多語系內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site)
-
-3. [如何用 Nitro Hooks 解決 Nuxt Content 動態路由的預渲染問題](/zh/posts/nitro-prerender-dynamic-routes-solution)
-
-4. [整合 MiniSearch + Nuxt Content 實現全站搜尋](/zh/posts/global-fulltext-search)
-
-5. [圖片的自動化管理方案:自動化 JSON map + LightBox + Schema.org](/zh/posts/image-management-pipeline)
-
-6. [Nuxt 4 SEO 開發指南](/zh/posts/nuxt-seo-guide)
 
 ---
 

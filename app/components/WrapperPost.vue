@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ProseTh from './content/ProseTh.vue'
 
-const { contenDetailData, redirectLink = '/posts' } = defineProps<{
-  contenDetailData: ContentDetailData
+const { contentDetailData, redirectLink = '/posts' } = defineProps<{
+  contentDetailData: ContentDetailData
   redirectLink?: string
 }>()
 
@@ -11,11 +11,18 @@ const route = useRoute()
 const { trackOutboundClick } = useAnalyticsOutboundClick()
 
 // 使用拆分後的 composables
-const { mainData, prevContent, nextContent } = contenDetailData
+const { mainData, prevContent, nextContent } = contentDetailData
 
 // 將 null 轉為 undefined，以符合下游元件（如 postPrevNext）可能使用可選屬性的型別
 const prevForNav = computed(() => prevContent.value ?? undefined)
 const nextForNav = computed(() => nextContent.value ?? undefined)
+
+const relatedPagesInput = computed(() => {
+  const value = mainData.value?.relatedPages
+  return Array.isArray(value) ? value : []
+})
+
+const { relatedPages } = useRelatedPages(relatedPagesInput, contentDetailData.collection)
 
 const data = computed(() => ({
   title: mainData.value?.title,
@@ -160,6 +167,8 @@ if (import.meta.client) {
                 <p>No content found.</p>
               </template>
             </ContentRenderer>
+
+            <PostRelatedPages :pages="relatedPages" />
           </div>
 
           <template v-else>

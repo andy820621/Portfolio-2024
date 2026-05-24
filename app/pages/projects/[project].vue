@@ -6,7 +6,7 @@ const { locale } = useI18n()
 
 // 獲取內容數據
 const paramName = 'project'
-const { contentData, error } = await useContentData({
+const { contentData, error, collection } = await useContentData({
   basePageName: 'projects',
   paramName,
 })
@@ -22,8 +22,8 @@ if (error.value || !contentData.value) {
   })
 }
 
-const contenDetailData = useContentDetailData(contentData)
-const { mainData } = contenDetailData
+const contentDetailData = useContentDetailData(contentData, collection)
+const { mainData } = contentDetailData
 const project = mainData.value
 
 if (!project) {
@@ -138,6 +138,6 @@ useSchemaOrg(schemas)
   <div>
     <RandomBackground :sources="['ArtPlum', 'FlowDots']" />
 
-    <WrapperPost :conten-detail-data="contenDetailData" redirect-link="/projects" />
+    <WrapperPost :content-detail-data="contentDetailData" redirect-link="/projects" />
   </div>
 </template>

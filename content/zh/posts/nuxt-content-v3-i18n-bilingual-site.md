@@ -11,6 +11,10 @@ ogImage:
   url: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 tags: ['Nuxt', 'Nuxt Content', 'Markdown', 'i18n', 'Collections', 'Schema', 'SEO']
 categories: ['Nuxt', '內容管理系統', 'i18n']
+relatedPages:
+  - path: /zh/projects/nuxt-content-mermaid
+  - path: /zh/posts/nitro-prerender-dynamic-routes-solution
+  - path: /zh/posts/nuxt4-portfolio-architecture
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -232,9 +236,3 @@ Nuxt Content v3 提供的 collections 與 hooks，
 非常適合用來打造真正可維護的內容型產品。
 
 ---
-
-### 延伸閱讀
-
-- [nuxt-content-mermaid](/zh/projects/nuxt-content-mermaid)
-- [如何用 Nitro Hooks 解決 Nuxt Content 動態路由的預渲染問題](/zh/posts/nitro-prerender-dynamic-routes-solution)
-- [以產品思維打造 Nuxt 4 個人網站](/zh/posts/nuxt4-portfolio-architecture)

@@ -11,6 +11,9 @@ ogImage:
   url: /project-images/nuxt-content-mermaid-wide.webp
 tags: ['Nuxt', 'Nuxt Module', 'Nuxt Content', 'Mermaid', 'Markdown', 'TypeScript', 'Vitest', 'Open Source']
 categories: ['Nuxt', 'Nuxt Content', 'Mermaid']
+relatedPages:
+  - path: /posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /posts/nitro-prerender-dynamic-routes-solution
 published: true
 
 sitemap:
@@ -73,7 +76,7 @@ flowchart TD
 pnpm add -D @barzhsieh/nuxt-content-mermaid
 ```
 
-2. Add it to `nuxt.config.ts`:
+1. Add it to `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
@@ -85,7 +88,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Write Mermaid directly in Markdown:
+1. Write Mermaid directly in Markdown:
 
 ````md
 ```mermaid
@@ -98,6 +101,5 @@ graph LR
 
 ## Links
 
-- Related article: [Bilingual Nuxt Content v3 + i18n: a maintainable content system](/posts/nuxt-content-v3-i18n-bilingual-site/)
 - NPM: [https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid](https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid){target="\_blank" rel="noopener"}
 - GitHub: [https://github.com/andy820621/nuxt-content-mermaid](https://github.com/andy820621/nuxt-content-mermaid){target="\_blank" rel="noopener"}

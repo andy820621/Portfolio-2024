@@ -10,6 +10,11 @@ ogImage:
   url: https://nuxt.com/assets/blog/v4.png
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Portfolio', 'Architecture', 'DX', 'Nuxt Content', 'SEO']
 categories: ['Nuxt', 'Portfolio', 'Architecture']
+relatedPages:
+  - path: /posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /posts/global-fulltext-search
+  - path: /posts/image-management-pipeline
+  - path: /posts/nitro-prerender-dynamic-routes-solution
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -187,15 +192,6 @@ Shared filtering UI for all list pages, with consistent tag/search interactions.
 Dynamic background variations to keep the site feeling fresh.
 
 ---
-
-## Further reading
-
-This post is the overview. These posts dive into specific subsystems:
-
-- [Bilingual Nuxt Content v3 + i18n](/posts/nuxt-content-v3-i18n-bilingual-site)
-- [Global search with MiniSearch + Nuxt Content](/posts/global-fulltext-search)
-- [Projects/Gallery image pipeline: JSON maps, metadata, and LightBox](/posts/image-management-pipeline)
-- [Prerendering dynamic Markdown routes with Nitro hooks](/posts/nitro-prerender-dynamic-routes-solution)
 
 ---
 

@@ -1,8 +1,8 @@
-import type { AsyncContentDataType } from '~~/types/main'
+import type { AsyncContentDataType, BasePostCollectionsKey } from '~~/types/main'
 
 export type ContentDetailData = ReturnType<typeof useContentDetailData>
 
-export function useContentDetailData(contentData: AsyncContentDataType) {
+export function useContentDetailData(contentData: AsyncContentDataType, collection: BasePostCollectionsKey) {
   const mainData = computed(() => contentData.value?.content)
 
   const prevContent = computed(() => contentData.value?.surroundContent?.[0] ?? null)
@@ -12,5 +12,6 @@ export function useContentDetailData(contentData: AsyncContentDataType) {
     mainData,
     prevContent,
     nextContent,
+    collection,
   }
 }

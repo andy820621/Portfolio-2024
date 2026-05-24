@@ -6,11 +6,22 @@ export interface ContentDetailDataReturn<T = PageCollectionItemBase> {
   mainData: globalThis.ComputedRef<T | null>
   prevContent: globalThis.ComputedRef<ContentNavigationItem | null>
   nextContent: globalThis.ComputedRef<ContentNavigationItem | null>
+  collection: BasePostCollectionsKey
 }
 
 export type AllCollectionItem = ContentEnCollectionItem & ContentZhCollectionItem & PostsEnCollectionItem & PostsZhCollectionItem & ProjectsEnCollectionItem & ProjectsZhCollectionItem & DemosEnCollectionItem & DemosZhCollectionItem
 
 export type DateLike = Date | number | string | undefined
+
+export interface RelatedPageInput {
+  path: string
+  title?: string
+}
+
+export interface RelatedPageResolved {
+  path: string
+  title: string
+}
 
 export type ContentCollectionItem = ContentEnCollectionItem | ContentZhCollectionItem
 export type PostsCollectionItem = PostsEnCollectionItem | PostsZhCollectionItem

@@ -11,6 +11,10 @@ ogImage:
   url: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 tags: ['Nuxt', 'Nitro', 'Prerender', 'Netlify', 'Nuxt Content', 'SSG', 'i18n', '部署']
 categories: ['Nuxt', '部署', 'SEO']
+relatedPages:
+  - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /zh/posts/global-fulltext-search
+  - path: /zh/posts/nuxt-seo-guide
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -459,7 +463,7 @@ pnpm test:prerender
 
 預期輸出:
 
-```
+```markdown
 🔍 檢查預渲染輸出...
 
 📊 預渲染統計:
@@ -540,14 +544,6 @@ pnpm test:prerender
 4. Redirects 處理錯誤的語系前綴
 
 ---
-
-## 延伸閱讀
-
-這篇文章是「Nuxt 4 作品集系列」的一部分:
-
-- [透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site) - 了解 collections 與 schema 設計
-- [全站搜尋怎麼做得好用:MiniSearch + Nuxt Content 分段索引](/zh/posts/global-fulltext-search) - 預渲染的內容如何建立搜尋索引
-- [Nuxt 4 實戰 SEO:Schema.org、sitemap、OG images 與驗證工具](/zh/posts/nuxt-seo-guide) - 預渲染如何與 SEO 整合
 
 ---
 

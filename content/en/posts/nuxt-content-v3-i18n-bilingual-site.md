@@ -11,6 +11,10 @@ ogImage:
   url: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 tags: ['Nuxt', 'Nuxt Content', 'Markdown', 'i18n', 'Collections', 'Schema', 'SEO']
 categories: ['Nuxt', 'Content System', 'i18n']
+relatedPages:
+  - path: /projects/nuxt-content-mermaid
+  - path: /posts/nitro-prerender-dynamic-routes-solution
+  - path: /posts/nuxt4-portfolio-architecture
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -228,9 +232,3 @@ But for a long-lived content product, **structure and constraints actually make 
 Nuxt Content v3 collections and hooks let content scale naturally into SEO, search, prerendering, and build automation—an excellent fit for maintainable, content-driven products.
 
 ---
-
-### Further reading
-
-- [nuxt-content-mermaid](/projects/nuxt-content-mermaid)
-- [Prerendering dynamic Markdown routes with Nitro hooks](/posts/nitro-prerender-dynamic-routes-solution)
-- [Building a Nuxt 4 portfolio as a product](/posts/nuxt4-portfolio-architecture)

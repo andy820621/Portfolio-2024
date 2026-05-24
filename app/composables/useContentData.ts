@@ -48,5 +48,6 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
   return {
     contentData,
     error,
+    collection,
   }
 }

@@ -10,6 +10,11 @@ ogImage:
   url: https://nuxt.com/assets/blog/v4.png
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', '作品集', 'Architecture', 'DX', 'Nuxt Content', 'SEO']
 categories: ['Nuxt', '作品集', '架構設計']
+relatedPages:
+  - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /zh/posts/global-fulltext-search
+  - path: /zh/posts/image-management-pipeline
+  - path: /zh/posts/nitro-prerender-dynamic-routes-solution
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -186,15 +191,6 @@ flowchart LR
 每次進入頁面都會呈現不同的動態背景，為使用者創造新鮮感。
 
 ---
-
-## 延伸閱讀
-
-這篇文章只是整個架構的概覽，以下文章會深入探討各個子系統的實作細節：
-
-- [整合 Nuxt Content + i18n，打造多語系內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site)
-- [整合 MiniSearch + Nuxt Content 實現全站搜尋](/zh/posts/global-fulltext-search)
-- [Projects/Gallery 圖片管線：JSON map、metadata 與 LightBox 整合](/zh/posts/image-management-pipeline)
-- [如何用 Nitro Hooks 解決 Nuxt Content 動態路由的預渲染問題](/zh/posts/nitro-prerender-dynamic-routes-solution)
 
 ---
 

@@ -11,6 +11,13 @@ ogImage:
   url: /project-images/portfolio-2024-hero.webp
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Nuxt Content', 'i18n', 'SEO', 'Schema.org', 'MiniSearch', 'Nitro', 'Netlify']
 categories: ['Portfolio', 'Nuxt', 'Full Stack']
+relatedPages:
+  - path: /posts/nuxt4-portfolio-architecture
+  - path: /posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /posts/nitro-prerender-dynamic-routes-solution
+  - path: /posts/global-fulltext-search
+  - path: /posts/image-management-pipeline
+  - path: /posts/nuxt-seo-guide
 updatedAt: 2025/12/22
 published: true
 
@@ -88,22 +95,6 @@ From image maps to routes to SEO defaults, automate the boring parts to reduce m
 Small details add up: smooth scrolling, keyboard shortcuts, instant search, and flexible filters are all polished intentionally.
 
 ---
-
-## Further Reading
-
-Want the implementation details? I wrote a series of deep dives:
-
-1. [Nuxt 4 Portfolio as a Product](/posts/nuxt4-portfolio-architecture)
-
-2. [Bilingual Nuxt Content v3 + i18n](/posts/nuxt-content-v3-i18n-bilingual-site)
-
-3. [Prerendering Markdown routes safely (Nitro)](/posts/nitro-prerender-dynamic-routes-solution)
-
-4. [Global search for Markdown sections (MiniSearch)](/posts/global-fulltext-search)
-
-5. [Image pipeline: JSON maps + metadata + LightBox + Schema.org](/posts/image-management-pipeline)
-
-6. [Nuxt 4 SEO guide](/posts/nuxt-seo-guide)
 
 ---
 

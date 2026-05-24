@@ -11,6 +11,9 @@ ogImage:
   url: /project-images/nuxt-content-mermaid-wide.webp
 tags: ['Nuxt', 'Nuxt Module', 'Nuxt Content', 'Mermaid', 'Markdown', 'TypeScript', 'Vitest', '開源']
 categories: ['Nuxt', 'Nuxt Content', 'Mermaid']
+relatedPages:
+  - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /zh/posts/nitro-prerender-dynamic-routes-solution
 published: true
 
 sitemap:
@@ -73,7 +76,7 @@ flowchart TD
 pnpm add -D @barzhsieh/nuxt-content-mermaid
 ```
 
-2. 加到 `nuxt.config.ts`：
+1. 加到 `nuxt.config.ts`：
 
 ```ts
 export default defineNuxtConfig({
@@ -85,7 +88,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. 在 Markdown 直接寫 Mermaid：
+1. 在 Markdown 直接寫 Mermaid：
 
 ````md
 ```mermaid
@@ -96,8 +99,7 @@ graph LR
 ```
 ````
 
-## 相關連結
+## 外部連結
 
-- 延伸閱讀：[透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site/)
 - NPM：[https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid](https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid){:target="\_blank"}
 - GitHub：[https://github.com/andy820621/nuxt-content-mermaid](https://github.com/andy820621/nuxt-content-mermaid){:target="\_blank"}

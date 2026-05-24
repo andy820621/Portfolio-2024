@@ -11,6 +11,10 @@ ogImage:
   url: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 tags: ['Nuxt', 'Nitro', 'Prerender', 'Netlify', 'Nuxt Content', 'SSG', 'i18n', 'Deployment']
 categories: ['Nuxt', 'Deployment', 'SEO']
+relatedPages:
+  - path: /posts/nuxt-content-v3-i18n-bilingual-site
+  - path: /posts/global-fulltext-search
+  - path: /posts/nuxt-seo-guide
 published: true
 schemaOrg:
   - "@type": "BlogPosting"
@@ -455,7 +459,7 @@ pnpm test:prerender
 
 Expected output:
 
-```
+```markdown
 🔍 Checking prerender output...
 
 📊 Prerender stats:
@@ -536,14 +540,6 @@ Each route produces:
 4. Redirect rules fix accidental locale-prefix URLs
 
 ---
-
-## Further reading
-
-This post is part of the “Nuxt 4 portfolio series”:
-
-- [Bilingual Nuxt Content v3 + i18n](/posts/nuxt-content-v3-i18n-bilingual-site) — collections and schema design
-- [Global search: MiniSearch + Nuxt Content search sections](/posts/global-fulltext-search) — how prerendered content becomes searchable
-- [Practical SEO in Nuxt 4: Schema.org, sitemap, OG images, and validation](/posts/nuxt-seo-guide) — how prerendering fits into SEO
 
 ---
 

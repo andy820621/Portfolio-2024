@@ -60,6 +60,10 @@ const articleSchema = z.object({
   keywords: z.array(z.string()).optional(),
   wordCount: z.number().optional(),
   readingTime: z.number().optional(),
+  relatedPages: z.array(z.object({
+    path: z.string(),
+    title: z.string().optional(),
+  })).optional(),
 })
 
 // projects 內容模式
@@ -82,6 +86,10 @@ const projectSchema = z.object({
   keywords: z.array(z.string()).optional(),
   wordCount: z.number().optional(),
   readingTime: z.number().optional(),
+  relatedPages: z.array(z.object({
+    path: z.string(),
+    title: z.string().optional(),
+  })).optional(),
 })
 
 // demos 內容模式
