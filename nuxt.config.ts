@@ -288,6 +288,7 @@ export default defineNuxtConfig({
     ],
   },
   sitemap: {
+    sources: ['/api/__sitemap__/gallery'],
     xslTips: false,
     xsl: '/__sitemap__/style.xsl',
     xslColumns: [
@@ -732,10 +733,6 @@ function generateRouteRules({ locales }: GenerateRouteRulesOptions): RouteRules 
       headers: {
         'X-Robots-Tag': 'noindex',
       },
-    },
-
-    '/sitemap.xml': {
-      prerender: true,
     },
 
     [`${GALLERY_IMAGE_PATH_PREFIX}**`]: {

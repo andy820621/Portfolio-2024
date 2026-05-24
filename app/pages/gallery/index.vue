@@ -183,13 +183,13 @@ useSchemaOrg([
         :key="group.albumId"
         class="gallery-item"
       >
-        <a :href="getGalleryAlbumPath(group.slug)" :title="group.title" :aria-label="group.title" class="block">
+        <NuxtLink :to="getGalleryAlbumPath(group.slug)" :title="group.title" :aria-label="group.title" class="block">
           <GalleryImageCard
             :album-id="group.albumId"
             :title="group.title"
             :src="group.coverImage"
           />
-        </a>
+        </NuxtLink>
       </div>
     </div>
 
