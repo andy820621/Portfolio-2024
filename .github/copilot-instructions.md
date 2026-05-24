@@ -21,6 +21,7 @@ Before modifying code:
 - For non-trivial tasks, briefly explain the approach before editing.
 - Follow the smallest correct implementation path.
 - Avoid unrelated refactors, formatting churn, or new abstractions.
+- When running Node-related commands, prefer Volta (for example, `volta run node ...`) to ensure the project-required Node version is used.
 - After editing, summarize:
   - changed files
   - key changes
