@@ -53,6 +53,262 @@ to = "/posts/nuxt-content-v3-i18n-bilingual-site/"
 status = 301
 force = true
 
+# TODO(2027-05): 檢查 GSC Coverage + Netlify logs，若舊 URL 已無流量可移除本區塊舊版 gallery 轉址。
+# 舊版 gallery slug（空白分隔）永久重定向到新版 slug（連字號）
+[[redirects]]
+from = "/gallery/blossoms%20and%20kids"
+to = "/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/blossoms%20and%20kids/"
+to = "/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+# 舊版 gallery albumId（含空白/符號）永久重定向到新版 slug（預設語系）
+[[redirects]]
+from = "/gallery/Blossoms%20%26%20Kids"
+to = "/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Blossoms%20%26%20Kids/"
+to = "/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/blossoms%20%26%20kids"
+to = "/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/blossoms%20%26%20kids/"
+to = "/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Blossom%20Passage"
+to = "/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Blossom%20Passage/"
+to = "/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/blossom%20passage"
+to = "/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/blossom%20passage/"
+to = "/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Cityscapes%20of%20Tokyo"
+to = "/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Cityscapes%20of%20Tokyo/"
+to = "/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/cityscapes%20of%20tokyo"
+to = "/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/cityscapes%20of%20tokyo/"
+to = "/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Sakura%20Park"
+to = "/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Sakura%20Park/"
+to = "/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/sakura%20park"
+to = "/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/sakura%20park/"
+to = "/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Chasing%20Blossoms"
+to = "/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/Chasing%20Blossoms/"
+to = "/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/chasing%20blossoms"
+to = "/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/gallery/chasing%20blossoms/"
+to = "/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+# 舊版 gallery albumId（含空白/符號）永久重定向到新版 slug（zh 語系）
+[[redirects]]
+from = "/zh/gallery/Blossoms%20%26%20Kids"
+to = "/zh/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Blossoms%20%26%20Kids/"
+to = "/zh/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/blossoms%20%26%20kids"
+to = "/zh/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/blossoms%20%26%20kids/"
+to = "/zh/gallery/blossoms-and-kids/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Blossom%20Passage"
+to = "/zh/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Blossom%20Passage/"
+to = "/zh/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/blossom%20passage"
+to = "/zh/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/blossom%20passage/"
+to = "/zh/gallery/blossom-passage/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Cityscapes%20of%20Tokyo"
+to = "/zh/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Cityscapes%20of%20Tokyo/"
+to = "/zh/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/cityscapes%20of%20tokyo"
+to = "/zh/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/cityscapes%20of%20tokyo/"
+to = "/zh/gallery/cityscapes-of-tokyo/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Sakura%20Park"
+to = "/zh/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Sakura%20Park/"
+to = "/zh/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/sakura%20park"
+to = "/zh/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/sakura%20park/"
+to = "/zh/gallery/sakura-park/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Chasing%20Blossoms"
+to = "/zh/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/Chasing%20Blossoms/"
+to = "/zh/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/chasing%20blossoms"
+to = "/zh/gallery/chasing-blossoms/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/zh/gallery/chasing%20blossoms/"
+to = "/zh/gallery/chasing-blossoms/"
+status = 301
+force = true
+
 # 避免 localized sitemap route 落回 Nuxt app shell
 [[redirects]]
 from = "/zh/sitemap.xml"
