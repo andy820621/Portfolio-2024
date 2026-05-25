@@ -21,8 +21,13 @@ const relatedPagesInput = computed(() => {
   const value = mainData.value?.relatedPages
   return Array.isArray(value) ? value : []
 })
+const relatedLinksInput = computed(() => {
+  const value = mainData.value?.relatedLinks
+  return Array.isArray(value) ? value : []
+})
 
 const { relatedPages } = useRelatedPages(relatedPagesInput, contentDetailData.collection)
+const { relatedLinks } = useRelatedLinks(relatedLinksInput)
 
 const data = computed(() => ({
   title: mainData.value?.title,
@@ -169,6 +174,7 @@ if (import.meta.client) {
             </ContentRenderer>
 
             <PostRelatedPages :pages="relatedPages" />
+            <PostRelatedLinks :links="relatedLinks" />
           </div>
 
           <template v-else>

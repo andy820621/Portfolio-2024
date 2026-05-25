@@ -23,6 +23,16 @@ export interface RelatedPageResolved {
   title: string
 }
 
+export interface RelatedLinkInput {
+  title: string
+  href: string
+  note?: string
+}
+
+export interface RelatedLinkResolved extends RelatedLinkInput {
+  isExternal: boolean
+}
+
 export type ContentCollectionItem = ContentEnCollectionItem | ContentZhCollectionItem
 export type PostsCollectionItem = PostsEnCollectionItem | PostsZhCollectionItem
 export type ProjectsCollectionItem = ProjectsEnCollectionItem | ProjectsZhCollectionItem

@@ -64,6 +64,11 @@ const articleSchema = z.object({
     path: z.string(),
     title: z.string().optional(),
   })).optional(),
+  relatedLinks: z.array(z.object({
+    title: z.string(),
+    href: z.string(),
+    note: z.string().optional(),
+  })).optional(),
 })
 
 // projects 內容模式
@@ -89,6 +94,11 @@ const projectSchema = z.object({
   relatedPages: z.array(z.object({
     path: z.string(),
     title: z.string().optional(),
+  })).optional(),
+  relatedLinks: z.array(z.object({
+    title: z.string(),
+    href: z.string(),
+    note: z.string().optional(),
   })).optional(),
 })
 

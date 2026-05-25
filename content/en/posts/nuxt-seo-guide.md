@@ -1,204 +1,127 @@
 ---
-title: "Nuxt 4 SEO guide: meta, Schema.org, sitemap, and validation"
+title: "Nuxt 4 SEO guide: series overview and implementation map"
 date: 2025/12/17
-updatedAt: 2026/05/25
-description: "A practical SEO setup for a bilingual Nuxt 4 content site: consistent meta, OG image generation, Schema.org (including image licensing), dynamic sitemap endpoints, and a validation checklist with common pitfalls."
-seoTitle: "Nuxt 4 SEO Meta, Schema, and Sitemap Guide"
-seoDescription: "A practical Nuxt 4 SEO setup for bilingual content sites, covering meta tags, OG images, Schema.org, sitemap endpoints, and validation workflows."
+updatedAt: 2026-05-25
+description: "A map for this Nuxt 4 SEO series on bilingual content sites: start with the shared architecture, then go deeper on sitemap and robots, meta plus Schema.org, and canonical with i18n internal linking."
+seoTitle: "Nuxt 4 SEO Series: Meta, Schema, Sitemap, and Canonical"
+seoDescription: "A series-based Nuxt 4 SEO guide covering sitemap, robots, Schema.org, OG previews, canonical URLs, i18n, and internal linking for content-heavy sites."
 image: /blog-images/nuxt-seo-guide.webp
-alt: "Nuxt 4 SEO: Meta, Schema.org, and sitemap"
+alt: "Nuxt 4 SEO series overview"
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Schema.org', 'Sitemap', 'Open Graph', 'i18n']
 categories: ['Nuxt', 'SEO']
 published: true
+relatedPages:
+  - path: /posts/nuxt-sitemaps-robots-indexing
+  - path: /posts/nuxt-meta-og-schema
+  - path: /posts/nuxt-canonical-i18n-internal-linking
+  - path: /posts/nuxt-content-v3-i18n-bilingual-site
+relatedLinks:
+  - title: "Nuxt SEO Learn: SEO Checklist"
+    href: https://nuxtseo.com/learn-seo/checklist
+    note: A practical verification loop for launches and regressions.
+  - title: "Nuxt SEO Learn: Sitemaps"
+    href: https://nuxtseo.com/learn-seo/nuxt/controlling-crawlers/sitemaps
+    note: Pairs with the sitemap and indexing article in this series.
+  - title: "Nuxt SEO Learn: Schema.org"
+    href: https://nuxtseo.com/learn-seo/nuxt/mastering-meta/schema-org
+    note: Background for the metadata and structured-data article.
+  - title: "Nuxt SEO Learn: Canonical URLs"
+    href: https://nuxtseo.com/learn-seo/nuxt/controlling-crawlers/canonical-urls
+    note: Useful when reading the canonical and i18n article.
+  - title: "Nuxt SEO Learn: Internal Linking"
+    href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/internal-linking
+    note: The reference behind this hub-and-spoke content cluster.
 schemaOrg:
   - "@type": "BlogPosting"
-    headline: "Nuxt 4 SEO guide: meta, Schema.org, sitemap, and validation"
-    description: "A practical SEO setup for a bilingual Nuxt 4 content site: consistent meta, OG image generation, Schema.org (including image licensing), dynamic sitemap endpoints, and a validation checklist with common pitfalls."
+    headline: "Nuxt 4 SEO guide: series overview and implementation map"
+    description: "A map for this Nuxt 4 SEO series on bilingual content sites: start with the shared architecture, then go deeper on sitemap and robots, meta plus Schema.org, and canonical with i18n internal linking."
     author:
       "@type": "Person"
       name: "BarZ Hsieh"
     datePublished: "2025/12/17"
-    dateModified: "2026/05/25"
+    dateModified: "2026-05-25"
     image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt SEO", "Schema.org", "Sitemap", "Open Graph", "i18n"]
+    keywords: ["Nuxt SEO", "Schema.org", "Sitemap", "Canonical", "i18n"]
     articleSection: "TechArticle"
 
 sitemap:
   lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
-      title: "Nuxt 4 SEO guide"
-      caption: "Meta + Schema.org + sitemap + OG images (with validation and common pitfalls)."
+      title: "Nuxt 4 SEO series overview"
+      caption: "One hub article connecting sitemap, metadata, schema, and canonical workflows."
 ---
 
-Nuxt SEO for a bilingual content site works best when you treat it as one system: centralize page meta, derive content SEO from front matter, emit clear Schema.org, and validate sitemap plus previews continuously. This guide shows the exact stack and tradeoffs I use in a real Nuxt 4 portfolio.
+This article is not meant to carry every Nuxt SEO detail by itself. It is the hub for the whole series. The goal is to separate the problems that usually get mixed together on content-heavy sites: indexing control, share previews, structured data, canonical logic, multilingual routing, and the way related posts distribute attention across the site.
 
-## Why does a portfolio still need SEO?
+## What does this hub article cover?
 
-For developers/designers, a portfolio is not only a showcase—it’s also:
+If you are starting a Nuxt SEO cleanup, use this post to build the map first, then dive into the specific article that matches your problem:
 
-- how potential employers/clients find you through search
-- how your work looks when shared on social platforms (OG / Twitter Card)
-- a test of your understanding of web standards and structured content (Schema / Sitemap)
+- **Indexing and crawler control**: which URLs should be discovered, and which should only be visible to users?
+- **Meta and Schema.org**: how do search snippets and share previews stay aligned?
+- **Canonical and i18n**: how do bilingual pages avoid competing against each other?
+- **Internal linking**: how do articles become a cluster instead of isolated pages?
 
-Portfolio SEO is also tricky: mixed content types (posts, projects, galleries), bilingual routing, and the need to generate canonical/OG/schema/sitemap correctly in SSG/SSR contexts.
+I am deliberately using a hub-and-spoke structure here because SEO itself depends on information architecture. The hub targets broad queries, while each spoke handles one narrower search intent. That is much easier to maintain than stuffing everything into one oversized guide.
 
-## What are the three pillars of a Nuxt SEO setup?
+## Series map
 
-- **Meta (OG/Twitter)**: controls SERP and share previews—most visible changes
-- **Schema.org**: helps search engines understand your content types and relationships (articles, lists, images, licensing)
-- **Sitemap**: helps crawlers discover every important URL, especially with dynamic and multilingual content
+Start with these three deep dives:
 
-A pragmatic strategy is: **centralize defaults, derive automatically from real page data, and validate early**.
+1. [Nuxt sitemap, robots.txt, and noindex for content-heavy sites](/posts/nuxt-sitemaps-robots-indexing/)
+2. [Nuxt meta, OG previews, and Schema.org from front matter](/posts/nuxt-meta-og-schema/)
+3. [Nuxt canonical, i18n, and internal linking without ranking cannibalization](/posts/nuxt-canonical-i18n-internal-linking/)
 
-## 1) Page-level meta: one composable
+If you want more background before reading the SEO-focused posts, these two articles are good companions:
 
-Create a SEO composable that centrally handles:
+- [Bilingual Nuxt Content v3 + i18n: a maintainable content system](/posts/nuxt-content-v3-i18n-bilingual-site/)
+- [Prerendering Nuxt Content dynamic routes with Nitro hooks](/posts/nitro-prerender-dynamic-routes-solution/)
 
-- title/description/keywords
-- `og:*` / `twitter:*` (especially `og:url`, `og:image`)
-- robots flags (e.g. noindex)
-- canonical and trailing-slash normalization (avoid `/about` and `/about/` being treated as separate pages)
+## The four principles shared by the whole series
 
-One common pitfall is **base URL**: you need a single source of truth that works in production and previews (e.g. `NUXT_SITE_URL`), otherwise `og:url`/`og:image` often break in preview environments.
+### 1. Build one source of truth before adding SEO layers
 
-```ts
-interface PageSeoOptions {
-  title: string
-  description: string
-  ogImage?: string
-  keywords?: string | string[]
-  noIndex?: boolean
-}
+SEO gets messy when content data is split across multiple places: one title in the page, another in OG config, a third version inside schema. This series assumes that title, description, published state, image, and locale are core content data. SEO should be derived from that data, not maintained in parallel.
 
-export function usePageSeo(options: PageSeoOptions) {
-  const route = useRoute()
-  const config = useRuntimeConfig()
+### 2. Rendering strategy and indexing strategy are different concerns
 
-  const baseUrl = config.public.siteUrl // e.g. NUXT_SITE_URL
-  const fullUrl = `${baseUrl}${route.path}` // locale prefix is part of route.path
+SSR, SSG, prerendering, and cache rules answer “how is this page produced?” Sitemap, robots, noindex, and canonical answer “how should search engines understand it?” Those changes often happen in the same area of the codebase, but they solve different problems. That is why sitemap and crawler control get their own article.
 
-  useSeoMeta({
-    title: options.title,
-    description: options.description,
-    keywords: options.keywords,
-    robots: options.noIndex ? 'noindex, nofollow' : 'index, follow',
+### 3. Linking between articles is architecture, not decoration
 
-    ogTitle: options.title,
-    ogDescription: options.description,
-    ogUrl: fullUrl,
-    ogImage: options.ogImage,
-    // twitterCard / twitterImage etc can be filled here too
-  })
-}
-```
+Every article in this series uses two separate link systems:
 
-## 2) Content page SEO: derived from front matter
+- `relatedPages`: internal follow-up reading that builds topic clusters and return paths
+- `relatedLinks`: external authority references that strengthen the evidence trail
 
-For content pages (posts/projects), the lowest-friction approach is to derive SEO from front matter:
+They solve different jobs. Internal links shape the site architecture. External references define the boundaries and credibility of the topic.
 
-- authors maintain `title`, `description`, `cover/ogImage`, `tags`
-- composables merge tags into keywords, fill `og:url`, and handle draft/noindex logic
-- for extra fields like `wordCount`/`readingTime`, compute them during build/parse so authors don’t maintain them manually
+### 4. Verification has to be routine, not a last-minute ritual
 
-## 3) Schema.org in practice
+The hardest part of SEO is rarely the first setup. It is the slow regression afterward. One silent break in canonical tags, schema, or sitemaps can steadily reduce quality. So every spoke in this series comes back to the same point: verification must move with content changes.
 
-Schema is more than articles. Typical mappings:
+## Recommended reading order
 
-- **Home**: ProfilePage
-- **Index pages (posts/projects/gallery)**: CollectionPage + ItemList
-- **Detail pages**: WebPage + Article/BlogPosting
-- **Gallery album**: WebPage + ItemList + `ImageObject` entries
+For a bilingual Nuxt content site, this order is usually the safest:
 
-You can also attach **image licensing** info to Schema.org:
+1. Clean up metadata and front matter derivation first.
+2. Then fix sitemaps, robots, and noindex rules so the index surface is clean.
+3. Finally add canonical, hreflang, and content clusters to improve scale and signal clarity.
 
-```ts
-// Gallery image Schema.org (with licensing)
-const { locale } = useI18n()
+This order helps because it stabilizes the content model before you tune how crawlers see it, and only then optimizes multilingual ranking signals.
 
-useSchemaOrg([
-  defineImage({
-    '@id': `${fullUrl}#image-${locale.value}`, // avoid @id collision across locales
-    '@type': 'ImageObject',
-    'contentUrl': imageUrl,
-    'url': imageUrl,
+## Minimum pre-publish checks
 
-    // licensing fields (the highlight)
-    'license': 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
-    'acquireLicensePage': `${baseUrl}/license/`,
-    'creditText': 'Photo by Your Name',
-    'creator': {
-      '@type': 'Person',
-      'name': 'Your Name',
-    },
-  }),
-])
-```
+Before all three spoke articles are in place, this small checklist still protects quality:
 
-> Tip: use “absolute URL + fragment” for `@id`, and avoid duplicates across locales (put locale in fragment or use `fullUrl`).
-
-## 4) Sitemap: dynamic content + i18n + images
-
-### Why custom sitemap endpoints?
-
-Nuxt SEO / sitemap modules can generate sitemaps, but complex dynamic content often requires custom endpoints:
-
-- generate entries based on real data sources (gallery/albums/projects)
-- include image sitemap data (covers or representative images)
-- ensure locale-aware URLs and hreflang alignment
-
-So a pragmatic approach is to output sitemap URLs via **Nitro API routes**.
-
-Example: generate a sitemap entry for a gallery album with image data:
-
-```ts
-import type { SitemapUrl } from '#sitemap/types'
-
-export default defineSitemapEventHandler((): SitemapUrl[] => {
-  return [
-    {
-      loc: '/gallery/album-1/',
-      lastmod: new Date().toISOString(),
-      changefreq: 'weekly',
-      priority: 0.8,
-      images: [
-        {
-          loc: '/gallery-images/album-1.webp',
-          title: 'Album 1',
-          caption: 'Cover image',
-        },
-      ],
-    },
-  ]
-})
-```
-
-> If you have drafts/unpublished content, exclude them both in build/prerender and sitemap output (e.g. `sitemap: false` or `robots: false` in front matter).
-
-## 5) SEO validation checklist
-
-Content sites often “slowly regress”: broken links, invalid HTML, or a change that silently breaks schema/sitemap.
-
-### During development
-
-- [ ] HTML validation: enable dev-time validators
-- [ ] Link validation: validate Markdown links at build time (avoid dead links)
-- [ ] Meta checks: DevTools or https://metatags.io
-
-### Before deployment
-
-- [ ] Prerender test: ensure all dynamic routes are actually prerendered
-- [ ] Sitemap check: open `/sitemap.xml` (or sitemap index) and verify completeness
-- [ ] Schema validation: Google Rich Results Test / Schema Markup Validator
-
-### After deployment
-
-- [ ] Broken link scan: schedule link checks (or CI jobs)
-- [ ] Search Console: submit sitemaps, monitor coverage and indexing
-- [ ] OG preview: test shares on LinkedIn/Twitter/Facebook
+- [ ] confirm title, description, canonical, and `og:image` come from the same content source
+- [ ] ensure drafts, private pages, and API routes are not leaking into sitemaps
+- [ ] verify locale counterparts use the correct URLs and language mapping
+- [ ] check that internal follow-up reading and external references both improve context instead of repeating the same links
 
 ## Summary
 
-SEO success for content portfolios is rarely “add more meta tags”. It’s making Meta, Schema, and Sitemap maintainable systems: centralized defaults, derived fields, and a validation checklist so quality doesn’t slowly decay over time.
+This hub article only needs to do one thing well: make the map obvious. The detailed work lives in the three spoke articles. Once sitemap, metadata, canonical logic, i18n, and internal linking are treated as separate topics, it becomes much easier to keep a Nuxt SEO system consistent, verifiable, and expandable.
