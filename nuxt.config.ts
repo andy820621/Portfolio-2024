@@ -5,6 +5,7 @@ import type { NuxtPage } from 'nuxt/schema'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { defineNuxtConfig } from 'nuxt/config'
+import { buildSentryRuntimePublicConfig, isSentrySourceMapUploadEnabled } from './app/utils/sentry'
 import { createPersonIdentity, getKeywords, navbarData, seoData } from './data'
 import { bundleIcons } from './data/bundleIcons'
 
@@ -28,9 +29,25 @@ const chunkMap: Record<string, string> = {
 
 const DEFAULT_SITE_URL = seoData.mySite.replace(/\/$/, '')
 const canonicalSiteUrl = (process.env.NUXT_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, '')
+const isDevelopment = process.env.NODE_ENV === 'development'
 const isProduction = process.env.NODE_ENV === 'production'
 const isNetlify = !!process.env.NETLIFY
 const isSearchIndexableDeployment = isProduction && (!isNetlify || process.env.CONTEXT === 'production')
+const sentryRuntimePublicConfig = buildSentryRuntimePublicConfig({
+  context: process.env.CONTEXT,
+  nodeEnv: process.env.NODE_ENV,
+  sentryDsn: process.env.NUXT_PUBLIC_SENTRY_DSN,
+  sentryRelease: process.env.SENTRY_RELEASE,
+  commitRef: process.env.COMMIT_REF,
+})
+const sentrySourceMapUploadEnabled = isSentrySourceMapUploadEnabled({
+  ...sentryRuntimePublicConfig,
+  context: process.env.CONTEXT,
+  nodeEnv: process.env.NODE_ENV,
+  sentryAuthToken: process.env.SENTRY_AUTH_TOKEN,
+  sentryOrg: process.env.SENTRY_ORG,
+  sentryProject: process.env.SENTRY_PROJECT,
+})
 
 const AI_SEARCH_BOTS = [
   'OAI-SearchBot',
@@ -187,6 +204,15 @@ export default defineNuxtConfig({
     // Keep extraction for production static output only.
     payloadExtraction: isProduction,
   },
+  sourcemap: sentrySourceMapUploadEnabled
+    ? {
+        client: 'hidden',
+        server: true,
+      }
+    : {
+        client: isDevelopment,
+        server: isDevelopment,
+      },
   modules: [
     '@barzhsieh/nuxt-content-mermaid',
     '~~/modules/content-hooks',
@@ -206,10 +232,23 @@ export default defineNuxtConfig({
     '@netlify/nuxt',
     'nuxt-headlessui',
     'nuxt-gtag',
+    '@sentry/nuxt/module',
   ],
   gtag: {
     id: process.env.NUXT_PUBLIC_GTAG_ID,
     enabled: isProduction,
+  },
+  sentry: {
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    sourcemaps: {
+      filesToDeleteAfterUpload: [
+        './**/*.map',
+        '.nuxt/**/*.map',
+        '.output/**/*.map',
+      ],
+    },
   },
   contentMermaid: {
     theme: {
@@ -295,6 +334,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
+      sentryDsn: sentryRuntimePublicConfig.sentryDsn,
+      sentryEnabled: sentryRuntimePublicConfig.sentryEnabled,
+      sentryEnvironment: sentryRuntimePublicConfig.sentryEnvironment,
+      sentryRelease: sentryRuntimePublicConfig.sentryRelease,
       trailingSlash: true,
     },
   },
@@ -595,10 +638,9 @@ export default defineNuxtConfig({
             if (entry)
               return entry[1]
           },
-          sourcemapExcludeSources: !(process.env.NODE_ENV === 'development'), // Set to false to include sources in sourcemaps
+          sourcemapExcludeSources: !sentrySourceMapUploadEnabled && !isDevelopment,
         },
       },
-      sourcemap: process.env.NODE_ENV === 'development',
       chunkSizeWarningLimit: 2500,
     },
     server: {
@@ -611,6 +653,9 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     debug: process.env.NODE_ENV !== 'production',
     preset: isNetlify ? 'netlify' : undefined,
+    replace: {
+      'process.env.SENTRY_RELEASE': JSON.stringify(sentryRuntimePublicConfig.sentryRelease ?? ''),
+    },
     publicAssets: [
       {
         dir: 'public',

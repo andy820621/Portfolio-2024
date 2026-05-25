@@ -1,5 +1,5 @@
 [build]
-command = "NODE_ENV=production NODE_OPTIONS='--max-old-space-size=3072' pnpm run build"
+command = "NODE_ENV=production SENTRY_RELEASE=${COMMIT_REF:-${SENTRY_RELEASE:-local-build}} NODE_OPTIONS='--max-old-space-size=3072' pnpm run build"
 
 [build.environment]
 NODE_VERSION = "22.22.1"
