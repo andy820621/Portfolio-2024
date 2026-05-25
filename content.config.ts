@@ -11,6 +11,18 @@ const baseSeoSchemaFields = {
   schemaOrg: defineSchemaOrgSchema(),
 }
 
+function isExternalRelatedLinkHref(value: string) {
+  return /^https?:\/\//i.test(value.trim())
+}
+
+const relatedLinkSchema = z.object({
+  title: z.string(),
+  href: z.string().refine(isExternalRelatedLinkHref, {
+    message: 'relatedLinks.href must be an absolute http(s) URL.',
+  }),
+  note: z.string().optional(),
+})
+
 function prependZhLocalePrefix(url: { loc: string }) {
   if (!url.loc.startsWith('/zh'))
     url.loc = `/zh${url.loc}`
@@ -64,11 +76,7 @@ const articleSchema = z.object({
     path: z.string(),
     title: z.string().optional(),
   })).optional(),
-  relatedLinks: z.array(z.object({
-    title: z.string(),
-    href: z.string(),
-    note: z.string().optional(),
-  })).optional(),
+  relatedLinks: z.array(relatedLinkSchema).optional(),
 })
 
 // projects 內容模式
@@ -95,11 +103,7 @@ const projectSchema = z.object({
     path: z.string(),
     title: z.string().optional(),
   })).optional(),
-  relatedLinks: z.array(z.object({
-    title: z.string(),
-    href: z.string(),
-    note: z.string().optional(),
-  })).optional(),
+  relatedLinks: z.array(relatedLinkSchema).optional(),
 })
 
 // demos 內容模式

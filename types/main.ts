@@ -29,9 +29,7 @@ export interface RelatedLinkInput {
   note?: string
 }
 
-export interface RelatedLinkResolved extends RelatedLinkInput {
-  isExternal: boolean
-}
+export type RelatedLinkResolved = RelatedLinkInput
 
 export type ContentCollectionItem = ContentEnCollectionItem | ContentZhCollectionItem
 export type PostsCollectionItem = PostsEnCollectionItem | PostsZhCollectionItem

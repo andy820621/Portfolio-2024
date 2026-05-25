@@ -7,7 +7,7 @@ function normalizeText(value: unknown) {
 }
 
 function isExternalHref(href: string) {
-  return /^[a-z][a-z\d+.-]*:/i.test(href)
+  return /^https?:\/\//i.test(href)
 }
 
 export function normalizeRelatedLinks(value: unknown): RelatedLinkResolved[] {
@@ -18,7 +18,7 @@ export function normalizeRelatedLinks(value: unknown): RelatedLinkResolved[] {
     const title = normalizeText(item?.title)
     const href = normalizeText(item?.href)
 
-    if (!title || !href)
+    if (!title || !href || !isExternalHref(href))
       return []
 
     const note = normalizeText(item?.note)
@@ -27,7 +27,6 @@ export function normalizeRelatedLinks(value: unknown): RelatedLinkResolved[] {
       title,
       href,
       note: note || undefined,
-      isExternal: isExternalHref(href) && !href.startsWith('/'),
     }]
   })
 }
