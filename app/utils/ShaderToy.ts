@@ -20,6 +20,13 @@ export interface HSVControls {
 export type MouseMode = 'click' | 'hover'
 type AutoPauseReason = 'visibility' | 'intersection'
 
+class ShaderToyWebGLUnsupportedError extends Error {
+  constructor() {
+    super('WebGL 2 not supported')
+    this.name = 'ShaderToyWebGLUnsupportedError'
+  }
+}
+
 export class ShaderToy {
   private renderer: Renderer
   private camera: Camera
@@ -129,6 +136,28 @@ export class ShaderToy {
     }
   `
 
+  public static isRecoverableInitializationError(error: unknown): boolean {
+    return error instanceof ShaderToyWebGLUnsupportedError
+  }
+
+  private static createWebGL2Canvas(attributes: WebGLContextAttributes): HTMLCanvasElement | null {
+    if (typeof window === 'undefined' || typeof document === 'undefined')
+      return null
+
+    try {
+      const canvas = document.createElement('canvas')
+      const context = canvas.getContext('webgl2', attributes)
+      return ShaderToy.isWebGL2Context(context) ? canvas : null
+    }
+    catch {
+      return null
+    }
+  }
+
+  private static isWebGL2Context(value: unknown): value is WebGL2RenderingContext {
+    return typeof WebGL2RenderingContext !== 'undefined' && value instanceof WebGL2RenderingContext
+  }
+
   constructor(
     private container: HTMLElement,
     mouseMode?: MouseMode,
@@ -145,22 +174,30 @@ export class ShaderToy {
     this.renderHeight = this.container.clientHeight
     this.renderDpr = window.devicePixelRatio
 
-    // Create renderer with WebGL 2 context
-    this.renderer = new Renderer({
-      width: this.renderWidth,
-      height: this.renderHeight,
-      dpr: this.renderDpr,
+    const rendererAttributes: WebGLContextAttributes = {
       alpha: true,
       depth: false,
       stencil: false,
       antialias: true,
       powerPreference: 'high-performance',
+    }
+
+    const canvas = ShaderToy.createWebGL2Canvas(rendererAttributes)
+    if (!canvas)
+      throw new ShaderToyWebGLUnsupportedError()
+
+    // Create renderer with WebGL 2 context
+    this.renderer = new Renderer({
+      canvas,
+      width: this.renderWidth,
+      height: this.renderHeight,
+      dpr: this.renderDpr,
+      ...rendererAttributes,
     })
 
     // Ensure WebGL 2 context
-    if (!this.renderer.gl || !(this.renderer.gl instanceof WebGL2RenderingContext)) {
-      throw new Error('WebGL 2 not supported')
-    }
+    if (!ShaderToy.isWebGL2Context(this.renderer.gl))
+      throw new ShaderToyWebGLUnsupportedError()
 
     // Append canvas to container
     this.container.appendChild(this.renderer.gl.canvas)

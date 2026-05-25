@@ -32,7 +32,17 @@ onMounted(() => {
   if (!containerRef.value)
     return
 
-  shader = new ShaderToy(containerRef.value, props.mouseMode)
+  try {
+    shader = new ShaderToy(containerRef.value, props.mouseMode)
+  }
+  catch (error) {
+    if (ShaderToy.isRecoverableInitializationError(error)) {
+      console.warn('[ShaderToy] Initialization skipped:', error)
+      return
+    }
+
+    throw error
+  }
 
   const success = shader.setShader({
     source: props.shaderCode,
