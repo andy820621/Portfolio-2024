@@ -11,6 +11,12 @@ Sentry.init({
     release: runtimeConfig.public.sentryRelease,
   }),
   integrations: runtimeConfig.public.sentryEnabled
-    ? [Sentry.browserTracingIntegration()]
+    ? [
+        Sentry.browserTracingIntegration(),
+        Sentry.replayIntegration(),
+      ]
     : [],
+  // In production, keep a low baseline replay sampling rate and capture full sessions on errors.
+  replaysSessionSampleRate: runtimeConfig.public.sentryEnabled ? 0.1 : 0,
+  replaysOnErrorSampleRate: runtimeConfig.public.sentryEnabled ? 1 : 0,
 })
