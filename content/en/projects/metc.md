@@ -1,6 +1,7 @@
 ---
 title: Smart Fire Protection System
 date: 2024/3/31
+updatedAt: 2026-06-01
 description: Smart Fire Protection System - Community Disaster Prevention IoT Solution
 seoTitle: "Smart Fire Protection IoT System"
 seoDescription: "A community disaster-prevention platform that combines IoT devices, real-time monitoring, and workflow automation for smarter fire safety management."
@@ -8,12 +9,10 @@ image: /project-images/metc.webp
 alt: Smart Fire Protection System
 ogImage:
   url: /project-images/metc.webp
-categories: ['IoT', 'Fire Safety', 'Smart Systems', 'Community Solutions']
 tags: ['IoT', 'Fire Protection', 'Disaster Prevention', 'Vue 3', 'Quasar', '.NET Core', 'WebSocket', 'PWA', 'WorkflowCore', 'Community Management']
 published: true
 
 sitemap:
-  lastmod: 2025-04-17
   images:
     - loc: /project-images/metc.webp
       title: Smart Fire Protection System

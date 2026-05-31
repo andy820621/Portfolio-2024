@@ -1,7 +1,7 @@
 ---
 title: 個人作品集網站
 date: 2025/12/18
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: 以產品思維打造的 Nuxt 4 作品集——整合 Nuxt Content、i18n、全站搜尋、自動化圖片管線與完整 SEO 優化，可長期維護的個人網站專案。
 seoTitle: "Nuxt 4 個人作品集網站與內容系統"
 seoDescription: "一個整合 Nuxt Content、i18n、全站搜尋、自動化圖片管線與完整 SEO 架構的雙語 Nuxt 4 個人作品集網站，強調產品思維、注重可維護性，增加後續的開發效率。"
@@ -11,7 +11,6 @@ alt: Nuxt 4 個人作品集網站
 ogImage:
   url: /project-images/portfolio-2024-hero.webp
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Nuxt Content', 'i18n', 'SEO', 'Schema.org', 'MiniSearch', 'Nitro', 'Netlify']
-categories: ['作品集', 'Nuxt', 'Full Stack']
 relatedPages:
   - path: /zh/posts/nuxt4-portfolio-architecture
   - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
@@ -22,7 +21,6 @@ relatedPages:
 published: true
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /project-images/portfolio-2024-hero.webp
       title: "Nuxt 4 個人作品集網站"

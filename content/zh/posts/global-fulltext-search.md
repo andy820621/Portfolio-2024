@@ -1,7 +1,7 @@
 ---
 title: 透過 MiniSearch + Nuxt Content 實現全站搜尋、分段索引
 date: 2025/12/19
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: 我在個人作品集網站上實現 Cmd/Ctrl+K 功能的全站搜尋：用 MiniSearch 與 queryCollectionSearchSections() 讓搜尋理解 Markdown 的章節段落，而不只是簡單的標題搜索。
 seoTitle: "MiniSearch + Nuxt Content 全站搜尋實作"
 seoDescription: "以個人作品集為例，說明如何用 MiniSearch 與 Nuxt Content 建立 Cmd/Ctrl+K 全站搜尋，並讓結果精準對應到章節與段落。"
@@ -10,25 +10,10 @@ alt: MiniSearch + Nuxt Content 全站搜尋
 ogImage:
   url: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 tags: ['Nuxt', 'Search', 'MiniSearch', 'Nuxt Content', 'UX', 'i18n']
-categories: ['Nuxt', 'UX', '內容系統']
 relatedPages:
   - path: /zh/posts/image-management-pipeline
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "透過 MiniSearch + Nuxt Content 實現全站搜尋、分段索引"
-    description: "我在個人作品集網站上實現 Cmd/Ctrl+K 功能的全站搜尋：用 MiniSearch 與 queryCollectionSearchSections() 讓搜尋理解 Markdown 的章節段落，而不只是簡單的標題搜索。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/19"
-    dateModified: "2026/05/25"
-    image: "https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png"
-    keywords: ["MiniSearch", "Nuxt Content", "Search Modal", "UX", "Cmd+K"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
       title: "透過 MiniSearch + Nuxt Content 實現全站搜尋、分段索引"

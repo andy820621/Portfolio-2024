@@ -1,16 +1,15 @@
 ---
-title: Nuxt 4 SEO 開發指南：系列總覽與實作地圖
-date: 2025/12/17
-updatedAt: 2026-05-25
-description: 以雙語 Nuxt 4 內容網站為例，整理這組 SEO 系列的實作地圖：母文先講架構原則，再拆成 sitemap/robots、meta/OG/schema、canonical/i18n/internal linking 三篇深文。
-seoTitle: "Nuxt 4 SEO 系列總覽：Meta、Schema、Sitemap、Canonical"
-seoDescription: "用系列化方式整理 Nuxt 4 SEO 實作，涵蓋 sitemap、robots、Schema.org、OG、canonical、i18n 與內部連結策略。"
+title: 2026 Nuxt 4 SEO 優化指南：從架構到內容索引
+date: 2025-12-17
+updatedAt: 2026-06-01
+description: 本篇文章將以個人的雙語內容網站為例，你將會學到如何在 Nuxt4 做好 SEO。這會是一系列的文章，本篇先注重於架構原則，再進一步的給出其他深度文章，並會不定期的更新更多實作細節。
+seoTitle: "2026 Nuxt 4 SEO 優化指南：從架構到內容索引"
+seoDescription: "本篇文章將以個人的雙語內容網站為例，你將會學到如何在 Nuxt4 做好 SEO。這會是一系列的文章，本篇先注重於架構原則，再進一步的給出其他深度文章，並會不定期的更新更多實作細節。"
 image: /blog-images/nuxt-seo-guide.webp
-alt: Nuxt 4 SEO 系列總覽
+alt: Nuxt 4 SEO 系列總覽與實作地圖
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Schema.org', 'Sitemap', 'Open Graph', 'i18n']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /zh/posts/nuxt-sitemaps-robots-indexing
@@ -33,95 +32,160 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Internal Linking"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/internal-linking
     note: 用來設計這組文章的 hub-and-spoke 架構。
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt 4 SEO 開發指南：系列總覽與實作地圖"
-    description: "以雙語 Nuxt 4 內容網站為例，整理這組 SEO 系列的實作地圖：母文先講架構原則，再拆成 sitemap/robots、meta/OG/schema、canonical/i18n/internal linking 三篇深文。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/17"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt SEO", "Schema.org", "Sitemap", "Canonical", "i18n"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
-    - loc: /page-cover/blog.webp
-      title: "Nuxt 4 SEO 系列總覽"
+    - loc: /blog-images/nuxt-seo-guide.webp
+      title: "2026 Nuxt 4 SEO 優化指南：從架構到內容索引"
       caption: "從系列 Hub 出發，拆解 sitemap、meta、schema 與 canonical。"
 ---
 
-這篇不是把所有 Nuxt SEO 細節塞在同一篇長文裡，而是整個系列的入口。我的目標是把「作品集/內容型網站」最常一起出現的問題拆開：索引控制、分享預覽、結構化資料、canonical、多語系，以及文章之間如何互相導流。
+## SEO 在 2026 年的真實面貌
 
-## 這篇母文負責什麼？
+SEO 已經不只是「讓 Google 找到你」這件事了。
 
-如果你剛開始整理 Nuxt SEO，可以先用這篇建立整體地圖，再依問題往下讀深文：
+如今的搜尋結果頁面同時會有有傳統的連結，還會有 AI 摘要。除了傳統搜尋引擎，部分 AI 回答引擎與搜尋型 AI 服務也會透過公開網頁、搜尋索引或自家爬蟲理解網站內容。換句話說，**你現在有兩種讀者需要同時服務：真實使用者和 AI 代理**。
 
-- **索引與爬蟲控制**：哪些 URL 應該被發現？哪些只該被使用者看到？
-- **Meta 與 Schema.org**：搜尋結果與分享預覽怎麼保持一致？
-- **Canonical 與 i18n**：雙語內容怎麼避免互相搶排名？
-- **Internal Linking**：文章如何形成 cluster，而不是各寫各的孤島？
+這帶來了一個具體的問題：如果你的網站結構讓搜尋引擎或 AI 爬蟲看不懂，你的內容對它們來說就不存在。不是排名低——是根本不會出現在任何地方。
 
-我這次刻意用 hub-and-spoke 的方式來寫，因為 SEO 本身就依賴資訊架構。母文吃比較廣的查詢，深文則處理單一主題，這樣比較不容易讓所有關鍵字都擠在同一篇裡互相競爭。
+2026 年，技術 SEO 的健康狀態等於你在網路上的可信度。以下這幾個常見問題，會靜默地傷害你的排名和 AI 引用機會：
 
-## 系列地圖
+- **錯誤的內部連結**：對 AI 訓練爬蟲來說是低品質訊號
+- **網站內容身分不一致**：讓搜尋引擎無法把你的品牌和內容連在一起
+- **缺少 Schema.org**：搜尋引擎與 AI 系統仍可能理解頁面，但你少了一層明確描述文章類型、作者、日期與主圖的結構化訊號。
+- **Hydration 延遲**：過重的客戶端 JavaScript 可能拖慢互動回應，影響 INP，而 Core Web Vitals 是 Google 頁面體驗訊號的一部分。
 
-先從這三篇深文開始：
+---
 
-1. [Nuxt sitemap、robots.txt 與 noindex：內容型網站的索引控制實戰](/zh/posts/nuxt-sitemaps-robots-indexing/)
-2. [Nuxt Meta、OG 與 Schema.org：從 front matter 到分享預覽](/zh/posts/nuxt-meta-og-schema/)
-3. [Nuxt canonical、i18n 與 internal linking：避免內容互搶排名](/zh/posts/nuxt-canonical-i18n-internal-linking/)
+## Nuxt 4 的 SEO 挑戰
 
-如果你想先補背景，再回來讀這組 SEO 系列，這兩篇也很值得一起看：
+Nuxt 帶來了很多效能優勢，但也帶來了幾個特殊的 SEO 複雜性，是其他純靜態網站不需要面對的：
 
-- [透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站](/zh/posts/nuxt-content-v3-i18n-bilingual-site/)
-- [如何用 Nitro Hooks 解決 Nuxt Content 動態路由的預渲染問題](/zh/posts/nitro-prerender-dynamic-routes-solution/)
+**混合渲染的一致性問題**
+Nuxt 4 支援 SSR、SSG 和 SWR，一個站裡可以同時存在不同的渲染策略。但如果沒有統一的 SEO 設定層，不同頁面的 canonical、meta tags 和 sitemap 收錄狀態很容易互相矛盾。
 
-## 這組 SEO 系列共享的四個原則
+**Hydration 與 INP**
+Google 現在用「Interaction to Next Paint (INP)」評估互動性能。如果你的 Vue 水合過程太慢，使用者點了連結但頁面沒有反應，這個延遲就會被計入排名因子。Nuxt Islands 讓你可以標記哪些元件不需要客戶端 JS，直接輸出純 HTML，是解決這個問題的關鍵工具。
 
-### 1. 先有單一真相來源，再談 SEO
+**AI 爬蟲管理**
+GPTBot、ClaudeBot、PerplexityBot 這些 AI 爬蟲的行為和 Googlebot 不同。你需要明確在 `robots.txt` 裡告訴它們哪些內容可以抓、哪些不行。這件事現在已經是基本設定，而不是進階選項。
 
-SEO 失控最常見的原因，不是少一個 meta tag，而是資料來源分裂：標題在頁面寫一份、OG image 在另一個檔案、schema 又自己組一套。這個系列的前提是把 title、description、published、image、locale 當成核心內容資料，SEO 只是從這些資料往外推導。
+---
 
-### 2. 渲染策略與索引策略要分開思考
+## 從 `@nuxtjs/seo` 開始
 
-SSR、SSG、預渲染、快取，這些都是「頁面怎麼被產生」；但 sitemap、robots、noindex、canonical 則是「搜尋引擎應該怎麼理解它」。兩者常常一起改，但責任不同。這也是為什麼我把 sitemap/robots 另外拆成一篇。
+Nuxt SEO 生態裡，個人認為 `@nuxtjs/seo` 是目前最完整的整合。它把六個獨立模組打包成一個安裝：
 
-### 3. 文章之間的連結不是附加品，而是架構
+```bash
+npx nuxi@latest module add seo
+```
 
-這個系列裡，每篇文章都會有：
+裝好之後，在 `nuxt.config.ts` 加上基本站點資料：
 
-- `relatedPages`：放站內延伸閱讀，建立主題回鏈與橫向導流
-- `relatedLinks`：放外部權威資料，補上證據鏈與延伸研究入口
+```ts
+export default defineNuxtConfig({
+  modules: ['@nuxtjs/seo'],
+  site: {
+    url: 'https://example.com',
+    name: '你的站名',
+    description: '站點描述'
+  }
+})
+```
 
-前者是站內資訊架構，後者是可信度與語意邊界。兩者功能不同，不應混成同一種欄位。
+這一步看起來很簡單，但它做的事情比你想的多很多：設定站點 URL 是後續所有絕對路徑（canonical、OG image URL、sitemap）的基礎，也是讓 AI 知識圖譜能把內容連結到正確實體的必要條件。
 
-### 4. 驗證要成為日常，而不是上線前臨時補做
+`@nuxtjs/seo` 裡面主要包含的六個模組各自負責不同的面向：
 
-SEO 最麻煩的不是「第一次設定」，而是之後慢慢退化。只要有一次改動讓 canonical、schema 或 sitemap 靜默失效，排名和分享預覽就會一路變差。所以這個系列所有深文都會回到同一件事：怎麼讓驗證流程跟著內容更新一起跑。
+| 模組                | 負責什麼                  |
+| ------------------- | ------------------------- |
+| `@nuxtjs/robots`    | robots.txt 與 AI 爬蟲控制 |
+| `@nuxtjs/sitemap`   | 自動 XML sitemap 生成     |
+| `nuxt-og-image`     | 零執行期 OG 圖片生成      |
+| `nuxt-schema-org`   | Schema.org 結構化資料圖譜 |
+| `nuxt-link-checker` | 錯誤連結偵測              |
+| `nuxt-site-config`  | 跨模組共享站點設定        |
 
-## 建議閱讀順序
+---
 
-如果你正在做雙語 Nuxt 內容網站，我會建議這樣走：
+## 三個優先順序
 
-1. 先把 metadata 與 front matter 推導整理好，避免每頁手寫。
-2. 再處理 sitemap、robots 與 noindex，確保索引面乾淨。
-3. 最後補 canonical、hreflang 與文章 cluster，解決規模化後的混亂。
+裝好模組之後，SEO 工作有三個層次，建議按這個順序來處理：
 
-這個順序的好處是：你先把資料模型站穩，再處理搜尋引擎如何看到它，最後才優化多語系與站內權重流動。
+### 1. Meta 與內容語意（最先做）
 
-## 發佈前最低驗證
+用 `useSeoMeta()` 取代舊的 `useHead()`。前者是型別安全的扁平語法，比較不容易寫錯欄位：
 
-在每一篇深文都寫完之前，先用這份最小檢查表守住品質：
+```ts
+useSeoMeta({
+  title: '頁面標題',
+  description: '140 字以內的描述，影響搜尋結果點擊率',
+  ogImage: '/og/this-page.png',
+  twitterCard: 'summary_large_image',
+})
+```
 
-- [ ] 開頁後檢查 title、description、canonical、og:image 是否來自同一份內容資料
-- [ ] 確認草稿、不公開頁、API route 沒有誤進 sitemap
-- [ ] 驗證中英文對應頁都有正確 URL 與語系關係
-- [ ] 檢查文章底部的站內延伸閱讀與外部參考是否真的能補足理解脈絡
+這一步的核心原則是：**所有 SEO 資料應該從同一份內容資料推導出來**。標題、描述、OG image 和 Schema.org 如果各自寫在不同地方，遲早會出現版本分裂、改了一個但另一個沒跟上的問題。
 
-## 總結
+Schema.org 部分，`nuxt-schema-org` 讓你用 Vue composable 宣告結構化資料，不需要手寫 JSON-LD：
 
-這篇母文的任務很簡單：先把地圖畫清楚。真正的細節都在後面的三篇深文裡。當 sitemap、meta、canonical、i18n 與 internal linking 被拆成獨立主題後，你反而更容易維持一個一致、可驗證、可持續擴張的 Nuxt SEO 系統。
+```ts
+useSchemaOrg([
+  defineArticle({
+    headline: '文章標題',
+    datePublished: '2026-01-01',
+    author: definePerson({ name: '作者名' }),
+  })
+])
+```
+
+搜尋引擎和 AI 模型讀 Schema.org 的方式遠比讀純 HTML 更準確。如果你不提供結構化資料，它們只能靠猜，猜錯的機率不低。
+
+### 2. 爬蟲控制與索引
+
+確認 sitemap 能自動涵蓋你想被收錄的頁面，並且明確排除草稿、測試路由和 API endpoint。`@nuxtjs/sitemap` 預設會自動掃描 Nuxt 路由，但動態路由（例如 `/posts/:slug`）需要你提供資料來源。
+
+> 注意：robots.txt 是控制爬取，不是保證不被索引。真正不希望出現在搜尋結果的頁面，應該用 noindex、權限保護，或在非 HTML 資源上使用 X-Robots-Tag。
+
+`robots.txt` 方面，2026 年需要特別處理 AI 爬蟲：
+
+```ts
+// nuxt.config.ts
+robots: {
+  disallow: ['/admin', '/api'],
+  // 允許 Googlebot，限制特定 AI 爬蟲
+}
+```
+
+### 3. 渲染策略（視需求調整）
+
+用 `routeRules` 做混合渲染，讓行銷頁和文章走 SSG 或 SWR 快取，動態功能頁走 SSR：
+
+```ts
+routeRules: {
+  '/': { prerender: true },
+  '/posts/**': { swr: 3600 },
+  '/dashboard/**': { ssr: true },
+}
+```
+
+這個設定直接影響 TTFB 和 INP，進而影響 Core Web Vitals 評分。
+
+---
+
+## 上線前的最低驗證清單
+
+在 SEO 設定出現問題之前，最難發現問題的時機是剛上線後的幾週。這份清單可以在部署前擋住最常見的失誤：
+
+- [ ] `title`、`description`、`canonical`、`og:image` 與 Schema.org 的主要欄位，都來自同一份內容資料，沒有手動散寫在各頁
+- [ ] 用「檢視原始碼」確認 meta tags 出現在伺服器回傳的 HTML 裡，而不是只存在客戶端渲染後的 DOM
+- [ ] 草稿頁、開發用路由、API endpoint 沒有誤進 sitemap
+- [ ] Google Search Console 驗證站點，並提交 sitemap URL
+- [ ] 瀏覽器 console 沒有水合錯誤（hydration mismatch）
+
+---
+
+## 小結
+
+Nuxt 4 的 SEO 不只是補上幾個 meta tags，而是要讓內容資料、渲染策略、索引控制與結構化資料彼此一致。
+
+這篇先建立整體地圖；後續可以再分別深入 sitemap、robots、metadata、Schema.org、canonical、i18n 與 internal linking。

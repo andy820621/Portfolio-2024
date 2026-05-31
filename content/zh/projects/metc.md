@@ -1,6 +1,7 @@
 ---
 title: 智慧消防系統
 date: 2024/3/31
+updatedAt: 2026-06-01
 description: 智慧消防系統 - 社區防災物聯網解決方案
 seoTitle: "智慧消防與社區防災物聯網整合管理平台"
 seoDescription: "結合 IoT 裝置、即時監控與流程管理的社區防災平台，用數位化方式提升消防安全、事件處理效率與日常設備管理的可追蹤性，讓維運與應變流程更有依據。"
@@ -9,11 +10,9 @@ alt: 智慧消防系統
 ogImage:
   url: /project-images/metc.webp
 tags: ['智慧消防', '物聯網', '社區防災', 'Web開發', 'Vue', 'Quasar', 'PWA', '.NET Core', 'WorkflowCore']
-categories: ['專案案例', 'IoT應用', '智慧城市', '消防科技']
 published: true
 
 sitemap:
-  lastmod: 2025-04-17
   images:
     - loc: /project-images/metc.webp
       title: 智慧消防系統

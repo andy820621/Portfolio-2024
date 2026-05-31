@@ -1,7 +1,7 @@
 ---
 title: Nuxt Meta、OG 與 Schema.org：從 front matter 到分享預覽
 date: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: 2026-06-01
 description: 以 Nuxt 內容網站為例，整理如何把 title、description、image、tags 等 front matter 推導成頁面 meta、Open Graph、Twitter Card 與 Schema.org，降低手動維護成本。
 seoTitle: "Nuxt Meta、OG 與 Schema.org 實作"
 seoDescription: "整理 Nuxt 內容網站的 page-level meta、OG image、Twitter Card 與 Schema.org 推導流程。"
@@ -10,7 +10,6 @@ alt: Nuxt Meta、OG 與 Schema.org
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Open Graph', 'Schema.org', 'Metadata', 'i18n']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /zh/posts/nuxt-seo-guide
@@ -33,21 +32,7 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Twitter Cards"
     href: https://nuxtseo.com/learn-seo/nuxt/mastering-meta/twitter-cards
     note: 補足 OG 以外的平台預覽差異。
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt Meta、OG 與 Schema.org：從 front matter 到分享預覽"
-    description: "以 Nuxt 內容網站為例，整理如何把 title、description、image、tags 等 front matter 推導成頁面 meta、Open Graph、Twitter Card 與 Schema.org，降低手動維護成本。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2026-05-25"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt Metadata", "Open Graph", "Schema.org", "Twitter Cards", "Front Matter SEO"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt Meta 與 Schema.org 實作"

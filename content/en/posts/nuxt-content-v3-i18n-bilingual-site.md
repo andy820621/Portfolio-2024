@@ -1,7 +1,7 @@
 ---
 title: "Bilingual Nuxt Content v3 + i18n: a maintainable content system"
 date: 2025/12/21
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: Using a real portfolio as an example, this post explains how to manage bilingual Markdown with @nuxt/content v3 collections and Zod schemas to build a consistent, extensible, SEO-friendly content system.
 seoTitle: "Bilingual Nuxt Content v3 with i18n"
 seoDescription: "Learn how to structure bilingual Nuxt Content v3 collections with Zod schemas and i18n for a maintainable, SEO-friendly Markdown workflow."
@@ -11,27 +11,13 @@ alt: Nuxt Content v3 bilingual collections
 ogImage:
   url: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 tags: ['Nuxt', 'Nuxt Content', 'Markdown', 'i18n', 'Collections', 'Schema', 'SEO']
-categories: ['Nuxt', 'Content System', 'i18n']
 relatedPages:
   - path: /projects/nuxt-content-mermaid
   - path: /posts/nitro-prerender-dynamic-routes-solution
   - path: /posts/nuxt4-portfolio-architecture
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Bilingual Nuxt Content v3 + i18n: a maintainable content system"
-    description: "Using a real portfolio as an example, this post explains how to manage bilingual Markdown with @nuxt/content v3 collections and Zod schemas to build a consistent, extensible, SEO-friendly content system."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/21"
-    dateModified: "2026/05/25"
-    image: "/blog-images/nuxt-content-v3-i18n-bilingual-site.webp"
-    keywords: ["Nuxt Content", "Markdown", "i18n", "Collections", "Schema"]
-    articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
       title: "Bilingual Nuxt Content v3 + i18n"
@@ -147,8 +133,8 @@ As content grows, relying on “free-form front matter” becomes risky.
 
 In `content.config.ts`, I define nearly identical schemas for `posts` and `projects` (with Zod):
 
-- **required**: `date`, `tags`, `published`
-- **optional**: `title`, `description`, `image`, `ogImage`, `categories`, `updatedAt`, ...
+- **required**: `date`, `seoTitle`, `seoDescription`, `tags`, `published`
+- **optional**: `updatedAt`, `title`, `description`, `image`, `alt`, `ogImage`, `relatedPages`, `relatedLinks`, `sitemap`, ...
 
 This gives real benefits:
 

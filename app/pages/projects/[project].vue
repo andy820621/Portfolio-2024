@@ -41,7 +41,7 @@ const route = useRoute()
 const { baseUrl } = useUrl()
 
 const keywords = project.tags || []
-const articleSection = project.categories || project.tags || []
+const articleSection = project.tags || []
 const schemaDescription = project.seoDescription || project.description
 
 const websiteId = buildSchemaNodeId(baseUrl.value, 'website')

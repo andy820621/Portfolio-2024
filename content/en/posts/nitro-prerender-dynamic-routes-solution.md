@@ -10,27 +10,13 @@ alt: A complete guide to prerendering Nuxt Content routes with Nitro
 ogImage:
   url: /blog-images/nitro-prerender-dynamic-routes-solution.webp
 tags: ['Nuxt', 'Nitro', 'Prerender', 'Netlify', 'Nuxt Content', 'SSG', 'i18n', 'Deployment']
-categories: ['Nuxt', 'Deployment', 'SEO']
 relatedPages:
   - path: /posts/nuxt-content-v3-i18n-bilingual-site
   - path: /posts/global-fulltext-search
   - path: /posts/nuxt-seo-guide
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Prerendering Nuxt Content dynamic routes with Nitro hooks"
-    description: "A deep dive into scanning Markdown files at build time, filtering drafts, generating static routes, and verifying that all content is actually prerendered."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/20"
-    dateModified: "2025/12/20"
-    image: "/blog-images/nitro-prerender-dynamic-routes-solution.webp"
-    keywords: ["Nitro", "Prerender", "Nuxt Content", "Netlify", "SSG", "Draft filtering"]
-    articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-20
   images:
     - loc: /blog-images/nitro-prerender-dynamic-routes-solution.webp
       title: "Prerendering Nuxt Content dynamic routes with Nitro hooks"

@@ -1,6 +1,7 @@
 ---
 title: Personal Finance Tracking System
 date: 2025/5/10
+updatedAt: 2026-06-01
 description: EconoMe - A Simple and Effective Personal Finance Management Solution
 seoTitle: "EconoMe Personal Finance Tracker App"
 seoDescription: "A personal finance web app built with Nuxt 3, Vue 3, Supabase, and Tailwind CSS to simplify budgeting, expense tracking, and money management."
@@ -9,12 +10,10 @@ alt: Personal Finance Tracking System
 ogImage:
   url: /project-images/finance-tracker.webp
 tags: ['Finance Management', 'Nuxt 3', 'Vue 3', 'Supabase', 'TypeScript', 'Tailwind CSS']
-categories: ['Web Development', 'SaaS', 'Personal Finance']
 published: true
 imageClass: object-left-top
 
 sitemap:
-  lastmod: 2025-05-10
   images:
     - loc: /project-images/finance-tracker.webp
       title: Personal Finance Tracking System

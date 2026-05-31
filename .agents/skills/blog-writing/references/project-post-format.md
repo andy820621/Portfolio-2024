@@ -19,7 +19,7 @@ Use the existing post files as the shape reference. New posts should usually inc
 - `alt`
 - `ogImage.url`
 - `tags`
-- `categories`
+- `published`
 
 Use these fields only when the post needs them:
 
@@ -27,11 +27,17 @@ Use these fields only when the post needs them:
 - `cover`
 - `relatedPages`
 - `relatedLinks`
-- `published`
-- `schemaOrg`
 - `sitemap`
 
-If an existing post already contains extended metadata such as `relatedPages`, `relatedLinks`, `schemaOrg`, `sitemap`, or `published`, preserve those fields and update them consistently when the article title, summary, image, or dates change.
+Frontmatter rules for this repo:
+
+- Keep `seoTitle` and `seoDescription` even when they are very close to `title` and `description`; they are reserved override fields.
+- Do not add or preserve legacy `schemaOrg` blocks in post frontmatter.
+- Do not add or preserve `categories`; use `tags` as the classification source.
+- Do not set `sitemap.lastmod` manually; it is derived from `updatedAt`, with `date` as fallback.
+- Keep `sitemap` only when the page still needs extra sitemap metadata such as `images`.
+- Treat `published: false` as fully non-public content. It must stay out of lists, search, related-page resolution, direct detail access, and prerendered public routes.
+- If an existing post contains `relatedPages`, `relatedLinks`, `sitemap`, or `published`, preserve those fields and update them consistently when the article title, summary, image, or dates change.
 
 ## Date Rules
 

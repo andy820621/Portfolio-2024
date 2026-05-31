@@ -39,7 +39,7 @@ const data = computed(() => ({
   ogImage: mainData.value?.ogImage,
   date: mainData.value?.date,
   tags: mainData.value?.tags || [],
-  published: mainData.value?.published || true,
+  published: mainData.value?.published ?? true,
   wordCount: mainData.value?.wordCount || 0,
   readingTime: mainData.value?.readingTime || undefined,
   imageClass: mainData.value?.imageClass || '',

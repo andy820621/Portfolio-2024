@@ -10,26 +10,12 @@ alt: MiniSearch + Nuxt Content global search
 ogImage:
   url: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
 tags: ['Nuxt', 'Search', 'MiniSearch', 'Nuxt Content', 'UX', 'i18n']
-categories: ['Nuxt', 'UX', 'Content System']
 relatedPages:
   - path: /posts/image-management-pipeline
   - title: Projects & Gallery image pipeline: generated JSON maps, metadata, and LightBox integration
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Implementing Site-wide Search with MiniSearch + Nuxt Content Using Segmented Indexing"
-    description: "I implemented a site-wide Cmd/Ctrl+K search feature on my portfolio website: using MiniSearch with queryCollectionSearchSections() to make search understand Markdown sections and paragraphs, not just simple title searches."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/19"
-    dateModified: "2026/05/25"
-    image: "https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png"
-    keywords: ["MiniSearch", "Nuxt Content", "Search Modal", "UX", "Cmd+K"]
-    articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: https://www.bypeople.com/wp-content/uploads/2019/02/minisearch-featured.png
       title: "Global search with MiniSearch + Nuxt Content"

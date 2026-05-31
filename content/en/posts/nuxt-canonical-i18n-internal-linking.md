@@ -10,7 +10,6 @@ alt: "Nuxt canonical, i18n, and internal linking"
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Canonical', 'i18n', 'Internal Linking', 'Hreflang']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /posts/nuxt-seo-guide
@@ -33,21 +32,8 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Trailing Slashes"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/trailing-slashes
     note: Prevents `/path` and `/path/` from becoming competing URLs.
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt canonical, i18n, and internal linking without ranking cannibalization"
-    description: "A practical guide to canonical URLs, query parameters, hreflang, trailing slashes, and content clusters in bilingual Nuxt sites, so duplicate signals do not compete against each other."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2026-05-25"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt Canonical", "Hreflang", "i18n SEO", "Internal Linking", "Trailing Slash"]
-    articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt canonical and i18n implementation"

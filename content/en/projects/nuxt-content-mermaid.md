@@ -1,7 +1,7 @@
 ---
 title: nuxt-content-mermaid
 date: 2025/12/31
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support.
 seoTitle: "nuxt-content-mermaid for Nuxt Content v3"
 seoDescription: "Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support."
@@ -11,14 +11,12 @@ alt: nuxt-content-mermaid
 ogImage:
   url: /project-images/nuxt-content-mermaid-wide.webp
 tags: ['Nuxt', 'Nuxt Module', 'Nuxt Content', 'Mermaid', 'Markdown', 'TypeScript', 'Vitest', 'Open Source']
-categories: ['Nuxt', 'Nuxt Content', 'Mermaid']
 relatedPages:
   - path: /posts/nuxt-content-v3-i18n-bilingual-site
   - path: /posts/nitro-prerender-dynamic-routes-solution
 published: true
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /project-images/nuxt-content-mermaid.webp
       title: nuxt-content-mermaid

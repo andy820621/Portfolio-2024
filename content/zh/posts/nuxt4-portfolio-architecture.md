@@ -1,6 +1,7 @@
 ---
 title: 以產品思維打造 Nuxt 4 個人網站
 date: 2025/12/22
+updatedAt: 2026-06-01
 description: 過去的作品集只做到「好看」就停了，後續維護困難重重。這次我要打造一個像產品一樣可長期迭代的個人網站——從內容管理到 SEO，從自動化到部署，每個環節都經過系統化設計。
 seoTitle: "以產品思維打造 Nuxt 4 作品集網站"
 seoDescription: "從內容架構、SEO、自動化到部署，一步步拆解我是如何兼顧後續擴充彈性，把 Nuxt 4 個人作品集做成能長期演進、維護的產品思維開發的網站。"
@@ -9,28 +10,13 @@ alt: Nuxt 4 作品集架構設計
 ogImage:
   url: https://nuxt.com/assets/blog/v4.png
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', '作品集', 'Architecture', 'DX', 'Nuxt Content', 'SEO']
-categories: ['Nuxt', '作品集', '架構設計']
 relatedPages:
   - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
   - path: /zh/posts/global-fulltext-search
   - path: /zh/posts/image-management-pipeline
   - path: /zh/posts/nitro-prerender-dynamic-routes-solution
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "以產品思維打造 Nuxt 4 個人網站"
-    description: "過去的作品集只做到「好看」就停了，後續維護困難重重。這次我要打造一個像產品一樣可長期迭代的個人網站——從內容管理到 SEO，從自動化到部署，每個環節都經過系統化設計。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025-12-22"
-    dateModified: "2025-12-22"
-    image: "https://nuxt.com/assets/blog/v4.png"
-    keywords: ["Nuxt 4", "作品集", "架構設計", "TypeScript", "UnoCSS", "Nuxt Content", "SEO", "DX", "可維護性", "內容管理"]
-    articleSection: "技術架構"
-
 sitemap:
-  lastmod: 2025-12-22
   images:
     - loc: /page-cover/blog.webp
       title: "以產品思維打造 Nuxt 4 個人網站"

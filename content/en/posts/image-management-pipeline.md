@@ -9,28 +9,14 @@ alt: Projects and gallery image pipeline
 ogImage:
   url: /blog-images/image-management-pipeline.webp
 tags: ['Nuxt', 'Images', 'Automation', 'Gallery', 'LightBox', 'SEO', 'Schema.org']
-categories: ['Nuxt', 'Media', 'Automation']
 relatedPages:
   - path: /projects/portfolio-2024
     title: BarZ Hsieh Portfolio 2024
   - path: /posts/nuxt-seo-guide
     title: Practical SEO in Nuxt 4: Schema.org, OG images, sitemap, and validation
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Image management at scale: JSON maps, metadata, LightBox, and Schema.org licensing"
-    description: "How this portfolio manages a large image library: build-time JSON maps, optional per-image metadata, deterministic ordering, and LightBox integration (plus Schema.org licensing fields)."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/18"
-    dateModified: "2025/12/18"
-    image: "/blog-images/image-management-pipeline.webp"
-    keywords: ["Gallery", "LightBox", "Image map", "Metadata", "Schema.org"]
-    articleSection: "TechArticle"
 
 sitemap:
-  lastmod: 2025-12-18
   images:
     - loc: /page-cover/blog.webp
       title: "Projects / Gallery image pipeline"

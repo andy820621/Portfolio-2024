@@ -1,7 +1,7 @@
 ---
 title: Personal Portfolio Website
 date: 2025/12/18
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: A Nuxt 4 portfolio built with a product mindset—bilingual Nuxt Content, i18n, global search, automated image pipeline, and comprehensive SEO for long-term maintainability.
 seoTitle: "Nuxt 4 Personal Portfolio Website"
 seoDescription: "A bilingual Nuxt 4 portfolio with Nuxt Content, i18n, global search, automated image pipelines, and a maintainable end-to-end SEO setup."
@@ -11,7 +11,6 @@ alt: Nuxt 4 personal portfolio website
 ogImage:
   url: /project-images/portfolio-2024-hero.webp
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Nuxt Content', 'i18n', 'SEO', 'Schema.org', 'MiniSearch', 'Nitro', 'Netlify']
-categories: ['Portfolio', 'Nuxt', 'Full Stack']
 relatedPages:
   - path: /posts/nuxt4-portfolio-architecture
   - path: /posts/nuxt-content-v3-i18n-bilingual-site
@@ -22,7 +21,6 @@ relatedPages:
 published: true
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /project-images/portfolio-2024-hero.webp
       title: "Nuxt 4 personal portfolio website"

@@ -1,6 +1,7 @@
 ---
 title: 圖片的自動化管理方案：自動化 JSON map + LightBox + Schema.org
 date: 2025/12/18
+updatedAt: 2026-06-01
 description: 這個作品集如何管理大量圖片：建置期生成 JSON map、可選的圖片 metadata、可預期的排序規則，以及在 Nuxt 中整合 LightBox 的方式。
 seoTitle: "Nuxt 圖片管線：JSON Map、LightBox 與授權資料"
 seoDescription: "整理作品集的大量圖片管理流程，包含建置期 JSON map、圖片 metadata、排序策略、LightBox 整合與 Schema.org 授權標記。"
@@ -9,28 +10,13 @@ alt: Projects 與 Gallery 圖片自動化管線
 ogImage:
   url: /blog-images/image-management-pipeline.webp
 tags: ['Nuxt', 'Images', 'Automation', 'Gallery', 'LightBox', 'SEO', 'Schema.org']
-categories: ['Nuxt', '媒體', '自動化']
 relatedPages:
   - path: /zh/projects/portfolio-2024
     title: BarZ Hsieh 作品集 2024
   - path: /zh/posts/nuxt-seo-guide
     title: Nuxt 4 實戰 SEO：Schema.org、sitemap、OG images 與驗證工具
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "圖片的自動化管理方案：自動化 JSON map + LightBox + Schema.org"
-    description: "這個作品集如何管理大量圖片：建置期生成 JSON map、可選的圖片 metadata、可預期的排序規則，以及在 Nuxt 中整合 LightBox 的方式。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/18"
-    dateModified: "2025/12/18"
-    image: "/blog-images/image-management-pipeline.webp"
-    keywords: ["Gallery", "LightBox", "Image map", "Metadata", "Schema.org"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2025-12-18
   images:
     - loc: /page-cover/blog.webp
       title: "Projects / Gallery 圖片管線"

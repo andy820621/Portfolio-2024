@@ -1,7 +1,7 @@
 ---
 title: Nuxt canonical、i18n 與 internal linking：避免內容互搶排名
 date: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: 2026-06-01
 description: 針對雙語 Nuxt 內容網站，整理 canonical URL、query parameters、hreflang、trailing slash 與文章 cluster 的實作方式，避免重複內容與站內訊號互相打架。
 seoTitle: "Nuxt Canonical、i18n 與 Internal Linking"
 seoDescription: "整理 Nuxt 內容網站的 canonical URL、hreflang、多語系網址、query parameters 與 internal linking 策略。"
@@ -10,7 +10,6 @@ alt: Nuxt canonical、i18n 與 internal linking
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Canonical', 'i18n', 'Internal Linking', 'Hreflang']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /zh/posts/nuxt-seo-guide
@@ -33,21 +32,7 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Trailing Slashes"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/trailing-slashes
     note: 避免 `/path` 與 `/path/` 兩種網址同時存在。
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt canonical、i18n 與 internal linking：避免內容互搶排名"
-    description: "針對雙語 Nuxt 內容網站，整理 canonical URL、query parameters、hreflang、trailing slash 與文章 cluster 的實作方式，避免重複內容與站內訊號互相打架。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2026-05-25"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt Canonical", "Hreflang", "i18n SEO", "Internal Linking", "Trailing Slash"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt canonical 與 i18n 實作"

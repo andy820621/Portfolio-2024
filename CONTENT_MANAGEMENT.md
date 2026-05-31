@@ -205,6 +205,15 @@ updatedAt: 2026-05-25
 - 修改文章：保留原本 `date`，更新 `updatedAt`（最後修改時間，`YYYY-MM-DD`）
 - 若舊文沒有 `updatedAt`，第一次修改時補上
 
+**Frontmatter 結構規範（Posts / Projects 共用）：**
+
+- 保留 `seoTitle` 與 `seoDescription`，即使目前內容與 `title` / `description` 很接近也不要刪除，這兩個欄位是預留的 SEO override。
+- 不再使用 `schemaOrg` frontmatter。頁面的結構化資料由頁面程式碼與共用 SEO 邏輯產生。
+- 不再使用 `categories` frontmatter。內容分類統一以 `tags` 為主。
+- 不要手動寫 `sitemap.lastmod`。最後修改時間由 `updatedAt` 自動推導，若沒有 `updatedAt` 才回退到 `date`。
+- `sitemap` 只在需要補充 sitemap page metadata（例如 `images`）時保留。
+- `published: false` 視為未公開內容，不應出現在列表、搜尋、相關文章、詳情頁公開路由或 prerender 輸出中。
+
 #### 6. 測試
 
 ```bash
@@ -266,6 +275,7 @@ generate-project-images-metadata.js
 - [ ] **首次或有新圖片時**執行 `pnpm run generate:metadata`
 - [ ] 在 `content/en|zh/projects/*.md` frontmatter 設定 `date`
 - [ ] 修改既有 projects 文章時，更新 `updatedAt`
+- [ ] 保留 `seoTitle` / `seoDescription`，不要新增 `categories`、`schemaOrg` 或 `sitemap.lastmod`
 - [ ] （可選）手動編輯 `project-images-metadata.json` 優化內容
 - [ ] 創建 `content/en/projects/project-name.md`
 - [ ] 創建 `content/zh/projects/project-name.md`
@@ -277,6 +287,7 @@ generate-project-images-metadata.js
 - [ ] 建立 `content/en/posts/post-name.md` 與 `content/zh/posts/post-name.md`
 - [ ] 新增文章時在 frontmatter 設定 `date`
 - [ ] 修改既有 posts 文章時，更新 `updatedAt`（保留原本 `date`）
+- [ ] 保留 `seoTitle` / `seoDescription`，不要新增 `categories`、`schemaOrg` 或 `sitemap.lastmod`
 - [ ] 測試訪問 `/posts/post-name`（含語系路由）
 
 ---

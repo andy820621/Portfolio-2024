@@ -1,7 +1,7 @@
 ---
 title: 透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站
 date: 2025/12/21
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: 以實際作品集為例，說明如何使用 @nuxt/content v3 的 collections 與 schema 管理中英 Markdown，建立一致、可擴充且對 SEO 友善的內容系統。
 seoTitle: "Nuxt Content v3 與 i18n 雙語內容架構"
 seoDescription: "以實際作品集為例，整理如何結合 Nuxt Content v3、collections、schema 與 i18n，建立可長期維護且對 SEO 友善的雙語內容系統。"
@@ -11,27 +11,12 @@ alt: Nuxt Content v3 雙語 collections
 ogImage:
   url: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
 tags: ['Nuxt', 'Nuxt Content', 'Markdown', 'i18n', 'Collections', 'Schema', 'SEO']
-categories: ['Nuxt', '內容管理系統', 'i18n']
 relatedPages:
   - path: /zh/projects/nuxt-content-mermaid
   - path: /zh/posts/nitro-prerender-dynamic-routes-solution
   - path: /zh/posts/nuxt4-portfolio-architecture
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站"
-    description: "以實際作品集為例，說明如何使用 @nuxt/content v3 的 collections 與 schema 管理中英 Markdown，建立一致、可擴充且對 SEO 友善的內容系統。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/21"
-    dateModified: "2026/05/25"
-    image: "/blog-images/nuxt-content-v3-i18n-bilingual-site.webp"
-    keywords: ["Nuxt Content", "Markdown", "i18n", "Collections", "Schema"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /blog-images/nuxt-content-v3-i18n-bilingual-site.webp
       title: "透過 Nuxt Content v3 與 i18n 建立可長期維護的雙語內容網站"
@@ -148,8 +133,8 @@ Nuxt Content v3 提供的 **collections**，是我整個內容架構的核心。
 
 因此我在 `content.config.ts` 中，替 `posts` 與 `projects` 定義了幾乎一致的 schema（使用 Zod）：
 
-- **必填**：`date`、`tags`、`published`
-- **選填**：`title`、`description`、`image`、`ogImage`、`categories`、`updatedAt`…
+- **必填**：`date`、`seoTitle`、`seoDescription`、`tags`、`published`
+- **選填**：`updatedAt`、`title`、`description`、`image`、`alt`、`ogImage`、`relatedPages`、`relatedLinks`、`sitemap`…
 
 這樣做帶來的實際好處是：
 

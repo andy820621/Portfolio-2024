@@ -2,13 +2,11 @@ import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 import { defineRobotsSchema } from '@nuxtjs/robots/content'
 import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 import { defineOgImageSchema } from 'nuxt-og-image/content'
-import { defineSchemaOrgSchema } from 'nuxt-schema-org/content'
 
 // SEO schema fields，取代已棄用的 asSeoCollection
 const baseSeoSchemaFields = {
   robots: defineRobotsSchema(),
   ogImage: defineOgImageSchema(),
-  schemaOrg: defineSchemaOrgSchema(),
 }
 
 function isExternalRelatedLinkHref(value: string) {
@@ -65,7 +63,6 @@ const articleSchema = z.object({
   alt: z.string().optional(),
   ogImage: z.string().optional(),
   tags: z.array(z.string()),
-  categories: z.array(z.string()).optional(),
   published: z.boolean().default(true),
   rawbody: z.string(),
   imageClass: z.string().optional(),
@@ -92,7 +89,6 @@ const projectSchema = z.object({
   alt: z.string().optional(),
   ogImage: z.string().optional(),
   tags: z.array(z.string()),
-  categories: z.array(z.string()).optional(),
   published: z.boolean().default(true),
   rawbody: z.string(),
   imageClass: z.string().optional(),

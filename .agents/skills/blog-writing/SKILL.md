@@ -113,7 +113,8 @@ For both locales, when the post is trying to capture a high-intent search query,
 - Add or update `updatedAt` on edits using `YYYY-MM-DD`.
 - Use `YYYY-MM-DD` for new posts.
 - If a topic is time-sensitive, version-sensitive, or clearly shaped by the current search environment, it is acceptable to reflect that in the title and framing, but do not change historical dates just to simulate freshness.
-- When editing a post with extra metadata blocks such as `relatedPages`, `relatedLinks`, `schemaOrg`, `sitemap`, or `published`, treat them as part of the article contract and keep them consistent with any title, description, image, or date changes.
+- When editing a post with extra metadata blocks such as `relatedPages`, `relatedLinks`, `sitemap`, or `published`, treat them as part of the article contract and keep them consistent with any title, description, image, or date changes.
+- Do not add or preserve legacy `schemaOrg`, `categories`, or `sitemap.lastmod` fields in post frontmatter. Keep `seoTitle` and `seoDescription`, and use `updatedAt` as the source of sitemap last-modified time.
 - Keep the change scoped to the requested post. Do not "clean up" unrelated content.
 - Do not copy the source sample articles' exact intros, slogans, or catchphrases.
 

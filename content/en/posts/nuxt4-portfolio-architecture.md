@@ -1,6 +1,7 @@
 ---
 title: Building a Nuxt 4 portfolio as a product
 date: 2025/12/22
+updatedAt: 2026-06-01
 description: Most portfolios stop at “looking good”. This time I build a Nuxt 4 site that can evolve like a product—systematic content, SEO, automation, and deployment, designed for long-term maintenance.
 seoTitle: "Building a Nuxt 4 Portfolio as a Product"
 seoDescription: "A real-world look at building a Nuxt 4 portfolio with product thinking, covering content architecture, SEO, automation, and long-term maintainability."
@@ -9,28 +10,13 @@ alt: Nuxt 4 portfolio architecture design
 ogImage:
   url: https://nuxt.com/assets/blog/v4.png
 tags: ['Nuxt', 'Nuxt 4', 'TypeScript', 'UnoCSS', 'Portfolio', 'Architecture', 'DX', 'Nuxt Content', 'SEO']
-categories: ['Nuxt', 'Portfolio', 'Architecture']
 relatedPages:
   - path: /posts/nuxt-content-v3-i18n-bilingual-site
   - path: /posts/global-fulltext-search
   - path: /posts/image-management-pipeline
   - path: /posts/nitro-prerender-dynamic-routes-solution
 published: true
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Building a Nuxt 4 portfolio as a product"
-    description: "Most portfolios stop at “looking good”. This time I build a Nuxt 4 site that can evolve like a product—systematic content, SEO, automation, and deployment, designed for long-term maintenance."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/22"
-    dateModified: "2025/12/22"
-    image: "https://nuxt.com/assets/blog/v4.png"
-    keywords: ["Nuxt 4", "Portfolio", "Architecture", "TypeScript", "UnoCSS", "Nuxt Content", "SEO", "DX"]
-    articleSection: "Architecture"
-
 sitemap:
-  lastmod: 2025-12-22
   images:
     - loc: /page-cover/blog.webp
       title: "Building a Nuxt 4 portfolio as a product"

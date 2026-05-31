@@ -1,7 +1,7 @@
 ---
 title: "Nuxt 4 SEO guide: series overview and implementation map"
 date: 2025/12/17
-updatedAt: 2026-05-25
+updatedAt: 2026-06-01
 description: "A map for this Nuxt 4 SEO series on bilingual content sites: start with the shared architecture, then go deeper on sitemap and robots, meta plus Schema.org, and canonical with i18n internal linking."
 seoTitle: "Nuxt 4 SEO Series: Meta, Schema, Sitemap, and Canonical"
 seoDescription: "A series-based Nuxt 4 SEO guide covering sitemap, robots, Schema.org, OG previews, canonical URLs, i18n, and internal linking for content-heavy sites."
@@ -10,7 +10,6 @@ alt: "Nuxt 4 SEO series overview"
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Schema.org', 'Sitemap', 'Open Graph', 'i18n']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /posts/nuxt-sitemaps-robots-indexing
@@ -33,21 +32,7 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Internal Linking"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/internal-linking
     note: The reference behind this hub-and-spoke content cluster.
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt 4 SEO guide: series overview and implementation map"
-    description: "A map for this Nuxt 4 SEO series on bilingual content sites: start with the shared architecture, then go deeper on sitemap and robots, meta plus Schema.org, and canonical with i18n internal linking."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2025/12/17"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt SEO", "Schema.org", "Sitemap", "Canonical", "i18n"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt 4 SEO series overview"

@@ -1,7 +1,7 @@
 ---
 title: "Nuxt meta, OG previews, and Schema.org from front matter"
 date: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: 2026-06-01
 description: "A practical Nuxt guide to deriving page meta, Open Graph, Twitter Cards, and Schema.org from front matter fields such as title, description, image, and tags."
 seoTitle: "Nuxt Meta, OG, and Schema.org implementation"
 seoDescription: "How to derive Nuxt page metadata, OG images, Twitter Cards, and Schema.org from content front matter with less manual maintenance."
@@ -10,7 +10,6 @@ alt: "Nuxt meta, OG previews, and Schema.org"
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Open Graph', 'Schema.org', 'Metadata', 'i18n']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /posts/nuxt-seo-guide
@@ -33,21 +32,7 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Twitter Cards"
     href: https://nuxtseo.com/learn-seo/nuxt/mastering-meta/twitter-cards
     note: Complements Open Graph with platform-specific preview details.
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt meta, OG previews, and Schema.org from front matter"
-    description: "A practical Nuxt guide to deriving page meta, Open Graph, Twitter Cards, and Schema.org from front matter fields such as title, description, image, and tags."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2026-05-25"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt Metadata", "Open Graph", "Schema.org", "Twitter Cards", "Front Matter SEO"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt metadata and Schema.org implementation"

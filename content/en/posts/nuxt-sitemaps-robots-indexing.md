@@ -1,7 +1,7 @@
 ---
 title: "Nuxt sitemap, robots.txt, and noindex for content-heavy sites"
 date: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: 2026-06-01
 description: "A practical guide to sitemap, robots.txt, X-Robots-Tag, and noindex in a bilingual Nuxt content site, including dynamic sources, image sitemap support, and multilingual indexing control."
 seoTitle: "Nuxt Sitemap, robots.txt, and noindex implementation"
 seoDescription: "A practical Nuxt guide to sitemap generation, robots.txt, X-Robots-Tag, image sitemap entries, and multilingual indexing control."
@@ -10,7 +10,6 @@ alt: "Nuxt sitemap, robots.txt, and noindex"
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Sitemap', 'robots.txt', 'noindex', 'i18n']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /posts/nuxt-seo-guide
@@ -30,21 +29,7 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Dynamic Routes"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/dynamic-routes
     note: Helps keep sitemap output aligned with real content routes.
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt sitemap, robots.txt, and noindex for content-heavy sites"
-    description: "A practical guide to sitemap, robots.txt, X-Robots-Tag, and noindex in a bilingual Nuxt content site, including dynamic sources, image sitemap support, and multilingual indexing control."
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2026-05-25"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt Sitemap", "robots.txt", "noindex", "image sitemap", "i18n SEO"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt sitemap and robots implementation"

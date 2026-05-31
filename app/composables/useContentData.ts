@@ -26,15 +26,20 @@ export async function useContentData({ basePageName, paramName }: UsePostDataOpt
     async () => {
       try {
         // 獲取主要內容
-        const content = await queryCollection(collection).path(fullPath).first()
+        const content = await queryCollection(collection)
+          .where('published', '=', true)
+          .path(fullPath)
+          .first()
 
         if (!content)
           throw new Error(`No content found for ${fullPath}.`)
 
         // 獲取周圍內容
         const surroundContent = await queryCollectionItemSurroundings(collection, fullPath, {
-          fields: ['title', 'description', 'path', 'date', 'id'],
-        }).order('date', 'DESC')
+          fields: ['title', 'description', 'path', 'date', 'id', 'published'],
+        })
+          .where('published', '=', true)
+          .order('date', 'DESC')
 
         return { content, surroundContent }
       }

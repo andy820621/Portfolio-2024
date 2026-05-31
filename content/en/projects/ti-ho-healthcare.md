@@ -1,6 +1,7 @@
 ---
 title: Ti-He Healthcare Official Website
 date: 2022/10/15
+updatedAt: 2026-06-01
 description: Ti-He Healthcare official website.
 seoTitle: "Ti-He Healthcare Brand Website"
 seoDescription: "A brand website for Ti-He Healthcare, focused on accessibility, clear product communication, and a polished healthcare industry presentation."
@@ -9,11 +10,9 @@ alt: Ti-He Healthcare Official Website Development
 ogImage:
   url: /project-images/ti-ho-healthcare.webp
 tags: ['Website Development', 'JavaScript', 'Responsive Design', 'Accessibility', 'UI/UX', 'Brand Collaboration', 'Dental Industry', 'Interactive Features']
-categories: ['Web Development', 'Healthcare Projects', 'Branding', 'Frontend Engineering']
 published: true
 
 sitemap:
-  lastmod: 2025-04-17
   images:
     - loc: /project-images/ti-ho-healthcare.webp
       title: "Ti-He Healthcare Official Website Development"

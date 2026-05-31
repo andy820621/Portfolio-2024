@@ -125,6 +125,7 @@ export function useRelatedPages(
 
     const targetCollection = resolveCollectionFromPath(lookupPath)
     const record = await queryCollection(targetCollection)
+      .where('published', '=', true)
       .path(lookupPath)
       .select('title')
       .first() as { title?: string } | null

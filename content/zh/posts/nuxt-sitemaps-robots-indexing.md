@@ -1,7 +1,7 @@
 ---
 title: Nuxt sitemap、robots.txt 與 noindex：內容型網站的索引控制實戰
 date: 2026-05-25
-updatedAt: 2026-05-25
+updatedAt: 2026-06-01
 description: 以雙語 Nuxt 內容網站為例，拆解 sitemap、robots.txt、X-Robots-Tag 與 noindex 的責任分工，整理動態內容、image sitemap 與多語系索引控制的實作方式。
 seoTitle: "Nuxt Sitemap、robots.txt 與 noindex 實作"
 seoDescription: "整理 Nuxt 內容型網站的 sitemap、robots.txt、X-Robots-Tag、image sitemap 與多語系索引控制策略。"
@@ -10,7 +10,6 @@ alt: Nuxt sitemap、robots.txt 與 noindex
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
 tags: ['Nuxt', 'SEO', 'Sitemap', 'robots.txt', 'noindex', 'i18n']
-categories: ['Nuxt', 'SEO']
 published: true
 relatedPages:
   - path: /zh/posts/nuxt-seo-guide
@@ -30,21 +29,7 @@ relatedLinks:
   - title: "Nuxt SEO Learn: Dynamic Routes"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/dynamic-routes
     note: 幫助確認 sitemap 與真實動態內容來源一致。
-schemaOrg:
-  - "@type": "BlogPosting"
-    headline: "Nuxt sitemap、robots.txt 與 noindex：內容型網站的索引控制實戰"
-    description: "以雙語 Nuxt 內容網站為例，拆解 sitemap、robots.txt、X-Robots-Tag 與 noindex 的責任分工，整理動態內容、image sitemap 與多語系索引控制的實作方式。"
-    author:
-      "@type": "Person"
-      name: "BarZ Hsieh"
-    datePublished: "2026-05-25"
-    dateModified: "2026-05-25"
-    image: "/blog-images/nuxt-seo-guide.webp"
-    keywords: ["Nuxt Sitemap", "robots.txt", "noindex", "image sitemap", "i18n SEO"]
-    articleSection: "TechArticle"
-
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /page-cover/blog.webp
       title: "Nuxt sitemap 與 robots 實作"

@@ -51,6 +51,17 @@
 - If `updatedAt` is missing, add it on the first edit.
 - When AI adds or edits posts/projects content, it must also check and update these date fields. Do not change only the body.
 
+## Content Frontmatter Rules
+
+- Scope: `content/{en,zh}/posts/*.md` and `content/{en,zh}/projects/*.md`.
+- Keep `seoTitle` and `seoDescription` in frontmatter even when they are currently identical or very close to `title` and `description`. They are intentional override fields.
+- Do not add or maintain `schemaOrg` in post/project frontmatter. Structured data is generated from page code and shared SEO utilities, not from content-level `schemaOrg` blocks.
+- Do not add or maintain `categories` in post/project frontmatter. Use `tags` as the content classification source.
+- Do not hand-write `sitemap.lastmod` in post/project frontmatter. It must be derived from `updatedAt`, with `date` as the fallback when `updatedAt` is absent.
+- Keep `sitemap` only when page-specific sitemap metadata is still needed, such as `images`.
+- Treat `published: false` as fully non-public content. It must not appear in lists, search indexes, related-page resolution, direct detail access, or prerendered public routes.
+- When cleaning up legacy frontmatter, prefer removing obsolete keys instead of preserving them for compatibility.
+
 ## Diff Discipline
 
 - Every changed line must trace directly to the user request.

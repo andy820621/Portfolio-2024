@@ -1,7 +1,7 @@
 ---
 title: nuxt-content-mermaid
 date: 2025/12/31
-updatedAt: 2026/05/25
+updatedAt: 2026-06-01
 description: 把 Nuxt Content 的 Mermaid 程式碼區塊轉成可渲染元件，支援 lazy loading、深淺主題切換與 Markdown 技術文件的流程圖整合，適合內容網站與教學文件。
 seoTitle: "nuxt-content-mermaid：Nuxt Content Mermaid 模組"
 seoDescription: "把 Nuxt Content 的 Mermaid 程式碼區塊轉成可渲染元件，支援 lazy loading、深淺主題切換與 Markdown 技術文件的流程圖整合，適合內容網站與教學文件。"
@@ -11,14 +11,12 @@ alt: nuxt-content-mermaid
 ogImage:
   url: /project-images/nuxt-content-mermaid-wide.webp
 tags: ['Nuxt', 'Nuxt Module', 'Nuxt Content', 'Mermaid', 'Markdown', 'TypeScript', 'Vitest', '開源']
-categories: ['Nuxt', 'Nuxt Content', 'Mermaid']
 relatedPages:
   - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
   - path: /zh/posts/nitro-prerender-dynamic-routes-solution
 published: true
 
 sitemap:
-  lastmod: 2026-05-25
   images:
     - loc: /project-images/nuxt-content-mermaid.webp
       title: nuxt-content-mermaid
