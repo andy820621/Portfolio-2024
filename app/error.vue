@@ -6,22 +6,61 @@ const props = defineProps({
   error: Object as () => NuxtError,
 })
 
-const { t } = useI18n()
-const localePath = useLocalePath()
+const route = useRoute()
+
+let tComposer: ((key: string, fallback?: string) => string) | undefined
+let localePathComposer: ((path: string) => string) | undefined
+
+try {
+  const { t } = useI18n()
+  tComposer = t
+}
+catch {
+  tComposer = undefined
+}
+
+try {
+  localePathComposer = useLocalePath()
+}
+catch {
+  localePathComposer = undefined
+}
+
+function tSafe(key: string, fallback: string) {
+  if (tComposer) {
+    const translated = tComposer(key, fallback)
+    if (typeof translated === 'string' && translated.length > 0)
+      return translated
+  }
+
+  return fallback
+}
+
+function localePathSafe(path: string) {
+  if (localePathComposer)
+    return localePathComposer(path)
+
+  if (path !== '/')
+    return path
+
+  return route.path.startsWith('/zh') ? '/zh/' : '/'
+}
+
+const homePath = computed(() => localePathSafe('/'))
 const { baseUrl } = useUrl()
 
 const pageTitle = computed(() => {
   if (props.error?.statusCode === 404) {
-    return t('errorPage.title', '404 - Page Not Found')
+    return tSafe('errorPage.title', '404 - Page Not Found')
   }
-  return t('errorPage.genericTitle', 'An Error Occurred')
+  return tSafe('errorPage.genericTitle', 'An Error Occurred')
 })
 
 const pageDescription = computed(() => {
   if (props.error?.statusCode === 404) {
-    return props.error?.message || t('errorPage.description', '您訪問的頁面不存在')
+    return props.error?.message || tSafe('errorPage.description', '您訪問的頁面不存在')
   }
-  return props.error?.message || t('errorPage.genericDescription', '抱歉，發生了一些錯誤。')
+  return props.error?.message || tSafe('errorPage.genericDescription', '抱歉，發生了一些錯誤。')
 })
 
 const shouldUseStaticOgImage = computed(() => {
@@ -60,7 +99,9 @@ useSeoMeta({
   twitterImageAlt: ogImageAlt,
 })
 
-const handleError = () => clearError({ redirect: localePath('/') })
+const backToHomeLabel = computed(() => tSafe('backToHome', 'Back to Home'))
+
+const handleError = () => clearError({ redirect: homePath.value })
 </script>
 
 <template>
@@ -83,13 +124,13 @@ const handleError = () => clearError({ redirect: localePath('/') })
 
       <div grid justify-center>
         <NuxtLink
-          :to="localePath('/')"
+          :to="homePath"
           class="inline-block base-btn px-6 py-3 text-lg font-semibold shadow-base transition duration-300 ease-in-out hover:shadow-base-hover hover:-translate-y-1"
-          :aria-label="$t('backToHome')"
-          :title="$t('backToHome')"
+          :aria-label="backToHomeLabel"
+          :title="backToHomeLabel"
           @click.prevent="handleError"
         >
-          {{ $t('backToHome') }}
+          {{ backToHomeLabel }}
         </NuxtLink>
       </div>
     </div>
