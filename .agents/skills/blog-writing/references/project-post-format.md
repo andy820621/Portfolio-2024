@@ -63,6 +63,12 @@ For search-driven guides, a stronger opening pattern is often:
 3. Narrow to the framework or project-specific challenge.
 4. Only then explain how the article is organized.
 
+For repo-grounded personal-site guides, another strong opening pattern is:
+
+1. Start with the concrete site problem.
+2. Follow with a short list of the actual questions, risks, or failure cases being solved.
+3. Then explain how the article will break down the implementation.
+
 Do not spend the first screen mostly explaining that the article is a hub, a series intro, or a map, unless the article's primary job is genuinely navigational.
 
 Guides that cover broad technical areas often read better when they add explicit prioritization, for example:
@@ -103,6 +109,8 @@ Additional guide heuristics from recent revisions:
 - For fast-moving topics, use explicit year/version/context in the title only when the article truly reflects that current state.
 - When a guide covers a large topic, introduce a recommended tool or module choice early if it helps anchor the rest of the article.
 - Use article-specific images and metadata when available instead of generic site-wide cover assets.
+- When the guide is about this portfolio or another personal site, prefer naming the real artifact type directly (`個人網站`, `部落格`, `作品集`) over abstract labels when that makes the promise clearer.
+- If one technical layer contains materially different resource types or policies, split the explanation into separate sections instead of compressing them under one broad heading.
 
 ## Publish Checklist
 

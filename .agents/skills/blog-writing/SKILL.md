@@ -53,6 +53,10 @@ If the post mixes both, choose one primary mode and let the other mode support i
    - Dates, frontmatter, and file placement
    - Native-sounding locale voice
    - Claims backed by the repo or by clearly framed examples
+8. If the user manually revises an AI draft, diff the user's wording against the earlier draft before editing the skill or continuing the post.
+   - Treat the user's edits as the stronger style signal.
+   - Extract reusable preferences such as framing, specificity, section granularity, pronoun choice, and metadata wording.
+   - Update the post or skill with the underlying pattern, not just sentence-level mimicry.
 
 ## Structure Templates
 
@@ -67,6 +71,12 @@ Use this default structure:
 5. Close with `## Summary` / `## 總結` or an equivalent recap section.
 
 Guide posts should feel concrete and inspectable. Mention real filenames, commands, modules, or data flow when that improves trust and clarity.
+
+For repo-grounded personal-site guides, prefer the concrete artifact over abstract platform labels when it improves naturalness. If the article is really about a personal blog, portfolio, or website, naming that directly is often stronger than generic phrasing such as "content site" or "this repo".
+
+For implementation retrospectives, it is often better to move from one dense opening paragraph into a short list of concrete questions, risks, or failure cases. This usually makes the article promise clearer than jumping straight into architecture.
+
+When one broad layer actually contains different policy surfaces, split them. For example, "route rules" may read better as separate sections for list pages, API routes, and image/static assets instead of one compressed catch-all section.
 
 For search-facing technical guides, prefer the reader's real query over meta commentary about the article itself. If the topic is freshness-sensitive or ecosystem-sensitive, a stronger pattern is:
 
@@ -117,6 +127,7 @@ For both locales, when the post is trying to capture a high-intent search query,
 - Do not add or preserve legacy `schemaOrg`, `categories`, or `sitemap.lastmod` fields in post frontmatter. Keep `seoTitle` and `seoDescription`, and use `updatedAt` as the source of sitemap last-modified time.
 - Keep the change scoped to the requested post. Do not "clean up" unrelated content.
 - Do not copy the source sample articles' exact intros, slogans, or catchphrases.
+- Do not over-generalize a repo-specific personal-site guide into abstract product language if the concrete site type is part of why the article sounds trustworthy.
 
 ## Reference Files
 
