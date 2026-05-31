@@ -35,4 +35,5 @@ Before modifying code:
 - When implementing outbound reference or tool links, reuse `useAnalyticsOutboundClick()` instead of bespoke tracking code.
 
 ## Graphify
+
 See `AGENTS.md` for graphify usage policy. In Copilot Chat, `/graphify` can build or update the graph.
