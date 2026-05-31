@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blog Writing"
+  short_description: "Write bilingual technical blog posts for this portfolio"
+  default_prompt: "Use $blog-writing to draft or revise a bilingual technical blog post for this Nuxt portfolio."
