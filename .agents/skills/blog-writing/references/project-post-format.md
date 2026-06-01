@@ -111,6 +111,12 @@ Additional guide heuristics from recent revisions:
 - Use article-specific images and metadata when available instead of generic site-wide cover assets.
 - When the guide is about this portfolio or another personal site, prefer naming the real artifact type directly (`個人網站`, `部落格`, `作品集`) over abstract labels when that makes the promise clearer.
 - If one technical layer contains materially different resource types or policies, split the explanation into separate sections instead of compressing them under one broad heading.
+- Once the structure is clear, later sections can become shorter and more reference-like; not every section needs the same amount of framing or persuasion.
+- When mentioning libraries or modules that are central to the implementation, prefer the exact package or module name when that is more precise than a broader branded label.
+- If a definition or distinction is already obvious from a heading plus bullets, do not spend another full paragraph restating the same mapping in parallel sentences.
+- A short blockquote callout can be useful for one implementation rule or invariant, but treat it as emphasis, not decoration.
+- Keep conclusion sections proportional to the body. For implementation-heavy guides, one tight closing sentence is often enough once the structure has done its job.
+- Prefer direct instructions over repeated rhetorical contrast. Use "不是 A，而是 B" only when the contrast itself helps the reader choose or avoid a real mistake.
 
 ## Publish Checklist
 

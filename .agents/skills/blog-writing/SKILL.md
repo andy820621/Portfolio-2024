@@ -49,6 +49,9 @@ If the post mixes both, choose one primary mode and let the other mode support i
 6. Tighten.
    - Remove filler, duplicated setup, and generic claims.
    - Prefer one strong framing device over several weak ones.
+   - For implementation guides, compress rhetorical transitions once the structure is clear; keep the article feeling inspectable rather than essay-like.
+   - If a definition section or recap only repeats a distinction already made by a list, code sample, or heading, compress it to one sentence or cut it.
+   - Keep contrast framing ("不是 A，而是 B") only when the contrast teaches a real decision; otherwise prefer direct operational wording.
 7. Self-check.
    - Dates, frontmatter, and file placement
    - Native-sounding locale voice
@@ -77,6 +80,12 @@ For repo-grounded personal-site guides, prefer the concrete artifact over abstra
 For implementation retrospectives, it is often better to move from one dense opening paragraph into a short list of concrete questions, risks, or failure cases. This usually makes the article promise clearer than jumping straight into architecture.
 
 When one broad layer actually contains different policy surfaces, split them. For example, "route rules" may read better as separate sections for list pages, API routes, and image/static assets instead of one compressed catch-all section.
+
+Once the core structure is established, prefer concise operational sections over repeated justification. A strong guide often benefits from reducing “why this matters” repetition and keeping each section focused on one decision or subsystem.
+
+If a guide needs emphasis, prefer a small number of short callouts over extra explanatory paragraphs. A single `>` line can work well for one policy rule, implementation invariant, or key reminder, but only when the sentence is strong enough to stand alone.
+
+Definition-heavy sections should usually get shorter as the article goes on. If a heading already names the distinction clearly, avoid re-explaining the same mapping in multiple parallel sentences.
 
 For search-facing technical guides, prefer the reader's real query over meta commentary about the article itself. If the topic is freshness-sensitive or ecosystem-sensitive, a stronger pattern is:
 
@@ -128,6 +137,7 @@ For both locales, when the post is trying to capture a high-intent search query,
 - Keep the change scoped to the requested post. Do not "clean up" unrelated content.
 - Do not copy the source sample articles' exact intros, slogans, or catchphrases.
 - Do not over-generalize a repo-specific personal-site guide into abstract product language if the concrete site type is part of why the article sounds trustworthy.
+- Do not preserve long explanatory contrasts or conclusion paragraphs out of habit. If the guide already made the rule concrete, shorter is usually stronger.
 
 ## Reference Files
 

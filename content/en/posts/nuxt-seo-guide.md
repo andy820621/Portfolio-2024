@@ -2,9 +2,9 @@
 title: "2026 Nuxt 4 SEO guide: from architecture to content indexing"
 date: 2025/12/17
 updatedAt: 2026-06-01
-description: "This guide uses a bilingual content site as the working example. You will learn how to approach SEO in Nuxt 4, starting with architecture principles and then moving into the deeper implementation articles."
 seoTitle: "2026 Nuxt 4 SEO guide: from architecture to content indexing"
-seoDescription: "This guide uses a bilingual content site as the working example. You will learn how to approach SEO in Nuxt 4, starting with architecture principles and then moving into the deeper implementation articles."
+seoDescription: "This article uses my bilingual portfolio site as the working example. It shows how I approach SEO in Nuxt 4, starting with the architecture and then branching into deeper implementation articles that I will keep expanding over time."
+description: "This article uses my bilingual portfolio site as the working example. It shows how I approach SEO in Nuxt 4, starting with the architecture and then branching into deeper implementation articles that I will keep expanding over time."
 image: /blog-images/nuxt-seo-guide.webp
 alt: "Nuxt 4 SEO series overview and implementation map"
 ogImage:
@@ -45,7 +45,7 @@ SEO is no longer just about getting Google to notice your site.
 
 Search results now mix classic blue links with AI summaries. On top of that, some AI answer engines and search-driven AI products read public pages, search indexes, or their own crawlers to understand your content. In practice, **you now have two audiences to serve at the same time: human readers and AI agents**.
 
-That creates a very concrete problem: if your site structure is hard for search engines or AI crawlers to understand, your content is effectively invisible to them. Not merely ranked lower. Missing.
+That creates a very concrete problem: if your site structure is hard for search engines or AI crawlers to understand, your content is effectively invisible to them. Not ranked lower. Missing.
 
 In 2026, technical SEO health is part of your credibility on the web. These issues quietly damage both rankings and citation potential:
 
@@ -188,4 +188,4 @@ The hardest SEO failures to catch are usually the ones that happen right after l
 
 Nuxt 4 SEO is not just a matter of adding a few meta tags. The real work is keeping content data, rendering strategy, index control, and structured data consistent with each other.
 
-This article sets the map first. The follow-up pieces can then go deeper on sitemap, robots, metadata, Schema.org, canonical URLs, i18n, and internal linking.
+This article sets the map first. The follow-up pieces then go deeper on sitemap, robots, metadata, Schema.org, canonical URLs, i18n, and internal linking.
