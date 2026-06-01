@@ -96,14 +96,14 @@ That step looks small, but it does more than it seems. Your site URL becomes the
 
 The six main modules inside `@nuxtjs/seo` each cover a different piece of the system:
 
-| Module | What it handles |
-| --- | --- |
-| `@nuxtjs/robots` | `robots.txt` and AI crawler control |
-| `@nuxtjs/sitemap` | Automatic XML sitemap generation |
-| `nuxt-og-image` | Zero-runtime OG image generation |
-| `nuxt-schema-org` | Schema.org structured-data graphs |
-| `nuxt-link-checker` | Broken-link detection |
-| `nuxt-site-config` | Shared site configuration across modules |
+| Module              | What it handles                          |
+| ------------------- | ---------------------------------------- |
+| `@nuxtjs/robots`    | `robots.txt` and AI crawler control      |
+| `@nuxtjs/sitemap`   | Automatic XML sitemap generation         |
+| `nuxt-og-image`     | Zero-runtime OG image generation         |
+| `nuxt-schema-org`   | Schema.org structured-data graphs        |
+| `nuxt-link-checker` | Broken-link detection                    |
+| `nuxt-site-config`  | Shared site configuration across modules |
 
 ---
 
