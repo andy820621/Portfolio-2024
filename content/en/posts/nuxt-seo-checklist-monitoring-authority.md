@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: "This article focuses on the long-term maintenance layer of Nuxt SEO: pre-launch checks, post-launch monitoring, Search Console habits, structured-data validation, AI-facing discovery entry points, and practical authority-building basics."
 seoTitle: "Nuxt SEO checklist, monitoring, and authority"
 seoDescription: "A practical guide to Nuxt SEO verification, post-launch monitoring, Search Console habits, AI-facing discovery entry points, and authority baselines."
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-seo-checklist-monitoring-authority.webp
 alt: Nuxt SEO checklist, monitoring, and authority
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-seo-checklist-monitoring-authority.webp
 tags: ['Nuxt', 'SEO', 'Checklist', 'Monitoring', 'Authority', 'Search Console']
 published: true
 relatedPages:

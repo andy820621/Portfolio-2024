@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: "This article focuses on the search-preview and semantic layer: titles, descriptions, OG, Twitter Cards, Slack-style previews, structured data, rich results, and image alt text derived from the same content fields."
 seoTitle: "Nuxt meta, OG, Twitter Cards, and structured data"
 seoDescription: "A practical guide to Nuxt metadata, preview cards, structured data, rich results, and image alt text as one semantic layer."
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-meta-og-schema.webp
 alt: Nuxt meta, OG, Twitter Cards, and structured data
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-meta-og-schema.webp
 tags: ['Nuxt', 'SEO', 'Open Graph', 'Schema.org', 'Twitter Cards', 'Metadata']
 published: true
 relatedPages:

@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: 以個人雙語 Nuxt 部落格網頁為例，詳解 sitemap、robots.txt、X-Robots-Tag、noindex、動態路由來源一致性，以及渲染模式如何影響可被發現的內容面。
 seoTitle: "Nuxt Sitemap、robots.txt、X-Robots-Tag 與 noindex"
 seoDescription: "整理 Nuxt sitemap、robots.txt、X-Robots-Tag、noindex、動態路由與渲染模式如何共同決定索引面。"
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-sitemaps-robots-indexing.webp
 alt: Nuxt Sitemap、robots.txt、X-Robots-Tag 與 noindex
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-sitemaps-robots-indexing.webp
 tags: ['Nuxt', 'SEO', 'Sitemap', 'robots.txt', 'X-Robots-Tag', 'noindex']
 published: true
 relatedPages:

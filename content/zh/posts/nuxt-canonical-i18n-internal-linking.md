@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: 如何處理公開 URL 訊號：canonical、hreflang、query params、pagination、trailing slash、URL structure 與 internal linking，讓雙語 Nuxt 內容網站的正式網址清楚可判斷。
 seoTitle: "Nuxt Canonical、i18n 與 Internal Linking"
 seoDescription: "整理 Nuxt canonical、hreflang、query params、pagination、trailing slash、URL structure 與 internal linking 的網址訊號策略。"
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-canonical-i18n-internal-linking.webp
 alt: Nuxt Canonical、i18n 與 Internal Linking
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-canonical-i18n-internal-linking.webp
 tags: ['Nuxt', 'SEO', 'Canonical', 'i18n', 'Internal Linking', 'Pagination']
 published: true
 relatedPages:

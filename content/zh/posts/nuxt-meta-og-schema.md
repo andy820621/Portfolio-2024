@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: 這篇文章將聚焦在搜尋預覽與語意層的設定：title、description、OG、Twitter Card、Slack unfurls、Schema 結構化資料、複合搜尋結果，以及圖片替代文字與內容欄位推導。
 seoTitle: "Nuxt Meta、OG、Twitter Card 與 Schema 結構化資料"
 seoDescription: "整理 Nuxt metadata、OG preview、Twitter Card、Slack unfurls、Schema 結構化資料、複合搜尋結果與圖片 alt text 的分層實作。"
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-meta-og-schema.webp
 alt: Nuxt Meta、OG、Twitter Card 與 Schema 結構化資料
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-meta-og-schema.webp
 tags: ['Nuxt', 'SEO', 'Open Graph', 'Schema 結構化資料', 'Twitter Cards', 'Metadata']
 published: true
 relatedPages:

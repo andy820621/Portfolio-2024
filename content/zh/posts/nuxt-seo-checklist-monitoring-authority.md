@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: 這篇文章將焦點放在 Nuxt SEO 的長期維護策略與驗證層：上線前檢查、上線後監控、Search Console、結構化資料驗證、AI 探索入口準備，以及 backlinks 與 authority 的基本做法。
 seoTitle: "Nuxt SEO 驗證、監控與 Authority"
 seoDescription: "整理 Nuxt SEO 的 pre-launch checklist、post-launch monitoring、Search Console、AI 探索入口與 authority 基準。"
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-seo-checklist-monitoring-authority.webp
 alt: Nuxt SEO 驗證、監控與 Authority
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-seo-checklist-monitoring-authority.webp
 tags: ['Nuxt', 'SEO', 'Checklist', 'Monitoring', 'Authority', 'Search Console']
 published: true
 relatedPages:

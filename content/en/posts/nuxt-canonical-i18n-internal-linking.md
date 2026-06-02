@@ -5,10 +5,10 @@ updatedAt: 2026-06-02
 description: "How to handle public URL signals in a bilingual Nuxt content site: canonical URLs, hreflang, query parameters, pagination, trailing slashes, URL structure, and internal linking."
 seoTitle: "Nuxt canonical, i18n, and internal linking"
 seoDescription: "A practical guide to canonical URLs, hreflang, query parameters, pagination, trailing slashes, URL structure, and internal linking in Nuxt."
-image: /blog-images/nuxt-seo-guide.webp
+image: /blog-images/nuxt-canonical-i18n-internal-linking.webp
 alt: Nuxt canonical, i18n, and internal linking
 ogImage:
-  url: /blog-images/nuxt-seo-guide.webp
+  url: /blog-images/nuxt-canonical-i18n-internal-linking.webp
 tags: ['Nuxt', 'SEO', 'Canonical', 'i18n', 'Internal Linking', 'Pagination']
 published: true
 relatedPages:
