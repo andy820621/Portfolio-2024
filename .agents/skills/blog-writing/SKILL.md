@@ -40,6 +40,8 @@ If the post mixes both, choose one primary mode and let the other mode support i
 3. Draft frontmatter first.
    - Match the project's field names and date rules.
    - Mirror the counterpart locale file's metadata shape when writing a bilingual pair.
+   - For search-facing guides, make `description` / `seoDescription` primarily answer the reader's problem and promised outcome, not the article's role inside a series.
+   - When using `relatedLinks`, write each `note` as reader-facing value about the destination page, not as an editorial note about how the link functions in your article plan.
 4. Build an outline that matches the mode.
    - `guide`: question-led or decision-led `##` headings
    - `essay`: thesis-led sections that progressively sharpen the argument
@@ -56,10 +58,19 @@ If the post mixes both, choose one primary mode and let the other mode support i
    - Dates, frontmatter, and file placement
    - Native-sounding locale voice
    - Claims backed by the repo or by clearly framed examples
+   - Search-facing opening still works for a reader who never sees the rest of the series
 8. If the user manually revises an AI draft, diff the user's wording against the earlier draft before editing the skill or continuing the post.
    - Treat the user's edits as the stronger style signal.
    - Extract reusable preferences such as framing, specificity, section granularity, pronoun choice, and metadata wording.
    - Update the post or skill with the underlying pattern, not just sentence-level mimicry.
+
+When extracting reusable preferences from a user revision, check at least these surfaces:
+
+1. Opening hook: did the user move from series framing to live problem framing?
+2. Metadata wording: did `description` / `seoDescription` become more reader-facing?
+3. Terminology: did the locale move toward native-language primary nouns with English as support?
+4. Link annotations: did `relatedLinks.note` become a summary of the linked resource instead of an editorial aside?
+5. Compression: which rhetorical transitions, contrasts, or recap paragraphs did the user delete?
 
 ## Structure Templates
 
@@ -97,6 +108,14 @@ For search-facing technical guides, prefer the reader's real query over meta com
 
 If the post belongs to a series, treat the series relationship as supporting structure, not the main title or opening hook, unless the user explicitly wants a hub page.
 
+Even for hub pages, earn the click as a standalone article before switching into map mode. The first screen should still tell the reader what changed, what problem the guide solves, or what they will be able to decide after reading.
+
+For search-facing guides, use this preflight check before drafting body paragraphs:
+
+1. Would the first screen still make sense if all mentions of "series", "hub", or "map" were removed?
+2. Does the opening explain the current environment, concrete risk, or practical question before article organization?
+3. Is the article promising reader value before editorial structure?
+
 ### `essay`
 
 Use this default structure:
@@ -133,6 +152,8 @@ For both locales, when the post is trying to capture a high-intent search query,
 - Use `YYYY-MM-DD` for new posts.
 - If a topic is time-sensitive, version-sensitive, or clearly shaped by the current search environment, it is acceptable to reflect that in the title and framing, but do not change historical dates just to simulate freshness.
 - When editing a post with extra metadata blocks such as `relatedPages`, `relatedLinks`, `sitemap`, or `published`, treat them as part of the article contract and keep them consistent with any title, description, image, or date changes.
+- For search-facing guides, do not let frontmatter or the opening paragraph primarily describe the article's role in a series when the user is really searching for a practical answer.
+- Treat `relatedLinks.note` as user-facing link context. Default to describing what the linked page teaches or helps verify.
 - Do not add or preserve legacy `schemaOrg`, `categories`, or `sitemap.lastmod` fields in post frontmatter. Keep `seoTitle` and `seoDescription`, and use `updatedAt` as the source of sitemap last-modified time.
 - Keep the change scoped to the requested post. Do not "clean up" unrelated content.
 - Do not copy the source sample articles' exact intros, slogans, or catchphrases.

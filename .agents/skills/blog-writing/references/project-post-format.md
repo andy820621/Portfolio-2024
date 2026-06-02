@@ -38,6 +38,8 @@ Frontmatter rules for this repo:
 - Keep `sitemap` only when the page still needs extra sitemap metadata such as `images`.
 - Treat `published: false` as fully non-public content. It must stay out of lists, search, related-page resolution, direct detail access, and prerendered public routes.
 - If an existing post contains `relatedPages`, `relatedLinks`, `sitemap`, or `published`, preserve those fields and update them consistently when the article title, summary, image, or dates change.
+- For search-facing guides, default `description` / `seoDescription` to a reader-facing promise about the problem solved or outcome delivered, not an editorial explanation of the post's place in a series.
+- If `relatedLinks` exists, write each `note` as a short summary of what the linked resource teaches, clarifies, or helps verify.
 
 ## Date Rules
 
@@ -70,6 +72,8 @@ For repo-grounded personal-site guides, another strong opening pattern is:
 3. Then explain how the article will break down the implementation.
 
 Do not spend the first screen mostly explaining that the article is a hub, a series intro, or a map, unless the article's primary job is genuinely navigational.
+
+Even when the post is a hub, the opening still needs standalone value. A reader landing from search should learn the current landscape, practical problem, or recommended starting point before the article switches into navigation mode.
 
 Guides that cover broad technical areas often read better when they add explicit prioritization, for example:
 
@@ -110,6 +114,7 @@ Additional guide heuristics from recent revisions:
 - When a guide covers a large topic, introduce a recommended tool or module choice early if it helps anchor the rest of the article.
 - Use article-specific images and metadata when available instead of generic site-wide cover assets.
 - When the guide is about this portfolio or another personal site, prefer naming the real artifact type directly (`個人網站`, `部落格`, `作品集`) over abstract labels when that makes the promise clearer.
+- For Chinese technical guides, prefer native-language primary nouns in `title`, `description`, `seoDescription`, `alt`, and `tags`; use English in parentheses only when it improves recognition.
 - If one technical layer contains materially different resource types or policies, split the explanation into separate sections instead of compressing them under one broad heading.
 - Once the structure is clear, later sections can become shorter and more reference-like; not every section needs the same amount of framing or persuasion.
 - When mentioning libraries or modules that are central to the implementation, prefer the exact package or module name when that is more precise than a broader branded label.
@@ -123,8 +128,11 @@ Additional guide heuristics from recent revisions:
 - File is in the correct locale directory.
 - Slug matches the intended counterpart locale file.
 - Frontmatter fields follow the existing shape.
+- `description` / `seoDescription` promise reader value before series structure, when the post is search-facing.
+- `relatedLinks.note` describes destination value instead of editorial planning context.
 - `date` and `updatedAt` follow the project rules.
 - Headings start at `##` unless there is a deliberate exception.
+- The first screen still works if a search reader never notices the article is part of a series.
 - Code blocks, commands, filenames, and links are real.
 - Tone matches the target locale and chosen mode.
 - The article says something specific, not generic.
