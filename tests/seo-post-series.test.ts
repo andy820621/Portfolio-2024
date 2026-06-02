@@ -12,6 +12,8 @@ const seriesFiles = {
       'content/en/posts/nuxt-sitemaps-robots-indexing.md',
       'content/en/posts/nuxt-meta-og-schema.md',
       'content/en/posts/nuxt-canonical-i18n-internal-linking.md',
+      'content/en/posts/nuxt-seo-checklist-monitoring-authority.md',
+      'content/en/posts/nuxt-url-lifecycle-redirects-llms.md',
     ],
   },
   zh: {
@@ -20,8 +22,18 @@ const seriesFiles = {
       'content/zh/posts/nuxt-sitemaps-robots-indexing.md',
       'content/zh/posts/nuxt-meta-og-schema.md',
       'content/zh/posts/nuxt-canonical-i18n-internal-linking.md',
+      'content/zh/posts/nuxt-seo-checklist-monitoring-authority.md',
+      'content/zh/posts/nuxt-url-lifecycle-redirects-llms.md',
     ],
   },
+}
+
+function toRoutePath(relativePath: string) {
+  const withoutContentPrefix = relativePath.replace(/^content\/(?:en|zh)\//, '')
+  const routePath = `/${withoutContentPrefix.replace(/\.md$/, '')}`
+  return relativePath.includes('/zh/')
+    ? routePath.replace(/^\/posts\//, '/zh/posts/')
+    : routePath.replace(/^\/posts\//, '/posts/')
 }
 
 function readFrontmatter(relativePath: string) {
@@ -56,13 +68,27 @@ describe('seo post series cluster', () => {
 
       for (const spoke of localeFiles.spokes) {
         const spokeFrontmatter = readFrontmatter(spoke)
-        const expectedPath = `/${spoke.replace(/^content\/(?:en|zh)\//, '').replace(/\.md$/, '')}`
-          .replace(/^\/posts\//, localeFiles.hub.includes('/zh/') ? '/zh/posts/' : '/posts/')
+        const expectedPath = toRoutePath(spoke)
         const guidePath = localeFiles.hub.includes('/zh/') ? '/zh/posts/nuxt-seo-guide' : '/posts/nuxt-seo-guide'
         const spokePaths = (spokeFrontmatter.relatedPages || []).map(page => page.path)
 
         expect(hubPaths).toContain(expectedPath)
         expect(spokePaths).toContain(guidePath)
+      }
+    }
+  })
+
+  it('keeps at least two sibling links in every spoke article', () => {
+    for (const localeFiles of Object.values(seriesFiles)) {
+      const spokeRoutePaths = localeFiles.spokes.map(toRoutePath)
+
+      for (const spoke of localeFiles.spokes) {
+        const spokeFrontmatter = readFrontmatter(spoke)
+        const spokePaths = (spokeFrontmatter.relatedPages || []).map(page => page.path)
+        const siblingPaths = spokeRoutePaths.filter(path => path !== toRoutePath(spoke))
+        const matchedSiblings = siblingPaths.filter(path => spokePaths.includes(path))
+
+        expect(matchedSiblings.length).toBeGreaterThanOrEqual(2)
       }
     }
   })

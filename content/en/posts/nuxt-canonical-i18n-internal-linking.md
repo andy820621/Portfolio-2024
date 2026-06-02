@@ -1,240 +1,131 @@
 ---
 title: "Nuxt canonical, i18n, and internal linking: a layered URL-signal implementation"
 date: 2026-05-25
-updatedAt: 2026-06-01
-description: "Using a bilingual Nuxt portfolio site as the working example, this guide breaks down the real job of canonical URLs, pagination query parameters, trailing slashes, locale alternates, and related pages."
-seoTitle: "Nuxt URL signal implementation: canonical, i18n, and internal linking"
-seoDescription: "A practical guide to canonical URLs, hreflang, pagination canonical rules, trailing slashes, and related pages in a bilingual Nuxt site."
+updatedAt: 2026-06-02
+description: "How to handle public URL signals in a bilingual Nuxt content site: canonical URLs, hreflang, query parameters, pagination, trailing slashes, URL structure, and internal linking."
+seoTitle: "Nuxt canonical, i18n, and internal linking"
+seoDescription: "A practical guide to canonical URLs, hreflang, query parameters, pagination, trailing slashes, URL structure, and internal linking in Nuxt."
 image: /blog-images/nuxt-seo-guide.webp
-alt: "Nuxt canonical, i18n, and internal linking URL-signal implementation"
+alt: Nuxt canonical, i18n, and internal linking
 ogImage:
   url: /blog-images/nuxt-seo-guide.webp
-tags: ['Nuxt', 'SEO', 'Canonical', 'i18n', 'Internal Linking', 'Hreflang']
+tags: ['Nuxt', 'SEO', 'Canonical', 'i18n', 'Internal Linking', 'Pagination']
 published: true
 relatedPages:
   - path: /posts/nuxt-seo-guide
   - path: /posts/nuxt-sitemaps-robots-indexing
-  - path: /posts/nuxt-content-v3-i18n-bilingual-site
-  - path: /posts/nuxt4-portfolio-architecture
+  - path: /posts/nuxt-meta-og-schema
+  - path: /posts/nuxt-seo-checklist-monitoring-authority
+  - path: /posts/nuxt-url-lifecycle-redirects-llms
 relatedLinks:
-  - title: "Canonical URLs in Nuxt · Nuxt SEO"
+  - title: "Nuxt SEO Learn: Canonical URLs"
     href: https://nuxtseo.com/learn-seo/nuxt/controlling-crawlers/canonical-urls
-    note: Useful for the idea that canonical is a hint rather than a command, and for the practical query-parameter policy.
-  - title: "Hreflang Tags in Nuxt · Nuxt SEO"
+    note: Covers how canonical URLs consolidate duplicate variants and focus ranking signals.
+  - title: "Nuxt SEO Learn: Query Parameters"
+    href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/query-parameters
+    note: Explains how to treat filters, tracking parameters, and paginated query variants.
+  - title: "Nuxt SEO Learn: Hreflang & i18n"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/i18n
-    note: Useful when checking that multilingual canonicals and hreflang both point at indexable canonical URLs.
-  - title: "Trailing Slashes in Nuxt · Nuxt SEO"
-    href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/trailing-slashes
-    note: Useful for keeping trailing-slash policy, canonical output, and redirects aligned.
-  - title: "How to specify a canonical URL · Google Search Central"
-    href: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
-    note: Google's official reference for canonical rules and same-language hreflang pairing.
-  - title: "Internal Linking · Nuxt SEO"
+    note: Shows how alternates and `x-default` fit into multilingual route strategy.
+  - title: "Nuxt SEO Learn: Internal Linking"
     href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/internal-linking
-    note: Useful when turning articles into a hub-and-spoke topic cluster.
+    note: Explains how to turn related articles into a readable topic structure instead of isolated links.
+  - title: "Nuxt SEO Learn: Trailing Slashes"
+    href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/trailing-slashes
+    note: Covers consistent URL formatting and redirect policy around slash variants.
+  - title: "Nuxt SEO Learn: Pagination"
+    href: https://nuxtseo.com/learn-seo/nuxt/routes-and-rendering/pagination
+    note: Explains self-referencing canonicals and modern pagination-indexing strategy.
 sitemap:
   images:
     - loc: /blog-images/nuxt-seo-guide.webp
-      title: "Nuxt canonical and i18n implementation"
-      caption: "Canonical, hreflang, pagination, and internal linking layers for a bilingual personal site."
+      title: "Nuxt canonical, i18n, and internal linking"
+      caption: "Focused on public URLs, locale relationships, and topic return paths."
 ---
 
-Once a blog starts to have English and Chinese pages, paginated lists, query parameters, multiple URL forms for the same content, and a series of articles linking to each other, the SEO problem is usually no longer “I forgot a canonical tag”.
+## Public URL signals
 
-When I planned this bilingual Nuxt 4 blog, these were the real questions:
+Public URL signals tell search systems which URL should be trusted, which locale version corresponds to which reader, and how one article connects to the rest of the topic graph.
 
-- If both `/path` and `/path/` exist, which one is the official URL?
-- Pagination can keep `?page=2`, but should `?page=1` exist at all?
-- At which layer should alternates and hreflang be generated so they do not fight canonical?
-- Are the Chinese and English pages translations of each other, or is one meant to replace the other?
-- How should `relatedPages` balance locale, path structure, and return links?
+## Separate what canonical, hreflang, and internal linking each solve
 
-This article is not about the abstract definition of canonical. It is about how I split URL signals inside this personal site so canonical, i18n, and internal linking all reinforce the same URL policy.
+- **canonical**: which public URL should represent this content
+- **hreflang / alternates**: how locale versions relate to one another
+- **internal linking**: how pages distribute topic signals and reading paths inside the site
 
-## Start by separating what canonical, hreflang, and internal linking each solve
+All three involve URLs, but from different angles.
+Canonical chooses a preferred version, hreflang defines language relationships, and internal linking shapes semantic flow.
 
-All three operate on URL signals, but they do different jobs:
+## Path layer: decide what a public URL should look like
 
-- **canonical** tells search engines which URL is the official version of the content
-- **hreflang / alternates** tell search engines how locale variants relate to each other
-- **internal linking** tells both readers and crawlers which pages belong to the same topic path
+Before any head logic exists, URL policy already matters:
 
-If you do not separate those responsibilities, the most common result is:
+- should slug naming remain stable over time?
+- is trailing-slash behavior consistent across the site?
+- do case and encoding variants collapse into one public form?
+- does the URL structure reflect content type and hierarchy clearly?
 
-- canonical points at URL A
-- hreflang points at URL B
-- internal links keep sending people to URL C
+If those questions are unresolved, canonical becomes a cleanup tool instead of a preference signal.
+Canonical works best on top of a stable URL policy, not as a substitute for one.
 
-At that point, it becomes hard for search engines to tell which URL you actually want to represent the page.
+## Query parameters and pagination are the easiest places to split signals
 
-## I split URL signals into four layers
+On content-heavy sites, the most common silent URL variants come from:
 
-I did not solve this with one helper. I split it into four layers:
+- `?page=1` versus the root list page
+- filters such as `?tag=` or `?sort=`
+- tracking and sharing parameters
 
-1. Path layer: `app/utils/pathUtils.ts` decides how the canonical path is normalized.
-2. Site layer: `app/app.vue` plus `useLocaleHead()` handle alternates, trailing slashes, and pagination query output.
-3. Page layer: `usePageSeo()` decides which pages need a custom canonical URL.
-4. Content layer: `relatedPages` plus `useRelatedPages()` handle topical return links and locale-aware resolution.
+Without a clear rule for which variants deserve a public version and which are purely functional, canonical has to patch problems that never should have become public in the first place.
 
-That split keeps canonical from being just a string in `<head>`, and keeps i18n from turning into “prepend `/zh` and hope for the best”.
+## Each locale gets its own preferred URL
 
-## Path layer: decide what the canonical path looks like
+The most common bilingual SEO mistake is not missing hreflang.
+It is treating English and Chinese pages as if they compete for the same public version.
+A better rule set is:
 
-A stable canonical path makes sitemap URLs, share URLs, Schema.org URLs, and breadcrumbs much easier to keep consistent.
+- each locale has its own canonical
+- alternates point to the real counterpart page
+- language switches and internal links always use existing counterpart URLs
 
-This repo defines the base rules in `app/utils/pathUtils.ts`:
+Multilingual SEO is not “choose one language as the real page”.
+It is “each locale has a preferred public version, and the relationship between them is explicit”.
 
-```ts
-export function canonicalizePagePath(path: string) {
-  const normalizedPath = normalizePath(path)
+## Internal linking turns a series into a trackable topic structure
 
-  if (!normalizedPath || normalizedPath === '/')
-    return normalizedPath || '/'
+In this SEO series, `relatedPages` is not only for extra reading.
+Internal linking itself is part of the signal-distribution system:
 
-  return normalizedPath.endsWith('/') ? normalizedPath : `${normalizedPath}/`
-}
+- the hub provides the map
+- every spoke links back to the hub
+- every spoke links to at least two sibling articles
 
-export function buildCanonicalSiteUrl(baseUrl: string, path: string) {
-  const normalizedBaseUrl = normalizeBaseSiteUrl(baseUrl)
-  const canonicalPath = encodeCanonicalPagePath(path)
-  return `${normalizedBaseUrl}${canonicalPath}`
-}
-```
+That keeps each article from becoming a dead end. For readers, it creates sequence. For search systems, it creates a clearer topical graph.
 
-My decision is simple: **this site treats the trailing slash as part of the canonical URL.**
+## What canonical solves, and what it does not
 
-> Make the whole site agree on slashes, or the signal gets split across variants.
+Canonical is appropriate for:
 
-## Site layer: `app/app.vue` handles alternates, canonical-like URLs, and pagination query parameters
+- technical variants of the same content
+- preferred versions among pagination or query variants
+- preferred public URLs within locale pairs
 
-The easy mistake in multilingual SEO is thinking the page layer can set canonical and you are done. Alternates and hreflang are a second pipeline.
+Canonical is **not** the right tool for:
 
-In `app/app.vue`, I start from `useLocaleHead({ seo: true })` and then apply two site-wide transforms:
+- moved URLs
+- retired content
+- pages that should clearly become 404 or 410
 
-1. Normalize trailing slashes for alternate URLs, canonical-like URLs, `og:url`, and `twitter:url`
-2. When the current page is page 2 or higher, add the same `?page=` query to alternate URLs
+Those belong in [Nuxt URL management, redirect strategy, duplicate content, and `llms.txt`: how to preserve signals after content changes](/posts/nuxt-url-lifecycle-redirects-llms/).
+Once the boundary is clean, canonical becomes much harder to misuse.
 
-The core logic looks like this:
+## Minimum checklist
 
-```ts
-const links = computed(() => localeHead.value.link?.map((link) => {
-  const normalizedHref = trailingSlashUrlOrNot(link.href)
-
-  if (link.rel === 'alternate') {
-    return {
-      ...link,
-      href: withPaginationQuery(normalizedHref),
-    }
-  }
-
-  return {
-    ...link,
-    href: normalizedHref,
-  }
-}) || [])
-```
-
-That means alternates are not maintained by hand per page. `@nuxtjs/i18n` generates them, and the app-level head layer normalizes both slash policy and pagination query handling.
-
-That separation matters because it keeps locale mapping and page-specific copy from leaking into each other. Canonical should not force every page to hand-build alternates. Alternates should not invent a different URL format than canonical.
-
-## Page layer: make pagination canonical explicit
-
-On post-list pages, I compute pagination canonical URLs explicitly:
-
-```ts
-const paginatedCanonicalUrl = computed(() => buildCanonicalSiteUrlWithQuery(baseUrl.value, route.path, {
-  page: pageNumber.value > 1 ? pageNumber.value : undefined,
-}))
-
-usePageSeo({
-  title: seoTitle,
-  description: seoDescription,
-  canonicalUrl: paginatedCanonicalUrl,
-})
-```
-
-The rule is straightforward:
-
-- page 1: canonical does not include `?page=1`
-- page 2 and above: canonical keeps `?page=2`, `?page=3`, and so on
-
-In other words, this site does not treat every query parameter as a non-canonical URL.
-
-My policy is:
-
-- **pagination parameters** can appear in canonical when they represent a real slice of content
-- **tracking parameters** such as `utm_*` should never become canonical
-- **filter parameters** depend on whether you truly want search engines to index that filtered view
-
-## i18n: each locale needs its own canonical
-
-This site uses `prefix_except_default`:
-
-- English: `/posts/...`
-- Chinese: `/zh/posts/...`
-
-That means the English and Chinese pages are not replacing each other. **Each locale gets its own canonical URL, and alternates / hreflang connect the pair.**
-
-Google's own guidance is clear here: if you use `hreflang`, the canonical should point to the same-language page whenever possible, or at least the closest substitute.
-
-For this site, the implementation rule is simple:
-
-- Chinese pages canonicalize to Chinese URLs
-- English pages canonicalize to English URLs
-- alternates connect the pair
-
-## Internal linking: `relatedPages` is not just further reading, it is topical return links
-
-I keep internal and external references separate in markdown frontmatter:
-
-- `relatedPages`: internal follow-up reading
-- `relatedLinks`: external references
-
-And `useRelatedPages()` does a few practical things:
-
-- strips query strings and hashes so lookup paths stay clean
-- checks whether the input path already has a locale prefix
-- adds the current locale through `localePath()` when the path has no locale prefix
-- resolves the right content collection from both section and locale
-- only queries records where `published = true`
-
-> The point is to make `relatedPages` aware of locale, collection, and publish state, not just render a list of URLs.
-
-For this SEO series, that also matches the cluster I want:
-
-- the hub article provides the entry point
-- each deep dive owns one search intent
-- spokes link back to the hub and sideways to sibling articles
-
-> Internal linking here is not just “add more further reading”. It is how the canonical URL also gets reinforced through the site's topic paths.
-
-## Which URLs are worth checking first?
-
-If I need to find canonical or i18n problems, these are the URLs I inspect first:
-
-- whether `/path` and `/path/` both exist
-- whether page 1 and `?page=1` are both treated as official
-- whether alternate URLs follow the same slash rule as the current canonical
-- whether Chinese pages and English pages canonicalize to each other by mistake
-- whether related pages point at the wrong locale, unpublished pages, or mismatched lookup paths
-
-## How I verify before launch
-
-- [ ] Spot-check one post and one project to make sure the canonical URL uses the trailing-slash version everywhere
-- [ ] Check page 1 and page 2 of the post list to confirm the `?page=` canonical rule behaves as intended
-- [ ] Inspect the alternate links emitted from `app/app.vue` and confirm both locale URLs and pagination query parameters match the current page
-- [ ] Confirm the English and Chinese pages point to each other, but do not overwrite each other's canonical target
-- [ ] Spot-check the pages behind `relatedPages` and make sure locale, title, and published state all resolve correctly
-- [ ] Check sitemap, Schema.org, breadcrumbs, and share URLs to make sure they all follow the same canonical path policy
+- [ ] every content page and list page has an explicit canonical
+- [ ] page 1 does not compete with the root list page as a second public version
+- [ ] English and Chinese counterparts reference each other without overwriting canonical signals
+- [ ] hub and spoke `relatedPages` form real return links and sibling paths
 
 ## Summary
 
-Here is the final split of responsibilities I use for URL signals in this Nuxt personal site:
-
-- `pathUtils.ts`: defines the canonical path and official URL form
-- `app/app.vue` + `useLocaleHead()`: normalize alternates, slash policy, and pagination query handling
-- `usePageSeo()`: explicitly overrides canonical URLs on list and paginated pages
-- `relatedPages` + `useRelatedPages()`: turn internal links into locale-aware topical return links
-
-Canonical, i18n, and internal linking are all ways of putting URLs in order. Once the rules are consistent, search engines see a clean set of official URLs with stable meaning.
+When canonical URLs, hreflang, pagination policy, and internal linking each have a clear job, search systems have a much easier time deciding which URL to trust, how locale pages relate, and how surrounding content should reinforce one another.
