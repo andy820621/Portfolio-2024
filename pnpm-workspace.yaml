@@ -5,3 +5,5 @@ allowBuilds:
   esbuild: true
   sharp: true
   vue-demi: true
+minimumReleaseAgeExclude:
+  - swiper@14.0.1

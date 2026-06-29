@@ -29,6 +29,8 @@
   --p-color-border: var(--clr-border);
   --p-color-border-subtle: var(--clr-border-subtle);
   --p-color-border-outline: var(--clr-border-outline);
+  --p-list-marker-color: color-mix(in oklab, var(--p-color-text-muted) 86%, var(--p-color-text) 14%);
+  --p-list-marker-halo: color-mix(in oklab, var(--p-color-bg) 88%, transparent);
   --p-link-text-color: var(--p-color-text-accent);
   --p-link-text-decoration-color: color-mix(in oklab, var(--p-color-text-accent) 25%, transparent);
   --p-code-block-color-bg: var(--p-color-bg-surface2);
@@ -151,7 +153,7 @@ html.dark .prose {
   content: counter(list-item, var(--list-counter-style, decimal)) '.';
   position: absolute;
   font-weight: 400;
-  color: var(--p-color-text-muted);
+  color: var(--p-list-marker-color);
   left: 0;
 }
 .prose ul > li {
@@ -161,12 +163,13 @@ html.dark .prose {
 .prose ul > li::before {
   content: '';
   position: absolute;
-  background-color: var(--p-color-border);
+  background-color: var(--p-list-marker-color);
   border-radius: 50%;
-  width: 0.375em;
-  height: 0.375em;
-  top: calc(0.875em - 0.1875em);
-  left: 0.25em;
+  width: 0.4375em;
+  height: 0.4375em;
+  top: calc(0.875em - 0.21875em);
+  left: 0.1875em;
+  box-shadow: 0 0 0 2px var(--p-list-marker-halo);
 }
 .prose hr {
   border-color: var(--p-color-border);
