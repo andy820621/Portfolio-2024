@@ -8,7 +8,7 @@ const emit = defineEmits<{
 }>()
 
 const searchText = defineModel<string>('searchText', { default: '' })
-const selectedTags = defineModel<string[]>('selectedTags', { default: [] })
+const selectedTags = defineModel<string[]>('selectedTags', { default: () => [] })
 
 const selectedTagList = computed(() => selectedTags.value ?? [])
 

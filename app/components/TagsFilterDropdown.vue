@@ -3,7 +3,7 @@ const props = defineProps<{
   allTags: string[]
 }>()
 
-const selectedTags = defineModel<string[]>('selectedTags', { default: [] })
+const selectedTags = defineModel<string[]>('selectedTags', { default: () => [] })
 
 const query = ref('')
 
