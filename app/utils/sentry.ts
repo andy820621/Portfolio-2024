@@ -92,6 +92,41 @@ function extractMessages(event?: SentryErrorEventLike, hint?: EventHint) {
     .filter((value): value is string => typeof value === 'string' && value.length > 0)
 }
 
+function extractChunkLoadUrl(event?: SentryErrorEventLike, hint?: EventHint) {
+  for (const message of extractMessages(event, hint)) {
+    const match = message.match(/Failed to fetch dynamically imported module:\s*(https?:\/\/\S+)/i)
+    if (match?.[1])
+      return match[1]
+  }
+}
+
+function enrichSentryChunkLoadError<T extends ErrorEvent>(event: T, hint?: EventHint) {
+  const chunkUrl = extractChunkLoadUrl(event, hint)
+  if (!chunkUrl)
+    return event
+
+  const chunkLoadContext: Record<string, boolean | string> = {
+    url: chunkUrl,
+  }
+
+  if (typeof window !== 'undefined' && typeof navigator !== 'undefined')
+    chunkLoadContext.online = navigator.onLine
+
+  if (typeof window !== 'undefined' && typeof location !== 'undefined')
+    chunkLoadContext.route = location.pathname
+
+  event.tags = {
+    ...event.tags,
+    'error.kind': 'chunk-load',
+  }
+  event.contexts = {
+    ...event.contexts,
+    chunk_load: chunkLoadContext,
+  }
+
+  return event
+}
+
 export function resolveSentryRelease({ commitRef, sentryRelease }: SentryReleaseInput) {
   return sentryRelease || commitRef || undefined
 }
@@ -154,7 +189,7 @@ export function shouldFilterSentry404(event?: SentryErrorEventLike, hint?: Event
 }
 
 export function sentryBeforeSend<T extends ErrorEvent>(event: T, hint?: EventHint) {
-  return shouldFilterSentry404(event, hint) ? null : event
+  return shouldFilterSentry404(event, hint) ? null : enrichSentryChunkLoadError(event, hint)
 }
 
 export function createSentryInitOptions(input: SentryInitOptionsInput) {

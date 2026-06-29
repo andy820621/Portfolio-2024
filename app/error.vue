@@ -105,8 +105,7 @@ const handleError = () => clearError({ redirect: homePath.value })
 </script>
 
 <template>
-  <!-- Can use another layout -->
-  <NuxtLayout name="error">
+  <main class="min-h-[100dvh] px-7 py-12">
     <div class="container mx-auto max-w-xl min-h-[calc(100dvh-200px)] flex flex-col pb-4 text-center">
       <h1 class="py-4 text-4xl font-bold">
         <Logo404
@@ -134,5 +133,5 @@ const handleError = () => clearError({ redirect: homePath.value })
         </NuxtLink>
       </div>
     </div>
-  </NuxtLayout>
+  </main>
 </template>

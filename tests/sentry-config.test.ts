@@ -118,6 +118,32 @@ describe('sentry runtime config helpers', () => {
       },
     })).toBeNull()
   })
+
+  it('adds diagnostics to dynamic import failures', () => {
+    const event = {
+      type: undefined,
+      exception: {
+        values: [
+          {
+            type: 'TypeError',
+            value: 'Failed to fetch dynamically imported module: https://barz.app/_nuxt/example.js',
+          },
+        ],
+      },
+    }
+
+    expect(sentryBeforeSend(event, {})).toBe(event)
+    expect(event).toMatchObject({
+      tags: {
+        'error.kind': 'chunk-load',
+      },
+      contexts: {
+        chunk_load: {
+          url: 'https://barz.app/_nuxt/example.js',
+        },
+      },
+    })
+  })
 })
 
 describe('nuxt sentry config', () => {
