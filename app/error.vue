@@ -56,8 +56,20 @@ const pageTitle = computed(() => {
   return tSafe('errorPage.genericTitle', 'An Error Occurred')
 })
 
+const useLocalizedDescription = computed(() => {
+  const data = props.error?.data
+
+  return typeof data === 'object'
+    && data !== null
+    && 'useLocalizedDescription' in data
+    && data.useLocalizedDescription === true
+})
+
 const pageDescription = computed(() => {
   if (props.error?.statusCode === 404) {
+    if (useLocalizedDescription.value)
+      return tSafe('errorPage.description', '您訪問的頁面不存在')
+
     return props.error?.message || tSafe('errorPage.description', '您訪問的頁面不存在')
   }
   return props.error?.message || tSafe('errorPage.genericDescription', '抱歉，發生了一些錯誤。')

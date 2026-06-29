@@ -3,6 +3,30 @@ import { expect, it } from 'vitest'
 
 const netlifyConfig = readFileSync(new URL('../netlify.toml', import.meta.url), 'utf8')
 
+const scannerPaths = [
+  '/.env',
+  '/.git/*',
+  '/wp-login.php',
+  '/wp-admin/*',
+  '/wp-config.php',
+  '/xmlrpc.php',
+]
+
+function findRedirectRule(path: string) {
+  return netlifyConfig
+    .split('[[redirects]]')
+    .find(rule => rule.includes(`from = "${path}"`))
+}
+
+it.each(scannerPaths)('%s is terminated at the Netlify edge with a 404', (path) => {
+  const redirectRule = findRedirectRule(path)
+
+  expect(redirectRule).toBeDefined()
+  expect(redirectRule).toContain('to = "/404.html"')
+  expect(redirectRule).toContain('status = 404')
+  expect(redirectRule).toContain('force = true')
+})
+
 it('/posts/fetch-content-data-render-pages/ permanently redirects to new post URL', () => {
   const redirectRule = /\[\[redirects\]\]\s+from = "\/posts\/fetch-content-data-render-pages\/"\s+to = "\/posts\/nuxt-content-v3-i18n-bilingual-site\/"\s+status = 301\s+force = true/
 

@@ -46,6 +46,43 @@ to = "https://barz.app/:splat"
 status = 308
 force = true
 
+# 在請求進入 Nuxt SSR／i18n 前，直接結束常見敏感路徑掃描
+[[redirects]]
+from = "/.env"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/.git/*"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/wp-login.php"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/wp-admin/*"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/wp-config.php"
+to = "/404.html"
+status = 404
+force = true
+
+[[redirects]]
+from = "/xmlrpc.php"
+to = "/404.html"
+status = 404
+force = true
+
 # 舊文章路徑重新導向到目前最接近的 Nuxt Content 架構文章
 [[redirects]]
 from = "/posts/fetch-content-data-render-pages/"

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 const route = useRoute()
 
 // 若進入到（被 i18n 加上前綴的）Nuxt 內建錯誤路由，
@@ -18,9 +16,10 @@ else {
   // 其餘未匹配到的路由，拋出 404 讓 app/error.vue 處理
   throw createError({
     statusCode: 404,
-    statusMessage: t('errorPage.description', '您訪問的頁面不存在'),
-    message: t('errorPage.description', '您訪問的頁面不存在'),
     fatal: true,
+    data: {
+      useLocalizedDescription: true,
+    },
   })
 }
 </script>

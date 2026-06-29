@@ -41,3 +41,7 @@ graphify-out/
 sentry-issues/
 *.sentry.json
 *.sentry.ai.md
+
+# pnpm store cache
+.pnpm-store/
+
