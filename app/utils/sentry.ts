@@ -21,6 +21,7 @@ interface SentryServerRuntimeConfigInput extends SentryReleaseInput {
 }
 
 interface SentrySourceMapUploadInput extends SentryRuntimeConfigInput {
+  isNetlify?: boolean
   sentryAuthToken?: string
   sentryOrg?: string
   sentryProject?: string
@@ -165,7 +166,8 @@ export function buildSentryServerRuntimeConfig(input: SentryServerRuntimeConfigI
 }
 
 export function isSentrySourceMapUploadEnabled(input: SentrySourceMapUploadInput) {
-  return isSentryEnabled(input)
+  return !!input.isNetlify
+    && isSentryEnabled(input)
     && typeof input.sentryAuthToken === 'string'
     && input.sentryAuthToken.length > 0
     && typeof input.sentryOrg === 'string'

@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   buildSentryRuntimePublicConfig,
   buildSentryServerRuntimeConfig,
+  isSentrySourceMapUploadEnabled,
   sentryBeforeSend,
   shouldFilterSentry404,
 } from '../app/utils/sentry'
@@ -70,6 +71,28 @@ describe('sentry runtime config helpers', () => {
       sentryDsn: undefined,
       sentryRelease: 'missing-dsn',
     }).sentryEnabled).toBe(false)
+  })
+
+  it('only enables source map uploads for Netlify production builds with full Sentry credentials', () => {
+    expect(isSentrySourceMapUploadEnabled({
+      context: 'production',
+      isNetlify: true,
+      nodeEnv: 'production',
+      sentryAuthToken: 'token',
+      sentryDsn: 'https://public@example.ingest.sentry.io/1',
+      sentryOrg: 'barz',
+      sentryProject: 'portfolio-2024',
+    })).toBe(true)
+
+    expect(isSentrySourceMapUploadEnabled({
+      context: 'production',
+      isNetlify: false,
+      nodeEnv: 'production',
+      sentryAuthToken: 'token',
+      sentryDsn: 'https://public@example.ingest.sentry.io/1',
+      sentryOrg: 'barz',
+      sentryProject: 'portfolio-2024',
+    })).toBe(false)
   })
 
   it('filters expected 404 errors but keeps other errors', () => {
@@ -181,6 +204,7 @@ describe('nuxt sentry config', () => {
     if (!sentryModuleConfig)
       throw new Error('Expected sentry module config to be enabled.')
 
+    expect(sentryModuleConfig.sourcemaps?.disable).toBe(false)
     expect(sentryModuleConfig.sourcemaps?.filesToDeleteAfterUpload).toEqual(
       expect.arrayContaining([
         './**/*.map',
@@ -214,5 +238,39 @@ describe('nuxt sentry config', () => {
       client: false,
       server: false,
     })
+    const sentryModuleConfig = config.sentry
+
+    if (!sentryModuleConfig)
+      throw new Error('Expected sentry module config to be enabled.')
+
+    expect(sentryModuleConfig.sourcemaps?.disable).toBe(true)
+  })
+
+  it('keeps automatic source map upload disabled outside Netlify production builds', async () => {
+    const config = await loadConfigWithEnv({
+      NODE_ENV: 'production',
+      CONTEXT: 'production',
+      COMMIT_REF: 'local-build-sha',
+      NUXT_PUBLIC_SENTRY_DSN: 'https://public@example.ingest.sentry.io/1',
+      SENTRY_AUTH_TOKEN: 'token',
+      SENTRY_ORG: 'barz',
+      SENTRY_PROJECT: 'portfolio-2024',
+    })
+
+    expect(config.runtimeConfig?.public).toMatchObject({
+      sentryEnabled: true,
+      sentryEnvironment: 'production',
+      sentryRelease: 'local-build-sha',
+    })
+    expect(config.sourcemap).toEqual({
+      client: false,
+      server: false,
+    })
+    const sentryModuleConfig = config.sentry
+
+    if (!sentryModuleConfig)
+      throw new Error('Expected sentry module config to be enabled.')
+
+    expect(sentryModuleConfig.sourcemaps?.disable).toBe(true)
   })
 })

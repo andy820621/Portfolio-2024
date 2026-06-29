@@ -43,6 +43,7 @@ const sentryRuntimePublicConfig = buildSentryRuntimePublicConfig({
 const sentrySourceMapUploadEnabled = isSentrySourceMapUploadEnabled({
   ...sentryRuntimePublicConfig,
   context: process.env.CONTEXT,
+  isNetlify,
   nodeEnv: process.env.NODE_ENV,
   sentryAuthToken: process.env.SENTRY_AUTH_TOKEN,
   sentryOrg: process.env.SENTRY_ORG,
@@ -243,6 +244,7 @@ export default defineNuxtConfig({
     org: process.env.SENTRY_ORG,
     project: process.env.SENTRY_PROJECT,
     sourcemaps: {
+      disable: !sentrySourceMapUploadEnabled,
       filesToDeleteAfterUpload: [
         './**/*.map',
         '.nuxt/**/*.map',
