@@ -1,9 +1,9 @@
 ---
 title: "Nuxt sitemap, robots.txt, X-Robots-Tag, and noindex: indexing control in practice"
 date: 2026-05-25
-updatedAt: 2026-06-02
+updatedAt: 2026-06-30
 description: "Using a bilingual Nuxt blog as the example, this article explains sitemap output, robots.txt, X-Robots-Tag, noindex, dynamic-route source consistency, and how rendering modes affect the discoverable surface."
-seoTitle: "Nuxt sitemap, robots.txt, X-Robots-Tag, and noindex"
+seoTitle: "Nuxt sitemap, robots.txt, X-Robots-Tag, noindex"
 seoDescription: "A practical guide to Nuxt sitemap output, robots.txt, X-Robots-Tag, noindex, dynamic routes, and rendering modes as one indexing surface."
 image: /blog-images/nuxt-sitemaps-robots-indexing.webp
 alt: Nuxt sitemap, robots.txt, X-Robots-Tag, and noindex

@@ -1,10 +1,10 @@
 ---
 title: "Nuxt URL management, redirect strategy, duplicate content, and llms.txt: how to preserve signals after content changes"
 date: 2026-06-01
-updatedAt: 2026-06-02
+updatedAt: 2026-06-30
 description: "This article focuses on post-publish URL lifecycle management: redirect strategy, retiring old URLs, duplicate content, 404 versus 410, legacy cleanup, and the role of `llms.txt` as an AI-facing discovery entry point."
-seoTitle: "Nuxt URL management, redirect strategy, duplicate content, and llms.txt"
-seoDescription: "How to manage URL changes, content retirement, redirect strategy, duplicate content, and llms.txt in a Nuxt site without throwing away accumulated signals."
+seoTitle: "Nuxt URL lifecycle: redirects, duplicates, LLMs"
+seoDescription: "How to handle URL renames, content retirement, redirects, duplicate content, and AI discovery files in Nuxt without losing accumulated signals."
 image: /blog-images/nuxt-url-lifecycle-redirects-llms.webp
 alt: Nuxt URL management, redirect strategy, duplicate content, and llms.txt
 ogImage:

@@ -169,7 +169,7 @@ useSchemaOrg([
         >
           <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber > 1 }" />
         </NuxtLink>
-        <span v-else title="Previous page" aria-label="Previous page" aria-disabled="true">
+        <span v-else title="Previous page" aria-disabled="true">
           <Icon is="span" name="mdi:code-less-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" />
         </span>
         <p>{{ pageNumber }} / {{ totalPage }}</p>
@@ -181,7 +181,7 @@ useSchemaOrg([
         >
           <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" :class="{ 'base-btn': pageNumber < totalPage }" />
         </NuxtLink>
-        <span v-else title="Next page" aria-label="Next page" aria-disabled="true">
+        <span v-else title="Next page" aria-disabled="true">
           <Icon is="span" name="mdi:code-greater-than" size="30" class="min-h-[30px] min-w-[30px] base-btn-disabled" />
         </span>
       </div>

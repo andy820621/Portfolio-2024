@@ -1,10 +1,10 @@
 ---
 title: "2026 Nuxt 4 SEO guide: from architecture to content indexing"
 date: 2025-12-17
-updatedAt: 2026-06-02
+updatedAt: 2026-06-30
 description: "Using my bilingual personal site as the example, this article explains how I approach SEO in Nuxt 4. It starts with the architectural principles, then branches into deeper follow-up articles and implementation details."
-seoTitle: "2026 Nuxt 4 SEO guide: from architecture to content indexing"
-seoDescription: "Using my bilingual personal site as the example, this article explains how I approach SEO in Nuxt 4. It starts with the architectural principles, then branches into deeper follow-up articles and implementation details."
+seoTitle: "Nuxt 4 SEO guide: architecture to indexing"
+seoDescription: "A practical Nuxt 4 SEO guide covering architecture, indexing, metadata, sitemaps, canonical signals, and monitoring for a bilingual site."
 image: /blog-images/nuxt-seo-guide.webp
 alt: Nuxt 4 SEO implementation guide and recommendations
 ogImage:

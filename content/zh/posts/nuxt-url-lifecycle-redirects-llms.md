@@ -1,10 +1,10 @@
 ---
 title: "Nuxt URL 管理策略、重新導向策略、重複內容與 llms.txt：內容改版後怎麼維持訊號"
 date: 2026-06-01
-updatedAt: 2026-06-02
+updatedAt: 2026-06-30
 description: 這篇文章聚焦在內容發布之後的 URL 生命週期管理：重新導向策略、舊網址淘汰、重複內容、404/410、legacy cleanup，以及 `llms.txt` 作為 AI 探索入口的角色。
 seoTitle: "Nuxt URL 管理策略、重新導向策略、重複內容 與 llms.txt"
-seoDescription: "整理 Nuxt 網站在內容改名、重組、下架之後，如何用重新導向策略、404/410、重複內容與 llms.txt 維持 URL 訊號。"
+seoDescription: "整理 Nuxt 網站在內容改名、重組、下架後，如何以重新導向策略、404/410、重複內容與 llms.txt 維持 URL 訊號與可發現性。"
 image: /blog-images/nuxt-url-lifecycle-redirects-llms.webp
 alt: Nuxt URL 管理策略、重新導向策略、重複內容與 llms.txt
 ogImage:
