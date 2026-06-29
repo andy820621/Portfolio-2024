@@ -198,6 +198,9 @@ importers:
       sass:
         specifier: ^1.100.0
         version: 1.100.0
+      sentry:
+        specifier: 0.38.0
+        version: 0.38.0
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -9448,6 +9451,11 @@ packages:
   send@1.2.1:
     resolution: {integrity: sha512-1gnZf7DFcoIcajTjTwjwuDjzuz4PPcY2StKPlsGAQ1+YH20IRVrBaXSWmdjowTJ6u8Rc01PoYOGHXfP1mYcZNQ==}
     engines: {node: '>= 18'}
+
+  sentry@0.38.0:
+    resolution: {integrity: sha512-jxW4P3bUqqeMo2dh8i7OpDsOwNe+GQZhE5Teazh+aTw0/nforhp3ZSBsmrm09kmRIUG2R4JrXMMS/8qYFLRCgg==}
+    engines: {node: '>=22.15'}
+    hasBin: true
 
   serialize-javascript@7.0.5:
     resolution: {integrity: sha512-F4LcB0UqUl1zErq+1nYEEzSHJnIwb3AF2XWB94b+afhrekOUijwooAYqFyRbjYkm2PAKBabx6oYv/xDxNi8IBw==}
@@ -22014,6 +22022,8 @@ snapshots:
       statuses: 2.0.2
     transitivePeerDependencies:
       - supports-color
+
+  sentry@0.38.0: {}
 
   serialize-javascript@7.0.5: {}
 

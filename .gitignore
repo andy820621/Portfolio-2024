@@ -35,3 +35,9 @@ Google Console Problem
 
 # Local Graphify outputs
 graphify-out/
+
+# Local Sentry issue exports
+.tmp/sentry/
+sentry-issues/
+*.sentry.json
+*.sentry.ai.md

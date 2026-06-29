@@ -58,6 +58,41 @@
   - `statusCode === 404`
   - 或訊息明確對應 `Page Not Found`
 
+## Export an Issue for AI Analysis
+
+本流程不使用 Sentry MCP。只要提供 issue id，例如 `BARZAPP-4`，即可用本地 script 透過 `sentry` CLI 抓取 issue/event，並產生給 AI 分析用的脫敏 Markdown。
+
+首次使用需登入 Sentry CLI：
+
+```bash
+pnpm exec sentry auth login --read-only
+pnpm exec sentry auth status
+```
+
+產生 issue 分析檔：
+
+```bash
+pnpm sentry:issue-ai BARZAPP-4
+```
+
+輸出位於 `.tmp/sentry/`：
+
+- `BARZAPP-4.sentry.json`：脫敏後的 Sentry issue/event JSON
+- `BARZAPP-4.sentry.ai.md`：給 AI 分析用的精簡 Markdown
+
+交給 Codex 時只需要提供 issue id，例如：
+
+```text
+請使用 BARZAPP-4 的 Sentry issue 資訊分析 root cause，找出相關程式碼路徑，並提出最小修正方案。
+```
+
+注意事項：
+
+- 不要提交 `.tmp/sentry/`、`*.sentry.json`、`*.sentry.ai.md`
+- 不要把 `SENTRY_AUTH_TOKEN` 寫進 repo、文件或 package script
+- 產出的 Markdown 雖已脫敏，交給外部服務前仍建議人工快速檢查
+- isuue 解決後建議刪除 `.tmp/sentry/`，避免敏感資訊外洩
+
 ## Verification
 
 1. 設定上述 Sentry env vars 到 Netlify production。
