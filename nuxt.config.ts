@@ -526,7 +526,7 @@ export default defineNuxtConfig({
   image: {
     format: ['avif', 'webp', 'jpg', 'png', 'gif'],
     quality: 81,
-    provider: isProduction && isNetlify ? 'netlify' : 'ipx',
+    provider: isProduction && isNetlify ? 'none' : 'ipx',
   },
   content: {
     renderer: {
@@ -664,7 +664,7 @@ export default defineNuxtConfig({
       },
     ],
     prerender: {
-      failOnError: process.env.NODE_ENV !== 'production', // 防止某些 404 錯誤中斷建置
+      failOnError: true,
       crawlLinks: true,
       // 確保所有靜態頁面和動態內容頁面都被預渲染
       routes: [
