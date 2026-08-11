@@ -1,10 +1,10 @@
 ---
 title: nuxt-content-mermaid
 date: 2025/12/31
-updatedAt: 2026-06-01
-description: Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support.
+updatedAt: 2026-08-12
+description: Render Mermaid code blocks in Nuxt Content Markdown with lazy loading, theme switching, toolbar controls, and expand interactions.
 seoTitle: "nuxt-content-mermaid for Nuxt Content v3"
-seoDescription: "Render Mermaid code blocks in Nuxt Content Markdown with lazy loading and dark/light theme support."
+seoDescription: "Render Mermaid code blocks in Nuxt Content Markdown with lazy loading, theme switching, toolbar controls, and expand interactions."
 cover: /project-images/nuxt-content-mermaid.webp
 image: /project-images/nuxt-content-mermaid-wide.webp
 alt: nuxt-content-mermaid
@@ -28,7 +28,7 @@ sitemap:
 ## What is nuxt-content-mermaid?
 
 This module integrates [**Nuxt Content v3**](https://content.nuxt.com/docs/getting-started){target="\_blank" rel="noopener"} and [**Mermaid**](https://mermaid.js.org/){target="\_blank" rel="noopener"}.
-It automatically turns Mermaid fenced code blocks (\`\`\`mermaid) in Markdown into a responsive diagram component, with lazy loading and dark/light theme switching built in.
+It automatically turns Mermaid fenced code blocks (\`\`\`mermaid) in Markdown into responsive diagram components, with lazy loading, dark/light theme switching, toolbar controls, and an expand overlay with pan and zoom.
 
 If you want to see how this module fits into a larger content workflow, read [Bilingual Nuxt Content v3 + i18n: a maintainable content system](/posts/nuxt-content-v3-i18n-bilingual-site/). That article covers the broader architecture; this page focuses on the Mermaid integration layer.
 
@@ -48,11 +48,17 @@ This module packages the above into a “content transformer + runtime component
 - **Automatic transform**: Converts Mermaid fenced code blocks into `<Mermaid>` during the `content:file:beforeParse` hook.
 - **Lazy loading**: Uses `IntersectionObserver` by default; Mermaid is loaded and rendered only when the component enters the viewport.
 - **Theme integration**: If `@nuxtjs/color-mode` is installed, Mermaid themes automatically follow `dark/light`; `useMermaidTheme()` is also available for manual control.
+- **Interactive toolbar**: Provides copy-source, fullscreen, and expand controls for Mermaid blocks.
+- **Expand & navigation**: Supports fullscreen/expand views with pan and zoom for large diagrams.
 - **Customizable components**: Supports custom renderer / spinner / error components.
-- **Runtime config**: Allows overriding settings at deploy time via `runtimeConfig.public.contentMermaid`.
-- **Front matter override**: Supports a `config` field in page front matter to override Mermaid settings per document.
+- **Runtime config**: Resolves strict, serializable settings from `runtimeConfig.public.contentMermaid` once per Nuxt application initialization.
+- **Front matter override**: Supports a `config` field in page front matter to override Mermaid settings per document; the field must be declared as an object in the collection schema.
 - **TypeScript support**: Full TypeScript definitions for both the module and runtime components.
 - **Test coverage**: Unit tests written with Vitest to keep the module stable.
+
+## Compatibility
+
+Version 3 supports Nuxt `^4.1.0`, Nuxt Content `>=3.5.0 <4.0.0`, and Node.js `>=22.19.0`.
 
 ## How does it work?
 
@@ -74,17 +80,25 @@ flowchart TD
 1. Install:
 
 ```bash
-pnpm add -D @barzhsieh/nuxt-content-mermaid
+pnpm add @barzhsieh/nuxt-content-mermaid @nuxt/content
 ```
 
 1. Add it to `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
-  modules: ['@barzhsieh/nuxt-content-mermaid', '@nuxt/content'],
+  modules: ['@barzhsieh/nuxt-content-mermaid'],
   contentMermaid: {
+    enabled: true,
+    loader: {
+      lazy: true,
+      init: { securityLevel: 'strict' },
+    },
     theme: { light: 'default', dark: 'dark' },
-    // loader: { lazy: true, init: { securityLevel: 'strict' } },
+    toolbar: {
+      buttons: { copy: true, fullscreen: true, expand: true },
+    },
+    expand: { enabled: true },
   },
 })
 ```
@@ -99,6 +113,12 @@ graph LR
   B -- No --> D[Debug]
 ```
 ````
+
+## Support
+
+If this module is useful to you, you can support its ongoing maintenance on Ko-fi.
+
+[![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/barzhsieh){target="\_blank" rel="noopener"}
 
 ## Links
 
