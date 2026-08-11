@@ -59,7 +59,6 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
   useSeoMeta({
     title: pageTitle,
     description: pageDescription,
-    keywords: mergedKeywords,
     robots: () => data.value.noIndex ? 'noindex, nofollow' : 'index, follow',
     ogTitle: pageTitle,
     ogDescription: pageDescription,
@@ -73,6 +72,15 @@ export function useContentSEO(data: ComputedRef<ContentData & { tags?: string[] 
     ogImageAlt,
     twitterImage: ogImageUrl,
     twitterImageAlt: ogImageAlt,
+  })
+
+  useHead({
+    meta: [
+      {
+        name: 'keywords',
+        content: mergedKeywords,
+      },
+    ],
   })
 
   // OG 圖片

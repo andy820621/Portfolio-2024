@@ -149,12 +149,12 @@ useSchemaOrg([
     },
   }),
 
-  defineItemList({
+  defineItemList(computed(() => ({
     '@id': itemListId,
     '@type': 'ItemList',
-    'numberOfItems': computed(() => galleryGroupsList.value.length),
-    'itemListElement': itemListElement,
-  }),
+    'numberOfItems': galleryGroupsList.value.length,
+    'itemListElement': itemListElement.value,
+  }))),
 ])
 </script>
 

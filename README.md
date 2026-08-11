@@ -81,6 +81,7 @@ When pnpm changes, update `package.json#packageManager` and run `pnpm sync:pnpm`
 
 ```bash
 pnpm dev          # Start development server
+pnpm clean:dev-runtime # Clear generated Nuxt/Netlify development artifacts
 pnpm build        # Build for production
 pnpm generate     # Generate static site
 pnpm preview      # Preview production build
@@ -90,6 +91,8 @@ pnpm typecheck    # Run TypeScript type checking
 pnpm sync:pnpm    # Sync pnpm version examples from package.json
 pnpm check:pnpm   # Verify pnpm docs match packageManager
 ```
+
+Stop the development server and run `pnpm clean:dev-runtime` after upgrading Nuxt, Nitro, or Netlify dependencies, or when switching branches with different lockfiles. The command preserves `.netlify/state.json` and its site link.
 
 ---
 

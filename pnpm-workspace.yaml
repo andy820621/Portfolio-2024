@@ -6,4 +6,30 @@ allowBuilds:
   sharp: true
   vue-demi: true
 minimumReleaseAgeExclude:
-  - swiper@14.0.1
+  - '@barzhsieh/nuxt-content-mermaid@3.0.0'
+  - '@iconify-json/vscode-icons@1.2.71'
+  - '@nuxtjs/mdc@0.23.1'
+  - '@sentry/browser-utils@10.70.0'
+  - '@sentry/browser@10.70.0'
+  - '@sentry/cloudflare@10.70.0'
+  - '@sentry/core@10.70.0'
+  - '@sentry/feedback@10.70.0'
+  - '@sentry/node-core@10.70.0'
+  - '@sentry/node@10.70.0'
+  - '@sentry/nuxt@10.70.0'
+  - '@sentry/opentelemetry@10.70.0'
+  - '@sentry/replay-canvas@10.70.0'
+  - '@sentry/replay@10.70.0'
+  - '@sentry/server-utils@10.70.0'
+  - '@sentry/vue@10.70.0'
+  - '@takumi-rs/core-darwin-arm64@2.7.1'
+  - '@takumi-rs/core-darwin-x64@2.7.1'
+  - '@takumi-rs/core-linux-arm64-gnu@2.7.1'
+  - '@takumi-rs/core-linux-arm64-musl@2.7.1'
+  - '@takumi-rs/core-linux-x64-gnu@2.7.1'
+  - '@takumi-rs/core-linux-x64-musl@2.7.1'
+  - '@takumi-rs/core-win32-arm64-msvc@2.7.1'
+  - '@takumi-rs/core-win32-x64-msvc@2.7.1'
+  - '@takumi-rs/core@2.7.1'
+  - '@takumi-rs/helpers@2.7.1'
+  - nuxt-og-image@6.7.8

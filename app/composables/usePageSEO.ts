@@ -96,7 +96,6 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   useSeoMeta({
     title: pageTitle,
     description: pageDescription,
-    keywords: pageKeywords,
     robots,
     ogTitle: pageTitle,
     ogDescription: pageDescription,
@@ -115,6 +114,12 @@ export function usePageSeo(options: PageSeoOptions = {}) {
   })
 
   useHead({
+    meta: [
+      {
+        name: 'keywords',
+        content: pageKeywords,
+      },
+    ],
     link: [
       {
         rel: 'canonical',
