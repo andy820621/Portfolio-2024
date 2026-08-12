@@ -9,16 +9,24 @@ const baseSeoSchemaFields = {
   ogImage: defineOgImageSchema(),
 }
 
-function isExternalRelatedLinkHref(value: string) {
+function isExternalHttpHref(value: string) {
   return /^https?:\/\//i.test(value.trim())
 }
 
 const relatedLinkSchema = z.object({
   title: z.string(),
-  href: z.string().refine(isExternalRelatedLinkHref, {
+  href: z.string().refine(isExternalHttpHref, {
     message: 'relatedLinks.href must be an absolute http(s) URL.',
   }),
   note: z.string().optional(),
+})
+
+const projectLinkSchema = z.object({
+  label: z.string().min(1),
+  href: z.string().refine(isExternalHttpHref, {
+    message: 'projectLinks.href must be an absolute http(s) URL.',
+  }),
+  icon: z.string().min(1).optional(),
 })
 
 function prependZhLocalePrefix(url: { loc: string }) {
@@ -102,6 +110,7 @@ const projectSchema = z.object({
     path: z.string(),
     title: z.string().optional(),
   })).optional(),
+  projectLinks: z.array(projectLinkSchema).optional(),
   relatedLinks: z.array(relatedLinkSchema).optional(),
 })
 

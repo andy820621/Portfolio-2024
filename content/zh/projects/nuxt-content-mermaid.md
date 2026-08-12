@@ -11,6 +11,13 @@ alt: nuxt-content-mermaid
 ogImage:
   url: /project-images/nuxt-content-mermaid-wide.webp
 tags: ['Nuxt', 'Nuxt Module', 'Nuxt Content', 'Mermaid', 'Markdown', 'TypeScript', 'Vitest', '開源']
+projectLinks:
+  - label: npm package
+    href: https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid
+    icon: simple-icons:npm
+  - label: GitHub repository
+    href: https://github.com/andy820621/nuxt-content-mermaid
+    icon: mdi:github
 relatedPages:
   - path: /zh/posts/nuxt-content-v3-i18n-bilingual-site
   - path: /zh/posts/nitro-prerender-dynamic-routes-solution
@@ -116,11 +123,6 @@ graph LR
 
 ## 支持專案
 
-如果這個模組對你有幫助，歡迎透過 Ko-fi 支持我持續維護。
-
 [![在 Ko-fi 支持我](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/barzhsieh){target="\_blank" rel="noopener"}
 
-## 外部連結
-
-- NPM：[https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid](https://www.npmjs.com/package/@barzhsieh/nuxt-content-mermaid){:target="\_blank"}
-- GitHub：[https://github.com/andy820621/nuxt-content-mermaid](https://github.com/andy820621/nuxt-content-mermaid){:target="\_blank"}
+如果這個模組對你有幫助，歡迎透過 Ko-fi 支持我持續維護。謝謝！

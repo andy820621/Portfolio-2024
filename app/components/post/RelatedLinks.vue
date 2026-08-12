@@ -11,24 +11,12 @@ const { trackOutboundClick } = useAnalyticsOutboundClick()
 const activeMobileNoteHref = ref<string | null>(null)
 const noteTriggerClass = 'text-sub/45 hover:text-primary focus-visible:text-primary -my-2 -mr-2 inline-flex h-10 w-10 shrink-0 items-center justify-center transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/35'
 
-function resolveDestinationType(destinationUrl: URL) {
-  const hostname = destinationUrl.hostname.toLowerCase()
-
-  if (hostname === 'github.com' || hostname.endsWith('.github.com'))
-    return 'github' as const
-
-  if (hostname === 'npmjs.com' || hostname.endsWith('.npmjs.com'))
-    return 'npm' as const
-
-  return 'tool' as const
-}
-
 function handleRelatedLinkClick(href: string) {
   try {
     const destinationUrl = new URL(href)
 
     trackOutboundClick({
-      destinationType: resolveDestinationType(destinationUrl),
+      destinationType: resolveOutboundDestinationType(destinationUrl),
       destinationUrl: destinationUrl.href,
       linkGroup: 'related_links',
       sourceComponent: 'post_related_links',

@@ -28,6 +28,11 @@ const relatedLinksInput = computed(() => {
 
 const { relatedPages } = useRelatedPages(relatedPagesInput, contentDetailData.collection)
 const { relatedLinks } = useRelatedLinks(relatedLinksInput)
+const projectLinks = computed(() => {
+  const value = mainData.value
+
+  return value && 'projectLinks' in value ? value.projectLinks : undefined
+})
 
 const data = computed(() => ({
   title: mainData.value?.title,
@@ -51,18 +56,6 @@ useContentSEO(data)
 const tocLinks = computed(() => mainData.value?.body?.toc?.links || [])
 
 const { fullPath } = useUrl()
-
-function resolveMarkdownDestinationType(url: URL) {
-  const hostname = url.hostname.toLowerCase()
-
-  if (hostname === 'github.com' || hostname.endsWith('.github.com'))
-    return 'github' as const
-
-  if (hostname === 'npmjs.com' || hostname.endsWith('.npmjs.com'))
-    return 'npm' as const
-
-  return undefined
-}
 
 function resolveContentItemId() {
   const params = route.params as {
@@ -97,9 +90,9 @@ function handleMarkdownOutboundClick(event: MouseEvent) {
   if (resolvedUrl.origin === window.location.origin)
     return
 
-  const destinationType = resolveMarkdownDestinationType(resolvedUrl)
+  const destinationType = resolveOutboundDestinationType(resolvedUrl)
 
-  if (!destinationType)
+  if (destinationType === 'tool')
     return
 
   trackOutboundClick({
@@ -165,6 +158,8 @@ if (import.meta.client) {
             :reading-time="data.readingTime"
             :image-class="data.imageClass"
           />
+
+          <ProjectLinks v-if="projectLinks" :links="projectLinks" />
 
           <div v-if="mainData" @click.capture="handleMarkdownOutboundClick">
             <ContentRenderer :value="mainData" :components="{ th: ProseTh }">

@@ -16,6 +16,7 @@ export const bundleIcons = [
   'logos:pinia',
   'logos:git-icon',
   'mdi:github',
+  'simple-icons:npm',
   'logos:nodejs-icon',
   'logos:php',
   'logos:laravel',
