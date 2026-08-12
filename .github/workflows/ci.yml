@@ -1,4 +1,4 @@
-name: Lint & Typecheck
+name: CI
 
 on:
   pull_request:
@@ -28,5 +28,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint & Typecheck
+      - name: Check
         run: pnpm check

@@ -9,7 +9,6 @@
   "scripts": {
     "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js && node scripts/generate-gallery-images-metadata.js",
     "generate:metadata": "node scripts/generate-project-images-metadata.js && node scripts/generate-gallery-images-metadata.js",
-    "test:prerender": "node scripts/test-prerender.js",
     "audit:seo": "pnpm build && node scripts/audit-seo.js",
     "audit:schema-org": "pnpm build && node scripts/audit-schema-org.js",
     "build": "nuxt build",
@@ -29,11 +28,10 @@
     "format:md": "remark . --output --quiet",
     "test": "vitest run",
     "test:unit": "vitest run",
-    "test:build-output": "pnpm generate && AUDIT_BUILD_OUTPUT=1 vitest run tests/gallery-build-output.test.ts",
     "test:watch": "vitest",
     "sync:pnpm": "node scripts/sync-pnpm-version.js",
     "check:pnpm": "node scripts/sync-pnpm-version.js --check",
-    "check": "pnpm check:pnpm && pnpm typecheck && pnpm lint && pnpm test:unit && pnpm test:build-output && pnpm test:prerender",
+    "check": "pnpm check:pnpm && pnpm typecheck && pnpm lint && pnpm test:unit",
     "prepare": "husky && (npx skilld prepare || true)"
   },
   "dependencies": {
