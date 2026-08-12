@@ -123,6 +123,7 @@ graph LR
 
 ## Support
 
-[![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/barzhsieh){target="\_blank" rel="noopener"}
-
 If this module is useful to you, consider sponsoring me to help maintain it. Thank you!
+
+::SupportButton{href="https://ko-fi.com/barzhsieh" icon="mdi:hand-heart-outline" label="Sponsor on Ko-fi"}
+::

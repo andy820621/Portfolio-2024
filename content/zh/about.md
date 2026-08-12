@@ -60,3 +60,12 @@ description: BarZ Hsieh 的前端工程師作品集與技術網站
 或者直接 mail 我 <a href="mailto:andy820621@gmail.com" aria-label="Email me at andy820621@gmail.com" title="Email">andy820621@gmail.com</a>
 
 ---
+
+<!-- Translate to chinese -->
+
+如果你喜歡我的作品並覺得它們有幫助，請考慮贊助我以持續創作。謝謝！
+
+::SupportButton{href="https://ko-fi.com/barzhsieh" icon="mdi:hand-heart-outline" label="在 Ko-fi 支持我"}
+::
+
+---

@@ -123,6 +123,7 @@ graph LR
 
 ## 支持專案
 
-[![在 Ko-fi 支持我](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/barzhsieh){target="\_blank" rel="noopener"}
-
 如果這個模組對你有幫助，歡迎透過 Ko-fi 支持我持續維護。謝謝！
+
+::SupportButton{href="https://ko-fi.com/barzhsieh" icon="mdi:hand-heart-outline" label="在 Ko-fi 支持我"}
+::

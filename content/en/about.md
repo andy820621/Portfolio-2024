@@ -59,3 +59,10 @@ Find me on
 Or mail me at <a href="mailto:andy820621@gmail.com" aria-label="Email me at andy820621@gmail.com" title="Email">andy820621@gmail.com</a>
 
 ---
+
+If you enjoy my work and find them useful, consider sponsoring me to keep it going. Thank you!
+
+::SupportButton{href="https://ko-fi.com/barzhsieh" icon="mdi:hand-heart-outline" label="Sponsor Me on Ko-fi"}
+::
+
+---
