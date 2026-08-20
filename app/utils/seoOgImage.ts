@@ -1,4 +1,4 @@
-import { encodeUrlPath } from './pathUtils'
+import { encodeUrlPath, normalizeBaseSiteUrl } from './pathUtils'
 
 const ABSOLUTE_URL_REGEX = /^[a-z][\w+\-.]*:\/\//i
 
@@ -79,7 +79,7 @@ function resolveAbsoluteSeoImageUrl(baseUrl: string, image?: string) {
   if (ABSOLUTE_URL_REGEX.test(image))
     return encodeUrlPath(image)
 
-  const normalizedBaseUrl = trailingSlashUrlOrNot(baseUrl, false)
+  const normalizedBaseUrl = normalizeBaseSiteUrl(baseUrl)
   const normalizedImagePath = image.startsWith('/') ? image : `/${image}`
   return `${normalizedBaseUrl}${encodeUrlPath(normalizedImagePath)}`
 }

@@ -470,7 +470,7 @@ export default defineNuxtConfig({
   ogImage: {
     debug: process.env.NODE_ENV !== 'production',
     zeroRuntime: isProduction,
-    fontSubsets: ['latin', 'chinese-traditional', 'japanese'],
+    fontSubsets: ['latin', 'chinese-traditional'],
     buildCache: isProduction
       ? { base: '.cache/og-image' }
       : false,
@@ -480,41 +480,18 @@ export default defineNuxtConfig({
       {
         name: 'Inter',
         provider: 'google',
-        weights: [400, 600, 700, 800],
+        weights: ['400 800'],
+        styles: ['normal', 'italic'],
+        subsets: ['latin', 'latin-ext'],
         global: true,
+        preload: false,
       },
       {
         name: 'Noto Sans TC',
         provider: 'google',
-        weights: [400, 500, 600, 700],
-        global: true,
-        preload: false,
-      },
-      {
-        name: 'Noto Sans JP',
-        provider: 'google',
-        weights: [400, 500, 600, 700],
-        global: true,
-        preload: false,
-      },
-      {
-        name: 'DM Mono',
-        provider: 'google',
-        weights: [400, 500, 700],
-        global: true,
-        preload: false,
-      },
-      {
-        name: 'Roboto Condensed',
-        provider: 'google',
-        weights: [400, 700],
-        global: true,
-        preload: false,
-      },
-      {
-        name: 'Bad Script',
-        provider: 'google',
-        weights: [400],
+        weights: ['400 600'],
+        styles: ['normal'],
+        subsets: ['chinese-traditional'],
         global: true,
         preload: false,
       },

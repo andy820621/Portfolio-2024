@@ -3,10 +3,8 @@ import { defineConfig, presetAttributify, presetIcons, presetMini, presetWind3, 
 export default defineConfig({
   theme: {
     fontFamily: {
-      sans: 'Inter, "Noto Sans TC", "Noto Sans JP", system-ui, sans-serif',
-      mono: '"DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace',
-      condensed: '"Roboto Condensed", "Inter", "Noto Sans TC", "Noto Sans JP", sans-serif',
-      wisper: '"Bad Script", cursive',
+      sans: 'Inter, system-ui, sans-serif',
+      mono: 'ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     },
   },
   shortcuts: [
