@@ -64,8 +64,8 @@ importers:
         specifier: ^9.3.0
         version: 9.3.0(@typescript-eslint/typescript-estree@8.67.0(typescript@6.0.3))(@typescript-eslint/utils@8.67.0(eslint@10.8.1(jiti@2.7.0))(typescript@6.0.3))(@unocss/eslint-plugin@66.8.0(eslint@10.8.1(jiti@2.7.0))(typescript@6.0.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@2.0.1(eslint@10.8.1(jiti@2.7.0)))(eslint@10.8.1(jiti@2.7.0))(typescript@6.0.3)(vitest@4.1.11(@opentelemetry/api@1.9.1)(@types/node@26.0.1)(vite@8.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass@1.102.0)(terser@5.50.0)(yaml@2.9.0)))
       '@barzhsieh/nuxt-content-mermaid':
-        specifier: 3.0.3
-        version: 3.0.3(c0f8da072076bf1d0d1fb3b92adaa0a5)
+        specifier: 3.0.4
+        version: 3.0.4(c0f8da072076bf1d0d1fb3b92adaa0a5)
       '@commitlint/cli':
         specifier: ^21.2.2
         version: 21.2.2(@types/node@26.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)
@@ -470,8 +470,8 @@ packages:
     resolution: {integrity: sha512-eY+Yn3dCqTGmyiq2QRU66lA5FL8lqqqvecHt0fF3uHONIa7ToYsaCiWV8lOKqAs0Rb2SjixiKFROngnulPtt2g==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
-  '@barzhsieh/nuxt-content-mermaid@3.0.3':
-    resolution: {integrity: sha512-NjUuraEIfDzsTK8HfQGS1Be0x22h0k/ckRATMq3CGPlt64RdATeS+e0+8bhOw7l36XO4WPsN6sn16jjv+Ub7DQ==}
+  '@barzhsieh/nuxt-content-mermaid@3.0.4':
+    resolution: {integrity: sha512-10tftBznfbmH3PhSiBclnSiqyoIJ4ZOQmP5hl7kcXnZPDpGaQYmn+m6AjJ61Z+iDsHRMcJ8zKfJctmPxRgtGPg==}
     engines: {node: '>=22.19.0'}
     peerDependencies:
       '@nuxt/content': '>=3.5.0 <4.0.0'
@@ -1961,8 +1961,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@mermaid-js/parser@1.2.0':
-    resolution: {integrity: sha512-oYPyv8A4As1yH5Bx+04iQEQxXuIQDe0GKCNSRgao6z8AM9jixXIfP0vsppRLvGf+nKIOb9/LdpWA4YuJiVvESA==}
+  '@mermaid-js/parser@1.2.1':
+    resolution: {integrity: sha512-n12NohV3mrUyUL2o93IgG/ifeW9FTyeJn3zDxkhwa8MJ9Fxg3HQMlA3RiGmD/3UnJvheztkjjQAjA2T4LmUcpw==}
 
   '@miyaneee/rollup-plugin-json5@1.2.0':
     resolution: {integrity: sha512-JjTIaXZp9WzhUHpElrqPnl1AzBi/rvRs065F71+aTmlqvTMVkdbjZ8vfFl4nRlgJy+TPBw69ZK4pwFdmOAt4aA==}
@@ -6367,8 +6367,8 @@ packages:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
 
-  dompurify@3.4.13:
-    resolution: {integrity: sha512-2vmYIoqjze2d+kakP8S/nS5shfsl587kzwEjcGlTdiksUVgFHnFCsLYDVj/JNqJVOQZGSYBTmuycv0PodwmnMQ==}
+  dompurify@3.4.14:
+    resolution: {integrity: sha512-dVoH9z+MY+C9IilgGCk3YfFqjLi3fChm2OiKJMzh6axrJ5qwxqWaZamgmHrpv22CN/KdbZJuGEGgfQoL00LTdg==}
 
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
@@ -6946,6 +6946,9 @@ packages:
   fast-xml-parser@5.10.1:
     resolution: {integrity: sha512-IEMIf7298kXuZSRFoGfMYrl7is8LpavODgbNz1cwIudv7KwVFnuU+UsMporfq6PD6aXSlawZlARiA3UywCTfMw==}
     hasBin: true
+
+  fastdom@1.0.12:
+    resolution: {integrity: sha512-LB+xjSTEbjHE1cWsxu+tN2Xqr1kpi+V9aADI7sVM5ZMaXyYGPHULQMzpJMYqOTULK/73pUkWVzzObFRBkPr+hg==}
 
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
@@ -8312,8 +8315,8 @@ packages:
     resolution: {integrity: sha512-Sz8FzjzI0kN13GK/6MVEsVzMZEPvOhnmmI1lU5+/1cGOiK3QUahntrNNtdVeihrO7t9JpoH75iMNXg6R6uWflQ==}
     engines: {node: '>=18.0.0'}
 
-  mermaid@11.16.1:
-    resolution: {integrity: sha512-TQsq6u22fAn3rek5VOubrhKPo1g5hwC3FXUN9hiyupTckcYiGuuKGkNQrKYwGJkXUxZdojwRG46gsSCFZMDp4g==}
+  mermaid@11.17.0:
+    resolution: {integrity: sha512-Jo9N377Wb4MSnHFPTbLi2SxFpsQl4eVHoxnW5U1Md9EazvgMp3s+4ohDxr81YNTgbn5Kj7HJ3yslrSJ52kwpbA==}
 
   micromark-core-commonmark@2.0.3:
     resolution: {integrity: sha512-RDBrHEMSxVFLg6xvnXmb1Ayr2WzLAWjeSATAoxwKYJV94TeNavgoIdA0a9ytzDSVzBy2YKFK+emCPOEibLeCrg==}
@@ -10117,6 +10120,9 @@ packages:
   streamx@2.28.0:
     resolution: {integrity: sha512-1Yowhzjf0ivGMrTIkY9hav5TxobO9qIVqUE41fiCGMGgc3CLlf4MY+9AHmZqBWgDTue0fY9zWjYFVyf6Diuobw==}
 
+  strictdom@1.0.1:
+    resolution: {integrity: sha512-cEmp9QeXXRmjj/rVp9oyiqcvyocWab/HaoN4+bwFeZ7QzykJD6L3yD4v12K1x0tHpqRqVpJevN3gW7kyM39Bqg==}
+
   string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
     engines: {node: '>=0.6.19'}
@@ -11707,14 +11713,14 @@ snapshots:
       '@babel/helper-string-parser': 8.0.0
       '@babel/helper-validator-identifier': 8.0.4
 
-  '@barzhsieh/nuxt-content-mermaid@3.0.3(c0f8da072076bf1d0d1fb3b92adaa0a5)':
+  '@barzhsieh/nuxt-content-mermaid@3.0.4(c0f8da072076bf1d0d1fb3b92adaa0a5)':
     dependencies:
       '@nuxt/content': 3.15.2(@electric-sql/pglite@0.3.16)(better-sqlite3@12.11.1)(esbuild@0.28.1)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.3)(rollup@4.62.2)(vite@8.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass@1.102.0)(terser@5.50.0)(yaml@2.9.0))(webpack@5.103.0(esbuild@0.28.1)(lightningcss@1.33.0)(postcss@8.5.26))
       '@nuxt/kit': 4.5.2(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.141.0)(rolldown@1.2.3)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.3)(rollup@4.62.2)(vite@8.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass@1.102.0)(terser@5.50.0)(yaml@2.9.0))(webpack@5.103.0(esbuild@0.28.1)(lightningcss@1.33.0)(postcss@8.5.26)))
       defu: 6.1.7
       destr: 2.0.5
       html-to-image: 1.11.11
-      mermaid: 11.16.1
+      mermaid: 11.17.0
       nuxt: 4.5.2(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@electric-sql/pglite@0.3.16)(@netlify/blobs@10.7.9)(@oxc-project/types@0.143.0)(@parcel/watcher@2.5.6)(@types/node@26.0.1)(@vue/compiler-sfc@3.5.41)(better-sqlite3@12.11.1)(db0@0.3.4(@electric-sql/pglite@0.3.16)(better-sqlite3@12.11.1))(esbuild@0.28.1)(eslint@10.8.1(jiti@2.7.0))(ioredis@5.11.1)(lightningcss@1.33.0)(magicast@0.5.3)(optionator@0.9.4)(oxc-parser@0.141.0)(rolldown@1.2.3)(rollup-plugin-visualizer@7.0.1(rolldown@1.2.3)(rollup@4.62.2))(rollup@4.62.2)(sass@1.102.0)(srvx@0.11.22)(terser@5.50.0)(typescript@6.0.3)(vite@8.2.1(@types/node@26.0.1)(esbuild@0.28.1)(jiti@2.7.0)(sass@1.102.0)(terser@5.50.0)(yaml@2.9.0))(vue-tsc@3.3.10(typescript@6.0.3))(webpack@5.103.0(esbuild@0.28.1)(lightningcss@1.33.0)(postcss@8.5.26))(yaml@2.9.0)
       yaml: 2.9.0
     transitivePeerDependencies:
@@ -12897,7 +12903,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@mermaid-js/parser@1.2.0':
+  '@mermaid-js/parser@1.2.1':
     dependencies:
       '@chevrotain/types': 11.1.2
 
@@ -16075,7 +16081,7 @@ snapshots:
 
   '@tiptap/extension-bubble-menu@3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)':
     dependencies:
-      '@floating-ui/dom': 1.7.6
+      '@floating-ui/dom': 1.8.0
       '@tiptap/core': 3.30.2(@tiptap/pm@3.30.2)
       '@tiptap/pm': 3.30.2
 
@@ -16112,7 +16118,7 @@ snapshots:
 
   '@tiptap/extension-drag-handle@3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/extension-collaboration@3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)(@tiptap/y-tiptap@3.0.9(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.2)(y-protocols@1.0.7(yjs@13.6.32))(yjs@13.6.32))(yjs@13.6.32))(@tiptap/extension-node-range@3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)(@tiptap/y-tiptap@3.0.9(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.2)(y-protocols@1.0.7(yjs@13.6.32))(yjs@13.6.32))':
     dependencies:
-      '@floating-ui/dom': 1.7.6
+      '@floating-ui/dom': 1.8.0
       '@tiptap/core': 3.30.2(@tiptap/pm@3.30.2)
       '@tiptap/extension-collaboration': 3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)(@tiptap/y-tiptap@3.0.9(prosemirror-model@1.25.11)(prosemirror-state@1.4.4)(prosemirror-view@1.42.2)(y-protocols@1.0.7(yjs@13.6.32))(yjs@13.6.32))(yjs@13.6.32)
       '@tiptap/extension-node-range': 3.30.2(@tiptap/core@3.30.2(@tiptap/pm@3.30.2))(@tiptap/pm@3.30.2)
@@ -18491,7 +18497,7 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
-  dompurify@3.4.13:
+  dompurify@3.4.14:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -19274,6 +19280,10 @@ snapshots:
       path-expression-matcher: 1.6.2
       strnum: 2.4.1
       xml-naming: 0.3.0
+
+  fastdom@1.0.12:
+    dependencies:
+      strictdom: 1.0.1
 
   fastq@1.20.1:
     dependencies:
@@ -20790,11 +20800,11 @@ snapshots:
 
   meriyah@6.1.4: {}
 
-  mermaid@11.16.1:
+  mermaid@11.17.0:
     dependencies:
       '@braintree/sanitize-url': 7.1.2
       '@iconify/utils': 3.1.4
-      '@mermaid-js/parser': 1.2.0
+      '@mermaid-js/parser': 1.2.1
       '@types/d3': 7.4.3
       '@upsetjs/venn.js': 2.0.0
       cytoscape: 3.34.1
@@ -20804,8 +20814,9 @@ snapshots:
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.14
       dayjs: 1.11.23
-      dompurify: 3.4.13
+      dompurify: 3.4.14
       es-toolkit: 1.51.0
+      fastdom: 1.0.12
       katex: 0.16.47
       khroma: 2.1.0
       marked: 16.4.2
@@ -23862,6 +23873,8 @@ snapshots:
     transitivePeerDependencies:
       - bare-abort-controller
       - react-native-b4a
+
+  strictdom@1.0.1: {}
 
   string-argv@0.3.2: {}
 

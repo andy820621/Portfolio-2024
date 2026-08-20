@@ -6,7 +6,7 @@ allowBuilds:
   sharp: true
   vue-demi: true
 minimumReleaseAgeExclude:
-  - '@barzhsieh/nuxt-content-mermaid@3.0.3'
+  - '@barzhsieh/nuxt-content-mermaid@3.0.4'
   - '@iconify-json/vscode-icons@1.2.71'
   - '@nuxtjs/mdc@0.23.1'
   - '@sentry/browser-utils@10.70.0'

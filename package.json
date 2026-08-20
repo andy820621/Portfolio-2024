@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.3.0",
-    "@barzhsieh/nuxt-content-mermaid": "3.0.3",
+    "@barzhsieh/nuxt-content-mermaid": "3.0.4",
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
     "@formkit/auto-animate": "^0.10.0",
