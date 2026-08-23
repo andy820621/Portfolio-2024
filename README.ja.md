@@ -71,7 +71,7 @@ volta install node@22.22.1
   "volta": {
     "node": "22.22.1"
   },
-  "packageManager": "pnpm@11.2.2+sha512..."
+  "packageManager": "pnpm@11.23.0+sha512..."
 }
 ```
 
