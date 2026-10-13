@@ -6,7 +6,12 @@
 
 - Security headers，例如 CSP、HSTS、X-Frame-Options，程式碼裡沒有明顯配置。
 - Core Web Vitals 的改善與監控、RUM、圖片 alt 品質檢查，還沒看到完整驗證流程。
-- 內容頁與列表頁的內部連結深度、孤兒頁檢查，尚未看到對應自動化。
+
+## 部署後自動檢查
+
+- `pnpm audit:seo:live` 檢查正式站 robots.txt、sitemap 頁面的狀態碼與 canonical、索引指令、SSR 標題、hreflang、從中英文首頁出發的可達性與連結深度，以及代表性的舊網址轉址。
+- Netlify production 部署成功後自動執行；失敗會顯示在部署摘要，不會回滾已發布的版本。
+- 正常轉址網址不需要被索引。技術檢查通過不代表 Google 保證收錄 canonical 頁面。
 
 ## 無法從程式碼確認
 

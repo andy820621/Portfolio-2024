@@ -42,6 +42,7 @@ const HTML_ENTITY_GT_RE = /&gt;/g
 const ATTRIBUTE_RE = /([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?/g
 
 const TAG_PATTERNS = {
+  a: /<a\b[^>]*>/gi,
   meta: /<meta\b[^>]*>/gi,
   link: /<link\b[^>]*>/gi,
 }
@@ -254,7 +255,7 @@ function parseAttributes(tagSource) {
     const [, rawName, doubleQuoted, singleQuoted, bareValue] = match
     const name = rawName.toLowerCase()
 
-    if (name === 'meta' || name === 'link')
+    if (name === 'a' || name === 'meta' || name === 'link')
       continue
 
     const value = doubleQuoted ?? singleQuoted ?? bareValue ?? ''
@@ -264,7 +265,7 @@ function parseAttributes(tagSource) {
   return attributes
 }
 
-function collectTagAttributes(source, tagName) {
+export function collectTagAttributes(source, tagName) {
   const pattern = TAG_PATTERNS[tagName]
   if (!pattern)
     return []
@@ -280,7 +281,7 @@ function countMetaTags(metas, key, value) {
   return metas.filter(meta => meta[key] === value).length
 }
 
-function hasRel(relValue, expected) {
+export function hasRel(relValue, expected) {
   return String(relValue || '')
     .toLowerCase()
     .split(MULTIPLE_WHITESPACE_RE)
@@ -686,4 +687,5 @@ async function main() {
   }
 }
 
-main()
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+  main()

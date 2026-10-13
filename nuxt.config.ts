@@ -643,6 +643,8 @@ export default defineNuxtConfig({
     prerender: {
       failOnError: true,
       crawlLinks: true,
+      // /path 與 /path/ 會寫入同一個 HTML 檔案，必須避免併發寫入。
+      concurrency: 1,
       // 確保所有靜態頁面和動態內容頁面都被預渲染
       routes: [
         '/',

@@ -88,6 +88,7 @@ pnpm preview      # Preview production build
 pnpm lint         # Run ESLint
 pnpm lint:fix     # Fix ESLint issues
 pnpm typecheck    # Run TypeScript type checking
+pnpm audit:seo:live # Audit the deployed canonical site (defaults to https://barz.app)
 pnpm sync:pnpm    # Sync pnpm version examples from package.json
 pnpm check:pnpm   # Verify pnpm docs match packageManager
 ```
@@ -121,6 +122,14 @@ This project is configured for Netlify deployment with:
 - Custom redirect rules in `netlify.toml`
 - Environment-specific configurations
 - CDN optimization for static assets
+
+Prerendering runs serially because slash and non-slash routes can write to the same HTML file. This prevents overlapping writes from corrupting generated pages.
+
+Production deploys run `plugins/netlify-plugin-seo-audit` after Netlify reports a successful deploy. The audit checks robots.txt, all sitemap pages (HTTP 200, complete HTML documents, canonical, indexing directives, rendered headings, reciprocal hreflang), internal-link reachability from the English and Chinese homepages, and representative legacy redirects. It reuses the installed Nuxt SEO parsers and the existing HTML audit helpers.
+
+Run `pnpm audit:seo:live https://barz.app` to repeat the read-only check. Failures exit with code 1; automatic runs report a plugin failure in the Netlify deploy summary. Because this runs after deployment, it does not prevent publication or roll back the deploy. Local builds and non-production deploys skip it.
+
+Passing this audit confirms technical eligibility, not Google indexing. Redirected URLs are expected to stay out of the index; track the final canonical pages in Search Console. Google controls crawl timing and indexing decisions.
 
 ---
 

@@ -10,6 +10,7 @@
     "prebuild": "node scripts/generate-project-images-map.js && node scripts/generate-gallery-images-map.js && node scripts/generate-gallery-images-metadata.js",
     "generate:metadata": "node scripts/generate-project-images-metadata.js && node scripts/generate-gallery-images-metadata.js",
     "audit:seo": "pnpm build && node scripts/audit-seo.js",
+    "audit:seo:live": "node scripts/audit-seo-live.js",
     "audit:schema-org": "pnpm build && node scripts/audit-schema-org.js",
     "build": "nuxt build",
     "build:netlify": "volta run --node 22.22.1 netlify build",

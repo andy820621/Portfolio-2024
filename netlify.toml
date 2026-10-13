@@ -7,6 +7,9 @@ PNPM_FLAGS = "--shamefully-hoist"
 # AWS Lambda requires specific GLIBC version - ensure proper rebuild
 AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
 
+[[plugins]]
+package = "./plugins/netlify-plugin-seo-audit"
+
 [images]
 # Allow Netlify Image CDN to fetch and transform external images
 # used by Nuxt Image in production. Add any other remote sources here.
