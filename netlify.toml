@@ -349,6 +349,13 @@ to = "/zh/gallery/chasing-blossoms/"
 status = 301
 force = true
 
+# 避免 sitemap 入口回傳預渲染的 HTML meta refresh
+[[redirects]]
+from = "/sitemap.xml"
+to = "/sitemap_index.xml"
+status = 308
+force = true
+
 # 避免 localized sitemap route 落回 Nuxt app shell
 [[redirects]]
 from = "/zh/sitemap.xml"
