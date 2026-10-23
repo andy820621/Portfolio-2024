@@ -108,7 +108,7 @@ useSchemaOrg([
     '@type': 'Person',
     ...createPersonIdentity({
       baseUrl: siteBaseUrl,
-      imagePath: '/me.jpg',
+      imagePath: '/me.webp',
     }),
     // 'worksFor': {
     //   '@type': 'Organization',
