@@ -1,0 +1,2 @@
+# 優先於 Nitro 產生的非強制規則，避免 sitemap 預渲染 HTML 遮蔽轉址。
+/sitemap.xml /sitemap_index.xml 308!
